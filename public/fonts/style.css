@@ -1,0 +1,223 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('icomoon.eot?cda6a4');
+  src:  url('icomoon.eot?cda6a4#iefix') format('embedded-opentype'),
+    url('icomoon.ttf?cda6a4') format('truetype'),
+    url('icomoon.woff?cda6a4') format('woff'),
+    url('icomoon.svg?cda6a4#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-arrow-right:before {
+  content: "\e900";
+}
+.icon-calendar:before {
+  content: "\e901";
+}
+.icon-cargar-archivo:before {
+  content: "\e902";
+}
+.icon-c-escort:before {
+  content: "\e903";
+}
+.icon-c-fetiche:before {
+  content: "\e904";
+}
+.icon-c-gigolo:before {
+  content: "\e905";
+}
+.icon-chat:before {
+  content: "\e906";
+}
+.icon-check:before {
+  content: "\e907";
+}
+.icon-c-homo:before {
+  content: "\e908";
+}
+.icon-c-lesbiana:before {
+  content: "\e909";
+}
+.icon-close-delgado:before {
+  content: "\e90a";
+}
+.icon-c-masaje:before {
+  content: "\e90b";
+}
+.icon-c-mujer:before {
+  content: "\e90c";
+}
+.icon-c-parejas:before {
+  content: "\e90d";
+}
+.icon-credit-cards:before {
+  content: "\e90e";
+}
+.icon-c-trans:before {
+  content: "\e90f";
+}
+.icon-danger:before {
+  content: "\e910";
+}
+.icon-diary:before {
+  content: "\e911";
+}
+.icon-down-arrow:before {
+  content: "\e912";
+}
+.icon-email:before {
+  content: "\e913";
+}
+.icon-estadisticas:before {
+  content: "\e914";
+}
+.icon-habitaciones:before {
+  content: "\e915";
+}
+.icon-heart:before {
+  content: "\e916";
+}
+.icon-heart-all:before {
+  content: "\e917";
+}
+.icon-like:before {
+  content: "\e918";
+}
+.icon-locked-padlock:before {
+  content: "\e919";
+}
+.icon-massage:before {
+  content: "\e91a";
+}
+.icon-medical-stethoscope:before {
+  content: "\e91b";
+}
+.icon-moneda-nuevo-sol:before {
+  content: "\e91c";
+}
+.icon-money:before {
+  content: "\e91d";
+}
+.icon-nuevo-sol:before {
+  content: "\e91e";
+}
+.icon-panama .path1:before {
+  content: "\e91f";
+  color: rgb(240, 240, 240);
+}
+.icon-panama .path2:before {
+  content: "\e920";
+  margin-left: -1em;
+  color: rgb(0, 82, 180);
+}
+.icon-panama .path3:before {
+  content: "\e921";
+  margin-left: -1em;
+  color: rgb(216, 0, 39);
+}
+.icon-panama .path4:before {
+  content: "\e922";
+  margin-left: -1em;
+  color: rgb(0, 82, 180);
+}
+.icon-panama .path5:before {
+  content: "\e923";
+  margin-left: -1em;
+  color: rgb(216, 0, 39);
+}
+.icon-paper-plane:before {
+  content: "\e924";
+}
+.icon-people:before {
+  content: "\e925";
+}
+.icon-peru .path1:before {
+  content: "\e926";
+  color: rgb(240, 240, 240);
+}
+.icon-peru .path2:before {
+  content: "\e927";
+  margin-left: -1em;
+  color: rgb(216, 0, 39);
+}
+.icon-peru .path3:before {
+  content: "\e928";
+  margin-left: -1em;
+  color: rgb(216, 0, 39);
+}
+.icon-plus:before {
+  content: "\e929";
+}
+.icon-podium:before {
+  content: "\e92a";
+}
+.icon-question:before {
+  content: "\e92b";
+}
+.icon-reserved:before {
+  content: "\e92c";
+}
+.icon-search:before {
+  content: "\e92d";
+}
+.icon-share:before {
+  content: "\e92e";
+}
+.icon-spain .path1:before {
+  content: "\e92f";
+  color: rgb(255, 218, 68);
+}
+.icon-spain .path2:before {
+  content: "\e930";
+  margin-left: -1em;
+  color: rgb(216, 0, 39);
+}
+.icon-spain .path3:before {
+  content: "\e931";
+  margin-left: -1em;
+  color: rgb(216, 0, 39);
+}
+.icon-star:before {
+  content: "\e932";
+}
+.icon-star-outline:before {
+  content: "\e933";
+}
+.icon-trash:before {
+  content: "\e934";
+}
+.icon-user-woman:before {
+  content: "\e935";
+}
+.icon-video:before {
+  content: "\e936";
+}
+.icon-webcam:before {
+  content: "\e937";
+}
+.icon-whatsapp-green:before {
+  content: "\e938";
+  color: #7ad06d;
+}
+.icon-world:before {
+  content: "\e939";
+}
+.icon-x:before {
+  content: "\e93a";
+}
