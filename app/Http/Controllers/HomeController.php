@@ -12,7 +12,7 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    public function __construct() 
     {
         $this->middleware('auth');
     }
@@ -26,7 +26,7 @@ class HomeController extends Controller
     {
         $request->user()->authorizeRoles(['usuario', 'profesional', 'empresa']);
 
-        return view('layouts.app');
+        return view('home');
         
     }
 

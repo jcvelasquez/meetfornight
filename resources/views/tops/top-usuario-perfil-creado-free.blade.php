@@ -6,12 +6,14 @@
       <a href="" class="reactivar">RENOVAR</a>-->
   		<div class="usuario-creado">
   			<span><i class="icon-user-woman esp-icon-usuario-creado"></i> {{ Auth::user()->name }}</span>
-  			<span><i class="icon-locked-padlock esp-icon-usuario-creado"></i><a href="{{ route('logout') }}">Cerrar Sesión</a></span>
+  			<span><i class="icon-locked-padlock esp-icon-usuario-creado"></i><a href="{{ route('cerrar-sesion') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Cerrar Sesión</a></span>
         <div class="dropdown show eliminar-usuario">
           <a class="btn x-circulo2 dropdown-toggle " href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="icon-x"></i>
           </a>
-          <form class="dropdown-menu dropdown-menu-right eliminar-opciones p-4">
+
+          <form id="logout-form" action="{{ route('cerrar-sesion') }}" method="POST" style="display: none;" class="dropdown-menu dropdown-menu-right eliminar-opciones p-4">
+          @csrf
             <!--<div class="form-group custom-radio">
               <input type="radio" id="suspender" name="opciones" class="custom-control-input">
               <label class="custom-control-label custom-control-label-espacio" for="suspender">Suspender suscripción</label>

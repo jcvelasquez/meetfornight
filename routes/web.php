@@ -24,9 +24,7 @@ Route::resource('categorias', 'CategoriasController');
 
 
 //URLS DEL SISTEMA
-Route::get('iniciar-sesion', function () {
-    return view('iniciar-sesion');
-});
+
 
 Route::get('/', function () {
     return view('home');
@@ -170,20 +168,42 @@ Route::get('valoracion-profesional', function () {
 
 
 //URLS PARA EL USUARIO
-/*Route::get('perfil-usuario', function () {
-    return view('forms-perfil-usuario.perfil-usuario');
-});*/
-
+Route::get('perfil-usuario', 'PerfilUsuarioController@index')->name('usuario');
 Route::get('seguridad-usuario', function () {
     return view('forms-perfil-usuario.seguridad-usuario');
 });
 
 
-Auth::routes();
+//Auth::routes();
+// Authentication Routes...
+Route::get('iniciar-sesion', 'IniciarSesionController@index')->name('iniciar-sesion');
+Route::post('iniciar-sesion', 'IniciarSesionController@login');
+Route::post('cerrar-sesion', 'IniciarSesionController@logout')->name('cerrar-sesion');
 
-Route::get('/homemfn', 'HomeController@index')->name('home');
 
-Route::get('perfil-usuario', 'PerfilUsuarioController@index')->name('usuario');
+   
+// Registration Routes...
+Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+Route::post('register', 'Auth\RegisterController@register');
+
+
+// Password Reset Routes...
+Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
+
+
+// Email Verification Routes...
+Route::get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
+Route::get('email/verify/{id}', 'Auth\VerificationController@verify')->name('verification.verify');
+Route::get('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
+
+
+
+
+
+
 
 
 

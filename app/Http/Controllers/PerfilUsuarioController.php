@@ -31,7 +31,8 @@ class PerfilUsuarioController extends Controller
 
         $request->user()->authorizeRoles(['usuario', 'profesional', 'empresa']);
 
-        return view('forms-perfil-usuario.perfil-usuario', compact('books'));
+        //return view('forms-perfil-usuario.perfil-usuario', compact('books'));
+        return view('forms-perfil-usuario.perfil-usuario');
     }
 
     /**
