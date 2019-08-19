@@ -63,6 +63,7 @@ class User extends Authenticatable
         }
         return false;
     }
+    
     public function hasRole($role)
     {
         if ($this->roles()->where('nombre_rol', $role)->first()) {
