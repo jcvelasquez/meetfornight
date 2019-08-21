@@ -31,7 +31,7 @@
         </div>
       @endif
 
-        <form method="post" action="{{ route('perfil_usuario.store') }}">
+        <form method="post" action="{{ route('perfil_usuario.store') }}" id="form-cuenta-usuario">
           @csrf
             <!-- SmartWizard html -->
             <div id="smartwizard">
@@ -92,6 +92,39 @@
         $(document).ready(function(){
           
             
+          // validate signup form on keyup and submit
+          /*$("#form-cuenta-usuario").validate({
+            ignore: ":hidden",
+            rules: {
+              nombre: "required",
+              apodo: "required",
+              clave: "required",
+              confirmar_clave: "required",
+              email: {
+                email: true,
+                required: true
+              },
+              confirmar_email: {
+                email: true,
+                required: true
+              },
+              fecha_nacimiento: "required",
+              sexo: "required",
+              nacionalidad: "required",
+              idioma: "required"
+            },
+            messages: {
+              nombre: "El nombre es obligatorio",
+              apodo: "El apodo es obligatorio",
+              email: "El email es obligatorio",
+              confirmar_email: "Debe confirmar su email"
+              clave: "La clave es obligatoria",
+              fecha_nacimiento: "La fecha de nacimiento es obligatoria",
+              sexo: "El sexo es obligatorio",
+              nacionalidad: "La nacionalidad es obligatoria",
+              idioma: "El idioma es obligatorio",
+            }
+          });*/
 
 
             // Step show event
@@ -107,16 +140,7 @@
                }
             });
 
-            // Toolbar extra buttons
-            /*var btnFinish = $('<button></button>').text('EMPEZAR')
-                                             .addClass('btn btn-primary btn-busqueda-detallada')
-                                             .on('click', function(){ alert('Finish Clicked'); });
-
-            var btnCancel = $('<button></button>').text('Cancel')
-                                             .addClass('btn btn-danger')
-                                             .on('click', function(){ $('#smartwizard').smartWizard("reset"); });*/
-
-
+          
             // Smart Wizard
             $('#smartwizard').smartWizard({
                     selected: 0,
@@ -150,6 +174,17 @@
                 // Navigate next
                 $('#smartwizard').smartWizard("next");
                 return true;
+
+
+                  /*var form = $("#form-cuenta-usuario");
+                  var fields = form.find(":input");
+                  
+                  if (fields.valid()) {        
+                    $('#smartwizard').smartWizard("next");
+                    return true;
+                  }*/
+                
+                
             });
 
             $("#dropzone_perfil").dropzone({ url: "/file/post", clickable: "#dropzone_perfil button", maxFiles: 1, addRemoveLinks:true });
@@ -158,6 +193,7 @@
 
         });
     </script>
+
 
   </body>
 </html>

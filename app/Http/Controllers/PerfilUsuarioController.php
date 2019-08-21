@@ -8,50 +8,33 @@ use Illuminate\Http\Request;
 class PerfilUsuarioController extends Controller
 {
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('auth');
     }
 
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Request $request)
+    //public function index(Request $request)
+    public function show($id)
     {
-        //$books = Book::all();
+        //$usuario = PerfilUsuario::all();
         //return view('forms-perfil-usuario.perfil-usuario', compact('books'));
-
-        $request->user()->authorizeRoles(['usuario', 'profesional', 'empresa']);
-
+        //$request->user()->authorizeRoles(['usuario', 'profesional', 'empresa']);
         //return view('forms-perfil-usuario.perfil-usuario', compact('books'));
-        return view('forms-perfil-usuario.perfil-usuario');
+       // return view('forms-perfil-usuario.perfil-usuario', compact('usuario'));
+
+        return view('forms-perfil-usuario.perfil-usuario', ['perfil_usuario' => PerfilUsuario::findOrFail($id)]);
+
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         //
         return view('create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         
@@ -63,7 +46,7 @@ class PerfilUsuarioController extends Controller
             'email'=>'required'
         ]);
 
-        $contact = new Contact([
+        $contact = new PerfilUsuario([
             'first_name' => $request->get('first_name'),
             'last_name' => $request->get('last_name'),
             'email' => $request->get('email'),
@@ -93,17 +76,6 @@ class PerfilUsuarioController extends Controller
         return redirect('/crear-cuenta-usuario')->with('success', 'Contact saved!');
 
 
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**

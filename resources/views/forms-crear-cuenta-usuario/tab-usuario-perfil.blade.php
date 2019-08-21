@@ -15,13 +15,13 @@
 
               <div class="col-lg-12 col-sm-12">
 
-                <input type="text" class="form-control espacio-campos" name="nombre" placeholder="Nombre *">
+                <input type="text" class="form-control espacio-campos" name="nombre" id="nombre" placeholder="Nombre *">
 
               </div>
 
               <div class="col-lg-12 col-sm-12">
 
-                <input type="text" class="form-control" name="apodo" placeholder="Apodo *">
+                <input type="text" class="form-control" name="apodo" id="apodo" placeholder="Apodo *">
 
                 <small id="emailHelp" class="form-text text-muted espacio-campos informativo">El Apodo será el único dato personal que se visualizará en la web</small>
 
@@ -29,26 +29,28 @@
 
               <div class="col-lg-12 col-sm-12">
 
-                <input type="password" class="form-control espacio-campos" name="clave" placeholder="Contraseña *">
+                <input type="password" class="form-control espacio-campos" id="clave" name="clave" placeholder="Contraseña *">
 
               </div>
 
               <div class="col-lg-12 col-sm-12">
 
-                <input type="password" class="form-control espacio-campos" name="verificar-clave" placeholder="Verificar Contraseña *">
+                <input type="password" class="form-control espacio-campos" id="confirmar_clave" name="confirmar_clave" placeholder="Verificar Contraseña *">
 
               </div>
 
               <div class="col-lg-6 col-sm-12">
 
-                <input type="date" class="form-control espacio-campos" name="fecha_nacimiento">
+                <input type="date" class="form-control espacio-campos" name="fecha_nacimiento" id="fecha_nacimiento">
 
               </div>
 
               <div class="col-lg-6 col-sm-12">
 
-                <select type="text" class="form-control espacio-campos" name="sexo">
+                <select type="text" class="form-control espacio-campos" name="sexo" id="sexo">
 
+                <option value="">Seleccione</option>
+                
                   <option value="M">Masculino</option>
 
                   <option value="F">Femenino</option>
@@ -59,7 +61,9 @@
 
               <div class="col-lg-12 col-sm-12">
 
-                <select type="text" class="form-control espacio-campos" name="nacionalidad">
+                <select type="text" class="form-control espacio-campos" name="nacionalidad" id="nacionalidad">
+
+                <option value="">Seleccione</option>
 
                   <option value="PE">Peruana</option>
 
@@ -73,7 +77,9 @@
 
               <div class="col-lg-12 col-sm-12">
 
-                <select type="text" class="form-control espacio-campos" name="idioma">
+                <select type="text" class="form-control espacio-campos" name="idioma" id="idioma">
+
+                <option value="">Seleccione</option>
 
                   <option value="ES">Español</option>
 
@@ -85,30 +91,19 @@
 
               <div class="col-lg-6 col-sm-12">
 
-                <input type="email" class="form-control espacio-campos" name="email" placeholder="Email *">
+                <input type="email" class="form-control espacio-campos" name="email" id="email" placeholder="Email *">
 
               </div>
 
               <div class="col-lg-6 col-sm-12">
 
-                <input type="email" class="form-control espacio-campos" name="confirmar-email" placeholder="Confirmar email *">
+                <input type="email" class="form-control espacio-campos" name="confirmar_email" id="confirmar_email" placeholder="Confirmar email *">
                 <input type="hidden" name="estado" value="0"/>
               </div>
 
             </div>
 
           </div>
-
-<!--           <div class="bloques-de-perfil">
-
-            <div class="form-row">
-
-              <button type="submit" class="btn btn-primary btn-busqueda-detallada">SIGUIENTE PASO</button>
-
-            </div>
-
-          </div> -->
-
 
           </div>
 

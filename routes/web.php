@@ -168,7 +168,10 @@ Route::get('valoracion-profesional', function () {
 
 
 //URLS PARA EL USUARIO
-Route::get('perfil-usuario', 'PerfilUsuarioController@index')->name('usuario');
+//Route::get('perfil-usuario', 'PerfilUsuarioController@index');
+Route::get('perfil-usuario/{id}', 'PerfilUsuarioController@show');
+
+
 Route::get('seguridad-usuario', function () {
     return view('forms-perfil-usuario.seguridad-usuario');
 });

@@ -35,7 +35,7 @@
            <h5 class="formulario-titulos">Ingresa tu número de móvil:</h5>
           <div class="form-row">
               <div class="col-lg-12 col-sm-12">
-                <input type="text" class="form-control espacio-campos" name="celular" placeholder="Celular *">
+                <input type="text" class="form-control espacio-campos" name="celular" id="celular" placeholder="Celular *">
               </div>
 			  </div>
           

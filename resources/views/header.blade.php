@@ -13,19 +13,20 @@
 
     <link href="https://fonts.googleapis.com/css?family=Fauna+One|Lato:300,400,700,900|Marck+Script|Merriweather:300,400,700,900" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Yellowtail" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{{ url('/css/bootstrap.min.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ url('/css/main.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ url('/css/responsive.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ url('/fonts/style.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ url('/css/jquery.fancybox.min.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ url('/css/asRange.css') }}" />
-    <!-- Include SmartWizard CSS -->
-    <link href="{{ url('/css/smart_wizard.css')}}" rel="stylesheet" type="text/css" />
 
-    <!-- Optional SmartWizard theme -->
-    <link href="{{ url('/css/smart_wizard_theme_circles.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ url('/css/smart_wizard_theme_arrows.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ url('/css/smart_wizard_theme_dots.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/main.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/responsive.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('fonts/style.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/jquery.fancybox.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/asRange.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/smart_wizard.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/smart_wizard_theme_circles.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/actualizacion.css') }}" rel="stylesheet" type="text/css" />
+
+
+<!--     <link href="{{ asset('css/smart_wizard_theme_arrows.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/smart_wizard_theme_dots.css') }}" rel="stylesheet" type="text/css" /> -->
 
     <script
         src="https://code.jquery.com/jquery-3.3.1.min.js"
@@ -39,14 +40,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" 
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         
-
-    <script src="{{ url('/js/bootstrap.min.js') }}"></script>
-    <script src="{{ url('/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ url('/js/main.js') }}"></script>
-    <script src="{{ url('/js/jquery.fancybox.min.js') }}"></script>
-    <script src="{{ url('/js/jquery.smartWizard.min.js') }}"></script>
-    <script src="{{ url('/js/jquery-asRange.js') }}"></script>
-    <script src="{{ url('/js/dropzone.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+<!--<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script> -->
+    <script src="{{ asset('js/main.js') }}"></script>
+    <script src="{{ asset('js/jquery.fancybox.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.smartWizard.min.js') }}"></script>
+    <script src="{{ asset('js/jquery-asRange.js') }}"></script>
+    <script src="{{ asset('js/jquery.validate.min.js') }}"></script>
+    <script src="{{ asset('js/dropzone.js') }}"></script>
 
         
 </head>
