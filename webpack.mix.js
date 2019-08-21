@@ -11,8 +11,8 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js(['resources/js/app.js'], 'public/js')
-    .sass('resources/sass/app.scss', 'public/css/')
+mix.js(['resources/js/app.js'], 'public/js/app.js')
+    .sass('resources/sass/app.scss', 'public/css/app.css')
     .styles([
         'resources/css/bootstrap.min.css',
         'resources/css/main.css',
@@ -22,13 +22,16 @@ mix.js(['resources/js/app.js'], 'public/js')
         'resources/css/asRange.css',
         'resources/fonts/style.css',
         'resources/css/smart_wizard.css',
-        'resources/css/smart_wizard_theme_circles.css'
-    ], 'public/css/meetfornight.all.css')
+        'resources/css/smart_wizard_theme_circles.css',
+        'resources/css/fontawesome.css',
+        'resources/css/piwicho.css',
+    ], 'public/css/meetfornight.css')
     .scripts([
         'resources/js/main.js',
         'resources/js/jquery.fancybox.min.js',
         'resources/js/jquery.smartWizard.min.js',
         'resources/js/jquery-asRange.js',
         'resources/js/jquery.validate.min.js',
-        'resources/js/dropzone.js'        
-    ], 'public/js/meetfornight.all.js');
+        'resources/js/dropzone.js',
+        'resources/js/fontawesome.js'      
+    ], 'public/js/meetfornight.js');

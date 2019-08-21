@@ -3,8 +3,8 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-4 footer-logo">
-          <a href="index.php">
-            <img src="img/logo-bottom.png">
+          <a href="#">
+            <img src="{{ asset('img/logo-bottom.png') }}">
           </a>
         </div>
         <div class="col-lg-8">

@@ -8,9 +8,9 @@
 
     <div class="col-lg-4 footer-logo">
 
-      <a href="index.php">
+      <a href="#">
 
-        <img src="img/logo-bottom.png">
+        <img src="{{ asset('img/logo-bottom.png') }}">
 
       </a>
 

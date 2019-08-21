@@ -4,7 +4,7 @@
 
 /******RANGE******/
 
-$(document).ready(function() {
+$(document).ready(function($) {
 
       $(".range-example").asRange({
 
@@ -49,13 +49,13 @@ $(document).ready(function() {
 
 
 /******TOOLTIPS*****/
-
+/*
 $(function () {
 
   $('[data-toggle="tooltip"]').tooltip()
 
 })
-
+*/
 
 
 /*****GALERÍA IMAGENES PEQUEÑAS*****/
@@ -116,5 +116,5 @@ function ocultarFormulario() {
 
 /****Dropdown****/
 
-$('.dropdown-toggle').dropdown()
+//$('.dropdown-toggle').dropdown()
 
