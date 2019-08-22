@@ -5,6 +5,8 @@
 
   <body>
 
+  <div id="widget">
+
   @include('tops.top-free')
 
   <!--BANNER-->
@@ -169,15 +171,8 @@
       </div>
     </div>
 
-    <div class="container">
 
-      <div class="row">
-
-            @include('loop.content-profesional')
-
-      </div>
-
-    </div>
+    <listado-profesionales></listado-profesionales>
 
     <div class="slider-inferior">
       <div class="container">
@@ -217,6 +212,7 @@
                 <a href="no-reserva-free.php">VER PERFIL</a>
               </div>
             </div>
+
             <div class="carousel-item">
               <img class="d-block w-100" src="img/slider/slider-inferior-1.jpg" alt="Slider inferior 1">
               <div class="carousel-caption d-none d-md-block banner-inferior-texto">
@@ -226,6 +222,7 @@
                 <a href="no-reserva-free.php">VER PERFIL</a>
               </div>
             </div>
+
           </div>
 
           <a class="carousel-control-prev" href="#carouselExampleIndicators2" role="button" data-slide="prev">
@@ -261,6 +258,11 @@
   @include('footers.footer-free')
 
   @include('modal')
+  </div>
+
+  
+  <script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('js/meetfornight.js') }}"></script>
 
   </body>
 </html>

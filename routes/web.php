@@ -12,7 +12,7 @@ Route::resource('favorito_usuario', 'FavoritoUsuarioController');
 Route::resource('foto_profesional', 'FotoProfesionalController');
 Route::resource('mensaje_profesional', 'MensajeProfesionalController');
 Route::resource('mensaje_usuario', 'MensajeUsuarioController');
-Route::resource('perfil_usuario', 'PerfilUsuarioController');
+//Route::resource('perfil_usuario', 'PerfilUsuarioController');
 Route::resource('perfil_profesional', 'PerfilProfesionalController');
 Route::resource('reserva_usuario', 'ReservaUsuarioController');
 Route::resource('seguridad_usuario', 'SeguridadUsuarioController');

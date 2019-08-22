@@ -14,7 +14,6 @@
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/meetfornight.css') }}" rel="stylesheet" type="text/css" />
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('js/meetfornight.js') }}"></script>
+    
 
 </head>

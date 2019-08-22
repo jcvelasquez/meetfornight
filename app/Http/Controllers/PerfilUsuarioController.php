@@ -15,6 +15,17 @@ class PerfilUsuarioController extends Controller
 
 
     //public function index(Request $request)
+    public function index()
+    {
+
+        $usuario = PerfilUsuario::all();
+        return $usuario;
+
+        //return view('forms-perfil-usuario.perfil-usuario', ['perfil_usuario' => PerfilUsuario::findOrFail($id)]);
+
+    }
+
+    //public function index(Request $request)
     public function show($id)
     {
         //$usuario = PerfilUsuario::all();
@@ -23,7 +34,10 @@ class PerfilUsuarioController extends Controller
         //return view('forms-perfil-usuario.perfil-usuario', compact('books'));
        // return view('forms-perfil-usuario.perfil-usuario', compact('usuario'));
 
-        return view('forms-perfil-usuario.perfil-usuario', ['perfil_usuario' => PerfilUsuario::findOrFail($id)]);
+       //$usuario = PerfilUsuario::all();
+      // return $usuario;
+
+       return view('forms-perfil-usuario.perfil-usuario', ['perfil_usuario' => PerfilUsuario::findOrFail($id)]);
 
     }
 

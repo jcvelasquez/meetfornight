@@ -5,6 +5,8 @@
 
   <body>
 
+  <div id="app">
+
     @include('tops.top-crear-perfil')
 
 
@@ -194,6 +196,7 @@
         });
     </script>
 
+</div>
 
   </body>
 </html>

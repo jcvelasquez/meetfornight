@@ -63,8 +63,10 @@
           </div>
           <div class="col-lg-9 col-sm-12">
 
-          @yield('content')
-
+              <div id="widget">
+                  @yield('content')
+              </div>
+              
           </div>
         </div>
       </div>
