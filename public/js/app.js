@@ -1876,54 +1876,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      listado: [{
-        nombre: "FRANCESCA",
-        ubicacion_edad: "LIMA | 22 años",
-        precio: '150',
-        valoracion: 2
-      }, {
-        nombre: "JIMENA",
-        ubicacion_edad: "PIURA | 19 años",
-        precio: '120',
-        valoracion: 5
-      }, {
-        nombre: "JORDANA",
-        ubicacion_edad: "AYACUCHO | 24 años",
-        precio: '140',
-        valoracion: 3
-      }, {
-        nombre: "CAROLINA",
-        ubicacion_edad: "CHICLAYO | 21 años",
-        precio: '130',
-        valoracion: 5
-      }, {
-        nombre: "ALEJANDRA",
-        ubicacion_edad: "TUMBES | 29 años",
-        precio: '180',
-        valoracion: 4
-      }, {
-        nombre: "VERONICA",
-        ubicacion_edad: "ICA | 26 años",
-        precio: '200',
-        valoracion: 1
-      }, {
-        nombre: "SUSANA",
-        ubicacion_edad: "JUNIN | 23 años",
-        precio: '250',
-        valoracion: 2
-      }, {
-        nombre: "SHEYLA",
-        ubicacion_edad: "PUCALLPA | 27 años",
-        precio: '150',
-        valoracion: 3
-      }]
+      arrayProfesionales: []
     };
   },
   mounted: function mounted() {
     console.log("Component mounted.");
+    this.listarProfesionales();
   },
   methods: {
-    listarCategoria: function listarCategoria() {}
+    listarProfesionales: function listarProfesionales() {
+      var me = this; // Make a request for a user with a given ID
+
+      axios.get('/perfil-usuario').then(function (response) {
+        // handle success
+        me.arrayProfesionales = response.data;
+        console.log(response);
+      })["catch"](function (error) {
+        // handle error
+        console.log(error);
+      })["finally"](function () {// always executed
+      });
+    }
   }
 });
 
@@ -37354,35 +37327,43 @@ var render = function() {
     _c(
       "div",
       { staticClass: "row" },
-      _vm._l(_vm.listado, function(item) {
-        return _c("div", { staticClass: "col-lg-3 col-md-6 col-sm-12" }, [
-          _c("div", { staticClass: "item-chica" }, [
-            _c("img", {
-              staticClass: "img-responsive",
-              attrs: { src: "img/chicas/chica1.jpg" }
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "texto-chica" }, [
-              _c("h3", { domProps: { textContent: _vm._s(item.nombre) } }),
-              _vm._v(" "),
-              _c("h4", {
-                domProps: { textContent: _vm._s(item.ubicacion_edad) }
+      _vm._l(_vm.arrayProfesionales, function(profesional) {
+        return _c(
+          "div",
+          { key: profesional.id, staticClass: "col-lg-3 col-md-6 col-sm-12" },
+          [
+            _c("div", { staticClass: "item-chica" }, [
+              _c("img", {
+                staticClass: "img-responsive",
+                attrs: { src: "img/chicas/chica1.jpg" }
               }),
               _vm._v(" "),
-              _c("h5", { domProps: { textContent: _vm._s(item.precio) } }),
-              _vm._v(" "),
-              _vm._m(0, true),
-              _vm._v(" "),
-              _c(
-                "a",
-                { attrs: { target: "_blank", href: "no-reserva-free.php" } },
-                [_vm._v("VER PERFIL")]
-              ),
-              _vm._v(" "),
-              _vm._m(1, true)
+              _c("div", { staticClass: "texto-chica" }, [
+                _c("h3", {
+                  domProps: { textContent: _vm._s(profesional.nombre) }
+                }),
+                _vm._v(" "),
+                _c("h4", {
+                  domProps: { textContent: _vm._s(profesional.ubicacion_edad) }
+                }),
+                _vm._v(" "),
+                _c("h5", {
+                  domProps: { textContent: _vm._s(profesional.precio) }
+                }),
+                _vm._v(" "),
+                _vm._m(0, true),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  { attrs: { target: "_blank", href: "no-reserva-free.php" } },
+                  [_vm._v("VER PERFIL")]
+                ),
+                _vm._v(" "),
+                _vm._m(1, true)
+              ])
             ])
-          ])
-        ])
+          ]
+        )
       }),
       0
     )
