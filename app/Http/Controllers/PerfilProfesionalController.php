@@ -2,83 +2,106 @@
 
 namespace App\Http\Controllers;
 
+use App\PerfilProfesional;
 use Illuminate\Http\Request;
 
 class PerfilProfesionalController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+
+    public function __construct()
     {
-        //
+       // $this->middleware('auth');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function index()
+    {
+        
+        return view('forms-perfil-profesional.perfil-profesional');
+    }
+
+
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         //
+        $validatedData = $request->validate([
+            'nombre'=>'required',
+            'apodo'=>'required',
+            'email'=>'required',
+            'clave'=>'required',
+            'fecha_nacimiento'=>'required',
+            'sexo'=>'required',
+            'nacionalidad'=>'required',
+            'idioma'=>'required',
+            'celular'=>'required',
+            'estado'=>'required'
+        ]);
+
+        $perfilUsuario = PerfilUsuario::create($validatedData);
+
+        return redirect('/crear-cuenta-usuario')->with('success', 'Contact saved!');
+
+
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+
+    public function show(Request $request)
     {
         //
+        return PerfilProfesional::findOrFail($request->id);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
         //
+        $book = Book::findOrFail($id);
+
+        return view('edit', compact('book'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id)
     {
-        //
+
+
+        $validatedData = $request->validate([
+            'nombre'=>'required',
+            'apodo'=>'required',
+            'email'=>'required',
+            'clave'=>'required',
+            'fecha_nacimiento'=>'required',
+            'sexo'=>'required',
+            'nacionalidad'=>'required',
+            'idioma'=>'required',
+            'celular'=>'required',
+            'estado'=>'required'
+        ]);  
+
+        return PerfilUsuario::whereId($request->id)->update($validatedData);
+
+        //return redirect('/perfil-usuario')->with('success', 'Book is successfully updated');
+
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
         //
+
+        /*
+        $contact = Contact::find($id);
+        $contact->delete();
+
+        */
+        $book = Book::findOrFail($id);
+        $book->delete();
+
+        return redirect('/books')->with('success', 'Book is successfully deleted');
     }
 }

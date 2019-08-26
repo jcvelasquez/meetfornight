@@ -106,16 +106,27 @@ Route::get('perfil', function () {
 
 
 
+//URLS PARA EL USUARIO
+Route::get('perfil-usuario', 'PerfilUsuarioController@index');
+Route::get('perfil-usuario/{id}', 'PerfilUsuarioController@show');
+Route::put('perfil-usuario/actualizar', 'PerfilUsuarioController@update');
+
+
 
 
 //URLS PARA EL PROFESIONAL
+Route::get('perfil-profesional', 'PerfilProfesionalController@index');
+Route::get('perfil-profesional/{id}', 'PerfilProfesionalController@show');
+
+/*Route::get('perfil-profesional', function () {
+    return view('forms-perfil-profesional.perfil-profesional');
+});*/
+
 Route::get('planes-profesional', function () {
     return view('forms-perfil-profesional.planes-profesional');
 });
 
-Route::get('perfil-profesional', function () {
-    return view('forms-perfil-profesional.perfil-profesional');
-});
+
 
 Route::get('servicios-profesional', function () {
     return view('forms-perfil-profesional.servicios-profesional');
@@ -167,10 +178,7 @@ Route::get('valoracion-profesional', function () {
 
 
 
-//URLS PARA EL USUARIO
-Route::get('perfil-usuario', 'PerfilUsuarioController@index');
-Route::get('perfil-usuario/{id}', 'PerfilUsuarioController@show');
-Route::put('perfil-usuario/actualizar', 'PerfilUsuarioController@update');
+
 
 
 Route::get('seguridad-usuario', function () {

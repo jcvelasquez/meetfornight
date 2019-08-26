@@ -49,7 +49,7 @@
                   </a>
                 </div>
                 <div class="usuario-nombre">
-                <h2>¡Hola {{ Auth::user()->name }} !</h2>
+                <h2>¡Hola  !</h2>
                 <span class="identificador">ID: 4789020</span>
                 </div>
               </div>
