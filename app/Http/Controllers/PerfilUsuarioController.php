@@ -18,16 +18,19 @@ class PerfilUsuarioController extends Controller
     public function index()
     {
 
-        $usuario = PerfilUsuario::all();
-        return $usuario;
+        //$perfilesUsuarios = PerfilUsuario::all();
+        //return $perfilesUsuarios;
 
-        //return view('forms-perfil-usuario.perfil-usuario', ['perfil_usuario' => PerfilUsuario::findOrFail($id)]);
+        return view('forms-perfil-usuario.perfil-usuario');
 
     }
 
     //public function index(Request $request)
-    public function show($id)
+    public function show(Request $request)
     {
+
+        return PerfilUsuario::findOrFail($request->id);
+
         //$usuario = PerfilUsuario::all();
         //return view('forms-perfil-usuario.perfil-usuario', compact('books'));
         //$request->user()->authorizeRoles(['usuario', 'profesional', 'empresa']);
@@ -37,7 +40,7 @@ class PerfilUsuarioController extends Controller
        //$usuario = PerfilUsuario::all();
       // return $usuario;
 
-       return view('forms-perfil-usuario.perfil-usuario', ['perfil_usuario' => PerfilUsuario::findOrFail($id)]);
+       //return PerfilUsuario::findOrFail($id);
 
     }
 
@@ -85,19 +88,14 @@ class PerfilUsuarioController extends Controller
             'estado'=>'required'
         ]);
 
-        $book = PerfilUsuario::create($validatedData);
+        $perfilUsuario = PerfilUsuario::create($validatedData);
 
         return redirect('/crear-cuenta-usuario')->with('success', 'Contact saved!');
 
 
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
         //
@@ -106,14 +104,8 @@ class PerfilUsuarioController extends Controller
         return view('edit', compact('book'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+
+    public function update(Request $request)
     {
         //
 
@@ -132,25 +124,35 @@ class PerfilUsuarioController extends Controller
         $contact->city = $request->get('city');
         $contact->country = $request->get('country');
         $contact->save();
-        */
 
-        $validatedData = $request->validate([
+         $validatedData = $request->validate([
             'book_name' => 'required|max:255',
             'isbn_no' => 'required|alpha_num',
             'book_price' => 'required|numeric',
         ]);
-        Book::whereId($id)->update($validatedData);
 
-        return redirect('/books')->with('success', 'Book is successfully updated');
+        */
+
+        $validatedData = $request->validate([
+            'nombre'=>'required',
+            'apodo'=>'required',
+            'email'=>'required',
+            'clave'=>'required',
+            'fecha_nacimiento'=>'required',
+            'sexo'=>'required',
+            'nacionalidad'=>'required',
+            'idioma'=>'required',
+            'celular'=>'required',
+            'estado'=>'required'
+        ]);  
+
+        return PerfilUsuario::whereId($request->id)->update($validatedData);
+
+        //return redirect('/perfil-usuario')->with('success', 'Book is successfully updated');
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
         //
@@ -166,4 +168,5 @@ class PerfilUsuarioController extends Controller
         return redirect('/books')->with('success', 'Book is successfully deleted');
 
     }
+    
 }
