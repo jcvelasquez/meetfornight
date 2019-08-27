@@ -42,6 +42,14 @@ $(document).ready(function($) {
         }
       });
 
+      $('#sexo').on('change', function(){
+
+        console.log("test")
+
+      })
+
+
+
 });
 
 

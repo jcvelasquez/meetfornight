@@ -37,18 +37,18 @@
           />
         </div>
         <div class="col-lg-6 col-sm-12">
-          <input type="date" class="form-control espacio-campos" name="fecha-nacimiento" />
+          <input type="date" class="form-control espacio-campos" name="fecha_nacimiento" id="fecha_nacimiento" v-model="fecha_nacimiento" />
         </div>
         <div class="col-lg-6 col-sm-12">
-          <select type="text" class="form-control espacio-campos" name="sexo">
-            <option value="">Seleccione</option>
+          <select type="text" class="form-control espacio-campos" name="sexo" id="sexo" v-model="sexo">
+            <option value="">Seleccione un sexo</option>
             <option value="M">Masculino</option>
             <option value="F">Femenino</option>
           </select>
         </div>
         <div class="col-lg-12 col-sm-12">
           <select type="text" class="form-control espacio-campos" name="nacionalidad" id="nacionalidad" v-model="nacionalidad">
-            <option value="">Seleccione</option>
+            <option value="">Seleccione una nacionalidad</option>
             <option value="PE">Peruana</option>
             <option value="PA">Panameña</option>
             <option value="ES">Española</option>
@@ -56,7 +56,7 @@
         </div>
         <div class="col-lg-12 col-sm-12">
           <select type="text" class="form-control espacio-campos" name="idioma" id="idioma" v-model="idioma">
-            <option value="">Seleccione</option>
+            <option value="">Seleccione un idioma</option>
             <option value="ES">Español</option>
             <option value="EN">Ingles</option>
           </select>

@@ -13,33 +13,35 @@ class CreatePerfilProfesionalTable extends Migration
      */
     public function up()
     {
+
         Schema::create('perfil_profesional', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nombre');
             $table->string('apodo');
             $table->text('frase');
+            $table->text('descripcion');
             $table->string('email')->unique();
             $table->string('clave');
-            $table->string('usuario')->unique();
             $table->date('fecha_nacimiento');
-            $table->enum('sexo',['Masculino','Femenino','Trans']);
-            $table->enum('nacionalidad',['Peruana','Panameña','Española']);
+            $table->enum('sexo',['M','F']);
+            $table->enum('nacionalidad',['PE','PA','ES']);
+            $table->enum('idioma',['ES','EN']);
             $table->string('departamento');
             $table->string('distrito');
-            $table->string('idioma');
             $table->string('etnia');
             $table->string('pecho');
+            $table->string('pene');
             $table->string('color_ojos');
-            $table->string('cabello');
+            $table->string('color_cabello');
             $table->string('corte_intimo');
-            $table->tinyInteger('estatura');
-            $table->tinyInteger('peso');
-            $table->enum('orientacion',['Lesbiana','Heterosual','Transexual','Homosexual','Bisexual']);
-            $table->tinyInteger('tatuaje');
-            $table->tinyInteger('piercing');
-            $table->tinyInteger('fumador');
-            $table->tinyInteger('seguridad');
-            $table->tinyInteger('estado');
+            $table->integer('estatura');
+            $table->integer('peso');
+            $table->enum('orientacion',['LESB','HETE','TRAN','HOMO','BISE']);
+            $table->integer('tatuaje');
+            $table->integer('piercing');
+            $table->integer('fumador');
+            $table->integer('seguridad');
+            $table->integer('estado');
             $table->timestamps();
         });
     }

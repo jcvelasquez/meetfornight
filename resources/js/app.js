@@ -21,6 +21,7 @@ window.Vue = require('vue');
 
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('perfil-usuario', require('./components/PerfilUsuario.vue').default);
+Vue.component('perfil-profesional', require('./components/PerfilProfesional.vue').default);
 Vue.component('listado-profesionales', require('./components/ListadoProfesionales.vue').default);
 
 

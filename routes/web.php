@@ -117,6 +117,8 @@ Route::put('perfil-usuario/actualizar', 'PerfilUsuarioController@update');
 //URLS PARA EL PROFESIONAL
 Route::get('perfil-profesional', 'PerfilProfesionalController@index');
 Route::get('perfil-profesional/{id}', 'PerfilProfesionalController@show');
+Route::put('perfil-profesional/actualizar', 'PerfilProfesionalController@update');
+
 
 /*Route::get('perfil-profesional', function () {
     return view('forms-perfil-profesional.perfil-profesional');

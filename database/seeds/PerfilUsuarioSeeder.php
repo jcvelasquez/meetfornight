@@ -13,7 +13,8 @@ class PerfilUsuarioSeeder extends Seeder
      */
     public function run()
     {
-        //
+        
+        
         DB::table('perfil_usuario')->insert([
             'nombre'=> 'Jose Claudio Junior Velasquez Boyer',
             'apodo'=> 'piwicho',
