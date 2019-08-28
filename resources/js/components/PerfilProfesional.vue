@@ -107,7 +107,7 @@
                     <div class="busqueda-detallada-range espacio-campos">
                       <label>Estatura</label>
                       <span class="esp-i">140 cm</span>
-                      <input class="range-example-bol" type="text" min="140" max="210" value="140" name="estatura" id="estatura" v-model="estatura" step="1" />
+                      <input class="rango-perfil" type="text" min="140" max="210" value="140" name="estatura" id="estatura" v-model="estatura" step="1" />
                       <span class="esp-d">210 cm</span>
                     </div>
                 </div>
@@ -115,7 +115,7 @@
                     <div class="busqueda-detallada-range espacio-campos">
                       <label>Peso</label>
                       <span class="esp-i">45 kg</span>
-                      <input class="range-example-bol" type="text" min="45" max="150" value="45" name="peso" id="peso" v-model="peso" step="1" />
+                      <input class="rango-perfil" type="text" min="45" max="150" value="45" name="peso" id="peso" v-model="peso" step="1" />
                       <span class="esp-d">150 kg</span>
                     </div>
                 </div>
@@ -329,7 +329,7 @@
             <h5 class="formulario-titulos">FRASE QUE RESALTE:</h5>
             <div class="form-row espacio-campos">
               <div class="col-lg-12 col-sm-12">
-                <input type="text" class="form-control espacio-campos" name="frase" placeholder="Ejm: Te invito a mi mundo de fantasía">
+                <input type="text" class="form-control espacio-campos" name="frase" id="frase" v-model="frase" placeholder="Ejm: Te invito a mi mundo de fantasía">
               </div>
             </div>
           </div>
@@ -338,7 +338,7 @@
             <h5 class="formulario-titulos">DESCRIPCIÓN:</h5>
             <div class="form-row espacio-campos">
               <div class="col-lg-12 col-sm-12">
-                <textarea type="text" rows="5" class="form-control" name="descripcion"></textarea>
+                <textarea type="text" rows="5" class="form-control" name="descripcion" id="descripcion" v-model="descripcion"></textarea>
                 <small id="emailHelp" class="form-text text-muted espacio-campos informativo">1000 caracteres como máximo</small>
               </div>
             </div>
@@ -363,15 +363,19 @@ export default {
             frase : '',
             descripcion : '',
             email : '',
+            confirmar_email : '',
             clave : '',
+            verificar_clave : '',
             usuario : '',
             fecha_nacimiento : '',
             sexo : '',
             nacionalidad : '',
             departamento : '',
             distrito : '',
+            idioma : '',
             etnia : '',
             pecho : '',
+            pene : '',
             color_ojos : '',
             color_cabello : '',
             corte_intimo : '',
@@ -398,18 +402,41 @@ export default {
             .then(function (response) {
                 // handle success
               
-               /* me.nombre = response.data.nombre;
+
+                me.nombre = response.data.nombre;
                 me.apodo = response.data.apodo;
+                me.frase = response.data.frase;
+                me.descripcion = response.data.descripcion;
                 me.email = response.data.email;
+                me.confirmar_email = response.data.email;
                 me.clave = response.data.clave;
+                me.verificar_clave = response.data.clave;
+                me.usuario = response.data.usuario;
                 me.fecha_nacimiento = response.data.fecha_nacimiento;
                 me.sexo = response.data.sexo;
                 me.nacionalidad = response.data.nacionalidad;
+                me.departamento = response.data.departamento;
+                me.distrito = response.data.distrito;
                 me.idioma = response.data.idioma;
-                me.celular = response.data.celular;
-                me.estado = response.data.estado;*/
+                me.etnia = response.data.etnia;
+                me.pecho = response.data.pecho;
+                me.pene = response.data.pene;
+                me.color_ojos = response.data.color_ojos;
+                me.color_cabello = response.data.color_cabello;
+                me.corte_intimo = response.data.corte_intimo;
+                //me.estatura = response.data.estatura;
+                //me.peso = response.data.peso;
+                me.orientacion = response.data.orientacion;
+                me.tatuaje = response.data.tatuaje;
+                me.piercing = response.data.piercing;
+                me.fumador = response.data.fumador;
+                me.seguridad = response.data.seguridad;
 
                 console.log(response.data);
+
+
+                $("#estatura").asRange('val', response.data.estatura);
+                $("#peso").asRange('val', response.data.peso);
 
             })
             .catch(function (error) {

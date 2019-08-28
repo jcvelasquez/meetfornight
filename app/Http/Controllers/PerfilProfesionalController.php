@@ -52,7 +52,7 @@ class PerfilProfesionalController extends Controller
 
     public function show(Request $request)
     {
-        //
+        if(!$request->ajax()) return redirect('/');
         return PerfilProfesional::findOrFail($request->id);
     }
 

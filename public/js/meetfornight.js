@@ -14,12 +14,9 @@ $(document).ready(function($) {
 
       });
 
-      $(".range-example-bol").asRange({
-
+      $(".rango-perfil").asRange({
         range: false,
-     
         limit: false
-     
       });
 
       // validate signup form on keyup and submit

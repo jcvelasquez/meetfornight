@@ -2274,15 +2274,19 @@ __webpack_require__.r(__webpack_exports__);
       frase: '',
       descripcion: '',
       email: '',
+      confirmar_email: '',
       clave: '',
+      verificar_clave: '',
       usuario: '',
       fecha_nacimiento: '',
       sexo: '',
       nacionalidad: '',
       departamento: '',
       distrito: '',
+      idioma: '',
       etnia: '',
       pecho: '',
+      pene: '',
       color_ojos: '',
       color_cabello: '',
       corte_intimo: '',
@@ -2305,18 +2309,37 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get('/perfil-profesional/1').then(function (response) {
         // handle success
+        me.nombre = response.data.nombre;
+        me.apodo = response.data.apodo;
+        me.frase = response.data.frase;
+        me.descripcion = response.data.descripcion;
+        me.email = response.data.email;
+        me.confirmar_email = response.data.email;
+        me.clave = response.data.clave;
+        me.verificar_clave = response.data.clave;
+        me.usuario = response.data.usuario;
+        me.fecha_nacimiento = response.data.fecha_nacimiento;
+        me.sexo = response.data.sexo;
+        me.nacionalidad = response.data.nacionalidad;
+        me.departamento = response.data.departamento;
+        me.distrito = response.data.distrito;
+        me.idioma = response.data.idioma;
+        me.etnia = response.data.etnia;
+        me.pecho = response.data.pecho;
+        me.pene = response.data.pene;
+        me.color_ojos = response.data.color_ojos;
+        me.color_cabello = response.data.color_cabello;
+        me.corte_intimo = response.data.corte_intimo; //me.estatura = response.data.estatura;
+        //me.peso = response.data.peso;
 
-        /* me.nombre = response.data.nombre;
-         me.apodo = response.data.apodo;
-         me.email = response.data.email;
-         me.clave = response.data.clave;
-         me.fecha_nacimiento = response.data.fecha_nacimiento;
-         me.sexo = response.data.sexo;
-         me.nacionalidad = response.data.nacionalidad;
-         me.idioma = response.data.idioma;
-         me.celular = response.data.celular;
-         me.estado = response.data.estado;*/
+        me.orientacion = response.data.orientacion;
+        me.tatuaje = response.data.tatuaje;
+        me.piercing = response.data.piercing;
+        me.fumador = response.data.fumador;
+        me.seguridad = response.data.seguridad;
         console.log(response.data);
+        $("#estatura").asRange('val', response.data.estatura);
+        $("#peso").asRange('val', response.data.peso);
       })["catch"](function (error) {
         // handle error
         console.log(error);
@@ -39303,7 +39326,7 @@ var render = function() {
                     expression: "estatura"
                   }
                 ],
-                staticClass: "range-example-bol",
+                staticClass: "rango-perfil",
                 attrs: {
                   type: "text",
                   min: "140",
@@ -39347,7 +39370,7 @@ var render = function() {
                     expression: "peso"
                   }
                 ],
-                staticClass: "range-example-bol",
+                staticClass: "rango-perfil",
                 attrs: {
                   type: "text",
                   min: "45",
@@ -39694,11 +39717,88 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _vm._m(5),
+    _c("div", { staticClass: "bloques-de-perfil" }, [
+      _c("h5", { staticClass: "formulario-titulos" }, [
+        _vm._v("FRASE QUE RESALTE:")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-row espacio-campos" }, [
+        _c("div", { staticClass: "col-lg-12 col-sm-12" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.frase,
+                expression: "frase"
+              }
+            ],
+            staticClass: "form-control espacio-campos",
+            attrs: {
+              type: "text",
+              name: "frase",
+              id: "frase",
+              placeholder: "Ejm: Te invito a mi mundo de fantasía"
+            },
+            domProps: { value: _vm.frase },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.frase = $event.target.value
+              }
+            }
+          })
+        ])
+      ])
+    ]),
     _vm._v(" "),
-    _vm._m(6),
+    _c("div", { staticClass: "bloques-de-perfil" }, [
+      _c("h5", { staticClass: "formulario-titulos" }, [_vm._v("DESCRIPCIÓN:")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-row espacio-campos" }, [
+        _c("div", { staticClass: "col-lg-12 col-sm-12" }, [
+          _c("textarea", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.descripcion,
+                expression: "descripcion"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              rows: "5",
+              name: "descripcion",
+              id: "descripcion"
+            },
+            domProps: { value: _vm.descripcion },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.descripcion = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c(
+            "small",
+            {
+              staticClass: "form-text text-muted espacio-campos informativo",
+              attrs: { id: "emailHelp" }
+            },
+            [_vm._v("1000 caracteres como máximo")]
+          )
+        ])
+      ])
+    ]),
     _vm._v(" "),
-    _vm._m(7)
+    _vm._m(5)
   ])
 }
 var staticRenderFns = [
@@ -40045,55 +40145,6 @@ var staticRenderFns = [
             )
           ]
         )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "bloques-de-perfil" }, [
-      _c("h5", { staticClass: "formulario-titulos" }, [
-        _vm._v("FRASE QUE RESALTE:")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-row espacio-campos" }, [
-        _c("div", { staticClass: "col-lg-12 col-sm-12" }, [
-          _c("input", {
-            staticClass: "form-control espacio-campos",
-            attrs: {
-              type: "text",
-              name: "frase",
-              placeholder: "Ejm: Te invito a mi mundo de fantasía"
-            }
-          })
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "bloques-de-perfil" }, [
-      _c("h5", { staticClass: "formulario-titulos" }, [_vm._v("DESCRIPCIÓN:")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-row espacio-campos" }, [
-        _c("div", { staticClass: "col-lg-12 col-sm-12" }, [
-          _c("textarea", {
-            staticClass: "form-control",
-            attrs: { type: "text", rows: "5", name: "descripcion" }
-          }),
-          _vm._v(" "),
-          _c(
-            "small",
-            {
-              staticClass: "form-text text-muted espacio-campos informativo",
-              attrs: { id: "emailHelp" }
-            },
-            [_vm._v("1000 caracteres como máximo")]
-          )
-        ])
       ])
     ])
   },
