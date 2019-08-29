@@ -21,8 +21,21 @@ window.Vue = require('vue');
 
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('perfil-usuario', require('./components/PerfilUsuario.vue').default);
+
+Vue.component('planes-profesional', require('./components/PlanesProfesional.vue').default);
 Vue.component('perfil-profesional', require('./components/PerfilProfesional.vue').default);
-Vue.component('listado-profesionales', require('./components/ListadoProfesionales.vue').default);
+Vue.component('servicios-profesional', require('./components/ServiciosProfesional.vue').default);
+Vue.component('contacto-profesional', require('./components/ContactoProfesional.vue').default);
+Vue.component('agenda-profesional', require('./components/AgendaProfesional.vue').default);
+Vue.component('reservas-profesional', require('./components/ReservasProfesional.vue').default);
+Vue.component('tarifas-profesional', require('./components/TarifasProfesional.vue').default);
+Vue.component('fotos-profesional', require('./components/FotosProfesional.vue').default);
+Vue.component('creditos-profesional', require('./components/CreditosProfesional.vue').default);
+Vue.component('booster-profesional', require('./components/BoosterProfesional.vue').default);
+Vue.component('estadisticas-profesional', require('./components/EstadisticasProfesional.vue').default);
+Vue.component('mensajes-profesional', require('./components/MensajesProfesional.vue').default);
+Vue.component('alerta-profesional', require('./components/AlertaProfesional.vue').default);
+Vue.component('valoracion-profesional', require('./components/ValoracionProfesional.vue').default);
 
 
 /**

@@ -28,10 +28,11 @@ mix.js(['resources/js/app.js'], 'public/js/app.js')
     ], 'public/css/meetfornight.css')
     .scripts([
         'resources/js/main.js',
+        'resources/js/jquery.repeater.min.js',
         'resources/js/jquery.fancybox.min.js',
         'resources/js/jquery.smartWizard.min.js',
         'resources/js/jquery-asRange.js',
         'resources/js/jquery.validate.min.js',
         'resources/js/dropzone.js',
-        'resources/js/fontawesome.js'      
+        'resources/js/fontawesome.js'
     ], 'public/js/meetfornight.js');

@@ -7,12 +7,13 @@
 $(document).ready(function($) {
 
       $(".range-example").asRange({
-
         range: true,
-
         limit: false
 
       });
+
+      // setup the repeater
+     // $('.repeater').repeater();
 
       $(".rango-perfil").asRange({
         range: false,

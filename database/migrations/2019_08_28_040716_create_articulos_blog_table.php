@@ -14,8 +14,9 @@ class CreateArticulosBlogTable extends Migration
     public function up()
     {
         
+        Schema::dropIfExists('articulos_blog');
         Schema::create('articulos_blog', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->integer('categoria_id')->unsigned();
             $table->string('titulo');
             $table->text('descripcion');

@@ -14,7 +14,7 @@ class CreateCategoriasBlogTable extends Migration
     public function up()
     {
         Schema::create('categorias_blog', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('titulo');
             $table->text('descripcion');
             $table->timestamps();
