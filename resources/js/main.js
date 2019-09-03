@@ -13,7 +13,17 @@ $(document).ready(function($) {
       });
 
       // setup the repeater
-     // $('.repeater').repeater();
+      $('.repeater').repeater({
+        show: function () {
+          $(this).slideDown();
+        },
+        hide: function (deleteElement) {
+          if(confirm('Are you sure you want to delete this element?')) {
+              $(this).slideUp(deleteElement);
+          }
+        },
+        isFirstItemUndeletable: true
+      });
 
       $(".rango-perfil").asRange({
         range: false,

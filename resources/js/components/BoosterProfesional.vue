@@ -91,45 +91,62 @@
         </div>
         <div class="col-lg-12 col-sm-12 form-row">
           <div
-            class="custom-control custom-radio custom-control-inline no-margin-right-check col-sm-12 espacio-campos"
-          >
+            class="custom-control custom-radio  no-margin-right-check col-sm-12 espacio-campos">
+
+
             <input type="radio" id="manualmente" name="elige" class="custom-control-input" />
             <label class="custom-control-label custom-control-label-espacio" for="manualmente">
               <h3 class="formulario-titulos tamano-pequeno">Frecuencia Manual</h3>
+              </label>
 
-              <div class="horizontal">
-                <label
-                  for="inputPassword"
-                  class="col-form-label formulario-titulos tamano-pequeno esp-radio"
-                >Fecha</label>
-                <div class="espacio-campos esp-radio">
-                  <input type="date" class="form-control icono-calendario" id="inputPassword" />
+
+              <div class="repeater col-lg-12 col-sm-12 form-row">
+
+                <div data-repeater-list="frecuencia_manual">
+
+                    <div class="horizontal" data-repeater-item>
+                      <label
+                        for="inputPassword"
+                        class="col-form-label formulario-titulos tamano-pequeno esp-radio"
+                      >Fecha</label>
+                      <div class="espacio-campos esp-radio">
+                        <input type="date" name="fecha" class="form-control icono-calendario" />
+                      </div>
+                      <label
+                        for="inputPassword"
+                        class="col-form-label formulario-titulos tamano-pequeno esp-radio"
+                      >Hora</label>
+                      <div class="espacio-campos esp-radio">
+                        <input type="text" name="hora" class="form-control" value="00:00" />
+                      </div>
+                     <!--  <div class="espacio-campos esp-radio">
+                        <select type="text" class="form-control" id="inputPassword">
+                          <option value="am">am</option>
+                          <option value="pm">pm</option>
+                        </select>
+                      </div> -->
+                      <div class="espacio-campos">
+                        <button type="button" data-repeater-delete class="btn btn-primary x-circulo">
+                          <i class="fa fa-times" aria-hidden="true"></i>
+                        </button>
+                      </div>
+                    </div>
+
                 </div>
-                <label
-                  for="inputPassword"
-                  class="col-form-label formulario-titulos tamano-pequeno esp-radio"
-                >Hora</label>
-                <div class="espacio-campos esp-radio">
-                  <input type="text" class="form-control" id="inputPassword" value="00:00" />
-                </div>
-                <div class="espacio-campos esp-radio">
-                  <select type="text" class="form-control" id="inputPassword">
-                    <option value="am">am</option>
-                    <option value="pm">pm</option>
-                  </select>
-                </div>
-                <div class="espacio-campos">
-                  <button type="button" class="btn btn-primary x-circulo">
-                    <i class="fa fa-times" aria-hidden="true"></i>
-                  </button>
-                </div>
+
+                <div class="repeater col-lg-12 col-sm-12 form-row">
+
+                  <div class="espacio-campos">
+                    <button type="button" class="btn btn-primary mas-cuadrado" data-repeater-create>
+                      <i class="fa fa-plus" aria-hidden="true"></i>
+                    </button>
+                  </div>
+
+                  </div>
+
               </div>
-              <div class="espacio-campos">
-                <button type="button" class="btn btn-primary mas-cuadrado">
-                  <i class="fa fa-plus" aria-hidden="true"></i>
-                </button>
-              </div>
-            </label>
+
+            
           </div>
         </div>
       </div>
