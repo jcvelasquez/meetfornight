@@ -3004,31 +3004,272 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      arrayProfesionales: []
+      categoria_id: 0,
+      nombre: '',
+      descripcion: '',
+      arPerfilProfesional: [],
+      modal: 0,
+      tituloModal: '',
+      tipoAccion: 0,
+      errorPerfilProfesional: 0,
+      errorMostrarMsjPerfilProfesional: [],
+      pagination: {
+        'total': 0,
+        'current_page': 0,
+        'per_page': 0,
+        'last_page': 0,
+        'from': 0,
+        'to': 0
+      },
+      offset: 32,
+      criterio: 'nombre',
+      buscar: ''
     };
   },
-  mounted: function mounted() {
-    console.log("Component mounted.");
-    this.listarProfesionales();
+  computed: {
+    isActived: function isActived() {
+      return this.pagination.current_page;
+    },
+    //Calcula los elementos de la paginación
+    pagesNumber: function pagesNumber() {
+      if (!this.pagination.to) {
+        return [];
+      }
+
+      var from = this.pagination.current_page - this.offset;
+
+      if (from < 1) {
+        from = 1;
+      }
+
+      var to = from + this.offset * 2;
+
+      if (to >= this.pagination.last_page) {
+        to = this.pagination.last_page;
+      }
+
+      var pagesArray = [];
+
+      while (from <= to) {
+        pagesArray.push(from);
+        from++;
+      }
+
+      return pagesArray;
+    }
   },
   methods: {
-    listarProfesionales: function listarProfesionales() {
-      var me = this; // Make a request for a user with a given ID
-
-      axios.get('/perfil-profesional').then(function (response) {
-        // handle success
-        me.arrayProfesionales = response.data;
-        console.log(response);
+    listarProfesionales: function listarProfesionales(page) {
+      var me = this;
+      var url = '/perfil-profesional?page=' + page;
+      axios.get(url).then(function (response) {
+        var respuesta = response.data;
+        me.arPerfilProfesional = respuesta.arPerfilProfesional.data;
+        me.pagination = respuesta.pagination;
       })["catch"](function (error) {
-        // handle error
         console.log(error);
-      })["finally"](function () {// always executed
       });
+    },
+    cambiarPagina: function cambiarPagina(page) {
+      var me = this; //Actualiza la página actual
+
+      me.pagination.current_page = page; //Envia la petición para visualizar la data de esa página
+
+      me.listarProfesionales(page);
     }
+    /*registrarCategoria(){
+        if (this.validarCategoria()){
+            return;
+        }
+        
+        let me = this;
+          axios.post('/categoria/registrar',{
+            'nombre': this.nombre,
+            'descripcion': this.descripcion
+        }).then(function (response) {
+            me.cerrarModal();
+            me.listarCategoria();
+        }).catch(function (error) {
+            console.log(error);
+        });
+    },
+    actualizarCategoria(){
+       if (this.validarCategoria()){
+            return;
+        }
+        
+        let me = this;
+          axios.put('/categoria/actualizar',{
+            'nombre': this.nombre,
+            'descripcion': this.descripcion,
+            'id': this.categoria_id
+        }).then(function (response) {
+            me.cerrarModal();
+            me.listarCategoria();
+        }).catch(function (error) {
+            console.log(error);
+        }); 
+    },
+    desactivarCategoria(id){
+       swal({
+        title: 'Esta seguro de desactivar esta categoría?',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Aceptar!',
+        cancelButtonText: 'Cancelar',
+        confirmButtonClass: 'btn btn-success',
+        cancelButtonClass: 'btn btn-danger',
+        buttonsStyling: false,
+        reverseButtons: true
+        }).then((result) => {
+        if (result.value) {
+            let me = this;
+              axios.put('/categoria/desactivar',{
+                'id': id
+            }).then(function (response) {
+                me.listarCategoria();
+                swal(
+                'Desactivado!',
+                'El registro ha sido desactivado con éxito.',
+                'success'
+                )
+            }).catch(function (error) {
+                console.log(error);
+            });
+            
+            
+        } else if (
+            // Read more about handling dismissals
+            result.dismiss === swal.DismissReason.cancel
+        ) {
+            
+        }
+        }) 
+    },
+    activarCategoria(id){
+       swal({
+        title: 'Esta seguro de activar esta categoría?',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Aceptar!',
+        cancelButtonText: 'Cancelar',
+        confirmButtonClass: 'btn btn-success',
+        cancelButtonClass: 'btn btn-danger',
+        buttonsStyling: false,
+        reverseButtons: true
+        }).then((result) => {
+        if (result.value) {
+            let me = this;
+              axios.put('/categoria/activar',{
+                'id': id
+            }).then(function (response) {
+                me.listarCategoria();
+                swal(
+                'Activado!',
+                'El registro ha sido activado con éxito.',
+                'success'
+                )
+            }).catch(function (error) {
+                console.log(error);
+            });
+            
+            
+        } else if (
+            // Read more about handling dismissals
+            result.dismiss === swal.DismissReason.cancel
+        ) {
+            
+        }
+        }) 
+    },
+    validarCategoria(){
+        this.errorCategoria=0;
+        this.errorMostrarMsjCategoria =[];
+          if (!this.nombre) this.errorMostrarMsjCategoria.push("El nombre de la categoría no puede estar vacío.");
+          if (this.errorMostrarMsjCategoria.length) this.errorCategoria = 1;
+          return this.errorCategoria;
+    },
+    cerrarModal(){
+        this.modal=0;
+        this.tituloModal='';
+        this.nombre='';
+        this.descripcion='';
+    },
+    abrirModal(modelo, accion, data = []){
+        switch(modelo){
+            case "categoria":
+            {
+                switch(accion){
+                    case 'registrar':
+                    {
+                        this.modal = 1;
+                        this.tituloModal = 'Registrar Categoría';
+                        this.nombre= '';
+                        this.descripcion = '';
+                        this.tipoAccion = 1;
+                        break;
+                    }
+                    case 'actualizar':
+                    {
+                        //console.log(data);
+                        this.modal=1;
+                        this.tituloModal='Actualizar categoría';
+                        this.tipoAccion=2;
+                        this.categoria_id=data['id'];
+                        this.nombre = data['nombre'];
+                        this.descripcion= data['descripcion'];
+                        break;
+                    }
+                }
+            }
+        }
+    }*/
+
+  },
+  mounted: function mounted() {
+    this.listarProfesionales();
   }
+  /*,
+  methods : {
+   listarProfesionales : function(){
+       let me = this;
+       // Make a request for a user with a given ID
+       axios.get('/perfil-profesional').then(function (response) {
+           // handle success
+           me.arrayProfesionales = response.data;
+           console.log(response);
+       })
+       .catch(function (error) {
+           // handle error
+           console.log(error);
+       })
+       .finally(function () {
+           // always executed
+       });
+     }
+  }*/
+
 });
 
 /***/ }),
@@ -43271,7 +43512,7 @@ var render = function() {
     _c(
       "div",
       { staticClass: "row" },
-      _vm._l(_vm.arrayProfesionales, function(profesional) {
+      _vm._l(_vm.arPerfilProfesional, function(profesional) {
         return _c(
           "div",
           { key: profesional.id, staticClass: "col-lg-3 col-md-6 col-sm-12" },
@@ -43310,7 +43551,82 @@ var render = function() {
         )
       }),
       0
-    )
+    ),
+    _vm._v(" "),
+    _c("nav", [
+      _c(
+        "ul",
+        { staticClass: "pagination" },
+        [
+          _vm.pagination.current_page > 1
+            ? _c("li", { staticClass: "page-item" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "page-link",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.cambiarPagina(
+                          _vm.pagination.current_page - 1
+                        )
+                      }
+                    }
+                  },
+                  [_vm._v("Ant")]
+                )
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm._l(_vm.pagesNumber, function(page) {
+            return _c(
+              "li",
+              {
+                key: page,
+                staticClass: "page-item",
+                class: [page == _vm.isActived ? "active" : ""]
+              },
+              [
+                _c("a", {
+                  staticClass: "page-link",
+                  attrs: { href: "#" },
+                  domProps: { textContent: _vm._s(page) },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.cambiarPagina(page)
+                    }
+                  }
+                })
+              ]
+            )
+          }),
+          _vm._v(" "),
+          _vm.pagination.current_page < _vm.pagination.last_page
+            ? _c("li", { staticClass: "page-item" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "page-link",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.cambiarPagina(
+                          _vm.pagination.current_page + 1
+                        )
+                      }
+                    }
+                  },
+                  [_vm._v("Sig")]
+                )
+              ])
+            : _vm._e()
+        ],
+        2
+      )
+    ])
   ])
 }
 var staticRenderFns = [

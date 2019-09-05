@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\PerfilProfesional;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class PerfilProfesionalController extends Controller
@@ -17,7 +18,7 @@ class PerfilProfesionalController extends Controller
     {
         //if (!$request->ajax()) return redirect('/');
 
-        $perfilProfesional = PerfilProfesional::paginate(3);
+        $perfilProfesional = PerfilProfesional::paginate(32);
 
         return [
             'pagination' => [
