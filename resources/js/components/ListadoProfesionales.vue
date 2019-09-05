@@ -52,7 +52,7 @@ export default {
         let me = this;
 
         // Make a request for a user with a given ID
-          axios.get('/perfil-usuario').then(function (response) {
+          axios.get('/perfil-profesional').then(function (response) {
               // handle success
               me.arrayProfesionales = response.data;
               console.log(response);

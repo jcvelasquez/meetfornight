@@ -37,6 +37,10 @@ Vue.component('mensajes-profesional', require('./components/MensajesProfesional.
 Vue.component('alerta-profesional', require('./components/AlertaProfesional.vue').default);
 Vue.component('valoracion-profesional', require('./components/ValoracionProfesional.vue').default);
 
+//
+Vue.component('listado-profesionales', require('./components/ListadoProfesionales.vue').default);
+
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

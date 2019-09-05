@@ -13,12 +13,30 @@ class PerfilProfesionalController extends Controller
        // $this->middleware('auth');
     }
 
-    public function index()
+    public function index(Request $request)
+    {
+        //if (!$request->ajax()) return redirect('/');
+
+        $perfilProfesional = PerfilProfesional::paginate(3);
+
+        return [
+            'pagination' => [
+                'total'        => $perfilProfesional->total(),
+                'current_page' => $perfilProfesional->currentPage(),
+                'per_page'     => $perfilProfesional->perPage(),
+                'last_page'    => $perfilProfesional->lastPage(),
+                'from'         => $perfilProfesional->firstItem(),
+                'to'           => $perfilProfesional->lastItem(),
+            ],
+            'arPerfilProfesional' => $perfilProfesional
+        ];
+    }   
+
+    /*public function index()
     {
         
         return view('forms-perfil-profesional.perfil-profesional');
-    }
-
+    }*/
 
     public function create()
     {
@@ -59,10 +77,11 @@ class PerfilProfesionalController extends Controller
 
     public function edit($id)
     {
-        //
+
         $book = Book::findOrFail($id);
 
-        return view('edit', compact('book'));
+        return view('forms-perfil-profesional.perfil-profesional');
+
     }
 
 
