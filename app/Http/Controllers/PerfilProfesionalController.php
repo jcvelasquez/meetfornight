@@ -18,8 +18,34 @@ class PerfilProfesionalController extends Controller
     {
         //if (!$request->ajax()) return redirect('/');
 
-        $perfilProfesional = PerfilProfesional::paginate(32);
+        $provincia = $request->provincia;
+        $edad = $request->edad;
+        $categoria = $request->categoria;
+        $poblacion = $request->poblacion;
 
+
+        if ($buscar==''){
+            $perfilProfesional = PerfilProfesional::orderBy('id', 'desc')->paginate(32);
+        }
+        else{
+            $perfilProfesional = PerfilProfesional::where($criterio, 'like', '%'. $buscar . '%')->orderBy('id', 'desc')->paginate(32);
+        }
+
+         /*
+        if ($buscar==''){
+            $perfilProfesional = PerfilProfesional::join('categorias','articulos.idcategoria','=','categorias.id')
+            ->select('articulos.id','articulos.idcategoria','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','articulos.precio_venta','articulos.stock','articulos.descripcion','articulos.condicion')
+            ->orderBy('articulos.id', 'desc')->paginate(32);
+        }
+        else{
+           $perfilProfesional = PerfilProfesional::join('categorias','articulos.idcategoria','=','categorias.id')
+            ->select('articulos.id','articulos.idcategoria','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','articulos.precio_venta','articulos.stock','articulos.descripcion','articulos.condicion')
+            ->where('articulos.'.$criterio, 'like', '%'. $buscar . '%')
+            ->orderBy('articulos.id', 'desc')->paginate(32);
+
+        }*/
+         
+ 
         return [
             'pagination' => [
                 'total'        => $perfilProfesional->total(),
@@ -31,6 +57,8 @@ class PerfilProfesionalController extends Controller
             ],
             'arPerfilProfesional' => $perfilProfesional
         ];
+       
+        
     }   
 
     /*public function index()

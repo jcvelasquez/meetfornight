@@ -13,13 +13,13 @@ class PerfilProfesionalSeeder extends Seeder
     {
         
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
+            'nombre' => Str::random(10),
+            'apodo' => Str::random(6),
             'frase' => 'Vive la vida y no dejes que la vida te viva',
             'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'F',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -43,13 +43,13 @@ class PerfilProfesionalSeeder extends Seeder
 
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
+            'nombre' => str_random(12),
             'apodo' => 'pollitonmushroom',
             'frase' => 'Carpe Diem',
             'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -71,14 +71,15 @@ class PerfilProfesionalSeeder extends Seeder
             'estado'=> '1'
         ]);
 
+     
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
+            'nombre' => Str::random(10),
+            'apodo' => Str::random(6),
             'frase' => 'Vive la vida y no dejes que la vida te viva',
             'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'F',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -102,13 +103,13 @@ class PerfilProfesionalSeeder extends Seeder
 
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
+            'nombre' => str_random(12),
             'apodo' => 'pollitonmushroom',
             'frase' => 'Carpe Diem',
             'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -130,931 +131,16 @@ class PerfilProfesionalSeeder extends Seeder
             'estado'=> '1'
         ]);
 
+     
 
-
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
-            'frase' => 'Vive la vida y no dejes que la vida te viva',
-            'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
-            'email'=> Str::random(10).'@piwichostudio.com',
-            'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
-            'sexo'=> 'F',
-            'nacionalidad'=>'PE',
-            'idioma' =>'ES',
-            'departamento' => 'Lima',
-            'distrito' => 'San Miguel',
-            'etnia' => 'Caucasica',
-            'pecho' => 'B',
-            'pene' => '',
-            'color_ojos' => 'Verdes Pardos',
-            'color_cabello' => 'Negro',
-            'corte_intimo' => 'Natural',
-            'estatura' => '170',
-            'peso' => '75',
-            'orientacion' => 'LESB',
-            'tatuaje' => '1',
-            'piercing' => '1',
-            'fumador' => '0',
-            'seguridad' => '1',
-            'estado'=> '1'
-        ]);
-
-
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
-            'apodo' => 'pollitonmushroom',
-            'frase' => 'Carpe Diem',
-            'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
-            'email'=> Str::random(10).'@piwichostudio.com',
-            'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
-            'sexo'=> 'M',
-            'nacionalidad'=>'PE',
-            'idioma' =>'ES',
-            'departamento' => 'Lima',
-            'distrito' => 'San Martin de Porres',
-            'etnia' => 'Trigueño',
-            'pecho' => '',
-            'pene' => 'Si',
-            'color_ojos' => 'Marrones',
-            'color_cabello' => 'Negro',
-            'corte_intimo' => 'Natural',
-            'estatura' => '173',
-            'peso' => '80',
-            'orientacion' => 'HETE',
-            'tatuaje' => '1',
-            'piercing' => '0',
-            'fumador' => '1',
-            'seguridad' => '1',
-            'estado'=> '1'
-        ]);
-
-
-
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
-            'frase' => 'Vive la vida y no dejes que la vida te viva',
-            'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
-            'email'=> Str::random(10).'@piwichostudio.com',
-            'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
-            'sexo'=> 'F',
-            'nacionalidad'=>'PE',
-            'idioma' =>'ES',
-            'departamento' => 'Lima',
-            'distrito' => 'San Miguel',
-            'etnia' => 'Caucasica',
-            'pecho' => 'B',
-            'pene' => '',
-            'color_ojos' => 'Verdes Pardos',
-            'color_cabello' => 'Negro',
-            'corte_intimo' => 'Natural',
-            'estatura' => '170',
-            'peso' => '75',
-            'orientacion' => 'LESB',
-            'tatuaje' => '1',
-            'piercing' => '1',
-            'fumador' => '0',
-            'seguridad' => '1',
-            'estado'=> '1'
-        ]);
-
-
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
-            'apodo' => 'pollitonmushroom',
-            'frase' => 'Carpe Diem',
-            'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
-            'email'=> Str::random(10).'@piwichostudio.com',
-            'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
-            'sexo'=> 'M',
-            'nacionalidad'=>'PE',
-            'idioma' =>'ES',
-            'departamento' => 'Lima',
-            'distrito' => 'San Martin de Porres',
-            'etnia' => 'Trigueño',
-            'pecho' => '',
-            'pene' => 'Si',
-            'color_ojos' => 'Marrones',
-            'color_cabello' => 'Negro',
-            'corte_intimo' => 'Natural',
-            'estatura' => '173',
-            'peso' => '80',
-            'orientacion' => 'HETE',
-            'tatuaje' => '1',
-            'piercing' => '0',
-            'fumador' => '1',
-            'seguridad' => '1',
-            'estado'=> '1'
-        ]);
-
-
-
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
-            'frase' => 'Vive la vida y no dejes que la vida te viva',
-            'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
-            'email'=> Str::random(10).'@piwichostudio.com',
-            'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
-            'sexo'=> 'F',
-            'nacionalidad'=>'PE',
-            'idioma' =>'ES',
-            'departamento' => 'Lima',
-            'distrito' => 'San Miguel',
-            'etnia' => 'Caucasica',
-            'pecho' => 'B',
-            'pene' => '',
-            'color_ojos' => 'Verdes Pardos',
-            'color_cabello' => 'Negro',
-            'corte_intimo' => 'Natural',
-            'estatura' => '170',
-            'peso' => '75',
-            'orientacion' => 'LESB',
-            'tatuaje' => '1',
-            'piercing' => '1',
-            'fumador' => '0',
-            'seguridad' => '1',
-            'estado'=> '1'
-        ]);
-
-
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
-            'apodo' => 'pollitonmushroom',
-            'frase' => 'Carpe Diem',
-            'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
-            'email'=> Str::random(10).'@piwichostudio.com',
-            'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
-            'sexo'=> 'M',
-            'nacionalidad'=>'PE',
-            'idioma' =>'ES',
-            'departamento' => 'Lima',
-            'distrito' => 'San Martin de Porres',
-            'etnia' => 'Trigueño',
-            'pecho' => '',
-            'pene' => 'Si',
-            'color_ojos' => 'Marrones',
-            'color_cabello' => 'Negro',
-            'corte_intimo' => 'Natural',
-            'estatura' => '173',
-            'peso' => '80',
-            'orientacion' => 'HETE',
-            'tatuaje' => '1',
-            'piercing' => '0',
-            'fumador' => '1',
-            'seguridad' => '1',
-            'estado'=> '1'
-        ]);
-
-
-
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
-            'frase' => 'Vive la vida y no dejes que la vida te viva',
-            'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
-            'email'=> Str::random(10).'@piwichostudio.com',
-            'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
-            'sexo'=> 'F',
-            'nacionalidad'=>'PE',
-            'idioma' =>'ES',
-            'departamento' => 'Lima',
-            'distrito' => 'San Miguel',
-            'etnia' => 'Caucasica',
-            'pecho' => 'B',
-            'pene' => '',
-            'color_ojos' => 'Verdes Pardos',
-            'color_cabello' => 'Negro',
-            'corte_intimo' => 'Natural',
-            'estatura' => '170',
-            'peso' => '75',
-            'orientacion' => 'LESB',
-            'tatuaje' => '1',
-            'piercing' => '1',
-            'fumador' => '0',
-            'seguridad' => '1',
-            'estado'=> '1'
-        ]);
-
-
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
-            'apodo' => 'pollitonmushroom',
-            'frase' => 'Carpe Diem',
-            'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
-            'email'=> Str::random(10).'@piwichostudio.com',
-            'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
-            'sexo'=> 'M',
-            'nacionalidad'=>'PE',
-            'idioma' =>'ES',
-            'departamento' => 'Lima',
-            'distrito' => 'San Martin de Porres',
-            'etnia' => 'Trigueño',
-            'pecho' => '',
-            'pene' => 'Si',
-            'color_ojos' => 'Marrones',
-            'color_cabello' => 'Negro',
-            'corte_intimo' => 'Natural',
-            'estatura' => '173',
-            'peso' => '80',
-            'orientacion' => 'HETE',
-            'tatuaje' => '1',
-            'piercing' => '0',
-            'fumador' => '1',
-            'seguridad' => '1',
-            'estado'=> '1'
-        ]);
-
-
-
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
-            'frase' => 'Vive la vida y no dejes que la vida te viva',
-            'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
-            'email'=> Str::random(10).'@piwichostudio.com',
-            'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
-            'sexo'=> 'F',
-            'nacionalidad'=>'PE',
-            'idioma' =>'ES',
-            'departamento' => 'Lima',
-            'distrito' => 'San Miguel',
-            'etnia' => 'Caucasica',
-            'pecho' => 'B',
-            'pene' => '',
-            'color_ojos' => 'Verdes Pardos',
-            'color_cabello' => 'Negro',
-            'corte_intimo' => 'Natural',
-            'estatura' => '170',
-            'peso' => '75',
-            'orientacion' => 'LESB',
-            'tatuaje' => '1',
-            'piercing' => '1',
-            'fumador' => '0',
-            'seguridad' => '1',
-            'estado'=> '1'
-        ]);
-
-
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
-            'apodo' => 'pollitonmushroom',
-            'frase' => 'Carpe Diem',
-            'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
-            'email'=> Str::random(10).'@piwichostudio.com',
-            'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
-            'sexo'=> 'M',
-            'nacionalidad'=>'PE',
-            'idioma' =>'ES',
-            'departamento' => 'Lima',
-            'distrito' => 'San Martin de Porres',
-            'etnia' => 'Trigueño',
-            'pecho' => '',
-            'pene' => 'Si',
-            'color_ojos' => 'Marrones',
-            'color_cabello' => 'Negro',
-            'corte_intimo' => 'Natural',
-            'estatura' => '173',
-            'peso' => '80',
-            'orientacion' => 'HETE',
-            'tatuaje' => '1',
-            'piercing' => '0',
-            'fumador' => '1',
-            'seguridad' => '1',
-            'estado'=> '1'
-        ]);
-
-
-
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
-            'frase' => 'Vive la vida y no dejes que la vida te viva',
-            'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
-            'email'=> Str::random(10).'@piwichostudio.com',
-            'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
-            'sexo'=> 'F',
-            'nacionalidad'=>'PE',
-            'idioma' =>'ES',
-            'departamento' => 'Lima',
-            'distrito' => 'San Miguel',
-            'etnia' => 'Caucasica',
-            'pecho' => 'B',
-            'pene' => '',
-            'color_ojos' => 'Verdes Pardos',
-            'color_cabello' => 'Negro',
-            'corte_intimo' => 'Natural',
-            'estatura' => '170',
-            'peso' => '75',
-            'orientacion' => 'LESB',
-            'tatuaje' => '1',
-            'piercing' => '1',
-            'fumador' => '0',
-            'seguridad' => '1',
-            'estado'=> '1'
-        ]);
-
-
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
-            'apodo' => 'pollitonmushroom',
-            'frase' => 'Carpe Diem',
-            'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
-            'email'=> Str::random(10).'@piwichostudio.com',
-            'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
-            'sexo'=> 'M',
-            'nacionalidad'=>'PE',
-            'idioma' =>'ES',
-            'departamento' => 'Lima',
-            'distrito' => 'San Martin de Porres',
-            'etnia' => 'Trigueño',
-            'pecho' => '',
-            'pene' => 'Si',
-            'color_ojos' => 'Marrones',
-            'color_cabello' => 'Negro',
-            'corte_intimo' => 'Natural',
-            'estatura' => '173',
-            'peso' => '80',
-            'orientacion' => 'HETE',
-            'tatuaje' => '1',
-            'piercing' => '0',
-            'fumador' => '1',
-            'seguridad' => '1',
-            'estado'=> '1'
-        ]);
-
-
-
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
-            'frase' => 'Vive la vida y no dejes que la vida te viva',
-            'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
-            'email'=> Str::random(10).'@piwichostudio.com',
-            'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
-            'sexo'=> 'F',
-            'nacionalidad'=>'PE',
-            'idioma' =>'ES',
-            'departamento' => 'Lima',
-            'distrito' => 'San Miguel',
-            'etnia' => 'Caucasica',
-            'pecho' => 'B',
-            'pene' => '',
-            'color_ojos' => 'Verdes Pardos',
-            'color_cabello' => 'Negro',
-            'corte_intimo' => 'Natural',
-            'estatura' => '170',
-            'peso' => '75',
-            'orientacion' => 'LESB',
-            'tatuaje' => '1',
-            'piercing' => '1',
-            'fumador' => '0',
-            'seguridad' => '1',
-            'estado'=> '1'
-        ]);
-
-
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
-            'apodo' => 'pollitonmushroom',
-            'frase' => 'Carpe Diem',
-            'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
-            'email'=> Str::random(10).'@piwichostudio.com',
-            'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
-            'sexo'=> 'M',
-            'nacionalidad'=>'PE',
-            'idioma' =>'ES',
-            'departamento' => 'Lima',
-            'distrito' => 'San Martin de Porres',
-            'etnia' => 'Trigueño',
-            'pecho' => '',
-            'pene' => 'Si',
-            'color_ojos' => 'Marrones',
-            'color_cabello' => 'Negro',
-            'corte_intimo' => 'Natural',
-            'estatura' => '173',
-            'peso' => '80',
-            'orientacion' => 'HETE',
-            'tatuaje' => '1',
-            'piercing' => '0',
-            'fumador' => '1',
-            'seguridad' => '1',
-            'estado'=> '1'
-        ]);
-
-
-
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
-            'frase' => 'Vive la vida y no dejes que la vida te viva',
-            'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
-            'email'=> Str::random(10).'@piwichostudio.com',
-            'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
-            'sexo'=> 'F',
-            'nacionalidad'=>'PE',
-            'idioma' =>'ES',
-            'departamento' => 'Lima',
-            'distrito' => 'San Miguel',
-            'etnia' => 'Caucasica',
-            'pecho' => 'B',
-            'pene' => '',
-            'color_ojos' => 'Verdes Pardos',
-            'color_cabello' => 'Negro',
-            'corte_intimo' => 'Natural',
-            'estatura' => '170',
-            'peso' => '75',
-            'orientacion' => 'LESB',
-            'tatuaje' => '1',
-            'piercing' => '1',
-            'fumador' => '0',
-            'seguridad' => '1',
-            'estado'=> '1'
-        ]);
-
-
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
-            'apodo' => 'pollitonmushroom',
-            'frase' => 'Carpe Diem',
-            'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
-            'email'=> Str::random(10).'@piwichostudio.com',
-            'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
-            'sexo'=> 'M',
-            'nacionalidad'=>'PE',
-            'idioma' =>'ES',
-            'departamento' => 'Lima',
-            'distrito' => 'San Martin de Porres',
-            'etnia' => 'Trigueño',
-            'pecho' => '',
-            'pene' => 'Si',
-            'color_ojos' => 'Marrones',
-            'color_cabello' => 'Negro',
-            'corte_intimo' => 'Natural',
-            'estatura' => '173',
-            'peso' => '80',
-            'orientacion' => 'HETE',
-            'tatuaje' => '1',
-            'piercing' => '0',
-            'fumador' => '1',
-            'seguridad' => '1',
-            'estado'=> '1'
-        ]);
-
-
-
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
-            'frase' => 'Vive la vida y no dejes que la vida te viva',
-            'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
-            'email'=> Str::random(10).'@piwichostudio.com',
-            'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
-            'sexo'=> 'F',
-            'nacionalidad'=>'PE',
-            'idioma' =>'ES',
-            'departamento' => 'Lima',
-            'distrito' => 'San Miguel',
-            'etnia' => 'Caucasica',
-            'pecho' => 'B',
-            'pene' => '',
-            'color_ojos' => 'Verdes Pardos',
-            'color_cabello' => 'Negro',
-            'corte_intimo' => 'Natural',
-            'estatura' => '170',
-            'peso' => '75',
-            'orientacion' => 'LESB',
-            'tatuaje' => '1',
-            'piercing' => '1',
-            'fumador' => '0',
-            'seguridad' => '1',
-            'estado'=> '1'
-        ]);
-
-
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
-            'apodo' => 'pollitonmushroom',
-            'frase' => 'Carpe Diem',
-            'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
-            'email'=> Str::random(10).'@piwichostudio.com',
-            'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
-            'sexo'=> 'M',
-            'nacionalidad'=>'PE',
-            'idioma' =>'ES',
-            'departamento' => 'Lima',
-            'distrito' => 'San Martin de Porres',
-            'etnia' => 'Trigueño',
-            'pecho' => '',
-            'pene' => 'Si',
-            'color_ojos' => 'Marrones',
-            'color_cabello' => 'Negro',
-            'corte_intimo' => 'Natural',
-            'estatura' => '173',
-            'peso' => '80',
-            'orientacion' => 'HETE',
-            'tatuaje' => '1',
-            'piercing' => '0',
-            'fumador' => '1',
-            'seguridad' => '1',
-            'estado'=> '1'
-        ]);
-
-
-
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
-            'frase' => 'Vive la vida y no dejes que la vida te viva',
-            'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
-            'email'=> Str::random(10).'@piwichostudio.com',
-            'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
-            'sexo'=> 'F',
-            'nacionalidad'=>'PE',
-            'idioma' =>'ES',
-            'departamento' => 'Lima',
-            'distrito' => 'San Miguel',
-            'etnia' => 'Caucasica',
-            'pecho' => 'B',
-            'pene' => '',
-            'color_ojos' => 'Verdes Pardos',
-            'color_cabello' => 'Negro',
-            'corte_intimo' => 'Natural',
-            'estatura' => '170',
-            'peso' => '75',
-            'orientacion' => 'LESB',
-            'tatuaje' => '1',
-            'piercing' => '1',
-            'fumador' => '0',
-            'seguridad' => '1',
-            'estado'=> '1'
-        ]);
-
-
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
-            'apodo' => 'pollitonmushroom',
-            'frase' => 'Carpe Diem',
-            'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
-            'email'=> Str::random(10).'@piwichostudio.com',
-            'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
-            'sexo'=> 'M',
-            'nacionalidad'=>'PE',
-            'idioma' =>'ES',
-            'departamento' => 'Lima',
-            'distrito' => 'San Martin de Porres',
-            'etnia' => 'Trigueño',
-            'pecho' => '',
-            'pene' => 'Si',
-            'color_ojos' => 'Marrones',
-            'color_cabello' => 'Negro',
-            'corte_intimo' => 'Natural',
-            'estatura' => '173',
-            'peso' => '80',
-            'orientacion' => 'HETE',
-            'tatuaje' => '1',
-            'piercing' => '0',
-            'fumador' => '1',
-            'seguridad' => '1',
-            'estado'=> '1'
-        ]);
-
-
-
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
-            'frase' => 'Vive la vida y no dejes que la vida te viva',
-            'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
-            'email'=> Str::random(10).'@piwichostudio.com',
-            'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
-            'sexo'=> 'F',
-            'nacionalidad'=>'PE',
-            'idioma' =>'ES',
-            'departamento' => 'Lima',
-            'distrito' => 'San Miguel',
-            'etnia' => 'Caucasica',
-            'pecho' => 'B',
-            'pene' => '',
-            'color_ojos' => 'Verdes Pardos',
-            'color_cabello' => 'Negro',
-            'corte_intimo' => 'Natural',
-            'estatura' => '170',
-            'peso' => '75',
-            'orientacion' => 'LESB',
-            'tatuaje' => '1',
-            'piercing' => '1',
-            'fumador' => '0',
-            'seguridad' => '1',
-            'estado'=> '1'
-        ]);
-
-
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
-            'apodo' => 'pollitonmushroom',
-            'frase' => 'Carpe Diem',
-            'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
-            'email'=> Str::random(10).'@piwichostudio.com',
-            'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
-            'sexo'=> 'M',
-            'nacionalidad'=>'PE',
-            'idioma' =>'ES',
-            'departamento' => 'Lima',
-            'distrito' => 'San Martin de Porres',
-            'etnia' => 'Trigueño',
-            'pecho' => '',
-            'pene' => 'Si',
-            'color_ojos' => 'Marrones',
-            'color_cabello' => 'Negro',
-            'corte_intimo' => 'Natural',
-            'estatura' => '173',
-            'peso' => '80',
-            'orientacion' => 'HETE',
-            'tatuaje' => '1',
-            'piercing' => '0',
-            'fumador' => '1',
-            'seguridad' => '1',
-            'estado'=> '1'
-        ]);
-
-
-
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
-            'frase' => 'Vive la vida y no dejes que la vida te viva',
-            'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
-            'email'=> Str::random(10).'@piwichostudio.com',
-            'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
-            'sexo'=> 'F',
-            'nacionalidad'=>'PE',
-            'idioma' =>'ES',
-            'departamento' => 'Lima',
-            'distrito' => 'San Miguel',
-            'etnia' => 'Caucasica',
-            'pecho' => 'B',
-            'pene' => '',
-            'color_ojos' => 'Verdes Pardos',
-            'color_cabello' => 'Negro',
-            'corte_intimo' => 'Natural',
-            'estatura' => '170',
-            'peso' => '75',
-            'orientacion' => 'LESB',
-            'tatuaje' => '1',
-            'piercing' => '1',
-            'fumador' => '0',
-            'seguridad' => '1',
-            'estado'=> '1'
-        ]);
-
-
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
-            'apodo' => 'pollitonmushroom',
-            'frase' => 'Carpe Diem',
-            'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
-            'email'=> Str::random(10).'@piwichostudio.com',
-            'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
-            'sexo'=> 'M',
-            'nacionalidad'=>'PE',
-            'idioma' =>'ES',
-            'departamento' => 'Lima',
-            'distrito' => 'San Martin de Porres',
-            'etnia' => 'Trigueño',
-            'pecho' => '',
-            'pene' => 'Si',
-            'color_ojos' => 'Marrones',
-            'color_cabello' => 'Negro',
-            'corte_intimo' => 'Natural',
-            'estatura' => '173',
-            'peso' => '80',
-            'orientacion' => 'HETE',
-            'tatuaje' => '1',
-            'piercing' => '0',
-            'fumador' => '1',
-            'seguridad' => '1',
-            'estado'=> '1'
-        ]);
-
-
-
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
-            'frase' => 'Vive la vida y no dejes que la vida te viva',
-            'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
-            'email'=> Str::random(10).'@piwichostudio.com',
-            'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
-            'sexo'=> 'F',
-            'nacionalidad'=>'PE',
-            'idioma' =>'ES',
-            'departamento' => 'Lima',
-            'distrito' => 'San Miguel',
-            'etnia' => 'Caucasica',
-            'pecho' => 'B',
-            'pene' => '',
-            'color_ojos' => 'Verdes Pardos',
-            'color_cabello' => 'Negro',
-            'corte_intimo' => 'Natural',
-            'estatura' => '170',
-            'peso' => '75',
-            'orientacion' => 'LESB',
-            'tatuaje' => '1',
-            'piercing' => '1',
-            'fumador' => '0',
-            'seguridad' => '1',
-            'estado'=> '1'
-        ]);
-
-
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
-            'apodo' => 'pollitonmushroom',
-            'frase' => 'Carpe Diem',
-            'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
-            'email'=> Str::random(10).'@piwichostudio.com',
-            'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
-            'sexo'=> 'M',
-            'nacionalidad'=>'PE',
-            'idioma' =>'ES',
-            'departamento' => 'Lima',
-            'distrito' => 'San Martin de Porres',
-            'etnia' => 'Trigueño',
-            'pecho' => '',
-            'pene' => 'Si',
-            'color_ojos' => 'Marrones',
-            'color_cabello' => 'Negro',
-            'corte_intimo' => 'Natural',
-            'estatura' => '173',
-            'peso' => '80',
-            'orientacion' => 'HETE',
-            'tatuaje' => '1',
-            'piercing' => '0',
-            'fumador' => '1',
-            'seguridad' => '1',
-            'estado'=> '1'
-        ]);
-
-
-
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
-            'frase' => 'Vive la vida y no dejes que la vida te viva',
-            'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
-            'email'=> Str::random(10).'@piwichostudio.com',
-            'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
-            'sexo'=> 'F',
-            'nacionalidad'=>'PE',
-            'idioma' =>'ES',
-            'departamento' => 'Lima',
-            'distrito' => 'San Miguel',
-            'etnia' => 'Caucasica',
-            'pecho' => 'B',
-            'pene' => '',
-            'color_ojos' => 'Verdes Pardos',
-            'color_cabello' => 'Negro',
-            'corte_intimo' => 'Natural',
-            'estatura' => '170',
-            'peso' => '75',
-            'orientacion' => 'LESB',
-            'tatuaje' => '1',
-            'piercing' => '1',
-            'fumador' => '0',
-            'seguridad' => '1',
-            'estado'=> '1'
-        ]);
-
-
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
-            'apodo' => 'pollitonmushroom',
-            'frase' => 'Carpe Diem',
-            'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
-            'email'=> Str::random(10).'@piwichostudio.com',
-            'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
-            'sexo'=> 'M',
-            'nacionalidad'=>'PE',
-            'idioma' =>'ES',
-            'departamento' => 'Lima',
-            'distrito' => 'San Martin de Porres',
-            'etnia' => 'Trigueño',
-            'pecho' => '',
-            'pene' => 'Si',
-            'color_ojos' => 'Marrones',
-            'color_cabello' => 'Negro',
-            'corte_intimo' => 'Natural',
-            'estatura' => '173',
-            'peso' => '80',
-            'orientacion' => 'HETE',
-            'tatuaje' => '1',
-            'piercing' => '0',
-            'fumador' => '1',
-            'seguridad' => '1',
-            'estado'=> '1'
-        ]);
-
-
-
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
-            'frase' => 'Vive la vida y no dejes que la vida te viva',
-            'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
-            'email'=> Str::random(10).'@piwichostudio.com',
-            'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
-            'sexo'=> 'F',
-            'nacionalidad'=>'PE',
-            'idioma' =>'ES',
-            'departamento' => 'Lima',
-            'distrito' => 'San Miguel',
-            'etnia' => 'Caucasica',
-            'pecho' => 'B',
-            'pene' => '',
-            'color_ojos' => 'Verdes Pardos',
-            'color_cabello' => 'Negro',
-            'corte_intimo' => 'Natural',
-            'estatura' => '170',
-            'peso' => '75',
-            'orientacion' => 'LESB',
-            'tatuaje' => '1',
-            'piercing' => '1',
-            'fumador' => '0',
-            'seguridad' => '1',
-            'estado'=> '1'
-        ]);
-
-
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
-            'apodo' => 'pollitonmushroom',
-            'frase' => 'Carpe Diem',
-            'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
-            'email'=> Str::random(10).'@piwichostudio.com',
-            'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
-            'sexo'=> 'M',
-            'nacionalidad'=>'PE',
-            'idioma' =>'ES',
-            'departamento' => 'Lima',
-            'distrito' => 'San Martin de Porres',
-            'etnia' => 'Trigueño',
-            'pecho' => '',
-            'pene' => 'Si',
-            'color_ojos' => 'Marrones',
-            'color_cabello' => 'Negro',
-            'corte_intimo' => 'Natural',
-            'estatura' => '173',
-            'peso' => '80',
-            'orientacion' => 'HETE',
-            'tatuaje' => '1',
-            'piercing' => '0',
-            'fumador' => '1',
-            'seguridad' => '1',
-            'estado'=> '1'
-        ]);
-
-
-
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
+            'nombre' => Str::random(10),
+            'apodo' => Str::random(6),
             'frase' => 'Vive la vida y no dejes que la vida te viva',
             'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'F',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -1078,13 +164,13 @@ class PerfilProfesionalSeeder extends Seeder
 
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
+            'nombre' => str_random(12),
             'apodo' => 'pollitonmushroom',
             'frase' => 'Carpe Diem',
             'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -1106,16 +192,16 @@ class PerfilProfesionalSeeder extends Seeder
             'estado'=> '1'
         ]);
 
+     
 
-
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
+            'nombre' => Str::random(10),
+            'apodo' => Str::random(6),
             'frase' => 'Vive la vida y no dejes que la vida te viva',
             'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'F',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -1139,13 +225,13 @@ class PerfilProfesionalSeeder extends Seeder
 
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
+            'nombre' => str_random(12),
             'apodo' => 'pollitonmushroom',
             'frase' => 'Carpe Diem',
             'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -1166,17 +252,17 @@ class PerfilProfesionalSeeder extends Seeder
             'seguridad' => '1',
             'estado'=> '1'
         ]);
-
 
+     
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
+            'nombre' => Str::random(10),
+            'apodo' => Str::random(6),
             'frase' => 'Vive la vida y no dejes que la vida te viva',
             'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'F',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -1200,13 +286,13 @@ class PerfilProfesionalSeeder extends Seeder
 
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
+            'nombre' => str_random(12),
             'apodo' => 'pollitonmushroom',
             'frase' => 'Carpe Diem',
             'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -1228,16 +314,16 @@ class PerfilProfesionalSeeder extends Seeder
             'estado'=> '1'
         ]);
 
+     
 
-
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
+            'nombre' => Str::random(10),
+            'apodo' => Str::random(6),
             'frase' => 'Vive la vida y no dejes que la vida te viva',
             'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'F',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -1261,13 +347,13 @@ class PerfilProfesionalSeeder extends Seeder
 
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
+            'nombre' => str_random(12),
             'apodo' => 'pollitonmushroom',
             'frase' => 'Carpe Diem',
             'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -1288,17 +374,17 @@ class PerfilProfesionalSeeder extends Seeder
             'seguridad' => '1',
             'estado'=> '1'
         ]);
-
 
+     
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
+            'nombre' => Str::random(10),
+            'apodo' => Str::random(6),
             'frase' => 'Vive la vida y no dejes que la vida te viva',
             'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'F',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -1322,13 +408,13 @@ class PerfilProfesionalSeeder extends Seeder
 
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
+            'nombre' => str_random(12),
             'apodo' => 'pollitonmushroom',
             'frase' => 'Carpe Diem',
             'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -1350,16 +436,16 @@ class PerfilProfesionalSeeder extends Seeder
             'estado'=> '1'
         ]);
 
+     
 
-
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
+            'nombre' => Str::random(10),
+            'apodo' => Str::random(6),
             'frase' => 'Vive la vida y no dejes que la vida te viva',
             'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'F',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -1383,13 +469,13 @@ class PerfilProfesionalSeeder extends Seeder
 
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
+            'nombre' => str_random(12),
             'apodo' => 'pollitonmushroom',
             'frase' => 'Carpe Diem',
             'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -1410,17 +496,17 @@ class PerfilProfesionalSeeder extends Seeder
             'seguridad' => '1',
             'estado'=> '1'
         ]);
-
 
+     
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
+            'nombre' => Str::random(10),
+            'apodo' => Str::random(6),
             'frase' => 'Vive la vida y no dejes que la vida te viva',
             'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'F',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -1444,13 +530,13 @@ class PerfilProfesionalSeeder extends Seeder
 
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
+            'nombre' => str_random(12),
             'apodo' => 'pollitonmushroom',
             'frase' => 'Carpe Diem',
             'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -1472,16 +558,16 @@ class PerfilProfesionalSeeder extends Seeder
             'estado'=> '1'
         ]);
 
+     
 
-
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
+            'nombre' => Str::random(10),
+            'apodo' => Str::random(6),
             'frase' => 'Vive la vida y no dejes que la vida te viva',
             'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'F',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -1505,13 +591,13 @@ class PerfilProfesionalSeeder extends Seeder
 
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
+            'nombre' => str_random(12),
             'apodo' => 'pollitonmushroom',
             'frase' => 'Carpe Diem',
             'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -1532,17 +618,17 @@ class PerfilProfesionalSeeder extends Seeder
             'seguridad' => '1',
             'estado'=> '1'
         ]);
-
 
+     
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
+            'nombre' => Str::random(10),
+            'apodo' => Str::random(6),
             'frase' => 'Vive la vida y no dejes que la vida te viva',
             'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'F',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -1566,13 +652,13 @@ class PerfilProfesionalSeeder extends Seeder
 
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
+            'nombre' => str_random(12),
             'apodo' => 'pollitonmushroom',
             'frase' => 'Carpe Diem',
             'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -1594,16 +680,16 @@ class PerfilProfesionalSeeder extends Seeder
             'estado'=> '1'
         ]);
 
+     
 
-
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
+            'nombre' => Str::random(10),
+            'apodo' => Str::random(6),
             'frase' => 'Vive la vida y no dejes que la vida te viva',
             'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'F',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -1627,13 +713,13 @@ class PerfilProfesionalSeeder extends Seeder
 
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
+            'nombre' => str_random(12),
             'apodo' => 'pollitonmushroom',
             'frase' => 'Carpe Diem',
             'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -1654,17 +740,17 @@ class PerfilProfesionalSeeder extends Seeder
             'seguridad' => '1',
             'estado'=> '1'
         ]);
-
 
+     
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
+            'nombre' => Str::random(10),
+            'apodo' => Str::random(6),
             'frase' => 'Vive la vida y no dejes que la vida te viva',
             'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'F',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -1688,13 +774,13 @@ class PerfilProfesionalSeeder extends Seeder
 
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
+            'nombre' => str_random(12),
             'apodo' => 'pollitonmushroom',
             'frase' => 'Carpe Diem',
             'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -1716,16 +802,16 @@ class PerfilProfesionalSeeder extends Seeder
             'estado'=> '1'
         ]);
 
+     
 
-
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
+            'nombre' => Str::random(10),
+            'apodo' => Str::random(6),
             'frase' => 'Vive la vida y no dejes que la vida te viva',
             'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'F',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -1749,13 +835,13 @@ class PerfilProfesionalSeeder extends Seeder
 
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
+            'nombre' => str_random(12),
             'apodo' => 'pollitonmushroom',
             'frase' => 'Carpe Diem',
             'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -1776,17 +862,17 @@ class PerfilProfesionalSeeder extends Seeder
             'seguridad' => '1',
             'estado'=> '1'
         ]);
-
 
+     
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
+            'nombre' => Str::random(10),
+            'apodo' => Str::random(6),
             'frase' => 'Vive la vida y no dejes que la vida te viva',
             'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'F',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -1810,13 +896,13 @@ class PerfilProfesionalSeeder extends Seeder
 
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
+            'nombre' => str_random(12),
             'apodo' => 'pollitonmushroom',
             'frase' => 'Carpe Diem',
             'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -1838,16 +924,16 @@ class PerfilProfesionalSeeder extends Seeder
             'estado'=> '1'
         ]);
 
+     
 
-
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
+            'nombre' => Str::random(10),
+            'apodo' => Str::random(6),
             'frase' => 'Vive la vida y no dejes que la vida te viva',
             'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'F',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -1871,13 +957,13 @@ class PerfilProfesionalSeeder extends Seeder
 
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
+            'nombre' => str_random(12),
             'apodo' => 'pollitonmushroom',
             'frase' => 'Carpe Diem',
             'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -1898,17 +984,17 @@ class PerfilProfesionalSeeder extends Seeder
             'seguridad' => '1',
             'estado'=> '1'
         ]);
-
 
+     
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
+            'nombre' => Str::random(10),
+            'apodo' => Str::random(6),
             'frase' => 'Vive la vida y no dejes que la vida te viva',
             'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'F',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -1932,13 +1018,13 @@ class PerfilProfesionalSeeder extends Seeder
 
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
+            'nombre' => str_random(12),
             'apodo' => 'pollitonmushroom',
             'frase' => 'Carpe Diem',
             'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -1960,16 +1046,16 @@ class PerfilProfesionalSeeder extends Seeder
             'estado'=> '1'
         ]);
 
+     
 
-
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
+            'nombre' => Str::random(10),
+            'apodo' => Str::random(6),
             'frase' => 'Vive la vida y no dejes que la vida te viva',
             'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'F',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -1993,13 +1079,13 @@ class PerfilProfesionalSeeder extends Seeder
 
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
+            'nombre' => str_random(12),
             'apodo' => 'pollitonmushroom',
             'frase' => 'Carpe Diem',
             'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -2020,17 +1106,17 @@ class PerfilProfesionalSeeder extends Seeder
             'seguridad' => '1',
             'estado'=> '1'
         ]);
-
 
+     
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
+            'nombre' => Str::random(10),
+            'apodo' => Str::random(6),
             'frase' => 'Vive la vida y no dejes que la vida te viva',
             'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'F',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -2054,13 +1140,13 @@ class PerfilProfesionalSeeder extends Seeder
 
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
+            'nombre' => str_random(12),
             'apodo' => 'pollitonmushroom',
             'frase' => 'Carpe Diem',
             'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -2081,17 +1167,15 @@ class PerfilProfesionalSeeder extends Seeder
             'seguridad' => '1',
             'estado'=> '1'
         ]);
-
-
 
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
+           DB::table('perfil_profesional')->insert([
+            'nombre' => Str::random(10),
+            'apodo' => Str::random(6),
             'frase' => 'Vive la vida y no dejes que la vida te viva',
             'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'F',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -2115,13 +1199,13 @@ class PerfilProfesionalSeeder extends Seeder
 
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
+            'nombre' => str_random(12),
             'apodo' => 'pollitonmushroom',
             'frase' => 'Carpe Diem',
             'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -2142,17 +1226,15 @@ class PerfilProfesionalSeeder extends Seeder
             'seguridad' => '1',
             'estado'=> '1'
         ]);
-
 
-
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
+            'nombre' => Str::random(10),
+            'apodo' => Str::random(6),
             'frase' => 'Vive la vida y no dejes que la vida te viva',
             'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'F',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -2176,13 +1258,13 @@ class PerfilProfesionalSeeder extends Seeder
 
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
+            'nombre' => str_random(12),
             'apodo' => 'pollitonmushroom',
             'frase' => 'Carpe Diem',
             'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -2203,17 +1285,15 @@ class PerfilProfesionalSeeder extends Seeder
             'seguridad' => '1',
             'estado'=> '1'
         ]);
-
 
-
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
+            'nombre' => Str::random(10),
+            'apodo' => Str::random(6),
             'frase' => 'Vive la vida y no dejes que la vida te viva',
             'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'F',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -2237,13 +1317,13 @@ class PerfilProfesionalSeeder extends Seeder
 
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
+            'nombre' => str_random(12),
             'apodo' => 'pollitonmushroom',
             'frase' => 'Carpe Diem',
             'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -2264,17 +1344,15 @@ class PerfilProfesionalSeeder extends Seeder
             'seguridad' => '1',
             'estado'=> '1'
         ]);
-
 
-
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
+           DB::table('perfil_profesional')->insert([
+            'nombre' => Str::random(10),
+            'apodo' => Str::random(6),
             'frase' => 'Vive la vida y no dejes que la vida te viva',
             'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'F',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -2298,13 +1376,13 @@ class PerfilProfesionalSeeder extends Seeder
 
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
+            'nombre' => str_random(12),
             'apodo' => 'pollitonmushroom',
             'frase' => 'Carpe Diem',
             'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -2326,16 +1404,14 @@ class PerfilProfesionalSeeder extends Seeder
             'estado'=> '1'
         ]);
 
-
-
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
+           DB::table('perfil_profesional')->insert([
+            'nombre' => Str::random(10),
+            'apodo' => Str::random(6),
             'frase' => 'Vive la vida y no dejes que la vida te viva',
             'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'F',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -2359,13 +1435,13 @@ class PerfilProfesionalSeeder extends Seeder
 
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
+            'nombre' => str_random(12),
             'apodo' => 'pollitonmushroom',
             'frase' => 'Carpe Diem',
             'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -2386,17 +1462,15 @@ class PerfilProfesionalSeeder extends Seeder
             'seguridad' => '1',
             'estado'=> '1'
         ]);
-
 
-
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
+           DB::table('perfil_profesional')->insert([
+            'nombre' => Str::random(10),
+            'apodo' => Str::random(6),
             'frase' => 'Vive la vida y no dejes que la vida te viva',
             'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'F',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -2420,13 +1494,13 @@ class PerfilProfesionalSeeder extends Seeder
 
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
+            'nombre' => str_random(12),
             'apodo' => 'pollitonmushroom',
             'frase' => 'Carpe Diem',
             'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -2447,17 +1521,15 @@ class PerfilProfesionalSeeder extends Seeder
             'seguridad' => '1',
             'estado'=> '1'
         ]);
-
-
 
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
+           DB::table('perfil_profesional')->insert([
+            'nombre' => Str::random(10),
+            'apodo' => Str::random(6),
             'frase' => 'Vive la vida y no dejes que la vida te viva',
             'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'F',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -2481,13 +1553,13 @@ class PerfilProfesionalSeeder extends Seeder
 
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
+            'nombre' => str_random(12),
             'apodo' => 'pollitonmushroom',
             'frase' => 'Carpe Diem',
             'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -2508,17 +1580,15 @@ class PerfilProfesionalSeeder extends Seeder
             'seguridad' => '1',
             'estado'=> '1'
         ]);
-
 
-
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
+           DB::table('perfil_profesional')->insert([
+            'nombre' => Str::random(10),
+            'apodo' => Str::random(6),
             'frase' => 'Vive la vida y no dejes que la vida te viva',
             'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'F',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -2542,13 +1612,13 @@ class PerfilProfesionalSeeder extends Seeder
 
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
+            'nombre' => str_random(12),
             'apodo' => 'pollitonmushroom',
             'frase' => 'Carpe Diem',
             'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -2570,16 +1640,14 @@ class PerfilProfesionalSeeder extends Seeder
             'estado'=> '1'
         ]);
 
-
-
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
+           DB::table('perfil_profesional')->insert([
+            'nombre' => Str::random(10),
+            'apodo' => Str::random(6),
             'frase' => 'Vive la vida y no dejes que la vida te viva',
             'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'F',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -2603,13 +1671,13 @@ class PerfilProfesionalSeeder extends Seeder
 
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
+            'nombre' => str_random(12),
             'apodo' => 'pollitonmushroom',
             'frase' => 'Carpe Diem',
             'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -2630,17 +1698,15 @@ class PerfilProfesionalSeeder extends Seeder
             'seguridad' => '1',
             'estado'=> '1'
         ]);
-
 
-
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
+           DB::table('perfil_profesional')->insert([
+            'nombre' => Str::random(10),
+            'apodo' => Str::random(6),
             'frase' => 'Vive la vida y no dejes que la vida te viva',
             'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'F',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -2664,13 +1730,13 @@ class PerfilProfesionalSeeder extends Seeder
 
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
+            'nombre' => str_random(12),
             'apodo' => 'pollitonmushroom',
             'frase' => 'Carpe Diem',
             'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -2691,17 +1757,15 @@ class PerfilProfesionalSeeder extends Seeder
             'seguridad' => '1',
             'estado'=> '1'
         ]);
-
-
 
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
+           DB::table('perfil_profesional')->insert([
+            'nombre' => Str::random(10),
+            'apodo' => Str::random(6),
             'frase' => 'Vive la vida y no dejes que la vida te viva',
             'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'F',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -2725,13 +1789,13 @@ class PerfilProfesionalSeeder extends Seeder
 
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
+            'nombre' => str_random(12),
             'apodo' => 'pollitonmushroom',
             'frase' => 'Carpe Diem',
             'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -2752,17 +1816,17 @@ class PerfilProfesionalSeeder extends Seeder
             'seguridad' => '1',
             'estado'=> '1'
         ]);
-
 
+     
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
+            'nombre' => Str::random(10),
+            'apodo' => Str::random(6),
             'frase' => 'Vive la vida y no dejes que la vida te viva',
             'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'F',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -2786,13 +1850,13 @@ class PerfilProfesionalSeeder extends Seeder
 
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
+            'nombre' => str_random(12),
             'apodo' => 'pollitonmushroom',
             'frase' => 'Carpe Diem',
             'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -2813,17 +1877,16 @@ class PerfilProfesionalSeeder extends Seeder
             'seguridad' => '1',
             'estado'=> '1'
         ]);
-
-
 
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
+     
+           DB::table('perfil_profesional')->insert([
+            'nombre' => Str::random(10),
+            'apodo' => Str::random(6),
             'frase' => 'Vive la vida y no dejes que la vida te viva',
             'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'F',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -2847,13 +1910,13 @@ class PerfilProfesionalSeeder extends Seeder
 
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
+            'nombre' => str_random(12),
             'apodo' => 'pollitonmushroom',
             'frase' => 'Carpe Diem',
             'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -2874,17 +1937,16 @@ class PerfilProfesionalSeeder extends Seeder
             'seguridad' => '1',
             'estado'=> '1'
         ]);
-
 
-
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
+     
+           DB::table('perfil_profesional')->insert([
+            'nombre' => Str::random(10),
+            'apodo' => Str::random(6),
             'frase' => 'Vive la vida y no dejes que la vida te viva',
             'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'F',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -2908,13 +1970,13 @@ class PerfilProfesionalSeeder extends Seeder
 
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
+            'nombre' => str_random(12),
             'apodo' => 'pollitonmushroom',
             'frase' => 'Carpe Diem',
             'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -2936,16 +1998,15 @@ class PerfilProfesionalSeeder extends Seeder
             'estado'=> '1'
         ]);
 
-
-
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
+     
+           DB::table('perfil_profesional')->insert([
+            'nombre' => Str::random(10),
+            'apodo' => Str::random(6),
             'frase' => 'Vive la vida y no dejes que la vida te viva',
             'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'F',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -2969,13 +2030,13 @@ class PerfilProfesionalSeeder extends Seeder
 
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
+            'nombre' => str_random(12),
             'apodo' => 'pollitonmushroom',
             'frase' => 'Carpe Diem',
             'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -2996,17 +2057,16 @@ class PerfilProfesionalSeeder extends Seeder
             'seguridad' => '1',
             'estado'=> '1'
         ]);
-
 
-
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
+     
+           DB::table('perfil_profesional')->insert([
+            'nombre' => Str::random(10),
+            'apodo' => Str::random(6),
             'frase' => 'Vive la vida y no dejes que la vida te viva',
             'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'F',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -3030,13 +2090,13 @@ class PerfilProfesionalSeeder extends Seeder
 
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
+            'nombre' => str_random(12),
             'apodo' => 'pollitonmushroom',
             'frase' => 'Carpe Diem',
             'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -3057,17 +2117,16 @@ class PerfilProfesionalSeeder extends Seeder
             'seguridad' => '1',
             'estado'=> '1'
         ]);
-
-
 
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
+     
+           DB::table('perfil_profesional')->insert([
+            'nombre' => Str::random(10),
+            'apodo' => Str::random(6),
             'frase' => 'Vive la vida y no dejes que la vida te viva',
             'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'F',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -3091,13 +2150,13 @@ class PerfilProfesionalSeeder extends Seeder
 
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
+            'nombre' => str_random(12),
             'apodo' => 'pollitonmushroom',
             'frase' => 'Carpe Diem',
             'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -3118,17 +2177,16 @@ class PerfilProfesionalSeeder extends Seeder
             'seguridad' => '1',
             'estado'=> '1'
         ]);
-
 
-
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
+     
+           DB::table('perfil_profesional')->insert([
+            'nombre' => Str::random(10),
+            'apodo' => Str::random(6),
             'frase' => 'Vive la vida y no dejes que la vida te viva',
             'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'F',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -3152,13 +2210,13 @@ class PerfilProfesionalSeeder extends Seeder
 
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
+            'nombre' => str_random(12),
             'apodo' => 'pollitonmushroom',
             'frase' => 'Carpe Diem',
             'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -3180,16 +2238,15 @@ class PerfilProfesionalSeeder extends Seeder
             'estado'=> '1'
         ]);
 
-
-
+     
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
+            'nombre' => Str::random(10),
+            'apodo' => Str::random(6),
             'frase' => 'Vive la vida y no dejes que la vida te viva',
             'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'F',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -3213,13 +2270,13 @@ class PerfilProfesionalSeeder extends Seeder
 
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
+            'nombre' => str_random(12),
             'apodo' => 'pollitonmushroom',
             'frase' => 'Carpe Diem',
             'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -3240,17 +2297,16 @@ class PerfilProfesionalSeeder extends Seeder
             'seguridad' => '1',
             'estado'=> '1'
         ]);
-
-
 
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
+     
+           DB::table('perfil_profesional')->insert([
+            'nombre' => Str::random(10),
+            'apodo' => Str::random(6),
             'frase' => 'Vive la vida y no dejes que la vida te viva',
             'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'F',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -3274,13 +2330,13 @@ class PerfilProfesionalSeeder extends Seeder
 
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
+            'nombre' => str_random(12),
             'apodo' => 'pollitonmushroom',
             'frase' => 'Carpe Diem',
             'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -3301,17 +2357,16 @@ class PerfilProfesionalSeeder extends Seeder
             'seguridad' => '1',
             'estado'=> '1'
         ]);
-
 
-
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
+     
+           DB::table('perfil_profesional')->insert([
+            'nombre' => Str::random(10),
+            'apodo' => Str::random(6),
             'frase' => 'Vive la vida y no dejes que la vida te viva',
             'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'F',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -3335,13 +2390,13 @@ class PerfilProfesionalSeeder extends Seeder
 
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
+            'nombre' => str_random(12),
             'apodo' => 'pollitonmushroom',
             'frase' => 'Carpe Diem',
             'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -3363,16 +2418,15 @@ class PerfilProfesionalSeeder extends Seeder
             'estado'=> '1'
         ]);
 
-
-
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
+     
+           DB::table('perfil_profesional')->insert([
+            'nombre' => Str::random(10),
+            'apodo' => Str::random(6),
             'frase' => 'Vive la vida y no dejes que la vida te viva',
             'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'F',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -3396,13 +2450,13 @@ class PerfilProfesionalSeeder extends Seeder
 
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
+            'nombre' => str_random(12),
             'apodo' => 'pollitonmushroom',
             'frase' => 'Carpe Diem',
             'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -3423,17 +2477,16 @@ class PerfilProfesionalSeeder extends Seeder
             'seguridad' => '1',
             'estado'=> '1'
         ]);
-
 
-
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
+     
+           DB::table('perfil_profesional')->insert([
+            'nombre' => Str::random(10),
+            'apodo' => Str::random(6),
             'frase' => 'Vive la vida y no dejes que la vida te viva',
             'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'F',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -3457,13 +2510,13 @@ class PerfilProfesionalSeeder extends Seeder
 
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
+            'nombre' => str_random(12),
             'apodo' => 'pollitonmushroom',
             'frase' => 'Carpe Diem',
             'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -3484,17 +2537,16 @@ class PerfilProfesionalSeeder extends Seeder
             'seguridad' => '1',
             'estado'=> '1'
         ]);
-
-
 
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
+     
+           DB::table('perfil_profesional')->insert([
+            'nombre' => Str::random(10),
+            'apodo' => Str::random(6),
             'frase' => 'Vive la vida y no dejes que la vida te viva',
             'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'F',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -3518,13 +2570,13 @@ class PerfilProfesionalSeeder extends Seeder
 
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
+            'nombre' => str_random(12),
             'apodo' => 'pollitonmushroom',
             'frase' => 'Carpe Diem',
             'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -3545,17 +2597,16 @@ class PerfilProfesionalSeeder extends Seeder
             'seguridad' => '1',
             'estado'=> '1'
         ]);
-
 
-
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
+     
+           DB::table('perfil_profesional')->insert([
+            'nombre' => Str::random(10),
+            'apodo' => Str::random(6),
             'frase' => 'Vive la vida y no dejes que la vida te viva',
             'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'F',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -3579,13 +2630,13 @@ class PerfilProfesionalSeeder extends Seeder
 
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
+            'nombre' => str_random(12),
             'apodo' => 'pollitonmushroom',
             'frase' => 'Carpe Diem',
             'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -3607,16 +2658,15 @@ class PerfilProfesionalSeeder extends Seeder
             'estado'=> '1'
         ]);
 
-
-
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
+     
+           DB::table('perfil_profesional')->insert([
+            'nombre' => Str::random(10),
+            'apodo' => Str::random(6),
             'frase' => 'Vive la vida y no dejes que la vida te viva',
             'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'F',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -3640,13 +2690,13 @@ class PerfilProfesionalSeeder extends Seeder
 
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
+            'nombre' => str_random(12),
             'apodo' => 'pollitonmushroom',
             'frase' => 'Carpe Diem',
             'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -3667,17 +2717,16 @@ class PerfilProfesionalSeeder extends Seeder
             'seguridad' => '1',
             'estado'=> '1'
         ]);
-
 
-
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
+     
+           DB::table('perfil_profesional')->insert([
+            'nombre' => Str::random(10),
+            'apodo' => Str::random(6),
             'frase' => 'Vive la vida y no dejes que la vida te viva',
             'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'F',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -3701,13 +2750,13 @@ class PerfilProfesionalSeeder extends Seeder
 
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
+            'nombre' => str_random(12),
             'apodo' => 'pollitonmushroom',
             'frase' => 'Carpe Diem',
             'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -3728,17 +2777,16 @@ class PerfilProfesionalSeeder extends Seeder
             'seguridad' => '1',
             'estado'=> '1'
         ]);
-
-
 
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
+     
+           DB::table('perfil_profesional')->insert([
+            'nombre' => Str::random(10),
+            'apodo' => Str::random(6),
             'frase' => 'Vive la vida y no dejes que la vida te viva',
             'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'F',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -3762,13 +2810,13 @@ class PerfilProfesionalSeeder extends Seeder
 
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
+            'nombre' => str_random(12),
             'apodo' => 'pollitonmushroom',
             'frase' => 'Carpe Diem',
             'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -3789,17 +2837,16 @@ class PerfilProfesionalSeeder extends Seeder
             'seguridad' => '1',
             'estado'=> '1'
         ]);
-
 
-
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
+     
+           DB::table('perfil_profesional')->insert([
+            'nombre' => Str::random(10),
+            'apodo' => Str::random(6),
             'frase' => 'Vive la vida y no dejes que la vida te viva',
             'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'F',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -3823,13 +2870,13 @@ class PerfilProfesionalSeeder extends Seeder
 
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
+            'nombre' => str_random(12),
             'apodo' => 'pollitonmushroom',
             'frase' => 'Carpe Diem',
             'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -3851,16 +2898,15 @@ class PerfilProfesionalSeeder extends Seeder
             'estado'=> '1'
         ]);
 
-
-
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
+     
+           DB::table('perfil_profesional')->insert([
+            'nombre' => Str::random(10),
+            'apodo' => Str::random(6),
             'frase' => 'Vive la vida y no dejes que la vida te viva',
             'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'F',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -3884,13 +2930,13 @@ class PerfilProfesionalSeeder extends Seeder
 
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
+            'nombre' => str_random(12),
             'apodo' => 'pollitonmushroom',
             'frase' => 'Carpe Diem',
             'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -3911,17 +2957,16 @@ class PerfilProfesionalSeeder extends Seeder
             'seguridad' => '1',
             'estado'=> '1'
         ]);
-
 
-
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
+     
+           DB::table('perfil_profesional')->insert([
+            'nombre' => Str::random(10),
+            'apodo' => Str::random(6),
             'frase' => 'Vive la vida y no dejes que la vida te viva',
             'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'F',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -3945,13 +2990,13 @@ class PerfilProfesionalSeeder extends Seeder
 
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
+            'nombre' => str_random(12),
             'apodo' => 'pollitonmushroom',
             'frase' => 'Carpe Diem',
             'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -3972,17 +3017,16 @@ class PerfilProfesionalSeeder extends Seeder
             'seguridad' => '1',
             'estado'=> '1'
         ]);
-
-
 
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
+     
+           DB::table('perfil_profesional')->insert([
+            'nombre' => Str::random(10),
+            'apodo' => Str::random(6),
             'frase' => 'Vive la vida y no dejes que la vida te viva',
             'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'F',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -4006,13 +3050,13 @@ class PerfilProfesionalSeeder extends Seeder
 
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
+            'nombre' => str_random(12),
             'apodo' => 'pollitonmushroom',
             'frase' => 'Carpe Diem',
             'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -4033,17 +3077,16 @@ class PerfilProfesionalSeeder extends Seeder
             'seguridad' => '1',
             'estado'=> '1'
         ]);
-
 
-
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
+     
+           DB::table('perfil_profesional')->insert([
+            'nombre' => Str::random(10),
+            'apodo' => Str::random(6),
             'frase' => 'Vive la vida y no dejes que la vida te viva',
             'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'F',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -4067,13 +3110,13 @@ class PerfilProfesionalSeeder extends Seeder
 
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
+            'nombre' => str_random(12),
             'apodo' => 'pollitonmushroom',
             'frase' => 'Carpe Diem',
             'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -4095,16 +3138,15 @@ class PerfilProfesionalSeeder extends Seeder
             'estado'=> '1'
         ]);
 
-
-
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
+     
+           DB::table('perfil_profesional')->insert([
+            'nombre' => Str::random(10),
+            'apodo' => Str::random(6),
             'frase' => 'Vive la vida y no dejes que la vida te viva',
             'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'F',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -4128,13 +3170,13 @@ class PerfilProfesionalSeeder extends Seeder
 
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
+            'nombre' => str_random(12),
             'apodo' => 'pollitonmushroom',
             'frase' => 'Carpe Diem',
             'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -4155,17 +3197,16 @@ class PerfilProfesionalSeeder extends Seeder
             'seguridad' => '1',
             'estado'=> '1'
         ]);
-
 
-
-        DB::table('perfil_profesional')->insert([
-            'nombre' => 'Alejandra Carolina Marquez Garcia',
-            'apodo' => 'caromelow',
+     
+           DB::table('perfil_profesional')->insert([
+            'nombre' => Str::random(10),
+            'apodo' => Str::random(6),
             'frase' => 'Vive la vida y no dejes que la vida te viva',
             'descripcion' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut magna risus. Vivamus non sem in mauris accumsan sodales. Ut dictum sapien sed ex pulvinar laoreet nec ac velit. ',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1996-06-13',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'F',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -4189,13 +3230,13 @@ class PerfilProfesionalSeeder extends Seeder
 
 
         DB::table('perfil_profesional')->insert([
-            'nombre' => 'Jose Claudio Velasquez Boyer',
+            'nombre' => str_random(12),
             'apodo' => 'pollitonmushroom',
             'frase' => 'Carpe Diem',
             'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
             'email'=> Str::random(10).'@piwichostudio.com',
             'clave'=> '123456',
-            'fecha_nacimiento'=> '1986-09-25',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
             'nacionalidad'=>'PE',
             'idioma' =>'ES',
@@ -4216,10 +3257,8 @@ class PerfilProfesionalSeeder extends Seeder
             'seguridad' => '1',
             'estado'=> '1'
         ]);
-
-
-
 
+     
 
 
 
