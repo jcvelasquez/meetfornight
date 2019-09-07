@@ -20,7 +20,7 @@ class CreateUsuariosTable extends Migration
             $table->string('apodo');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('clave');
+            $table->string('password');
             $table->rememberToken();
             $table->date('fecha_nacimiento');
             $table->enum('sexo',['M','F']);

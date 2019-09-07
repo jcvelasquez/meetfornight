@@ -2,9 +2,10 @@
 
 namespace App;
 
-//use Illuminate\Database\Eloquent\Model;
+use App\Rol;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Foundation\Auth\Usuario as Authenticatable;
 
 class Usuario extends Authenticatable
 {
@@ -14,7 +15,7 @@ class Usuario extends Authenticatable
     public $table = "usuarios";
 
     protected $fillable =[
-        'idrol','nombre','email','clave','fecha_nacimiento','sexo','nacionalidad','idioma','celular','estado'
+        'idrol','nombre','email','password','fecha_nacimiento','sexo','nacionalidad','idioma','celular','estado'
     ];
 
     protected $hidden = [

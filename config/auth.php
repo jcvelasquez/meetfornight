@@ -12,10 +12,15 @@ return [
     | as required, but they're a perfect start for most applications.
     |
     */
-
+/*
     'defaults' => [
         'guard' => 'web',
         'passwords' => 'users',
+    ],
+*/
+    'defaults' => [
+        'guard' => 'web',
+        'passwords' => 'usuarios',
     ],
 
     /*
@@ -36,16 +41,23 @@ return [
     */
 
     'guards' => [
-        'web' => [
+        /*'web' => [
             'driver' => 'session',
             'provider' => 'users',
-        ],
+        ],*/
 
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
             'hash' => false,
         ],
+
+
+        'web' => [
+            'driver' => 'session',
+            'provider' => 'usuarios',
+        ],
+
     ],
 
     /*
@@ -66,10 +78,17 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'usuarios' => [
+            'driver' => 'eloquent',
+            'model' => App\Usuario::class,
+        ],
+
+
+       /*'users' => [
             'driver' => 'eloquent',
             'model' => App\User::class,
-        ],
+        ],*/
+
 
         // 'users' => [
         //     'driver' => 'database',
@@ -93,11 +112,18 @@ return [
     */
 
     'passwords' => [
-        'users' => [
+        /*'users' => [
             'provider' => 'users',
             'table' => 'password_resets',
             'expire' => 60,
+        ],*/
+
+        'usuarios' => [
+            'provider' => 'usuarios',
+            'table' => 'password_resets',
+            'expire' => 60,
         ],
+
     ],
 
 ];

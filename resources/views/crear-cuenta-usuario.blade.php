@@ -33,7 +33,7 @@
         </div>
       @endif
 
-        <form method="post" action="{{ route('perfil_usuario.store') }}" id="form-cuenta-usuario">
+        <form method="post" action="{{ route('registrar-usuario') }}" id="form-cuenta-usuario">
           @csrf
             <!-- SmartWizard html -->
             <div id="smartwizard">

@@ -1,6 +1,7 @@
 <?php
 
 //CONTROLLERS
+/*
 Route::resource('agenda_profesional', 'AgendaProfesionalController');
 Route::resource('alerta_profesional', 'AlertaProfesionalController');
 Route::resource('booster_profesional', 'BoosterProfesionalController');
@@ -12,7 +13,7 @@ Route::resource('favorito_usuario', 'FavoritoUsuarioController');
 Route::resource('foto_profesional', 'FotoProfesionalController');
 Route::resource('mensaje_profesional', 'MensajeProfesionalController');
 Route::resource('mensaje_usuario', 'MensajeUsuarioController');
-//Route::resource('perfil_usuario', 'PerfilUsuarioController');
+Route::resource('perfil_usuario', 'PerfilUsuarioController');
 Route::resource('perfil_profesional', 'PerfilProfesionalController');
 Route::resource('reserva_usuario', 'ReservaUsuarioController');
 Route::resource('seguridad_usuario', 'SeguridadUsuarioController');
@@ -21,7 +22,7 @@ Route::resource('servicio_profesional', 'ServicioProfesionalController');
 Route::resource('tarifa_profesional', 'TarifaProfesionalController');
 Route::resource('valoracion_profesional', 'ValoracionProfesionalController');
 Route::resource('categorias', 'CategoriasController');
-
+*/
 
 //URLS DEL SISTEMA
 
@@ -96,7 +97,6 @@ Route::get('faq-perfil-empresa', function () {
     return view('faq-perfil-empresa');
 });
 
-
 //VISTA DE PERFIL
 Route::get('perfil', function () {
     return view('perfil');
@@ -107,20 +107,31 @@ Route::get('perfil', function () {
 
 
 //URLS PARA EL USUARIO
-Route::get('perfil-usuario', 'PerfilUsuarioController@index');
-Route::get('perfil-usuario/{id}', 'PerfilUsuarioController@show');
-Route::put('perfil-usuario/actualizar', 'PerfilUsuarioController@update');
+Route::get('perfil-usuario', 'UsuarioController@mostrarPerfilUsuarioLogueado')->name('perfil-usuario');
+Route::post('perfil-usuario/registrar', 'UsuarioController@registrarDataUsuario');
+Route::get('perfil-usuario/editar', 'UsuarioController@editarDataUsuario');
+Route::put('perfil-usuario/actualizar', 'UsuarioController@actualizarDataUsuario');
 
 
 
 
 //URLS PARA EL PROFESIONAL
-Route::get('perfil-profesional', 'PerfilProfesionalController@index');
+Route::get('perfil-profesional', 'UsuarioController@mostrarPerfilProfesionalLogueado')->name('perfil-profesional');
+Route::post('perfil-profesional/registrar', 'UsuarioController@registrarDataProfesional');
+Route::get('perfil-profesional/editar', 'UsuarioController@editarDataPerfilProfesional');
+Route::put('perfil-profesional/actualizar', 'UsuarioController@actualizarDataProfesional');
 
-Route::get('perfil-profesional/{id}', 'PerfilProfesionalController@edit');
-Route::put('perfil-profesional/actualizar', 'PerfilProfesionalController@update');
+
+
+
+//Route::get('perfil-profesional/editar', 'UsuarioController@obtenerDataProfesional');
+//Route::get('obtenerUsuario/{id}', 'UsuarioController@obtenerUsuario');
 
 Route::get('usuarios', 'UsuarioController@index');
+//Route::post('usuarios/registrar-usuario', 'UsuarioController@registrarUsuario')->name('registrar-usuario');
+//Route::post('usuarios/registrar-profesional', 'UsuarioController@registrarProfesional')->name('registrar-profesional');
+
+
 
 
 /*Route::get('perfil-profesional', function () {
@@ -193,9 +204,9 @@ Route::get('seguridad-usuario', function () {
 
 //Auth::routes();
 // Authentication Routes...
-Route::get('iniciar-sesion', 'IniciarSesionController@index')->name('iniciar-sesion');
-Route::post('iniciar-sesion', 'IniciarSesionController@login');
-Route::post('cerrar-sesion', 'IniciarSesionController@logout')->name('cerrar-sesion');
+Route::get('iniciar-sesion', 'Auth\LoginController@showLoginForm');
+Route::post('iniciar-sesion', 'Auth\LoginController@login')->name('iniciar-sesion');
+Route::post('cerrar-sesion', 'Auth\LoginController@logout')->name('cerrar-sesion');
 
 
    

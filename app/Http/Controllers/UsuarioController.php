@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class UsuarioController extends Controller
 {
    
-    public function index(Request $request)
+    public function listarProfesionales(Request $request)
     {
         
         //if (!$request->ajax()) return redirect('/');
@@ -25,11 +25,7 @@ class UsuarioController extends Controller
         
         if ($buscar==''){*/
 
-            $usuarios = Usuario::join('usuarios_extras','usuarios.id','=','usuarios_extras.idusuario')
-            ->join('roles','usuarios.idrol','=','roles.id')
-            ->select('usuarios.id','usuarios.nombre','usuarios.fecha_nacimiento',
-            'usuarios_extras.departamento','usuarios.idrol','roles.nombre_rol as rol')
-            ->where('usuarios.idrol', '=', $idrol )->paginate(32);
+           
        /* }
         else{*/
 
@@ -45,6 +41,12 @@ class UsuarioController extends Controller
        // }
         
 
+       $usuarios = Usuario::join('usuarios_extras','usuarios.id','=','usuarios_extras.idusuario')
+       ->join('roles','usuarios.idrol','=','roles.id')
+       ->select('usuarios.id','usuarios.nombre','usuarios.fecha_nacimiento',
+       'usuarios_extras.departamento','usuarios.idrol','roles.nombre_rol as rol')
+       ->where('usuarios.idrol', '=', $idrol )->paginate(32);
+
         return [
             'pagination' => [
                 'total'        => $usuarios->total(),
@@ -59,56 +61,75 @@ class UsuarioController extends Controller
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    public function mostrarPerfilProfesionalLogueado(){
+
+        return view('forms-perfil-profesional.perfil-profesional');
+
+    }
+
+    public function mostrarPerfilUsuarioLogueado(){
+
+        return view('forms-perfil-usuario.perfil-usuario');
+
+    }
+
+    public function editarDataPerfilProfesional(Request $request){
+
+        //if(!$request->ajax()) return redirect('/');
+
+        /*$usuario = Usuario::join('usuarios_extras','usuarios.id','=','usuarios_extras.idusuario')
+        ->join('roles','usuarios.idrol','=','roles.id')
+        ->select('usuarios.id','usuarios.nombre','usuarios.fecha_nacimiento',
+        'usuarios_extras.departamento','usuarios.idrol','roles.nombre_rol as rol')
+        ->where('usuarios.id', '=', $request->id )->first();*/
+
+
+        $usuario = DB::table('usuarios')->join('usuarios_extras', 'usuarios_extras.idusuario', '=', 'usuarios.id')
+                                        ->join('roles', 'roles.id', '=', 'usuarios.idrol')
+                                        ->where('usuarios.id', '=', $request->id)
+                                        ->first();
+
+        return ['usuario' => $usuario];     
+
+    }
+
+  
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+     
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Usuario  $usuario
-     * @return \Illuminate\Http\Response
-     */
+    public function registrarUsuario(Request $request)
+    {
+        //
+    }
+
+    public function registrarProfesional(Request $request)
+    {
+        //
+    }
+
+    
+
     public function show(Usuario $usuario)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Usuario  $usuario
-     * @return \Illuminate\Http\Response
-     */
+   
     public function edit(Usuario $usuario)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Usuario  $usuario
-     * @return \Illuminate\Http\Response
-     */
+ 
     public function update(Request $request, Usuario $usuario)
     {
         //

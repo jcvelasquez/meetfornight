@@ -18,7 +18,7 @@ class PerfilProfesionalController extends Controller
     {
         //if (!$request->ajax()) return redirect('/');
 
-        $provincia = $request->provincia;
+       /* $provincia = $request->provincia;
         $edad = $request->edad;
         $categoria = $request->categoria;
         $poblacion = $request->poblacion;
@@ -29,7 +29,7 @@ class PerfilProfesionalController extends Controller
         }
         else{
             $perfilProfesional = PerfilProfesional::where($criterio, 'like', '%'. $buscar . '%')->orderBy('id', 'desc')->paginate(32);
-        }
+        }*/
 
          /*
         if ($buscar==''){
@@ -45,6 +45,7 @@ class PerfilProfesionalController extends Controller
 
         }*/
          
+        
  
         return [
             'pagination' => [

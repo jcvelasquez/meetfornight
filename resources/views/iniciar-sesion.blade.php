@@ -16,29 +16,17 @@
             <h2>MI CUENTA</h2>
             <div class="form-group">
 
-<!--               <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Usuario">
- -->              
-              <input id="email" type="email" placeholder="Correo electronico" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+             
+              <input id="email" type="email" placeholder="Correo electronico" class="form-control" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
-              @error('email')
-                  <span class="invalid-feedback" role="alert">
-                      <strong>{{ $message }}</strong>
-                  </span>
-              @enderror
+              {!!$errors->first('email','<span class="invalid-feedback">:message</span>')!!}
 
             </div>
             <div class="form-group">
 
-              <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Password">
+              <input id="password" type="password" class="form-control" name="password" required autocomplete="current-password" placeholder="Password">
+              {!!$errors->first('password','<span class="invalid-feedback">:message</span>')!!}
 
-              @error('password')
-                  <span class="invalid-feedback" role="alert">
-                      <strong>{{ $message }}</strong>
-                  </span>
-              @enderror
-
-<!--               <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
- -->            
             </div>
             <div class="form-group">
 

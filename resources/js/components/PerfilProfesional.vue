@@ -397,42 +397,41 @@ export default {
 
             let me = this;
 
+            var url= '/perfil-profesional/editar?id=1';
+
             // Make a request for a user with a given ID
-            axios.get('/perfil-profesional/1')
+            axios.get(url)
             .then(function (response) {
                 // handle success
-              
 
-                me.nombre = response.data.nombre;
-                me.apodo = response.data.apodo;
-                me.frase = response.data.frase;
-                me.descripcion = response.data.descripcion;
-                me.email = response.data.email;
-                me.confirmar_email = response.data.email;
-                me.clave = response.data.clave;
-                me.verificar_clave = response.data.clave;
-                me.usuario = response.data.usuario;
-                me.fecha_nacimiento = response.data.fecha_nacimiento;
-                me.sexo = response.data.sexo;
-                me.nacionalidad = response.data.nacionalidad;
-                me.departamento = response.data.departamento;
-                me.distrito = response.data.distrito;
-                me.idioma = response.data.idioma;
-                me.etnia = response.data.etnia;
-                me.pecho = response.data.pecho;
-                me.pene = response.data.pene;
-                me.color_ojos = response.data.color_ojos;
-                me.color_cabello = response.data.color_cabello;
-                me.corte_intimo = response.data.corte_intimo;
-                //me.estatura = response.data.estatura;
-                //me.peso = response.data.peso;
-                me.orientacion = response.data.orientacion;
-                me.tatuaje = response.data.tatuaje;
-                me.piercing = response.data.piercing;
-                me.fumador = response.data.fumador;
-                me.seguridad = response.data.seguridad;
+                var usuario = response.data.usuario;              
 
-                console.log(response.data);
+                me.nombre = usuario.nombre;
+                me.departamento = usuario.departamento;
+                me.apodo = usuario.apodo;
+                me.frase = usuario.frase;
+                me.descripcion = usuario.descripcion;
+                me.email = usuario.email;
+                me.confirmar_email = usuario.email;
+                me.clave = usuario.clave;
+                me.verificar_clave = usuario.clave;
+                me.usuario = usuario.usuario;
+                me.fecha_nacimiento = usuario.fecha_nacimiento;
+                me.sexo = usuario.sexo;
+                me.nacionalidad = usuario.nacionalidad;
+                me.distrito = usuario.distrito;
+                me.idioma = usuario.idioma;
+                me.etnia = usuario.etnia;
+                me.pecho = usuario.pecho;
+                me.pene = usuario.pene;
+                me.color_ojos = usuario.color_ojos;
+                me.color_cabello = usuario.color_cabello;
+                me.corte_intimo = usuario.corte_intimo;
+                me.orientacion = usuario.orientacion;
+                me.tatuaje = usuario.tatuaje;
+                me.piercing = usuario.piercing;
+                me.fumador = usuario.fumador;
+                me.seguridad = usuario.seguridad;
 
 
                 $("#estatura").asRange('val', response.data.estatura);
@@ -469,7 +468,7 @@ export default {
             let me = this;
 
             // Make a request for a user with a given ID
-            axios.put('/perfil-usuario/actualizar', {
+            axios.put('/perfil-profesional/actualizar', {
               'nombre' : this.nombre,
               'apodo' : this.apodo,
               'email' : this.email,

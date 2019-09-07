@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Role;
-use App\User;
+use App\Usuario;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -50,9 +50,9 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'nombre' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:usuarios'],
+            'clave' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
 
@@ -64,13 +64,13 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $user = User::create([
-            'name' => $data['name'],
+        $usuario = Usuario::create([
+            'nombre' => $data['nombre'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'clave' => Hash::make($data['clave']),
         ]);
 
-        $user->roles()->attach(Role::where('nombre_rol', 'usuario')->first());
+        $usuario->roles()->attach(Rol::where('nombre_rol', 'usuario')->first());
 
         return $user;
 
