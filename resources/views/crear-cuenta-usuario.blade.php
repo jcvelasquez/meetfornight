@@ -5,7 +5,7 @@
 
   <body>
 
-  <div id="app">
+  <div id="widget">
 
     @include('tops.top-crear-perfil')
 
@@ -90,7 +90,13 @@
 
   @include('footers.footer-perfil')
 
-  <script type="text/javascript">
+</div>
+
+
+<script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('js/meetfornight.js') }}"></script>
+
+<script type="text/javascript">
         $(document).ready(function(){
           
             
@@ -196,7 +202,7 @@
         });
     </script>
 
-</div>
+
 
   </body>
 </html>

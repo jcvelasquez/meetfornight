@@ -5,6 +5,8 @@
 
   <body>
 
+  <div id="widget">
+
     @include('tops.top-crear-perfil')
 
 
@@ -15,6 +17,8 @@
           <h2>CREA TU PERFIL</h2>
         </div>
 
+        <form method="post" action="{{ route('registrar-profesional') }}" id="form-cuenta-profesional">
+          @csrf
 
             <!-- SmartWizard html -->
             <div id="smartwizard">
@@ -67,14 +71,21 @@
 
                     </div>
                 </div>
+
             </div>
 
-
+        </form>
 
     </div>
 
 
   @include('footers.footer-perfil')
+
+
+  </div>
+
+  <script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('js/meetfornight.js') }}"></script>
 
   <script type="text/javascript">
         $(document).ready(function(){
@@ -137,6 +148,8 @@
 
         });
     </script>
+
+
 
   </body>
 </html>

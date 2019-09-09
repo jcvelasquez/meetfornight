@@ -15,7 +15,7 @@ class Usuario extends Authenticatable
     public $table = "usuarios";
 
     protected $fillable =[
-        'idrol','nombre','email','password','fecha_nacimiento','sexo','nacionalidad','idioma','celular','estado'
+        'idrol','apodo', 'nombre','email','password','fecha_nacimiento','sexo','nacionalidad','idioma','celular','estado'
     ];
 
     protected $hidden = [

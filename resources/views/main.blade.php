@@ -74,6 +74,9 @@
 
       @include('footers.footer-perfil')
 
+      <script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('js/meetfornight.js') }}"></script>
+
   </body>
 
 </html>

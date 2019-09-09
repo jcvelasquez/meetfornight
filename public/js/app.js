@@ -3725,7 +3725,8 @@ __webpack_require__.r(__webpack_exports__);
       nombre: '',
       apodo: '',
       email: '',
-      clave: '',
+      password: '',
+      confirmar_password: '',
       fecha_nacimiento: '',
       sexo: '',
       nacionalidad: '',
@@ -3741,12 +3742,13 @@ __webpack_require__.r(__webpack_exports__);
     mostrarPerfilUsuario: function mostrarPerfilUsuario() {
       var me = this; // Make a request for a user with a given ID
 
-      axios.get('/perfil-usuario/1').then(function (response) {
+      axios.get('/perfil-usuario/editar?id=1').then(function (response) {
         // handle success
         me.nombre = response.data.nombre;
         me.apodo = response.data.apodo;
         me.email = response.data.email;
-        me.clave = response.data.clave;
+        me.password = response.data.password;
+        me.confirmar_password = response.data.password;
         me.fecha_nacimiento = response.data.fecha_nacimiento;
         me.sexo = response.data.sexo;
         me.nacionalidad = response.data.nacionalidad;
@@ -3779,7 +3781,7 @@ __webpack_require__.r(__webpack_exports__);
         'nombre': this.nombre,
         'apodo': this.apodo,
         'email': this.email,
-        'clave': this.clave,
+        'password': this.password,
         'fecha_nacimiento': this.fecha_nacimiento,
         'sexo': this.sexo,
         'nacionalidad': this.nacionalidad,
@@ -45154,24 +45156,24 @@ var render = function() {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.clave,
-                expression: "clave"
+                value: _vm.password,
+                expression: "password"
               }
             ],
             staticClass: "form-control espacio-campos",
             attrs: {
               type: "password",
-              name: "clave",
-              id: "clave",
+              name: "password",
+              id: "password",
               placeholder: "Contraseña *"
             },
-            domProps: { value: _vm.clave },
+            domProps: { value: _vm.password },
             on: {
               input: function($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.clave = $event.target.value
+                _vm.password = $event.target.value
               }
             }
           })
@@ -45183,24 +45185,24 @@ var render = function() {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.clave,
-                expression: "clave"
+                value: _vm.password,
+                expression: "password"
               }
             ],
             staticClass: "form-control espacio-campos",
             attrs: {
               type: "password",
-              name: "verificar-clave",
-              id: "verificar-clave",
+              name: "confirmar_password",
+              id: "confirmar_password",
               placeholder: "Verificar Contraseña *"
             },
-            domProps: { value: _vm.clave },
+            domProps: { value: _vm.password },
             on: {
               input: function($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.clave = $event.target.value
+                _vm.password = $event.target.value
               }
             }
           })

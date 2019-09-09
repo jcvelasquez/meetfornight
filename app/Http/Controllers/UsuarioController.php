@@ -101,48 +101,43 @@ class UsuarioController extends Controller
     }
 
      
-    public function store(Request $request)
+
+    public function registrarDataUsuario(Request $request)
+    {
+       
+        $validatedData = $request->validate([
+            'nombre'=>'required',
+            'apodo'=>'required',
+            'email'=>'required',
+            'password'=>'required',
+            'fecha_nacimiento'=>'required',
+            'sexo'=>'required',
+            'nacionalidad'=>'required',
+            'idioma'=>'required',
+            'idrol'=>'required',
+            'celular'=>'required',
+            'estado'=>'required'
+        ]);
+
+        $usuario = Usuario::create($validatedData);
+
+        return redirect('/crear-cuenta-usuario')->with('success', 'Usuario creado!');
+
+    }
+
+    public function registrarDataProfesional(Request $request)
     {
         //
     }
 
-    public function registrarUsuario(Request $request)
+    public function editarDataUsuario(Request $request)
     {
-        //
+        return Usuario::findOrFail(41);
     }
 
-    public function registrarProfesional(Request $request)
-    {
-        //
-    }
 
     
 
-    public function show(Usuario $usuario)
-    {
-        //
-    }
+    
 
-   
-    public function edit(Usuario $usuario)
-    {
-        //
-    }
-
- 
-    public function update(Request $request, Usuario $usuario)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Usuario  $usuario
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Usuario $usuario)
-    {
-        //
-    }
 }

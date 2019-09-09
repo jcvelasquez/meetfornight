@@ -108,7 +108,7 @@ Route::get('perfil', function () {
 
 //URLS PARA EL USUARIO
 Route::get('perfil-usuario', 'UsuarioController@mostrarPerfilUsuarioLogueado')->name('perfil-usuario');
-Route::post('perfil-usuario/registrar', 'UsuarioController@registrarDataUsuario');
+Route::post('perfil-usuario/registrar', 'UsuarioController@registrarDataUsuario')->name('registrar-usuario');  
 Route::get('perfil-usuario/editar', 'UsuarioController@editarDataUsuario');
 Route::put('perfil-usuario/actualizar', 'UsuarioController@actualizarDataUsuario');
 
@@ -117,7 +117,8 @@ Route::put('perfil-usuario/actualizar', 'UsuarioController@actualizarDataUsuario
 
 //URLS PARA EL PROFESIONAL
 Route::get('perfil-profesional', 'UsuarioController@mostrarPerfilProfesionalLogueado')->name('perfil-profesional');
-Route::post('perfil-profesional/registrar', 'UsuarioController@registrarDataProfesional');
+//Route::get('perfil-profesional/{id}', 'UsuarioController@mostrarPerfilProfesional');
+Route::post('perfil-profesional/registrar', 'UsuarioController@registrarDataProfesional')->name('registrar-profesional');  
 Route::get('perfil-profesional/editar', 'UsuarioController@editarDataPerfilProfesional');
 Route::put('perfil-profesional/actualizar', 'UsuarioController@actualizarDataProfesional');
 
@@ -127,7 +128,7 @@ Route::put('perfil-profesional/actualizar', 'UsuarioController@actualizarDataPro
 //Route::get('perfil-profesional/editar', 'UsuarioController@obtenerDataProfesional');
 //Route::get('obtenerUsuario/{id}', 'UsuarioController@obtenerUsuario');
 
-Route::get('usuarios', 'UsuarioController@index');
+Route::get('usuarios', 'UsuarioController@listarProfesionales');
 //Route::post('usuarios/registrar-usuario', 'UsuarioController@registrarUsuario')->name('registrar-usuario');
 //Route::post('usuarios/registrar-profesional', 'UsuarioController@registrarProfesional')->name('registrar-profesional');
 

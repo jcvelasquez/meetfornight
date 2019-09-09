@@ -20,9 +20,9 @@
           <input
             type="password"
             class="form-control espacio-campos"
-            name="clave"
-            id="clave"
-            v-model="clave"
+            name="password"
+            id="password"
+            v-model="password"
             placeholder="Contraseña *"
           />
         </div>
@@ -30,9 +30,9 @@
           <input
             type="password"
             class="form-control espacio-campos"
-            name="verificar-clave"
-            id="verificar-clave"
-            v-model="clave"
+            name="confirmar_password"
+            id="confirmar_password"
+            v-model="password"
             placeholder="Verificar Contraseña *"
           />
         </div>
@@ -99,7 +99,8 @@ export default {
             nombre : '',
             apodo : '',
             email : '',
-            clave : '',
+            password : '',
+            confirmar_password : '',
             fecha_nacimiento : '',
             sexo : '',
             nacionalidad : '',
@@ -117,14 +118,15 @@ export default {
             let me = this;
 
             // Make a request for a user with a given ID
-            axios.get('/perfil-usuario/1')
+            axios.get('/perfil-usuario/editar?id=1')
             .then(function (response) {
                 // handle success
               
                 me.nombre = response.data.nombre;
                 me.apodo = response.data.apodo;
                 me.email = response.data.email;
-                me.clave = response.data.clave;
+                me.password = response.data.password;
+                me.confirmar_password = response.data.password;
                 me.fecha_nacimiento = response.data.fecha_nacimiento;
                 me.sexo = response.data.sexo;
                 me.nacionalidad = response.data.nacionalidad;
@@ -169,7 +171,7 @@ export default {
               'nombre' : this.nombre,
               'apodo' : this.apodo,
               'email' : this.email,
-              'clave' : this.clave,
+              'password' : this.password,
               'fecha_nacimiento' : this.fecha_nacimiento,
               'sexo' : this.sexo,
               'nacionalidad' : this.nacionalidad,

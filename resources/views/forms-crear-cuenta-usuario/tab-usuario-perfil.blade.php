@@ -29,7 +29,7 @@
 
               <div class="col-lg-12 col-sm-12">
 
-                <input type="password" class="form-control espacio-campos" id="clave" name="clave" placeholder="Contraseña *">
+                <input type="password" class="form-control espacio-campos" id="password" name="password" placeholder="Contraseña *">
 
               </div>
 
@@ -99,6 +99,7 @@
 
                 <input type="email" class="form-control espacio-campos" name="confirmar_email" id="confirmar_email" placeholder="Confirmar email *">
                 <input type="hidden" name="estado" value="0"/>
+                <input type="hidden" name="idrol" id="idrol" value="3"/>
               </div>
 
             </div>

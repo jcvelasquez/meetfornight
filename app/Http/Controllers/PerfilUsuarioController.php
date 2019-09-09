@@ -84,7 +84,7 @@ class PerfilUsuarioController extends Controller
             'sexo'=>'required',
             'nacionalidad'=>'required',
             'idioma'=>'required',
-            'celular'=>'required',
+            'idrol'=>'required',
             'estado'=>'required'
         ]);
 

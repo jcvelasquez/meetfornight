@@ -15,31 +15,642 @@ class UsuariosSeeder extends Seeder
 
         DB::table('usuarios')->insert([
             'idrol' => '4',
-            'nombre'=> 'Jose Claudio Junior Velasquez Boyer',
-            'apodo'=> 'piwicho',
-            'email'=> 'jcjrvb@gmail.com',
+            'nombre' => Str::random(10),
+            'email'=> Str::random(10).'@piwichostudio.com',
             'password'=> Hash::make("123456"),
-            'fecha_nacimiento'=> '1986-09-25',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
+            'apodo' => 'coqueta12',
             'nacionalidad'=>'PE',
+            'celular' => '967994927',
             'idioma'=>'ES',
-            'celular'=> '967994927',
             'estado'=> '1'
         ]);
 
+        
         DB::table('usuarios')->insert([
             'idrol' => '4',
-            'nombre'=> 'Julio Alberto Lozano Arevalo',
-            'apodo'=> 'betrico',
-            'email'=> 'lozano-julio@hotmail.com',
+            'nombre' => Str::random(10),
+            'email'=> Str::random(10).'@piwichostudio.com',
             'password'=> Hash::make("123456"),
-            'fecha_nacimiento'=> '1995-09-17',
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
+            'apodo' => 'coqueta12',
             'nacionalidad'=>'PE',
+            'celular' => '967994927',
             'idioma'=>'ES',
-            'celular'=> '954789632',
             'estado'=> '1'
         ]);
+
+
+        
+        DB::table('usuarios')->insert([
+            'idrol' => '4',
+            'nombre' => Str::random(10),
+            'email'=> Str::random(10).'@piwichostudio.com',
+            'password'=> Hash::make("123456"),
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
+            'sexo'=> 'M',
+            'apodo' => 'coqueta12',
+            'nacionalidad'=>'PE',
+            'celular' => '967994927',
+            'idioma'=>'ES',
+            'estado'=> '1'
+        ]);
+
+
+        
+        DB::table('usuarios')->insert([
+            'idrol' => '4',
+            'nombre' => Str::random(10),
+            'email'=> Str::random(10).'@piwichostudio.com',
+            'password'=> Hash::make("123456"),
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
+            'sexo'=> 'M',
+            'apodo' => 'coqueta12',
+            'nacionalidad'=>'PE',
+            'celular' => '967994927',
+            'idioma'=>'ES',
+            'estado'=> '1'
+        ]);
+
+
+        
+        DB::table('usuarios')->insert([
+            'idrol' => '4',
+            'nombre' => Str::random(10),
+            'email'=> Str::random(10).'@piwichostudio.com',
+            'password'=> Hash::make("123456"),
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
+            'sexo'=> 'M',
+            'apodo' => 'coqueta12',
+            'nacionalidad'=>'PE',
+            'celular' => '967994927',
+            'idioma'=>'ES',
+            'estado'=> '1'
+        ]);
+
+
+        
+        DB::table('usuarios')->insert([
+            'idrol' => '4',
+            'nombre' => Str::random(10),
+            'email'=> Str::random(10).'@piwichostudio.com',
+            'password'=> Hash::make("123456"),
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
+            'sexo'=> 'M',
+            'apodo' => 'coqueta12',
+            'nacionalidad'=>'PE',
+            'celular' => '967994927',
+            'idioma'=>'ES',
+            'estado'=> '1'
+        ]);
+
+
+        
+        DB::table('usuarios')->insert([
+            'idrol' => '4',
+            'nombre' => Str::random(10),
+            'email'=> Str::random(10).'@piwichostudio.com',
+            'password'=> Hash::make("123456"),
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
+            'sexo'=> 'M',
+            'apodo' => 'coqueta12',
+            'nacionalidad'=>'PE',
+            'celular' => '967994927',
+            'idioma'=>'ES',
+            'estado'=> '1'
+        ]);
+
+
+        
+        DB::table('usuarios')->insert([
+            'idrol' => '4',
+            'nombre' => Str::random(10),
+            'email'=> Str::random(10).'@piwichostudio.com',
+            'password'=> Hash::make("123456"),
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
+            'sexo'=> 'M',
+            'apodo' => 'coqueta12',
+            'nacionalidad'=>'PE',
+            'celular' => '967994927',
+            'idioma'=>'ES',
+            'estado'=> '1'
+        ]);
+
+
+        
+        DB::table('usuarios')->insert([
+            'idrol' => '4',
+            'nombre' => Str::random(10),
+            'email'=> Str::random(10).'@piwichostudio.com',
+            'password'=> Hash::make("123456"),
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
+            'sexo'=> 'M',
+            'apodo' => 'coqueta12',
+            'nacionalidad'=>'PE',
+            'celular' => '967994927',
+            'idioma'=>'ES',
+            'estado'=> '1'
+        ]);
+
+
+        
+        DB::table('usuarios')->insert([
+            'idrol' => '4',
+            'nombre' => Str::random(10),
+            'email'=> Str::random(10).'@piwichostudio.com',
+            'password'=> Hash::make("123456"),
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
+            'sexo'=> 'M',
+            'apodo' => 'coqueta12',
+            'nacionalidad'=>'PE',
+            'celular' => '967994927',
+            'idioma'=>'ES',
+            'estado'=> '1'
+        ]);
+
+
+        
+        DB::table('usuarios')->insert([
+            'idrol' => '4',
+            'nombre' => Str::random(10),
+            'email'=> Str::random(10).'@piwichostudio.com',
+            'password'=> Hash::make("123456"),
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
+            'sexo'=> 'M',
+            'apodo' => 'coqueta12',
+            'nacionalidad'=>'PE',
+            'celular' => '967994927',
+            'idioma'=>'ES',
+            'estado'=> '1'
+        ]);
+
+
+        
+        DB::table('usuarios')->insert([
+            'idrol' => '4',
+            'nombre' => Str::random(10),
+            'email'=> Str::random(10).'@piwichostudio.com',
+            'password'=> Hash::make("123456"),
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
+            'sexo'=> 'M',
+            'apodo' => 'coqueta12',
+            'nacionalidad'=>'PE',
+            'celular' => '967994927',
+            'idioma'=>'ES',
+            'estado'=> '1'
+        ]);
+
+
+        
+        DB::table('usuarios')->insert([
+            'idrol' => '4',
+            'nombre' => Str::random(10),
+            'email'=> Str::random(10).'@piwichostudio.com',
+            'password'=> Hash::make("123456"),
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
+            'sexo'=> 'M',
+            'apodo' => 'coqueta12',
+            'nacionalidad'=>'PE',
+            'celular' => '967994927',
+            'idioma'=>'ES',
+            'estado'=> '1'
+        ]);
+
+
+        
+        DB::table('usuarios')->insert([
+            'idrol' => '4',
+            'nombre' => Str::random(10),
+            'email'=> Str::random(10).'@piwichostudio.com',
+            'password'=> Hash::make("123456"),
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
+            'sexo'=> 'M',
+            'apodo' => 'coqueta12',
+            'nacionalidad'=>'PE',
+            'celular' => '967994927',
+            'idioma'=>'ES',
+            'estado'=> '1'
+        ]);
+
+
+        
+        DB::table('usuarios')->insert([
+            'idrol' => '4',
+            'nombre' => Str::random(10),
+            'email'=> Str::random(10).'@piwichostudio.com',
+            'password'=> Hash::make("123456"),
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
+            'sexo'=> 'M',
+            'apodo' => 'coqueta12',
+            'nacionalidad'=>'PE',
+            'celular' => '967994927',
+            'idioma'=>'ES',
+            'estado'=> '1'
+        ]);
+
+
+        
+        DB::table('usuarios')->insert([
+            'idrol' => '4',
+            'nombre' => Str::random(10),
+            'email'=> Str::random(10).'@piwichostudio.com',
+            'password'=> Hash::make("123456"),
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
+            'sexo'=> 'M',
+            'apodo' => 'coqueta12',
+            'nacionalidad'=>'PE',
+            'celular' => '967994927',
+            'idioma'=>'ES',
+            'estado'=> '1'
+        ]);
+
+
+        
+        DB::table('usuarios')->insert([
+            'idrol' => '4',
+            'nombre' => Str::random(10),
+            'email'=> Str::random(10).'@piwichostudio.com',
+            'password'=> Hash::make("123456"),
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
+            'sexo'=> 'M',
+            'apodo' => 'coqueta12',
+            'nacionalidad'=>'PE',
+            'celular' => '967994927',
+            'idioma'=>'ES',
+            'estado'=> '1'
+        ]);
+
+
+        
+        DB::table('usuarios')->insert([
+            'idrol' => '4',
+            'nombre' => Str::random(10),
+            'email'=> Str::random(10).'@piwichostudio.com',
+            'password'=> Hash::make("123456"),
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
+            'sexo'=> 'M',
+            'apodo' => 'coqueta12',
+            'nacionalidad'=>'PE',
+            'celular' => '967994927',
+            'idioma'=>'ES',
+            'estado'=> '1'
+        ]);
+
+
+        
+        DB::table('usuarios')->insert([
+            'idrol' => '4',
+            'nombre' => Str::random(10),
+            'email'=> Str::random(10).'@piwichostudio.com',
+            'password'=> Hash::make("123456"),
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
+            'sexo'=> 'M',
+            'apodo' => 'coqueta12',
+            'nacionalidad'=>'PE',
+            'celular' => '967994927',
+            'idioma'=>'ES',
+            'estado'=> '1'
+        ]);
+
+
+        
+        DB::table('usuarios')->insert([
+            'idrol' => '4',
+            'nombre' => Str::random(10),
+            'email'=> Str::random(10).'@piwichostudio.com',
+            'password'=> Hash::make("123456"),
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
+            'sexo'=> 'M',
+            'apodo' => 'coqueta12',
+            'nacionalidad'=>'PE',
+            'celular' => '967994927',
+            'idioma'=>'ES',
+            'estado'=> '1'
+        ]);
+
+
+        
+        DB::table('usuarios')->insert([
+            'idrol' => '4',
+            'nombre' => Str::random(10),
+            'email'=> Str::random(10).'@piwichostudio.com',
+            'password'=> Hash::make("123456"),
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
+            'sexo'=> 'M',
+            'apodo' => 'coqueta12',
+            'nacionalidad'=>'PE',
+            'celular' => '967994927',
+            'idioma'=>'ES',
+            'estado'=> '1'
+        ]);
+
+
+        
+        DB::table('usuarios')->insert([
+            'idrol' => '4',
+            'nombre' => Str::random(10),
+            'email'=> Str::random(10).'@piwichostudio.com',
+            'password'=> Hash::make("123456"),
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
+            'sexo'=> 'M',
+            'apodo' => 'coqueta12',
+            'nacionalidad'=>'PE',
+            'celular' => '967994927',
+            'idioma'=>'ES',
+            'estado'=> '1'
+        ]);
+
+
+        
+        DB::table('usuarios')->insert([
+            'idrol' => '4',
+            'nombre' => Str::random(10),
+            'email'=> Str::random(10).'@piwichostudio.com',
+            'password'=> Hash::make("123456"),
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
+            'sexo'=> 'M',
+            'apodo' => 'coqueta12',
+            'nacionalidad'=>'PE',
+            'celular' => '967994927',
+            'idioma'=>'ES',
+            'estado'=> '1'
+        ]);
+
+
+        
+        DB::table('usuarios')->insert([
+            'idrol' => '4',
+            'nombre' => Str::random(10),
+            'email'=> Str::random(10).'@piwichostudio.com',
+            'password'=> Hash::make("123456"),
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
+            'sexo'=> 'M',
+            'apodo' => 'coqueta12',
+            'nacionalidad'=>'PE',
+            'celular' => '967994927',
+            'idioma'=>'ES',
+            'estado'=> '1'
+        ]);
+
+
+        
+        DB::table('usuarios')->insert([
+            'idrol' => '4',
+            'nombre' => Str::random(10),
+            'email'=> Str::random(10).'@piwichostudio.com',
+            'password'=> Hash::make("123456"),
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
+            'sexo'=> 'M',
+            'apodo' => 'coqueta12',
+            'nacionalidad'=>'PE',
+            'celular' => '967994927',
+            'idioma'=>'ES',
+            'estado'=> '1'
+        ]);
+
+
+        
+        DB::table('usuarios')->insert([
+            'idrol' => '4',
+            'nombre' => Str::random(10),
+            'email'=> Str::random(10).'@piwichostudio.com',
+            'password'=> Hash::make("123456"),
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
+            'sexo'=> 'M',
+            'apodo' => 'coqueta12',
+            'nacionalidad'=>'PE',
+            'celular' => '967994927',
+            'idioma'=>'ES',
+            'estado'=> '1'
+        ]);
+
+
+        
+        DB::table('usuarios')->insert([
+            'idrol' => '4',
+            'nombre' => Str::random(10),
+            'email'=> Str::random(10).'@piwichostudio.com',
+            'password'=> Hash::make("123456"),
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
+            'sexo'=> 'M',
+            'apodo' => 'coqueta12',
+            'nacionalidad'=>'PE',
+            'celular' => '967994927',
+            'idioma'=>'ES',
+            'estado'=> '1'
+        ]);
+
+
+        
+        DB::table('usuarios')->insert([
+            'idrol' => '4',
+            'nombre' => Str::random(10),
+            'email'=> Str::random(10).'@piwichostudio.com',
+            'password'=> Hash::make("123456"),
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
+            'sexo'=> 'M',
+            'apodo' => 'coqueta12',
+            'nacionalidad'=>'PE',
+            'celular' => '967994927',
+            'idioma'=>'ES',
+            'estado'=> '1'
+        ]);
+
+
+        
+        DB::table('usuarios')->insert([
+            'idrol' => '4',
+            'nombre' => Str::random(10),
+            'email'=> Str::random(10).'@piwichostudio.com',
+            'password'=> Hash::make("123456"),
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
+            'sexo'=> 'M',
+            'apodo' => 'coqueta12',
+            'nacionalidad'=>'PE',
+            'celular' => '967994927',
+            'idioma'=>'ES',
+            'estado'=> '1'
+        ]);
+
+
+        
+        DB::table('usuarios')->insert([
+            'idrol' => '4',
+            'nombre' => Str::random(10),
+            'email'=> Str::random(10).'@piwichostudio.com',
+            'password'=> Hash::make("123456"),
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
+            'sexo'=> 'M',
+            'apodo' => 'coqueta12',
+            'nacionalidad'=>'PE',
+            'celular' => '967994927',
+            'idioma'=>'ES',
+            'estado'=> '1'
+        ]);
+
+
+        
+        DB::table('usuarios')->insert([
+            'idrol' => '4',
+            'nombre' => Str::random(10),
+            'email'=> Str::random(10).'@piwichostudio.com',
+            'password'=> Hash::make("123456"),
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
+            'sexo'=> 'M',
+            'apodo' => 'coqueta12',
+            'nacionalidad'=>'PE',
+            'celular' => '967994927',
+            'idioma'=>'ES',
+            'estado'=> '1'
+        ]);
+
+
+        
+        DB::table('usuarios')->insert([
+            'idrol' => '4',
+            'nombre' => Str::random(10),
+            'email'=> Str::random(10).'@piwichostudio.com',
+            'password'=> Hash::make("123456"),
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
+            'sexo'=> 'M',
+            'apodo' => 'coqueta12',
+            'nacionalidad'=>'PE',
+            'celular' => '967994927',
+            'idioma'=>'ES',
+            'estado'=> '1'
+        ]);
+
+
+        
+        DB::table('usuarios')->insert([
+            'idrol' => '4',
+            'nombre' => Str::random(10),
+            'email'=> Str::random(10).'@piwichostudio.com',
+            'password'=> Hash::make("123456"),
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
+            'sexo'=> 'M',
+            'apodo' => 'coqueta12',
+            'nacionalidad'=>'PE',
+            'celular' => '967994927',
+            'idioma'=>'ES',
+            'estado'=> '1'
+        ]);
+
+
+        
+        DB::table('usuarios')->insert([
+            'idrol' => '4',
+            'nombre' => Str::random(10),
+            'email'=> Str::random(10).'@piwichostudio.com',
+            'password'=> Hash::make("123456"),
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
+            'sexo'=> 'M',
+            'apodo' => 'coqueta12',
+            'nacionalidad'=>'PE',
+            'celular' => '967994927',
+            'idioma'=>'ES',
+            'estado'=> '1'
+        ]);
+
+
+        
+        DB::table('usuarios')->insert([
+            'idrol' => '4',
+            'nombre' => Str::random(10),
+            'email'=> Str::random(10).'@piwichostudio.com',
+            'password'=> Hash::make("123456"),
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
+            'sexo'=> 'M',
+            'apodo' => 'coqueta12',
+            'nacionalidad'=>'PE',
+            'celular' => '967994927',
+            'idioma'=>'ES',
+            'estado'=> '1'
+        ]);
+
+
+        
+        DB::table('usuarios')->insert([
+            'idrol' => '4',
+            'nombre' => Str::random(10),
+            'email'=> Str::random(10).'@piwichostudio.com',
+            'password'=> Hash::make("123456"),
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
+            'sexo'=> 'M',
+            'apodo' => 'coqueta12',
+            'nacionalidad'=>'PE',
+            'celular' => '967994927',
+            'idioma'=>'ES',
+            'estado'=> '1'
+        ]);
+
+
+        
+        DB::table('usuarios')->insert([
+            'idrol' => '4',
+            'nombre' => Str::random(10),
+            'email'=> Str::random(10).'@piwichostudio.com',
+            'password'=> Hash::make("123456"),
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
+            'sexo'=> 'M',
+            'apodo' => 'coqueta12',
+            'nacionalidad'=>'PE',
+            'celular' => '967994927',
+            'idioma'=>'ES',
+            'estado'=> '1'
+        ]);
+
+
+        
+        DB::table('usuarios')->insert([
+            'idrol' => '4',
+            'nombre' => Str::random(10),
+            'email'=> Str::random(10).'@piwichostudio.com',
+            'password'=> Hash::make("123456"),
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
+            'sexo'=> 'M',
+            'apodo' => 'coqueta12',
+            'nacionalidad'=>'PE',
+            'celular' => '967994927',
+            'idioma'=>'ES',
+            'estado'=> '1'
+        ]);
+
+
+        
+        DB::table('usuarios')->insert([
+            'idrol' => '4',
+            'nombre' => Str::random(10),
+            'email'=> Str::random(10).'@piwichostudio.com',
+            'password'=> Hash::make("123456"),
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
+            'sexo'=> 'M',
+            'apodo' => 'coqueta12',
+            'nacionalidad'=>'PE',
+            'celular' => '967994927',
+            'idioma'=>'ES',
+            'estado'=> '1'
+        ]);
+
+
+        
+        DB::table('usuarios')->insert([
+            'idrol' => '4',
+            'nombre' => Str::random(10),
+            'email'=> Str::random(10).'@piwichostudio.com',
+            'password'=> Hash::make("123456"),
+            'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
+            'sexo'=> 'M',
+            'apodo' => 'coqueta12',
+            'nacionalidad'=>'PE',
+            'celular' => '967994927',
+            'idioma'=>'ES',
+            'estado'=> '1'
+        ]);
+
+
 
     }
 }
