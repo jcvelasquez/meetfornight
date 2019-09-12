@@ -15,10 +15,13 @@ class CreateTarifaProfesionalTable extends Migration
     {
         Schema::create('tarifa_profesional', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('tiempo_tarifa');
+            $table->integer('idusuario')->unsigned();
+            $table->string('opcion_tarifa');
             $table->double('costo_tarifa');
-            $table->enum('categoria_tarifa',['TARIFAS PRIVADAS','ESCORT','EXTRAS']);
-            $table->timestamps();
+            $table->enum('categoria_tarifa',['SERVICIO','ESCORT','EXTRAS']);
+
+            $table->foreign('idusuario')->references('id')->on('usuarios');
+            //$table->timestamps();
         });
     }
 

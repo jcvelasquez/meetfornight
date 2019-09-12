@@ -16,18 +16,20 @@ class LoginController extends Controller
     public function login(Request $request){
 
         $this->validateLogin($request);       
-        /*
-        echo($request->usuario);
-        echo($request->password);
-        return;*/
+  
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'estado'=>1])){
-            return redirect()->route('perfil-profesional');
+
+            if( Auth::user()->idrol == 4) {
+                return redirect()->route('perfil-profesional');
+            }else{
+                return redirect()->route('perfil-usuario');
+            }
+
+            
         }
 
-        return back()
-        ->withErrors(['email' => trans('auth.failed')])
-        ->withInput(request(['email']));
+        return back()->withErrors(['email' => trans('auth.failed')])->withInput(request(['email']));
 
     }
 

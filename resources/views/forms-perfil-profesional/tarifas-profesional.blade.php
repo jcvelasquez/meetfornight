@@ -1,6 +1,6 @@
 @extends('main')
 
-@section('title', 'Tarifas')
+@section('title', 'Tarifas del Profesional')
 
 @section('top')
 

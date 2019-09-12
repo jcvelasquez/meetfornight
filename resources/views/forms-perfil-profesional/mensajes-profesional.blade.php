@@ -1,6 +1,6 @@
 @extends('main')
 
-@section('title', 'Mensajes')
+@section('title', 'Mensajes del Profesional')
 
 @section('top')
 
