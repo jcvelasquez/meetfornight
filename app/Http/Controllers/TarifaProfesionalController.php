@@ -1,84 +1,63 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\TarifaProfesional;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class TarifaProfesionalController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+
+    public function list(Request $request)
     {
-        //
+        
+
+        $idusuario = Auth::user()->id;
+
+        $tarifas = DB::table('usuarios')->join('tarifa_profesional', 'tarifa_profesional.idusuario', '=', 'usuarios.id')
+                                        ->select('tarifa_profesional.*')
+                                        ->where('usuarios.id', '=', $idusuario)
+                                        ->get();
+
+        return ['tarifas' => $tarifas];  
+
+
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
-        //
+        
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
-        //
+        
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id)
     {
-        //
+       
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+
+       // return $id;
+
+        $tarifa = TarifaProfesional::find($id);
+        $tarifa->delete();
+
+        return ['mensaje' => 'se elimino'];
+        
     }
 }

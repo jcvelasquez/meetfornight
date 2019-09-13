@@ -137,7 +137,6 @@ Route::group(['middleware'=>['auth']],function(){
 
             //URLS PARA EL PROFESIONAL
             Route::get('perfil-profesional', 'UsuarioController@mostrarPerfilProfesionalLogueado')->name('perfil-profesional');
-            //Route::get('perfil-profesional/{id}', 'UsuarioController@mostrarPerfilProfesional');
             Route::post('perfil-profesional/registrar', 'UsuarioController@registrarDataProfesional')->name('registrar-profesional');  
             Route::get('perfil-profesional/editar', 'UsuarioController@editarDataPerfilProfesional');
             Route::put('perfil-profesional/actualizar', 'UsuarioController@actualizarDataProfesional');
@@ -166,6 +165,14 @@ Route::group(['middleware'=>['auth']],function(){
             Route::get('tarifas-profesional', function () {
                 return view('forms-perfil-profesional.tarifas-profesional');
             });
+
+            Route::get('tarifas-profesional/listar', 'TarifaProfesionalController@list' );
+            Route::delete('tarifas-profesional/eliminar/{id}', 'TarifaProfesionalController@destroy' );
+            Route::post('tarifas-profesional/registrar', 'TarifaProfesionalController@store');
+            
+
+
+
             
             Route::get('fotos-videos-profesional', function () {
                 return view('forms-perfil-profesional.fotos-videos-profesional');

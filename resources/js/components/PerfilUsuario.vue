@@ -187,9 +187,6 @@ export default {
             .catch(function (error) {
                 // handle error
                 console.log(error);
-            })
-            .finally(function () {
-                // always executed
             });
 
         }

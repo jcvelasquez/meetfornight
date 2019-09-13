@@ -36,6 +36,10 @@ class Usuario extends Authenticatable
         return $this->hasOne('App\UsuarioExtras');
     }
 
+    public function tarifas(){
+        return $this->hasMany('App\TarifaProfesional');
+    }
+
     
 
 }

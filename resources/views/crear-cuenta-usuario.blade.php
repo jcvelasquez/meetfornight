@@ -99,6 +99,76 @@
 <script type="text/javascript">
 
         $(document).ready(function(){
+
+
+
+            // validate signup form on keyup and submit
+            $("#form-cuenta-usuario").validate({
+              ignore: ":hidden",
+              debug: true,
+              rules: {
+                nombre: {
+                  required : true
+                },
+                apodo: {
+                  required : true
+                },
+                password: {
+                  required : true
+                },
+                confirmar_clave: {
+                  required : true,
+                  equalTo: '#password'
+                },
+                email: {
+                  email: true,
+                  required: true
+                },
+                confirmar_email: {
+                  email: true,
+                  required: true,
+                  equalTo: '#email'
+                },
+                fecha_nacimiento: {
+                  required : true
+                },
+                sexo: {
+                  required : true
+                },
+                nacionalidad: {
+                  required : true
+                },
+                idioma: {
+                  required : true
+                },
+                celular: {
+                  required : true
+                }
+              },
+              errorPlacement: function(error, element) {
+                //error.appendTo(element.parent("div").next("td"));
+                error.insertAfter(element); 
+              },
+              doNotHideMessage: false, 
+              //errorClass: "invalid",
+              messages: {
+                nombre: "El nombre es obligatorio",
+                apodo: "El apodo es obligatorio",
+                email: "El email es obligatorio",
+                confirmar_email: "Debe confirmar su email",
+                password: "La clave es obligatoria",
+                fecha_nacimiento: "La fecha de nacimiento es obligatoria",
+                sexo: "El sexo es obligatorio",
+                nacionalidad: "La nacionalidad es obligatoria",
+                idioma: "El idioma es obligatorio"
+              }/*,
+              highlight: function (element) { // hightlight error inputs
+                $(element).closest('.col-lg-12').addClass('has-error'); 
+              },
+              unhighlight: function (element) { // revert the change done by hightlight
+                $(element).closest('.col-lg-12').removeClass('has-error'); 
+              }*/
+            });
           
 
             // Step show event

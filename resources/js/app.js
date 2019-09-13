@@ -5,6 +5,8 @@
  */
 
 require('./bootstrap');
+//require('sweetalert2/dist/sweetalert2.min.js');
+window.Swal = require('sweetalert2');
 
 window.Vue = require('vue');
 
@@ -21,8 +23,6 @@ window.Vue = require('vue');
 
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('perfil-usuario', require('./components/PerfilUsuario.vue').default);
-
-
 Vue.component('planes-profesional', require('./components/PlanesProfesional.vue').default);
 Vue.component('perfil-profesional', require('./components/PerfilProfesional.vue').default);
 Vue.component('servicios-profesional', require('./components/ServiciosProfesional.vue').default);
@@ -42,7 +42,7 @@ Vue.component('valoracion-profesional', require('./components/ValoracionProfesio
 Vue.component('listado-profesionales', require('./components/ListadoProfesionales.vue').default);
 
 
-
+Vue.prototype.$userId = document.querySelector("meta[name='user-id']").getAttribute('content');
 
 
 /**
