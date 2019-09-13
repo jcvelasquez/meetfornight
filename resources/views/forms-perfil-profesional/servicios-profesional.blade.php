@@ -1,24 +1,9 @@
 @extends('main')
 
-@section('title', 'Servicios')
+@section('title', 'Servicios del Profesional')
 
-@section('top')
+@section('content')
 
-    @include('tops.top-perfil-creado-free')
+    <servicios-profesional></servicios-profesional>
 
 @endsection
-
-
-@section('menu-lateral')
-  
-    @include('menus.menu-lateral-profesional')
-    
-@endsection
-
-
-  @section('content')
-
-
-          <servicios-profesional></servicios-profesional>
-
-      @endsection

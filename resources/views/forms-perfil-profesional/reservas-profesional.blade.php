@@ -1,20 +1,6 @@
 @extends('main')
 
-@section('title', 'Reservas')
-
-@section('top')
-
-    @include('tops.top-perfil-creado-free')
-
-@endsection
-
-
-@section('menu-lateral')
-  
-    @include('menus.menu-lateral-profesional')
-    
-@endsection
-
+@section('title', 'Reservas del Profesional')
 
 @section('content')
 

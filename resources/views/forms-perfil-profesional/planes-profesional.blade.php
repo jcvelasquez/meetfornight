@@ -1,23 +1,9 @@
 @extends('main')
 
-@section('title', 'Planes')
+@section('title', 'Planes del Profesional')
 
-@section('top')
+@section('content')
 
-    @include('tops.top-perfil-creado-free')
+    <planes-profesional></planes-profesional>
 
 @endsection
-
-
-@section('menu-lateral')
-  
-    @include('menus.menu-lateral-profesional')
-    
-@endsection
-
-
-  @section('content')
-
-        <planes-profesional></planes-profesional>
-
-  @endsection

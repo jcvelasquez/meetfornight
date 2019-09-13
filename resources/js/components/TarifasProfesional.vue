@@ -1,5 +1,6 @@
 <template>
-    <form action="#" method="post">
+
+    <div>
 
           <div class="bloques-de-perfil">
             <h5 class="formulario-titulos">TARIFAS:</h5>
@@ -22,10 +23,30 @@
             <h5 class="formulario-titulos">PRECIO DE LOS SERVICIOS:</h5>
             <p>Especifica tus <strong class="precio-morado">tarifas privadas</strong> a continuación</p>
            
-            <form class="repeater">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col" width="40">#</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Tarifa</th>
+                    <th scope="col" width="80">Eliminar</th>
+                  </tr>
+                </thead>
+                <tbody>
 
-              <div data-repeater-list="servicio">
-                <div class="form-row" data-repeater-item>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td><button type="button" data-repeater-delete class="btn btn-primary x-circulo"><i class="fa fa-times"></i></button></td>
+                  </tr>
+                  
+                </tbody>
+              </table>
+
+            <form>
+
+                <div class="form-row" >
                   <div class="col-lg col-sm-12 espacio-campos">
                     <select type="text" class="form-control" name="tiempo">
                       <option value="">Selecciona el tiempo</option>
@@ -42,16 +63,9 @@
                     <input type="number" class="form-control" name="tarifa" placeholder="S/">
                   </div>
                   <div class="col-lg-1 col-sm-12 espacio-campos">
-                    <button type="button" data-repeater-delete class="btn btn-primary x-circulo"><i class="fa fa-times"></i></button>
+                    <button type="button" data-repeater-create class="btn btn-primary mas-cuadrado"><i class="fa fa-plus"></i></button>
                   </div>
                 </div>
-              </div>
-
-              <div class="form-row linea-morada">
-                <div class="col-lg-12 col-sm-12">
-                  <button type="button" data-repeater-create class="btn btn-primary mas-cuadrado"><i class="fa fa-plus"></i></button>
-                </div>
-              </div>
 
             </form>
 
@@ -63,11 +77,30 @@
             <p>Unicamente apareceran en la categoría <strong class="precio-morado">"escort"</strong> los miembros de <strong class="precio-morado">Meet For Night</strong> que presten <strong class="precio-morado">ACOMPAÑAMIENTO</strong> tales y como: a una feria, un evento (anfitrionas o anfitriones), o esten de acuerdo en acompañar a su cliente en su(s) viaje(s) fuera o dentro del país.</p>
             <p>Especifica tus <strong class="precio-morado">tarifas de acompañante</strong> a continuación</p>
             
-            
-            <form class="repeater">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col" width="40">#</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Tarifa</th>
+                    <th scope="col" width="80">Eliminar</th>
+                  </tr>
+                </thead>
+                <tbody>
 
-              <div data-repeater-list="escort">
-                <div class="form-row" data-repeater-item>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td><button type="button" data-repeater-delete class="btn btn-primary x-circulo"><i class="fa fa-times"></i></button></td>
+                  </tr>
+                  
+                </tbody>
+              </table>
+            
+            <form>
+
+                <div class="form-row">
                   <div class="col-lg col-sm-12 espacio-campos">
                     <select type="text" class="form-control" name="viaje">
                       <option value="">Selecciona una opcion</option>
@@ -82,16 +115,10 @@
                     <input type="number" class="form-control" name="tarifa" placeholder="S/">
                   </div>
                   <div class="col-lg-1 col-sm-12 espacio-campos">
-                    <button type="button" data-repeater-delete class="btn btn-primary x-circulo"><i class="fa fa-times"></i></button>
+                    <button type="button" class="btn btn-primary mas-cuadrado"><i class="fa fa-plus"></i></button>
                   </div>
                 </div>
-              </div>
 
-              <div class="form-row linea-morada">
-                <div class="col-lg-12 col-sm-12">
-                  <button type="button" data-repeater-create class="btn btn-primary mas-cuadrado"><i class="fa fa-plus"></i></button>
-                </div>
-              </div>
 
             </form>
 
@@ -101,10 +128,32 @@
             <h5 class="formulario-titulos">EXTRAS:</h5>
             <p>Especifica tus <strong class="precio-morado">tarifas adicionales</strong> a continuación (Las posibilidades se toman del paso anterior)</p>
             
-            <form class="repeater">
+           
 
-              <div data-repeater-list="extra">
-                <div class="form-row" data-repeater-item>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col" width="40">#</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Tarifa</th>
+                    <th scope="col" width="80">Eliminar</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td><button type="button" data-repeater-delete class="btn btn-primary x-circulo"><i class="fa fa-times"></i></button></td>
+                  </tr>
+                  
+                </tbody>
+              </table>
+
+               <form>
+
+                <div class="form-row">
                   <div class="col-lg col-sm-12 espacio-campos">
                     <select type="text" class="form-control" name="tipo">
                       <option value="">Selecciona el tipo</option>
@@ -130,27 +179,17 @@
                     <input type="number" class="form-control" name="tarifa" placeholder="S/">
                   </div>
                   <div class="col-lg-1 col-sm-12 espacio-campos">
-                    <button type="button" data-repeater-delete class="btn btn-primary x-circulo"><i class="fa fa-times"></i></button>
+                    <!-- <button type="button" data-repeater-delete class="btn btn-primary x-circulo"><i class="fa fa-times"></i></button> -->
+                    <button type="button" class="btn btn-primary mas-cuadrado"><i class="fa fa-plus"></i></button>
                   </div>
                 </div>
-              </div>
-
-              <div class="form-row linea-morada">
-                <div class="col-lg-12 col-sm-12">
-                  <button type="button" data-repeater-create class="btn btn-primary mas-cuadrado"><i class="fa fa-plus"></i></button>
-                </div>
-              </div>
 
             </form>
 
           </div>
 
-          <div class="bloques-de-perfil">
-            <div class="form-row">
-              <button type="button" class="btn btn-primary btn-busqueda-detallada">ACTUALIZAR DATOS</button>
-            </div>
-          </div>
-          </form>
+    </div>
+        
 </template>
 
 <script>

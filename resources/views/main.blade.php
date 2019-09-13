@@ -33,7 +33,15 @@
 
       </div>
 
-      @yield('top')
+
+        @if(Auth::check())
+            @if (Auth::user()->idrol == 4)
+                @include('tops.top-profesional')
+            @else
+                @include('tops.top-usuario')
+            @endif
+ 
+        @endif
 
       <div class="container espacio-perfil">
 
@@ -49,7 +57,7 @@
                   </a>
                 </div>
                 <div class="usuario-nombre">
-                <h2>¡Hola  ! {{ Auth::user() }}  </h2>
+                <h2>¡Hola  {{ Auth::user()->apodo }} !  </h2>
                 <span class="identificador">ID: 4789020</span>
                 </div>
               </div>
@@ -58,7 +66,14 @@
         <div class="row cuerpo-perfil">
           <div class="col-lg-3 col-sm-12">
               
-          @yield('menu-lateral')
+          @if(Auth::check())
+            @if (Auth::user()->idrol == 4)
+                @include('menus.menu-lateral-profesional')
+            @else
+                @include('menus.menu-lateral-usuario')
+            @endif
+ 
+        @endif
 
           </div>
           <div class="col-lg-9 col-sm-12">
@@ -75,7 +90,7 @@
       @include('footers.footer-perfil')
 
       <script src="{{ asset('js/app.js') }}"></script>
-<script src="{{ asset('js/meetfornight.js') }}"></script>
+      <script src="{{ asset('js/meetfornight.js') }}"></script>
 
   </body>
 

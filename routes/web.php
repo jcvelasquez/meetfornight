@@ -113,7 +113,7 @@ Route::group(['middleware'=>['guest']],function(){
 Route::group(['middleware'=>['auth']],function(){
 
 
-    Route::post('cerrar-sesion', 'Auth\LoginController@logout')->name('cerrar-sesion');
+    Route::get('cerrar-sesion', 'Auth\LoginController@logout')->name('cerrar-sesion');
 
 
     Route::group(['middleware'=>['Usuario']],function(){

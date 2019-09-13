@@ -4936,6 +4936,45 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log('Component mounted.');
@@ -47797,7 +47836,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("form", { attrs: { action: "#", method: "post" } }, [
+    return _c("div", [
       _c("div", { staticClass: "bloques-de-perfil" }, [
         _c("h5", { staticClass: "formulario-titulos" }, [_vm._v("TARIFAS:")]),
         _vm._v(" "),
@@ -47881,82 +47920,88 @@ var staticRenderFns = [
           _vm._v(" a continuación")
         ]),
         _vm._v(" "),
-        _c("form", { staticClass: "repeater" }, [
-          _c("div", { attrs: { "data-repeater-list": "servicio" } }, [
-            _c(
-              "div",
-              { staticClass: "form-row", attrs: { "data-repeater-item": "" } },
-              [
-                _c("div", { staticClass: "col-lg col-sm-12 espacio-campos" }, [
-                  _c(
-                    "select",
-                    {
-                      staticClass: "form-control",
-                      attrs: { type: "text", name: "tiempo" }
-                    },
-                    [
-                      _c("option", { attrs: { value: "" } }, [
-                        _vm._v("Selecciona el tiempo")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "30 Minutos" } }, [
-                        _vm._v("30 minutos")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "1 Hora" } }, [
-                        _vm._v("1 Hora")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "1h30" } }, [
-                        _vm._v("1h30")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "2 Horas" } }, [
-                        _vm._v("2 Horas")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "2h30" } }, [
-                        _vm._v("2h30")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "Cena" } }, [
-                        _vm._v("Cena")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "Noche" } }, [
-                        _vm._v("Noche")
-                      ])
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-lg col-sm-12 espacio-campos" }, [
-                  _c("input", {
-                    staticClass: "form-control",
-                    attrs: { type: "number", name: "tarifa", placeholder: "S/" }
-                  })
-                ]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "col-lg-1 col-sm-12 espacio-campos" },
-                  [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-primary x-circulo",
-                        attrs: { type: "button", "data-repeater-delete": "" }
-                      },
-                      [_c("i", { staticClass: "fa fa-times" })]
-                    )
-                  ]
-                )
-              ]
-            )
+        _c("table", { staticClass: "table" }, [
+          _c("thead", [
+            _c("tr", [
+              _c("th", { attrs: { scope: "col", width: "40" } }, [_vm._v("#")]),
+              _vm._v(" "),
+              _c("th", { attrs: { scope: "col" } }, [_vm._v("Tipo")]),
+              _vm._v(" "),
+              _c("th", { attrs: { scope: "col" } }, [_vm._v("Tarifa")]),
+              _vm._v(" "),
+              _c("th", { attrs: { scope: "col", width: "80" } }, [
+                _vm._v("Eliminar")
+              ])
+            ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "form-row linea-morada" }, [
-            _c("div", { staticClass: "col-lg-12 col-sm-12" }, [
+          _c("tbody", [
+            _c("tr", [
+              _c("th", { attrs: { scope: "row" } }, [_vm._v("1")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("Mark")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("Otto")]),
+              _vm._v(" "),
+              _c("td", [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary x-circulo",
+                    attrs: { type: "button", "data-repeater-delete": "" }
+                  },
+                  [_c("i", { staticClass: "fa fa-times" })]
+                )
+              ])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("form", [
+          _c("div", { staticClass: "form-row" }, [
+            _c("div", { staticClass: "col-lg col-sm-12 espacio-campos" }, [
+              _c(
+                "select",
+                {
+                  staticClass: "form-control",
+                  attrs: { type: "text", name: "tiempo" }
+                },
+                [
+                  _c("option", { attrs: { value: "" } }, [
+                    _vm._v("Selecciona el tiempo")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "30 Minutos" } }, [
+                    _vm._v("30 minutos")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "1 Hora" } }, [
+                    _vm._v("1 Hora")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "1h30" } }, [_vm._v("1h30")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "2 Horas" } }, [
+                    _vm._v("2 Horas")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "2h30" } }, [_vm._v("2h30")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "Cena" } }, [_vm._v("Cena")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "Noche" } }, [_vm._v("Noche")])
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-lg col-sm-12 espacio-campos" }, [
+              _c("input", {
+                staticClass: "form-control",
+                attrs: { type: "number", name: "tarifa", placeholder: "S/" }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-lg-1 col-sm-12 espacio-campos" }, [
               _c(
                 "button",
                 {
@@ -48003,87 +48048,93 @@ var staticRenderFns = [
           _vm._v(" a continuación")
         ]),
         _vm._v(" "),
-        _c("form", { staticClass: "repeater" }, [
-          _c("div", { attrs: { "data-repeater-list": "escort" } }, [
-            _c(
-              "div",
-              { staticClass: "form-row", attrs: { "data-repeater-item": "" } },
-              [
-                _c("div", { staticClass: "col-lg col-sm-12 espacio-campos" }, [
-                  _c(
-                    "select",
-                    {
-                      staticClass: "form-control",
-                      attrs: { type: "text", name: "viaje" }
-                    },
-                    [
-                      _c("option", { attrs: { value: "" } }, [
-                        _vm._v("Selecciona una opcion")
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "option",
-                        { attrs: { value: "Gastos de viaje +25km" } },
-                        [_vm._v("Gastos de viaje +25km")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "option",
-                        { attrs: { value: "Gastos de viaje +50km" } },
-                        [_vm._v("Gastos de viaje +50km")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "option",
-                        { attrs: { value: "Gastos de viaje +75km" } },
-                        [_vm._v("Gastos de viaje +75km")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "option",
-                        { attrs: { value: "Gastos de viaje +100km" } },
-                        [_vm._v("Gastos de viaje +100km")]
-                      ),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "Viaje de negocios" } }, [
-                        _vm._v("Viaje de negocios")
-                      ])
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-lg col-sm-12 espacio-campos" }, [
-                  _c("input", {
-                    staticClass: "form-control",
-                    attrs: { type: "number", name: "tarifa", placeholder: "S/" }
-                  })
-                ]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "col-lg-1 col-sm-12 espacio-campos" },
-                  [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-primary x-circulo",
-                        attrs: { type: "button", "data-repeater-delete": "" }
-                      },
-                      [_c("i", { staticClass: "fa fa-times" })]
-                    )
-                  ]
-                )
-              ]
-            )
+        _c("table", { staticClass: "table" }, [
+          _c("thead", [
+            _c("tr", [
+              _c("th", { attrs: { scope: "col", width: "40" } }, [_vm._v("#")]),
+              _vm._v(" "),
+              _c("th", { attrs: { scope: "col" } }, [_vm._v("Tipo")]),
+              _vm._v(" "),
+              _c("th", { attrs: { scope: "col" } }, [_vm._v("Tarifa")]),
+              _vm._v(" "),
+              _c("th", { attrs: { scope: "col", width: "80" } }, [
+                _vm._v("Eliminar")
+              ])
+            ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "form-row linea-morada" }, [
-            _c("div", { staticClass: "col-lg-12 col-sm-12" }, [
+          _c("tbody", [
+            _c("tr", [
+              _c("th", { attrs: { scope: "row" } }, [_vm._v("1")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("Mark")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("Otto")]),
+              _vm._v(" "),
+              _c("td", [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary x-circulo",
+                    attrs: { type: "button", "data-repeater-delete": "" }
+                  },
+                  [_c("i", { staticClass: "fa fa-times" })]
+                )
+              ])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("form", [
+          _c("div", { staticClass: "form-row" }, [
+            _c("div", { staticClass: "col-lg col-sm-12 espacio-campos" }, [
+              _c(
+                "select",
+                {
+                  staticClass: "form-control",
+                  attrs: { type: "text", name: "viaje" }
+                },
+                [
+                  _c("option", { attrs: { value: "" } }, [
+                    _vm._v("Selecciona una opcion")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "Gastos de viaje +25km" } }, [
+                    _vm._v("Gastos de viaje +25km")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "Gastos de viaje +50km" } }, [
+                    _vm._v("Gastos de viaje +50km")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "Gastos de viaje +75km" } }, [
+                    _vm._v("Gastos de viaje +75km")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "Gastos de viaje +100km" } }, [
+                    _vm._v("Gastos de viaje +100km")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "Viaje de negocios" } }, [
+                    _vm._v("Viaje de negocios")
+                  ])
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-lg col-sm-12 espacio-campos" }, [
+              _c("input", {
+                staticClass: "form-control",
+                attrs: { type: "number", name: "tarifa", placeholder: "S/" }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-lg-1 col-sm-12 espacio-campos" }, [
               _c(
                 "button",
                 {
                   staticClass: "btn btn-primary mas-cuadrado",
-                  attrs: { type: "button", "data-repeater-create": "" }
+                  attrs: { type: "button" }
                 },
                 [_c("i", { staticClass: "fa fa-plus" })]
               )
@@ -48105,153 +48156,150 @@ var staticRenderFns = [
           )
         ]),
         _vm._v(" "),
-        _c("form", { staticClass: "repeater" }, [
-          _c("div", { attrs: { "data-repeater-list": "extra" } }, [
-            _c(
-              "div",
-              { staticClass: "form-row", attrs: { "data-repeater-item": "" } },
-              [
-                _c("div", { staticClass: "col-lg col-sm-12 espacio-campos" }, [
-                  _c(
-                    "select",
-                    {
-                      staticClass: "form-control",
-                      attrs: { type: "text", name: "tipo" }
-                    },
-                    [
-                      _c("option", { attrs: { value: "" } }, [
-                        _vm._v("Selecciona el tipo")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "Intercambio" } }, [
-                        _vm._v("Intercambio")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "Cena" } }, [
-                        _vm._v("Cena")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "Pelicula o fotos" } }, [
-                        _vm._v("Pelicula o fotos")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "Pasar la noche" } }, [
-                        _vm._v("Pasar la noche")
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "option",
-                        { attrs: { value: "Posibilidad de ducharse" } },
-                        [_vm._v("Posibilidad de ducharse")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "option",
-                        { attrs: { value: "Condon femenino (Femidon)" } },
-                        [_vm._v("Condon femenino (Femidon)")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "option",
-                        { attrs: { value: "Quickies (algo rapido)" } },
-                        [_vm._v("Quickies (algo rapido)")]
-                      ),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "Sauna" } }, [
-                        _vm._v("Sauna")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "Sexo al aire libre" } }, [
-                        _vm._v("Sexo al aire libre")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "Sexo en el coche" } }, [
-                        _vm._v("Sexo en el coche")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "Streaptease" } }, [
-                        _vm._v("Streaptease")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "Trio (M/M/H)" } }, [
-                        _vm._v("Trio (M/M/H)")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "Trio (H/H/M)" } }, [
-                        _vm._v("Trio (H/H/M)")
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "option",
-                        { attrs: { value: "Visita a clubes de intercambio" } },
-                        [_vm._v("Visita a clubes de intercambio")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "option",
-                        { attrs: { value: "Viaje de negocios al exterior" } },
-                        [_vm._v("Viaje de negocios al exterior")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "option",
-                        { attrs: { value: "Viaje de negocios interno" } },
-                        [_vm._v("Viaje de negocios interno")]
-                      )
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-lg col-sm-12 espacio-campos" }, [
-                  _c("input", {
-                    staticClass: "form-control",
-                    attrs: { type: "number", name: "tarifa", placeholder: "S/" }
-                  })
-                ]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "col-lg-1 col-sm-12 espacio-campos" },
-                  [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-primary x-circulo",
-                        attrs: { type: "button", "data-repeater-delete": "" }
-                      },
-                      [_c("i", { staticClass: "fa fa-times" })]
-                    )
-                  ]
-                )
-              ]
-            )
+        _c("table", { staticClass: "table" }, [
+          _c("thead", [
+            _c("tr", [
+              _c("th", { attrs: { scope: "col", width: "40" } }, [_vm._v("#")]),
+              _vm._v(" "),
+              _c("th", { attrs: { scope: "col" } }, [_vm._v("Tipo")]),
+              _vm._v(" "),
+              _c("th", { attrs: { scope: "col" } }, [_vm._v("Tarifa")]),
+              _vm._v(" "),
+              _c("th", { attrs: { scope: "col", width: "80" } }, [
+                _vm._v("Eliminar")
+              ])
+            ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "form-row linea-morada" }, [
-            _c("div", { staticClass: "col-lg-12 col-sm-12" }, [
+          _c("tbody", [
+            _c("tr", [
+              _c("th", { attrs: { scope: "row" } }, [_vm._v("1")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("Mark")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("Otto")]),
+              _vm._v(" "),
+              _c("td", [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary x-circulo",
+                    attrs: { type: "button", "data-repeater-delete": "" }
+                  },
+                  [_c("i", { staticClass: "fa fa-times" })]
+                )
+              ])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("form", [
+          _c("div", { staticClass: "form-row" }, [
+            _c("div", { staticClass: "col-lg col-sm-12 espacio-campos" }, [
+              _c(
+                "select",
+                {
+                  staticClass: "form-control",
+                  attrs: { type: "text", name: "tipo" }
+                },
+                [
+                  _c("option", { attrs: { value: "" } }, [
+                    _vm._v("Selecciona el tipo")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "Intercambio" } }, [
+                    _vm._v("Intercambio")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "Cena" } }, [_vm._v("Cena")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "Pelicula o fotos" } }, [
+                    _vm._v("Pelicula o fotos")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "Pasar la noche" } }, [
+                    _vm._v("Pasar la noche")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "option",
+                    { attrs: { value: "Posibilidad de ducharse" } },
+                    [_vm._v("Posibilidad de ducharse")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "option",
+                    { attrs: { value: "Condon femenino (Femidon)" } },
+                    [_vm._v("Condon femenino (Femidon)")]
+                  ),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "Quickies (algo rapido)" } }, [
+                    _vm._v("Quickies (algo rapido)")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "Sauna" } }, [
+                    _vm._v("Sauna")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "Sexo al aire libre" } }, [
+                    _vm._v("Sexo al aire libre")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "Sexo en el coche" } }, [
+                    _vm._v("Sexo en el coche")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "Streaptease" } }, [
+                    _vm._v("Streaptease")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "Trio (M/M/H)" } }, [
+                    _vm._v("Trio (M/M/H)")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "Trio (H/H/M)" } }, [
+                    _vm._v("Trio (H/H/M)")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "option",
+                    { attrs: { value: "Visita a clubes de intercambio" } },
+                    [_vm._v("Visita a clubes de intercambio")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "option",
+                    { attrs: { value: "Viaje de negocios al exterior" } },
+                    [_vm._v("Viaje de negocios al exterior")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "option",
+                    { attrs: { value: "Viaje de negocios interno" } },
+                    [_vm._v("Viaje de negocios interno")]
+                  )
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-lg col-sm-12 espacio-campos" }, [
+              _c("input", {
+                staticClass: "form-control",
+                attrs: { type: "number", name: "tarifa", placeholder: "S/" }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-lg-1 col-sm-12 espacio-campos" }, [
               _c(
                 "button",
                 {
                   staticClass: "btn btn-primary mas-cuadrado",
-                  attrs: { type: "button", "data-repeater-create": "" }
+                  attrs: { type: "button" }
                 },
                 [_c("i", { staticClass: "fa fa-plus" })]
               )
             ])
           ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "bloques-de-perfil" }, [
-        _c("div", { staticClass: "form-row" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-primary btn-busqueda-detallada",
-              attrs: { type: "button" }
-            },
-            [_vm._v("ACTUALIZAR DATOS")]
-          )
         ])
       ])
     ])
