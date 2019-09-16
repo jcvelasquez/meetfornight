@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Middleware\Usuario;
-use App\Http\Middleware\Profesional;
+//use App\Http\Middleware\Usuario;
+//use App\Http\Middleware\Profesional;
+use App\Http\Middleware\CheckRol;
 
 //VISTA DE PERFIL
 Route::get('perfil', function () {
@@ -118,23 +119,21 @@ Route::group(['middleware'=>['auth']],function(){
     Route::get('cerrar-sesion', 'Auth\LoginController@logout')->name('cerrar-sesion');
 
 
-    Route::group(['middleware'=>['Usuario']],function(){
+    Route::group(['middleware'=>['usuario']],function(){
 
             //URLS PARA EL USUARIO
-            
+            Route::get('perfil-usuario', 'UsuarioController@mostrarPerfilUsuarioLogueado');
+
             Route::post('perfil-usuario/registrar', 'UsuarioController@registrarDataUsuario')->name('registrar-usuario');  
             Route::get('perfil-usuario/editar', 'UsuarioController@editarDataUsuario');
             Route::put('perfil-usuario/actualizar', 'UsuarioController@actualizarDataUsuario');
-
-            Route::get('perfil-usuario', 'UsuarioController@mostrarPerfilUsuarioLogueado')->middleware(Usuario::class);
-
             Route::get('seguridad-usuario', function () {
                 return view('forms-perfil-usuario.seguridad-usuario');
             });
 
     });
 
-    Route::group(['middleware'=>['Profesional']],function(){
+    Route::group(['middleware'=>['profesional']],function(){
 
 
             //URLS PARA EL PROFESIONAL

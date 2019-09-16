@@ -6,40 +6,20 @@ use App\Usuario;
 use App\Rol;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UsuarioController extends Controller
 {
    
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function listarProfesionales(Request $request)
     {
         
-        //if (!$request->ajax()) return redirect('/');
-
-        $idrol = 4;
-
-        //$idrol = $request->idrol;
-
-/*
-        $buscar = $request->buscar;
-        
-        
-        if ($buscar==''){*/
-
-           
-       /* }
-        else{*/
-
-           /* $personas = User::join('personas','users.id','=','personas.id')
-            ->join('roles','users.idrol','=','roles.id')
-            ->select('personas.id','personas.nombre','personas.tipo_documento',
-            'personas.num_documento','personas.direccion','personas.telefono',
-            'personas.email','users.usuario','users.password',
-            'users.condicion','users.idrol','roles.nombre as rol')            
-            ->where('personas.'.$criterio, 'like', '%'. $buscar . '%')
-            ->orderBy('personas.id', 'desc')->paginate(3);*/
-
-       // }
-        
+       $idrol = 4;
 
        $usuarios = Usuario::join('usuarios_extras','usuarios.id','=','usuarios_extras.idusuario')
        ->join('roles','usuarios.idrol','=','roles.id')
@@ -62,13 +42,18 @@ class UsuarioController extends Controller
     }
 
 
-    public function mostrarPerfilProfesionalLogueado(){
+    public function mostrarPerfilProfesionalLogueado(Request $request){
+
+        //$request->usuario()->authorizeRoles(['Profesional']);
+
 
         return view('forms-perfil-profesional.perfil-profesional');
 
     }
 
-    public function mostrarPerfilUsuarioLogueado(){
+    public function mostrarPerfilUsuarioLogueado(Request $request){
+
+       //$request->Usuario()->authorizeRoles(['Usuario']);
 
         return view('forms-perfil-usuario.perfil-usuario');
 

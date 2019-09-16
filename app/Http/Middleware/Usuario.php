@@ -2,23 +2,19 @@
 
 namespace App\Http\Middleware;
 
+
 use Closure;
+//use App\Usuario;
 
 class Usuario
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @return mixed
-     */
+
     public function handle($request, Closure $next)
     {
 
-        if ($request->idrol == 4) {
-            return redirect('/alerta-profesional');
-        }
+        /*if (! $request->Usuario()->hasRole('Usuario')) {
+            return redirect('/');
+        }*/
 
         return $next($request);
     }

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Usuario;
 
 class Rol extends Model
 {
@@ -12,7 +13,7 @@ class Rol extends Model
 
     public function usuario()
     {
-        return $this->hasMany('App\Usuario');
+        return $this->belongsToMany('App\Usuario')->withTimestamps();
     }
 
 }
