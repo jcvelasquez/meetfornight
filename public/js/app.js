@@ -1951,9 +1951,85 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
-    console.log("Component mounted.");
+    this.listarAlertas();
+  },
+  data: function data() {
+    return {
+      errorAlerta: 0,
+      erroresAlerta: [],
+      arAlertas: [],
+      idusuario: 0,
+      nombre: '',
+      apellido: '',
+      idalerta: '',
+      celular: '',
+      email: '',
+      razon: ''
+    };
+  },
+  methods: {
+    listarAlertas: function listarAlertas() {
+      var me = this;
+      axios.get('/alerta-profesional/listar').then(function (response) {
+        var respuesta = response.data;
+        me.arAlertas = respuesta.alertas;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    limpiarCampos: function limpiarCampos() {
+      var me = this;
+      me.nombre = '';
+      me.apellido = '';
+      me.idalerta = '';
+      me.celular = '';
+      me.email = '';
+      me.razon = '';
+    },
+    validarAlertas: function validarAlertas() {
+      var me = this;
+      me.errorAlerta = 0;
+      me.erroresAlerta = [];
+      if (!me.nombre) me.erroresAlerta.push("Selecciona el nombre");
+      if (!me.apellido) me.erroresAlerta.push("Ingresa el apellidos");
+      if (!me.idalerta) me.erroresAlerta.push("Ingresa el ID");
+      if (!me.celular) me.erroresAlerta.push("Ingresa el celular");
+      if (!me.email) me.erroresAlerta.push("Ingresa el email");
+      if (!me.razon) me.erroresAlerta.push("Ingresa la razon");
+      if (me.erroresAlerta.length) me.errorAlerta = 1;
+      return me.errorAlerta;
+    },
+    registrarAlerta: function registrarAlerta() {
+      var me = this;
+
+      if (me.validarAlertas()) {
+        Swal.fire('ERROR', me.erroresAlerta.toString(), 'error');
+        return;
+      }
+
+      axios.post('alerta-profesional/registrar', {
+        'idusuario': me.$idusuario,
+        'nombre': me.nombre,
+        'apellido': me.apellido,
+        'idalerta': me.idalerta,
+        'celular': me.celular,
+        'email': me.email,
+        'razon': me.razon
+      }).then(function (response) {
+        var _alerta = response.data.alerta;
+        console.log(_alerta);
+        me.limpiarCampos();
+        me.arAlertas.push(_alerta);
+        Swal.fire('CONFIRMACION', 'Alerta agregada correctamente', 'success');
+      })["catch"](function (error) {
+        // handle error
+        console.log(error);
+      });
+    }
   }
 });
 
@@ -4983,8 +5059,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     //console.log(this.$userId)
@@ -5014,35 +5088,76 @@ __webpack_require__.r(__webpack_exports__);
         console.log(error);
       });
     },
-    registrarTarifa: function registrarTarifa(tipo) {
+    limpiarCampos: function limpiarCampos() {
       var me = this;
-      var servicio, opcion;
+      me.servicio_opcion = '';
+      me.servicio_tarifa = '';
+      me.escort_opcion = '';
+      me.escort_tarifa = '';
+      me.extra_opcion = '';
+      me.extra_tarifa = '';
+    },
+    validarTarifas: function validarTarifas(tipo) {
+      var me = this;
+      me.errorPerfil = 0;
+      me.erroresPerfil = [];
 
       switch (tipo) {
-        case 'servicio':
-          opcion = this.servicio_opcion;
-          tarifa = this.servicio_tarifa;
+        case 'SERVICIO':
+          if (!me.servicio_opcion) me.erroresPerfil.push("Selecciona el tiempo de servicio");
+          if (!me.servicio_tarifa) me.erroresPerfil.push("Ingresa la tarifa del servicio");
           break;
 
-        case 'escort':
-          opcion = this.escort_opcion;
-          tarifa = this.escort_tarifa;
+        case 'ESCORT':
+          if (!me.escort_opcion) me.erroresPerfil.push("Selecciona una opcion de servicio de escort");
+          if (!me.escort_tarifa) me.erroresPerfil.push("Ingresa la tarifa del servicio escort");
           break;
 
-        case 'extras':
-          opcion = this.extra_opcion;
-          tarifa = this.extra_tarifa;
+        case 'EXTRAS':
+          if (!me.extra_opcion) me.erroresPerfil.push("Selecciona el tipo de servicio extra");
+          if (!me.extra_tarifa) me.erroresPerfil.push("Ingresa la tarifa del servicio extra");
           break;
       }
 
-      axios.put('tarifas-profesional/registrar', {
-        'idusuario': this.$userId,
+      if (me.erroresPerfil.length) me.errorPerfil = 1;
+      return me.errorPerfil;
+    },
+    registrarTarifa: function registrarTarifa(tipo) {
+      var me = this;
+      var tarifa, opcion;
+
+      if (me.validarTarifas(tipo)) {
+        Swal.fire('ERROR', me.erroresPerfil.toString(), 'error');
+        return;
+      }
+
+      switch (tipo) {
+        case 'SERVICIO':
+          opcion = me.servicio_opcion;
+          tarifa = me.servicio_tarifa;
+          break;
+
+        case 'ESCORT':
+          opcion = me.escort_opcion;
+          tarifa = me.escort_tarifa;
+          break;
+
+        case 'EXTRAS':
+          opcion = me.extra_opcion;
+          tarifa = me.extra_tarifa;
+          break;
+      }
+
+      axios.post('tarifas-profesional/registrar', {
+        'idusuario': me.$idusuario,
         'opcion_tarifa': opcion,
         'costo_tarifa': tarifa,
-        'categoria_tarifa': 'EXTRAS'
+        'categoria_tarifa': tipo
       }).then(function (response) {
-        // handle success
-        console.log(response);
+        var _tarifa = response.data.tarifa;
+        me.limpiarCampos();
+        me.arTarifas.push(_tarifa);
+        Swal.fire('CONFIRMACION', 'Tarifa agregada correctamente', 'success');
       })["catch"](function (error) {
         // handle error
         console.log(error);
@@ -5050,6 +5165,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     eliminarTarifa: function eliminarTarifa() {
       var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+      var index = arguments.length > 1 ? arguments[1] : undefined;
       var me = this;
       Swal.fire({
         title: '¿Estas seguro?',
@@ -5061,6 +5177,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (result) {
         if (result.value) {
           axios["delete"]('/tarifas-profesional/eliminar/' + data.id).then(function (response) {
+            me.$delete(me.arTarifas, index);
             Swal.fire('¡Eliminado!', 'Se borró el registro seleccionado', 'success');
           })["catch"](function (error) {
             console.log(error);
@@ -9649,6 +9766,25 @@ __webpack_require__.r(__webpack_exports__);
 
 }));
 //# sourceMappingURL=bootstrap.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AlertaProfesional.vue?vue&type=style&index=0&lang=css&":
+/*!***********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/AlertaProfesional.vue?vue&type=style&index=0&lang=css& ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.div-error {\n  display:flex;\n  justify-content:center;\n}\n.text-error{\n  color:red;\n  font-weight:bold;\n}\n", ""]);
+
+// exports
 
 
 /***/ }),
@@ -40537,6 +40673,36 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AlertaProfesional.vue?vue&type=style&index=0&lang=css&":
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/AlertaProfesional.vue?vue&type=style&index=0&lang=css& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./AlertaProfesional.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AlertaProfesional.vue?vue&type=style&index=0&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PerfilProfesional.vue?vue&type=style&index=0&lang=css&":
 /*!***************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/PerfilProfesional.vue?vue&type=style&index=0&lang=css& ***!
@@ -44163,162 +44329,264 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("form", { attrs: { action: "#", method: "post" } }, [
+    _c("h5", { staticClass: "formulario-titulos" }, [_vm._v("ALERTA:")]),
+    _vm._v(" "),
+    _c("p", [
+      _vm._v(
+        "El modulo ALERTA te permite verificar facilmente si ha habido informes negativos sobre un cliente que debes evitar para tu seguridad."
+      )
+    ]),
+    _vm._v(" "),
+    _c("p", [
+      _vm._v(
+        "El modulo ALERTA es una base de datos mantenida por la comunidad Meet For Night."
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-row" }, [
+      _c("div", { staticClass: "col-lg-12 col-sm-12 espacio-campos" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.nombre,
+              expression: "nombre"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { type: "text", name: "nombre", placeholder: "Nombre" },
+          domProps: { value: _vm.nombre },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.nombre = $event.target.value
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-lg-12 col-sm-12 espacio-campos" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.apellido,
+              expression: "apellido"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { type: "text", name: "apellido", placeholder: "Apellido" },
+          domProps: { value: _vm.apellido },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.apellido = $event.target.value
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-lg-12 col-sm-12 espacio-campos" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.idalerta,
+              expression: "idalerta"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { type: "text", name: "idalerta", placeholder: "ID" },
+          domProps: { value: _vm.idalerta },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.idalerta = $event.target.value
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-lg-12 col-sm-12 espacio-campos" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.celular,
+              expression: "celular"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { type: "text", name: "celular", placeholder: "Celular" },
+          domProps: { value: _vm.celular },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.celular = $event.target.value
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c(
+          "small",
+          {
+            staticClass: "form-text text-muted informativo",
+            attrs: { id: "emailHelp" }
+          },
+          [_vm._v("Ejm: +51 947 827 191")]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-lg-12 col-sm-12 espacio-campos" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.email,
+              expression: "email"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { type: "email", name: "email", placeholder: "Email" },
+          domProps: { value: _vm.email },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.email = $event.target.value
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-lg-12 col-sm-12 espacio-campos" }, [
+        _c("textarea", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.razon,
+              expression: "razon"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: {
+            type: "text",
+            rows: "5",
+            name: "razon",
+            placeholder: "Razón"
+          },
+          domProps: { value: _vm.razon },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.razon = $event.target.value
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c(
+          "small",
+          {
+            staticClass: "form-text text-muted espacio-campos informativo",
+            attrs: { id: "emailHelp" }
+          },
+          [_vm._v("Sólo 150 caracteres")]
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-row espacio-campos-big" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary btn-busqueda-detallada",
+          attrs: { type: "button" },
+          on: {
+            click: function($event) {
+              return _vm.registrarAlerta()
+            }
+          }
+        },
+        [_vm._v("BUSCAR / AGREGAR")]
+      )
+    ]),
+    _vm._v(" "),
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-lg-12" }, [
+        _c("div", { staticClass: "table-responsive" }, [
+          _c("table", { staticClass: "table" }, [
+            _vm._m(1),
+            _vm._v(" "),
+            _c(
+              "tbody",
+              { staticClass: "resultado-fake" },
+              _vm._l(_vm.arAlertas, function(alerta) {
+                return _c("tr", { key: alerta.id }, [
+                  _c("td", {
+                    domProps: { textContent: _vm._s(alerta.nombre) }
+                  }),
+                  _vm._v(" "),
+                  _c("td", {
+                    domProps: { textContent: _vm._s(alerta.celular) }
+                  }),
+                  _vm._v(" "),
+                  _c("td", { domProps: { textContent: _vm._s(alerta.email) } }),
+                  _vm._v(" "),
+                  _c("td", { domProps: { textContent: _vm._s(alerta.razon) } })
+                ])
+              }),
+              0
+            )
+          ])
+        ])
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("form", { attrs: { action: "#", method: "post" } }, [
-      _c("h5", { staticClass: "formulario-titulos" }, [_vm._v("ALERTA:")]),
-      _vm._v(" "),
-      _c("p", [
-        _vm._v(
-          "El modulo ALERTA te permite verificar facilmente si ha habido informes negativos sobre un cliente que debes evitar para tu seguridad."
-        )
-      ]),
-      _vm._v(" "),
-      _c("p", [
-        _vm._v(
-          "El modulo ALERTA es una base de datos mantenida por la comunidad Meet For Night."
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-row" }, [
-        _c("div", { staticClass: "col-lg-12 col-sm-12 espacio-campos" }, [
-          _c("input", {
-            staticClass: "form-control",
-            attrs: { type: "text", name: "nombre", placeholder: "Nombre" }
-          })
-        ]),
+    return _c("h5", { staticClass: "formulario-titulos-fake" }, [
+      _vm._v("\n   LISTA DE ALERTAS\n   "),
+      _c("br"),
+      _vm._v("(DE TODA LA COMUNIDAD MEET FOR NIGHT)\n ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "cabecera-fake" }, [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nombre")]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-lg-12 col-sm-12 espacio-campos" }, [
-          _c("input", {
-            staticClass: "form-control",
-            attrs: { type: "text", name: "apellido", placeholder: "Apellido" }
-          })
-        ]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Teléfono")]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-lg-12 col-sm-12 espacio-campos" }, [
-          _c("input", {
-            staticClass: "form-control",
-            attrs: { type: "text", name: "id", placeholder: "ID" }
-          })
-        ]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Email")]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-lg-12 col-sm-12 espacio-campos" }, [
-          _c("input", {
-            staticClass: "form-control",
-            attrs: { type: "text", name: "celular", placeholder: "Celular" }
-          }),
-          _vm._v(" "),
-          _c(
-            "small",
-            {
-              staticClass: "form-text text-muted informativo",
-              attrs: { id: "emailHelp" }
-            },
-            [_vm._v("Ejm: +51 947 827 191")]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-lg-12 col-sm-12 espacio-campos" }, [
-          _c("input", {
-            staticClass: "form-control",
-            attrs: { type: "email", name: "email", placeholder: "Email" }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-lg-12 col-sm-12 espacio-campos" }, [
-          _c("textarea", {
-            staticClass: "form-control",
-            attrs: {
-              type: "text",
-              rows: "5",
-              name: "razon",
-              placeholder: "Razón"
-            }
-          }),
-          _vm._v(" "),
-          _c(
-            "small",
-            {
-              staticClass: "form-text text-muted espacio-campos informativo",
-              attrs: { id: "emailHelp" }
-            },
-            [_vm._v("Sólo 150 caracteres")]
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-row espacio-campos-big" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-primary btn-busqueda-detallada",
-            attrs: { type: "submit" }
-          },
-          [_vm._v("BUSCAR / AGREGAR")]
-        )
-      ]),
-      _vm._v(" "),
-      _c("h5", { staticClass: "formulario-titulos-fake" }, [
-        _vm._v("\n  LISTA DE ALERTAS\n  "),
-        _c("br"),
-        _vm._v("(DE TODA LA COMUNIDAD MEET FOR NIGHT)\n")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-lg-12" }, [
-          _c("div", { staticClass: "table-responsive" }, [
-            _c("table", { staticClass: "table" }, [
-              _c("thead", { staticClass: "cabecera-fake" }, [
-                _c("tr", [
-                  _c("th", { attrs: { scope: "col" } }, [_vm._v("Nombre")]),
-                  _vm._v(" "),
-                  _c("th", { attrs: { scope: "col" } }, [_vm._v("Teléfono")]),
-                  _vm._v(" "),
-                  _c("th", { attrs: { scope: "col" } }, [_vm._v("Email")]),
-                  _vm._v(" "),
-                  _c("th", { attrs: { scope: "col" } }, [_vm._v("Razón")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("tbody", { staticClass: "resultado-fake" }, [
-                _c("tr", [
-                  _c("td", [_vm._v("Lele lele lele")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("123123 123123")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("lele@gmail.com lele@gmail.com")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("Sin comentario Sin comentario")])
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _c("td", [_vm._v("Lele")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("123123")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("lele@gmail.com")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("Sin comentario")])
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _c("td", [_vm._v("Lele")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("123123")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("lele@gmail.com")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("Sin comentario")])
-                ])
-              ])
-            ])
-          ])
-        ])
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Razón")])
       ])
     ])
   }
@@ -50841,7 +51109,7 @@ var render = function() {
         _vm._v(" "),
         _c(
           "tbody",
-          _vm._l(_vm.arTarifas, function(servicio) {
+          _vm._l(_vm.arTarifas, function(servicio, index) {
             return _c(
               "tr",
               { key: servicio.id },
@@ -50875,7 +51143,7 @@ var render = function() {
                             attrs: { type: "button" },
                             on: {
                               click: function($event) {
-                                return _vm.eliminarTarifa(servicio)
+                                return _vm.eliminarTarifa(servicio, index)
                               }
                             }
                           },
@@ -50985,7 +51253,7 @@ var render = function() {
               attrs: { type: "button" },
               on: {
                 click: function($event) {
-                  return _vm.registrarTarifa("servicio")
+                  return _vm.registrarTarifa("SERVICIO")
                 }
               }
             },
@@ -51009,7 +51277,7 @@ var render = function() {
         _vm._v(" "),
         _c(
           "tbody",
-          _vm._l(_vm.arTarifas, function(escort) {
+          _vm._l(_vm.arTarifas, function(escort, index) {
             return _c(
               "tr",
               { key: escort.id },
@@ -51041,7 +51309,7 @@ var render = function() {
                             attrs: { type: "button" },
                             on: {
                               click: function($event) {
-                                return _vm.eliminarTarifa(escort)
+                                return _vm.eliminarTarifa(escort, index)
                               }
                             }
                           },
@@ -51117,7 +51385,34 @@ var render = function() {
           )
         ]),
         _vm._v(" "),
-        _vm._m(7),
+        _c("div", { staticClass: "col-lg col-sm-12 espacio-campos" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.escort_tarifa,
+                expression: "escort_tarifa"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: {
+              type: "number",
+              name: "escort_tarifa",
+              id: "escort_tarifa",
+              placeholder: "S/"
+            },
+            domProps: { value: _vm.escort_tarifa },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.escort_tarifa = $event.target.value
+              }
+            }
+          })
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-lg-1 col-sm-12 espacio-campos" }, [
           _c(
@@ -51127,7 +51422,7 @@ var render = function() {
               attrs: { type: "button" },
               on: {
                 click: function($event) {
-                  return _vm.registrarTarifa("escort")
+                  return _vm.registrarTarifa("ESCORT")
                 }
               }
             },
@@ -51140,14 +51435,14 @@ var render = function() {
     _c("div", { staticClass: "bloques-de-perfil" }, [
       _c("h5", { staticClass: "formulario-titulos" }, [_vm._v("EXTRAS:")]),
       _vm._v(" "),
-      _vm._m(8),
+      _vm._m(7),
       _vm._v(" "),
       _c("table", { staticClass: "table" }, [
-        _vm._m(9),
+        _vm._m(8),
         _vm._v(" "),
         _c(
           "tbody",
-          _vm._l(_vm.arTarifas, function(extra) {
+          _vm._l(_vm.arTarifas, function(extra, index) {
             return _c(
               "tr",
               { key: extra.id },
@@ -51179,7 +51474,7 @@ var render = function() {
                             attrs: { type: "button" },
                             on: {
                               click: function($event) {
-                                return _vm.eliminarTarifa(extra)
+                                return _vm.eliminarTarifa(extra, index)
                               }
                             }
                           },
@@ -51331,7 +51626,7 @@ var render = function() {
               attrs: { type: "button" },
               on: {
                 click: function($event) {
-                  return _vm.registrarTarifa("extras")
+                  return _vm.registrarTarifa("EXTRAS")
                 }
               }
             },
@@ -51501,22 +51796,6 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col", width: "80" } }, [_vm._v("Eliminar")])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg col-sm-12 espacio-campos" }, [
-      _c("input", {
-        staticClass: "form-control",
-        attrs: {
-          type: "number",
-          name: "escort_tarifa",
-          id: "escort_tarifa",
-          placeholder: "S/"
-        }
-      })
     ])
   },
   function() {
@@ -63972,7 +64251,7 @@ Vue.component('alerta-profesional', __webpack_require__(/*! ./components/AlertaP
 Vue.component('valoracion-profesional', __webpack_require__(/*! ./components/ValoracionProfesional.vue */ "./resources/js/components/ValoracionProfesional.vue")["default"]); //
 
 Vue.component('listado-profesionales', __webpack_require__(/*! ./components/ListadoProfesionales.vue */ "./resources/js/components/ListadoProfesionales.vue")["default"]);
-Vue.prototype.$userId = document.querySelector("meta[name='user-id']").getAttribute('content');
+Vue.prototype.$idusuario = document.querySelector("meta[name='user-id']").getAttribute('content');
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -64123,7 +64402,9 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _AlertaProfesional_vue_vue_type_template_id_14d8aaa8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AlertaProfesional.vue?vue&type=template&id=14d8aaa8& */ "./resources/js/components/AlertaProfesional.vue?vue&type=template&id=14d8aaa8&");
 /* harmony import */ var _AlertaProfesional_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AlertaProfesional.vue?vue&type=script&lang=js& */ "./resources/js/components/AlertaProfesional.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _AlertaProfesional_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AlertaProfesional.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/AlertaProfesional.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -64131,7 +64412,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _AlertaProfesional_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _AlertaProfesional_vue_vue_type_template_id_14d8aaa8___WEBPACK_IMPORTED_MODULE_0__["render"],
   _AlertaProfesional_vue_vue_type_template_id_14d8aaa8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
@@ -64160,6 +64441,22 @@ component.options.__file = "resources/js/components/AlertaProfesional.vue"
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AlertaProfesional_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./AlertaProfesional.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AlertaProfesional.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AlertaProfesional_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/AlertaProfesional.vue?vue&type=style&index=0&lang=css&":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/components/AlertaProfesional.vue?vue&type=style&index=0&lang=css& ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AlertaProfesional_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./AlertaProfesional.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AlertaProfesional.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AlertaProfesional_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AlertaProfesional_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AlertaProfesional_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AlertaProfesional_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AlertaProfesional_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 

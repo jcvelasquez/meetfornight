@@ -15,6 +15,11 @@ class Usuario
      */
     public function handle($request, Closure $next)
     {
+
+        if ($request->idrol == 4) {
+            return redirect('/alerta-profesional');
+        }
+
         return $next($request);
     }
 }

@@ -42,7 +42,7 @@ Vue.component('valoracion-profesional', require('./components/ValoracionProfesio
 Vue.component('listado-profesionales', require('./components/ListadoProfesionales.vue').default);
 
 
-Vue.prototype.$userId = document.querySelector("meta[name='user-id']").getAttribute('content');
+Vue.prototype.$idusuario = document.querySelector("meta[name='user-id']").getAttribute('content');
 
 
 /**

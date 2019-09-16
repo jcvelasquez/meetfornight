@@ -15,6 +15,11 @@ class Profesional
      */
     public function handle($request, Closure $next)
     {
+        
+        if ($request->idrol == 4) {
+            return redirect('/perfil-profesional');
+        }
+
         return $next($request);
     }
 }

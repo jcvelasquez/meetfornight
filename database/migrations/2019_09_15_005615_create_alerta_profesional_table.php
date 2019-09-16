@@ -15,7 +15,16 @@ class CreateAlertaProfesionalTable extends Migration
     {
         Schema::create('alerta_profesional', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->timestamps();
+            $table->integer('idusuario')->unsigned();
+            $table->string('nombre');
+            $table->string('apellido');
+            $table->string('idalerta');
+            $table->string('celular');
+            $table->string('email');
+            $table->text('razon');
+            $table->dateTime('created_at');
+
+            $table->foreign('idusuario')->references('id')->on('usuarios');
         });
     }
 

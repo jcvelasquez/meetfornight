@@ -11,7 +11,6 @@ class TarifaProfesionalController extends Controller
 
     public function list(Request $request)
     {
-        
 
         $idusuario = Auth::user()->id;
 
@@ -28,26 +27,21 @@ class TarifaProfesionalController extends Controller
 
     public function store(Request $request)
     {
+
+        $validatedData = $request->validate([
+            'idusuario'=>'required',
+            'opcion_tarifa'=>'required',
+            'costo_tarifa'=>'required',
+            'categoria_tarifa'=>'required'
+        ]);
+
+        $tarifa = TarifaProfesional::create($validatedData);
+
+        return ['mensaje' => 'Tarifa registrada correctamente', 'tarifa' => $tarifa];
+
         
     }
 
-
-    public function show($id)
-    {
-        
-    }
-
-
-    public function edit($id)
-    {
-        
-    }
-
-
-    public function update(Request $request, $id)
-    {
-       
-    }
 
     public function destroy($id)
     {
@@ -60,4 +54,6 @@ class TarifaProfesionalController extends Controller
         return ['mensaje' => 'se elimino'];
         
     }
+
+
 }

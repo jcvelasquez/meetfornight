@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Middleware\Usuario;
+use App\Http\Middleware\Profesional;
 
 //VISTA DE PERFIL
 Route::get('perfil', function () {
@@ -124,7 +126,7 @@ Route::group(['middleware'=>['auth']],function(){
             Route::get('perfil-usuario/editar', 'UsuarioController@editarDataUsuario');
             Route::put('perfil-usuario/actualizar', 'UsuarioController@actualizarDataUsuario');
 
-            Route::get('perfil-usuario', 'UsuarioController@mostrarPerfilUsuarioLogueado');
+            Route::get('perfil-usuario', 'UsuarioController@mostrarPerfilUsuarioLogueado')->middleware(Usuario::class);
 
             Route::get('seguridad-usuario', function () {
                 return view('forms-perfil-usuario.seguridad-usuario');
@@ -197,6 +199,9 @@ Route::group(['middleware'=>['auth']],function(){
             Route::get('alerta-profesional', function () {
                 return view('forms-perfil-profesional.alerta-profesional');
             });
+
+            Route::get('alerta-profesional/listar', 'AlertaProfesionalController@list' );
+            Route::post('alerta-profesional/registrar', 'AlertaProfesionalController@store');  
             
             Route::get('valoracion-profesional', function () {
                 return view('forms-perfil-profesional.valoracion-profesional');
