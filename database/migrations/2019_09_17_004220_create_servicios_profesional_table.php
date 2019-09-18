@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateServicioProfesionalTable extends Migration
+class CreateServiciosProfesionalTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateServicioProfesionalTable extends Migration
      */
     public function up()
     {
-        Schema::create('servicio_profesional', function (Blueprint $table) {
-            $table->bigIncrements('id');
+        Schema::create('servicios_profesional', function (Blueprint $table) {
+            $table->increments('id');
             $table->string('nombre_servicio');
-            $table->enum('categoria_servicio',['MASAJES','PRELIMINARES','INTIMO','OTROS SERVICIOS','FETICHE','DISCAPACTIDAOS']);
-            $table->timestamps();
+            $table->enum('categoria_servicio',['MASAJES','PRELIMINARES','INTIMO','OTROS','FETICHE','DISCAPACITADOS']);
+            $table->integer('estado_servicio');
         });
     }
 
@@ -28,6 +28,6 @@ class CreateServicioProfesionalTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('servicio_profesional');
+        Schema::dropIfExists('servicios_profesional');
     }
 }

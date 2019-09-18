@@ -13,19 +13,18 @@ class UsuarioController extends Controller
    
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
 
     public function listarProfesionales(Request $request)
     {
         
-       $idrol = 4;
 
        $usuarios = Usuario::join('usuarios_extras','usuarios.id','=','usuarios_extras.idusuario')
        ->join('roles','usuarios.idrol','=','roles.id')
        ->select('usuarios.id','usuarios.nombre','usuarios.fecha_nacimiento',
        'usuarios_extras.departamento','usuarios.idrol','roles.nombre_rol as rol')
-       ->where('usuarios.idrol', '=', $idrol )->paginate(32);
+       ->where('usuarios.idrol', '=', 4 )->paginate(32);
 
         return [
             'pagination' => [
@@ -60,14 +59,6 @@ class UsuarioController extends Controller
     }
 
     public function editarDataPerfilProfesional(Request $request){
-
-        //if(!$request->ajax()) return redirect('/');
-
-        /*$usuario = Usuario::join('usuarios_extras','usuarios.id','=','usuarios_extras.idusuario')
-        ->join('roles','usuarios.idrol','=','roles.id')
-        ->select('usuarios.id','usuarios.nombre','usuarios.fecha_nacimiento',
-        'usuarios_extras.departamento','usuarios.idrol','roles.nombre_rol as rol')
-        ->where('usuarios.id', '=', $request->id )->first();*/
 
 
         $usuario = DB::table('usuarios')->join('usuarios_extras', 'usuarios_extras.idusuario', '=', 'usuarios.id')

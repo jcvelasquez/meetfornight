@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Auth; 
 
 class Profesional
 {
@@ -16,10 +17,8 @@ class Profesional
     public function handle($request, Closure $next)
     {
         
-        if ($request->idrol == 4) {
-            return redirect('/perfil-profesional');
+        if (Auth::user()->idrol == 4) {
+            return $next($request);
         }
-
-        return $next($request);
     }
 }

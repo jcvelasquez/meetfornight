@@ -135,7 +135,6 @@ Route::group(['middleware'=>['auth']],function(){
 
     Route::group(['middleware'=>['profesional']],function(){
 
-
             //URLS PARA EL PROFESIONAL
             Route::get('perfil-profesional', 'UsuarioController@mostrarPerfilProfesionalLogueado')->name('perfil-profesional');
             Route::post('perfil-profesional/registrar', 'UsuarioController@registrarDataProfesional')->name('registrar-profesional');  
@@ -146,23 +145,31 @@ Route::group(['middleware'=>['auth']],function(){
             Route::get('planes-profesional', function () {
                 return view('forms-perfil-profesional.planes-profesional');
             });
-            
+
+
+            //SERVICIOS
             Route::get('servicios-profesional', function () {
                 return view('forms-perfil-profesional.servicios-profesional');
             });
+            Route::get('servicios-profesional/listar', 'ServiciosProfesionalController@list' );
+
             
+            //CONTACTO
             Route::get('contacto-profesional', function () {
                 return view('forms-perfil-profesional.contacto-profesional');
             });
             
+            //AGENDA
             Route::get('agenda-profesional', function () {
                 return view('forms-perfil-profesional.agenda-profesional');
             });
             
+            //RESERVAS
             Route::get('reservas-profesional', function () {
                 return view('forms-perfil-profesional.reservas-profesional');
             });
             
+            //TARIFAS
             Route::get('tarifas-profesional', function () {
                 return view('forms-perfil-profesional.tarifas-profesional');
             });

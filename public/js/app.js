@@ -4353,495 +4353,102 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
-    console.log('Component mounted.');
+    //console.log(this.$userId)
+    this.listarServicios();
+  },
+  data: function data() {
+    return {
+      errorServicio: 0,
+      erroresServicio: [],
+      arServicios: [],
+      idusuario: 0,
+      nombre_servicio: '',
+      categoria_servicio: '',
+      estado_servicio: '',
+      otro_servicio: ''
+    };
+  },
+  methods: {
+    listarServicios: function listarServicios() {
+      var me = this;
+      axios.get('/servicios-profesional/listar').then(function (response) {
+        var respuesta = response.data;
+        me.arServicios = respuesta.servicios;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    limpiarCampos: function limpiarCampos() {
+      this.otro_servicio = '';
+    },
+    validarOtroServicio: function validarOtroServicio() {
+      var me = this;
+      me.errorServicio = 0;
+      me.erroresServicio = [];
+      if (me.erroresServicio.length) me.errorServicio = 1;
+      return me.errorServicio;
+    },
+    registrarServicio: function registrarServicio() {
+      /*
+                        let me = this;
+      
+                        if(me.validarOtroServicio()){
+                          Swal.fire('ERROR', me.erroresServicio.toString(),'error');
+                          return;
+                        }
+      
+      
+                        axios.post('servicios-profesional/registrar', {
+                          'idusuario' : me.$idusuario,
+                          'opcion_tarifa' : opcion,
+                          'costo_tarifa' : tarifa,
+                          'categoria_tarifa' : tipo
+                        })
+                        .then(function (response) {
+      
+                          var _tarifa = response.data.tarifa;
+      
+                            me.limpiarCampos();
+                            me.arTarifas.push(_tarifa);
+      
+                            Swal.fire('CONFIRMACION', 'Tarifa agregada correctamente','success');
+      
+                        })
+                        .catch(function (error) {
+                            // handle error
+                            console.log(error);
+                        });*/
+    },
+    eliminarTarifa: function eliminarTarifa() {
+      /* let me = this;
+        Swal.fire({
+         title: '¿Estas seguro?',
+         text: 'Una vez eliminado, no podrás recuperar el registro!',
+         type: 'warning',
+         showCancelButton: true,
+         confirmButtonText: 'Si, eliminar!',
+         cancelButtonText: 'No, Cancelar'
+       }).then((result) => {
+         
+         if (result.value) {
+             axios.delete('/tarifas-profesional/eliminar/' + data.id)
+             .then(function (response) {
+                 me.$delete(me.arTarifas, index);
+                  Swal.fire(
+                   '¡Eliminado!',
+                   'Se borró el registro seleccionado',
+                   'success'
+                 )
+              }).catch(function(error){ console.log(error); });
+          } 
+         
+       })*/
+
+      var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+      var index = arguments.length > 1 ? arguments[1] : undefined;
+    }
   }
 });
 
@@ -49222,287 +48829,82 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("form", { attrs: { action: "#", method: "post" } }, [
-    _vm._m(0),
-    _vm._v(" "),
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-lg-6 col-sm-12 espacio-campos" }, [
         _c("div", { staticClass: "cuadro-servicios" }, [
           _c("h5", { staticClass: "formulario-titulos" }, [_vm._v("MASAJES:")]),
           _vm._v(" "),
           _c("div", { staticClass: "form-row" }, [
-            _c("div", { staticClass: "col-lg-12 col-sm-12" }, [
-              _c("div", { staticClass: "form-group checksito-total" }, [
-                _c("input", {
-                  staticClass: "inp-cbx",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "mas", type: "checkbox" }
+            _c(
+              "div",
+              { staticClass: "col-lg-12 col-sm-12" },
+              [
+                _vm._l(_vm.arServicios, function(servicio, index) {
+                  return _c(
+                    "div",
+                    {
+                      key: servicio.id,
+                      staticClass: "form-group checksito-total"
+                    },
+                    [
+                      servicio.categoria_servicio == "MASAJES"
+                        ? [
+                            _c("input", {
+                              staticClass: "inp-cbx",
+                              staticStyle: { display: "none" },
+                              attrs: {
+                                id: "servicio" + servicio.id,
+                                type: "checkbox"
+                              },
+                              domProps: { value: servicio.id },
+                              on: {
+                                click: function($event) {
+                                  return _vm.agregarServicio(servicio, index)
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "label",
+                              {
+                                staticClass: "cbx",
+                                attrs: { for: "servicio" + servicio.id }
+                              },
+                              [
+                                _c("span", [
+                                  _c(
+                                    "svg",
+                                    {
+                                      attrs: {
+                                        width: "12px",
+                                        height: "10px",
+                                        viewbox: "0 0 12 10"
+                                      }
+                                    },
+                                    [
+                                      _c("polyline", {
+                                        attrs: { points: "1.5 6 4.5 9 10.5 1" }
+                                      })
+                                    ]
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(_vm._s(servicio.nombre_servicio))
+                                ])
+                              ]
+                            )
+                          ]
+                        : _vm._e()
+                    ],
+                    2
+                  )
                 }),
                 _vm._v(" "),
-                _c("label", { staticClass: "cbx", attrs: { for: "mas" } }, [
-                  _c("span", [
-                    _c(
-                      "svg",
-                      {
-                        attrs: {
-                          width: "12px",
-                          height: "10px",
-                          viewbox: "0 0 12 10"
-                        }
-                      },
-                      [
-                        _c("polyline", {
-                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Body to body")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group checksito-total" }, [
-                _c("input", {
-                  staticClass: "inp-cbx",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "mas2", type: "checkbox" }
-                }),
-                _vm._v(" "),
-                _c("label", { staticClass: "cbx", attrs: { for: "mas2" } }, [
-                  _c("span", [
-                    _c(
-                      "svg",
-                      {
-                        attrs: {
-                          width: "12px",
-                          height: "10px",
-                          viewbox: "0 0 12 10"
-                        }
-                      },
-                      [
-                        _c("polyline", {
-                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Hot stone massage")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group checksito-total" }, [
-                _c("input", {
-                  staticClass: "inp-cbx",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "mas3", type: "checkbox" }
-                }),
-                _vm._v(" "),
-                _c("label", { staticClass: "cbx", attrs: { for: "mas3" } }, [
-                  _c("span", [
-                    _c(
-                      "svg",
-                      {
-                        attrs: {
-                          width: "12px",
-                          height: "10px",
-                          viewbox: "0 0 12 10"
-                        }
-                      },
-                      [
-                        _c("polyline", {
-                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Masaje")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group checksito-total" }, [
-                _c("input", {
-                  staticClass: "inp-cbx",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "mas4", type: "checkbox" }
-                }),
-                _vm._v(" "),
-                _c("label", { staticClass: "cbx", attrs: { for: "mas4" } }, [
-                  _c("span", [
-                    _c(
-                      "svg",
-                      {
-                        attrs: {
-                          width: "12px",
-                          height: "10px",
-                          viewbox: "0 0 12 10"
-                        }
-                      },
-                      [
-                        _c("polyline", {
-                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Masaje con final feliz (manual)")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group checksito-total" }, [
-                _c("input", {
-                  staticClass: "inp-cbx",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "mas5", type: "checkbox" }
-                }),
-                _vm._v(" "),
-                _c("label", { staticClass: "cbx", attrs: { for: "mas5" } }, [
-                  _c("span", [
-                    _c(
-                      "svg",
-                      {
-                        attrs: {
-                          width: "12px",
-                          height: "10px",
-                          viewbox: "0 0 12 10"
-                        }
-                      },
-                      [
-                        _c("polyline", {
-                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Masaje con final feliz (oral)")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group checksito-total" }, [
-                _c("input", {
-                  staticClass: "inp-cbx",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "mas6", type: "checkbox" }
-                }),
-                _vm._v(" "),
-                _c("label", { staticClass: "cbx", attrs: { for: "mas6" } }, [
-                  _c("span", [
-                    _c(
-                      "svg",
-                      {
-                        attrs: {
-                          width: "12px",
-                          height: "10px",
-                          viewbox: "0 0 12 10"
-                        }
-                      },
-                      [
-                        _c("polyline", {
-                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Masaje de próstata")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group checksito-total" }, [
-                _c("input", {
-                  staticClass: "inp-cbx",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "mas7", type: "checkbox" }
-                }),
-                _vm._v(" "),
-                _c("label", { staticClass: "cbx", attrs: { for: "mas7" } }, [
-                  _c("span", [
-                    _c(
-                      "svg",
-                      {
-                        attrs: {
-                          width: "12px",
-                          height: "10px",
-                          viewbox: "0 0 12 10"
-                        }
-                      },
-                      [
-                        _c("polyline", {
-                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Masaje Nuru")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group checksito-total" }, [
-                _c("input", {
-                  staticClass: "inp-cbx",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "mas8", type: "checkbox" }
-                }),
-                _vm._v(" "),
-                _c("label", { staticClass: "cbx", attrs: { for: "mas8" } }, [
-                  _c("span", [
-                    _c(
-                      "svg",
-                      {
-                        attrs: {
-                          width: "12px",
-                          height: "10px",
-                          viewbox: "0 0 12 10"
-                        }
-                      },
-                      [
-                        _c("polyline", {
-                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Masaje sobre mesa de masaje")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group checksito-total" }, [
-                _c("input", {
-                  staticClass: "inp-cbx",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "mas9", type: "checkbox" }
-                }),
-                _vm._v(" "),
-                _c("label", { staticClass: "cbx", attrs: { for: "mas9" } }, [
-                  _c("span", [
-                    _c(
-                      "svg",
-                      {
-                        attrs: {
-                          width: "12px",
-                          height: "10px",
-                          viewbox: "0 0 12 10"
-                        }
-                      },
-                      [
-                        _c("polyline", {
-                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Masaje Tantra")])
-                ])
-              ]),
-              _vm._v(" "),
-              _vm._m(1)
-            ])
+                _vm._m(0)
+              ],
+              2
+            )
           ])
         ])
       ]),
@@ -49514,279 +48916,76 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-row" }, [
-            _c("div", { staticClass: "col-lg-12 col-sm-12" }, [
-              _c("div", { staticClass: "form-group checksito-total" }, [
-                _c("input", {
-                  staticClass: "inp-cbx",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "pre", type: "checkbox" }
+            _c(
+              "div",
+              { staticClass: "col-lg-12 col-sm-12" },
+              [
+                _vm._l(_vm.arServicios, function(servicio, index) {
+                  return _c(
+                    "div",
+                    {
+                      key: servicio.id,
+                      staticClass: "form-group checksito-total"
+                    },
+                    [
+                      servicio.categoria_servicio == "PRELIMINARES"
+                        ? [
+                            _c("input", {
+                              staticClass: "inp-cbx",
+                              staticStyle: { display: "none" },
+                              attrs: {
+                                id: "servicio" + servicio.id,
+                                type: "checkbox"
+                              },
+                              domProps: { value: servicio.id },
+                              on: {
+                                click: function($event) {
+                                  return _vm.agregarServicio(servicio, index)
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "label",
+                              {
+                                staticClass: "cbx",
+                                attrs: { for: "servicio" + servicio.id }
+                              },
+                              [
+                                _c("span", [
+                                  _c(
+                                    "svg",
+                                    {
+                                      attrs: {
+                                        width: "12px",
+                                        height: "10px",
+                                        viewbox: "0 0 12 10"
+                                      }
+                                    },
+                                    [
+                                      _c("polyline", {
+                                        attrs: { points: "1.5 6 4.5 9 10.5 1" }
+                                      })
+                                    ]
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(_vm._s(servicio.nombre_servicio))
+                                ])
+                              ]
+                            )
+                          ]
+                        : _vm._e()
+                    ],
+                    2
+                  )
                 }),
                 _vm._v(" "),
-                _c("label", { staticClass: "cbx", attrs: { for: "pre" } }, [
-                  _c("span", [
-                    _c(
-                      "svg",
-                      {
-                        attrs: {
-                          width: "12px",
-                          height: "10px",
-                          viewbox: "0 0 12 10"
-                        }
-                      },
-                      [
-                        _c("polyline", {
-                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Body to body")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group checksito-total" }, [
-                _c("input", {
-                  staticClass: "inp-cbx",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "pre2", type: "checkbox" }
-                }),
-                _vm._v(" "),
-                _c("label", { staticClass: "cbx", attrs: { for: "pre2" } }, [
-                  _c("span", [
-                    _c(
-                      "svg",
-                      {
-                        attrs: {
-                          width: "12px",
-                          height: "10px",
-                          viewbox: "0 0 12 10"
-                        }
-                      },
-                      [
-                        _c("polyline", {
-                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Hot stone massage")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group checksito-total" }, [
-                _c("input", {
-                  staticClass: "inp-cbx",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "pre3", type: "checkbox" }
-                }),
-                _vm._v(" "),
-                _c("label", { staticClass: "cbx", attrs: { for: "pre3" } }, [
-                  _c("span", [
-                    _c(
-                      "svg",
-                      {
-                        attrs: {
-                          width: "12px",
-                          height: "10px",
-                          viewbox: "0 0 12 10"
-                        }
-                      },
-                      [
-                        _c("polyline", {
-                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Masaje")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group checksito-total" }, [
-                _c("input", {
-                  staticClass: "inp-cbx",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "pre4", type: "checkbox" }
-                }),
-                _vm._v(" "),
-                _c("label", { staticClass: "cbx", attrs: { for: "pre4" } }, [
-                  _c("span", [
-                    _c(
-                      "svg",
-                      {
-                        attrs: {
-                          width: "12px",
-                          height: "10px",
-                          viewbox: "0 0 12 10"
-                        }
-                      },
-                      [
-                        _c("polyline", {
-                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Masaje con final feliz (manual)")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group checksito-total" }, [
-                _c("input", {
-                  staticClass: "inp-cbx",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "pre5", type: "checkbox" }
-                }),
-                _vm._v(" "),
-                _c("label", { staticClass: "cbx", attrs: { for: "pre5" } }, [
-                  _c("span", [
-                    _c(
-                      "svg",
-                      {
-                        attrs: {
-                          width: "12px",
-                          height: "10px",
-                          viewbox: "0 0 12 10"
-                        }
-                      },
-                      [
-                        _c("polyline", {
-                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Masaje con final feliz (oral)")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group checksito-total" }, [
-                _c("input", {
-                  staticClass: "inp-cbx",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "pre6", type: "checkbox" }
-                }),
-                _vm._v(" "),
-                _c("label", { staticClass: "cbx", attrs: { for: "pre6" } }, [
-                  _c("span", [
-                    _c(
-                      "svg",
-                      {
-                        attrs: {
-                          width: "12px",
-                          height: "10px",
-                          viewbox: "0 0 12 10"
-                        }
-                      },
-                      [
-                        _c("polyline", {
-                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Masaje de próstata")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group checksito-total" }, [
-                _c("input", {
-                  staticClass: "inp-cbx",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "pre7", type: "checkbox" }
-                }),
-                _vm._v(" "),
-                _c("label", { staticClass: "cbx", attrs: { for: "pre7" } }, [
-                  _c("span", [
-                    _c(
-                      "svg",
-                      {
-                        attrs: {
-                          width: "12px",
-                          height: "10px",
-                          viewbox: "0 0 12 10"
-                        }
-                      },
-                      [
-                        _c("polyline", {
-                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Masaje Nuru")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group checksito-total" }, [
-                _c("input", {
-                  staticClass: "inp-cbx",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "pre8", type: "checkbox" }
-                }),
-                _vm._v(" "),
-                _c("label", { staticClass: "cbx", attrs: { for: "pre8" } }, [
-                  _c("span", [
-                    _c(
-                      "svg",
-                      {
-                        attrs: {
-                          width: "12px",
-                          height: "10px",
-                          viewbox: "0 0 12 10"
-                        }
-                      },
-                      [
-                        _c("polyline", {
-                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Masaje sobre mesa de masaje")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group checksito-total" }, [
-                _c("input", {
-                  staticClass: "inp-cbx",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "pre9", type: "checkbox" }
-                }),
-                _vm._v(" "),
-                _c("label", { staticClass: "cbx", attrs: { for: "pre9" } }, [
-                  _c("span", [
-                    _c(
-                      "svg",
-                      {
-                        attrs: {
-                          width: "12px",
-                          height: "10px",
-                          viewbox: "0 0 12 10"
-                        }
-                      },
-                      [
-                        _c("polyline", {
-                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Masaje Tantra")])
-                ])
-              ]),
-              _vm._v(" "),
-              _vm._m(2)
-            ])
+                _vm._m(1)
+              ],
+              2
+            )
           ])
         ])
       ]),
@@ -49796,279 +48995,76 @@ var render = function() {
           _c("h5", { staticClass: "formulario-titulos" }, [_vm._v("ÍNTIMO:")]),
           _vm._v(" "),
           _c("div", { staticClass: "form-row" }, [
-            _c("div", { staticClass: "col-lg-12 col-sm-12" }, [
-              _c("div", { staticClass: "form-group checksito-total" }, [
-                _c("input", {
-                  staticClass: "inp-cbx",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "in", type: "checkbox" }
+            _c(
+              "div",
+              { staticClass: "col-lg-12 col-sm-12" },
+              [
+                _vm._l(_vm.arServicios, function(servicio, index) {
+                  return _c(
+                    "div",
+                    {
+                      key: servicio.id,
+                      staticClass: "form-group checksito-total"
+                    },
+                    [
+                      servicio.categoria_servicio == "INTIMO"
+                        ? [
+                            _c("input", {
+                              staticClass: "inp-cbx",
+                              staticStyle: { display: "none" },
+                              attrs: {
+                                id: "servicio" + servicio.id,
+                                type: "checkbox"
+                              },
+                              domProps: { value: servicio.id },
+                              on: {
+                                click: function($event) {
+                                  return _vm.agregarServicio(servicio, index)
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "label",
+                              {
+                                staticClass: "cbx",
+                                attrs: { for: "servicio" + servicio.id }
+                              },
+                              [
+                                _c("span", [
+                                  _c(
+                                    "svg",
+                                    {
+                                      attrs: {
+                                        width: "12px",
+                                        height: "10px",
+                                        viewbox: "0 0 12 10"
+                                      }
+                                    },
+                                    [
+                                      _c("polyline", {
+                                        attrs: { points: "1.5 6 4.5 9 10.5 1" }
+                                      })
+                                    ]
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(_vm._s(servicio.nombre_servicio))
+                                ])
+                              ]
+                            )
+                          ]
+                        : _vm._e()
+                    ],
+                    2
+                  )
                 }),
                 _vm._v(" "),
-                _c("label", { staticClass: "cbx", attrs: { for: "in" } }, [
-                  _c("span", [
-                    _c(
-                      "svg",
-                      {
-                        attrs: {
-                          width: "12px",
-                          height: "10px",
-                          viewbox: "0 0 12 10"
-                        }
-                      },
-                      [
-                        _c("polyline", {
-                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Body to body")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group checksito-total" }, [
-                _c("input", {
-                  staticClass: "inp-cbx",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "in2", type: "checkbox" }
-                }),
-                _vm._v(" "),
-                _c("label", { staticClass: "cbx", attrs: { for: "in2" } }, [
-                  _c("span", [
-                    _c(
-                      "svg",
-                      {
-                        attrs: {
-                          width: "12px",
-                          height: "10px",
-                          viewbox: "0 0 12 10"
-                        }
-                      },
-                      [
-                        _c("polyline", {
-                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Hot stone massage")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group checksito-total" }, [
-                _c("input", {
-                  staticClass: "inp-cbx",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "in3", type: "checkbox" }
-                }),
-                _vm._v(" "),
-                _c("label", { staticClass: "cbx", attrs: { for: "in3" } }, [
-                  _c("span", [
-                    _c(
-                      "svg",
-                      {
-                        attrs: {
-                          width: "12px",
-                          height: "10px",
-                          viewbox: "0 0 12 10"
-                        }
-                      },
-                      [
-                        _c("polyline", {
-                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Masaje")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group checksito-total" }, [
-                _c("input", {
-                  staticClass: "inp-cbx",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "in4", type: "checkbox" }
-                }),
-                _vm._v(" "),
-                _c("label", { staticClass: "cbx", attrs: { for: "in4" } }, [
-                  _c("span", [
-                    _c(
-                      "svg",
-                      {
-                        attrs: {
-                          width: "12px",
-                          height: "10px",
-                          viewbox: "0 0 12 10"
-                        }
-                      },
-                      [
-                        _c("polyline", {
-                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Masaje con final feliz (manual)")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group checksito-total" }, [
-                _c("input", {
-                  staticClass: "inp-cbx",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "in5", type: "checkbox" }
-                }),
-                _vm._v(" "),
-                _c("label", { staticClass: "cbx", attrs: { for: "in5" } }, [
-                  _c("span", [
-                    _c(
-                      "svg",
-                      {
-                        attrs: {
-                          width: "12px",
-                          height: "10px",
-                          viewbox: "0 0 12 10"
-                        }
-                      },
-                      [
-                        _c("polyline", {
-                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Masaje con final feliz (oral)")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group checksito-total" }, [
-                _c("input", {
-                  staticClass: "inp-cbx",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "in6", type: "checkbox" }
-                }),
-                _vm._v(" "),
-                _c("label", { staticClass: "cbx", attrs: { for: "in6" } }, [
-                  _c("span", [
-                    _c(
-                      "svg",
-                      {
-                        attrs: {
-                          width: "12px",
-                          height: "10px",
-                          viewbox: "0 0 12 10"
-                        }
-                      },
-                      [
-                        _c("polyline", {
-                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Masaje de próstata")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group checksito-total" }, [
-                _c("input", {
-                  staticClass: "inp-cbx",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "in7", type: "checkbox" }
-                }),
-                _vm._v(" "),
-                _c("label", { staticClass: "cbx", attrs: { for: "in7" } }, [
-                  _c("span", [
-                    _c(
-                      "svg",
-                      {
-                        attrs: {
-                          width: "12px",
-                          height: "10px",
-                          viewbox: "0 0 12 10"
-                        }
-                      },
-                      [
-                        _c("polyline", {
-                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Masaje Nuru")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group checksito-total" }, [
-                _c("input", {
-                  staticClass: "inp-cbx",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "in8", type: "checkbox" }
-                }),
-                _vm._v(" "),
-                _c("label", { staticClass: "cbx", attrs: { for: "in8" } }, [
-                  _c("span", [
-                    _c(
-                      "svg",
-                      {
-                        attrs: {
-                          width: "12px",
-                          height: "10px",
-                          viewbox: "0 0 12 10"
-                        }
-                      },
-                      [
-                        _c("polyline", {
-                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Masaje sobre mesa de masaje")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group checksito-total" }, [
-                _c("input", {
-                  staticClass: "inp-cbx",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "in9", type: "checkbox" }
-                }),
-                _vm._v(" "),
-                _c("label", { staticClass: "cbx", attrs: { for: "in9" } }, [
-                  _c("span", [
-                    _c(
-                      "svg",
-                      {
-                        attrs: {
-                          width: "12px",
-                          height: "10px",
-                          viewbox: "0 0 12 10"
-                        }
-                      },
-                      [
-                        _c("polyline", {
-                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Masaje Tantra")])
-                ])
-              ]),
-              _vm._v(" "),
-              _vm._m(3)
-            ])
+                _vm._m(2)
+              ],
+              2
+            )
           ])
         ])
       ]),
@@ -50080,279 +49076,76 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-row" }, [
-            _c("div", { staticClass: "col-lg-12 col-sm-12" }, [
-              _c("div", { staticClass: "form-group checksito-total" }, [
-                _c("input", {
-                  staticClass: "inp-cbx",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "otr", type: "checkbox" }
+            _c(
+              "div",
+              { staticClass: "col-lg-12 col-sm-12" },
+              [
+                _vm._l(_vm.arServicios, function(servicio, index) {
+                  return _c(
+                    "div",
+                    {
+                      key: servicio.id,
+                      staticClass: "form-group checksito-total"
+                    },
+                    [
+                      servicio.categoria_servicio == "OTROS"
+                        ? [
+                            _c("input", {
+                              staticClass: "inp-cbx",
+                              staticStyle: { display: "none" },
+                              attrs: {
+                                id: "servicio" + servicio.id,
+                                type: "checkbox"
+                              },
+                              domProps: { value: servicio.id },
+                              on: {
+                                click: function($event) {
+                                  return _vm.agregarServicio(servicio, index)
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "label",
+                              {
+                                staticClass: "cbx",
+                                attrs: { for: "servicio" + servicio.id }
+                              },
+                              [
+                                _c("span", [
+                                  _c(
+                                    "svg",
+                                    {
+                                      attrs: {
+                                        width: "12px",
+                                        height: "10px",
+                                        viewbox: "0 0 12 10"
+                                      }
+                                    },
+                                    [
+                                      _c("polyline", {
+                                        attrs: { points: "1.5 6 4.5 9 10.5 1" }
+                                      })
+                                    ]
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(_vm._s(servicio.nombre_servicio))
+                                ])
+                              ]
+                            )
+                          ]
+                        : _vm._e()
+                    ],
+                    2
+                  )
                 }),
                 _vm._v(" "),
-                _c("label", { staticClass: "cbx", attrs: { for: "otr" } }, [
-                  _c("span", [
-                    _c(
-                      "svg",
-                      {
-                        attrs: {
-                          width: "12px",
-                          height: "10px",
-                          viewbox: "0 0 12 10"
-                        }
-                      },
-                      [
-                        _c("polyline", {
-                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Body to body")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group checksito-total" }, [
-                _c("input", {
-                  staticClass: "inp-cbx",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "otr2", type: "checkbox" }
-                }),
-                _vm._v(" "),
-                _c("label", { staticClass: "cbx", attrs: { for: "otr2" } }, [
-                  _c("span", [
-                    _c(
-                      "svg",
-                      {
-                        attrs: {
-                          width: "12px",
-                          height: "10px",
-                          viewbox: "0 0 12 10"
-                        }
-                      },
-                      [
-                        _c("polyline", {
-                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Hot stone massage")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group checksito-total" }, [
-                _c("input", {
-                  staticClass: "inp-cbx",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "otr3", type: "checkbox" }
-                }),
-                _vm._v(" "),
-                _c("label", { staticClass: "cbx", attrs: { for: "otr3" } }, [
-                  _c("span", [
-                    _c(
-                      "svg",
-                      {
-                        attrs: {
-                          width: "12px",
-                          height: "10px",
-                          viewbox: "0 0 12 10"
-                        }
-                      },
-                      [
-                        _c("polyline", {
-                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Masaje")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group checksito-total" }, [
-                _c("input", {
-                  staticClass: "inp-cbx",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "otr4", type: "checkbox" }
-                }),
-                _vm._v(" "),
-                _c("label", { staticClass: "cbx", attrs: { for: "otr4" } }, [
-                  _c("span", [
-                    _c(
-                      "svg",
-                      {
-                        attrs: {
-                          width: "12px",
-                          height: "10px",
-                          viewbox: "0 0 12 10"
-                        }
-                      },
-                      [
-                        _c("polyline", {
-                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Masaje con final feliz (manual)")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group checksito-total" }, [
-                _c("input", {
-                  staticClass: "inp-cbx",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "otr5", type: "checkbox" }
-                }),
-                _vm._v(" "),
-                _c("label", { staticClass: "cbx", attrs: { for: "otr5" } }, [
-                  _c("span", [
-                    _c(
-                      "svg",
-                      {
-                        attrs: {
-                          width: "12px",
-                          height: "10px",
-                          viewbox: "0 0 12 10"
-                        }
-                      },
-                      [
-                        _c("polyline", {
-                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Masaje con final feliz (oral)")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group checksito-total" }, [
-                _c("input", {
-                  staticClass: "inp-cbx",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "otr6", type: "checkbox" }
-                }),
-                _vm._v(" "),
-                _c("label", { staticClass: "cbx", attrs: { for: "otr6" } }, [
-                  _c("span", [
-                    _c(
-                      "svg",
-                      {
-                        attrs: {
-                          width: "12px",
-                          height: "10px",
-                          viewbox: "0 0 12 10"
-                        }
-                      },
-                      [
-                        _c("polyline", {
-                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Masaje de próstata")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group checksito-total" }, [
-                _c("input", {
-                  staticClass: "inp-cbx",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "otr7", type: "checkbox" }
-                }),
-                _vm._v(" "),
-                _c("label", { staticClass: "cbx", attrs: { for: "otr7" } }, [
-                  _c("span", [
-                    _c(
-                      "svg",
-                      {
-                        attrs: {
-                          width: "12px",
-                          height: "10px",
-                          viewbox: "0 0 12 10"
-                        }
-                      },
-                      [
-                        _c("polyline", {
-                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Masaje Nuru")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group checksito-total" }, [
-                _c("input", {
-                  staticClass: "inp-cbx",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "otr8", type: "checkbox" }
-                }),
-                _vm._v(" "),
-                _c("label", { staticClass: "cbx", attrs: { for: "otr8" } }, [
-                  _c("span", [
-                    _c(
-                      "svg",
-                      {
-                        attrs: {
-                          width: "12px",
-                          height: "10px",
-                          viewbox: "0 0 12 10"
-                        }
-                      },
-                      [
-                        _c("polyline", {
-                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Masaje sobre mesa de masaje")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group checksito-total" }, [
-                _c("input", {
-                  staticClass: "inp-cbx",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "otr9", type: "checkbox" }
-                }),
-                _vm._v(" "),
-                _c("label", { staticClass: "cbx", attrs: { for: "otr9" } }, [
-                  _c("span", [
-                    _c(
-                      "svg",
-                      {
-                        attrs: {
-                          width: "12px",
-                          height: "10px",
-                          viewbox: "0 0 12 10"
-                        }
-                      },
-                      [
-                        _c("polyline", {
-                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Masaje Tantra")])
-                ])
-              ]),
-              _vm._v(" "),
-              _vm._m(4)
-            ])
+                _vm._m(3)
+              ],
+              2
+            )
           ])
         ])
       ]),
@@ -50362,279 +49155,76 @@ var render = function() {
           _c("h5", { staticClass: "formulario-titulos" }, [_vm._v("FETICHE:")]),
           _vm._v(" "),
           _c("div", { staticClass: "form-row" }, [
-            _c("div", { staticClass: "col-lg-12 col-sm-12" }, [
-              _c("div", { staticClass: "form-group checksito-total" }, [
-                _c("input", {
-                  staticClass: "inp-cbx",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "fet", type: "checkbox" }
+            _c(
+              "div",
+              { staticClass: "col-lg-12 col-sm-12" },
+              [
+                _vm._l(_vm.arServicios, function(servicio, index) {
+                  return _c(
+                    "div",
+                    {
+                      key: servicio.id,
+                      staticClass: "form-group checksito-total"
+                    },
+                    [
+                      servicio.categoria_servicio == "FETICHE"
+                        ? [
+                            _c("input", {
+                              staticClass: "inp-cbx",
+                              staticStyle: { display: "none" },
+                              attrs: {
+                                id: "servicio" + servicio.id,
+                                type: "checkbox"
+                              },
+                              domProps: { value: servicio.id },
+                              on: {
+                                click: function($event) {
+                                  return _vm.agregarServicio(servicio, index)
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "label",
+                              {
+                                staticClass: "cbx",
+                                attrs: { for: "servicio" + servicio.id }
+                              },
+                              [
+                                _c("span", [
+                                  _c(
+                                    "svg",
+                                    {
+                                      attrs: {
+                                        width: "12px",
+                                        height: "10px",
+                                        viewbox: "0 0 12 10"
+                                      }
+                                    },
+                                    [
+                                      _c("polyline", {
+                                        attrs: { points: "1.5 6 4.5 9 10.5 1" }
+                                      })
+                                    ]
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(_vm._s(servicio.nombre_servicio))
+                                ])
+                              ]
+                            )
+                          ]
+                        : _vm._e()
+                    ],
+                    2
+                  )
                 }),
                 _vm._v(" "),
-                _c("label", { staticClass: "cbx", attrs: { for: "fet" } }, [
-                  _c("span", [
-                    _c(
-                      "svg",
-                      {
-                        attrs: {
-                          width: "12px",
-                          height: "10px",
-                          viewbox: "0 0 12 10"
-                        }
-                      },
-                      [
-                        _c("polyline", {
-                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Body to body")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group checksito-total" }, [
-                _c("input", {
-                  staticClass: "inp-cbx",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "fet2", type: "checkbox" }
-                }),
-                _vm._v(" "),
-                _c("label", { staticClass: "cbx", attrs: { for: "fet2" } }, [
-                  _c("span", [
-                    _c(
-                      "svg",
-                      {
-                        attrs: {
-                          width: "12px",
-                          height: "10px",
-                          viewbox: "0 0 12 10"
-                        }
-                      },
-                      [
-                        _c("polyline", {
-                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Hot stone massage")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group checksito-total" }, [
-                _c("input", {
-                  staticClass: "inp-cbx",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "fet3", type: "checkbox" }
-                }),
-                _vm._v(" "),
-                _c("label", { staticClass: "cbx", attrs: { for: "fet3" } }, [
-                  _c("span", [
-                    _c(
-                      "svg",
-                      {
-                        attrs: {
-                          width: "12px",
-                          height: "10px",
-                          viewbox: "0 0 12 10"
-                        }
-                      },
-                      [
-                        _c("polyline", {
-                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Masaje")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group checksito-total" }, [
-                _c("input", {
-                  staticClass: "inp-cbx",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "fet4", type: "checkbox" }
-                }),
-                _vm._v(" "),
-                _c("label", { staticClass: "cbx", attrs: { for: "fet4" } }, [
-                  _c("span", [
-                    _c(
-                      "svg",
-                      {
-                        attrs: {
-                          width: "12px",
-                          height: "10px",
-                          viewbox: "0 0 12 10"
-                        }
-                      },
-                      [
-                        _c("polyline", {
-                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Masaje con final feliz (manual)")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group checksito-total" }, [
-                _c("input", {
-                  staticClass: "inp-cbx",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "fet5", type: "checkbox" }
-                }),
-                _vm._v(" "),
-                _c("label", { staticClass: "cbx", attrs: { for: "fet5" } }, [
-                  _c("span", [
-                    _c(
-                      "svg",
-                      {
-                        attrs: {
-                          width: "12px",
-                          height: "10px",
-                          viewbox: "0 0 12 10"
-                        }
-                      },
-                      [
-                        _c("polyline", {
-                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Masaje con final feliz (oral)")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group checksito-total" }, [
-                _c("input", {
-                  staticClass: "inp-cbx",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "fet6", type: "checkbox" }
-                }),
-                _vm._v(" "),
-                _c("label", { staticClass: "cbx", attrs: { for: "fet6" } }, [
-                  _c("span", [
-                    _c(
-                      "svg",
-                      {
-                        attrs: {
-                          width: "12px",
-                          height: "10px",
-                          viewbox: "0 0 12 10"
-                        }
-                      },
-                      [
-                        _c("polyline", {
-                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Masaje de próstata")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group checksito-total" }, [
-                _c("input", {
-                  staticClass: "inp-cbx",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "fet7", type: "checkbox" }
-                }),
-                _vm._v(" "),
-                _c("label", { staticClass: "cbx", attrs: { for: "fet7" } }, [
-                  _c("span", [
-                    _c(
-                      "svg",
-                      {
-                        attrs: {
-                          width: "12px",
-                          height: "10px",
-                          viewbox: "0 0 12 10"
-                        }
-                      },
-                      [
-                        _c("polyline", {
-                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Masaje Nuru")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group checksito-total" }, [
-                _c("input", {
-                  staticClass: "inp-cbx",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "fet8", type: "checkbox" }
-                }),
-                _vm._v(" "),
-                _c("label", { staticClass: "cbx", attrs: { for: "fet8" } }, [
-                  _c("span", [
-                    _c(
-                      "svg",
-                      {
-                        attrs: {
-                          width: "12px",
-                          height: "10px",
-                          viewbox: "0 0 12 10"
-                        }
-                      },
-                      [
-                        _c("polyline", {
-                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Masaje sobre mesa de masaje")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group checksito-total" }, [
-                _c("input", {
-                  staticClass: "inp-cbx",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "fet9", type: "checkbox" }
-                }),
-                _vm._v(" "),
-                _c("label", { staticClass: "cbx", attrs: { for: "fet9" } }, [
-                  _c("span", [
-                    _c(
-                      "svg",
-                      {
-                        attrs: {
-                          width: "12px",
-                          height: "10px",
-                          viewbox: "0 0 12 10"
-                        }
-                      },
-                      [
-                        _c("polyline", {
-                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Masaje Tantra")])
-                ])
-              ]),
-              _vm._v(" "),
-              _vm._m(5)
-            ])
+                _vm._m(4)
+              ],
+              2
+            )
           ])
         ])
       ]),
@@ -50646,285 +49236,80 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-row" }, [
-            _c("div", { staticClass: "col-lg-12 col-sm-12" }, [
-              _c("div", { staticClass: "form-group checksito-total" }, [
-                _c("input", {
-                  staticClass: "inp-cbx",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "dis", type: "checkbox" }
+            _c(
+              "div",
+              { staticClass: "col-lg-12 col-sm-12" },
+              [
+                _vm._l(_vm.arServicios, function(servicio, index) {
+                  return _c(
+                    "div",
+                    {
+                      key: servicio.id,
+                      staticClass: "form-group checksito-total"
+                    },
+                    [
+                      servicio.categoria_servicio == "DISCAPACITADOS"
+                        ? [
+                            _c("input", {
+                              staticClass: "inp-cbx",
+                              staticStyle: { display: "none" },
+                              attrs: {
+                                id: "servicio" + servicio.id,
+                                type: "checkbox"
+                              },
+                              domProps: { value: servicio.id },
+                              on: {
+                                click: function($event) {
+                                  return _vm.agregarServicio(servicio, index)
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "label",
+                              {
+                                staticClass: "cbx",
+                                attrs: { for: "servicio" + servicio.id }
+                              },
+                              [
+                                _c("span", [
+                                  _c(
+                                    "svg",
+                                    {
+                                      attrs: {
+                                        width: "12px",
+                                        height: "10px",
+                                        viewbox: "0 0 12 10"
+                                      }
+                                    },
+                                    [
+                                      _c("polyline", {
+                                        attrs: { points: "1.5 6 4.5 9 10.5 1" }
+                                      })
+                                    ]
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(_vm._s(servicio.nombre_servicio))
+                                ])
+                              ]
+                            )
+                          ]
+                        : _vm._e()
+                    ],
+                    2
+                  )
                 }),
                 _vm._v(" "),
-                _c("label", { staticClass: "cbx", attrs: { for: "dis" } }, [
-                  _c("span", [
-                    _c(
-                      "svg",
-                      {
-                        attrs: {
-                          width: "12px",
-                          height: "10px",
-                          viewbox: "0 0 12 10"
-                        }
-                      },
-                      [
-                        _c("polyline", {
-                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Body to body")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group checksito-total" }, [
-                _c("input", {
-                  staticClass: "inp-cbx",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "dis2", type: "checkbox" }
-                }),
-                _vm._v(" "),
-                _c("label", { staticClass: "cbx", attrs: { for: "dis2" } }, [
-                  _c("span", [
-                    _c(
-                      "svg",
-                      {
-                        attrs: {
-                          width: "12px",
-                          height: "10px",
-                          viewbox: "0 0 12 10"
-                        }
-                      },
-                      [
-                        _c("polyline", {
-                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Hot stone massage")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group checksito-total" }, [
-                _c("input", {
-                  staticClass: "inp-cbx",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "dis3", type: "checkbox" }
-                }),
-                _vm._v(" "),
-                _c("label", { staticClass: "cbx", attrs: { for: "dis3" } }, [
-                  _c("span", [
-                    _c(
-                      "svg",
-                      {
-                        attrs: {
-                          width: "12px",
-                          height: "10px",
-                          viewbox: "0 0 12 10"
-                        }
-                      },
-                      [
-                        _c("polyline", {
-                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Masaje")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group checksito-total" }, [
-                _c("input", {
-                  staticClass: "inp-cbx",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "dis4", type: "checkbox" }
-                }),
-                _vm._v(" "),
-                _c("label", { staticClass: "cbx", attrs: { for: "dis4" } }, [
-                  _c("span", [
-                    _c(
-                      "svg",
-                      {
-                        attrs: {
-                          width: "12px",
-                          height: "10px",
-                          viewbox: "0 0 12 10"
-                        }
-                      },
-                      [
-                        _c("polyline", {
-                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Masaje con final feliz (manual)")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group checksito-total" }, [
-                _c("input", {
-                  staticClass: "inp-cbx",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "dis5", type: "checkbox" }
-                }),
-                _vm._v(" "),
-                _c("label", { staticClass: "cbx", attrs: { for: "dis5" } }, [
-                  _c("span", [
-                    _c(
-                      "svg",
-                      {
-                        attrs: {
-                          width: "12px",
-                          height: "10px",
-                          viewbox: "0 0 12 10"
-                        }
-                      },
-                      [
-                        _c("polyline", {
-                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Masaje con final feliz (oral)")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group checksito-total" }, [
-                _c("input", {
-                  staticClass: "inp-cbx",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "dis6", type: "checkbox" }
-                }),
-                _vm._v(" "),
-                _c("label", { staticClass: "cbx", attrs: { for: "dis6" } }, [
-                  _c("span", [
-                    _c(
-                      "svg",
-                      {
-                        attrs: {
-                          width: "12px",
-                          height: "10px",
-                          viewbox: "0 0 12 10"
-                        }
-                      },
-                      [
-                        _c("polyline", {
-                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Masaje de próstata")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group checksito-total" }, [
-                _c("input", {
-                  staticClass: "inp-cbx",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "dis7", type: "checkbox" }
-                }),
-                _vm._v(" "),
-                _c("label", { staticClass: "cbx", attrs: { for: "dis7" } }, [
-                  _c("span", [
-                    _c(
-                      "svg",
-                      {
-                        attrs: {
-                          width: "12px",
-                          height: "10px",
-                          viewbox: "0 0 12 10"
-                        }
-                      },
-                      [
-                        _c("polyline", {
-                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Masaje Nuru")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group checksito-total" }, [
-                _c("input", {
-                  staticClass: "inp-cbx",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "dis8", type: "checkbox" }
-                }),
-                _vm._v(" "),
-                _c("label", { staticClass: "cbx", attrs: { for: "dis8" } }, [
-                  _c("span", [
-                    _c(
-                      "svg",
-                      {
-                        attrs: {
-                          width: "12px",
-                          height: "10px",
-                          viewbox: "0 0 12 10"
-                        }
-                      },
-                      [
-                        _c("polyline", {
-                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Masaje sobre mesa de masaje")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group checksito-total" }, [
-                _c("input", {
-                  staticClass: "inp-cbx",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "dis9", type: "checkbox" }
-                }),
-                _vm._v(" "),
-                _c("label", { staticClass: "cbx", attrs: { for: "dis9" } }, [
-                  _c("span", [
-                    _c(
-                      "svg",
-                      {
-                        attrs: {
-                          width: "12px",
-                          height: "10px",
-                          viewbox: "0 0 12 10"
-                        }
-                      },
-                      [
-                        _c("polyline", {
-                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Masaje Tantra")])
-                ])
-              ]),
-              _vm._v(" "),
-              _vm._m(6)
-            ])
+                _vm._m(5)
+              ],
+              2
+            )
           ])
         ])
       ])
-    ]),
-    _vm._v(" "),
-    _vm._m(7)
+    ])
   ])
 }
 var staticRenderFns = [
@@ -50932,67 +49317,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "row justify-content-center cuerpo-perfil mb-4" },
-      [
-        _c(
-          "div",
-          {
-            staticClass:
-              "custom-control custom-radio custom-control-inline custom-rb-plan"
-          },
-          [
-            _c("input", {
-              staticClass: "custom-control-input",
-              attrs: {
-                type: "radio",
-                id: "btnRadio1",
-                name: "customRadioS3",
-                checked: ""
-              }
-            }),
-            _vm._v(" "),
-            _c(
-              "label",
-              {
-                staticClass: "custom-control-label rojo",
-                attrs: { for: "btnRadio1" }
-              },
-              [_vm._v("Preseleccionado")]
-            )
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass:
-              "custom-control custom-radio custom-control-inline custom-rb-plan"
-          },
-          [
-            _c("input", {
-              staticClass: "custom-control-input",
-              attrs: { type: "radio", id: "btnRadio2", name: "customRadioS3" }
-            }),
-            _vm._v(" "),
-            _c(
-              "label",
-              {
-                staticClass: "custom-control-label",
-                attrs: { for: "btnRadio2" }
-              },
-              [_vm._v("Manual")]
-            )
-          ]
-        )
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "form-group" }, [
       _c("button", { staticClass: "form-control btn-otros" }, [
         _c("span", [_vm._v("Otros")]),
@@ -51052,23 +49376,6 @@ var staticRenderFns = [
       _c("button", { staticClass: "form-control btn-otros" }, [
         _c("span", [_vm._v("Otros")]),
         _c("i", { staticClass: "fa fa-plus-circle" })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "bloques-de-perfil" }, [
-      _c("div", { staticClass: "form-row" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-primary btn-busqueda-detallada",
-            attrs: { type: "submit" }
-          },
-          [_vm._v("ACTUALIZAR DATOS")]
-        )
       ])
     ])
   }
