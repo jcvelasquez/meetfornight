@@ -4353,6 +4353,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     //console.log(this.$userId)
@@ -4363,6 +4380,7 @@ __webpack_require__.r(__webpack_exports__);
       errorServicio: 0,
       erroresServicio: [],
       arServicios: [],
+      arServiciosProfesional: [],
       idusuario: 0,
       nombre_servicio: '',
       categoria_servicio: '',
@@ -4376,6 +4394,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.get('/servicios-profesional/listar').then(function (response) {
         var respuesta = response.data;
         me.arServicios = respuesta.servicios;
+        me.arServiciosProfesional = respuesta.servicios_x_profesional;
       })["catch"](function (error) {
         console.log(error);
       });
@@ -48891,6 +48910,71 @@ var render = function() {
                                 _vm._v(" "),
                                 _c("span", [
                                   _vm._v(_vm._s(servicio.nombre_servicio))
+                                ])
+                              ]
+                            )
+                          ]
+                        : _vm._e()
+                    ],
+                    2
+                  )
+                }),
+                _vm._v(" "),
+                _vm._l(_vm.arServiciosProfesional, function(serv_x_pro, index) {
+                  return _c(
+                    "div",
+                    {
+                      key: serv_x_pro.id,
+                      staticClass: "form-group checksito-total"
+                    },
+                    [
+                      serv_x_pro.categoria_servicio == "MASAJES"
+                        ? [
+                            _c("input", {
+                              staticClass: "inp-cbx",
+                              staticStyle: { display: "none" },
+                              attrs: {
+                                id: "servicio" + _vm.servicio.id,
+                                type: "checkbox"
+                              },
+                              domProps: { value: serv_x_pro.id },
+                              on: {
+                                click: function($event) {
+                                  return _vm.agregarServicio(
+                                    _vm.servicio,
+                                    index
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "label",
+                              {
+                                staticClass: "cbx",
+                                attrs: { for: "servicio" + serv_x_pro.id }
+                              },
+                              [
+                                _c("span", [
+                                  _c(
+                                    "svg",
+                                    {
+                                      attrs: {
+                                        width: "12px",
+                                        height: "10px",
+                                        viewbox: "0 0 12 10"
+                                      }
+                                    },
+                                    [
+                                      _c("polyline", {
+                                        attrs: { points: "1.5 6 4.5 9 10.5 1" }
+                                      })
+                                    ]
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(_vm._s(serv_x_pro.nombre_servicio))
                                 ])
                               ]
                             )

@@ -39,6 +39,23 @@
                     </div>
                     <!-- End Servicios -->
 
+
+                     <!-- Start Servicios Personalizados -->
+                    <div class="form-group checksito-total" v-for="(serv_x_pro, index) in arServiciosProfesional" :key="serv_x_pro.id">
+                      <template v-if="serv_x_pro.categoria_servicio == 'MASAJES' ">
+                        <input class="inp-cbx" :value="serv_x_pro.id" :id="'servicio' + servicio.id" type="checkbox" style="display: none;" @click="agregarServicio(servicio, index)"/>
+                        <label class="cbx" :for="'servicio' + serv_x_pro.id">
+                          <span>
+                            <svg width="12px" height="10px" viewbox="0 0 12 10">
+                              <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                            </svg>
+                          </span>
+                          <span>{{serv_x_pro.nombre_servicio}}</span>
+                        </label>
+                      </template>
+                    </div>
+                    <!-- End Servicios Personalizados -->
+
             
                     <div class="form-group">
                       <button class="form-control btn-otros"><span>Otros</span><i class="fa fa-plus-circle"></i></button>
@@ -225,6 +242,7 @@
                 errorServicio : 0,
                 erroresServicio: [],
                 arServicios : [],
+                arServiciosProfesional : [],
                 idusuario : 0,
                 nombre_servicio : '',
                 categoria_servicio : '',
@@ -242,6 +260,8 @@
 
                       var respuesta= response.data;
                       me.arServicios = respuesta.servicios;
+                      me.arServiciosProfesional = respuesta.servicios_x_profesional;
+                      
 
                   }).catch(function (error) {  console.log(error);     });
                 

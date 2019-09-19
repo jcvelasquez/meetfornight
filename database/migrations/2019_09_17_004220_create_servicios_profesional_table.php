@@ -18,6 +18,7 @@ class CreateServiciosProfesionalTable extends Migration
             $table->string('nombre_servicio');
             $table->enum('categoria_servicio',['MASAJES','PRELIMINARES','INTIMO','OTROS','FETICHE','DISCAPACITADOS']);
             $table->integer('estado_servicio');
+            $table->integer('es_admin');
         });
     }
 

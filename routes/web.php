@@ -151,7 +151,7 @@ Route::group(['middleware'=>['auth']],function(){
             Route::get('servicios-profesional', function () {
                 return view('forms-perfil-profesional.servicios-profesional');
             });
-            Route::get('servicios-profesional/listar', 'ServiciosProfesionalController@list' );
+            Route::get('servicios-profesional/listar', 'ServiciosProfesionalController@listar' );
 
             
             //CONTACTO

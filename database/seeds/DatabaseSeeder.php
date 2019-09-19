@@ -19,9 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(TarifaProfesionalSeeder::class);
         $this->call(AlertaProfesionalSeeder::class);
         $this->call(ServiciosProfesionalSeeder::class);
-
-        
-        
+        $this->call(ServiciosXProfesionalSeeder::class);
         
     }
 }
