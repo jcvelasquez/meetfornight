@@ -17,7 +17,7 @@ class CreateServiciosXProfesionalTable extends Migration
             $table->bigIncrements('id');
             $table->integer('idservicio')->nullable()->unsigned();
             $table->integer('idusuario')->unsigned();
-            $table->string('nombre_servicio');
+            $table->string('nombre_servicio')->nullable();
             $table->enum('categoria_servicio',['MASAJES','PRELIMINARES','INTIMO','OTROS','FETICHE','DISCAPACITADOS']);
             $table->foreign('idservicio')->references('id')->on('servicios_profesional');
             $table->foreign('idusuario')->references('id')->on('usuarios');

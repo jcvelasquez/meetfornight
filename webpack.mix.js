@@ -33,6 +33,5 @@ mix.js(['resources/js/app.js'], 'public/js/app.js')
         'resources/js/jquery.smartWizard.min.js',
         'resources/js/jquery-asRange.js',
         'resources/js/jquery.validate.js',
-        'resources/js/dropzone.js',
         'resources/js/fontawesome.js'
     ], 'public/js/meetfornight.js');

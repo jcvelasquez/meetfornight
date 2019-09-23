@@ -1,238 +1,176 @@
 <template>
 
 <form action="#" method="post">
-
-          <!-- Start Opciones -->
-         <!--  <div class="row justify-content-center cuerpo-perfil mb-4">
-              <div class="custom-control custom-radio custom-control-inline custom-rb-plan">
-                 <input type="radio" id="btnRadio1" name="customRadioS3" class="custom-control-input" checked>
-                 <label class="custom-control-label rojo" for="btnRadio1">Preseleccionado</label>
-              </div>
-              <div class="custom-control custom-radio custom-control-inline custom-rb-plan">
-                 <input type="radio" id="btnRadio2" name="customRadioS3" class="custom-control-input">
-                 <label class="custom-control-label" for="btnRadio2">Manual</label>
-              </div>
-          </div> -->
-          <!-- End Opciones -->
-
           
-            <div class="row">
-              <div class="col-lg-6 col-sm-12 espacio-campos">
-                <div class="cuadro-servicios">
-                <h5 class="formulario-titulos">MASAJES:</h5>
-                <div class="form-row">
-                  <div class="col-lg-12 col-sm-12">
-
-                     <!-- Start Servicios -->
-                    <div class="form-group checksito-total" v-for="(servicio, index) in arServicios" :key="servicio.id">
-                      <template v-if="servicio.categoria_servicio == 'MASAJES' ">
-                        <input class="inp-cbx" :value="servicio.id" :id="'servicio' + servicio.id" type="checkbox" style="display: none;" @click="agregarServicio(servicio, index)"/>
-                        <label class="cbx" :for="'servicio' + servicio.id">
-                          <span>
-                            <svg width="12px" height="10px" viewbox="0 0 12 10">
-                              <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                            </svg>
-                          </span>
-                          <span>{{servicio.nombre_servicio}}</span>
-                        </label>
-                      </template>
-                    </div>
-                    <!-- End Servicios -->
-
-
-                     <!-- Start Servicios Personalizados -->
-                    <div class="form-group checksito-total" v-for="(serv_x_pro, index) in arServiciosProfesional" :key="serv_x_pro.id">
-                      <template v-if="serv_x_pro.categoria_servicio == 'MASAJES' ">
-                        <input class="inp-cbx" :value="serv_x_pro.id" :id="'servicio' + servicio.id" type="checkbox" style="display: none;" @click="agregarServicio(servicio, index)"/>
-                        <label class="cbx" :for="'servicio' + serv_x_pro.id">
-                          <span>
-                            <svg width="12px" height="10px" viewbox="0 0 12 10">
-                              <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                            </svg>
-                          </span>
-                          <span>{{serv_x_pro.nombre_servicio}}</span>
-                        </label>
-                      </template>
-                    </div>
-                    <!-- End Servicios Personalizados -->
-
-            
-                    <div class="form-group">
-                      <button class="form-control btn-otros"><span>Otros</span><i class="fa fa-plus-circle"></i></button>
-                    </div>
-                  </div>
-                </div>
-                </div>
-              </div>
-
-              <div class="col-lg-6 col-sm-12 espacio-campos">
-                <div class="cuadro-servicios">
-                <h5 class="formulario-titulos">PRELIMINARES:</h5>
-                <div class="form-row">
-                  <div class="col-lg-12 col-sm-12">
-
-
-                    <!-- Start Servicios -->
-                    <div class="form-group checksito-total" v-for="(servicio, index) in arServicios" :key="servicio.id">
-                      <template v-if="servicio.categoria_servicio == 'PRELIMINARES' ">
-                        <input class="inp-cbx" :value="servicio.id" :id="'servicio' + servicio.id" type="checkbox" style="display: none;" @click="agregarServicio(servicio, index)"/>
-                        <label class="cbx" :for="'servicio' + servicio.id">
-                          <span>
-                            <svg width="12px" height="10px" viewbox="0 0 12 10">
-                              <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                            </svg>
-                          </span>
-                          <span>{{servicio.nombre_servicio}}</span>
-                        </label>
-                      </template>
-                    </div>
-                    <!-- End Servicios -->
-
-                    <div class="form-group">
-                      <button class="form-control btn-otros"><span>Otros</span><i class="fa fa-plus-circle"></i></button>
-                    </div>
-                  </div>
-                </div>
-                </div>
-              </div>
-
-              <div class="col-lg-6 col-sm-12 espacio-campos">
-                <div class="cuadro-servicios">
-                <h5 class="formulario-titulos">ÍNTIMO:</h5>
-                <div class="form-row">
-                  <div class="col-lg-12 col-sm-12">
-                  
-                    <!-- Start Servicios -->
-                    <div class="form-group checksito-total" v-for="(servicio, index) in arServicios" :key="servicio.id">
-                      <template v-if="servicio.categoria_servicio == 'INTIMO' ">
-                        <input class="inp-cbx" :value="servicio.id" :id="'servicio' + servicio.id" type="checkbox" style="display: none;" @click="agregarServicio(servicio, index)"/>
-                        <label class="cbx" :for="'servicio' + servicio.id">
-                          <span>
-                            <svg width="12px" height="10px" viewbox="0 0 12 10">
-                              <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                            </svg>
-                          </span>
-                          <span>{{servicio.nombre_servicio}}</span>
-                        </label>
-                      </template>
-                    </div>
-                    <!-- End Servicios -->
-
-                    <div class="form-group">
-                      <button class="form-control btn-otros"><span>Otros</span><i class="fa fa-plus-circle"></i></button>
-                    </div>
-                  </div>
-                </div>
-                </div>
-              </div>
-
-              <div class="col-lg-6 col-sm-12 espacio-campos">
-                <div class="cuadro-servicios">
-                <h5 class="formulario-titulos">OTROS SERVICIOS:</h5>
-                <div class="form-row">
-                  <div class="col-lg-12 col-sm-12">
-
-                    <!-- Start Servicios -->
-                    <div class="form-group checksito-total" v-for="(servicio, index) in arServicios" :key="servicio.id">
-                      <template v-if="servicio.categoria_servicio == 'OTROS' ">
-                        <input class="inp-cbx" :value="servicio.id" :id="'servicio' + servicio.id" type="checkbox" style="display: none;" @click="agregarServicio(servicio, index)"/>
-                        <label class="cbx" :for="'servicio' + servicio.id">
-                          <span>
-                            <svg width="12px" height="10px" viewbox="0 0 12 10">
-                              <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                            </svg>
-                          </span>
-                          <span>{{servicio.nombre_servicio}}</span>
-                        </label>
-                      </template>
-                    </div>
-                    <!-- End Servicios -->
-                    
-                    <div class="form-group">
-                      <button class="form-control btn-otros"><span>Otros</span><i class="fa fa-plus-circle"></i></button>
-                    </div>
-                  </div>
-                </div>
-                </div>
-              </div>
-
-              <div class="col-lg-6 col-sm-12 espacio-campos">
-                <div class="cuadro-servicios">
-                <h5 class="formulario-titulos">FETICHE:</h5>
-                <div class="form-row">
-                  <div class="col-lg-12 col-sm-12">
-                    
-                    
-                    <!-- Start Servicios -->
-                    <div class="form-group checksito-total" v-for="(servicio, index) in arServicios" :key="servicio.id">
-                      <template v-if="servicio.categoria_servicio == 'FETICHE' ">
-                        <input class="inp-cbx" :value="servicio.id" :id="'servicio' + servicio.id" type="checkbox" style="display: none;" @click="agregarServicio(servicio, index)"/>
-                        <label class="cbx" :for="'servicio' + servicio.id">
-                          <span>
-                            <svg width="12px" height="10px" viewbox="0 0 12 10">
-                              <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                            </svg>
-                          </span>
-                          <span>{{servicio.nombre_servicio}}</span>
-                        </label>
-                      </template>
-                    </div>
-                    <!-- End Servicios -->
-
-
-                    <div class="form-group">
-                      <button class="form-control btn-otros"><span>Otros</span><i class="fa fa-plus-circle"></i></button>
-                    </div>
-                  </div>
-                </div>
-                </div>
-              </div>
-
-              <div class="col-lg-6 col-sm-12 espacio-campos">
-                <div class="cuadro-servicios-especial">
-                <h5 class="formulario-titulos">DISCAPACITADOS:</h5>
-                <div class="form-row">
-                  <div class="col-lg-12 col-sm-12">
-                   
-                    <!-- Start Servicios -->
-                    <div class="form-group checksito-total" v-for="(servicio, index) in arServicios" :key="servicio.id">
-                      <template v-if="servicio.categoria_servicio == 'DISCAPACITADOS' ">
-                        <input class="inp-cbx" :value="servicio.id" :id="'servicio' + servicio.id" type="checkbox" style="display: none;" @click="agregarServicio(servicio, index)"/>
-                        <label class="cbx" :for="'servicio' + servicio.id">
-                          <span>
-                            <svg width="12px" height="10px" viewbox="0 0 12 10">
-                              <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                            </svg>
-                          </span>
-                          <span>{{servicio.nombre_servicio}}</span>
-                        </label>
-                      </template>
-                    </div>
-                    <!-- End Servicios -->
-
-
-                    <div class="form-group">
-                      <button class="form-control btn-otros"><span>Otros</span><i class="fa fa-plus-circle"></i></button>
-                    </div>
-                  </div>
-                </div>
-                </div>
-              </div>
-
-            </div>
-         <!--  <div class="bloques-de-perfil">
+        <div class="row">
+          <div class="col-lg-6 col-sm-12 espacio-campos">
+            <div class="cuadro-servicios">
+            <h5 class="formulario-titulos">MASAJES:</h5>
             <div class="form-row">
-              <button type="submit" class="btn btn-primary btn-busqueda-detallada">ACTUALIZAR DATOS</button>
+              <div class="col-lg-12 col-sm-12">
+
+
+                <!-- Start Servicios -->
+                <div class="form-group checksito-total" v-for="(servicio, index) in filtrarPor(arServicios, 'MASAJES')" :key=" 'm_' + servicio.id">
+                    <p-check class="p-curve" true-value="1" false-value="0" v-model="servicio.es_marcado" :value="servicio.id" @change="checkServicio(servicio, index)" color="danger">{{servicio.nombre_servicio}} - {{servicio.id}} </p-check>          
+                </div>
+                <!-- End Servicios -->
+
+
+                <!-- Start Servicios -->
+                <div class="form-group checksito-total" v-for="(servicio_perso, index) in filtrarPor(arServiciosPersonalizados, 'MASAJES')" :key=" 'mp_' + servicio_perso.id">
+                    <p-check class="p-curve" true-value="1" false-value="0" v-model="servicio_perso.es_marcado" :value="servicio_perso.id" @change="checkServicioPersonalizado(servicio_perso, index)" color="danger">{{servicio_perso.nombre_servicio}} - {{servicio_perso.id}}</p-check>          
+                </div>
+                <!-- End Servicios -->
+        
+                <div class="form-group">
+                  <button class="form-control btn-otros"><span>Otros</span><i class="fa fa-plus-circle"></i></button>
+                </div>
+              </div>
             </div>
-          </div> -->
-          
-     </form>
+            </div>
+          </div>
+
+          <div class="col-lg-6 col-sm-12 espacio-campos">
+            <div class="cuadro-servicios">
+            <h5 class="formulario-titulos">PRELIMINARES:</h5>
+            <div class="form-row">
+              <div class="col-lg-12 col-sm-12">
+
+
+                <!-- Start Servicios -->
+                <div class="form-group checksito-total" v-for="(servicio, index) in filtrarPor(arServicios, 'PRELIMINARES')" :key=" 'p_' + servicio.id">
+                    <p-check class="p-curve" true-value="1" false-value="0" v-model="servicio.es_marcado" :value="servicio.id" @change="checkServicio(servicio, index)" color="danger">{{servicio.nombre_servicio}} - {{servicio.id}}</p-check>         
+                </div>
+                <!-- End Servicios -->
+
+                <!-- Start Servicios -->
+                <div class="form-group checksito-total" v-for="(servicio_perso, index) in filtrarPor(arServiciosPersonalizados, 'PRELIMINARES')" :key=" 'pp_' + servicio_perso.id">
+                    <p-check class="p-curve" true-value="1" false-value="0" v-model="servicio_perso.es_marcado" :value="servicio_perso.id" @change="checkServicioPersonalizado(servicio_perso, index)" color="danger">{{servicio_perso.nombre_servicio}}</p-check>          
+                </div>
+                <!-- End Servicios -->
+
+                <div class="form-group">
+                  <button class="form-control btn-otros"><span>Otros</span><i class="fa fa-plus-circle"></i></button>
+                </div>
+              </div>
+            </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6 col-sm-12 espacio-campos">
+            <div class="cuadro-servicios">
+            <h5 class="formulario-titulos">ÍNTIMO:</h5>
+            <div class="form-row">
+              <div class="col-lg-12 col-sm-12">
+              
+                <!-- Start Servicios -->
+                <div class="form-group checksito-total" v-for="(servicio, index) in filtrarPor(arServicios, 'INTIMO')" :key=" 'i_' + servicio.id">
+                    <p-check class="p-curve" true-value="1" false-value="0" v-model="servicio.es_marcado" :value="servicio.id" @change="checkServicio(servicio, index)" color="danger">{{servicio.nombre_servicio}} - {{servicio.id}}</p-check>       
+                </div>
+                <!-- End Servicios -->
+
+                <!-- Start Servicios -->
+                <div class="form-group checksito-total" v-for="(servicio_perso, index) in filtrarPor(arServiciosPersonalizados, 'INTIMO')" :key=" 'ip_' + servicio_perso.id">
+                    <p-check class="p-curve" true-value="1" false-value="0" v-model="servicio_perso.es_marcado" :value="servicio_perso.id" @change="checkServicioPersonalizado(servicio_perso, index)" color="danger">{{servicio_perso.nombre_servicio}} - {{servicio_perso.id}}</p-check>          
+                </div>
+                <!-- End Servicios -->
+
+                <div class="form-group">
+                  <button class="form-control btn-otros"><span>Otros</span><i class="fa fa-plus-circle"></i></button>
+                </div>
+              </div>
+            </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6 col-sm-12 espacio-campos">
+            <div class="cuadro-servicios">
+            <h5 class="formulario-titulos">OTROS SERVICIOS:</h5>
+            <div class="form-row">
+              <div class="col-lg-12 col-sm-12">
+
+                <!-- Start Servicios -->
+                <div class="form-group checksito-total" v-for="(servicio, index) in filtrarPor(arServicios, 'OTROS')" :key=" 'o_' + servicio.id">
+                    <p-check class="p-curve" true-value="1" false-value="0" v-model="servicio.es_marcado" :value="servicio.id" @change="checkServicio(servicio, index)" color="danger">{{servicio.nombre_servicio}} - {{servicio.id}}</p-check>       
+                </div>
+                <!-- End Servicios -->
+
+                <!-- Start Servicios -->
+                <div class="form-group checksito-total" v-for="(servicio_perso, index) in filtrarPor(arServiciosPersonalizados, 'OTROS')" :key=" 'op_' + servicio_perso.id">
+                    <p-check class="p-curve" true-value="1" false-value="0" v-model="servicio_perso.es_marcado" :value="servicio_perso.id" @change="checkServicioPersonalizado(servicio_perso, index)" color="danger">{{servicio_perso.nombre_servicio}} - {{servicio_perso.id}}</p-check>          
+                </div>
+                <!-- End Servicios -->
+
+                <div class="form-group">
+                  <button class="form-control btn-otros"><span>Otros</span><i class="fa fa-plus-circle"></i></button>
+                </div>
+              </div>
+            </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6 col-sm-12 espacio-campos">
+            <div class="cuadro-servicios">
+            <h5 class="formulario-titulos">FETICHE:</h5>
+            <div class="form-row">
+              <div class="col-lg-12 col-sm-12">
+                
+                
+                <!-- Start Servicios -->
+                <div class="form-group checksito-total" v-for="(servicio, index) in filtrarPor(arServicios, 'FETICHE')" :key=" 'f_' + servicio.id">
+                    <p-check class="p-curve" true-value="1" false-value="0" v-model="servicio.es_marcado" :value="servicio.id" @change="checkServicio(servicio, index)" color="danger">{{servicio.nombre_servicio}} - {{servicio.id}}</p-check>       
+                </div>
+                <!-- End Servicios -->
+
+                <!-- Start Servicios -->
+                <div class="form-group checksito-total" v-for="(servicio_perso, index) in filtrarPor(arServiciosPersonalizados, 'FETICHE')" :key=" 'fp_' + servicio_perso.id">
+                    <p-check class="p-curve" true-value="1" false-value="0" v-model="servicio_perso.es_marcado" :value="servicio_perso.id" @change="checkServicioPersonalizado(servicio_perso, index)" color="danger">{{servicio_perso.nombre_servicio}} - {{servicio_perso.id}}</p-check>          
+                </div>
+                <!-- End Servicios -->
+
+                <div class="form-group">
+                  <button class="form-control btn-otros"><span>Otros</span><i class="fa fa-plus-circle"></i></button>
+                </div>
+              </div>
+            </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6 col-sm-12 espacio-campos">
+            <div class="cuadro-servicios-especial">
+            <h5 class="formulario-titulos">DISCAPACITADOS:</h5>
+            <div class="form-row">
+              <div class="col-lg-12 col-sm-12">
+                
+                <!-- Start Servicios -->
+                <div class="form-group checksito-total" v-for="(servicio, index) in filtrarPor(arServicios, 'DISCAPACITADOS')" :key=" 'd_' + servicio.id">
+                    <p-check class="p-curve" true-value="1" false-value="0" v-model="servicio.es_marcado" :value="servicio.id" @change="checkServicio(servicio, index)" color="danger">{{servicio.nombre_servicio}} - {{servicio.id}}</p-check>       
+                </div>
+                <!-- End Servicios -->
+
+                <!-- Start Servicios -->
+                <div class="form-group checksito-total" v-for="(servicio_perso, index) in filtrarPor(arServiciosPersonalizados, 'DISCAPACITADOS')" :key=" 'dp_' + servicio_perso.id">
+                    <p-check class="p-curve" true-value="1" false-value="0" v-model="servicio_perso.es_marcado" :value="servicio_perso.id" @change="checkServicioPersonalizado(servicio_perso, index)" color="danger">{{servicio_perso.nombre_servicio}} - {{servicio_perso.id}}</p-check>          
+                </div>
+                <!-- End Servicios -->
+
+                <div class="form-group">
+                  <button class="form-control btn-otros"><span>Otros</span><i class="fa fa-plus-circle"></i></button>
+                </div>
+              </div>
+            </div>
+            </div>
+          </div>
+
+        </div>
+      
+  </form>
 </template>
 
 <script>
     export default {
         mounted() {
-            //console.log(this.$userId)
 
             this.listarServicios();
 
@@ -242,7 +180,7 @@
                 errorServicio : 0,
                 erroresServicio: [],
                 arServicios : [],
-                arServiciosProfesional : [],
+                arServiciosPersonalizados : [],
                 idusuario : 0,
                 nombre_servicio : '',
                 categoria_servicio : '',
@@ -260,11 +198,15 @@
 
                       var respuesta= response.data;
                       me.arServicios = respuesta.servicios;
-                      me.arServiciosProfesional = respuesta.servicios_x_profesional;
-                      
+                      me.arServiciosPersonalizados = respuesta.servicios_personalizados;
 
                   }).catch(function (error) {  console.log(error);     });
                 
+            },
+            filtrarPor(servicios, value) {
+              return servicios.filter( servicios => {
+                    return servicios.categoria_servicio.indexOf(value) > -1;
+              })
             },
             limpiarCampos(){
 
@@ -283,18 +225,23 @@
                 return me.errorServicio;
 
             },
-            registrarServicio(){
+            checkServicio(servicio){
 
-/*
+              
+              console.log(servicio);
+              //console.log(servicio.checked === servicio.no);
+
+              //checkedServicios
+
                   let me = this;
 
-                  if(me.validarOtroServicio()){
+                  /*if(me.validarOtroServicio()){
                     Swal.fire('ERROR', me.erroresServicio.toString(),'error');
                     return;
-                  }
+                  }*/
 
 
-                  axios.post('servicios-profesional/registrar', {
+                 /* axios.post('servicios-profesional/registrar', {
                     'idusuario' : me.$idusuario,
                     'opcion_tarifa' : opcion,
                     'costo_tarifa' : tarifa,
@@ -316,7 +263,9 @@
                   });*/
 
             },
-            eliminarTarifa(data = [], index){
+            checkServicioPersonalizado(data = [], index){
+            },
+            eliminarServicio(data = [], index){
 
                  /* let me = this;
 

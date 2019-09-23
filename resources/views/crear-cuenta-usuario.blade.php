@@ -100,8 +100,6 @@
 
         $(document).ready(function(){
 
-
-
             // validate signup form on keyup and submit
             $("#form-cuenta-usuario").validate({
               ignore: ":hidden",
@@ -202,8 +200,6 @@
 
             // External Button Events
             $("#finish-btn").on("click", function() {
-                // Reset wizard
-                //$('#smartwizard').smartWizard("reset");
                 alert('Finish Clicked');
                 return true;
             });
@@ -215,11 +211,6 @@
             });
 
             $("#next-btn").on("click", function() {
-
-              //var form_usuario = $("#form-cuenta-usuario");
-		          //var fields = form_usuario.find(":input");
-
-            //console.log(fields);
 
                   if ( $("#form-cuenta-usuario").valid() ){        
                     $('#smartwizard').smartWizard("next");

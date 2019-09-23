@@ -182,9 +182,14 @@ Route::group(['middleware'=>['auth']],function(){
 
 
             
-            Route::get('fotos-videos-profesional', function () {
+            Route::get('fotos-profesional', function () {
                 return view('forms-perfil-profesional.fotos-videos-profesional');
             });
+
+            Route::post('fotos-profesional/subir', 'FotoProfesionalController@fileStore')->name('fotos-profesional/subir');
+
+
+
             
             Route::get('creditos-profesional', function () {
                 return view('forms-perfil-profesional.creditos-profesional');

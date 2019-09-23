@@ -15,8 +15,10 @@ class CreateFotoProfesionalTable extends Migration
     {
         Schema::create('foto_profesional', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('archivo_foto');
-            $table->timestamps();
+            $table->integer('idusuario')->unsigned();
+            $table->string('url_foto');
+            $table->foreign('idusuario')->references('id')->on('usuarios');
+            //$table->timestamps();
         });
     }
 

@@ -23,7 +23,7 @@
           <button type="button" class="btn btn-primary"><i class="icon-cargar-archivo cargar"></i>SUBIR</button>
         </div>
           
-          <h5 class="formulario-titulos">Cargar foto de tu documento de identidad:</h5>
+        <h5 class="formulario-titulos">Cargar foto de tu documento de identidad:</h5>
 
         <div class="cargar-imagenes" id="dropzone_identidad">
           <span class="titulo-cargar-imagenes">Sube tus imágenes</span>

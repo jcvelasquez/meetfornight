@@ -16,7 +16,7 @@
 
     <li><a href="{{ url('tarifas-profesional') }}" class="{{ request()->is('tarifas-profesional') ? 'menu-lateral-usuario-active' : '' }}"><span><i class="icon-money esp-icono-bio"></i>TARIFAS</span><span><i class="fa fa-angle-right" aria-hidden="true"></i></span></a></li>
 
-    <li><a href="{{ url('fotos-videos-profesional') }}" class="{{ request()->is('fotos-videos-profesional') ? 'menu-lateral-usuario-active' : '' }}"><span><i class="icon-video esp-icono-bio"></i>FOTOS</span><span><i class="fa fa-angle-right" aria-hidden="true"></i></span></a></li>
+    <li><a href="{{ url('fotos-profesional') }}" class="{{ request()->is('fotos-videos-profesional') ? 'menu-lateral-usuario-active' : '' }}"><span><i class="icon-video esp-icono-bio"></i>FOTOS</span><span><i class="fa fa-angle-right" aria-hidden="true"></i></span></a></li>
 
     <li><a href="{{ url('creditos-profesional') }}" class="{{ request()->is('creditos-profesional') ? 'menu-lateral-usuario-active' : '' }}"><span class="resaltar"><i class="icon-moneda-nuevo-sol esp-icono-bio"></i>CRÉDITOS</span><span><i class="fa fa-angle-right" aria-hidden="true"></i></span></a></li>
 

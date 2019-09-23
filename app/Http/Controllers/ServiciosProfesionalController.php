@@ -7,23 +7,60 @@ use App\ServiciosXProfesional;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Arr;
+
 
 class ServiciosProfesionalController extends Controller
 {
 
     
+  
     public function listar()
     {
 
 
-        $servicios = DB::table('servicios_profesional')->where('estado_servicio', '=', 1)
-                                                     ->where('es_admin', '=', 1)->get();
+        $idusuario = Auth::user()->id;
+        $servicios = ServiciosProfesional::where('estado_servicio', 1)->where('es_admin', 1)->get();
+        $seleccionados = ServiciosXProfesional::where('idusuario', '=', $idusuario)->where('idservicio', '!=', NULL)->get();
+
+        //SELECCIONADOS
+        foreach ($servicios as $serv) {
+
+            if( $this->checkSeleccionado($seleccionados, $serv->id) ){
+                data_set($serv, 'es_marcado', '1');
+            }else{
+                data_set($serv, 'es_marcado', '0');
+            }
+            
+        }
 
 
-        $servicios_x_profesional = ServiciosXProfesional::all();
+        //PERSONALIZADOS
+        $servicios_personalizados = ServiciosXProfesional::where('idservicio', NULL)->where('idusuario', '=', $idusuario)->get();
 
-        return ['servicios' => $servicios, 'servicios_x_profesional' => $servicios_x_profesional];  
+        foreach ($servicios_personalizados as $serv_pers) {
+
+            data_set($serv_pers, 'es_marcado', '1');
+            
+        }
+
+        return [ 'servicios' => $servicios, 'servicios_personalizados' => $servicios_personalizados ];  
       
+
+    }
+
+    public function checkSeleccionado($seleccionados, $id){
+
+        foreach ($seleccionados as $selec) {
+            
+            if($selec->idservicio == $id){
+                return true;
+                break;
+            }
+            
+        }
+
+        return false;
 
     }
 

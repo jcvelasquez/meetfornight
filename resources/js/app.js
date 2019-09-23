@@ -4,24 +4,18 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
-//require('sweetalert2/dist/sweetalert2.min.js');
-window.Swal = require('sweetalert2');
 
+
+require('./bootstrap');
+window.Dropzone = require('./dropzone');
+window.Swal = require('sweetalert2');
 window.Vue = require('vue');
 
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
+require('pretty-checkbox-vue');
 
-// const files = require.context('./', true, /\.vue$/i);
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
+import PrettyCheckbox from 'pretty-checkbox-vue';
 
-//Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.use(PrettyCheckbox);
 Vue.component('perfil-usuario', require('./components/PerfilUsuario.vue').default);
 Vue.component('planes-profesional', require('./components/PlanesProfesional.vue').default);
 Vue.component('perfil-profesional', require('./components/PerfilProfesional.vue').default);
@@ -37,12 +31,12 @@ Vue.component('estadisticas-profesional', require('./components/EstadisticasProf
 Vue.component('mensajes-profesional', require('./components/MensajesProfesional.vue').default);
 Vue.component('alerta-profesional', require('./components/AlertaProfesional.vue').default);
 Vue.component('valoracion-profesional', require('./components/ValoracionProfesional.vue').default);
-
-//
 Vue.component('listado-profesionales', require('./components/ListadoProfesionales.vue').default);
 
 
 Vue.prototype.$idusuario = document.querySelector("meta[name='user-id']").getAttribute('content');
+Vue.prototype.$csrf_token = document.querySelector("meta[name='csrf-token']").getAttribute('content');
+
 
 
 /**

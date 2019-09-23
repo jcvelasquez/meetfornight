@@ -3,6 +3,7 @@
 
   @include('header')
 
+
   <body class="flotando">
 
 
@@ -81,7 +82,7 @@
               <div id="widget">
                   @yield('content')
               </div>
-              
+                 
           </div>
         </div>
       </div>
@@ -89,8 +90,11 @@
 
       @include('footers.footer-perfil')
 
-      <script src="{{ asset('js/app.js') }}"></script>
-      <script src="{{ asset('js/meetfornight.js') }}"></script>
+     
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/meetfornight.js') }}"></script>
+
+  
 
   </body>
 

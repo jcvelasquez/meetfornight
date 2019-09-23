@@ -17,7 +17,7 @@ $(document).ready(function($) {
       });
 
       // setup the repeater
-      $('.repeater').repeater({
+      /*$('.repeater').repeater({
         show: function () {
           $(this).slideDown();
         },
@@ -27,25 +27,18 @@ $(document).ready(function($) {
           }
         },
         isFirstItemUndeletable: true
-      });
+      });*/
 
       $(".rango-perfil").asRange({
         range: false,
         limit: false
       });
 
-
-      
-
-    
-
       $('#sexo').on('change', function(){
 
         console.log("test")
 
       })
-
-
 
 });
 
