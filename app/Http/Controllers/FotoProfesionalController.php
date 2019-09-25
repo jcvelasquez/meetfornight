@@ -5,10 +5,9 @@ namespace App\Http\Controllers;
 use App\FotoProfesional;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Auth;
-
-
 
 class FotoProfesionalController extends Controller
 {
@@ -18,6 +17,17 @@ class FotoProfesionalController extends Controller
     public function __construct()
     {
         $this->fotos_profesional_path = public_path('fotos-profesionales');
+    }
+
+    public function list(Request $request)
+    {
+
+        //$idusuario = Auth::user()->id;
+
+        $fotos = FotoProfesional::where('idusuario', '=', 34)->get();
+
+        return ['fotos' => $fotos];  
+
     }
 
     /*

@@ -7,11 +7,9 @@
       <span class="haz-click">Haz click</span>
       <button type="button" class="btn btn-primary"><i class="icon-cargar-archivo cargar"></i>SUBIR</button>
 
-
       <div class="fallback">
         <input name="file" type="files" multiple accept="image/jpeg, image/png, image/jpg" />
       </div>
-            
 
     </div>
 
@@ -82,7 +80,6 @@
 export default {
    mounted() {
       
-      
       this.listarFotos();
       this.initDropZone();   
 
@@ -90,7 +87,8 @@ export default {
    data(){
       return {
           idusuario : 0,
-          csrf_token : 0
+          csrf_token : 0,
+          arFotos : []
       }
   },
    methods:{
@@ -101,138 +99,72 @@ export default {
         var total_photos_counter = 0;
 
         var DropFotos = new Dropzone("#dropzone_fotos", { url: "/fotos-profesional/subir", 
-                                                          acceptedFiles: ".jpeg,.jpg,.png,.gif",
-                                                          clickable: "#dropzone_fotos button", 
-                                                          maxFiles: 1, 
-                                                          addRemoveLinks:true,
-                                                          headers: {
-                                                            'X-CSRF-TOKEN': me.$csrf_token
-                                                          },
-                                                          data: {idusuario: me.$idusuario },
-                                                          error: function(file, response){
-                                                              return false;
-                                                          },
-                                                          init: function () {
-                                                              this.on("removedfile", function (file) {
-                                                                  $.post({
-                                                                      url: '/fotos-profesional/eliminar',
-                                                                      data: {id: file.name, _token: me.$csrf_token },
-                                                                      dataType: 'json',
-                                                                      success: function (data) {
-                                                                          total_photos_counter--;
-                                                                          //$("#counter").text("# " + total_photos_counter);
-                                                                      }
-                                                                  });
-                                                              });
-                                                          },
-                                                          success: function (file, done) {
-                                                              total_photos_counter++;
+                        acceptedFiles: ".jpeg,.jpg,.png,.gif",
+                        clickable: "#dropzone_fotos button", 
+                        maxFiles: 1, 
+                        addRemoveLinks:true,
+                        headers: {
+                          'X-CSRF-TOKEN': me.$csrf_token
+                        },
+                        data: {idusuario: me.$idusuario },
+                        error: function(file, response){
+                            return false;
+                        },
+                        init: function () {
+                            this.on("removedfile", function (file) {
+                                $.post({
+                                    url: '/foto-profesional/eliminar',
+                                    data: {id: file.name, _token: me.$csrf_token },
+                                    dataType: 'json',
+                                    success: function (data) {
+                                        //total_photos_counter--;
+                                        //$("#counter").text("# " + total_photos_counter);
+                                    }
+                                });
+                            });
+                        },
+                        success: function (file, done) {
+                            total_photos_counter++;
 
-                                                              console.log("# " + total_photos_counter);
+                            console.log("# " + total_photos_counter);
 
-                                                          }
-                                                          /*removedfile: function(file) 
-                                                          {
-                                                              var name = file.upload.filename;
-                                                              $.ajax({
-                                                                  headers: {
-                                                                              'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                                                                          },
-                                                                  type: 'POST',
-                                                                  url: '{{ url("image/delete") }}',
-                                                                  data: {filename: name},
-                                                                  success: function (data){
-                                                                      console.log("File has been successfully removed!!");
-                                                                  },
-                                                                  error: function(e) {
-                                                                      console.log(e);
-                                                                  }});
-                                                                  var fileRef;
-                                                                  return (fileRef = file.previewElement) != null ? 
-                                                                  fileRef.parentNode.removeChild(file.previewElement) : void 0;
-                                                          }*/
-                                               });
-
-         /*Dropzone.options.dropzone_fotos = {
-            accept: function (file, done) {
-              if (file.type != "application/vnd.ms-excel" && file.type != "image/jpeg, image/png, image/jpg") {
-                done("Error! Files of this type are not accepted");
-              } else {
-                done();
-              }
-            }
-          }
-
-        Dropzone.options.dropzone_fotos = {
-          acceptedFiles: "image/jpeg, image/png, image/jpg"
-        }*/
-
-          /*var total_photos_counter = 0;
-
-          Dropzone.options.dropzone_fotos = {
-              uploadMultiple: true,
-              parallelUploads: 2,
-              maxFilesize: 16,
-              previewTemplate: document.querySelector('#preview').innerHTML,
-              addRemoveLinks: true,
-              dictRemoveFile: 'Remove file',
-              dictFileTooBig: 'Image is larger than 16MB',
-              timeout: 10000,
-          
-              init: function () {
-                  this.on("removedfile", function (file) {
-                      $.post({
-                          url: '/images-delete',
-                          data: {id: file.name, _token: $('[name="_token"]').val()},
-                          dataType: 'json',
-                          success: function (data) {
-                              total_photos_counter--;
-                              $("#counter").text("# " + total_photos_counter);
-                          }
-                      });
-                  });
-              },
-              success: function (file, done) {
-                  total_photos_counter++;
-                  $("#counter").text("# " + total_photos_counter);
-              }
-          };
-          Dropzone.options.dropzone_fotos = false;
-          Dropzone.autoDiscover = false;
-          Dropzone.options.dropzone_fotos =
-         {
-            maxFilesize: 12,
-            renameFile: function(file) {
-                var dt = new Date();
-                var time = dt.getTime();
-               return time+file.name;
-            },
-            acceptedFiles: ".jpeg,.jpg,.png,.gif",
-            addRemoveLinks: true,
-            timeout: 5000,
-            success: function(file, response) 
-            {
-                console.log(response);
-            },
-            error: function(file, response)
-            {
-               return false;
-            }
-         }*/
-
-
+                        }
+                        /*removedfile: function(file) 
+                        {
+                            var name = file.upload.filename;
+                            $.ajax({
+                                headers: {
+                                            'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                                        },
+                                type: 'POST',
+                                url: '{{ url("image/delete") }}',
+                                data: {filename: name},
+                                success: function (data){
+                                    console.log("File has been successfully removed!!");
+                                },
+                                error: function(e) {
+                                    console.log(e);
+                                }});
+                                var fileRef;
+                                return (fileRef = file.previewElement) != null ? 
+                                fileRef.parentNode.removeChild(file.previewElement) : void 0;
+                        }*/
+                        });
      },
      listarFotos(){
 
-       /* let me = this;
+      let me = this;
 
-        axios.get('/servicios-profesional/listar').then(function (response) {
+        axios.get('/foto-profesional/listar').then(function (response) {
+
             var respuesta= response.data;
-            me.arServicios = respuesta.servicios;
-            me.arServiciosPersonalizados = respuesta.servicios_personalizados;
-        }).catch(function (error) {  console.log(error);     });*/
+            me.arFotos = respuesta.fotos;
 
-    },
+            console.log(me.arFotos);
+
+        }).catch(function (error) {  console.log(error);     });
+
+    }
 
   }
 };

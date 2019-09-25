@@ -3018,8 +3018,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     this.listarFotos();
@@ -3028,7 +3026,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       idusuario: 0,
-      csrf_token: 0
+      csrf_token: 0,
+      arFotos: []
     };
   },
   methods: {
@@ -3053,14 +3052,14 @@ __webpack_require__.r(__webpack_exports__);
         init: function init() {
           this.on("removedfile", function (file) {
             $.post({
-              url: '/fotos-profesional/eliminar',
+              url: '/foto-profesional/eliminar',
               data: {
                 id: file.name,
                 _token: me.$csrf_token
               },
               dataType: 'json',
-              success: function success(data) {
-                total_photos_counter--; //$("#counter").text("# " + total_photos_counter);
+              success: function success(data) {//total_photos_counter--;
+                //$("#counter").text("# " + total_photos_counter);
               }
             });
           });
@@ -3091,78 +3090,16 @@ __webpack_require__.r(__webpack_exports__);
         }*/
 
       });
-      /*Dropzone.options.dropzone_fotos = {
-         accept: function (file, done) {
-           if (file.type != "application/vnd.ms-excel" && file.type != "image/jpeg, image/png, image/jpg") {
-             done("Error! Files of this type are not accepted");
-           } else {
-             done();
-           }
-         }
-       }
-       Dropzone.options.dropzone_fotos = {
-       acceptedFiles: "image/jpeg, image/png, image/jpg"
-      }*/
-
-      /*var total_photos_counter = 0;
-        Dropzone.options.dropzone_fotos = {
-          uploadMultiple: true,
-          parallelUploads: 2,
-          maxFilesize: 16,
-          previewTemplate: document.querySelector('#preview').innerHTML,
-          addRemoveLinks: true,
-          dictRemoveFile: 'Remove file',
-          dictFileTooBig: 'Image is larger than 16MB',
-          timeout: 10000,
-      
-          init: function () {
-              this.on("removedfile", function (file) {
-                  $.post({
-                      url: '/images-delete',
-                      data: {id: file.name, _token: $('[name="_token"]').val()},
-                      dataType: 'json',
-                      success: function (data) {
-                          total_photos_counter--;
-                          $("#counter").text("# " + total_photos_counter);
-                      }
-                  });
-              });
-          },
-          success: function (file, done) {
-              total_photos_counter++;
-              $("#counter").text("# " + total_photos_counter);
-          }
-      };
-      Dropzone.options.dropzone_fotos = false;
-      Dropzone.autoDiscover = false;
-      Dropzone.options.dropzone_fotos =
-      {
-        maxFilesize: 12,
-        renameFile: function(file) {
-            var dt = new Date();
-            var time = dt.getTime();
-           return time+file.name;
-        },
-        acceptedFiles: ".jpeg,.jpg,.png,.gif",
-        addRemoveLinks: true,
-        timeout: 5000,
-        success: function(file, response) 
-        {
-            console.log(response);
-        },
-        error: function(file, response)
-        {
-           return false;
-        }
-      }*/
     },
     listarFotos: function listarFotos() {
-      /* let me = this;
-         axios.get('/servicios-profesional/listar').then(function (response) {
-           var respuesta= response.data;
-           me.arServicios = respuesta.servicios;
-           me.arServiciosPersonalizados = respuesta.servicios_personalizados;
-       }).catch(function (error) {  console.log(error);     });*/
+      var me = this;
+      axios.get('/foto-profesional/listar').then(function (response) {
+        var respuesta = response.data;
+        me.arFotos = respuesta.fotos;
+        console.log(me.arFotos);
+      })["catch"](function (error) {
+        console.log(error);
+      });
     }
   }
 });
