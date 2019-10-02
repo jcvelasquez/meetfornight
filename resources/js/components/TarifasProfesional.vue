@@ -187,6 +187,7 @@
                       <option value="Viaje de negocios interno">Viaje de negocios interno</option>
                     </select>
                   </div>
+                  
                   <div class="col-lg col-sm-12 espacio-campos">
                     <input type="number" class="form-control" name="extra_tarifa" v-model="extra_tarifa" placeholder="S/">
                   </div>
