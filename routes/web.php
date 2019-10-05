@@ -4,11 +4,6 @@
 //use App\Http\Middleware\Profesional;
 use App\Http\Middleware\CheckRol;
 
-//VISTA DE PERFIL
-Route::get('perfil', function () {
-    return view('perfil');
-});
-
 
 
 Route::get('usuarios', 'UsuarioController@listarProfesionales');
@@ -34,11 +29,18 @@ Route::get('email/verify/{id}', 'Auth\VerificationController@verify')->name('ver
 Route::get('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
 
 
+Route::get('/', function () {
+    return view('home');
+});
+
+
+//VISTA DE PERFIL
+Route::get('perfil/{apodo}',  'PerfilController@mostrar');
+
+
+
 Route::group(['middleware'=>['guest']],function(){
   
-        Route::get('/', function () {
-            return view('home');
-        });
 
         Route::get('crear-cuenta', function () {
             return view('crear-cuenta');

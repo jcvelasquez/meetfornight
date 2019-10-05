@@ -24,6 +24,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "pretty-checkbox": "^3.0.3",
         "pretty-checkbox-vue": "^1.1.9",
         "sweetalert2": "^8.17.1"
     }

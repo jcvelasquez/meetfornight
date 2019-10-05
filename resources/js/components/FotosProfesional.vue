@@ -58,20 +58,22 @@
     </div>
 
 
-    <div class="img-cargada">
+    <div class="img-cargada" v-for="(foto, index) in arFotos" :key="foto.id">
       <div class="img-cargada-izq">
-        <img src="img/galeria/galeria-1.png" />
+        <img :src=" 'fotos-profesionales/' + foto.url_foto" />
         <div class="img-cargada-datos">
-          <span class="nom-img">foto-1.jpg</span>
+          <span class="nom-img" v-text="foto.url_foto"></span>
           <span class="peso-img">234 KB</span>
         </div>
       </div>
       <div class="img-cargada-der">
-        <button class="btn btn-primary x-cargar-img">
+        <button class="btn btn-primary x-cargar-img" @click="eliminarFoto(foto, index)">
           <i class="icon-x"></i>
         </button>
       </div>
     </div>
+
+
 
   </form>
 </template>
@@ -101,7 +103,7 @@ export default {
         var DropFotos = new Dropzone("#dropzone_fotos", { url: "/fotos-profesional/subir", 
                         acceptedFiles: ".jpeg,.jpg,.png,.gif",
                         clickable: "#dropzone_fotos button", 
-                        maxFiles: 1, 
+                        maxFiles: 5, 
                         addRemoveLinks:true,
                         headers: {
                           'X-CSRF-TOKEN': me.$csrf_token
@@ -155,7 +157,7 @@ export default {
 
       let me = this;
 
-        axios.get('/foto-profesional/listar').then(function (response) {
+        axios.get('/fotos-profesional/listar').then(function (response) {
 
             var respuesta= response.data;
             me.arFotos = respuesta.fotos;

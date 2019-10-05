@@ -4,11 +4,8 @@ use Illuminate\Database\Seeder;
 
 class ServiciosProfesionalSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
+
+    
     public function run()
     {
         
