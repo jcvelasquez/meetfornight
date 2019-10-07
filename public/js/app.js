@@ -2567,117 +2567,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log('Component mounted.');
@@ -4164,6 +4053,32 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log("Component mounted.");
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ReservaPerfil.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ReservaPerfil.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  mounted: function mounted() {
+    console.log('Component mounted.');
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      plugins: ['dayGrid'],
+      defaultView: 'dayGridWeek'
+    });
   }
 });
 
@@ -39938,6 +39853,22 @@ Popper.Defaults = Defaults;
 
 /***/ }),
 
+/***/ "./node_modules/pretty-checkbox-vue/radio.js":
+/*!***************************************************!*\
+  !*** ./node_modules/pretty-checkbox-vue/radio.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/*!
+ * pretty-checkbox-vue v1.1.9
+ * (c) 2017-2018 Hamed Ehtesham
+ * Released under the MIT License.
+ */
+!function(e,t){ true?module.exports=t():undefined}("undefined"!=typeof self?self:this,function(){return function(e){var t={};function i(s){if(t[s])return t[s].exports;var n=t[s]={i:s,l:!1,exports:{}};return e[s].call(n.exports,n,n.exports,i),n.l=!0,n.exports}return i.m=e,i.c=t,i.d=function(e,t,s){i.o(e,t)||Object.defineProperty(e,t,{configurable:!1,enumerable:!0,get:s})},i.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return i.d(t,"a",t),t},i.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},i.p="",i(i.s=1)}([function(e,t){e.exports=function(e,t,i,s,n,r){var o,a=e=e||{},u=typeof e.default;"object"!==u&&"function"!==u||(o=e,a=e.default);var h,l="function"==typeof a?a.options:a;if(t&&(l.render=t.render,l.staticRenderFns=t.staticRenderFns,l._compiled=!0),i&&(l.functional=!0),n&&(l._scopeId=n),r?(h=function(e){(e=e||this.$vnode&&this.$vnode.ssrContext||this.parent&&this.parent.$vnode&&this.parent.$vnode.ssrContext)||"undefined"==typeof __VUE_SSR_CONTEXT__||(e=__VUE_SSR_CONTEXT__),s&&s.call(this,e),e&&e._registeredComponents&&e._registeredComponents.add(r)},l._ssrRegister=h):s&&(h=s),h){var d=l.functional,c=d?l.render:l.beforeCreate;d?(l._injectStyles=h,l.render=function(e,t){return h.call(t),c(e,t)}):l.beforeCreate=c?[].concat(c,h):[h]}return{esModule:o,exports:a,options:l}}},function(e,t,i){var s=i(0)(i(2),null,!1,null,null,null);s.options.__file="src/PrettyRadio.vue",e.exports=s.exports},function(e,t,i){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var s=i(3),n={name:"pretty-radio",input_type:"radio",model:s.model,props:s.props,data:s.data,computed:s.computed,watch:s.watch,mounted:s.mounted,methods:s.methods,render:s.render};t.default=n},function(e,t,i){var s=i(0)(i(4),i(5),!1,null,null,null);s.options.__file="src/PrettyInput.vue",e.exports=s.exports},function(e,t,i){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.default={name:"pretty-input",model:{prop:"modelValue",event:"change"},props:{type:String,name:String,value:{},modelValue:{},trueValue:{},falseValue:{},checked:{},disabled:{},required:{},indeterminate:{},color:String,offColor:String,hoverColor:String,indeterminateColor:String,toggle:{},hover:{},focus:{}},data:function(){return{m_checked:void 0,default_mode:!1}},computed:{_type:function(){return this.$options.input_type?this.$options.input_type:this.type?this.type:"checkbox"},shouldBeChecked:function(){return void 0!==this.modelValue?"radio"===this._type?this.modelValue===this.value:this.modelValue instanceof Array?this.modelValue.includes(this.value):this._trueValue?this.modelValue===this.trueValue:"string"==typeof this.modelValue||!!this.modelValue:void 0===this.m_checked?this.m_checked="string"==typeof this.checked||!!this.checked:this.m_checked},_disabled:function(){return"string"==typeof this.disabled||!!this.disabled},_required:function(){return"string"==typeof this.required||!!this.required},_indeterminate:function(){return"string"==typeof this.indeterminate||!!this.indeterminate},_trueValue:function(){return"string"==typeof this.trueValue?this.trueValue:!!this.trueValue},_falseValue:function(){return"string"==typeof this.falseValue?this.falseValue:!!this.falseValue},_toggle:function(){return"string"==typeof this.toggle||!!this.toggle},_hover:function(){return"string"==typeof this.hover||!!this.hover},_focus:function(){return"string"==typeof this.focus||!!this.focus},classes:function(){return{pretty:!0,"p-default":this.default_mode,"p-round":"radio"===this._type&&this.default_mode,"p-toggle":this._toggle,"p-has-hover":this._hover,"p-has-focus":this._focus,"p-has-indeterminate":this._indeterminate}},onClasses:function(){var e={state:!0,"p-on":this._toggle};return this.color&&(e["p-"+this.color]=!0),e},offClasses:function(){var e={state:!0,"p-off":!0};return this.offColor&&(e["p-"+this.offColor]=!0),e},hoverClasses:function(){var e={state:!0,"p-is-hover":!0};return this.hoverColor&&(e["p-"+this.hoverColor]=!0),e},indeterminateClasses:function(){var e={state:!0,"p-is-indeterminate":!0};return this.indeterminateColor&&(e["p-"+this.indeterminateColor]=!0),e}},watch:{checked:function(e){this.m_checked=e},indeterminate:function(e){this.$refs.input.indeterminate=e}},mounted:function(){this.$vnode.data&&!this.$vnode.data.staticClass&&(this.default_mode=!0),this._indeterminate&&(this.$refs.input.indeterminate=!0),this.$el.setAttribute("p-"+this._type,"")},methods:{updateInput:function(e){if("radio"!==this._type){this.$emit("update:indeterminate",!1);var t=e.target.checked;if(this.m_checked=t,this.modelValue instanceof Array){var i=[].concat(function(e){if(Array.isArray(e)){for(var t=0,i=Array(e.length);t<e.length;t++)i[t]=e[t];return i}return Array.from(e)}(this.modelValue));t?i.push(this.value):i.splice(i.indexOf(this.value),1),this.$emit("change",i)}else this.$emit("change",t?!this._trueValue||this.trueValue:!!this._falseValue&&this.falseValue)}else this.$emit("change",this.value)}}}},function(e,t,i){var s=function(){var e=this.$createElement,t=this._self._c||e;return t("div",{class:this.classes},[t("input",{ref:"input",attrs:{type:this._type,name:this.name,disabled:this._disabled,required:this._required},domProps:{checked:this.shouldBeChecked,value:this.value},on:{change:this.updateInput}}),this._v(" "),t("div",{class:this.onClasses},[this._t("extra"),this._v(" "),t("label",[this._t("default")],2)],2),this._v(" "),this._toggle?t("div",{class:this.offClasses},[this._t("off-extra"),this._v(" "),this._t("off-label")],2):this._e(),this._v(" "),this._hover?t("div",{class:this.hoverClasses},[this._t("hover-extra"),this._v(" "),this._t("hover-label")],2):this._e(),this._v(" "),this._indeterminate?t("div",{class:this.indeterminateClasses},[this._t("indeterminate-extra"),this._v(" "),this._t("indeterminate-label")],2):this._e()])};s._withStripped=!0,e.exports={render:s,staticRenderFns:[]}}])});
+
+/***/ }),
+
 /***/ "./node_modules/process/browser.js":
 /*!*****************************************!*\
   !*** ./node_modules/process/browser.js ***!
@@ -40328,6 +40259,718 @@ process.umask = function() { return 0; };
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js"), __webpack_require__(/*! ./../process/browser.js */ "./node_modules/process/browser.js")))
+
+/***/ }),
+
+/***/ "./node_modules/sticky-sidebar/src/sticky-sidebar.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/sticky-sidebar/src/sticky-sidebar.js ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/**
+ * Sticky Sidebar JavaScript Plugin.
+ * @version 3.3.1
+ * @author Ahmed Bouhuolia <a.bouhuolia@gmail.com>
+ * @license The MIT License (MIT)
+ */
+const StickySidebar = (() => {
+  
+    // ---------------------------------
+    // # Define Constants
+    // ---------------------------------
+    //
+    const EVENT_KEY = '.stickySidebar';
+    const VERSION   = '3.3.1';
+  
+    const DEFAULTS = {
+      
+      /**
+       * Additional top spacing of the element when it becomes sticky.
+       * @type {Numeric|Function}
+       */
+      topSpacing: 0,
+  
+      /**
+       * Additional bottom spacing of the element when it becomes sticky.
+       * @type {Numeric|Function}
+       */
+      bottomSpacing: 0,
+  
+      /**
+       * Container sidebar selector to know what the beginning and end of sticky element.
+       * @type {String|False}
+       */
+      containerSelector: false,
+  
+      /**
+       * Inner wrapper selector.
+       * @type {String}
+       */
+      innerWrapperSelector: '.inner-wrapper-sticky',
+  
+      /**
+       * The name of CSS class to apply to elements when they have become stuck.
+       * @type {String|False}
+       */
+      stickyClass: 'is-affixed',
+  
+      /**
+       * Detect when sidebar and its container change height so re-calculate their dimensions.
+       * @type {Boolean}
+       */
+      resizeSensor: true,
+  
+      /**
+       * The sidebar returns to its normal position if its width below this value.
+       * @type {Numeric}
+       */
+      minWidth: false
+    };
+  
+    // ---------------------------------
+    // # Class Definition
+    // ---------------------------------
+    //
+    /**
+     * Sticky Sidebar Class.
+     * @public
+     */
+    class StickySidebar{
+  
+      /**
+       * Sticky Sidebar Constructor.
+       * @constructor
+       * @param {HTMLElement|String} sidebar - The sidebar element or sidebar selector.
+       * @param {Object} options - The options of sticky sidebar.
+       */
+      constructor(sidebar, options = {}){
+        this.options = StickySidebar.extend(DEFAULTS, options);
+  
+        // Sidebar element query if there's no one, throw error.
+        this.sidebar = ('string' === typeof sidebar ) ? document.querySelector(sidebar) : sidebar;
+        if( 'undefined' === typeof this.sidebar )
+          throw new Error("There is no specific sidebar element.");
+  
+        this.sidebarInner = false;
+        this.container = this.sidebar.parentElement;
+  
+        // Current Affix Type of sidebar element.
+        this.affixedType = 'STATIC';
+        this.direction = 'down';
+        this.support = {
+          transform:   false,
+          transform3d: false
+        };
+  
+        this._initialized = false;
+        this._reStyle = false;
+        this._breakpoint = false;
+        this._resizeListeners = [];
+        
+        // Dimensions of sidebar, container and screen viewport.
+        this.dimensions = {
+          translateY: 0,
+          topSpacing: 0,
+          lastTopSpacing: 0,
+          bottomSpacing: 0,
+          lastBottomSpacing: 0,
+          sidebarHeight: 0,
+          sidebarWidth: 0,
+          containerTop: 0,
+          containerHeight: 0,
+          viewportHeight: 0,
+          viewportTop: 0, 
+          lastViewportTop: 0,
+        };
+  
+        // Bind event handlers for referencability.
+        ['handleEvent'].forEach( (method) => {
+          this[method] = this[method].bind(this);
+        });
+  
+        // Initialize sticky sidebar for first time.
+        this.initialize();
+      }
+  
+      /**
+       * Initializes the sticky sidebar by adding inner wrapper, define its container, 
+       * min-width breakpoint, calculating dimensions, adding helper classes and inline style.
+       * @private
+       */
+      initialize(){
+        this._setSupportFeatures();
+  
+        // Get sticky sidebar inner wrapper, if not found, will create one.
+        if( this.options.innerWrapperSelector ){
+          this.sidebarInner = this.sidebar.querySelector(this.options.innerWrapperSelector);
+  
+          if( null === this.sidebarInner )
+            this.sidebarInner = false;
+        }
+        
+        if( ! this.sidebarInner ){
+          let wrapper = document.createElement('div');
+          wrapper.setAttribute('class', 'inner-wrapper-sticky');
+          this.sidebar.appendChild(wrapper);
+  
+          while( this.sidebar.firstChild != wrapper )
+            wrapper.appendChild(this.sidebar.firstChild);
+  
+          this.sidebarInner = this.sidebar.querySelector('.inner-wrapper-sticky');
+        }
+  
+        // Container wrapper of the sidebar.
+        if( this.options.containerSelector ){
+          let containers = document.querySelectorAll(this.options.containerSelector);
+          containers = Array.prototype.slice.call(containers);
+  
+          containers.forEach((container, item) => {
+            if( ! container.contains(this.sidebar) ) return;
+            this.container = container;
+          });
+  
+          if( ! containers.length )
+            throw new Error("The container does not contains on the sidebar.");
+        }
+        
+        // If top/bottom spacing is not function parse value to integer.
+        if( 'function' !== typeof this.options.topSpacing )
+          this.options.topSpacing = parseInt(this.options.topSpacing) || 0;
+  
+        if( 'function' !== typeof this.options.bottomSpacing )
+          this.options.bottomSpacing = parseInt(this.options.bottomSpacing) || 0;
+            
+        // Breakdown sticky sidebar if screen width below `options.minWidth`.
+        this._widthBreakpoint();
+  
+        // Calculate dimensions of sidebar, container and viewport.
+        this.calcDimensions();
+  
+        // Affix sidebar in proper position.
+        this.stickyPosition();
+  
+        // Bind all events.
+        this.bindEvents();
+        
+        // Inform other properties the sticky sidebar is initialized.
+        this._initialized = true;
+      }
+  
+      /**
+       * Bind all events of sticky sidebar plugin.
+       * @protected
+       */
+      bindEvents(){
+        window.addEventListener('resize', this, {passive: true, capture: false});
+        window.addEventListener('scroll', this, {passive: true, capture: false});
+  
+        this.sidebar.addEventListener('update' + EVENT_KEY, this);
+  
+        if( this.options.resizeSensor && 'undefined' !== typeof ResizeSensor ){
+          new ResizeSensor(this.sidebarInner, this.handleEvent);
+          new ResizeSensor(this.container, this.handleEvent);
+        }
+      }
+  
+      /**
+       * Handles all events of the plugin.
+       * @param {Object} event - Event object passed from listener.
+       */
+      handleEvent(event){
+        this.updateSticky(event);
+      }
+  
+      /**
+       * Calculates dimensions of sidebar, container and screen viewpoint
+       * @public
+       */
+      calcDimensions(){
+        if( this._breakpoint ) return;
+        var dims = this.dimensions;
+  
+        // Container of sticky sidebar dimensions.
+        dims.containerTop    = StickySidebar.offsetRelative(this.container).top;
+        dims.containerHeight = this.container.clientHeight;
+        dims.containerBottom = dims.containerTop + dims.containerHeight;
+  
+        // Sidebar dimensions.
+        dims.sidebarHeight = this.sidebarInner.offsetHeight;
+        dims.sidebarWidth  = this.sidebar.offsetWidth;
+        
+        // Screen viewport dimensions.
+        dims.viewportHeight = window.innerHeight;
+  
+        this._calcDimensionsWithScroll();
+      }
+  
+      /**
+       * Some dimensions values need to be up-to-date when scrolling the page.
+       * @private
+       */
+      _calcDimensionsWithScroll(){
+        var dims = this.dimensions;
+  
+        dims.sidebarLeft = StickySidebar.offsetRelative(this.sidebar).left;
+  
+        dims.viewportTop    = document.documentElement.scrollTop || document.body.scrollTop;
+        dims.viewportBottom = dims.viewportTop + dims.viewportHeight;
+        dims.viewportLeft   = document.documentElement.scrollLeft || document.body.scrollLeft;
+  
+        dims.topSpacing    = this.options.topSpacing;
+        dims.bottomSpacing = this.options.bottomSpacing;
+  
+        if( 'function' === typeof dims.topSpacing )
+            dims.topSpacing = parseInt(dims.topSpacing(this.sidebar)) || 0;
+  
+        if( 'function' === typeof dims.bottomSpacing )
+            dims.bottomSpacing = parseInt(dims.bottomSpacing(this.sidebar)) || 0;
+        
+        if( 'VIEWPORT-TOP' === this.affixedType ){
+          // Adjust translate Y in the case decrease top spacing value.
+          if( dims.topSpacing < dims.lastTopSpacing ){
+            dims.translateY += dims.lastTopSpacing - dims.topSpacing;
+            this._reStyle = true; 
+          }
+        
+        } else if( 'VIEWPORT-BOTTOM' === this.affixedType ){
+          // Adjust translate Y in the case decrease bottom spacing value.
+          if( dims.bottomSpacing < dims.lastBottomSpacing ){
+            dims.translateY += dims.lastBottomSpacing - dims.bottomSpacing;
+            this._reStyle = true;
+          }
+        }
+        
+        dims.lastTopSpacing    = dims.topSpacing;
+        dims.lastBottomSpacing = dims.bottomSpacing;
+      }
+      
+      /**
+       * Determine whether the sidebar is bigger than viewport.
+       * @public
+       * @return {Boolean}
+       */
+      isSidebarFitsViewport(){
+        return this.dimensions.sidebarHeight < this.dimensions.viewportHeight;
+      }
+  
+      /**
+       * Observe browser scrolling direction top and down.
+       */
+      observeScrollDir(){
+        var dims = this.dimensions;
+        if( dims.lastViewportTop === dims.viewportTop ) return;
+  
+        var furthest = 'down' === this.direction ? Math.min : Math.max;
+        
+        // If the browser is scrolling not in the same direction.
+        if( dims.viewportTop === furthest(dims.viewportTop, dims.lastViewportTop) )
+          this.direction = 'down' === this.direction ?  'up' : 'down';
+      }
+  
+      /**
+       * Gets affix type of sidebar according to current scrollTop and scrollLeft.
+       * Holds all logical affix of the sidebar when scrolling up and down and when sidebar 
+       * is bigger than viewport and vice versa.
+       * @public
+       * @return {String|False} - Proper affix type.
+       */
+      getAffixType(){
+        var dims = this.dimensions, affixType = false;
+  
+        this._calcDimensionsWithScroll();
+  
+        var sidebarBottom = dims.sidebarHeight + dims.containerTop;
+        var colliderTop = dims.viewportTop + dims.topSpacing;
+        var colliderBottom = dims.viewportBottom - dims.bottomSpacing;
+  
+        // When browser is scrolling top.
+        if( 'up' === this.direction ){
+          if( colliderTop <= dims.containerTop ){
+            dims.translateY = 0;
+            affixType = 'STATIC';
+  
+          } else if( colliderTop <= dims.translateY + dims.containerTop ){
+            dims.translateY = colliderTop - dims.containerTop;
+            affixType = 'VIEWPORT-TOP';
+  
+          } else if( ! this.isSidebarFitsViewport() && dims.containerTop <= colliderTop ){
+            affixType = 'VIEWPORT-UNBOTTOM';
+          }
+        // When browser is scrolling up.
+        } else {
+          // When sidebar element is not bigger than screen viewport.
+          if( this.isSidebarFitsViewport() ){
+  
+            if( dims.sidebarHeight + colliderTop >= dims.containerBottom ){
+              dims.translateY = dims.containerBottom - sidebarBottom;
+              affixType = 'CONTAINER-BOTTOM'; 
+  
+            } else if( colliderTop >= dims.containerTop ){
+              dims.translateY = colliderTop - dims.containerTop;
+              affixType = 'VIEWPORT-TOP';
+            }
+          // When sidebar element is bigger than screen viewport.
+          } else {
+      
+            if( dims.containerBottom <= colliderBottom ){
+              dims.translateY = dims.containerBottom - sidebarBottom; 
+              affixType = 'CONTAINER-BOTTOM';    
+  
+            } else if( sidebarBottom + dims.translateY <= colliderBottom ){
+              dims.translateY = colliderBottom - sidebarBottom;
+              affixType = 'VIEWPORT-BOTTOM';
+            
+            } else if( dims.containerTop + dims.translateY <= colliderTop ){
+              affixType = 'VIEWPORT-UNBOTTOM';
+            }
+          }
+        }
+  
+        // Make sure the translate Y is not bigger than container height.
+        dims.translateY = Math.max(0, dims.translateY);
+        dims.translateY = Math.min(dims.containerHeight, dims.translateY);
+  
+        dims.lastViewportTop = dims.viewportTop;
+        return affixType;
+      }
+  
+      /**
+       * Gets inline style of sticky sidebar wrapper and inner wrapper according 
+       * to its affix type.
+       * @private
+       * @param {String} affixType - Affix type of sticky sidebar.
+       * @return {Object}
+       */
+      _getStyle(affixType){
+        if( 'undefined' === typeof affixType ) return;
+  
+        var style = {inner: {}, outer: {}};
+        var dims = this.dimensions;
+  
+        switch( affixType ){
+          case 'VIEWPORT-TOP':
+            style.inner = {position: 'fixed', top: dims.topSpacing,
+                  left: dims.sidebarLeft - dims.viewportLeft, width: dims.sidebarWidth};
+            break;
+          case 'VIEWPORT-BOTTOM':
+            style.inner = {position: 'fixed', top: 'auto', left: dims.sidebarLeft,
+                  bottom: dims.bottomSpacing, width: dims.sidebarWidth};
+            break;
+          case 'CONTAINER-BOTTOM':
+          case 'VIEWPORT-UNBOTTOM':
+            let translate = this._getTranslate(0, dims.translateY + 'px');
+            
+            if( translate )
+              style.inner = {transform: translate};
+            else 
+              style.inner = {position: 'absolute', top: dims.translateY, width: dims.sidebarWidth};
+            break;
+        }
+        
+        switch( affixType ){
+          case 'VIEWPORT-TOP':
+          case 'VIEWPORT-BOTTOM':
+          case 'VIEWPORT-UNBOTTOM':
+          case 'CONTAINER-BOTTOM':
+            style.outer = {height: dims.sidebarHeight, position: 'relative'};
+            break;
+        }
+  
+        style.outer = StickySidebar.extend({height: '', position: ''}, style.outer);
+        style.inner = StickySidebar.extend({position: 'relative', top: '', left: '',
+            bottom: '', width: '',  transform: this._getTranslate()}, style.inner);
+  
+        return style;
+      }
+     
+      /**
+       * Cause the sidebar to be sticky according to affix type by adding inline
+       * style, adding helper class and trigger events.
+       * @function
+       * @protected
+       * @param {string} force - Update sticky sidebar position by force.
+       */
+      stickyPosition(force){
+        if( this._breakpoint ) return;
+  
+        force = this._reStyle || force || false;
+        
+        var offsetTop = this.options.topSpacing;
+        var offsetBottom = this.options.bottomSpacing;
+  
+        var affixType = this.getAffixType();
+        var style = this._getStyle(affixType);
+        
+        if( (this.affixedType != affixType || force) && affixType ){
+          let affixEvent = 'affix.' + affixType.toLowerCase().replace('viewport-', '') + EVENT_KEY;
+          StickySidebar.eventTrigger(this.sidebar, affixEvent);
+  
+          if( 'STATIC' === affixType )
+            StickySidebar.removeClass(this.sidebar, this.options.stickyClass);
+          else
+            StickySidebar.addClass(this.sidebar, this.options.stickyClass);
+          
+          for( let key in style.outer ){
+            let _unit = ('number' === typeof style.outer[key]) ? 'px' : '';
+            this.sidebar.style[key] = style.outer[key];
+          }
+  
+          for( let key in style.inner ){
+            let _unit = ('number' === typeof style.inner[key]) ? 'px' : '';
+            this.sidebarInner.style[key] = style.inner[key] + _unit;
+          }
+          
+          let affixedEvent = 'affixed.'+ affixType.toLowerCase().replace('viewport-', '') + EVENT_KEY;
+          StickySidebar.eventTrigger(this.sidebar, affixedEvent);
+        } else {
+          if( this._initialized ) this.sidebarInner.style.left = style.inner.left;
+        }
+  
+        this.affixedType = affixType;
+      }
+  
+      /**
+       * Breakdown sticky sidebar when window width is below `options.minWidth` value.
+       * @protected
+       */
+      _widthBreakpoint(){
+  
+        if( window.innerWidth <= this.options.minWidth ){
+          this._breakpoint = true;
+          this.affixedType = 'STATIC';
+  
+          this.sidebar.removeAttribute('style');
+          StickySidebar.removeClass(this.sidebar, this.options.stickyClass);
+          this.sidebarInner.removeAttribute('style');
+        } else {
+          this._breakpoint = false;
+        }
+      }
+  
+      /**
+       * Switches between functions stack for each event type, if there's no 
+       * event, it will re-initialize sticky sidebar.
+       * @public
+       */
+      updateSticky(event = {}){
+        if( this._running ) return;
+        this._running = true;
+  
+        ((eventType) => {
+
+          requestAnimationFrame(() => {
+            switch( eventType ){
+              // When browser is scrolling and re-calculate just dimensions
+              // within scroll. 
+              case 'scroll':
+                this._calcDimensionsWithScroll();
+                this.observeScrollDir();
+                this.stickyPosition();
+                break;
+  
+              // When browser is resizing or there's no event, observe width
+              // breakpoint and re-calculate dimensions.
+              case 'resize':
+              default: 
+                this._widthBreakpoint();
+                this.calcDimensions();
+                this.stickyPosition(true);
+                break;
+            }
+            this._running = false;
+          });
+        })(event.type);
+      }
+  
+      /**
+       * Set browser support features to the public property.
+       * @private
+       */
+      _setSupportFeatures(){
+        var support = this.support;
+  
+        support.transform = StickySidebar.supportTransform();
+        support.transform3d = StickySidebar.supportTransform(true);
+      }
+  
+      /**
+       * Get translate value, if the browser supports transfrom3d, it will adopt it.
+       * and the same with translate. if browser doesn't support both return false.
+       * @param {Number} y - Value of Y-axis.
+       * @param {Number} x - Value of X-axis.
+       * @param {Number} z - Value of Z-axis.
+       * @return {String|False}
+       */
+      _getTranslate(y = 0, x = 0, z = 0){
+        if( this.support.transform3d ) return 'translate3d(' + y +', '+ x +', '+ z +')';
+        else if( this.support.translate ) return 'translate('+ y +', '+ x +')';
+        else return false;
+      }
+  
+      /**
+       * Destroy sticky sidebar plugin.
+       * @public
+       */
+      destroy(){
+        window.removeEventListener('resize', this, {caption: false});
+        window.removeEventListener('scroll', this, {caption: false});
+  
+        this.sidebar.classList.remove(this.options.stickyClass);
+        this.sidebar.style.minHeight = '';
+  
+        this.sidebar.removeEventListener('update' + EVENT_KEY, this);
+  
+        var styleReset = {inner: {}, outer: {}};
+  
+        styleReset.inner = {position: '', top: '', left: '', bottom: '', width: '',  transform: ''};
+        styleReset.outer = {height: '', position: ''};
+  
+        for( let key in styleReset.outer )
+          this.sidebar.style[key] = styleReset.outer[key];
+  
+        for( let key in styleReset.inner )
+          this.sidebarInner.style[key] = styleReset.inner[key];
+  
+        if( this.options.resizeSensor && 'undefined' !== typeof ResizeSensor ){
+          ResizeSensor.detach(this.sidebarInner, this.handleEvent);
+          ResizeSensor.detach(this.container, this.handleEvent);
+        }
+      }
+  
+      /**
+       * Determine if the browser supports CSS transform feature.
+       * @function
+       * @static
+       * @param {Boolean} transform3d - Detect transform with translate3d.
+       * @return {String}
+       */
+      static supportTransform(transform3d){
+        var result = false,
+            property = (transform3d) ? 'perspective' : 'transform',
+            upper = property.charAt(0).toUpperCase() + property.slice(1),
+            prefixes = ['Webkit', 'Moz', 'O', 'ms'],
+            support = document.createElement('support'),
+            style = support.style;
+  
+        (property + ' ' + prefixes.join(upper + ' ') + upper).split(' ').forEach(function(property, i) {
+          if (style[property] !== undefined) {
+            result = property;
+            return false;
+          }
+        });
+        return result;
+      }
+  
+      /**
+       * Trigger custom event.
+       * @static
+       * @param {DOMObject} element - Target element on the DOM.
+       * @param {String} eventName - Event name.
+       * @param {Object} data - 
+       */
+      static eventTrigger(element, eventName, data){
+        try{
+          var event = new CustomEvent(eventName, {detail: data});
+        } catch(e){
+          var event = document.createEvent('CustomEvent');
+          event.initCustomEvent(eventName, true, true, data);
+        }
+        element.dispatchEvent(event);
+      }
+  
+      /**
+       * Extend options object with defaults.
+       * @function
+       * @static
+       */
+      static extend(defaults, options){
+        var results = {};
+        for( let key in defaults ){
+          if( 'undefined' !== typeof options[key] ) results[key] = options[key];
+          else results[key] = defaults[key];
+        }
+        return results;
+      }
+  
+      /**
+       * Get current coordinates left and top of specific element.
+       * @static
+       */
+      static offsetRelative(element){
+        var result = {left: 0, top: 0};
+
+        do{
+          let offsetTop = element.offsetTop;
+          let offsetLeft = element.offsetLeft;
+  
+          if( ! isNaN(offsetTop) )
+            result.top += offsetTop;
+  
+          if( ! isNaN(offsetLeft) )
+            result.left += offsetLeft;
+
+          element = ( 'BODY' === element.tagName ) ?
+                      element.parentElement : element.offsetParent;
+        } while(element)
+        return result;
+      }
+  
+      /**
+       * Add specific class name to specific element.
+       * @static 
+       * @param {ObjectDOM} element 
+       * @param {String} className 
+       */
+      static addClass(element, className){
+        if( ! StickySidebar.hasClass(element, className) ){
+          if (element.classList)
+            element.classList.add(className);
+          else
+            element.className += ' ' + className;
+        }
+      }
+      
+      /**
+       * Remove specific class name to specific element
+       * @static
+       * @param {ObjectDOM} element 
+       * @param {String} className 
+       */
+      static removeClass(element, className){
+        if( StickySidebar.hasClass(element, className) ){
+          if (element.classList)
+            element.classList.remove(className);
+          else
+            element.className = element.className.replace(new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
+        }
+      }
+
+      /**
+       * Determine weather the element has specific class name.
+       * @static
+       * @param {ObjectDOM} element 
+       * @param {String} className 
+       */
+      static hasClass(element, className){
+        if (element.classList)
+          return element.classList.contains(className);
+        else
+          return new RegExp('(^| )' + className + '( |$)', 'gi').test(element.className);
+      }
+    }
+  
+    return StickySidebar;
+  })();
+  
+  /* harmony default export */ __webpack_exports__["default"] = (StickySidebar);
+  
+  // Global
+  // -------------------------
+  window.StickySidebar = StickySidebar;
 
 /***/ }),
 
@@ -44738,7 +45381,49 @@ var render = function() {
     _vm._v(" "),
     _vm._m(1),
     _vm._v(" "),
-    _vm._m(2),
+    _c("div", { staticClass: "bloques-de-perfil" }, [
+      _c("h5", { staticClass: "formulario-titulos" }, [_vm._v("CONTACTO:")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-row espacio-campos obligando-columna" }, [
+        _c("div", { staticClass: "bloque-opcion" }, [
+          _c(
+            "div",
+            {
+              staticClass:
+                "no-pad custom-control custom-radio custom-control-inline no-margin-right-check col-lg col-md-12 col-sm-12"
+            },
+            [
+              _c(
+                "p-radio",
+                {
+                  attrs: {
+                    name: "contacto",
+                    id: "mensaje",
+                    "true-value": "24",
+                    value: 24
+                  }
+                },
+                [
+                  _c("span", [_vm._v("Mensaje")]),
+                  _c("p", [
+                    _vm._v("Unicamente "),
+                    _c("strong", [_vm._v("los usuarios registrados")]),
+                    _vm._v(
+                      " podrán enviarte un mensaje. Podrás leer y contestar a los mensajes a través del panel de control."
+                    )
+                  ])
+                ]
+              )
+            ],
+            1
+          )
+        ]),
+        _vm._v(" "),
+        _vm._m(2),
+        _vm._v(" "),
+        _vm._m(3)
+      ])
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "bloques-de-perfil" }, [
       _c("h5", { staticClass: "formulario-titulos" }, [
@@ -44746,118 +45431,34 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-row" }, [
-        _vm._m(3),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-lg-6 col-sm-12" }, [
-          _c("div", { staticClass: "form-group checksito esp-checkcheck" }, [
-            _c("input", {
-              staticClass: "inp-cbx",
-              staticStyle: { display: "none" },
-              attrs: { id: "lun", type: "checkbox" }
-            }),
-            _vm._v(" "),
-            _c("label", { staticClass: "cbx", attrs: { for: "lun" } }, [
-              _c("span", [
-                _c(
-                  "svg",
-                  {
-                    attrs: {
-                      width: "12px",
-                      height: "10px",
-                      viewbox: "0 0 12 10"
-                    }
-                  },
-                  [_c("polyline", { attrs: { points: "1.5 6 4.5 9 10.5 1" } })]
-                )
-              ]),
-              _vm._v(" "),
-              _c("span", [_vm._v("24/24")])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group checksito esp-checkcheck" }, [
-            _c("input", {
-              staticClass: "inp-cbx",
-              staticStyle: { display: "none" },
-              attrs: { id: "no-lun", type: "checkbox" }
-            }),
-            _vm._v(" "),
-            _c("label", { staticClass: "cbx", attrs: { for: "no-lun" } }, [
-              _c("span", [
-                _c(
-                  "svg",
-                  {
-                    attrs: {
-                      width: "12px",
-                      height: "10px",
-                      viewbox: "0 0 12 10"
-                    }
-                  },
-                  [_c("polyline", { attrs: { points: "1.5 6 4.5 9 10.5 1" } })]
-                )
-              ]),
-              _vm._v(" "),
-              _c("span", [_vm._v("No disponible")])
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-row" }, [
         _vm._m(4),
         _vm._v(" "),
         _c("div", { staticClass: "col-lg-6 col-sm-12" }, [
-          _c("div", { staticClass: "form-group checksito esp-checkcheck" }, [
-            _c("input", {
-              staticClass: "inp-cbx",
-              staticStyle: { display: "none" },
-              attrs: { id: "mar", type: "checkbox" }
-            }),
-            _vm._v(" "),
-            _c("label", { staticClass: "cbx", attrs: { for: "mar" } }, [
-              _c("span", [
-                _c(
-                  "svg",
-                  {
-                    attrs: {
-                      width: "12px",
-                      height: "10px",
-                      viewbox: "0 0 12 10"
-                    }
-                  },
-                  [_c("polyline", { attrs: { points: "1.5 6 4.5 9 10.5 1" } })]
-                )
-              ]),
-              _vm._v(" "),
-              _c("span", [_vm._v("24/24")])
-            ])
-          ]),
+          _c(
+            "div",
+            { staticClass: "form-group checksito esp-checkcheck" },
+            [
+              _c(
+                "p-radio",
+                { attrs: { name: "lunes", "true-value": "24", value: 24 } },
+                [_vm._v("24/24")]
+              )
+            ],
+            1
+          ),
           _vm._v(" "),
-          _c("div", { staticClass: "form-group checksito esp-checkcheck" }, [
-            _c("input", {
-              staticClass: "inp-cbx",
-              staticStyle: { display: "none" },
-              attrs: { id: "no-mar", type: "checkbox" }
-            }),
-            _vm._v(" "),
-            _c("label", { staticClass: "cbx", attrs: { for: "no-mar" } }, [
-              _c("span", [
-                _c(
-                  "svg",
-                  {
-                    attrs: {
-                      width: "12px",
-                      height: "10px",
-                      viewbox: "0 0 12 10"
-                    }
-                  },
-                  [_c("polyline", { attrs: { points: "1.5 6 4.5 9 10.5 1" } })]
-                )
-              ]),
-              _vm._v(" "),
-              _c("span", [_vm._v("No disponible")])
-            ])
-          ])
+          _c(
+            "div",
+            { staticClass: "form-group checksito esp-checkcheck" },
+            [
+              _c(
+                "p-radio",
+                { attrs: { name: "lunes", "true-value": "0", value: 0 } },
+                [_vm._v("No disponible")]
+              )
+            ],
+            1
+          )
         ])
       ]),
       _vm._v(" "),
@@ -44865,57 +45466,31 @@ var render = function() {
         _vm._m(5),
         _vm._v(" "),
         _c("div", { staticClass: "col-lg-6 col-sm-12" }, [
-          _c("div", { staticClass: "form-group checksito esp-checkcheck" }, [
-            _c("input", {
-              staticClass: "inp-cbx",
-              staticStyle: { display: "none" },
-              attrs: { id: "mie", type: "checkbox" }
-            }),
-            _vm._v(" "),
-            _c("label", { staticClass: "cbx", attrs: { for: "mie" } }, [
-              _c("span", [
-                _c(
-                  "svg",
-                  {
-                    attrs: {
-                      width: "12px",
-                      height: "10px",
-                      viewbox: "0 0 12 10"
-                    }
-                  },
-                  [_c("polyline", { attrs: { points: "1.5 6 4.5 9 10.5 1" } })]
-                )
-              ]),
-              _vm._v(" "),
-              _c("span", [_vm._v("24/24")])
-            ])
-          ]),
+          _c(
+            "div",
+            { staticClass: "form-group checksito esp-checkcheck" },
+            [
+              _c(
+                "p-radio",
+                { attrs: { name: "martes", "true-value": "24", value: 24 } },
+                [_vm._v("24/24")]
+              )
+            ],
+            1
+          ),
           _vm._v(" "),
-          _c("div", { staticClass: "form-group checksito esp-checkcheck" }, [
-            _c("input", {
-              staticClass: "inp-cbx",
-              staticStyle: { display: "none" },
-              attrs: { id: "no-mie", type: "checkbox" }
-            }),
-            _vm._v(" "),
-            _c("label", { staticClass: "cbx", attrs: { for: "no-mie" } }, [
-              _c("span", [
-                _c(
-                  "svg",
-                  {
-                    attrs: {
-                      width: "12px",
-                      height: "10px",
-                      viewbox: "0 0 12 10"
-                    }
-                  },
-                  [_c("polyline", { attrs: { points: "1.5 6 4.5 9 10.5 1" } })]
-                )
-              ]),
-              _vm._v(" "),
-              _c("span", [_vm._v("No disponible")])
-            ])
-          ])
+          _c(
+            "div",
+            { staticClass: "form-group checksito esp-checkcheck" },
+            [
+              _c(
+                "p-radio",
+                { attrs: { name: "martes", "true-value": "0", value: 0 } },
+                [_vm._v("No disponible")]
+              )
+            ],
+            1
+          )
         ])
       ]),
       _vm._v(" "),
@@ -44923,57 +45498,31 @@ var render = function() {
         _vm._m(6),
         _vm._v(" "),
         _c("div", { staticClass: "col-lg-6 col-sm-12" }, [
-          _c("div", { staticClass: "form-group checksito esp-checkcheck" }, [
-            _c("input", {
-              staticClass: "inp-cbx",
-              staticStyle: { display: "none" },
-              attrs: { id: "jue", type: "checkbox" }
-            }),
-            _vm._v(" "),
-            _c("label", { staticClass: "cbx", attrs: { for: "jue" } }, [
-              _c("span", [
-                _c(
-                  "svg",
-                  {
-                    attrs: {
-                      width: "12px",
-                      height: "10px",
-                      viewbox: "0 0 12 10"
-                    }
-                  },
-                  [_c("polyline", { attrs: { points: "1.5 6 4.5 9 10.5 1" } })]
-                )
-              ]),
-              _vm._v(" "),
-              _c("span", [_vm._v("24/24")])
-            ])
-          ]),
+          _c(
+            "div",
+            { staticClass: "form-group checksito esp-checkcheck" },
+            [
+              _c(
+                "p-radio",
+                { attrs: { name: "miercoles", "true-value": "24", value: 24 } },
+                [_vm._v("24/24")]
+              )
+            ],
+            1
+          ),
           _vm._v(" "),
-          _c("div", { staticClass: "form-group checksito esp-checkcheck" }, [
-            _c("input", {
-              staticClass: "inp-cbx",
-              staticStyle: { display: "none" },
-              attrs: { id: "no-jue", type: "checkbox" }
-            }),
-            _vm._v(" "),
-            _c("label", { staticClass: "cbx", attrs: { for: "no-jue" } }, [
-              _c("span", [
-                _c(
-                  "svg",
-                  {
-                    attrs: {
-                      width: "12px",
-                      height: "10px",
-                      viewbox: "0 0 12 10"
-                    }
-                  },
-                  [_c("polyline", { attrs: { points: "1.5 6 4.5 9 10.5 1" } })]
-                )
-              ]),
-              _vm._v(" "),
-              _c("span", [_vm._v("No disponible")])
-            ])
-          ])
+          _c(
+            "div",
+            { staticClass: "form-group checksito esp-checkcheck" },
+            [
+              _c(
+                "p-radio",
+                { attrs: { name: "miercoles", "true-value": "0", value: 0 } },
+                [_vm._v("No disponible")]
+              )
+            ],
+            1
+          )
         ])
       ]),
       _vm._v(" "),
@@ -44981,57 +45530,31 @@ var render = function() {
         _vm._m(7),
         _vm._v(" "),
         _c("div", { staticClass: "col-lg-6 col-sm-12" }, [
-          _c("div", { staticClass: "form-group checksito esp-checkcheck" }, [
-            _c("input", {
-              staticClass: "inp-cbx",
-              staticStyle: { display: "none" },
-              attrs: { id: "vie", type: "checkbox" }
-            }),
-            _vm._v(" "),
-            _c("label", { staticClass: "cbx", attrs: { for: "vie" } }, [
-              _c("span", [
-                _c(
-                  "svg",
-                  {
-                    attrs: {
-                      width: "12px",
-                      height: "10px",
-                      viewbox: "0 0 12 10"
-                    }
-                  },
-                  [_c("polyline", { attrs: { points: "1.5 6 4.5 9 10.5 1" } })]
-                )
-              ]),
-              _vm._v(" "),
-              _c("span", [_vm._v("24/24")])
-            ])
-          ]),
+          _c(
+            "div",
+            { staticClass: "form-group checksito esp-checkcheck" },
+            [
+              _c(
+                "p-radio",
+                { attrs: { name: "jueves", "true-value": "24", value: 24 } },
+                [_vm._v("24/24")]
+              )
+            ],
+            1
+          ),
           _vm._v(" "),
-          _c("div", { staticClass: "form-group checksito esp-checkcheck" }, [
-            _c("input", {
-              staticClass: "inp-cbx",
-              staticStyle: { display: "none" },
-              attrs: { id: "no-vie", type: "checkbox" }
-            }),
-            _vm._v(" "),
-            _c("label", { staticClass: "cbx", attrs: { for: "no-vie" } }, [
-              _c("span", [
-                _c(
-                  "svg",
-                  {
-                    attrs: {
-                      width: "12px",
-                      height: "10px",
-                      viewbox: "0 0 12 10"
-                    }
-                  },
-                  [_c("polyline", { attrs: { points: "1.5 6 4.5 9 10.5 1" } })]
-                )
-              ]),
-              _vm._v(" "),
-              _c("span", [_vm._v("No disponible")])
-            ])
-          ])
+          _c(
+            "div",
+            { staticClass: "form-group checksito esp-checkcheck" },
+            [
+              _c(
+                "p-radio",
+                { attrs: { name: "jueves", "true-value": "0", value: 0 } },
+                [_vm._v("No disponible")]
+              )
+            ],
+            1
+          )
         ])
       ]),
       _vm._v(" "),
@@ -45039,57 +45562,31 @@ var render = function() {
         _vm._m(8),
         _vm._v(" "),
         _c("div", { staticClass: "col-lg-6 col-sm-12" }, [
-          _c("div", { staticClass: "form-group checksito esp-checkcheck" }, [
-            _c("input", {
-              staticClass: "inp-cbx",
-              staticStyle: { display: "none" },
-              attrs: { id: "sab", type: "checkbox" }
-            }),
-            _vm._v(" "),
-            _c("label", { staticClass: "cbx", attrs: { for: "sab" } }, [
-              _c("span", [
-                _c(
-                  "svg",
-                  {
-                    attrs: {
-                      width: "12px",
-                      height: "10px",
-                      viewbox: "0 0 12 10"
-                    }
-                  },
-                  [_c("polyline", { attrs: { points: "1.5 6 4.5 9 10.5 1" } })]
-                )
-              ]),
-              _vm._v(" "),
-              _c("span", [_vm._v("24/24")])
-            ])
-          ]),
+          _c(
+            "div",
+            { staticClass: "form-group checksito esp-checkcheck" },
+            [
+              _c(
+                "p-radio",
+                { attrs: { name: "viernes", "true-value": "24", value: 24 } },
+                [_vm._v("24/24")]
+              )
+            ],
+            1
+          ),
           _vm._v(" "),
-          _c("div", { staticClass: "form-group checksito esp-checkcheck" }, [
-            _c("input", {
-              staticClass: "inp-cbx",
-              staticStyle: { display: "none" },
-              attrs: { id: "no-sab", type: "checkbox" }
-            }),
-            _vm._v(" "),
-            _c("label", { staticClass: "cbx", attrs: { for: "no-sab" } }, [
-              _c("span", [
-                _c(
-                  "svg",
-                  {
-                    attrs: {
-                      width: "12px",
-                      height: "10px",
-                      viewbox: "0 0 12 10"
-                    }
-                  },
-                  [_c("polyline", { attrs: { points: "1.5 6 4.5 9 10.5 1" } })]
-                )
-              ]),
-              _vm._v(" "),
-              _c("span", [_vm._v("No disponible")])
-            ])
-          ])
+          _c(
+            "div",
+            { staticClass: "form-group checksito esp-checkcheck" },
+            [
+              _c(
+                "p-radio",
+                { attrs: { name: "viernes", "true-value": "0", value: 0 } },
+                [_vm._v("No disponible")]
+              )
+            ],
+            1
+          )
         ])
       ]),
       _vm._v(" "),
@@ -45097,57 +45594,63 @@ var render = function() {
         _vm._m(9),
         _vm._v(" "),
         _c("div", { staticClass: "col-lg-6 col-sm-12" }, [
-          _c("div", { staticClass: "form-group checksito esp-checkcheck" }, [
-            _c("input", {
-              staticClass: "inp-cbx",
-              staticStyle: { display: "none" },
-              attrs: { id: "dom", type: "checkbox" }
-            }),
-            _vm._v(" "),
-            _c("label", { staticClass: "cbx", attrs: { for: "dom" } }, [
-              _c("span", [
-                _c(
-                  "svg",
-                  {
-                    attrs: {
-                      width: "12px",
-                      height: "10px",
-                      viewbox: "0 0 12 10"
-                    }
-                  },
-                  [_c("polyline", { attrs: { points: "1.5 6 4.5 9 10.5 1" } })]
-                )
-              ]),
-              _vm._v(" "),
-              _c("span", [_vm._v("24/24")])
-            ])
-          ]),
+          _c(
+            "div",
+            { staticClass: "form-group checksito esp-checkcheck" },
+            [
+              _c(
+                "p-radio",
+                { attrs: { name: "sabado", "true-value": "24", value: 24 } },
+                [_vm._v("24/24")]
+              )
+            ],
+            1
+          ),
           _vm._v(" "),
-          _c("div", { staticClass: "form-group checksito esp-checkcheck" }, [
-            _c("input", {
-              staticClass: "inp-cbx",
-              staticStyle: { display: "none" },
-              attrs: { id: "no-dom", type: "checkbox" }
-            }),
-            _vm._v(" "),
-            _c("label", { staticClass: "cbx", attrs: { for: "no-dom" } }, [
-              _c("span", [
-                _c(
-                  "svg",
-                  {
-                    attrs: {
-                      width: "12px",
-                      height: "10px",
-                      viewbox: "0 0 12 10"
-                    }
-                  },
-                  [_c("polyline", { attrs: { points: "1.5 6 4.5 9 10.5 1" } })]
-                )
-              ]),
-              _vm._v(" "),
-              _c("span", [_vm._v("No disponible")])
-            ])
-          ])
+          _c(
+            "div",
+            { staticClass: "form-group checksito esp-checkcheck" },
+            [
+              _c(
+                "p-radio",
+                { attrs: { name: "sabado", "true-value": "0", value: 0 } },
+                [_vm._v("No disponible")]
+              )
+            ],
+            1
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-row" }, [
+        _vm._m(10),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-lg-6 col-sm-12" }, [
+          _c(
+            "div",
+            { staticClass: "form-group checksito esp-checkcheck" },
+            [
+              _c(
+                "p-radio",
+                { attrs: { name: "domingo", "true-value": "24", value: 24 } },
+                [_vm._v("24/24")]
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "form-group checksito esp-checkcheck" },
+            [
+              _c(
+                "p-radio",
+                { attrs: { name: "domingo", "true-value": "0", value: 0 } },
+                [_vm._v("No disponible")]
+              )
+            ],
+            1
+          )
         ])
       ])
     ]),
@@ -45178,14 +45681,14 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("span", [_vm._v("Agenda compartida")]),
-              _vm._m(10)
+              _vm._m(11)
             ])
           ])
         ])
       ])
     ]),
     _vm._v(" "),
-    _vm._m(11)
+    _vm._m(12)
   ])
 }
 var staticRenderFns = [
@@ -45319,127 +45822,74 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "bloques-de-perfil" }, [
-      _c("h5", { staticClass: "formulario-titulos" }, [_vm._v("CONTACTO:")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-row espacio-campos obligando-columna" }, [
-        _c("div", { staticClass: "bloque-opcion" }, [
+    return _c("div", { staticClass: "bloque-opcion" }, [
+      _c(
+        "div",
+        {
+          staticClass:
+            "no-pad custom-control custom-radio custom-control-inline no-margin-right-check col-lg col-md-12 col-sm-12"
+        },
+        [
+          _c("input", {
+            staticClass: "custom-control-input",
+            attrs: { type: "radio", id: "correos", name: "customRadioInline1" }
+          }),
+          _vm._v(" "),
           _c(
-            "div",
+            "label",
             {
-              staticClass:
-                "no-pad custom-control custom-radio custom-control-inline no-margin-right-check col-lg col-md-12 col-sm-12"
+              staticClass: "custom-control-label custom-control-label-espacio",
+              attrs: { for: "correos" }
             },
             [
-              _c("input", {
-                staticClass: "custom-control-input",
-                attrs: {
-                  type: "radio",
-                  id: "mensaje",
-                  name: "customRadioInline1"
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass:
-                    "custom-control-label custom-control-label-espacio",
-                  attrs: { for: "mensaje" }
-                },
-                [
-                  _c("span", [_vm._v("Mensaje")]),
-                  _c("p", [
-                    _vm._v("Unicamente "),
-                    _c("strong", [_vm._v("los usuarios registrados")]),
-                    _vm._v(
-                      " podrán enviarte un mensaje. Podrás leer y contestar a los mensajes a través del panel de control."
-                    )
-                  ])
-                ]
-              )
+              _c("span", [_vm._v("Correos")]),
+              _c("p", [
+                _vm._v("Todos "),
+                _c("strong", [_vm._v("los usuarios anónimos y registrados")]),
+                _vm._v(
+                  " podrán enviarte un correo a través de la web. Podrás responder por medio de tu correo a los mensajes (tú correo no será visible en la pagina web)."
+                )
+              ])
             ]
           )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "bloque-opcion" }, [
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "bloque-opcion" }, [
+      _c(
+        "div",
+        {
+          staticClass:
+            "no-pad custom-control custom-radio custom-control-inline no-margin-right-check col-lg col-md-12 col-sm-12"
+        },
+        [
+          _c("input", {
+            staticClass: "custom-control-input",
+            attrs: { type: "radio", id: "ninguna", name: "customRadioInline1" }
+          }),
+          _vm._v(" "),
           _c(
-            "div",
+            "label",
             {
-              staticClass:
-                "no-pad custom-control custom-radio custom-control-inline no-margin-right-check col-lg col-md-12 col-sm-12"
+              staticClass: "custom-control-label custom-control-label-espacio",
+              attrs: { for: "ninguna" }
             },
             [
-              _c("input", {
-                staticClass: "custom-control-input",
-                attrs: {
-                  type: "radio",
-                  id: "correos",
-                  name: "customRadioInline1"
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass:
-                    "custom-control-label custom-control-label-espacio",
-                  attrs: { for: "correos" }
-                },
-                [
-                  _c("span", [_vm._v("Correos")]),
-                  _c("p", [
-                    _vm._v("Todos "),
-                    _c("strong", [
-                      _vm._v("los usuarios anónimos y registrados")
-                    ]),
-                    _vm._v(
-                      " podrán enviarte un correo a través de la web. Podrás responder por medio de tu correo a los mensajes (tú correo no será visible en la pagina web)."
-                    )
-                  ])
-                ]
-              )
+              _c("span", [_vm._v("Ninguna de las anteriores")]),
+              _c("p", [
+                _vm._v(
+                  "No quieres recibir mensajes o correos de los visitantes. Serás contactado solamente por teléfono y/o whatsapp."
+                )
+              ])
             ]
           )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "bloque-opcion" }, [
-          _c(
-            "div",
-            {
-              staticClass:
-                "no-pad custom-control custom-radio custom-control-inline no-margin-right-check col-lg col-md-12 col-sm-12"
-            },
-            [
-              _c("input", {
-                staticClass: "custom-control-input",
-                attrs: {
-                  type: "radio",
-                  id: "ninguna",
-                  name: "customRadioInline1"
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass:
-                    "custom-control-label custom-control-label-espacio",
-                  attrs: { for: "ninguna" }
-                },
-                [
-                  _c("span", [_vm._v("Ninguna de las anteriores")]),
-                  _c("p", [
-                    _vm._v(
-                      "No quieres recibir mensajes o correos de los visitantes. Serás contactado solamente por teléfono y/o whatsapp."
-                    )
-                  ])
-                ]
-              )
-            ]
-          )
-        ])
-      ])
+        ]
+      )
     ])
   },
   function() {
@@ -45453,10 +45903,11 @@ var staticRenderFns = [
         _c("input", {
           staticClass: "range-example",
           attrs: {
+            id: "horario_lunes",
             type: "text",
             min: "0",
             max: "24",
-            value: "5,24",
+            value: "",
             name: "points",
             step: "1"
           }
@@ -45477,10 +45928,11 @@ var staticRenderFns = [
         _c("input", {
           staticClass: "range-example",
           attrs: {
+            id: "horario_martes",
             type: "text",
             min: "0",
             max: "24",
-            value: "5,24",
+            value: "",
             name: "points",
             step: "1"
           }
@@ -45501,10 +45953,11 @@ var staticRenderFns = [
         _c("input", {
           staticClass: "range-example",
           attrs: {
+            id: "horario_miercoles",
             type: "text",
             min: "0",
             max: "24",
-            value: "5,24",
+            value: "",
             name: "points",
             step: "1"
           }
@@ -45525,10 +45978,11 @@ var staticRenderFns = [
         _c("input", {
           staticClass: "range-example",
           attrs: {
+            id: "horario_jueves",
             type: "text",
             min: "0",
             max: "24",
-            value: "5,24",
+            value: "",
             name: "points",
             step: "1"
           }
@@ -45549,10 +46003,11 @@ var staticRenderFns = [
         _c("input", {
           staticClass: "range-example",
           attrs: {
+            id: "horario_viernes",
             type: "text",
             min: "0",
             max: "24",
-            value: "5,24",
+            value: "",
             name: "points",
             step: "1"
           }
@@ -45574,9 +46029,10 @@ var staticRenderFns = [
           staticClass: "range-example",
           attrs: {
             type: "text",
+            id: "horario_sabado",
             min: "0",
             max: "24",
-            value: "5,24",
+            value: "",
             name: "points",
             step: "1"
           }
@@ -45598,9 +46054,10 @@ var staticRenderFns = [
           staticClass: "range-example",
           attrs: {
             type: "text",
+            id: "horario_domingo",
             min: "0",
             max: "24",
-            value: "5,24",
+            value: "",
             name: "points",
             step: "1"
           }
@@ -48927,6 +49384,30 @@ var staticRenderFns = [
     ])
   }
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ReservaPerfil.vue?vue&type=template&id=670b2249&":
+/*!****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ReservaPerfil.vue?vue&type=template&id=670b2249& ***!
+  \****************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { attrs: { id: "calendar" } })
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -62908,6 +63389,8 @@ module.exports = function(module) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var pretty_checkbox_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! pretty-checkbox-vue */ "./node_modules/pretty-checkbox-vue/dist/pretty-checkbox-vue.js");
 /* harmony import */ var pretty_checkbox_vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(pretty_checkbox_vue__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var pretty_checkbox_vue_radio__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! pretty-checkbox-vue/radio */ "./node_modules/pretty-checkbox-vue/radio.js");
+/* harmony import */ var pretty_checkbox_vue_radio__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(pretty_checkbox_vue_radio__WEBPACK_IMPORTED_MODULE_1__);
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -62917,12 +63400,65 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Dropzone = __webpack_require__(/*! ./dropzone */ "./resources/js/dropzone.js");
 window.Swal = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
-window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js"); //Calendar = require('@fullcalendar/core');
+//dayGridPlugin = require('@fullcalendar/daygrid');
+//window.StickySidebar = require('sticky-sidebar');
+//window.PrettyCheckbox = require('pretty-checkbox-vue');
 
-__webpack_require__(/*! pretty-checkbox-vue */ "./node_modules/pretty-checkbox-vue/dist/pretty-checkbox-vue.js");
+/*
+window.Calendar = require('@fullcalendar/core');
+window.dayGridPlugin = require('@fullcalendar/daygrid');
+window.timeGridPlugin = require('@fullcalendar/timegrid');
+window.listPlugin = require('@fullcalendar/list');*/
 
+__webpack_require__(/*! sticky-sidebar */ "./node_modules/sticky-sidebar/src/sticky-sidebar.js");
+/*
+require('@fullcalendar/core');
+require('@fullcalendar/daygrid');
+require('@fullcalendar/timegrid');
+require('@fullcalendar/list');
+/*
+require('@fullcalendar/core');
+require('@fullcalendar/daygrid');
+require('@fullcalendar/timegrid');
+require('@fullcalendar/list');*/
+
+/*
+import {Calendar} from '@fullcalendar/core';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import listPlugin from '@fullcalendar/list';*/
+
+
+
+
+/*
+document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+  
+    var calendar = new Calendar(calendarEl, {
+      plugins: [ dayGridPlugin ]
+    });
+  
+    calendar.render();
+
+  });
+
+  let calendar = new Calendar({
+    plugins: [ dayGridPlugin, timeGridPlugin, listPlugin ]
+  });*/
+
+/*
+let calendar = new Calendar(calendarEl, {
+    plugins: [ dayGridPlugin, timeGridPlugin, listPlugin ]
+  });*/
+//Vue.use(Calendar);
+//Vue.use(dayGridPlugin);
+//Vue.use(StickySidebar);
+//Vue.use(Calendar);
 
 Vue.use(pretty_checkbox_vue__WEBPACK_IMPORTED_MODULE_0___default.a);
+Vue.use(pretty_checkbox_vue_radio__WEBPACK_IMPORTED_MODULE_1___default.a);
 Vue.component('perfil-usuario', __webpack_require__(/*! ./components/PerfilUsuario.vue */ "./resources/js/components/PerfilUsuario.vue")["default"]);
 Vue.component('planes-profesional', __webpack_require__(/*! ./components/PlanesProfesional.vue */ "./resources/js/components/PlanesProfesional.vue")["default"]);
 Vue.component('perfil-profesional', __webpack_require__(/*! ./components/PerfilProfesional.vue */ "./resources/js/components/PerfilProfesional.vue")["default"]);
@@ -62939,6 +63475,7 @@ Vue.component('mensajes-profesional', __webpack_require__(/*! ./components/Mensa
 Vue.component('alerta-profesional', __webpack_require__(/*! ./components/AlertaProfesional.vue */ "./resources/js/components/AlertaProfesional.vue")["default"]);
 Vue.component('valoracion-profesional', __webpack_require__(/*! ./components/ValoracionProfesional.vue */ "./resources/js/components/ValoracionProfesional.vue")["default"]);
 Vue.component('listado-profesionales', __webpack_require__(/*! ./components/ListadoProfesionales.vue */ "./resources/js/components/ListadoProfesionales.vue")["default"]);
+Vue.component('reserva-perfil', __webpack_require__(/*! ./components/ReservaPerfil.vue */ "./resources/js/components/ReservaPerfil.vue")["default"]);
 Vue.prototype.$idusuario = document.querySelector("meta[name='user-id']").getAttribute('content');
 Vue.prototype.$csrf_token = document.querySelector("meta[name='csrf-token']").getAttribute('content');
 /**
@@ -63888,6 +64425,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PlanesProfesional_vue_vue_type_template_id_e832d54c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PlanesProfesional_vue_vue_type_template_id_e832d54c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/ReservaPerfil.vue":
+/*!***************************************************!*\
+  !*** ./resources/js/components/ReservaPerfil.vue ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ReservaPerfil_vue_vue_type_template_id_670b2249___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ReservaPerfil.vue?vue&type=template&id=670b2249& */ "./resources/js/components/ReservaPerfil.vue?vue&type=template&id=670b2249&");
+/* harmony import */ var _ReservaPerfil_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ReservaPerfil.vue?vue&type=script&lang=js& */ "./resources/js/components/ReservaPerfil.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ReservaPerfil_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ReservaPerfil_vue_vue_type_template_id_670b2249___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ReservaPerfil_vue_vue_type_template_id_670b2249___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/ReservaPerfil.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/ReservaPerfil.vue?vue&type=script&lang=js&":
+/*!****************************************************************************!*\
+  !*** ./resources/js/components/ReservaPerfil.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ReservaPerfil_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ReservaPerfil.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ReservaPerfil.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ReservaPerfil_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ReservaPerfil.vue?vue&type=template&id=670b2249&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/ReservaPerfil.vue?vue&type=template&id=670b2249& ***!
+  \**********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReservaPerfil_vue_vue_type_template_id_670b2249___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./ReservaPerfil.vue?vue&type=template&id=670b2249& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ReservaPerfil.vue?vue&type=template&id=670b2249&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReservaPerfil_vue_vue_type_template_id_670b2249___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReservaPerfil_vue_vue_type_template_id_670b2249___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

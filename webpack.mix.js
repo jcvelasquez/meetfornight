@@ -24,6 +24,9 @@ mix.js(['resources/js/app.js'], 'public/js/app.js')
         'resources/css/smart_wizard.css',
         'resources/css/smart_wizard_theme_circles.css',
         'resources/css/fontawesome.css',
+        'resources/css/fullcalendar.core.css',
+        'resources/css/fullcalendar.daygrid.css',
+        'resources/css/fullcalendar.timegrid.css',
         'resources/css/piwicho.css',
     ], 'public/css/meetfornight.css')
     .scripts([
@@ -33,5 +36,8 @@ mix.js(['resources/js/app.js'], 'public/js/app.js')
         'resources/js/jquery.smartWizard.min.js',
         'resources/js/jquery-asRange.js',
         'resources/js/jquery.validate.js',
-        'resources/js/fontawesome.js'
+        'resources/js/fontawesome.js',
+        'resources/js/fullcalendar.core.js',
+        'resources/js/fullcalendar.daygrid.js',
+        'resources/js/fullcalendar.timegrid.js'
     ], 'public/js/meetfornight.js');

@@ -40,8 +40,9 @@
   <div class="form-row espacio-campos obligando-columna">
         <div class="bloque-opcion">
           <div class="no-pad custom-control custom-radio custom-control-inline no-margin-right-check col-lg col-md-12 col-sm-12">
-          <input type="radio" id="mensaje" name="customRadioInline1" class="custom-control-input">
-          <label class="custom-control-label custom-control-label-espacio" for="mensaje"><span>Mensaje</span><p>Unicamente <strong>los usuarios registrados</strong> podrán enviarte un mensaje. Podrás leer y contestar a los mensajes a través del panel de control.</p></label>
+          <p-radio name="contacto" id="mensaje" true-value="24" :value="24"><span>Mensaje</span><p>Unicamente <strong>los usuarios registrados</strong> podrán enviarte un mensaje. Podrás leer y contestar a los mensajes a través del panel de control.</p></p-radio>
+
+        <!--   <label class="custom-control-label custom-control-label-espacio" for="mensaje"><span>Mensaje</span><p>Unicamente <strong>los usuarios registrados</strong> podrán enviarte un mensaje. Podrás leer y contestar a los mensajes a través del panel de control.</p></label> -->
           </div>
         </div>
         <div class="bloque-opcion">
@@ -65,32 +66,16 @@
       <div class="col-lg-6 col-sm-12">
           <div class="busqueda-detallada-range">
             <span class="esp-i">Lunes</span>
-            <input class="range-example" type="text" min="0" max="24" value="5,24" name="points" step="1" />
+            <input class="range-example" id="horario_lunes" type="text" min="0" max="24" value="" name="points" step="1" />
             <span class="esp-d">00:00/24:00</span>
           </div>
       </div>
       <div class="col-lg-6 col-sm-12">
           <div class="form-group checksito esp-checkcheck">
-            <input class="inp-cbx" id="lun" type="checkbox" style="display: none;"/>
-            <label class="cbx" for="lun">
-              <span>
-                <svg width="12px" height="10px" viewbox="0 0 12 10">
-                  <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                </svg>
-              </span>
-              <span>24/24</span>
-            </label>
+            <p-radio name="lunes" true-value="24" :value="24">24/24</p-radio>
           </div>
           <div class="form-group checksito esp-checkcheck">
-            <input class="inp-cbx" id="no-lun" type="checkbox" style="display: none;"/>
-            <label class="cbx" for="no-lun">
-              <span>
-                <svg width="12px" height="10px" viewbox="0 0 12 10">
-                  <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                </svg>
-              </span>
-              <span>No disponible</span>
-            </label>
+            <p-radio name="lunes" true-value="0" :value="0">No disponible</p-radio>
           </div>
       </div>
   </div>
@@ -98,32 +83,16 @@
       <div class="col-lg-6 col-sm-12">
           <div class="busqueda-detallada-range">
             <span class="esp-i">Martes</span>
-            <input class="range-example" type="text" min="0" max="24" value="5,24" name="points" step="1" />
+            <input class="range-example" id="horario_martes" type="text" min="0" max="24" value="" name="points" step="1" />
             <span class="esp-d">00:00/24:00</span>
           </div>
       </div>
       <div class="col-lg-6 col-sm-12">
           <div class="form-group checksito esp-checkcheck">
-            <input class="inp-cbx" id="mar" type="checkbox" style="display: none;"/>
-            <label class="cbx" for="mar">
-              <span>
-                <svg width="12px" height="10px" viewbox="0 0 12 10">
-                  <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                </svg>
-              </span>
-              <span>24/24</span>
-            </label>
+            <p-radio name="martes" true-value="24" :value="24">24/24</p-radio>
           </div>
           <div class="form-group checksito esp-checkcheck">
-            <input class="inp-cbx" id="no-mar" type="checkbox" style="display: none;"/>
-            <label class="cbx" for="no-mar">
-              <span>
-                <svg width="12px" height="10px" viewbox="0 0 12 10">
-                  <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                </svg>
-              </span>
-              <span>No disponible</span>
-            </label>
+            <p-radio name="martes" true-value="0" :value="0">No disponible</p-radio>
           </div>
       </div>
   </div>
@@ -131,32 +100,16 @@
       <div class="col-lg-6 col-sm-12">
           <div class="busqueda-detallada-range">
             <span class="esp-i">Miércoles</span>
-            <input class="range-example" type="text" min="0" max="24" value="5,24" name="points" step="1" />
+            <input class="range-example" id="horario_miercoles" type="text" min="0" max="24" value="" name="points" step="1" />
             <span class="esp-d">00:00/24:00</span>
           </div>
       </div>
       <div class="col-lg-6 col-sm-12">
           <div class="form-group checksito esp-checkcheck">
-            <input class="inp-cbx" id="mie" type="checkbox" style="display: none;"/>
-            <label class="cbx" for="mie">
-              <span>
-                <svg width="12px" height="10px" viewbox="0 0 12 10">
-                  <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                </svg>
-              </span>
-              <span>24/24</span>
-            </label>
+            <p-radio name="miercoles" true-value="24" :value="24">24/24</p-radio>
           </div>
           <div class="form-group checksito esp-checkcheck">
-            <input class="inp-cbx" id="no-mie" type="checkbox" style="display: none;"/>
-            <label class="cbx" for="no-mie">
-              <span>
-                <svg width="12px" height="10px" viewbox="0 0 12 10">
-                  <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                </svg>
-              </span>
-              <span>No disponible</span>
-            </label>
+            <p-radio name="miercoles" true-value="0" :value="0">No disponible</p-radio>
           </div>
       </div>
   </div>
@@ -164,32 +117,16 @@
       <div class="col-lg-6 col-sm-12">
           <div class="busqueda-detallada-range">
             <span class="esp-i">Jueves</span>
-            <input class="range-example" type="text" min="0" max="24" value="5,24" name="points" step="1" />
+            <input class="range-example" id="horario_jueves" type="text" min="0" max="24" value="" name="points" step="1" />
             <span class="esp-d">00:00/24:00</span>
           </div>
       </div>
       <div class="col-lg-6 col-sm-12">
           <div class="form-group checksito esp-checkcheck">
-            <input class="inp-cbx" id="jue" type="checkbox" style="display: none;"/>
-            <label class="cbx" for="jue">
-              <span>
-                <svg width="12px" height="10px" viewbox="0 0 12 10">
-                  <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                </svg>
-              </span>
-              <span>24/24</span>
-            </label>
+            <p-radio name="jueves" true-value="24" :value="24">24/24</p-radio>
           </div>
           <div class="form-group checksito esp-checkcheck">
-            <input class="inp-cbx" id="no-jue" type="checkbox" style="display: none;"/>
-            <label class="cbx" for="no-jue">
-              <span>
-                <svg width="12px" height="10px" viewbox="0 0 12 10">
-                  <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                </svg>
-              </span>
-              <span>No disponible</span>
-            </label>
+            <p-radio name="jueves" true-value="0" :value="0">No disponible</p-radio>
           </div>
       </div>
   </div>
@@ -197,32 +134,16 @@
       <div class="col-lg-6 col-sm-12">
           <div class="busqueda-detallada-range">
             <span class="esp-i">Viernes</span>
-            <input class="range-example" type="text" min="0" max="24" value="5,24" name="points" step="1" />
+            <input class="range-example" id="horario_viernes" type="text" min="0" max="24" value="" name="points" step="1" />
             <span class="esp-d">00:00/24:00</span>
           </div>
       </div>
       <div class="col-lg-6 col-sm-12">
           <div class="form-group checksito esp-checkcheck">
-            <input class="inp-cbx" id="vie" type="checkbox" style="display: none;"/>
-            <label class="cbx" for="vie">
-              <span>
-                <svg width="12px" height="10px" viewbox="0 0 12 10">
-                  <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                </svg>
-              </span>
-              <span>24/24</span>
-            </label>
+            <p-radio name="viernes" true-value="24" :value="24">24/24</p-radio>
           </div>
           <div class="form-group checksito esp-checkcheck">
-            <input class="inp-cbx" id="no-vie" type="checkbox" style="display: none;"/>
-            <label class="cbx" for="no-vie">
-              <span>
-                <svg width="12px" height="10px" viewbox="0 0 12 10">
-                  <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                </svg>
-              </span>
-              <span>No disponible</span>
-            </label>
+            <p-radio name="viernes" true-value="0" :value="0">No disponible</p-radio>
           </div>
       </div>
   </div>
@@ -230,32 +151,16 @@
       <div class="col-lg-6 col-sm-12">
           <div class="busqueda-detallada-range">
             <span class="esp-i">Sábado</span>
-            <input class="range-example" type="text" min="0" max="24" value="5,24" name="points" step="1" />
+            <input class="range-example" type="text" id="horario_sabado" min="0" max="24" value="" name="points" step="1" />
             <span class="esp-d">00:00/24:00</span>
           </div>
       </div>
       <div class="col-lg-6 col-sm-12">
           <div class="form-group checksito esp-checkcheck">
-            <input class="inp-cbx" id="sab" type="checkbox" style="display: none;"/>
-            <label class="cbx" for="sab">
-              <span>
-                <svg width="12px" height="10px" viewbox="0 0 12 10">
-                  <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                </svg>
-              </span>
-              <span>24/24</span>
-            </label>
+            <p-radio name="sabado" true-value="24" :value="24">24/24</p-radio>
           </div>
           <div class="form-group checksito esp-checkcheck">
-            <input class="inp-cbx" id="no-sab" type="checkbox" style="display: none;"/>
-            <label class="cbx" for="no-sab">
-              <span>
-                <svg width="12px" height="10px" viewbox="0 0 12 10">
-                  <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                </svg>
-              </span>
-              <span>No disponible</span>
-            </label>
+            <p-radio name="sabado" true-value="0" :value="0">No disponible</p-radio>
           </div>
       </div>
   </div>
@@ -263,32 +168,16 @@
       <div class="col-lg-6 col-sm-12">
           <div class="busqueda-detallada-range">
             <span class="esp-i">Domingo</span>
-            <input class="range-example" type="text" min="0" max="24" value="5,24" name="points" step="1" />
+            <input class="range-example" type="text" id="horario_domingo" min="0" max="24" value="" name="points" step="1" />
             <span class="esp-d">00:00/24:00</span>
           </div>
       </div>
       <div class="col-lg-6 col-sm-12">
           <div class="form-group checksito esp-checkcheck">
-            <input class="inp-cbx" id="dom" type="checkbox" style="display: none;"/>
-            <label class="cbx" for="dom">
-              <span>
-                <svg width="12px" height="10px" viewbox="0 0 12 10">
-                  <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                </svg>
-              </span>
-              <span>24/24</span>
-            </label>
+            <p-radio name="domingo" true-value="24" :value="24">24/24</p-radio>
           </div>
           <div class="form-group checksito esp-checkcheck">
-            <input class="inp-cbx" id="no-dom" type="checkbox" style="display: none;"/>
-            <label class="cbx" for="no-dom">
-              <span>
-                <svg width="12px" height="10px" viewbox="0 0 12 10">
-                  <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                </svg>
-              </span>
-              <span>No disponible</span>
-            </label>
+            <p-radio name="domingo" true-value="0" :value="0">No disponible</p-radio>
           </div>
       </div>
   </div>

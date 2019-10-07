@@ -1,1 +1,6 @@
 label.error { font-size: 12px; color:red; }
+
+.nav-tabs { padding-bottom: 0; }
+.nav-tabs .nav-item { padding:0; }
+
+.margen-otras-chicas { margin-top:30px; }

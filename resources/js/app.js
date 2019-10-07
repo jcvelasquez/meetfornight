@@ -10,12 +10,66 @@ require('./bootstrap');
 window.Dropzone = require('./dropzone');
 window.Swal = require('sweetalert2');
 window.Vue = require('vue');
+//Calendar = require('@fullcalendar/core');
+//dayGridPlugin = require('@fullcalendar/daygrid');
+//window.StickySidebar = require('sticky-sidebar');
+//window.PrettyCheckbox = require('pretty-checkbox-vue');
+/*
+window.Calendar = require('@fullcalendar/core');
+window.dayGridPlugin = require('@fullcalendar/daygrid');
+window.timeGridPlugin = require('@fullcalendar/timegrid');
+window.listPlugin = require('@fullcalendar/list');*/
 
-require('pretty-checkbox-vue');
 
+require('sticky-sidebar');
+/*
+require('@fullcalendar/core');
+require('@fullcalendar/daygrid');
+require('@fullcalendar/timegrid');
+require('@fullcalendar/list');
+/*
+require('@fullcalendar/core');
+require('@fullcalendar/daygrid');
+require('@fullcalendar/timegrid');
+require('@fullcalendar/list');*/
+/*
+import {Calendar} from '@fullcalendar/core';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import listPlugin from '@fullcalendar/list';*/
 import PrettyCheckbox from 'pretty-checkbox-vue';
+import PrettyRadio from 'pretty-checkbox-vue/radio';
+/*
+document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+  
+    var calendar = new Calendar(calendarEl, {
+      plugins: [ dayGridPlugin ]
+    });
+  
+    calendar.render();
 
+  });
+
+  let calendar = new Calendar({
+    plugins: [ dayGridPlugin, timeGridPlugin, listPlugin ]
+  });*/
+/*
+let calendar = new Calendar(calendarEl, {
+    plugins: [ dayGridPlugin, timeGridPlugin, listPlugin ]
+  });*/
+
+
+
+//Vue.use(Calendar);
+//Vue.use(dayGridPlugin);
+//Vue.use(StickySidebar);
+//Vue.use(Calendar);
 Vue.use(PrettyCheckbox);
+Vue.use(PrettyRadio);
+
+
+
 Vue.component('perfil-usuario', require('./components/PerfilUsuario.vue').default);
 Vue.component('planes-profesional', require('./components/PlanesProfesional.vue').default);
 Vue.component('perfil-profesional', require('./components/PerfilProfesional.vue').default);
@@ -32,6 +86,8 @@ Vue.component('mensajes-profesional', require('./components/MensajesProfesional.
 Vue.component('alerta-profesional', require('./components/AlertaProfesional.vue').default);
 Vue.component('valoracion-profesional', require('./components/ValoracionProfesional.vue').default);
 Vue.component('listado-profesionales', require('./components/ListadoProfesionales.vue').default);
+Vue.component('reserva-perfil', require('./components/ReservaPerfil.vue').default);
+
 
 
 Vue.prototype.$idusuario = document.querySelector("meta[name='user-id']").getAttribute('content');
@@ -48,3 +104,6 @@ Vue.prototype.$csrf_token = document.querySelector("meta[name='csrf-token']").ge
 const app = new Vue({
     el: '#widget'
 });
+
+
+

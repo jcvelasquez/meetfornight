@@ -3,7 +3,9 @@
 
   @include('header')
 
+
   <body>
+
 
   @include('tops.top')
 
@@ -18,13 +20,13 @@
 
         <div class="tipo-de-perfil">PERFIL PLATINIUM</div>
 
-        <h2>FRANCHESCA RHODES</h2>
+        <h2>{{ $perfil[0]->nombre }}</h2>
 
-        <h3>"Te invito a mi mundo de fantasía"</h3>
+        <h3>"{{ $perfil[0]->frase }}"</h3>
 
         <a href="">FAVORITO<i class="icon-heart"></i></a>
 
-        <div class="sellos"><img src="img/perfil-averiguado.png"><img src="img/control-sanitario.png"></div>
+        <div class="sellos"><img src="{{ asset('img/perfil-averiguado.png') }}"><img src="{{ asset('img/control-sanitario.png') }}"></div>
 
       </div>
 
@@ -60,7 +62,7 @@
 
             <span><i class="fa fa-angle-right"></i></span>
 
-            <a href="no-reserva.php" class="cabecera-chicas-active">Franchesca Rhodes</a>
+            <a href="no-reserva.php" class="cabecera-chicas-active">{{ $perfil[0]->nombre }}</a>
 
           </div>
 
@@ -76,272 +78,271 @@
 
     <div class="container">
 
-      <div class="row">
+      <div class="row" id="main-perfil">
 
-        <div class="col-lg-4">
+        <div class="col-lg-4" id="sidebar">
 
+            <div class="sidebar__inner">
+              <!-- Content goes here -->
+                  <div class="espacio-reservas">
 
+                    <div class="reservas-img-grande">
 
-          <div class="espacio-reservas">
+                      <img id="currentImg" src="{{ asset('img/galeria/galeria-1.png') }}" class="img-responsive">
 
-            <div class="reservas-img-grande">
+                      <a id="currentImg2" href="{{ asset('img/galeria/galeria-1.png') }}" data-fancybox="gallery" data-caption="Sexy Woman">
 
-              <img id="currentImg" src="img/galeria/galeria-1.png" class="img-responsive">
+                        <div class="img-grande-lupa">
 
-              <a id="currentImg2" href="img/galeria/galeria-1.png" data-fancybox="gallery" data-caption="Sexy Woman">
+                          <i class="icon-search"></i>
 
-                <div class="img-grande-lupa">
+                        </div>
 
-                  <i class="icon-search"></i>
+                      </a>
 
-                </div>
+                      <div class="img-grande-logo">
 
-              </a>
+                        <img src="img/logo-blanco.png">
 
-              <div class="img-grande-logo">
+                      </div>
 
-                <img src="img/logo-blanco.png">
+                    </div>
 
-              </div>
+                  </div>
+
+                  <div class="reservas-img-pequenas espacio-reservas">
+
+                      <div class="item-reservas-img-pequenas">
+
+                        <img src="{{asset('img/galeria/galeria-1.png')}}" class="img-responsive" onclick="showImage('galeria-1.png'), nombre('galeria-1.png');" />
+
+                        <a class="nunca-mostrar" data-fancybox="gallery" href="{{ asset('img/galeria/galeria-1.png') }}" data-caption="Sexy Woman"></a>
+
+                      </div>
+
+                      <div class="item-reservas-img-pequenas">
+
+                        <img src="{{ asset('img/galeria/galeria-1.png') }}" class="img-responsive" onclick="showImage('galeria-2.png'), nombre('galeria-2.png');" />
+
+                        <a class="nunca-mostrar" data-fancybox="gallery" href="{{ asset('img/galeria/galeria-1.png') }}" data-caption="Sexy Woman"></a>
+
+                      </div>
+
+                      <div class="item-reservas-img-pequenas">
+
+                        <img src="{{ asset('img/galeria/galeria-3.png') }}" class="img-responsive" onclick="showImage('galeria-3.png'), nombre('galeria-3.png');" />
+
+                        <a class="nunca-mostrar" data-fancybox="gallery" href="img/galeria/galeria-3.png" data-caption="Sexy Woman"></a>
+
+                      </div>
+
+                      <div class="item-reservas-img-pequenas">
+
+                        <img src="{{ asset('img/galeria/galeria-4.png') }}" class="img-responsive" onclick="showImage('galeria-4.png'), nombre('galeria-4.png');" />
+
+                        <a class="nunca-mostrar" data-fancybox="gallery" href="img/galeria/galeria-4.png" data-caption="Sexy Woman"></a>
+
+                      </div>
+
+                  </div>
+
+                  <div class="espacio-reservas">
+
+                    <h2 class="subtitulo-reservas">PERFIL</h2>
+
+                    <div class="reserva-info">
+
+                      <ul>
+
+                        <li>
+
+                          <div class="reserva-info-morado">Sexo</div>
+
+                          <div class="reserva-info-plomo">{{ $perfil[0]->sexo }}</div>
+
+                        </li>
+
+                        <li>
+
+                          <div class="reserva-info-morado">Orientación</div>
+
+                          <div class="reserva-info-plomo">{{ $perfil[0]->orientacion }}</div>
+
+                        </li>
+
+                        <li>
+
+                          <div class="reserva-info-morado">Nacionalidad</div>
+
+                          <div class="reserva-info-plomo">{{ $perfil[0]->nacionalidad }}</div>
+
+                        </li>
+
+                        <li>
+
+                          <div class="reserva-info-morado">Ciudad</div>
+
+                          <div class="reserva-info-plomo">{{ $perfil[0]->departamento }}</div>
+
+                        </li>
+
+                        <li>
+
+                          <div class="reserva-info-morado">Distrito</div>
+
+                          <div class="reserva-info-plomo">{{ $perfil[0]->distrito }}</div>
+
+                        </li>
+
+                        <li>
+
+                          <div class="reserva-info-morado">Idiomas</div>
+
+                          <div class="reserva-info-plomo">{{ $perfil[0]->idioma }}</div>
+
+                        </li>
+
+                        <li>
+
+                          <div class="reserva-info-morado">Edad</div>
+
+                          <div class="reserva-info-plomo">{{ $perfil[0]->edad }}</div>
+
+                        </li>
+
+                        <li>
+
+                          <div class="reserva-info-morado">Tamaño</div>
+
+                          <div class="reserva-info-plomo">{{ $perfil[0]->estatura }}</div>
+
+                        </li>
+
+                        <li>
+
+                          <div class="reserva-info-morado">Peso</div>
+
+                          <div class="reserva-info-plomo">{{ $perfil[0]->peso }}Kg</div>
+
+                        </li>
+
+                        <li>
+
+                          <div class="reserva-info-morado">Cabello</div>
+
+                          <div class="reserva-info-plomo">{{ $perfil[0]->color_cabello }}</div>
+
+                        </li>
+
+                        <li>
+
+                          <div class="reserva-info-morado">Ojos</div>
+
+                          <div class="reserva-info-plomo">{{ $perfil[0]->color_ojos }}</div>
+
+                        </li>
+
+                        <li>
+
+                          <div class="reserva-info-morado">Corte íntimo</div>
+
+                          <div class="reserva-info-plomo">{{ $perfil[0]->corte_intimo }}</div>
+
+                        </li>
+
+                        <li>
+
+                          <div class="reserva-info-morado">Copa</div>
+
+                          <div class="reserva-info-plomo">{{ $perfil[0]->pecho }}</div>
+
+                        </li>
+
+                        <li>
+
+                          <div class="reserva-info-morado">Tatuajes</div>
+
+                          <div class="reserva-info-plomo">{{ $perfil[0]->tatuaje }}</div>
+
+                        </li>
+
+                        <li>
+
+                          <div class="reserva-info-morado">Piercing</div>
+
+                          <div class="reserva-info-plomo">{{ $perfil[0]->piercing }}</div>
+
+                        </li>
+
+                        <li>
+
+                          <div class="reserva-info-morado">Fumador(a)</div>
+
+                          <div class="reserva-info-plomo">{{ $perfil[0]->fumador }}</div>
+
+                        </li>
+
+                      </ul>
+
+                    </div>
+
+                  </div>
+
+                  <div class="espacio-reservas">
+
+                    <h2 class="subtitulo-reservas">VALORACIÓN<br><div class="subsub-reserva"><p>Las calificaciones corresponden<br>a las experiencias</p></div></h2>
+
+                    <div class="reserva-info">
+
+                      <ul>
+
+                        <li>
+
+                          <div class="reserva-info-morado">Amabilidad</div>
+
+                          <div class="fucsia"><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></div>
+
+                        </li>
+
+                        <li>
+
+                          <div class="reserva-info-morado">Sensualidad</div>
+
+                          <div class="fucsia"><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></div>
+
+                        </li>
+
+                        <li>
+
+                          <div class="reserva-info-morado">Conversación</div>
+
+                          <div class="fucsia"><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></div>
+
+                        </li>
+
+                        <li>
+
+                          <div class="reserva-info-morado">Diversión</div>
+
+                          <div class="fucsia"><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></div>
+
+                        </li>
+
+                        <li>
+
+                          <div class="reserva-info-morado">Corresponde a la foto</div>
+
+                          <div class="fucsia"><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></div>
+
+                        </li>
+
+                      </ul>
+
+                    </div>
+
+                  </div>
 
             </div>
-
-          </div>
-
-          <div class="reservas-img-pequenas espacio-reservas">
-
-              <div class="item-reservas-img-pequenas">
-
-                <img src="img/galeria/galeria-1.png" class="img-responsive" onclick="showImage('galeria-1.png'), nombre('galeria-1.png');" />
-
-                <a class="nunca-mostrar" data-fancybox="gallery" href="img/galeria/galeria-1.png" data-caption="Sexy Woman"></a>
-
-              </div>
-
-              <div class="item-reservas-img-pequenas">
-
-                <img src="img/galeria/galeria-2.png" class="img-responsive" onclick="showImage('galeria-2.png'), nombre('galeria-2.png');" />
-
-                <a class="nunca-mostrar" data-fancybox="gallery" href="img/galeria/galeria-2.png" data-caption="Sexy Woman"></a>
-
-              </div>
-
-              <div class="item-reservas-img-pequenas">
-
-                <img src="img/galeria/galeria-3.png" class="img-responsive" onclick="showImage('galeria-3.png'), nombre('galeria-3.png');" />
-
-                <a class="nunca-mostrar" data-fancybox="gallery" href="img/galeria/galeria-3.png" data-caption="Sexy Woman"></a>
-
-              </div>
-
-              <div class="item-reservas-img-pequenas">
-
-                <img src="img/galeria/galeria-4.png" class="img-responsive" onclick="showImage('galeria-4.png'), nombre('galeria-4.png');" />
-
-                <a class="nunca-mostrar" data-fancybox="gallery" href="img/galeria/galeria-4.png" data-caption="Sexy Woman"></a>
-
-              </div>
-
-          </div>
-
-
-
-          <div class="espacio-reservas">
-
-            <h2 class="subtitulo-reservas">PERFIL</h2>
-
-            <div class="reserva-info">
-
-              <ul>
-
-                <li>
-
-                  <div class="reserva-info-morado">Sexo</div>
-
-                  <div class="reserva-info-plomo">Mujer</div>
-
-                </li>
-
-                <li>
-
-                  <div class="reserva-info-morado">Orientación</div>
-
-                  <div class="reserva-info-plomo">Heterosexual</div>
-
-                </li>
-
-                <li>
-
-                  <div class="reserva-info-morado">Nacionalidad</div>
-
-                  <div class="reserva-info-plomo">Perú</div>
-
-                </li>
-
-                <li>
-
-                  <div class="reserva-info-morado">Ciudad</div>
-
-                  <div class="reserva-info-plomo">Lima</div>
-
-                </li>
-
-                <li>
-
-                  <div class="reserva-info-morado">Distrito</div>
-
-                  <div class="reserva-info-plomo">La Molina</div>
-
-                </li>
-
-                <li>
-
-                  <div class="reserva-info-morado">Idiomas</div>
-
-                  <div class="reserva-info-plomo">Español</div>
-
-                </li>
-
-                <li>
-
-                  <div class="reserva-info-morado">Edad</div>
-
-                  <div class="reserva-info-plomo">23 años</div>
-
-                </li>
-
-                <li>
-
-                  <div class="reserva-info-morado">Tamaño</div>
-
-                  <div class="reserva-info-plomo">167cm</div>
-
-                </li>
-
-                <li>
-
-                  <div class="reserva-info-morado">Peso</div>
-
-                  <div class="reserva-info-plomo">67kg</div>
-
-                </li>
-
-                <li>
-
-                  <div class="reserva-info-morado">Cabello</div>
-
-                  <div class="reserva-info-plomo">Negro</div>
-
-                </li>
-
-                <li>
-
-                  <div class="reserva-info-morado">Ojos</div>
-
-                  <div class="reserva-info-plomo">Marrón</div>
-
-                </li>
-
-                <li>
-
-                  <div class="reserva-info-morado">Corte íntimo</div>
-
-                  <div class="reserva-info-plomo">Triángulo</div>
-
-                </li>
-
-                <li>
-
-                  <div class="reserva-info-morado">Copa</div>
-
-                  <div class="reserva-info-plomo">AA</div>
-
-                </li>
-
-                <li>
-
-                  <div class="reserva-info-morado">Tatuajes</div>
-
-                  <div class="reserva-info-plomo">Sí</div>
-
-                </li>
-
-                <li>
-
-                  <div class="reserva-info-morado">Piercing</div>
-
-                  <div class="reserva-info-plomo">Sí</div>
-
-                </li>
-
-                <li>
-
-                  <div class="reserva-info-morado">Fumador(a)</div>
-
-                  <div class="reserva-info-plomo">No</div>
-
-                </li>
-
-              </ul>
-
-            </div>
-
-          </div>
-
-          <div class="espacio-reservas">
-
-            <h2 class="subtitulo-reservas">VALORACIÓN<br><div class="subsub-reserva"><p>Las calificaciones corresponden<br>a las experiencias</p></div></h2>
-
-            <div class="reserva-info">
-
-              <ul>
-
-                <li>
-
-                  <div class="reserva-info-morado">Amabilidad</div>
-
-                  <div class="fucsia"><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></div>
-
-                </li>
-
-                <li>
-
-                  <div class="reserva-info-morado">Sensualidad</div>
-
-                  <div class="fucsia"><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></div>
-
-                </li>
-
-                <li>
-
-                  <div class="reserva-info-morado">Conversación</div>
-
-                  <div class="fucsia"><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></div>
-
-                </li>
-
-                <li>
-
-                  <div class="reserva-info-morado">Diversión</div>
-
-                  <div class="fucsia"><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></div>
-
-                </li>
-
-                <li>
-
-                  <div class="reserva-info-morado">Corresponde a la foto</div>
-
-                  <div class="fucsia"><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></div>
-
-                </li>
-
-              </ul>
-
-            </div>
-
-          </div>
-
         </div>
 
         <div class="col-lg-8">
@@ -372,7 +373,7 @@
 
             </div>
 
-            <p class="texto-biografia tamano-delicado">Soy Franchesca Rhodes PORN STAR te invito a venir a mi mundo de fantasía. Una chica con un bo increíble. Todo lo que hago, pongo todo mi amor y mucha pasión, con un estilo muy personal lleno de imaginación y creatividad. Me considero una mujer bella, audaz y sexy que sabe que la sensualidad aprecia todo lo que una mujer puede tener. Sé muy bien cómo involucrar a un hombre con mi juego de poder y seducción. Con mucho atrevimiento y sensualidad, envuelve desvergonzadamente tu cuerpo desnudo con varios exitantes en voluta.</p>
+            <p class="texto-biografia tamano-delicado">{{ $perfil[0]->descripcion }}</p>
 
           </div>
 
@@ -382,7 +383,7 @@
 
             <div class="reserva-contactame">
 
-              <p class="texto-biografia"><i class="icon-whatsapp-green esp-icono-bio"></i>990 432 112</p>
+              <p class="texto-biografia"><i class="icon-whatsapp-green esp-icono-bio"></i>{{ $perfil[0]->celular }}</p>
 
               <div class="web"><i class="icon-world esp-icono-bio"></i><a href="#" target="_blank">www.franchescarhodes.com</a></div>
 
@@ -398,9 +399,13 @@
 
           </div>
 
+
+
+
           <div class="espacio-reservas servicios-reservas">
 
             <h2 class="sub-tit"><i class="icon-massage esp-icono-bio"></i>SERVICIOS</h2>
+
 
             <ul class="nav nav-tabs" id="myTab" role="tablist">
 
@@ -448,21 +453,19 @@
 
                 <ul class="lista-servicio">
 
-                  <li>Body to body</li>
+                  @foreach($servicios as $ser)
+                      @if($ser->categoria_servicio == 'PRELIMINARES' && $ser->es_marcado == "1")
+                        <li>{{$ser->nombre_servicio}}</li>
+                      @endif
+                  @endforeach
 
-                  <li>Hot stone massage</li>
+                  @foreach($personalizados as $per)
+                      @if($per->categoria_servicio == 'PRELIMINARES')
+                        <li>{{$per->nombre_servicio}}</li>
+                      @endif
+                  @endforeach
 
-                  <li>Masaje con final feliz(manual)</li>
-
-                  <li>Masaje con final feliz(oral)</li>
-
-                  <li>Masaje de próstata</li>
-
-                  <li>Masaje Nuru</li>
-
-                  <li>Masaje sobre mesa de masaje</li>
-
-                  <li>Masaje Tantra</li>
+                  
 
                 </ul>
 
@@ -472,21 +475,17 @@
 
                 <ul class="lista-servicio">
 
-                  <li>Body to body</li>
+                  @foreach($servicios as $ser)
+                      @if($ser->categoria_servicio == 'MASAJES' && $ser->es_marcado == "1")
+                        <li>{{$ser->nombre_servicio}}</li>
+                      @endif
+                  @endforeach
 
-                  <li>Hot stone massage</li>
-
-                  <li>Masaje con final feliz(manual)</li>
-
-                  <li>Masaje con final feliz(oral)</li>
-
-                  <li>Masaje de próstata</li>
-
-                  <li>Masaje Nuru</li>
-
-                  <li>Masaje sobre mesa de masaje</li>
-
-                  <li>Masaje Tantra</li>
+                  @foreach($personalizados as $per)
+                      @if($per->categoria_servicio == 'MASAJES')
+                        <li>{{$per->nombre_servicio}}</li>
+                      @endif
+                  @endforeach
 
                 </ul>
 
@@ -496,21 +495,17 @@
 
                 <ul class="lista-servicio">
 
-                  <li>Body to body</li>
+                @foreach($servicios as $ser)
+                      @if($ser->categoria_servicio == 'FETICHE' && $ser->es_marcado == "1")
+                        <li>{{$ser->nombre_servicio}}</li>
+                      @endif
+                  @endforeach
 
-                  <li>Hot stone massage</li>
-
-                  <li>Masaje con final feliz(manual)</li>
-
-                  <li>Masaje con final feliz(oral)</li>
-
-                  <li>Masaje de próstata</li>
-
-                  <li>Masaje Nuru</li>
-
-                  <li>Masaje sobre mesa de masaje</li>
-
-                  <li>Masaje Tantra</li>
+                  @foreach($personalizados as $per)
+                      @if($per->categoria_servicio == 'FETICHE')
+                        <li>{{$per->nombre_servicio}}</li>
+                      @endif
+                  @endforeach
 
                 </ul>
 
@@ -520,21 +515,17 @@
 
                 <ul class="lista-servicio">
 
-                  <li>Body to body</li>
+                @foreach($servicios as $ser)
+                      @if($ser->categoria_servicio == 'INTIMO' && $ser->es_marcado == "1")
+                        <li>{{$ser->nombre_servicio}}</li>
+                      @endif
+                  @endforeach
 
-                  <li>Hot stone massage</li>
-
-                  <li>Masaje con final feliz(manual)</li>
-
-                  <li>Masaje con final feliz(oral)</li>
-
-                  <li>Masaje de próstata</li>
-
-                  <li>Masaje Nuru</li>
-
-                  <li>Masaje sobre mesa de masaje</li>
-
-                  <li>Masaje Tantra</li>
+                  @foreach($personalizados as $per)
+                      @if($per->categoria_servicio == 'INTIMO')
+                        <li>{{$per->nombre_servicio}}</li>
+                      @endif
+                  @endforeach
 
                 </ul>
 
@@ -544,21 +535,17 @@
 
                 <ul class="lista-servicio">
 
-                  <li>Body to body</li>
+                @foreach($servicios as $ser)
+                      @if($ser->categoria_servicio == 'OTROS' && $ser->es_marcado == "1")
+                        <li>{{$ser->nombre_servicio}}</li>
+                      @endif
+                  @endforeach
 
-                  <li>Hot stone massage</li>
-
-                  <li>Masaje con final feliz(manual)</li>
-
-                  <li>Masaje con final feliz(oral)</li>
-
-                  <li>Masaje de próstata</li>
-
-                  <li>Masaje Nuru</li>
-
-                  <li>Masaje sobre mesa de masaje</li>
-
-                  <li>Masaje Tantra</li>
+                  @foreach($personalizados as $per)
+                      @if($per->categoria_servicio == 'OTROS')
+                        <li>{{$per->nombre_servicio}}</li>
+                      @endif
+                  @endforeach
 
                 </ul>
 
@@ -568,21 +555,17 @@
 
                 <ul class="lista-servicio icon-celeste">
 
-                  <li>Body to body</li>
+                @foreach($servicios as $ser)
+                      @if($ser->categoria_servicio == 'DISCAPACITADOS' && $ser->es_marcado == "1")
+                        <li>{{$ser->nombre_servicio}}</li>
+                      @endif
+                  @endforeach
 
-                  <li>Hot stone massage</li>
-
-                  <li>Masaje con final feliz(manual)</li>
-
-                  <li>Masaje con final feliz(oral)</li>
-
-                  <li>Masaje de próstata</li>
-
-                  <li>Masaje Nuru</li>
-
-                  <li>Masaje sobre mesa de masaje</li>
-
-                  <li>Masaje Tantra</li>
+                  @foreach($personalizados as $per)
+                      @if($per->categoria_servicio == 'DISCAPACITADOS')
+                        <li>{{$per->nombre_servicio}}</li>
+                      @endif
+                  @endforeach
 
                 </ul>
 
@@ -672,31 +655,56 @@
 
           </div>
 
-          <div class="espacio-reservas">
+          <div id="widget"> </div>
+        
+              <div id="calendar"></div>
 
-            <h2 class="sub-tit"><i class="icon-money esp-icono-bio"></i>TARIFA</h2>
+         
 
+          <div class="espacio-reservas" style="margin-top:40px;">
+            <h2 class="sub-tit"><i class="icon-money esp-icono-bio"></i>TARIFAS SERVICIO</h2>
             <div class="tarifario-vertical">
-
-              <div class="tarifario-horizontal">
-
-                <div class="tarifario-morado">1 HORA</div>
-
-                <div class="tarifario-rojo">$ 150</div>
-
-              </div>
-
-              <div class="tarifario-horizontal">
-
-                <div class="tarifario-morado">1/2 HORA</div>
-
-                <div class="tarifario-rojo">$ 75</div>
-
-              </div>
-
+              @foreach($tarifas as $tar)
+                @if($tar->categoria_tarifa == 'SERVICIO')
+                  <div class="tarifario-horizontal">
+                    <div class="tarifario-morado">{{$tar->opcion_tarifa}} </div>
+                    <div class="tarifario-rojo">{{$tar->costo_tarifa}}</div>
+                  </div>
+                @endif
+              @endforeach
             </div>
-
           </div>
+
+          <div class="espacio-reservas">
+            <h2 class="sub-tit"><i class="icon-money esp-icono-bio"></i>TARIFAS ESCORT</h2>
+            <div class="tarifario-vertical">
+              @foreach($tarifas as $tar)
+                @if($tar->categoria_tarifa == 'ESCORT')
+                  <div class="tarifario-horizontal">
+                    <div class="tarifario-morado">{{$tar->opcion_tarifa}} </div>
+                    <div class="tarifario-rojo">{{$tar->costo_tarifa}}</div>
+                  </div>
+                @endif
+              @endforeach
+            </div>
+          </div>
+
+          <div class="espacio-reservas">
+            <h2 class="sub-tit"><i class="icon-money esp-icono-bio"></i>TARIFAS EXTRAS</h2>
+            <div class="tarifario-vertical">
+              @foreach($tarifas as $tar)
+                  @if($tar->categoria_tarifa == 'EXTRAS')
+                    <div class="tarifario-horizontal">
+                      <div class="tarifario-morado">{{$tar->opcion_tarifa}} </div>
+                      <div class="tarifario-rojo">{{$tar->costo_tarifa}}</div>
+                    </div>
+                  @endif
+              @endforeach
+            </div>
+          </div>
+
+
+
 
           <div class="espacio-reservas">
 
@@ -704,7 +712,7 @@
 
             <div class="reserva-salud">
 
-              <img src="img/control-sanitario.png">
+              <img src="{{ asset('img/control-sanitario.png') }}">
 
               <p class="texto-salud-reserva">La gestión de la agenda es responsabilidad del administrador del perfil, por lo tanto no nos hacemos responsables de la reserva.</p>
 
@@ -766,7 +774,7 @@
 
 
 
-      <div class="row">
+      <div class="row margen-otras-chicas">
 
         <div class="col-lg-12">
 
@@ -784,7 +792,7 @@
 
                     <div class="item-chica">
 
-                      <img src="img/chicas/chica1.jpg" class="img-responsive">
+                      <img src="{{ asset('img/chicas/chica1.jpg') }}" class="img-responsive">
 
                       <div class="texto-chica">
 
@@ -822,7 +830,7 @@
 
                     <div class="item-chica">
 
-                      <img src="img/chicas/chica1.jpg" class="img-responsive">
+                      <img src="{{ asset('img/chicas/chica1.jpg') }}" class="img-responsive">
 
                       <div class="texto-chica">
 
@@ -860,7 +868,7 @@
 
                     <div class="item-chica">
 
-                      <img src="img/chicas/chica1.jpg" class="img-responsive">
+                      <img src="{{ asset('img/chicas/chica1.jpg') }}" class="img-responsive">
 
                       <div class="texto-chica">
 
@@ -898,167 +906,7 @@
 
                     <div class="item-chica">
 
-                      <img src="img/chicas/chica1.jpg" class="img-responsive">
-
-                      <div class="texto-chica">
-
-                        <h3>FRANCESCA</h3>
-
-                        <h4>Lima │ 21 años</h4>
-
-                        <h5>$ 150</h5>
-
-                        <span>
-
-                          <i class="icon-star"></i>
-
-                          <i class="icon-star"></i>
-
-                          <i class="icon-star"></i>
-
-                          <i class="icon-star"></i>
-
-                          <i class="icon-star"></i>
-
-                        </span>
-
-                        <a href="no-reserva.php">VER PERFIL</a>
-
-                        <div class="triangulo"><i class="icon-heart"></i></div>
-
-                      </div>
-
-                    </div>
-
-                  </div>
-
-                </div>
-
-              </div>
-
-              <div class="carousel-item">
-
-                <div class="row">
-
-                  <div class="col-lg-3 col-md-6 col-sm-12">
-
-                    <div class="item-chica">
-
-                      <img src="img/chicas/chica1.jpg" class="img-responsive">
-
-                      <div class="texto-chica">
-
-                        <h3>FRANCESCA</h3>
-
-                        <h4>Lima │ 21 años</h4>
-
-                        <h5>$ 150</h5>
-
-                        <span>
-
-                          <i class="icon-star"></i>
-
-                          <i class="icon-star"></i>
-
-                          <i class="icon-star"></i>
-
-                          <i class="icon-star"></i>
-
-                          <i class="icon-star"></i>
-
-                        </span>
-
-                        <a href="no-reserva.php">VER PERFIL</a>
-
-                        <div class="triangulo"><i class="icon-heart"></i></div>
-
-                      </div>
-
-                    </div>
-
-                  </div>
-
-                  <div class="col-lg-3 col-md-6 col-sm-12">
-
-                    <div class="item-chica">
-
-                      <img src="img/chicas/chica1.jpg" class="img-responsive">
-
-                      <div class="texto-chica">
-
-                        <h3>FRANCESCA</h3>
-
-                        <h4>Lima │ 21 años</h4>
-
-                        <h5>$ 150</h5>
-
-                        <span>
-
-                          <i class="icon-star"></i>
-
-                          <i class="icon-star"></i>
-
-                          <i class="icon-star"></i>
-
-                          <i class="icon-star"></i>
-
-                          <i class="icon-star"></i>
-
-                        </span>
-
-                        <a href="no-reserva.php">VER PERFIL</a>
-
-                        <div class="triangulo"><i class="icon-heart"></i></div>
-
-                      </div>
-
-                    </div>
-
-                  </div>
-
-                  <div class="col-lg-3 col-md-6 col-sm-12">
-
-                    <div class="item-chica">
-
-                      <img src="img/chicas/chica1.jpg" class="img-responsive">
-
-                      <div class="texto-chica">
-
-                        <h3>FRANCESCA</h3>
-
-                        <h4>Lima │ 21 años</h4>
-
-                        <h5>$ 150</h5>
-
-                        <span>
-
-                          <i class="icon-star"></i>
-
-                          <i class="icon-star"></i>
-
-                          <i class="icon-star"></i>
-
-                          <i class="icon-star"></i>
-
-                          <i class="icon-star"></i>
-
-                        </span>
-
-                        <a href="no-reserva.php">VER PERFIL</a>
-
-                        <div class="triangulo"><i class="icon-heart"></i></div>
-
-                      </div>
-
-                    </div>
-
-                  </div>
-
-                  <div class="col-lg-3 col-md-6 col-sm-12">
-
-                    <div class="item-chica">
-
-                      <img src="img/chicas/chica1.jpg" class="img-responsive">
+                      <img src="{{ asset('img/chicas/chica1.jpg') }}" class="img-responsive">
 
                       <div class="texto-chica">
 
@@ -1104,7 +952,7 @@
 
                     <div class="item-chica">
 
-                      <img src="img/chicas/chica1.jpg" class="img-responsive">
+                      <img src="{{ asset('img/chicas/chica1.jpg') }}" class="img-responsive">
 
                       <div class="texto-chica">
 
@@ -1142,7 +990,7 @@
 
                     <div class="item-chica">
 
-                      <img src="img/chicas/chica1.jpg" class="img-responsive">
+                      <img src="{{ asset('img/chicas/chica1.jpg') }}" class="img-responsive">
 
                       <div class="texto-chica">
 
@@ -1180,7 +1028,7 @@
 
                     <div class="item-chica">
 
-                      <img src="img/chicas/chica1.jpg" class="img-responsive">
+                      <img src="{{ asset('img/chicas/chica1.jpg') }}" class="img-responsive">
 
                       <div class="texto-chica">
 
@@ -1218,7 +1066,167 @@
 
                     <div class="item-chica">
 
-                      <img src="img/chicas/chica1.jpg" class="img-responsive">
+                      <img src="{{ asset('img/chicas/chica1.jpg') }}" class="img-responsive">
+
+                      <div class="texto-chica">
+
+                        <h3>FRANCESCA</h3>
+
+                        <h4>Lima │ 21 años</h4>
+
+                        <h5>$ 150</h5>
+
+                        <span>
+
+                          <i class="icon-star"></i>
+
+                          <i class="icon-star"></i>
+
+                          <i class="icon-star"></i>
+
+                          <i class="icon-star"></i>
+
+                          <i class="icon-star"></i>
+
+                        </span>
+
+                        <a href="no-reserva.php">VER PERFIL</a>
+
+                        <div class="triangulo"><i class="icon-heart"></i></div>
+
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div class="carousel-item">
+
+                <div class="row">
+
+                  <div class="col-lg-3 col-md-6 col-sm-12">
+
+                    <div class="item-chica">
+
+                      <img src="{{ asset('img/chicas/chica1.jpg') }}" class="img-responsive">
+
+                      <div class="texto-chica">
+
+                        <h3>FRANCESCA</h3>
+
+                        <h4>Lima │ 21 años</h4>
+
+                        <h5>$ 150</h5>
+
+                        <span>
+
+                          <i class="icon-star"></i>
+
+                          <i class="icon-star"></i>
+
+                          <i class="icon-star"></i>
+
+                          <i class="icon-star"></i>
+
+                          <i class="icon-star"></i>
+
+                        </span>
+
+                        <a href="no-reserva.php">VER PERFIL</a>
+
+                        <div class="triangulo"><i class="icon-heart"></i></div>
+
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                  <div class="col-lg-3 col-md-6 col-sm-12">
+
+                    <div class="item-chica">
+
+                      <img src="{{ asset('img/chicas/chica1.jpg') }}" class="img-responsive">
+
+                      <div class="texto-chica">
+
+                        <h3>FRANCESCA</h3>
+
+                        <h4>Lima │ 21 años</h4>
+
+                        <h5>$ 150</h5>
+
+                        <span>
+
+                          <i class="icon-star"></i>
+
+                          <i class="icon-star"></i>
+
+                          <i class="icon-star"></i>
+
+                          <i class="icon-star"></i>
+
+                          <i class="icon-star"></i>
+
+                        </span>
+
+                        <a href="no-reserva.php">VER PERFIL</a>
+
+                        <div class="triangulo"><i class="icon-heart"></i></div>
+
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                  <div class="col-lg-3 col-md-6 col-sm-12">
+
+                    <div class="item-chica">
+
+                      <img src="{{ asset('img/chicas/chica1.jpg') }}" class="img-responsive">
+
+                      <div class="texto-chica">
+
+                        <h3>FRANCESCA</h3>
+
+                        <h4>Lima │ 21 años</h4>
+
+                        <h5>$ 150</h5>
+
+                        <span>
+
+                          <i class="icon-star"></i>
+
+                          <i class="icon-star"></i>
+
+                          <i class="icon-star"></i>
+
+                          <i class="icon-star"></i>
+
+                          <i class="icon-star"></i>
+
+                        </span>
+
+                        <a href="no-reserva.php">VER PERFIL</a>
+
+                        <div class="triangulo"><i class="icon-heart"></i></div>
+
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                  <div class="col-lg-3 col-md-6 col-sm-12">
+
+                    <div class="item-chica">
+
+                      <img src="{{ asset('img/chicas/chica1.jpg') }}" class="img-responsive">
 
                       <div class="texto-chica">
 
@@ -1291,6 +1299,29 @@
   @include('footers.footer-free')
 
   @include('modal')
+
+  
+<script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('js/meetfornight.js') }}"></script>
+
+<script>
+
+      var sidebar = new StickySidebar('#sidebar', {resizeSensor: false, maxWidth:350, topSpacing: 0, bottomSpacing: 50, containerSelector: '#main-perfil' });
+
+
+
+      document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          plugins: [ 'dayGrid', 'timeGrid' ], defaultView: 'timeGridWeek'
+        });
+
+        calendar.render();
+      });
+
+
+</script>
 
 
   </body>

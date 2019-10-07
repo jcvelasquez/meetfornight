@@ -8,26 +8,11 @@
 $(document).ready(function($) {
 
 
-
-
-      $(".range-example").asRange({
+      $("#horario_lunes, #horario_martes, #horario_miercoles, #horario_jueves, #horario_viernes, #horario_sabado, #horario_domingo").asRange({
         range: true,
         limit: false
-
       });
 
-      // setup the repeater
-      /*$('.repeater').repeater({
-        show: function () {
-          $(this).slideDown();
-        },
-        hide: function (deleteElement) {
-          if(confirm('Are you sure you want to delete this element?')) {
-              $(this).slideUp(deleteElement);
-          }
-        },
-        isFirstItemUndeletable: true
-      });*/
 
       $(".rango-perfil").asRange({
         range: false,
