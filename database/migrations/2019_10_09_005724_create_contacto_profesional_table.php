@@ -15,10 +15,11 @@ class CreateContactoProfesionalTable extends Migration
     {
         Schema::create('contacto_profesional', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('celular');
-            $table->enum('tipo_celular',['Whatsapp','Celular']);
-            $table->enum('tipo_contacto',['Mensaje','Correos','Ninguna de las anteriores']);
-            $table->string('web');
+            $table->integer('idusuario')->unsigned();
+            $table->integer('desde');
+            $table->integer('hasta');
+            $table->enum('dia',['LUNES','MARTES','MIERCOLES','JUEVES','VIERNES','SABADO','DOMINGO']);
+            $table->foreign('idusuario')->references('id')->on('usuarios');
             $table->timestamps();
         });
     }

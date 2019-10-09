@@ -17,6 +17,7 @@ class CreateUsuariosExtrasTable extends Migration
             $table->integer('idusuario')->unsigned();
             $table->text('frase');
             $table->text('descripcion');
+            $table->string('web')->nullable();
             $table->string('departamento');
             $table->string('distrito');
             $table->string('etnia');
@@ -28,11 +29,12 @@ class CreateUsuariosExtrasTable extends Migration
             $table->integer('estatura');
             $table->integer('peso');
             $table->enum('orientacion',['LESB','HETE','TRAN','HOMO','BISE']);
+            $table->enum('tipo_contacto',['MENSAJE','CORREO','NA'])->nullable();
             $table->integer('tatuaje');
             $table->integer('piercing');
             $table->integer('fumador');
             $table->integer('seguridad');
-            
+            $table->integer('agenda')->nullable();
             $table->foreign('idusuario')->references('id')->on('usuarios')->onDelete('cascade');
 
             

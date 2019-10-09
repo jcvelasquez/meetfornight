@@ -27,6 +27,7 @@ class CreateUsuariosTable extends Migration
             $table->enum('nacionalidad',['PE','PA','ES']);
             $table->enum('idioma',['ES','EN']);
             $table->string('celular');
+            $table->enum('tipo_celular',['WHATSAPP','CELULAR']);
             $table->integer('estado');
             $table->timestamps();
 

@@ -11,6 +11,9 @@
       </p>
       <p>Si estas interesado sigue estos pasos:</p>
     </div>
+
+    <div id="calendar"></div>
+
   </form>
 </template>
 
@@ -18,6 +21,20 @@
 export default {
   mounted() {
     console.log("Component mounted.");
+
+
+      document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          plugins: [ 'dayGrid', 'timeGrid' ], defaultView: 'dayGridMonth'
+        });
+
+        calendar.render();
+      });
+
+
   }
 };
+
 </script>
