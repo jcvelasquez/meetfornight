@@ -42,40 +42,45 @@
           <div class="no-pad custom-control custom-radio custom-control-inline no-margin-right-check col-lg col-md-12 col-sm-12">
           <p-radio name="contacto" id="mensaje" true-value="24" :value="24"><span>Mensaje</span><p>Unicamente <strong>los usuarios registrados</strong> podrán enviarte un mensaje. Podrás leer y contestar a los mensajes a través del panel de control.</p></p-radio>
 
-        <!--   <label class="custom-control-label custom-control-label-espacio" for="mensaje"><span>Mensaje</span><p>Unicamente <strong>los usuarios registrados</strong> podrán enviarte un mensaje. Podrás leer y contestar a los mensajes a través del panel de control.</p></label> -->
+   
           </div>
         </div>
         <div class="bloque-opcion">
           <div class="no-pad custom-control custom-radio custom-control-inline no-margin-right-check col-lg col-md-12 col-sm-12">
-          <input type="radio" id="correos" name="customRadioInline1" class="custom-control-input">
-          <label class="custom-control-label custom-control-label-espacio" for="correos"><span>Correos</span><p>Todos <strong>los usuarios anónimos y registrados</strong> podrán enviarte un correo a través de la web. Podrás responder por medio de tu correo a los mensajes (tú correo no será visible en la pagina web).</p></label>
+          <p-radio name="contacto" id="correo" true-value="24" :value="24"><span>Correos</span><p>Todos <strong>los usuarios anónimos y registrados</strong> podrán enviarte un correo a través de la web. Podrás responder por medio de tu correo a los mensajes (tú correo no será visible en la pagina web).</p></p-radio>
+          
           </div>
         </div>
         <div class="bloque-opcion">
           <div class="no-pad custom-control custom-radio custom-control-inline no-margin-right-check col-lg col-md-12 col-sm-12">
-          <input type="radio" id="ninguna" name="customRadioInline1" class="custom-control-input">
-          <label class="custom-control-label custom-control-label-espacio" for="ninguna"><span>Ninguna de las anteriores</span><p>No quieres recibir mensajes o correos de los visitantes. Serás contactado solamente por teléfono y/o whatsapp.</p></label>
+
+            <p-radio name="contacto" id="na" true-value="24" :value="24"><span>Ninguna de las anteriores</span><p>No quieres recibir mensajes o correos de los visitantes. Serás contactado solamente por teléfono y/o whatsapp.</p></p-radio>
+
+       
           </div>
         </div>
   </div>
 </div>
 
 <div class="bloques-de-perfil">
+
+  
+<vue-range-slider ref="slider" :min="0" :max="24" v-model="horario_lunes"></vue-range-slider>
+
   <h5 class="formulario-titulos">DISPONIBILIDAD EN HORAS:</h5>
   <div class="form-row">
       <div class="col-lg-6 col-sm-12">
           <div class="busqueda-detallada-range">
             <span class="esp-i">Lunes</span>
-            <input class="range-example" id="horario_lunes" type="text" min="0" max="24" value="" name="points" step="1" />
             <span class="esp-d">00:00/24:00</span>
           </div>
       </div>
       <div class="col-lg-6 col-sm-12">
           <div class="form-group checksito esp-checkcheck">
-            <p-radio name="lunes" true-value="24" :value="24">24/24</p-radio>
+            <p-input type="radio" name="lunes" color="info" value="24" v-model="disponibilidad_lunes" @change="cambiarHorario('lunes')">24/24</p-input>
           </div>
           <div class="form-group checksito esp-checkcheck">
-            <p-radio name="lunes" true-value="0" :value="0">No disponible</p-radio>
+         <p-input type="radio" name="lunes" color="info" value="0" v-model="disponibilidad_lunes" @change="cambiarHorario('lunes')">No disponible</p-input>
           </div>
       </div>
   </div>
@@ -89,10 +94,10 @@
       </div>
       <div class="col-lg-6 col-sm-12">
           <div class="form-group checksito esp-checkcheck">
-            <p-radio name="martes" true-value="24" :value="24">24/24</p-radio>
+            <p-input type="radio" name="martes" color="info" value="24" v-model="disponibilidad_martes" @change="cambiarHorario('martes')">24/24</p-input>
           </div>
           <div class="form-group checksito esp-checkcheck">
-            <p-radio name="martes" true-value="0" :value="0">No disponible</p-radio>
+            <p-input type="radio" name="martes" color="info" value="0" v-model="disponibilidad_martes" @change="cambiarHorario('martes')">No disponible</p-input>
           </div>
       </div>
   </div>
@@ -106,10 +111,10 @@
       </div>
       <div class="col-lg-6 col-sm-12">
           <div class="form-group checksito esp-checkcheck">
-            <p-radio name="miercoles" true-value="24" :value="24">24/24</p-radio>
+            <p-input type="radio" name="miercoles" color="info" value="24" v-model="disponibilidad_miercoles" @change="cambiarHorario('miercoles')">24/24</p-input>
           </div>
           <div class="form-group checksito esp-checkcheck">
-            <p-radio name="miercoles" true-value="0" :value="0">No disponible</p-radio>
+            <p-input type="radio" name="miercoles" color="info" value="0" v-model="disponibilidad_miercoles" @change="cambiarHorario('miercoles')">No disponible</p-input>
           </div>
       </div>
   </div>
@@ -123,10 +128,10 @@
       </div>
       <div class="col-lg-6 col-sm-12">
           <div class="form-group checksito esp-checkcheck">
-            <p-radio name="jueves" true-value="24" :value="24">24/24</p-radio>
+            <p-input type="radio" name="jueves" color="info" value="24" v-model="disponibilidad_jueves" @change="cambiarHorario('jueves')">24/24</p-input>
           </div>
           <div class="form-group checksito esp-checkcheck">
-            <p-radio name="jueves" true-value="0" :value="0">No disponible</p-radio>
+            <p-input type="radio" name="jueves" color="info" value="0" v-model="disponibilidad_jueves" @change="cambiarHorario('jueves')">No disponible</p-input>
           </div>
       </div>
   </div>
@@ -140,10 +145,10 @@
       </div>
       <div class="col-lg-6 col-sm-12">
           <div class="form-group checksito esp-checkcheck">
-            <p-radio name="viernes" true-value="24" :value="24">24/24</p-radio>
+            <p-input type="radio" name="viernes" color="info" value="24" v-model="disponibilidad_viernes" @change="cambiarHorario('viernes')">24/24</p-input>
           </div>
           <div class="form-group checksito esp-checkcheck">
-            <p-radio name="viernes" true-value="0" :value="0">No disponible</p-radio>
+            <p-input type="radio" name="viernes" color="info" value="0" v-model="disponibilidad_viernes" @change="cambiarHorario('viernes')">No disponible</p-input>
           </div>
       </div>
   </div>
@@ -157,10 +162,10 @@
       </div>
       <div class="col-lg-6 col-sm-12">
           <div class="form-group checksito esp-checkcheck">
-            <p-radio name="sabado" true-value="24" :value="24">24/24</p-radio>
+            <p-input type="radio" name="sabado" color="info" value="24" v-model="disponibilidad_sabado" @change="cambiarHorario('sabado')">24/24</p-input>
           </div>
           <div class="form-group checksito esp-checkcheck">
-            <p-radio name="sabado" true-value="0" :value="0">No disponible</p-radio>
+            <p-input type="radio" name="sabado" color="info" value="0" v-model="disponibilidad_sabado" @change="cambiarHorario('sabado')">No disponible</p-input>
           </div>
       </div>
   </div>
@@ -174,10 +179,10 @@
       </div>
       <div class="col-lg-6 col-sm-12">
           <div class="form-group checksito esp-checkcheck">
-            <p-radio name="domingo" true-value="24" :value="24">24/24</p-radio>
+            <p-input type="radio" name="domingo" color="info" value="24" v-model="disponibilidad_domingo" @change="cambiarHorario('domingo')">24/24</p-input>
           </div>
           <div class="form-group checksito esp-checkcheck">
-            <p-radio name="domingo" true-value="0" :value="0">No disponible</p-radio>
+            <p-input type="radio" name="domingo" color="info" value="0" v-model="disponibilidad_domingo" @change="cambiarHorario('domingo')">No disponible</p-input>
           </div>
       </div>
   </div>
@@ -309,9 +314,80 @@
 </template>
 
 <script>
+
+var martes;
+
+import VueRangeSlider from 'vue-range-component'
+
     export default {
         mounted() {
-            console.log('Component mounted.')
+           
+
+       
+            
+        },
+        data() {
+          return {
+            horario_lunes: [0,24],
+            disponibilidad_lunes : 0,
+            disponibilidad_martes : 0,
+            disponibilidad_miercoles : 0,
+            disponibilidad_jueves : 0,
+            disponibilidad_viernes : 0,
+            disponibilidad_sabado : 0,
+            disponibilidad_domingo : 0
+          }
+        },
+        methods:{
+
+            cambiarHorario(dia){
+
+              
+
+              let me = this;
+
+             
+
+              //slider.setValue([0,4])
+              //me.lunes[0,4];
+              //me.horario_lunes.refresh;
+              //console.log( me.horario_lunes)
+
+              me.horario_lunes = [0,4];
+
+              //me.lunes[0,4]
+               
+               
+                //console.log(me.radio_lunes.value)
+                console.log(me.disponibilidad_lunes)
+                console.log(dia)
+
+            }
+
+        },
+        components: {
+          VueRangeSlider
         }
     }
+
+    $(document).ready(function($) {
+
+
+      $("#horario_miercoles, #horario_jueves, #horario_viernes, #horario_sabado, #horario_domingo").asRange({
+        range: true,
+        limit: false
+      });
+
+      martes = $("#horario_martes").asRange({
+              range: true,
+              limit: false
+            });
+
+        
+
+
+    });
+
+
+
 </script>

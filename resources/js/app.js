@@ -11,7 +11,6 @@ window.Dropzone = require('./dropzone');
 window.Swal = require('sweetalert2');
 window.Vue = require('vue');
 
-
 require('sticky-sidebar');
 
 
@@ -23,8 +22,13 @@ import listPlugin from '@fullcalendar/list';
 import PrettyCheckbox from 'pretty-checkbox-vue';
 import PrettyRadio from 'pretty-checkbox-vue/radio';
 
+
+
+
 Vue.use(PrettyCheckbox);
 Vue.use(PrettyRadio);
+//Vue.use(VueRangeSlider);
+
 
 
 Vue.component('perfil-usuario', require('./components/PerfilUsuario.vue').default);

@@ -8,11 +8,7 @@
 $(document).ready(function($) {
 
 
-      $("#horario_lunes, #horario_martes, #horario_miercoles, #horario_jueves, #horario_viernes, #horario_sabado, #horario_domingo").asRange({
-        range: true,
-        limit: false
-      });
-
+  
 
       $(".rango-perfil").asRange({
         range: false,

@@ -11,11 +11,10 @@ use Illuminate\Http\Request;
 class PerfilController extends Controller
 {
 
-    public function mostrar($apodo)
+    public function mostrar($id)
     {
 
         $idusuario = 34;
-
 
         $perfil = DB::table('usuarios')->join('usuarios_extras', 'usuarios.id', '=', 'usuarios_extras.idusuario')
         ->where('usuarios.id', '=', $idusuario)
@@ -26,9 +25,7 @@ class PerfilController extends Controller
 
         //PERFIL
         foreach ($perfil as $per) {
-
-
-            
+   
             data_set($per, 'edad', $this->calcularEdad($per->fecha_nacimiento));
 
             if( $per->tatuaje = 1 ){
