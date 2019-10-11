@@ -70,11 +70,14 @@
   <h5 class="formulario-titulos">DISPONIBILIDAD EN HORAS:</h5>
   <div class="form-row">
       <div class="col-lg-6 col-sm-12">
-          <div class="busqueda-detallada-range">
-            <span class="esp-i">Lunes</span>
-            <span class="esp-d">00:00/24:00</span>
-          </div>
       </div>
+        
+      <div class="col-lg-6 col-sm-12">
+<!--           <div class="busqueda-detallada-range">
+ -->            <span class="esp-i">Lunes</span>
+            <span class="esp-d">00:00/24:00</span>
+<!--           </div>
+ -->      </div>
       <div class="col-lg-6 col-sm-12">
           <div class="form-group checksito esp-checkcheck">
             <p-input type="radio" name="lunes" color="info" value="24" v-model="disponibilidad_lunes" @change="cambiarHorario('lunes')">24/24</p-input>
