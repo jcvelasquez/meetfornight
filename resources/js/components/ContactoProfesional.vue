@@ -64,231 +64,164 @@
 
 <div class="bloques-de-perfil">
 
-  
-<vue-range-slider ref="slider" :min="0" :max="24" v-model="horario_lunes"></vue-range-slider>
-
   <h5 class="formulario-titulos">DISPONIBILIDAD EN HORAS:</h5>
+
   <div class="form-row">
-      <div class="col-lg-6 col-sm-12">
+      <div class="col-lg-2 col-sm-12">
+          <div class="busqueda-detallada-range">
+            <span class="esp-i">Lunes</span>
+          </div>   
       </div>
-        
-      <div class="col-lg-6 col-sm-12">
-<!--           <div class="busqueda-detallada-range">
- -->            <span class="esp-i">Lunes</span>
-            <span class="esp-d">00:00/24:00</span>
-<!--           </div>
- -->      </div>
-      <div class="col-lg-6 col-sm-12">
-          <div class="form-group checksito esp-checkcheck">
+      <div class="col-lg-3 col-sm-12" style="padding-top:1.5em;">
+            <vue-range-slider ref="slider" :min="0" :max="24" v-model="horario_lunes"></vue-range-slider>
+      </div>
+      <div class="col-lg-3 col-sm-12">       
+            <div class="busqueda-detallada-range">
+                <span class="esp-d">00:00/24:00</span>  
+            </div>     
+      </div>
+      <div class="col-lg-4 col-sm-12">
+          <div class="busqueda-detallada-range">
             <p-input type="radio" name="lunes" color="info" value="24" v-model="disponibilidad_lunes" @change="cambiarHorario('lunes')">24/24</p-input>
-          </div>
-          <div class="form-group checksito esp-checkcheck">
-         <p-input type="radio" name="lunes" color="info" value="0" v-model="disponibilidad_lunes" @change="cambiarHorario('lunes')">No disponible</p-input>
-          </div>
+            <p-input type="radio" name="lunes" color="info" value="0" v-model="disponibilidad_lunes" @change="cambiarHorario('lunes')">No disponible</p-input>
+          </div>  
       </div>
   </div>
+
   <div class="form-row">
-      <div class="col-lg-6 col-sm-12">
+      <div class="col-lg-2 col-sm-12">
           <div class="busqueda-detallada-range">
             <span class="esp-i">Martes</span>
-            <input class="range-example" id="horario_martes" type="text" min="0" max="24" value="" name="points" step="1" />
-            <span class="esp-d">00:00/24:00</span>
-          </div>
+          </div>   
       </div>
-      <div class="col-lg-6 col-sm-12">
-          <div class="form-group checksito esp-checkcheck">
-            <p-input type="radio" name="martes" color="info" value="24" v-model="disponibilidad_martes" @change="cambiarHorario('martes')">24/24</p-input>
-          </div>
-          <div class="form-group checksito esp-checkcheck">
-            <p-input type="radio" name="martes" color="info" value="0" v-model="disponibilidad_martes" @change="cambiarHorario('martes')">No disponible</p-input>
-          </div>
+      <div class="col-lg-3 col-sm-12" style="padding-top:1.5em;">
+            <vue-range-slider ref="slider" :min="0" :max="24" v-model="horario_martes"></vue-range-slider>
       </div>
-  </div>
-  <div class="form-row">
-      <div class="col-lg-6 col-sm-12">
+      <div class="col-lg-3 col-sm-12">       
+            <div class="busqueda-detallada-range">
+                <span class="esp-d">00:00/24:00</span>  
+            </div>     
+      </div>
+      <div class="col-lg-4 col-sm-12">
           <div class="busqueda-detallada-range">
-            <span class="esp-i">Miércoles</span>
-            <input class="range-example" id="horario_miercoles" type="text" min="0" max="24" value="" name="points" step="1" />
-            <span class="esp-d">00:00/24:00</span>
-          </div>
-      </div>
-      <div class="col-lg-6 col-sm-12">
-          <div class="form-group checksito esp-checkcheck">
-            <p-input type="radio" name="miercoles" color="info" value="24" v-model="disponibilidad_miercoles" @change="cambiarHorario('miercoles')">24/24</p-input>
-          </div>
-          <div class="form-group checksito esp-checkcheck">
-            <p-input type="radio" name="miercoles" color="info" value="0" v-model="disponibilidad_miercoles" @change="cambiarHorario('miercoles')">No disponible</p-input>
-          </div>
+            <p-input type="radio" name="martes" color="info" value="24" v-model="disponibilidad_martes" @change="cambiarHorario('martes')">24/24</p-input>
+            <p-input type="radio" name="martes" color="info" value="0" v-model="disponibilidad_martes" @change="cambiarHorario('martes')">No disponible</p-input>
+          </div>  
       </div>
   </div>
+
   <div class="form-row">
-      <div class="col-lg-6 col-sm-12">
+      <div class="col-lg-2 col-sm-12">
+          <div class="busqueda-detallada-range">
+            <span class="esp-i">Miercoles</span>
+          </div>   
+      </div>
+      <div class="col-lg-3 col-sm-12" style="padding-top:1.5em;">
+            <vue-range-slider ref="slider" :min="0" :max="24" v-model="horario_miercoles"></vue-range-slider>
+      </div>
+      <div class="col-lg-3 col-sm-12">       
+            <div class="busqueda-detallada-range">
+                <span class="esp-d">00:00/24:00</span>  
+            </div>     
+      </div>
+      <div class="col-lg-4 col-sm-12">
+          <div class="busqueda-detallada-range">
+            <p-input type="radio" name="miercoles" color="info" value="24" v-model="disponibilidad_miercoles" @change="cambiarHorario('miercoles')">24/24</p-input>
+            <p-input type="radio" name="miercoles" color="info" value="0" v-model="disponibilidad_miercoles" @change="cambiarHorario('miercoles')">No disponible</p-input>
+          </div>  
+      </div>
+  </div>
+
+  <div class="form-row">
+      <div class="col-lg-2 col-sm-12">
           <div class="busqueda-detallada-range">
             <span class="esp-i">Jueves</span>
-            <input class="range-example" id="horario_jueves" type="text" min="0" max="24" value="" name="points" step="1" />
-            <span class="esp-d">00:00/24:00</span>
-          </div>
+          </div>   
       </div>
-      <div class="col-lg-6 col-sm-12">
-          <div class="form-group checksito esp-checkcheck">
+      <div class="col-lg-3 col-sm-12" style="padding-top:1.5em;">
+            <vue-range-slider ref="slider" :min="0" :max="24" v-model="horario_jueves"></vue-range-slider>
+      </div>
+      <div class="col-lg-3 col-sm-12">       
+            <div class="busqueda-detallada-range">
+                <span class="esp-d">00:00/24:00</span>  
+            </div>     
+      </div>
+      <div class="col-lg-4 col-sm-12">
+          <div class="busqueda-detallada-range">
             <p-input type="radio" name="jueves" color="info" value="24" v-model="disponibilidad_jueves" @change="cambiarHorario('jueves')">24/24</p-input>
-          </div>
-          <div class="form-group checksito esp-checkcheck">
             <p-input type="radio" name="jueves" color="info" value="0" v-model="disponibilidad_jueves" @change="cambiarHorario('jueves')">No disponible</p-input>
-          </div>
+          </div>  
       </div>
   </div>
+
   <div class="form-row">
-      <div class="col-lg-6 col-sm-12">
+      <div class="col-lg-2 col-sm-12">
           <div class="busqueda-detallada-range">
             <span class="esp-i">Viernes</span>
-            <input class="range-example" id="horario_viernes" type="text" min="0" max="24" value="" name="points" step="1" />
-            <span class="esp-d">00:00/24:00</span>
-          </div>
+          </div>   
       </div>
-      <div class="col-lg-6 col-sm-12">
-          <div class="form-group checksito esp-checkcheck">
-            <p-input type="radio" name="viernes" color="info" value="24" v-model="disponibilidad_viernes" @change="cambiarHorario('viernes')">24/24</p-input>
-          </div>
-          <div class="form-group checksito esp-checkcheck">
-            <p-input type="radio" name="viernes" color="info" value="0" v-model="disponibilidad_viernes" @change="cambiarHorario('viernes')">No disponible</p-input>
-          </div>
+      <div class="col-lg-3 col-sm-12" style="padding-top:1.5em;">
+            <vue-range-slider ref="slider" :min="0" :max="24" v-model="horario_viernes"></vue-range-slider>
       </div>
-  </div>
-  <div class="form-row">
-      <div class="col-lg-6 col-sm-12">
+      <div class="col-lg-3 col-sm-12">       
+            <div class="busqueda-detallada-range">
+                <span class="esp-d">00:00/24:00</span>  
+            </div>     
+      </div>
+      <div class="col-lg-4 col-sm-12">
           <div class="busqueda-detallada-range">
-            <span class="esp-i">Sábado</span>
-            <input class="range-example" type="text" id="horario_sabado" min="0" max="24" value="" name="points" step="1" />
-            <span class="esp-d">00:00/24:00</span>
-          </div>
-      </div>
-      <div class="col-lg-6 col-sm-12">
-          <div class="form-group checksito esp-checkcheck">
-            <p-input type="radio" name="sabado" color="info" value="24" v-model="disponibilidad_sabado" @change="cambiarHorario('sabado')">24/24</p-input>
-          </div>
-          <div class="form-group checksito esp-checkcheck">
-            <p-input type="radio" name="sabado" color="info" value="0" v-model="disponibilidad_sabado" @change="cambiarHorario('sabado')">No disponible</p-input>
-          </div>
+            <p-input type="radio" name="viernes" color="info" value="24" v-model="disponibilidad_viernes" @change="cambiarHorario('viernes')">24/24</p-input>
+            <p-input type="radio" name="viernes" color="info" value="0" v-model="disponibilidad_viernes" @change="cambiarHorario('viernes')">No disponible</p-input>
+          </div>  
       </div>
   </div>
+
   <div class="form-row">
-      <div class="col-lg-6 col-sm-12">
+      <div class="col-lg-2 col-sm-12">
+          <div class="busqueda-detallada-range">
+            <span class="esp-i">Sabado</span>
+          </div>   
+      </div>
+      <div class="col-lg-3 col-sm-12" style="padding-top:1.5em;">
+            <vue-range-slider ref="slider" :min="0" :max="24" v-model="horario_sabado"></vue-range-slider>
+      </div>
+      <div class="col-lg-3 col-sm-12">       
+            <div class="busqueda-detallada-range">
+                <span class="esp-d">00:00/24:00</span>  
+            </div>     
+      </div>
+      <div class="col-lg-4 col-sm-12">
+          <div class="busqueda-detallada-range">
+            <p-input type="radio" name="sabado" color="info" value="24" v-model="disponibilidad_sabado" @change="cambiarHorario('sabado')">24/24</p-input>
+            <p-input type="radio" name="sabado" color="info" value="0" v-model="disponibilidad_sabado" @change="cambiarHorario('sabado')">No disponible</p-input>
+          </div>  
+      </div>
+  </div>
+
+  <div class="form-row">
+      <div class="col-lg-2 col-sm-12">
           <div class="busqueda-detallada-range">
             <span class="esp-i">Domingo</span>
-            <input class="range-example" type="text" id="horario_domingo" min="0" max="24" value="" name="points" step="1" />
-            <span class="esp-d">00:00/24:00</span>
-          </div>
+          </div>   
       </div>
-      <div class="col-lg-6 col-sm-12">
-          <div class="form-group checksito esp-checkcheck">
+      <div class="col-lg-3 col-sm-12" style="padding-top:1.5em;">
+            <vue-range-slider ref="slider" :min="0" :max="24" v-model="horario_domingo"></vue-range-slider>
+      </div>
+      <div class="col-lg-3 col-sm-12">       
+            <div class="busqueda-detallada-range">
+                <span class="esp-d">00:00/24:00</span>  
+            </div>     
+      </div>
+      <div class="col-lg-4 col-sm-12">
+          <div class="busqueda-detallada-range">
             <p-input type="radio" name="domingo" color="info" value="24" v-model="disponibilidad_domingo" @change="cambiarHorario('domingo')">24/24</p-input>
-          </div>
-          <div class="form-group checksito esp-checkcheck">
             <p-input type="radio" name="domingo" color="info" value="0" v-model="disponibilidad_domingo" @change="cambiarHorario('domingo')">No disponible</p-input>
-          </div>
+          </div>  
       </div>
   </div>
+
 </div>
 
-<!--<div class="bloques-de-perfil">
-  <h5 class="formulario-titulos">DISPONIBILIDAD EN FECHAS:</h5>
-  <div class="form-row espacio-campos-big">
-    <div class="disponibilidad">
-      <div class="fecha">
-        <a href="">Lun</a>
-        <span class="cencen">
-            <input class="inp-cbx" id="dia1" type="checkbox" style="display: none;"/>
-            <label class="cbx" for="dia1">
-              <span>
-                <svg width="12px" height="10px" viewbox="0 0 12 10">
-                  <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                </svg>
-              </span>
-            </label>
-        </span>
-      </div>
-      <div class="fecha">
-        <a href="">Mar</a>
-        <span class="cencen">
-            <input class="inp-cbx" id="dia2" type="checkbox" style="display: none;"/>
-            <label class="cbx" for="dia2">
-              <span>
-                <svg width="12px" height="10px" viewbox="0 0 12 10">
-                  <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                </svg>
-              </span>
-            </label>
-        </span>
-      </div>
-      <div class="fecha">
-        <a href="">Mie</a>
-        <span class="cencen">
-            <input class="inp-cbx" id="dia3" type="checkbox" style="display: none;"/>
-            <label class="cbx" for="dia3">
-              <span>
-                <svg width="12px" height="10px" viewbox="0 0 12 10">
-                  <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                </svg>
-              </span>
-            </label>
-        </span>
-      </div>
-      <div class="fecha">
-        <a href="">Jue</a>
-        <span class="cencen">
-            <input class="inp-cbx" id="dia4" type="checkbox" style="display: none;"/>
-            <label class="cbx" for="dia4">
-              <span>
-                <svg width="12px" height="10px" viewbox="0 0 12 10">
-                  <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                </svg>
-              </span>
-            </label>
-        </span>
-      </div>
-      <div class="fecha">
-        <a href="">Vie</a>
-        <span class="cencen">
-            <input class="inp-cbx" id="dia5" type="checkbox" style="display: none;"/>
-            <label class="cbx" for="dia5">
-              <span>
-                <svg width="12px" height="10px" viewbox="0 0 12 10">
-                  <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                </svg>
-              </span>
-            </label>
-        </span>
-      </div>
-      <div class="fecha">
-        <a href="">Sab</a>
-        <span class="cencen">
-            <input class="inp-cbx" id="dia6" type="checkbox" style="display: none;"/>
-            <label class="cbx" for="dia6">
-              <span>
-                <svg width="12px" height="10px" viewbox="0 0 12 10">
-                  <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                </svg>
-              </span>
-            </label>
-        </span>
-      </div>
-      <div class="fecha">
-        <a href="">Dom</a>
-        <span class="cencen">
-            <input class="inp-cbx" id="dia7" type="checkbox" style="display: none;"/>
-            <label class="cbx" for="dia7">
-              <span>
-                <svg width="12px" height="10px" viewbox="0 0 12 10">
-                  <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                </svg>
-              </span>
-            </label>
-        </span>
-      </div>
-    </div>
-  </div>
-</div>-->
 
 <div class="bloques-de-perfil">
   <div class="form-row">
@@ -310,7 +243,7 @@
 
 <div class="bloques-de-perfil">
   <div class="form-row">
-    <button type="submit" class="btn btn-primary btn-busqueda-detallada">ACTUALIZAR DATOS</button>
+    <button type="button" @click="actualizarHorarios()" class="btn btn-primary btn-busqueda-detallada">ACTUALIZAR DATOS</button>
   </div>
 </div>
 </form>
@@ -318,54 +251,128 @@
 
 <script>
 
-var martes;
-
-import VueRangeSlider from 'vue-range-component'
+    import VueRangeSlider from 'vue-range-component'
 
     export default {
         mounted() {
-           
 
-       
-            
+          this.listarDisponibilidad();
+           
         },
         data() {
           return {
             horario_lunes: [0,24],
+            horario_martes: [0,24],
+            horario_miercoles: [0,24],
+            horario_jueves: [0,24],
+            horario_viernes: [0,24],
+            horario_sabado: [0,24],
+            horario_domingo: [0,24],
             disponibilidad_lunes : 0,
             disponibilidad_martes : 0,
             disponibilidad_miercoles : 0,
             disponibilidad_jueves : 0,
             disponibilidad_viernes : 0,
             disponibilidad_sabado : 0,
-            disponibilidad_domingo : 0
+            disponibilidad_domingo : 0,
+            arDisponibilidad : [],
+            celular : '',
+            web: '',
+            tipo_celular: '',
+            agenda: ''
           }
         },
         methods:{
 
+            listarDisponibilidad(){
+
+                  let me = this;
+
+                  axios.get('/disponibilidad-profesional/listar').then(function (response) {
+
+                      var respuesta= response.data;
+                      me.arDisponibilidad = respuesta.disponibilidad;
+
+
+                  }).catch(function (error) {  console.log(error);     });
+
+            },
             cambiarHorario(dia){
 
-              
+                let me = this;
 
-              let me = this;
+                /*
 
-             
+                if(dia == 'lunes'){
+                  horario_lunes = [0,me.disponibilidad_lunes]
+                }else if(dia == 'martes'){
+                  me.disponibilidad_martes
+                }else if(dia == 'miercoles'){
+                  me.disponibilidad_miercoles
+                }else if(dia == 'jueves'){
+                  me.disponibilidad_jueves
+                }else if(dia == 'viernes'){
+                  me.disponibilidad_viernes
+                }else if(dia == 'sabado'){
+                  me.disponibilidad_sabado
+                }else if(dia == 'domingo'){
+                  me.disponibilidad_domingo
 
-              //slider.setValue([0,4])
-              //me.lunes[0,4];
-              //me.horario_lunes.refresh;
-              //console.log( me.horario_lunes)
+                }
 
-              me.horario_lunes = [0,4];
+                */
+            },
+            actualizarHorarios(){
 
-              //me.lunes[0,4]
-               
-               
-                //console.log(me.radio_lunes.value)
-                console.log(me.disponibilidad_lunes)
-                console.log(dia)
+
+                  let me = this;
+                  var tarifa, opcion;
+
+                  /*
+                  if(me.validarTarifas(tipo)){
+                    Swal.fire('ERROR', me.erroresPerfil.toString(),'error');
+                    return;
+                  }
+
+                  switch(tipo){
+
+                    case 'SERVICIO' :   opcion = me.servicio_opcion;
+                                        tarifa = me.servicio_tarifa;
+                                        break;
+
+                    case 'ESCORT' :     opcion = me.escort_opcion;
+                                        tarifa = me.escort_tarifa;
+                                        break;
+
+                    case 'EXTRAS' :     opcion = me.extra_opcion;
+                                        tarifa = me.extra_tarifa;
+                                        break;                                        
+
+                  }
+                  */
+                  axios.post('disponibilidad-profesional/registrar', {
+                    'idusuario' : me.$idusuario,
+                    'desde' : desde,
+                    'hasta' : hasta,
+                    'dia' : dia
+                  })
+                  .then(function (response) {
+
+                    /*var _tarifa = response.data.tarifa;
+
+                      me.limpiarCampos();
+                      me.arTarifas.push(_tarifa);
+
+                      Swal.fire('CONFIRMACION', 'Tarifa agregada correctamente','success');*/
+
+                  })
+                  .catch(function (error) {
+                      // handle error
+                      console.log(error);
+                  });
 
             }
+            
 
         },
         components: {
@@ -373,6 +380,7 @@ import VueRangeSlider from 'vue-range-component'
         }
     }
 
+    /*
     $(document).ready(function($) {
 
 
@@ -386,10 +394,7 @@ import VueRangeSlider from 'vue-range-component'
               limit: false
             });
 
-        
-
-
-    });
+    });*/
 
 
 

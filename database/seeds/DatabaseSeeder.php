@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(AlertaProfesionalSeeder::class);
         $this->call(ServiciosProfesionalSeeder::class);
         $this->call(ServiciosXProfesionalSeeder::class);
+        $this->call(DisponibilidadProfesionalSeeder::class);
         
     }
 }

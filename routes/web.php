@@ -143,6 +143,18 @@ Route::group(['middleware'=>['auth']],function(){
             Route::get('perfil-profesional/editar', 'UsuarioController@editarDataPerfilProfesional');
             Route::put('perfil-profesional/actualizar', 'UsuarioController@actualizarDataProfesional');
 
+
+            //CONTACTO
+            Route::get('contacto-profesional', 'ContactoProfesionalController@mostrar' );
+            Route::get('contacto-profesional/listar', 'ContactoProfesionalController@list' );
+            Route::post('contacto-profesional/registrar', 'ContactoProfesionalController@store');  
+
+
+            Route::get('disponibilidad-profesional/listar', 'DisponibilidadProfesionalController@list');  
+            Route::post('disponibilidad-profesional/registrar', 'DisponibilidadProfesionalController@store');  
+
+
+
             //URLS PARA EL PROFESIONAL
             Route::get('planes-profesional', function () {
                 return view('forms-perfil-profesional.planes-profesional');
@@ -156,10 +168,7 @@ Route::group(['middleware'=>['auth']],function(){
             Route::get('servicios-profesional/listar', 'ServiciosProfesionalController@listar' );
 
             
-            //CONTACTO
-            Route::get('contacto-profesional', function () {
-                return view('forms-perfil-profesional.contacto-profesional');
-            });
+            
             
             //AGENDA
             Route::get('agenda-profesional', function () {

@@ -347,7 +347,7 @@
 
         <div class="col-lg-8">
 
-            <perfil-profesional-front></perfil-profesional-front>
+           
 
             <div class="espacio-reservas">
 
@@ -585,7 +585,7 @@
 
               <div class="fecha">
 
-                <span class="dias">Lun</span>
+                <span class="dias">Lun </span>
 
                 <p>00:00</p>
 
@@ -660,7 +660,7 @@
           <div id="widget">
         
            
-         <perfil-profesional-front></perfil-profesional-front>
+          <reservas-profesional-front></reservas-profesional-front>
 
          </div>
 
@@ -1264,7 +1264,7 @@
 
 <script>
 
-      var sidebar = new StickySidebar('#sidebar', {resizeSensor: false, maxWidth:350, topSpacing: 0, bottomSpacing: 50, containerSelector: '#main-perfil' });
+      //var sidebar = new StickySidebar('#sidebar', {resizeSensor: false, maxWidth:350, topSpacing: 0, bottomSpacing: 50, containerSelector: '#main-perfil' });
 
 </script>
 

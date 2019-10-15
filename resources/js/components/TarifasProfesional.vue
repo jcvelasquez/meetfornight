@@ -42,12 +42,6 @@
                         <td v-text="servicio.costo_tarifa"></td>
                         <td><button type="button" @click="eliminarTarifa(servicio, index)" class="btn btn-primary x-circulo"><i class="fa fa-times"></i></button></td>
                     </template>
-                    <template v-else>
-
-
-                    </template>
-
-
                   </tr>
                   
                 </tbody>

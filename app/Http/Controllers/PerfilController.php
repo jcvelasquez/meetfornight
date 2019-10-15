@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Usuario;
 use App\ServiciosProfesional;
+use App\DisponibilidadProfesional;
 use App\ServiciosXProfesional;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -19,6 +20,8 @@ class PerfilController extends Controller
         $perfil = DB::table('usuarios')->join('usuarios_extras', 'usuarios.id', '=', 'usuarios_extras.idusuario')
         ->where('usuarios.id', '=', $idusuario)
         ->get();
+
+        
 
         $servicios = ServiciosProfesional::where('estado_servicio', 1)->where('es_admin', 1)->get();
         $seleccionados = ServiciosXProfesional::where('idusuario', '=', $idusuario)->where('idservicio', '!=', NULL)->get();
@@ -104,8 +107,10 @@ class PerfilController extends Controller
 
 
         $tarifas = DB::table('tarifa_profesional')->where('tarifa_profesional.idusuario', '=', $idusuario)->orderBy('categoria_tarifa','DESC')->get();
+
+        $disponibilidad = DB::table('disponibilidad_profesional')->where('disponibilidad_profesional.idusuario', '=', $idusuario)->get();
        
-        return view('perfil', compact('perfil', 'servicios', 'personalizados', 'tarifas'));
+        return view('perfil', compact('perfil', 'servicios', 'personalizados', 'tarifas','disponibilidad'));
 
     }
 

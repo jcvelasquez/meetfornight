@@ -47,9 +47,8 @@ Vue.component('mensajes-profesional', require('./components/MensajesProfesional.
 Vue.component('alerta-profesional', require('./components/AlertaProfesional.vue').default);
 Vue.component('valoracion-profesional', require('./components/ValoracionProfesional.vue').default);
 Vue.component('listado-profesionales', require('./components/ListadoProfesionales.vue').default);
-Vue.component('reserva-perfil', require('./components/ReservaPerfil.vue').default);
-Vue.component('perfil-profesional-front', require('./components/PerfilProfesionalFront.vue').default);
-
+//Vue.component('reserva-perfil', require('./components/ReservaPerfil.vue').default);
+Vue.component('reservas-profesional-front', require('./components/ReservasProfesionalFront.vue').default);
 
 
 

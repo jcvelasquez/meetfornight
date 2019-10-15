@@ -4,3 +4,15 @@ label.error { font-size: 12px; color:red; }
 .nav-tabs .nav-item { padding:0; }
 
 .margen-otras-chicas { margin-top:30px; }
+
+.direccion-cliente { margin-top: 20px;}
+.direccion-cliente input { padding-top: 10px;}
+
+.btn-busqueda-detallada.marcado { background: rgb(5, 182, 5);}
+
+.servicios_seleccionados {
+    padding: 28px;
+    border: 1px solid #a95db6;
+    border-radius: 14px;
+    background: #eded;
+}

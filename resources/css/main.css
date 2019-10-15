@@ -5096,21 +5096,13 @@ footer ul li a:hover{
 .lista-plan {
 
     padding-left: 1em;
-
-    list-style-image: url('../img/icon-list.png');
-
-}
-
-.lista-plan li {
-
+    background: url('../img/icon-list.png') no-repeat 0px 17px;
     font: 1.1em 'Lato';
-
     font-weight: bold;
-
     color: #808080;
-
-    padding: 1em;
-
+    /*padding: 1em;*/
+    padding-top:15px;
+    padding-bottom:15px;
     border-bottom: 1px solid #c7c7c7;
 
 }
