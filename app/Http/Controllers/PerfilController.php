@@ -135,15 +135,26 @@ class PerfilController extends Controller
     {
 
         //FECHA SELECCIONADA DEL FRONT
-        $fechaselec = "2019-10-23";
+        $fechaselec = "2019-10-21";
 
-        $fechaEsHoy = false;
+        //MINUTOS
+        $duracion = "90";
+
+
+        $hoy = new DateTime;
 
         //OBTENGO EL NUMERO DE DIA DE LA FECHA SELECCIONADA
-        $nroDia = new DateTime($fechaselec);
-        $nroDia = $nroDia->format('N');
+        $fechaselecDate = new DateTime($fechaselec);
 
-        switch($nroDia){
+        //OBTENGO SI LA FECHA SELECCIONADA ES DEL DIA DE HOY
+        if($hoy->diff($fechaselecDate)->days === 0){
+            $fechaEsHoy = true;
+        }else{
+            $fechaEsHoy = false;
+        }
+
+
+        switch($fechaselecDate->format('N')){
 
             case 1: $day = 'LUNES';
                     break;
@@ -168,21 +179,16 @@ class PerfilController extends Controller
         $hasta = new DateTime($fechaselec." ".$disponibilidad->hasta);
 
         if($fechaEsHoy){
-
-            $timenow = new DateTime($fechaselec." ".date('H:i'));
-
+            $timenow = new DateTime($fechaselec." ".date('H:i:s'));
         }else{
-
             $timenow = new DateTime($fechaselec." ".$disponibilidad->desde);
         }
-
-        //$timenow = new DateTime(date('H:i'));
 
         //ANTICIPACION PARA PEDIR EL SERVICIO
         //$timenow->add(new DateInterval('PT0M'));
 
         //TIEMPO DEL SERVICIO
-        $interval = new DateInterval('PT90M');
+        $interval = new DateInterval('PT'.$duracion.'M');
 
         $time_slots = array();
         //$time_slots = array( '17:30' => '18:30', '19:30' => '21:30' );

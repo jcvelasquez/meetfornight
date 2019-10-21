@@ -74,9 +74,18 @@
 
         <h2 class="sub-tit"><i class="icon-calendar esp-icono-bio"></i>HORARIOS DISPONIBLES</h2>
 
-        <div class="form-row" v-for="(horario, index) in arHorariosGenerados" :key=" 'h_' + index">
-            <div class="col-lg-12 col-sm-12">
-               <p-input type="radio" name="horario_seleccionado" color="info" @change=" horario_seleccionado = horario " v-model="horario_seleccionado">{{horario.desde}} -  {{horario.hasta}}</p-input>
+        <div class="form-row">
+            
+            <div class="col-lg-6 col-sm-12">
+                
+                <img src="/img/calendar.png" />
+                
+            </div>
+            <div class="col-lg-6 col-sm-12">
+                <ul>
+                    <li v-for="(horario, index) in arHorariosGenerados" :key=" 'h_' + index"><p-input type="radio" name="horario_seleccionado" color="info" @change=" horario_seleccionado = horario " v-model="horario_seleccionado">{{horario.desde}} -  {{horario.hasta}}</p-input></li>
+                </ul>
+               
             </div>
            
         </div>
@@ -157,6 +166,8 @@
 
 
 <script>
+
+
     export default {
         props: ['apodoData'],
         mounted() {
@@ -201,7 +212,7 @@
 
                 let me = this;
 
-                axios.post('/perfil/horarios', {
+                /*axios.post('/perfil/horarios', {
                     'apodo': me.apodoData,
                     'tiempo': me.tiempo
                 } ).then(function (response) {
@@ -212,7 +223,18 @@
 
                     console.log(me.arHorariosGenerados);
 
+                }).catch(function (error) {  console.log(error);     });*/
+
+                axios.get('/perfil/horarios/piwicho').then(function (response) {
+
+                    var respuesta= response.data;
+
+                    me.arHorariosGenerados = respuesta.horarios;
+
+                    console.log(me.arHorariosGenerados);
+
                 }).catch(function (error) {  console.log(error);     });
+
                 
 
             },

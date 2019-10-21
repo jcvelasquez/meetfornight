@@ -14,20 +14,20 @@ window.Vue = require('vue');
 require('sticky-sidebar');
 
 
-import {Calendar} from '@fullcalendar/core';
+/*import {Calendar} from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
-import listPlugin from '@fullcalendar/list';
+import listPlugin from '@fullcalendar/list';*/
 
 import PrettyCheckbox from 'pretty-checkbox-vue';
 import PrettyRadio from 'pretty-checkbox-vue/radio';
 
 
 
-
 Vue.use(PrettyCheckbox);
 Vue.use(PrettyRadio);
 //Vue.use(VueRangeSlider);
+
 
 
 
