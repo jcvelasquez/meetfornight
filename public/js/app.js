@@ -14612,6 +14612,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+<<<<<<< HEAD
       horario_lunes: [],
       horario_martes: [],
       horario_miercoles: [],
@@ -14619,6 +14620,15 @@ __webpack_require__.r(__webpack_exports__);
       horario_viernes: [],
       horario_sabado: [],
       horario_domingo: [],
+=======
+      horario_lunes: [0, 24],
+      horario_martes: [0, 24],
+      horario_miercoles: [0, 24],
+      horario_jueves: [0, 24],
+      horario_viernes: [0, 24],
+      horario_sabado: [0, 24],
+      horario_domingo: [0, 24],
+>>>>>>> origin/master
       disponibilidad_lunes: 0,
       disponibilidad_martes: 0,
       disponibilidad_miercoles: 0,
@@ -14639,6 +14649,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.get('/disponibilidad-profesional/listar').then(function (response) {
         var respuesta = response.data;
         me.arDisponibilidad = respuesta.disponibilidad;
+<<<<<<< HEAD
 
         if (me.arDisponibilidad.length > 0) {
           me.horario_lunes = me.obtenerHorarioDia(me.arDisponibilidad, 'LUNES');
@@ -14649,16 +14660,40 @@ __webpack_require__.r(__webpack_exports__);
           me.horario_sabado = me.obtenerHorarioDia(me.arDisponibilidad, 'SABADO');
           me.horario_domingo = me.obtenerHorarioDia(me.arDisponibilidad, 'DOMINGO');
         }
+=======
+>>>>>>> origin/master
       })["catch"](function (error) {
         console.log(error);
       });
     },
+<<<<<<< HEAD
     obtenerHorarioDia: function obtenerHorarioDia(disponibilidad, dia) {
       for (var i = 0; i < disponibilidad.length; i++) {
         if (disponibilidad[i].dia == dia) {
           return [disponibilidad[i].idesde, disponibilidad[i].ihasta];
         }
       }
+=======
+    cambiarHorario: function cambiarHorario(dia) {
+      var me = this;
+      /*
+       if(dia == 'lunes'){
+        horario_lunes = [0,me.disponibilidad_lunes]
+      }else if(dia == 'martes'){
+        me.disponibilidad_martes
+      }else if(dia == 'miercoles'){
+        me.disponibilidad_miercoles
+      }else if(dia == 'jueves'){
+        me.disponibilidad_jueves
+      }else if(dia == 'viernes'){
+        me.disponibilidad_viernes
+      }else if(dia == 'sabado'){
+        me.disponibilidad_sabado
+      }else if(dia == 'domingo'){
+        me.disponibilidad_domingo
+       }
+       */
+>>>>>>> origin/master
     },
     actualizarHorarios: function actualizarHorarios() {
       var me = this;
@@ -16356,6 +16391,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+<<<<<<< HEAD
 //
 //
 //
@@ -16409,6 +16445,11 @@ __webpack_require__.r(__webpack_exports__);
     this.mostrarTarifas();
     this.mostrarDisponibilidad();
     this.generarHorarios();
+=======
+/* harmony default export */ __webpack_exports__["default"] = ({
+  mounted: function mounted() {
+    this.mostrarTarifas();
+>>>>>>> origin/master
   },
   data: function data() {
     return {
@@ -16416,6 +16457,7 @@ __webpack_require__.r(__webpack_exports__);
       erroresTarifas: [],
       arTarifas: [],
       arTarifasSeleccionadas: [],
+<<<<<<< HEAD
       arDisponibilidad: [],
       arHorariosGenerados: [],
       idusuario: 0,
@@ -16431,12 +16473,23 @@ __webpack_require__.r(__webpack_exports__);
     mostrarTarifas: function mostrarTarifas() {
       var me = this;
       axios.get('/perfil/tarifas/' + me.apodoData).then(function (response) {
+=======
+      idusuario: 0,
+      desplazo: 0
+    };
+  },
+  methods: {
+    mostrarTarifas: function mostrarTarifas() {
+      var me = this;
+      axios.get('/tarifas-profesional/listar').then(function (response) {
+>>>>>>> origin/master
         var respuesta = response.data;
         me.arTarifas = respuesta.tarifas;
       })["catch"](function (error) {
         console.log(error);
       });
     },
+<<<<<<< HEAD
     generarHorarios: function generarHorarios() {
       var me = this;
       axios.post('/perfil/horarios', {
@@ -16459,6 +16512,8 @@ __webpack_require__.r(__webpack_exports__);
         console.log(error);
       });
     },
+=======
+>>>>>>> origin/master
     filtrarPor: function filtrarPor(tarifas, value) {
       return tarifas.filter(function (tarifas) {
         return tarifas.categoria_tarifa.indexOf(value) > -1;
@@ -16475,7 +16530,13 @@ __webpack_require__.r(__webpack_exports__);
         } else {
           me.arTarifasSeleccionadas.push(tarifa);
         }
+<<<<<<< HEAD
       }
+=======
+      } //me.$delete(me.arTarifasSeleccionadas, i);
+      //me.arTarifasSeleccionadas.push(tarifa);  
+
+>>>>>>> origin/master
     },
     buscarEnSeleccionados: function buscarEnSeleccionados(toFind) {
       var me = this;
@@ -57910,7 +57971,11 @@ var render = function() {
                   },
                   on: {
                     change: function($event) {
+<<<<<<< HEAD
                       _vm.horario_lunes = [0, 24]
+=======
+                      return _vm.cambiarHorario("lunes")
+>>>>>>> origin/master
                     }
                   },
                   model: {
@@ -57935,7 +58000,11 @@ var render = function() {
                   },
                   on: {
                     change: function($event) {
+<<<<<<< HEAD
                       _vm.horario_lunes = [0, 0]
+=======
+                      return _vm.cambiarHorario("lunes")
+>>>>>>> origin/master
                     }
                   },
                   model: {
@@ -57997,7 +58066,11 @@ var render = function() {
                   },
                   on: {
                     change: function($event) {
+<<<<<<< HEAD
                       _vm.horario_martes = [0, 24]
+=======
+                      return _vm.cambiarHorario("martes")
+>>>>>>> origin/master
                     }
                   },
                   model: {
@@ -58022,7 +58095,11 @@ var render = function() {
                   },
                   on: {
                     change: function($event) {
+<<<<<<< HEAD
                       _vm.horario_martes = [0, 0]
+=======
+                      return _vm.cambiarHorario("martes")
+>>>>>>> origin/master
                     }
                   },
                   model: {
@@ -58084,7 +58161,11 @@ var render = function() {
                   },
                   on: {
                     change: function($event) {
+<<<<<<< HEAD
                       _vm.horario_miercoles = [0, 24]
+=======
+                      return _vm.cambiarHorario("miercoles")
+>>>>>>> origin/master
                     }
                   },
                   model: {
@@ -58109,7 +58190,11 @@ var render = function() {
                   },
                   on: {
                     change: function($event) {
+<<<<<<< HEAD
                       _vm.horario_miercoles = [0, 0]
+=======
+                      return _vm.cambiarHorario("miercoles")
+>>>>>>> origin/master
                     }
                   },
                   model: {
@@ -58171,7 +58256,11 @@ var render = function() {
                   },
                   on: {
                     change: function($event) {
+<<<<<<< HEAD
                       _vm.horario_jueves = [0, 24]
+=======
+                      return _vm.cambiarHorario("jueves")
+>>>>>>> origin/master
                     }
                   },
                   model: {
@@ -58196,7 +58285,11 @@ var render = function() {
                   },
                   on: {
                     change: function($event) {
+<<<<<<< HEAD
                       _vm.horario_jueves = [0, 0]
+=======
+                      return _vm.cambiarHorario("jueves")
+>>>>>>> origin/master
                     }
                   },
                   model: {
@@ -58258,7 +58351,11 @@ var render = function() {
                   },
                   on: {
                     change: function($event) {
+<<<<<<< HEAD
                       _vm.horario_viernes = [0, 24]
+=======
+                      return _vm.cambiarHorario("viernes")
+>>>>>>> origin/master
                     }
                   },
                   model: {
@@ -58283,7 +58380,11 @@ var render = function() {
                   },
                   on: {
                     change: function($event) {
+<<<<<<< HEAD
                       _vm.horario_viernes = [0, 0]
+=======
+                      return _vm.cambiarHorario("viernes")
+>>>>>>> origin/master
                     }
                   },
                   model: {
@@ -58345,7 +58446,11 @@ var render = function() {
                   },
                   on: {
                     change: function($event) {
+<<<<<<< HEAD
                       _vm.horario_sabado = [0, 24]
+=======
+                      return _vm.cambiarHorario("sabado")
+>>>>>>> origin/master
                     }
                   },
                   model: {
@@ -58370,7 +58475,11 @@ var render = function() {
                   },
                   on: {
                     change: function($event) {
+<<<<<<< HEAD
                       _vm.horario_sabado = [0, 0]
+=======
+                      return _vm.cambiarHorario("sabado")
+>>>>>>> origin/master
                     }
                   },
                   model: {
@@ -58432,7 +58541,11 @@ var render = function() {
                   },
                   on: {
                     change: function($event) {
+<<<<<<< HEAD
                       _vm.horario_domingo = [0, 24]
+=======
+                      return _vm.cambiarHorario("domingo")
+>>>>>>> origin/master
                     }
                   },
                   model: {
@@ -58457,7 +58570,11 @@ var render = function() {
                   },
                   on: {
                     change: function($event) {
+<<<<<<< HEAD
                       _vm.horario_domingo = [0, 0]
+=======
+                      return _vm.cambiarHorario("domingo")
+>>>>>>> origin/master
                     }
                   },
                   model: {
@@ -62174,6 +62291,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
+<<<<<<< HEAD
     _c("div", { staticClass: "espacio-reservas" }, [
       _vm._m(0),
       _vm._v(" "),
@@ -62208,6 +62326,8 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
+=======
+>>>>>>> origin/master
     _c(
       "div",
       {
@@ -62215,7 +62335,11 @@ var render = function() {
         staticStyle: { "margin-top": "40px" }
       },
       [
+<<<<<<< HEAD
         _vm._m(1),
+=======
+        _vm._m(0),
+>>>>>>> origin/master
         _vm._v(" "),
         _c(
           "div",
@@ -62254,7 +62378,11 @@ var render = function() {
     ),
     _vm._v(" "),
     _c("div", { staticClass: "espacio-reservas" }, [
+<<<<<<< HEAD
       _vm._m(2),
+=======
+      _vm._m(1),
+>>>>>>> origin/master
       _vm._v(" "),
       _c(
         "div",
@@ -62281,7 +62409,11 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "espacio-reservas" }, [
+<<<<<<< HEAD
       _vm._m(3),
+=======
+      _vm._m(2),
+>>>>>>> origin/master
       _vm._v(" "),
       _c(
         "div",
@@ -62322,6 +62454,7 @@ var render = function() {
       "div",
       { staticClass: "servicios_seleccionados espacio-reservas" },
       [
+<<<<<<< HEAD
         _vm._m(4),
         _vm._v(" "),
         _vm._l(_vm.arHorariosGenerados, function(horario, index) {
@@ -62373,6 +62506,9 @@ var render = function() {
       { staticClass: "servicios_seleccionados espacio-reservas" },
       [
         _vm._m(6),
+=======
+        _vm._m(3),
+>>>>>>> origin/master
         _vm._v(" "),
         _vm._l(_vm.arTarifasSeleccionadas, function(seleccionado) {
           return _c(
@@ -62402,6 +62538,7 @@ var render = function() {
           "div",
           { staticClass: "form-row", staticStyle: { "margin-top": "20px" } },
           [
+<<<<<<< HEAD
             _vm._m(7),
             _vm._v(" "),
             _vm._m(8),
@@ -62409,6 +62546,15 @@ var render = function() {
             _vm._m(9),
             _vm._v(" "),
             _vm._m(10),
+=======
+            _vm._m(4),
+            _vm._v(" "),
+            _vm._m(5),
+            _vm._v(" "),
+            _vm._m(6),
+            _vm._v(" "),
+            _vm._m(7),
+>>>>>>> origin/master
             _vm._v(" "),
             _c("div", { staticClass: "col-lg-12 col-sm-12  espacio-campos" }, [
               _c(
@@ -62489,7 +62635,11 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
+<<<<<<< HEAD
             _vm._m(11)
+=======
+            _vm._m(8)
+>>>>>>> origin/master
           ]
         )
       ],
@@ -62503,6 +62653,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("h2", { staticClass: "sub-tit" }, [
+<<<<<<< HEAD
       _c("i", { staticClass: "icon-calendar esp-icono-bio" }),
       _vm._v("DISPONIBILIDAD")
     ])
@@ -62512,6 +62663,8 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("h2", { staticClass: "sub-tit" }, [
+=======
+>>>>>>> origin/master
       _c("i", { staticClass: "icon-money esp-icono-bio" }),
       _vm._v("TARIFAS SERVICIO")
     ])
@@ -62540,6 +62693,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("h2", { staticClass: "sub-tit" }, [
       _c("i", { staticClass: "icon-calendar esp-icono-bio" }),
+<<<<<<< HEAD
       _vm._v("HORARIOS DISPONIBLES")
     ])
   },
@@ -62577,6 +62731,8 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("h2", { staticClass: "sub-tit" }, [
       _c("i", { staticClass: "icon-calendar esp-icono-bio" }),
+=======
+>>>>>>> origin/master
       _vm._v("GENERAR RESERVA")
     ])
   },
