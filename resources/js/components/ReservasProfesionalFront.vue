@@ -3,7 +3,31 @@
 
 <div>
 
-  <div class="espacio-reservas" style="margin-top:40px;">
+    <div class="espacio-reservas">
+
+        <h2 class="sub-tit"><i class="icon-calendar esp-icono-bio"></i>DISPONIBILIDAD</h2>
+
+        <div class="disponibilidad">
+ 
+            <div class="fecha" v-for="dispo in arDisponibilidad" :key=" 'm_' + dispo.id">      
+                <div v-if="estaDisponible(dispo)">
+                    <span class="dias" v-text="dispo.dia.substr(0, 3)"></span>
+                    <p v-text="dispo.desde"></p>
+                    <p v-text="dispo.hasta"></p>
+                </div>
+                <div v-else>
+                    <span class="dias" style="background:#f20f21;" v-text="dispo.dia.substr(0, 3)"></span>
+                    <p>N/D</p>
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+    <div class="espacio-reservas" style="margin-top:40px;">
             <h2 class="sub-tit"><i class="icon-money esp-icono-bio"></i>TARIFAS SERVICIO</h2>
             <div class="tarifario-vertical">
              
@@ -43,10 +67,39 @@
                 </div>
 
             </div>
-          </div>
+    </div>
 
+    
     <div class="servicios_seleccionados espacio-reservas">
 
+        <h2 class="sub-tit"><i class="icon-calendar esp-icono-bio"></i>HORARIOS DISPONIBLES</h2>
+
+        <div class="form-row" v-for="(horario, index) in arHorariosGenerados" :key=" 'h_' + index">
+            <div class="col-lg-12 col-sm-12">
+               <p-input type="radio" name="horario_seleccionado" color="info" @change=" horario_seleccionado = horario " v-model="horario_seleccionado">{{horario.desde}} -  {{horario.hasta}}</p-input>
+            </div>
+           
+        </div>
+
+
+        <div class="form-row" style="margin-top:20px; display:none;">
+
+          
+            <div class="col-lg-12 col-sm-12  espacio-campos">
+
+                 sasa
+
+            </div>
+
+            <div class="col-lg-12 col-sm-12">
+              <button type="submit" class="btn btn-primary btn-busqueda-detallada">REALIZAR RESERVA</button>
+            </div>
+
+        </div>
+    
+    </div>
+    
+    <div class="servicios_seleccionados espacio-reservas">
 
         <h2 class="sub-tit"><i class="icon-calendar esp-icono-bio"></i>GENERAR RESERVA</h2>
 
@@ -58,8 +111,6 @@
                 $ {{seleccionado.costo_tarifa}}
             </div>  
         </div>
-
-
 
         <div class="form-row" style="margin-top:20px;">
 
@@ -87,9 +138,7 @@
                   </div>
 
                   <div class="direccion-cliente" v-show="desplazo">
-
                       <input type="text" name="direccion_cliente" id="direccion_cliente" placeholder="Ingrese su dirección" class="form-control">
-
                   </div>
 
             </div>
@@ -99,10 +148,8 @@
             </div>
 
         </div>
-
-
     
-</div>
+    </div>
 
  </div>  
 
@@ -111,10 +158,11 @@
 
 <script>
     export default {
+        props: ['apodoData'],
         mounted() {
-
             this.mostrarTarifas();
-
+            this.mostrarDisponibilidad();
+            this.generarHorarios();
         },
         data(){
             return {
@@ -122,20 +170,60 @@
                 erroresTarifas: [],
                 arTarifas : [],
                 arTarifasSeleccionadas: [],
+                arDisponibilidad: [],
+                arHorariosGenerados: [],
                 idusuario : 0,
-                desplazo: 0
+                desplazo: 0,
+                tiempo : 60,
+                horario_seleccionado : []
             }
         },
          methods:{
-           
+
+            estaDisponible(dispo) {
+
+                return dispo.idesde > 0 && dispo.ihasta > 0
+                
+            },
             mostrarTarifas(){
 
                   let me = this;
 
-                  axios.get('/tarifas-profesional/listar').then(function (response) {
+                  axios.get('/perfil/tarifas/' + me.apodoData ).then(function (response) {
 
                       var respuesta= response.data;
                       me.arTarifas = respuesta.tarifas;
+
+                  }).catch(function (error) {  console.log(error);     });
+
+            },
+            generarHorarios(){
+
+                let me = this;
+
+                axios.post('/perfil/horarios', {
+                    'apodo': me.apodoData,
+                    'tiempo': me.tiempo
+                } ).then(function (response) {
+
+                    var respuesta= response.data;
+
+                    me.arHorariosGenerados = respuesta.horarios;
+
+                    console.log(me.arHorariosGenerados);
+
+                }).catch(function (error) {  console.log(error);     });
+                
+
+            },
+            mostrarDisponibilidad(){
+
+                  let me = this;
+
+                  axios.get('/perfil/disponibilidad/' + me.apodoData ).then(function (response) {
+
+                      var respuesta= response.data;
+                      me.arDisponibilidad = respuesta.disponibilidad;
 
                   }).catch(function (error) {  console.log(error);     });
                 
@@ -147,26 +235,18 @@
             },
             agregarTarifa(tarifa){
 
-                  let me = this;      
+                let me = this;      
 
-                  if( me.arTarifasSeleccionadas.length < 1){
+                if( me.arTarifasSeleccionadas.length < 1){
+                    me.arTarifasSeleccionadas.push(tarifa);  
+                }else{
+                    if(me.buscarEnSeleccionados(tarifa)){
+                        console.log("existe y se borro")
+                    } else {
+                        me.arTarifasSeleccionadas.push(tarifa);  
+                    }
+                }
 
-                      me.arTarifasSeleccionadas.push(tarifa);  
-
-                  }else{
-
-                      if(me.buscarEnSeleccionados(tarifa)){
-
-                          console.log("existe y se borro")
-                      
-                      } else {
-                          me.arTarifasSeleccionadas.push(tarifa);  
-                      }
-
-                  }
-                  //me.$delete(me.arTarifasSeleccionadas, i);
-                  //me.arTarifasSeleccionadas.push(tarifa);  
-                  
             },
             buscarEnSeleccionados(toFind){
 

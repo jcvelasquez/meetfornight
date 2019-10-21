@@ -5,7 +5,7 @@
 
   <body>
 
-    @include('tops.top-free')
+    @include('tops.top')
 
   <!--BANNER-->
   <div id="banner-internas">

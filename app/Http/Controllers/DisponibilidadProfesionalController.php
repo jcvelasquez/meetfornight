@@ -12,10 +12,9 @@ class DisponibilidadProfesionalController extends Controller
    
     public function list(Request $request)
     {
+        
         //
-            $disponibilidad = DB::table('disponibilidad_profesional')->join('usuarios', 'disponibilidad_profesional.idusuario', '=', 'usuarios.id')
-            ->select('disponibilidad_profesional.*')
-            ->get();
+            $disponibilidad = DisponibilidadProfesional::where('idusuario', 34)->get();
 
             return ['disponibilidad' => $disponibilidad];  
 

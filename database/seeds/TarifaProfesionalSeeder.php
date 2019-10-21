@@ -17,6 +17,7 @@ class TarifaProfesionalSeeder extends Seeder
         DB::table('tarifa_profesional')->insert([
             'idusuario' => '34',
             'opcion_tarifa' => 'Cena',
+            'tiempo_tarifa' => '90',
             'costo_tarifa' => '150',
             'categoria_tarifa' => 'SERVICIO'
             
@@ -24,7 +25,8 @@ class TarifaProfesionalSeeder extends Seeder
 
         DB::table('tarifa_profesional')->insert([
             'idusuario' => '34',
-            'opcion_tarifa' => '1h30',
+            'opcion_tarifa' => '1 Hora 30 Minutos',
+            'tiempo_tarifa' => '90',
             'costo_tarifa' => '100',
             'categoria_tarifa' => 'SERVICIO'
             
@@ -33,6 +35,7 @@ class TarifaProfesionalSeeder extends Seeder
         DB::table('tarifa_profesional')->insert([
             'idusuario' => '34',
             'opcion_tarifa' => '1 Hora',
+            'tiempo_tarifa' => '60',
             'costo_tarifa' => '80',
             'categoria_tarifa' => 'SERVICIO'
             

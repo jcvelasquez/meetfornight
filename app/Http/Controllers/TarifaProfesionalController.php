@@ -12,15 +12,9 @@ class TarifaProfesionalController extends Controller
     public function list(Request $request)
     {
 
-        $idusuario = Auth::user()->id;
-
-        $tarifas = DB::table('usuarios')->join('tarifa_profesional', 'tarifa_profesional.idusuario', '=', 'usuarios.id')
-                                        ->select('tarifa_profesional.*')
-                                        ->where('usuarios.id', '=', $idusuario)
-                                        ->get();
+        $tarifas = TarifaProfesional::where('idusuario', 34)->get();
 
         return ['tarifas' => $tarifas];  
-
 
     }
 

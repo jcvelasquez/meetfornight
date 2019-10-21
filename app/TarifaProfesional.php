@@ -16,5 +16,10 @@ class TarifaProfesional extends Model
 
     public $timestamps = false;
 
+    public function usuario()
+    {
+        return $this->belongsTo('App\Usuario', 'idusuario', 'id');
+    }
+
 
 }

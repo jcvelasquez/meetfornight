@@ -543,11 +543,11 @@ class UsuariosSeeder extends Seeder
         DB::table('usuarios')->insert([
             'idrol' => '4',
             'nombre' => Str::random(10),
-            'email'=> Str::random(10).'@piwichostudio.com',
+            'email'=> 'jcvelasquez@piwichostudio.com',
             'password'=> Hash::make("123456"),
             'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
-            'apodo' => 'coqueta12',
+            'apodo' => 'piwicho',
             'nacionalidad'=>'PE',
             'celular' => '967994927',
             'idioma'=>'ES',

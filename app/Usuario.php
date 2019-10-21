@@ -26,14 +26,17 @@ class Usuario extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-
-   
     public function extras(){
-        return $this->hasOne('App\UsuarioExtras');
+        return $this->hasOne('App\UsuarioExtras', 'idusuario', 'id');
     }
 
     public function tarifas(){
-        return $this->hasMany('App\TarifaProfesional');
+        return $this->hasMany('App\TarifaProfesional', 'idusuario', 'id');
+    }
+
+    public function disponibilidades()
+    {
+        return $this->hasMany('App\DisponibilidadProfesional', 'idusuario', 'id');
     }
 
 

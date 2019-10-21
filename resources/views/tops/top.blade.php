@@ -28,9 +28,9 @@
 
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
-                    <a class="dropdown-item" href="#">Ingresar</a>
+                    <a class="dropdown-item" href="{{ url('/iniciar-sesion') }}">Ingresar</a>
 
-                    <a class="dropdown-item" href="#">Crear Cuenta</a>
+                    <a class="dropdown-item" href="{{ url('/crear-cuenta') }}">Crear Cuenta</a>
 
                   </div>
 

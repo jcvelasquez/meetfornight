@@ -16,8 +16,8 @@ class CreateDisponibilidadProfesionalTable extends Migration
         Schema::create('disponibilidad_profesional', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('idusuario')->unsigned();
-            $table->integer('desde');
-            $table->integer('hasta');
+            $table->time('desde');
+            $table->time('hasta');
             $table->enum('dia',['LUNES','MARTES','MIERCOLES','JUEVES','VIERNES','SABADO','DOMINGO']);
             $table->foreign('idusuario')->references('id')->on('usuarios');
         });

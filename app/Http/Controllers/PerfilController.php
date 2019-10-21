@@ -6,25 +6,29 @@ use App\Usuario;
 use App\ServiciosProfesional;
 use App\DisponibilidadProfesional;
 use App\ServiciosXProfesional;
+use App\TarifaProfesional;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use DateTime;
+use DateInterval;
+use DatePeriod;
 
 class PerfilController extends Controller
 {
 
-    public function mostrar($id)
+
+    public function mostrar(Request $request)
     {
 
-        $idusuario = 34;
+        $usuario = Usuario::select('id')->where('apodo', '=', $request->apodo)->firstOrFail();    
 
         $perfil = DB::table('usuarios')->join('usuarios_extras', 'usuarios.id', '=', 'usuarios_extras.idusuario')
-        ->where('usuarios.id', '=', $idusuario)
-        ->get();
-
-        
+        ->where('usuarios.id', '=', $usuario->id)
+        ->get();  
 
         $servicios = ServiciosProfesional::where('estado_servicio', 1)->where('es_admin', 1)->get();
-        $seleccionados = ServiciosXProfesional::where('idusuario', '=', $idusuario)->where('idservicio', '!=', NULL)->get();
+        $seleccionados = ServiciosXProfesional::where('idusuario', '=', $usuario->id)->where('idservicio', '!=', NULL)->get();
 
         //PERFIL
         foreach ($perfil as $per) {
@@ -97,20 +101,116 @@ class PerfilController extends Controller
 
 
         //PERSONALIZADOS
-        $personalizados = ServiciosXProfesional::where('idservicio', NULL)->where('idusuario', '=', $idusuario)->get();
+        $personalizados = ServiciosXProfesional::where('idservicio', NULL)->where('idusuario', '=', $usuario->id)->get();
 
         foreach ($personalizados as $serv_pers) {
 
             data_set($serv_pers, 'es_marcado', '1');
             
         }
-
-
-        $tarifas = DB::table('tarifa_profesional')->where('tarifa_profesional.idusuario', '=', $idusuario)->orderBy('categoria_tarifa','DESC')->get();
-
-        $disponibilidad = DB::table('disponibilidad_profesional')->where('disponibilidad_profesional.idusuario', '=', $idusuario)->get();
        
-        return view('perfil', compact('perfil', 'servicios', 'personalizados', 'tarifas','disponibilidad'));
+        return view('perfil', compact('perfil', 'servicios', 'personalizados'));
+
+    }
+
+
+    public function disponibilidad(Request $request)
+    {
+        
+            $disponibilidad = Usuario::where('apodo', '=', $request->apodo)->firstOrFail()->disponibilidades()->get();
+
+            return ['disponibilidad' => $disponibilidad];  
+
+    }
+
+    public function tarifas(Request $request)
+    {
+
+        $tarifas = Usuario::where('apodo', '=', $request->apodo)->firstOrFail()->tarifas()->get();
+
+        return ['tarifas' => $tarifas];  
+    }
+
+    public function horarios(Request $request)
+    {
+
+        //FECHA SELECCIONADA DEL FRONT
+        $fechaselec = "2019-10-23";
+
+        $fechaEsHoy = false;
+
+        //OBTENGO EL NUMERO DE DIA DE LA FECHA SELECCIONADA
+        $nroDia = new DateTime($fechaselec);
+        $nroDia = $nroDia->format('N');
+
+        switch($nroDia){
+
+            case 1: $day = 'LUNES';
+                    break;
+            case 2: $day = 'MARTES';
+                    break;
+            case 3: $day = 'MIERCOLES';
+                    break;
+            case 4: $day = 'JUEVES';
+                    break;
+            case 5: $day = 'VIERNES';
+                    break;
+            case 6: $day = 'SABADO';
+                    break;
+            case 7: $day = 'DOMINGO';
+                    break;
+        }
+
+        $disponibilidad = Usuario::where('apodo', '=', $request->apodo)->firstOrFail()->disponibilidades()->where('dia', '=', $day)->first();
+
+        //INICIO Y FIN DE SERVICIO
+        $desde = new DateTime($fechaselec." ".$disponibilidad->desde);
+        $hasta = new DateTime($fechaselec." ".$disponibilidad->hasta);
+
+        if($fechaEsHoy){
+
+            $timenow = new DateTime($fechaselec." ".date('H:i'));
+
+        }else{
+
+            $timenow = new DateTime($fechaselec." ".$disponibilidad->desde);
+        }
+
+        //$timenow = new DateTime(date('H:i'));
+
+        //ANTICIPACION PARA PEDIR EL SERVICIO
+        //$timenow->add(new DateInterval('PT0M'));
+
+        //TIEMPO DEL SERVICIO
+        $interval = new DateInterval('PT90M');
+
+        $time_slots = array();
+        //$time_slots = array( '17:30' => '18:30', '19:30' => '21:30' );
+
+        $available_slots = array();
+
+        $periodos = new DatePeriod($desde, $interval, $hasta);
+
+        foreach($periodos as $time) {
+
+            $timeslot = $time->format('H:i');
+
+            if ($timenow > $time) {
+                continue;
+            }                   
+                        
+            $hasta_slot = $time->add($interval);
+
+            /*if(array_key_exists($timeslot, $time_slots)) {
+                $available_slots[] = array('desde' => $timeslot, 'hasta' => 'FULL'); 
+                continue;
+            }*/
+
+            $available_slots[] = array('desde' => $timeslot, 'hasta' => $hasta_slot->format('H:i'));
+            
+        }
+
+        return ['horarios' => $available_slots];  
 
     }
 

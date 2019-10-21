@@ -102,7 +102,7 @@
 
                       <div class="img-grande-logo">
 
-                        <img src="img/logo-blanco.png">
+                        <img src="{{ asset('img/logo-blanco.png') }}">
 
                       </div>
 
@@ -397,7 +397,7 @@
 
             <h2 class="sub-tit"><i class="icon-video esp-icono-bio"></i>VIDEO</h2>
 
-            <iframe width="100%" height="315" src="https://www.youtube.com/embed/r1ncXWTwx2g" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+         <!--    <iframe width="100%" height="315" src="https://www.youtube.com/embed/r1ncXWTwx2g" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe> -->
 
           </div>
 
@@ -412,39 +412,27 @@
             <ul class="nav nav-tabs" id="myTab" role="tablist">
 
               <li class="nav-item">
-
                 <a class="nav-link active" id="preliminares-tab" data-toggle="tab" href="#preliminares" role="tab" aria-controls="preliminares" aria-selected="false">PRELIMINARES</a>
-
               </li>
 
               <li class="nav-item">
-
                 <a class="nav-link" id="intimo-tab" data-toggle="tab" href="#intimo" role="tab" aria-controls="intimo" aria-selected="false">ÍNTIMO</a>
-
               </li>
 
               <li class="nav-item">
-
                 <a class="nav-link" id="masajes-tab" data-toggle="tab" href="#masajes" role="tab" aria-controls="masajes" aria-selected="true">MASAJES</a>
-
               </li> 
 
               <li class="nav-item">
-
                 <a class="nav-link" id="fetiches-tab" data-toggle="tab" href="#fetiches" role="tab" aria-controls="fetiches" aria-selected="false">FETICHES</a>
-
               </li>
 
               <li class="nav-item">
-
                 <a class="nav-link" id="otros-tab" data-toggle="tab" href="#otros" role="tab" aria-controls="otros" aria-selected="false">OTROS</a>
-
               </li>
 
               <li class="nav-item">
-
                 <a class="nav-link celeste" id="discapacitados-tab" data-toggle="tab" href="#discapacitados" role="tab" aria-controls="discapacitados" aria-selected="false">DISCAPACITADOS</a>
-
               </li>
 
             </ul>
@@ -577,92 +565,12 @@
 
           </div>
 
-          <div class="espacio-reservas">
-
-            <h2 class="sub-tit"><i class="icon-calendar esp-icono-bio"></i>DISPONIBILIDAD</h2>
-
-            <div class="disponibilidad">
-
-              <div class="fecha">
-
-                <span class="dias">Lun </span>
-
-                <p>00:00</p>
-
-                <p>04:03</p>
-
-              </div>
-
-              <div class="fecha">
-
-                <span class="dias">Mar</span>
-
-                <p>00:00</p>
-
-                <p>04:03</p>
-
-              </div>
-
-              <div class="fecha">
-
-                <span class="dias">Mie</span>
-
-                <p>00:00</p>
-
-                <p>04:03</p>
-
-              </div>
-
-              <div class="fecha">
-
-                <span class="dias">Jue</span>
-
-                <p>00:00</p>
-
-                <p>04:03</p>
-
-              </div>
-
-              <div class="fecha">
-
-                <span class="dias">Vie</span>
-
-                <p>00:00</p>
-
-                <p>04:03</p>
-
-              </div>
-
-              <div class="fecha">
-
-                <span class="dias">Sab</span>
-
-                <p>00:00</p>
-
-                <p>04:03</p>
-
-              </div>
-
-              <div class="fecha">
-
-                <span class="dias">Dom</span>
-
-                <p>00:00</p>
-
-                <p>04:03</p>
-
-              </div>
-
-            </div>
-
-          </div>
-
+    
           <div id="widget">
         
-           
-          <reservas-profesional-front></reservas-profesional-front>
+             <reservas-profesional-front :apodo-data="{{json_encode($perfil[0]->apodo)}}"></reservas-profesional-front>
 
-         </div>
+          </div>
 
           <div class="espacio-reservas">
 

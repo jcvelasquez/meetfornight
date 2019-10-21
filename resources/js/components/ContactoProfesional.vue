@@ -82,8 +82,8 @@
       </div>
       <div class="col-lg-4 col-sm-12">
           <div class="busqueda-detallada-range">
-            <p-input type="radio" name="lunes" color="info" value="24" v-model="disponibilidad_lunes" @change="cambiarHorario('lunes')">24/24</p-input>
-            <p-input type="radio" name="lunes" color="info" value="0" v-model="disponibilidad_lunes" @change="cambiarHorario('lunes')">No disponible</p-input>
+            <p-input type="radio" name="lunes" color="info" value="24" v-model="disponibilidad_lunes" @change=" horario_lunes = [0,24] ">24/24</p-input>
+            <p-input type="radio" name="lunes" color="info" value="0" v-model="disponibilidad_lunes" @change=" horario_lunes = [0,0] ">No disponible</p-input>
           </div>  
       </div>
   </div>
@@ -104,8 +104,8 @@
       </div>
       <div class="col-lg-4 col-sm-12">
           <div class="busqueda-detallada-range">
-            <p-input type="radio" name="martes" color="info" value="24" v-model="disponibilidad_martes" @change="cambiarHorario('martes')">24/24</p-input>
-            <p-input type="radio" name="martes" color="info" value="0" v-model="disponibilidad_martes" @change="cambiarHorario('martes')">No disponible</p-input>
+            <p-input type="radio" name="martes" color="info" value="24" v-model="disponibilidad_martes" @change=" horario_martes = [0,24] ">24/24</p-input>
+            <p-input type="radio" name="martes" color="info" value="0" v-model="disponibilidad_martes" @change=" horario_martes = [0,0] ">No disponible</p-input>
           </div>  
       </div>
   </div>
@@ -126,8 +126,8 @@
       </div>
       <div class="col-lg-4 col-sm-12">
           <div class="busqueda-detallada-range">
-            <p-input type="radio" name="miercoles" color="info" value="24" v-model="disponibilidad_miercoles" @change="cambiarHorario('miercoles')">24/24</p-input>
-            <p-input type="radio" name="miercoles" color="info" value="0" v-model="disponibilidad_miercoles" @change="cambiarHorario('miercoles')">No disponible</p-input>
+            <p-input type="radio" name="miercoles" color="info" value="24" v-model="disponibilidad_miercoles" @change=" horario_miercoles = [0,24] ">24/24</p-input>
+            <p-input type="radio" name="miercoles" color="info" value="0" v-model="disponibilidad_miercoles" @change=" horario_miercoles = [0,0] ">No disponible</p-input>
           </div>  
       </div>
   </div>
@@ -148,8 +148,8 @@
       </div>
       <div class="col-lg-4 col-sm-12">
           <div class="busqueda-detallada-range">
-            <p-input type="radio" name="jueves" color="info" value="24" v-model="disponibilidad_jueves" @change="cambiarHorario('jueves')">24/24</p-input>
-            <p-input type="radio" name="jueves" color="info" value="0" v-model="disponibilidad_jueves" @change="cambiarHorario('jueves')">No disponible</p-input>
+            <p-input type="radio" name="jueves" color="info" value="24" v-model="disponibilidad_jueves" @change=" horario_jueves = [0,24] ">24/24</p-input>
+            <p-input type="radio" name="jueves" color="info" value="0" v-model="disponibilidad_jueves" @change=" horario_jueves = [0,0] ">No disponible</p-input>
           </div>  
       </div>
   </div>
@@ -170,8 +170,8 @@
       </div>
       <div class="col-lg-4 col-sm-12">
           <div class="busqueda-detallada-range">
-            <p-input type="radio" name="viernes" color="info" value="24" v-model="disponibilidad_viernes" @change="cambiarHorario('viernes')">24/24</p-input>
-            <p-input type="radio" name="viernes" color="info" value="0" v-model="disponibilidad_viernes" @change="cambiarHorario('viernes')">No disponible</p-input>
+            <p-input type="radio" name="viernes" color="info" value="24" v-model="disponibilidad_viernes" @change=" horario_viernes = [0,24] ">24/24</p-input>
+            <p-input type="radio" name="viernes" color="info" value="0" v-model="disponibilidad_viernes" @change=" horario_viernes = [0,0] ">No disponible</p-input>
           </div>  
       </div>
   </div>
@@ -192,8 +192,8 @@
       </div>
       <div class="col-lg-4 col-sm-12">
           <div class="busqueda-detallada-range">
-            <p-input type="radio" name="sabado" color="info" value="24" v-model="disponibilidad_sabado" @change="cambiarHorario('sabado')">24/24</p-input>
-            <p-input type="radio" name="sabado" color="info" value="0" v-model="disponibilidad_sabado" @change="cambiarHorario('sabado')">No disponible</p-input>
+            <p-input type="radio" name="sabado" color="info" value="24" v-model="disponibilidad_sabado" @change=" horario_sabado = [0,24] ">24/24</p-input>
+            <p-input type="radio" name="sabado" color="info" value="0" v-model="disponibilidad_sabado" @change=" horario_sabado = [0,0] ">No disponible</p-input>
           </div>  
       </div>
   </div>
@@ -214,8 +214,8 @@
       </div>
       <div class="col-lg-4 col-sm-12">
           <div class="busqueda-detallada-range">
-            <p-input type="radio" name="domingo" color="info" value="24" v-model="disponibilidad_domingo" @change="cambiarHorario('domingo')">24/24</p-input>
-            <p-input type="radio" name="domingo" color="info" value="0" v-model="disponibilidad_domingo" @change="cambiarHorario('domingo')">No disponible</p-input>
+            <p-input type="radio" name="domingo" color="info" value="24" v-model="disponibilidad_domingo" @change=" horario_domingo = [0,24] ">24/24</p-input>
+            <p-input type="radio" name="domingo" color="info" value="0" v-model="disponibilidad_domingo" @change=" horario_domingo = [0,0] ">No disponible</p-input>
           </div>  
       </div>
   </div>
@@ -261,13 +261,13 @@
         },
         data() {
           return {
-            horario_lunes: [0,24],
-            horario_martes: [0,24],
-            horario_miercoles: [0,24],
-            horario_jueves: [0,24],
-            horario_viernes: [0,24],
-            horario_sabado: [0,24],
-            horario_domingo: [0,24],
+            horario_lunes: [],
+            horario_martes: [],
+            horario_miercoles: [],
+            horario_jueves: [],
+            horario_viernes: [],
+            horario_sabado: [],
+            horario_domingo: [],
             disponibilidad_lunes : 0,
             disponibilidad_martes : 0,
             disponibilidad_miercoles : 0,
@@ -293,34 +293,30 @@
                       var respuesta= response.data;
                       me.arDisponibilidad = respuesta.disponibilidad;
 
+                      if(me.arDisponibilidad.length > 0){
+
+                            me.horario_lunes = me.obtenerHorarioDia(me.arDisponibilidad, 'LUNES');
+                            me.horario_martes = me.obtenerHorarioDia(me.arDisponibilidad, 'MARTES');
+                            me.horario_miercoles = me.obtenerHorarioDia(me.arDisponibilidad, 'MIERCOLES');
+                            me.horario_jueves = me.obtenerHorarioDia(me.arDisponibilidad, 'JUEVES');
+                            me.horario_viernes = me.obtenerHorarioDia(me.arDisponibilidad, 'VIERNES');
+                            me.horario_sabado = me.obtenerHorarioDia(me.arDisponibilidad, 'SABADO');
+                            me.horario_domingo = me.obtenerHorarioDia(me.arDisponibilidad, 'DOMINGO');
+
+                      }
+
 
                   }).catch(function (error) {  console.log(error);     });
 
             },
-            cambiarHorario(dia){
+            obtenerHorarioDia(disponibilidad, dia) {
 
-                let me = this;
+              for(var i=0; i < disponibilidad.length; i++){
+                  if(disponibilidad[i].dia == dia){
+                      return [disponibilidad[i].idesde, disponibilidad[i].ihasta];
+                  }
+              }
 
-                /*
-
-                if(dia == 'lunes'){
-                  horario_lunes = [0,me.disponibilidad_lunes]
-                }else if(dia == 'martes'){
-                  me.disponibilidad_martes
-                }else if(dia == 'miercoles'){
-                  me.disponibilidad_miercoles
-                }else if(dia == 'jueves'){
-                  me.disponibilidad_jueves
-                }else if(dia == 'viernes'){
-                  me.disponibilidad_viernes
-                }else if(dia == 'sabado'){
-                  me.disponibilidad_sabado
-                }else if(dia == 'domingo'){
-                  me.disponibilidad_domingo
-
-                }
-
-                */
             },
             actualizarHorarios(){
 
@@ -350,6 +346,7 @@
 
                   }
                   */
+
                   axios.post('disponibilidad-profesional/registrar', {
                     'idusuario' : me.$idusuario,
                     'desde' : desde,

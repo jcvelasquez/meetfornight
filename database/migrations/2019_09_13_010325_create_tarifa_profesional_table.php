@@ -17,6 +17,7 @@ class CreateTarifaProfesionalTable extends Migration
             $table->bigIncrements('id');
             $table->integer('idusuario')->unsigned();
             $table->string('opcion_tarifa');
+            $table->integer('tiempo_tarifa')->nullable();
             $table->double('costo_tarifa');
             $table->enum('categoria_tarifa',['SERVICIO','ESCORT','EXTRAS']);
 

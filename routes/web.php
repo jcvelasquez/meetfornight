@@ -36,6 +36,9 @@ Route::get('/', function () {
 
 //VISTA DE PERFIL
 Route::get('perfil/{apodo}',  'PerfilController@mostrar');
+Route::get('perfil/tarifas/{apodo}', 'PerfilController@tarifas' );
+Route::get('perfil/disponibilidad/{apodo}', 'PerfilController@disponibilidad' );
+Route::get('perfil/horarios/{apodo}', 'PerfilController@horarios' );
 
 
 

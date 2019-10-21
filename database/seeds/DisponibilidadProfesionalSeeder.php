@@ -15,50 +15,50 @@ class DisponibilidadProfesionalSeeder extends Seeder
         //
         $disponibilidad = new DisponibilidadProfesional();
         $disponibilidad->idusuario = 34;
-        $disponibilidad->desde = 2;
-        $disponibilidad->hasta = 15;
+        $disponibilidad->desde = "10:00:00";
+        $disponibilidad->hasta = "22:00:00";
         $disponibilidad->dia = 'LUNES';
         $disponibilidad->save();
 
         $disponibilidad = new DisponibilidadProfesional();
         $disponibilidad->idusuario = 34;
-        $disponibilidad->desde = 5;
-        $disponibilidad->hasta = 23;
+        $disponibilidad->desde = "15:00:00";
+        $disponibilidad->hasta = "20:00:00";
         $disponibilidad->dia = 'MARTES';
         $disponibilidad->save();
 
         $disponibilidad = new DisponibilidadProfesional();
         $disponibilidad->idusuario = 34;
-        $disponibilidad->desde = 8;
-        $disponibilidad->hasta = 20;
+        $disponibilidad->desde = "08:00:00";
+        $disponibilidad->hasta = "20:00:00";
         $disponibilidad->dia = 'MIERCOLES';
         $disponibilidad->save();
 
         $disponibilidad = new DisponibilidadProfesional();
         $disponibilidad->idusuario = 34;
-        $disponibilidad->desde = 11;
-        $disponibilidad->hasta = 22;
+        $disponibilidad->desde = "00:00:00";
+        $disponibilidad->hasta = "00:00:00";
         $disponibilidad->dia = 'JUEVES';
         $disponibilidad->save();
 
         $disponibilidad = new DisponibilidadProfesional();
         $disponibilidad->idusuario = 34;
-        $disponibilidad->desde = 8;
-        $disponibilidad->hasta = 19;
+        $disponibilidad->desde = "08:00:00";
+        $disponibilidad->hasta = "19:00:00";
         $disponibilidad->dia = 'VIERNES';
         $disponibilidad->save();
 
         $disponibilidad = new DisponibilidadProfesional();
         $disponibilidad->idusuario = 34;
-        $disponibilidad->desde = 10;
-        $disponibilidad->hasta = 21;
+        $disponibilidad->desde = "10:00:00";
+        $disponibilidad->hasta = "21:00:00";
         $disponibilidad->dia = 'SABADO';
         $disponibilidad->save();
 
         $disponibilidad = new DisponibilidadProfesional();
         $disponibilidad->idusuario = 34;
-        $disponibilidad->desde = 4;
-        $disponibilidad->hasta = 23;
+        $disponibilidad->desde = "04:00:00";
+        $disponibilidad->hasta = "23:00:00";
         $disponibilidad->dia = 'DOMINGO';
         $disponibilidad->save();
 
