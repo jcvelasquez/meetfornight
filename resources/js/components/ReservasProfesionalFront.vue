@@ -78,7 +78,7 @@
             
             <div class="col-lg-6 col-sm-12">
                 
-                <img src="/img/calendar.png" />
+                <vc-calendar color="pink" is-inline />
                 
             </div>
             <div class="col-lg-6 col-sm-12">
@@ -168,6 +168,7 @@
 <script>
 
 
+
     export default {
         props: ['apodoData'],
         mounted() {
@@ -175,6 +176,7 @@
             this.mostrarDisponibilidad();
             this.generarHorarios();
         },
+        
         data(){
             return {
                 errorServicio : 0,
@@ -189,7 +191,7 @@
                 horario_seleccionado : []
             }
         },
-         methods:{
+        methods:{
 
             estaDisponible(dispo) {
 

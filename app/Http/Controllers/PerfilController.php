@@ -135,10 +135,10 @@ class PerfilController extends Controller
     {
 
         //FECHA SELECCIONADA DEL FRONT
-        $fechaselec = "2019-10-21";
+        $fechaselec = "2019-10-23";
 
         //MINUTOS
-        $duracion = "90";
+        $duracion = "120";
 
 
         $hoy = new DateTime;

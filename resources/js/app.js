@@ -22,6 +22,11 @@ import listPlugin from '@fullcalendar/list';*/
 import PrettyCheckbox from 'pretty-checkbox-vue';
 import PrettyRadio from 'pretty-checkbox-vue/radio';
 
+import VCalendar from 'v-calendar';
+
+// Use v-calendar & v-date-picker components
+Vue.use(VCalendar, { componentPrefix: 'vc' });
+
 
 
 Vue.use(PrettyCheckbox);
