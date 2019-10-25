@@ -7,6 +7,7 @@ use App\ServiciosProfesional;
 use App\DisponibilidadProfesional;
 use App\ServiciosXProfesional;
 use App\TarifaProfesional;
+use App\ReservasProfesional;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -135,7 +136,7 @@ class PerfilController extends Controller
     {
 
         //FECHA SELECCIONADA DEL FRONT
-        $fechaselec = "2019-10-23";
+        $fechaselec = "2019-10-26";
 
         //MINUTOS
         $duracion = "120";
@@ -197,13 +198,19 @@ class PerfilController extends Controller
 
         $periodos = new DatePeriod($desde, $interval, $hasta);
 
+        //OBTENGO LOS HORARIOS RESERVADOS PARA ESE DIA
+        $reservas = ReservasProfesional::where('idprofesional', '=', 34)->where('es_aceptada', '=', 1)->get(['desde','hasta']);
+
+
         foreach($periodos as $time) {
 
-            $timeslot = $time->format('H:i');
+            $desde_slot = $fechaselec." ".$time->format('H:i');
 
             if ($timenow > $time) {
                 continue;
             }                   
+
+            
                         
             $hasta_slot = $time->add($interval);
 
@@ -212,15 +219,20 @@ class PerfilController extends Controller
                 continue;
             }*/
 
-            $available_slots[] = array('desde' => $timeslot, 'hasta' => $hasta_slot->format('H:i'));
+            
+
+            $available_slots[] = array('desde' => $desde_slot, 'hasta' => $fechaselec." ".$hasta_slot->format('H:i'));
             
         }
 
-        return ['horarios' => $available_slots];  
+        return ['horarios' => $available_slots, 'reservas' => $reservas];  
 
     }
 
+    public function buscarRangos($desde, $hasta){
 
+
+    }
 
     public function calcularEdad($nacimiento){
 
