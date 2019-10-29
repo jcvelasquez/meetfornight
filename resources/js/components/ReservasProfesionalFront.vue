@@ -78,12 +78,12 @@
             
             <div class="col-lg-6 col-sm-12">
                 
-                <vc-calendar color="pink" is-inline />
+                <vc-calendar color="pink"  @dayclick='dayClicked' :attributes='attributes' v-model='diaSeleccionado' is-inline :min-date='new Date()' />
                 
             </div>
             <div class="col-lg-6 col-sm-12">
                 <ul>
-                    <li v-for="(horario, index) in arHorariosGenerados" :key=" 'h_' + index"><p-input type="radio" name="horario_seleccionado" color="info" @change=" horario_seleccionado = horario " v-model="horario_seleccionado">{{horario.desde}} -  {{horario.hasta}}</p-input></li>
+                    <li v-for="(horario, index) in arHorariosGenerados" :key=" 'h_' + index"><p-input type="radio" name="horario_seleccionado" color="info" @change=" horario_seleccionado = horario " v-model="horario_seleccionado">{{horario.desde.substr(11, 5)}} -  {{horario.hasta.substr(11, 5)}}</p-input></li>
                 </ul>
                
             </div>
@@ -174,11 +174,18 @@
         mounted() {
             this.mostrarTarifas();
             this.mostrarDisponibilidad();
-            this.generarHorarios();
+            //this.generarHorarios();
         },
         
         data(){
             return {
+                attributes: [
+                    {
+                        key: 'today',
+                        highlight: true,
+                        dates: new Date()
+                    }
+                ],
                 errorServicio : 0,
                 erroresTarifas: [],
                 arTarifas : [],
@@ -188,7 +195,8 @@
                 idusuario : 0,
                 desplazo: 0,
                 tiempo : 60,
-                horario_seleccionado : []
+                horario_seleccionado : [],
+                diaSeleccionado : null
             }
         },
         methods:{
@@ -197,6 +205,15 @@
 
                 return dispo.idesde > 0 && dispo.ihasta > 0
                 
+            },
+            dayClicked(day) {
+
+                let me = this;
+
+                me.diaSeleccionado = day;
+
+                me.generarHorarios(me.diaSeleccionado.id);
+
             },
             mostrarTarifas(){
 
@@ -210,14 +227,25 @@
                   }).catch(function (error) {  console.log(error);     });
 
             },
-            generarHorarios(){
+            generarHorarios(fecha){
 
                 let me = this;
 
-                /*axios.post('/perfil/horarios', {
+                axios.post('/perfil/horarios/' + me.apodoData, {
                     'apodo': me.apodoData,
-                    'tiempo': me.tiempo
+                    'tiempo': me.tiempo,
+                    'fechaselec' : fecha
                 } ).then(function (response) {
+
+                    var respuesta = response.data;
+
+                    me.arHorariosGenerados = respuesta.horarios;
+
+                    console.log(me.arHorariosGenerados);
+
+                }).catch(function (error) {  console.log(error);     });
+
+                /*axios.get('/perfil/horarios/piwicho').then(function (response) {
 
                     var respuesta= response.data;
 
@@ -226,16 +254,6 @@
                     console.log(me.arHorariosGenerados);
 
                 }).catch(function (error) {  console.log(error);     });*/
-
-                axios.get('/perfil/horarios/piwicho').then(function (response) {
-
-                    var respuesta= response.data;
-
-                    me.arHorariosGenerados = respuesta.horarios;
-
-                    console.log(me.arHorariosGenerados);
-
-                }).catch(function (error) {  console.log(error);     });
 
                 
 

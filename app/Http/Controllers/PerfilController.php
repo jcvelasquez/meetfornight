@@ -136,11 +136,10 @@ class PerfilController extends Controller
     {
 
         //FECHA SELECCIONADA DEL FRONT
-        $fechaselec = "2019-10-26";
-
+        $fechaselec = $request->fechaselec;
+        
         //MINUTOS
-        $duracion = "120";
-
+        $duracion = 'PT' . $request->tiempo . 'M';
 
         $hoy = new DateTime;
 
@@ -189,7 +188,7 @@ class PerfilController extends Controller
         //$timenow->add(new DateInterval('PT0M'));
 
         //TIEMPO DEL SERVICIO
-        $interval = new DateInterval('PT'.$duracion.'M');
+        $interval = new DateInterval($duracion);
 
         $time_slots = array();
         //$time_slots = array( '17:30' => '18:30', '19:30' => '21:30' );
@@ -217,9 +216,7 @@ class PerfilController extends Controller
             /*if(array_key_exists($timeslot, $time_slots)) {
                 $available_slots[] = array('desde' => $timeslot, 'hasta' => 'FULL'); 
                 continue;
-            }*/
-
-            
+            }*/  
 
             $available_slots[] = array('desde' => $desde_slot, 'hasta' => $fechaselec." ".$hasta_slot->format('H:i'));
             

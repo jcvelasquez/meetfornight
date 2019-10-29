@@ -4331,11 +4331,15 @@ __webpack_require__.r(__webpack_exports__);
   props: ['apodoData'],
   mounted: function mounted() {
     this.mostrarTarifas();
-    this.mostrarDisponibilidad();
-    this.generarHorarios();
+    this.mostrarDisponibilidad(); //this.generarHorarios();
   },
   data: function data() {
     return {
+      attributes: [{
+        key: 'today',
+        highlight: true,
+        dates: new Date()
+      }],
       errorServicio: 0,
       erroresTarifas: [],
       arTarifas: [],
@@ -4345,12 +4349,18 @@ __webpack_require__.r(__webpack_exports__);
       idusuario: 0,
       desplazo: 0,
       tiempo: 60,
-      horario_seleccionado: []
+      horario_seleccionado: [],
+      diaSeleccionado: null
     };
   },
   methods: {
     estaDisponible: function estaDisponible(dispo) {
       return dispo.idesde > 0 && dispo.ihasta > 0;
+    },
+    dayClicked: function dayClicked(day) {
+      var me = this;
+      me.diaSeleccionado = day;
+      me.generarHorarios(me.diaSeleccionado.id);
     },
     mostrarTarifas: function mostrarTarifas() {
       var me = this;
@@ -4361,24 +4371,24 @@ __webpack_require__.r(__webpack_exports__);
         console.log(error);
       });
     },
-    generarHorarios: function generarHorarios() {
+    generarHorarios: function generarHorarios(fecha) {
       var me = this;
-      /*axios.post('/perfil/horarios', {
-          'apodo': me.apodoData,
-          'tiempo': me.tiempo
-      } ).then(function (response) {
-           var respuesta= response.data;
-           me.arHorariosGenerados = respuesta.horarios;
-           console.log(me.arHorariosGenerados);
-       }).catch(function (error) {  console.log(error);     });*/
-
-      axios.get('/perfil/horarios/piwicho').then(function (response) {
+      axios.post('/perfil/horarios/' + me.apodoData, {
+        'apodo': me.apodoData,
+        'tiempo': me.tiempo,
+        'fechaselec': fecha
+      }).then(function (response) {
         var respuesta = response.data;
         me.arHorariosGenerados = respuesta.horarios;
         console.log(me.arHorariosGenerados);
       })["catch"](function (error) {
         console.log(error);
       });
+      /*axios.get('/perfil/horarios/piwicho').then(function (response) {
+           var respuesta= response.data;
+           me.arHorariosGenerados = respuesta.horarios;
+           console.log(me.arHorariosGenerados);
+       }).catch(function (error) {  console.log(error);     });*/
     },
     mostrarDisponibilidad: function mostrarDisponibilidad() {
       var me = this;
@@ -50292,7 +50302,24 @@ var render = function() {
         _c(
           "div",
           { staticClass: "col-lg-6 col-sm-12" },
-          [_c("vc-calendar", { attrs: { color: "pink", "is-inline": "" } })],
+          [
+            _c("vc-calendar", {
+              attrs: {
+                color: "pink",
+                attributes: _vm.attributes,
+                "is-inline": "",
+                "min-date": new Date()
+              },
+              on: { dayclick: _vm.dayClicked },
+              model: {
+                value: _vm.diaSeleccionado,
+                callback: function($$v) {
+                  _vm.diaSeleccionado = $$v
+                },
+                expression: "diaSeleccionado"
+              }
+            })
+          ],
           1
         ),
         _vm._v(" "),
@@ -50327,7 +50354,9 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        _vm._s(horario.desde) + " -  " + _vm._s(horario.hasta)
+                        _vm._s(horario.desde.substr(11, 5)) +
+                          " -  " +
+                          _vm._s(horario.hasta.substr(11, 5))
                       )
                     ]
                   )
