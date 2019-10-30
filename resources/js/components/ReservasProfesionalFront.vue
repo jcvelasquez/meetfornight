@@ -70,45 +70,8 @@
     </div>
 
     
-    <div class="servicios_seleccionados espacio-reservas">
-
-        <h2 class="sub-tit"><i class="icon-calendar esp-icono-bio"></i>HORARIOS DISPONIBLES</h2>
-
-        <div class="form-row">
-            
-            <div class="col-lg-6 col-sm-12">
-                
-                <vc-calendar color="pink"  @dayclick='dayClicked' :attributes='attributes' v-model='diaSeleccionado' is-inline :min-date='new Date()' />
-                
-            </div>
-            <div class="col-lg-6 col-sm-12">
-                <ul>
-                    <li v-for="(horario, index) in arHorariosGenerados" :key=" 'h_' + index"><p-input type="radio" name="horario_seleccionado" color="info" @change=" horario_seleccionado = horario " v-model="horario_seleccionado">{{horario.desde.substr(11, 5)}} -  {{horario.hasta.substr(11, 5)}}</p-input></li>
-                </ul>
-               
-            </div>
-           
-        </div>
-
-
-        <div class="form-row" style="margin-top:20px; display:none;">
-
-          
-            <div class="col-lg-12 col-sm-12  espacio-campos">
-
-                 sasa
-
-            </div>
-
-            <div class="col-lg-12 col-sm-12">
-              <button type="submit" class="btn btn-primary btn-busqueda-detallada">REALIZAR RESERVA</button>
-            </div>
-
-        </div>
-    
-    </div>
-    
-    <div class="servicios_seleccionados espacio-reservas">
+  
+    <div class="servicios_seleccionados espacio-reservas" v-show="arTarifasSeleccionadas.length && mostrarDatos">
 
         <h2 class="sub-tit"><i class="icon-calendar esp-icono-bio"></i>GENERAR RESERVA</h2>
 
@@ -140,34 +103,66 @@
             </div>
 
             <div class="col-lg-12 col-sm-12  espacio-campos">
-
                   <div class="direccion-cliente"> 
                       ¿Usted es el que se despalaza? <p-input type="radio" name="desplazo" color="info" :value="0" v-model="desplazo">Si</p-input>
                       <p-input type="radio" name="desplazo" color="info" :value="1" checked v-model="desplazo">No</p-input> 
                   </div>
-
                   <div class="direccion-cliente" v-show="desplazo">
                       <input type="text" name="direccion_cliente" id="direccion_cliente" placeholder="Ingrese su dirección" class="form-control">
                   </div>
-
             </div>
 
             <div class="col-lg-12 col-sm-12">
-              <button type="submit" class="btn btn-primary btn-busqueda-detallada">REALIZAR RESERVA</button>
+              <button type="button" @click="seleccionarFechas()" class="btn btn-primary btn-busqueda-detallada">SELECCIONAR FECHAS</button>
             </div>
 
         </div>
     
     </div>
 
+      <div class="servicios_seleccionados espacio-reservas" v-show="mostrarFechas">
+
+        <h2 class="sub-tit"><i class="icon-calendar esp-icono-bio"></i>HORARIOS DISPONIBLES</h2>
+
+        <div class="form-row" style="margin-top:20px;">
+            
+            <div class="col-lg-6 col-sm-12">
+                
+                <vc-calendar color="pink"  @dayclick='dayClicked' :attributes='attributes' v-model='diaSeleccionado' is-inline :min-date='new Date()' />
+
+                <v-date-picker mode="single" :value="null" color="red" is-dark is-inline />
+                
+            </div>
+            <div class="col-lg-6 col-sm-12">
+                <ul>
+                    <li v-for="(horario, index) in arHorariosGenerados" :key=" 'h_' + index"><p-input type="radio" name="horario_seleccionado" color="info" @change=" horario_seleccionado = horario " v-model="horario_seleccionado">{{horario.desde.substr(11, 5)}} -  {{horario.hasta.substr(11, 5)}}</p-input></li>
+                </ul>
+               
+            </div>
+           
+        </div>
+
+
+        <div class="form-row" style="margin-top:20px;">
+
+            <div class="col-lg-6 col-sm-12">
+              <button type="button" @click="cambiarDatos()" class="btn btn-primary btn-busqueda-detallada">CAMBIAR DATOS</button>
+            </div>
+
+            <div class="col-lg-6 col-sm-12">
+              <button type="button" @click="realizarReserva()" class="btn btn-primary btn-busqueda-detallada">REALIZAR RESERVA</button>
+            </div>
+
+        </div>
+    
+    </div>
+    
+
  </div>  
 
 </template>
 
-
 <script>
-
-
 
     export default {
         props: ['apodoData'],
@@ -176,7 +171,6 @@
             this.mostrarDisponibilidad();
             //this.generarHorarios();
         },
-        
         data(){
             return {
                 attributes: [
@@ -196,11 +190,28 @@
                 desplazo: 0,
                 tiempo : 60,
                 horario_seleccionado : [],
-                diaSeleccionado : null
+                diaSeleccionado : null,
+                mostrarFechas : 0,
+                mostrarDatos : 1
             }
         },
         methods:{
+            seleccionarFechas(){
 
+                let me = this;
+
+                me.mostrarFechas = 1,
+                me.mostrarDatos = 0;
+
+            },
+            cambiarDatos(){
+
+                let me = this;
+
+                me.mostrarFechas = 0,
+                me.mostrarDatos = 1;
+
+            },
             estaDisponible(dispo) {
 
                 return dispo.idesde > 0 && dispo.ihasta > 0
@@ -254,8 +265,6 @@
                     console.log(me.arHorariosGenerados);
 
                 }).catch(function (error) {  console.log(error);     });*/
-
-                
 
             },
             mostrarDisponibilidad(){

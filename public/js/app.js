@@ -4324,9 +4324,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['apodoData'],
   mounted: function mounted() {
@@ -4350,10 +4347,20 @@ __webpack_require__.r(__webpack_exports__);
       desplazo: 0,
       tiempo: 60,
       horario_seleccionado: [],
-      diaSeleccionado: null
+      diaSeleccionado: null,
+      mostrarFechas: 0,
+      mostrarDatos: 1
     };
   },
   methods: {
+    seleccionarFechas: function seleccionarFechas() {
+      var me = this;
+      me.mostrarFechas = 1, me.mostrarDatos = 0;
+    },
+    cambiarDatos: function cambiarDatos() {
+      var me = this;
+      me.mostrarFechas = 0, me.mostrarDatos = 1;
+    },
     estaDisponible: function estaDisponible(dispo) {
       return dispo.idesde > 0 && dispo.ihasta > 0;
     },
@@ -50295,88 +50302,21 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "servicios_seleccionados espacio-reservas" }, [
-      _vm._m(4),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-row" }, [
-        _c(
-          "div",
-          { staticClass: "col-lg-6 col-sm-12" },
-          [
-            _c("vc-calendar", {
-              attrs: {
-                color: "pink",
-                attributes: _vm.attributes,
-                "is-inline": "",
-                "min-date": new Date()
-              },
-              on: { dayclick: _vm.dayClicked },
-              model: {
-                value: _vm.diaSeleccionado,
-                callback: function($$v) {
-                  _vm.diaSeleccionado = $$v
-                },
-                expression: "diaSeleccionado"
-              }
-            })
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-lg-6 col-sm-12" }, [
-          _c(
-            "ul",
-            _vm._l(_vm.arHorariosGenerados, function(horario, index) {
-              return _c(
-                "li",
-                { key: "h_" + index },
-                [
-                  _c(
-                    "p-input",
-                    {
-                      attrs: {
-                        type: "radio",
-                        name: "horario_seleccionado",
-                        color: "info"
-                      },
-                      on: {
-                        change: function($event) {
-                          _vm.horario_seleccionado = horario
-                        }
-                      },
-                      model: {
-                        value: _vm.horario_seleccionado,
-                        callback: function($$v) {
-                          _vm.horario_seleccionado = $$v
-                        },
-                        expression: "horario_seleccionado"
-                      }
-                    },
-                    [
-                      _vm._v(
-                        _vm._s(horario.desde.substr(11, 5)) +
-                          " -  " +
-                          _vm._s(horario.hasta.substr(11, 5))
-                      )
-                    ]
-                  )
-                ],
-                1
-              )
-            }),
-            0
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _vm._m(5)
-    ]),
-    _vm._v(" "),
     _c(
       "div",
-      { staticClass: "servicios_seleccionados espacio-reservas" },
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.arTarifasSeleccionadas.length && _vm.mostrarDatos,
+            expression: "arTarifasSeleccionadas.length && mostrarDatos"
+          }
+        ],
+        staticClass: "servicios_seleccionados espacio-reservas"
+      },
       [
-        _vm._m(6),
+        _vm._m(4),
         _vm._v(" "),
         _vm._l(_vm.arTarifasSeleccionadas, function(seleccionado) {
           return _c(
@@ -50406,13 +50346,13 @@ var render = function() {
           "div",
           { staticClass: "form-row", staticStyle: { "margin-top": "20px" } },
           [
+            _vm._m(5),
+            _vm._v(" "),
+            _vm._m(6),
+            _vm._v(" "),
             _vm._m(7),
             _vm._v(" "),
             _vm._m(8),
-            _vm._v(" "),
-            _vm._m(9),
-            _vm._v(" "),
-            _vm._m(10),
             _vm._v(" "),
             _c("div", { staticClass: "col-lg-12 col-sm-12  espacio-campos" }, [
               _c(
@@ -50493,11 +50433,166 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _vm._m(11)
+            _c("div", { staticClass: "col-lg-12 col-sm-12" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary btn-busqueda-detallada",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      return _vm.seleccionarFechas()
+                    }
+                  }
+                },
+                [_vm._v("SELECCIONAR FECHAS")]
+              )
+            ])
           ]
         )
       ],
       2
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.mostrarFechas,
+            expression: "mostrarFechas"
+          }
+        ],
+        staticClass: "servicios_seleccionados espacio-reservas"
+      },
+      [
+        _vm._m(9),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "form-row", staticStyle: { "margin-top": "20px" } },
+          [
+            _c(
+              "div",
+              { staticClass: "col-lg-6 col-sm-12" },
+              [
+                _c("vc-calendar", {
+                  attrs: {
+                    color: "pink",
+                    attributes: _vm.attributes,
+                    "is-inline": "",
+                    "min-date": new Date()
+                  },
+                  on: { dayclick: _vm.dayClicked },
+                  model: {
+                    value: _vm.diaSeleccionado,
+                    callback: function($$v) {
+                      _vm.diaSeleccionado = $$v
+                    },
+                    expression: "diaSeleccionado"
+                  }
+                }),
+                _vm._v(" "),
+                _c("v-date-picker", {
+                  attrs: {
+                    mode: "single",
+                    value: null,
+                    color: "red",
+                    "is-dark": "",
+                    "is-inline": ""
+                  }
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-lg-6 col-sm-12" }, [
+              _c(
+                "ul",
+                _vm._l(_vm.arHorariosGenerados, function(horario, index) {
+                  return _c(
+                    "li",
+                    { key: "h_" + index },
+                    [
+                      _c(
+                        "p-input",
+                        {
+                          attrs: {
+                            type: "radio",
+                            name: "horario_seleccionado",
+                            color: "info"
+                          },
+                          on: {
+                            change: function($event) {
+                              _vm.horario_seleccionado = horario
+                            }
+                          },
+                          model: {
+                            value: _vm.horario_seleccionado,
+                            callback: function($$v) {
+                              _vm.horario_seleccionado = $$v
+                            },
+                            expression: "horario_seleccionado"
+                          }
+                        },
+                        [
+                          _vm._v(
+                            _vm._s(horario.desde.substr(11, 5)) +
+                              " -  " +
+                              _vm._s(horario.hasta.substr(11, 5))
+                          )
+                        ]
+                      )
+                    ],
+                    1
+                  )
+                }),
+                0
+              )
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "form-row", staticStyle: { "margin-top": "20px" } },
+          [
+            _c("div", { staticClass: "col-lg-6 col-sm-12" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary btn-busqueda-detallada",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      return _vm.cambiarDatos()
+                    }
+                  }
+                },
+                [_vm._v("CAMBIAR DATOS")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-lg-6 col-sm-12" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary btn-busqueda-detallada",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      return _vm.realizarReserva()
+                    }
+                  }
+                },
+                [_vm._v("REALIZAR RESERVA")]
+              )
+            ])
+          ]
+        )
+      ]
     )
   ])
 }
@@ -50537,43 +50632,6 @@ var staticRenderFns = [
       _c("i", { staticClass: "icon-money esp-icono-bio" }),
       _vm._v("TARIFAS EXTRAS")
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("h2", { staticClass: "sub-tit" }, [
-      _c("i", { staticClass: "icon-calendar esp-icono-bio" }),
-      _vm._v("HORARIOS DISPONIBLES")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "form-row",
-        staticStyle: { "margin-top": "20px", display: "none" }
-      },
-      [
-        _c("div", { staticClass: "col-lg-12 col-sm-12  espacio-campos" }, [
-          _vm._v("\r\n\r\n                 sasa\r\n\r\n            ")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-lg-12 col-sm-12" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-primary btn-busqueda-detallada",
-              attrs: { type: "submit" }
-            },
-            [_vm._v("REALIZAR RESERVA")]
-          )
-        ])
-      ]
-    )
   },
   function() {
     var _vm = this
@@ -50652,15 +50710,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-12 col-sm-12" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-primary btn-busqueda-detallada",
-          attrs: { type: "submit" }
-        },
-        [_vm._v("REALIZAR RESERVA")]
-      )
+    return _c("h2", { staticClass: "sub-tit" }, [
+      _c("i", { staticClass: "icon-calendar esp-icono-bio" }),
+      _vm._v("HORARIOS DISPONIBLES")
     ])
   }
 ]
