@@ -231,6 +231,7 @@ class PerfilController extends Controller
 
     }
 
+
     public function calcularEdad($nacimiento){
 
 
@@ -256,37 +257,5 @@ class PerfilController extends Controller
     }
 
 
-    public function create()
-    {
-        //
-    }
-
-
-    public function store(Request $request)
-    {
-        //
-    }
-
-
-    public function show(Perfil $perfil)
-    {
-        //
-    }
-
-
-    public function edit(Perfil $perfil)
-    {
-        //
-    }
-
-
-    public function update(Request $request, Perfil $perfil)
-    {
-        //
-    }
-
-    public function destroy(Perfil $perfil)
-    {
-        //
-    }
+    
 }

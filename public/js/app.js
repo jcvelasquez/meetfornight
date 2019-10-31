@@ -4314,21 +4314,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['apodoData'],
   mounted: function mounted() {
     this.mostrarTarifas();
-    this.mostrarDisponibilidad(); //this.generarHorarios();
+    this.mostrarDisponibilidad();
   },
   data: function data() {
     return {
@@ -4349,10 +4339,43 @@ __webpack_require__.r(__webpack_exports__);
       horario_seleccionado: [],
       diaSeleccionado: null,
       mostrarFechas: 0,
-      mostrarDatos: 1
+      mostrarDatos: 1,
+      direccion: "",
+      email: "",
+      extras: "",
+      totalTarifa: 0
     };
   },
+  computed: {
+    calcularServicios: function calcularServicios() {
+      var sum = 0;
+      this.arTarifasSeleccionadas.forEach(function (item) {
+        sum += item.costo_tarifa;
+      });
+      this.totalTarifa = sum;
+      return sum;
+    }
+  },
   methods: {
+    realizarReserva: function realizarReserva() {
+      var me = this;
+      console.log(me.horario_seleccionado.hasta);
+      axios.post('/perfil/reservas/' + me.apodoData, {
+        'apodo': me.apodoData,
+        'idusuario': me.idusuario,
+        'desde': me.horario_seleccionado.desde,
+        'hasta': me.horario_seleccionado.hasta,
+        'servicios': me.arTarifasSeleccionadas,
+        'direccion': me.direccion,
+        'extras': me.extras,
+        'total': me.totalTarifa
+      }).then(function (response) {
+        var respuesta = response.data;
+        console.log(respuesta);
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
     seleccionarFechas: function seleccionarFechas() {
       var me = this;
       me.mostrarFechas = 1, me.mostrarDatos = 0;
@@ -4391,11 +4414,6 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         console.log(error);
       });
-      /*axios.get('/perfil/horarios/piwicho').then(function (response) {
-           var respuesta= response.data;
-           me.arHorariosGenerados = respuesta.horarios;
-           console.log(me.arHorariosGenerados);
-       }).catch(function (error) {  console.log(error);     });*/
     },
     mostrarDisponibilidad: function mostrarDisponibilidad() {
       var me = this;
@@ -50309,8 +50327,8 @@ var render = function() {
           {
             name: "show",
             rawName: "v-show",
-            value: _vm.arTarifasSeleccionadas.length && _vm.mostrarDatos,
-            expression: "arTarifasSeleccionadas.length && mostrarDatos"
+            value: _vm.arTarifasSeleccionadas.length,
+            expression: "arTarifasSeleccionadas.length"
           }
         ],
         staticClass: "servicios_seleccionados espacio-reservas"
@@ -50348,11 +50366,82 @@ var render = function() {
           [
             _vm._m(5),
             _vm._v(" "),
+            _c("div", { staticClass: "col-lg-2 col-sm-12 text-right" }, [
+              _vm._v(
+                "\r\n                $" +
+                  _vm._s(_vm.calcularServicios) +
+                  "\r\n            "
+              )
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.arTarifasSeleccionadas.length && _vm.mostrarDatos,
+                expression: "arTarifasSeleccionadas.length && mostrarDatos"
+              }
+            ],
+            staticClass: "form-row",
+            staticStyle: { "margin-top": "20px" }
+          },
+          [
             _vm._m(6),
             _vm._v(" "),
             _vm._m(7),
             _vm._v(" "),
-            _vm._m(8),
+            _c("div", { staticClass: "col-lg-6 col-sm-12" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.email,
+                    expression: "email"
+                  }
+                ],
+                staticClass: "form-control espacio-campos",
+                attrs: { type: "text", name: "email", placeholder: "Email *" },
+                domProps: { value: _vm.email },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.email = $event.target.value
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-lg-12 col-sm-12" }, [
+              _c("textarea", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.extras,
+                    expression: "extras"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text", rows: "5", name: "extras" },
+                domProps: { value: _vm.extras },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.extras = $event.target.value
+                  }
+                }
+              })
+            ]),
             _vm._v(" "),
             _c("div", { staticClass: "col-lg-12 col-sm-12  espacio-campos" }, [
               _c(
@@ -50421,12 +50510,28 @@ var render = function() {
                 },
                 [
                   _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.direccion,
+                        expression: "direccion"
+                      }
+                    ],
                     staticClass: "form-control",
                     attrs: {
                       type: "text",
-                      name: "direccion_cliente",
-                      id: "direccion_cliente",
+                      name: "direccion",
                       placeholder: "Ingrese su dirección"
+                    },
+                    domProps: { value: _vm.direccion },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.direccion = $event.target.value
+                      }
                     }
                   })
                 ]
@@ -50449,150 +50554,147 @@ var render = function() {
               )
             ])
           ]
-        )
-      ],
-      2
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.mostrarFechas,
-            expression: "mostrarFechas"
-          }
-        ],
-        staticClass: "servicios_seleccionados espacio-reservas"
-      },
-      [
-        _vm._m(9),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "form-row", staticStyle: { "margin-top": "20px" } },
-          [
-            _c(
-              "div",
-              { staticClass: "col-lg-6 col-sm-12" },
-              [
-                _c("vc-calendar", {
-                  attrs: {
-                    color: "pink",
-                    attributes: _vm.attributes,
-                    "is-inline": "",
-                    "min-date": new Date()
-                  },
-                  on: { dayclick: _vm.dayClicked },
-                  model: {
-                    value: _vm.diaSeleccionado,
-                    callback: function($$v) {
-                      _vm.diaSeleccionado = $$v
-                    },
-                    expression: "diaSeleccionado"
-                  }
-                }),
-                _vm._v(" "),
-                _c("v-date-picker", {
-                  attrs: {
-                    mode: "single",
-                    value: null,
-                    color: "red",
-                    "is-dark": "",
-                    "is-inline": ""
-                  }
-                })
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-lg-6 col-sm-12" }, [
-              _c(
-                "ul",
-                _vm._l(_vm.arHorariosGenerados, function(horario, index) {
-                  return _c(
-                    "li",
-                    { key: "h_" + index },
-                    [
-                      _c(
-                        "p-input",
-                        {
-                          attrs: {
-                            type: "radio",
-                            name: "horario_seleccionado",
-                            color: "info"
-                          },
-                          on: {
-                            change: function($event) {
-                              _vm.horario_seleccionado = horario
-                            }
-                          },
-                          model: {
-                            value: _vm.horario_seleccionado,
-                            callback: function($$v) {
-                              _vm.horario_seleccionado = $$v
-                            },
-                            expression: "horario_seleccionado"
-                          }
-                        },
-                        [
-                          _vm._v(
-                            _vm._s(horario.desde.substr(11, 5)) +
-                              " -  " +
-                              _vm._s(horario.hasta.substr(11, 5))
-                          )
-                        ]
-                      )
-                    ],
-                    1
-                  )
-                }),
-                0
-              )
-            ])
-          ]
         ),
         _vm._v(" "),
         _c(
           "div",
-          { staticClass: "form-row", staticStyle: { "margin-top": "20px" } },
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.mostrarFechas,
+                expression: "mostrarFechas"
+              }
+            ],
+            staticClass: "espacio-reservas",
+            staticStyle: { "margin-top": "40px" }
+          },
           [
-            _c("div", { staticClass: "col-lg-6 col-sm-12" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-primary btn-busqueda-detallada",
-                  attrs: { type: "button" },
-                  on: {
-                    click: function($event) {
-                      return _vm.cambiarDatos()
-                    }
-                  }
-                },
-                [_vm._v("CAMBIAR DATOS")]
-              )
-            ]),
+            _vm._m(8),
             _vm._v(" "),
-            _c("div", { staticClass: "col-lg-6 col-sm-12" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-primary btn-busqueda-detallada",
-                  attrs: { type: "button" },
-                  on: {
-                    click: function($event) {
-                      return _vm.realizarReserva()
-                    }
-                  }
-                },
-                [_vm._v("REALIZAR RESERVA")]
-              )
-            ])
+            _c(
+              "div",
+              {
+                staticClass: "form-row",
+                staticStyle: { "margin-top": "20px" }
+              },
+              [
+                _c(
+                  "div",
+                  { staticClass: "col-lg-6 col-sm-12" },
+                  [
+                    _c("vc-calendar", {
+                      attrs: {
+                        color: "pink",
+                        attributes: _vm.attributes,
+                        "is-inline": "",
+                        "min-date": new Date()
+                      },
+                      on: { dayclick: _vm.dayClicked },
+                      model: {
+                        value: _vm.diaSeleccionado,
+                        callback: function($$v) {
+                          _vm.diaSeleccionado = $$v
+                        },
+                        expression: "diaSeleccionado"
+                      }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-lg-6 col-sm-12" }, [
+                  _c(
+                    "ul",
+                    _vm._l(_vm.arHorariosGenerados, function(horario, index) {
+                      return _c(
+                        "li",
+                        { key: "h_" + index },
+                        [
+                          _c(
+                            "p-input",
+                            {
+                              attrs: {
+                                type: "radio",
+                                name: "horario_seleccionado",
+                                color: "info"
+                              },
+                              on: {
+                                change: function($event) {
+                                  _vm.horario_seleccionado = horario
+                                }
+                              },
+                              model: {
+                                value: _vm.horario_seleccionado,
+                                callback: function($$v) {
+                                  _vm.horario_seleccionado = $$v
+                                },
+                                expression: "horario_seleccionado"
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(horario.desde.substr(11, 5)) +
+                                  " -  " +
+                                  _vm._s(horario.hasta.substr(11, 5))
+                              )
+                            ]
+                          )
+                        ],
+                        1
+                      )
+                    }),
+                    0
+                  )
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "form-row",
+                staticStyle: { "margin-top": "20px" }
+              },
+              [
+                _c("div", { staticClass: "col-lg-6 col-sm-12" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary btn-busqueda-detallada",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          return _vm.cambiarDatos()
+                        }
+                      }
+                    },
+                    [_vm._v("CAMBIAR DATOS")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-lg-6 col-sm-12" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary btn-busqueda-detallada",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          return _vm.realizarReserva()
+                        }
+                      }
+                    },
+                    [_vm._v("REALIZAR RESERVA")]
+                  )
+                ])
+              ]
+            )
           ]
         )
-      ]
+      ],
+      2
     )
   ])
 }
@@ -50646,15 +50748,18 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-lg-10 col-sm-12" }, [
+      _c("strong", [_vm._v("TOTAL SERVICIO:")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-lg-12 col-sm-12" }, [
       _c("input", {
         staticClass: "form-control espacio-campos",
-        attrs: {
-          type: "text",
-          name: "nombre",
-          placeholder: "Nombre *",
-          id: "nombre"
-        }
+        attrs: { type: "text", name: "nombres", placeholder: "Nombres *" }
       })
     ])
   },
@@ -50665,44 +50770,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "col-lg-6 col-sm-12" }, [
       _c("input", {
         staticClass: "form-control espacio-campos",
-        attrs: {
-          type: "text",
-          name: "nombre",
-          placeholder: "Nombre *",
-          id: "nombre"
-        }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-6 col-sm-12" }, [
-      _c("input", {
-        staticClass: "form-control espacio-campos",
-        attrs: {
-          type: "text",
-          name: "nombre",
-          placeholder: "Nombre *",
-          id: "nombre"
-        }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-12 col-sm-12" }, [
-      _c("textarea", {
-        staticClass: "form-control",
-        attrs: {
-          type: "text",
-          rows: "5",
-          name: "descripcion",
-          id: "descripcion"
-        }
+        attrs: { type: "text", name: "apellidos", placeholder: "Apellidos *" }
       })
     ])
   },

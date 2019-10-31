@@ -39,6 +39,9 @@ Route::get('perfil/{apodo}',  'PerfilController@mostrar');
 Route::get('perfil/tarifas/{apodo}', 'PerfilController@tarifas' );
 Route::get('perfil/disponibilidad/{apodo}', 'PerfilController@disponibilidad' );
 Route::post('perfil/horarios/{apodo}', 'PerfilController@horarios' );
+//Route::post('perfil/reservas/{apodo}', 'PerfilController@registrarReserva' );
+Route::post('perfil/reservas/{apodo}', 'ReservasProfesionalController@registrar' );
+
 
 
 

@@ -40,8 +40,6 @@ class TarifaProfesionalController extends Controller
     public function destroy($id)
     {
 
-       // return $id;
-
         $tarifa = TarifaProfesional::find($id);
         $tarifa->delete();
 

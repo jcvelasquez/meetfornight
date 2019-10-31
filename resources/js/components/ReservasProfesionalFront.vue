@@ -30,14 +30,12 @@
     <div class="espacio-reservas" style="margin-top:40px;">
             <h2 class="sub-tit"><i class="icon-money esp-icono-bio"></i>TARIFAS SERVICIO</h2>
             <div class="tarifario-vertical">
-             
                   <div class="tarifario-horizontal" v-for="servicio in filtrarPor(arTarifas, 'SERVICIO')" :key=" 'm_' + servicio.id">
                     <div class="tarifario-morado" v-text="servicio.opcion_tarifa"></div>
                     <div class="tarifario-rojo">
                       <button type="button" class="btn btn-primary btn-busqueda-detallada" @click="agregarTarifa(servicio)">${{servicio.costo_tarifa}}</button>
                     </div>
                   </div>
-              
             </div>
           </div>
 
@@ -71,7 +69,7 @@
 
     
   
-    <div class="servicios_seleccionados espacio-reservas" v-show="arTarifasSeleccionadas.length && mostrarDatos">
+    <div class="servicios_seleccionados espacio-reservas" v-show="arTarifasSeleccionadas.length">
 
         <h2 class="sub-tit"><i class="icon-calendar esp-icono-bio"></i>GENERAR RESERVA</h2>
 
@@ -85,75 +83,67 @@
         </div>
 
         <div class="form-row" style="margin-top:20px;">
+            <div class="col-lg-10 col-sm-12">
+                <strong>TOTAL SERVICIO:</strong>
+            </div>
+            <div class="col-lg-2 col-sm-12 text-right">
+                ${{calcularServicios}}
+            </div>  
+        </div>
 
+        <!-- SECCION INTERIOR DE DATOS -->
+        <div class="form-row" style="margin-top:20px;" v-show="arTarifasSeleccionadas.length && mostrarDatos">
             <div class="col-lg-12 col-sm-12">
-                <input type="text" name="nombre" placeholder="Nombre *" id="nombre" class="form-control espacio-campos">
+                <input type="text" name="nombres" placeholder="Nombres *" class="form-control espacio-campos">
             </div>
-
             <div class="col-lg-6 col-sm-12">
-                <input type="text" name="nombre" placeholder="Nombre *" id="nombre" class="form-control espacio-campos">
+                <input type="text" name="apellidos" placeholder="Apellidos *" class="form-control espacio-campos">
             </div>
-
             <div class="col-lg-6 col-sm-12">
-                <input type="text" name="nombre" placeholder="Nombre *" id="nombre" class="form-control espacio-campos">
+                <input type="text" name="email" placeholder="Email *" v-model="email" class="form-control espacio-campos">
             </div>
-
             <div class="col-lg-12 col-sm-12">
-                <textarea type="text" rows="5" name="descripcion" id="descripcion" class="form-control"></textarea>
+                <textarea type="text" rows="5" name="extras" v-model="extras"  class="form-control"></textarea>
             </div>
-
             <div class="col-lg-12 col-sm-12  espacio-campos">
                   <div class="direccion-cliente"> 
                       ¿Usted es el que se despalaza? <p-input type="radio" name="desplazo" color="info" :value="0" v-model="desplazo">Si</p-input>
                       <p-input type="radio" name="desplazo" color="info" :value="1" checked v-model="desplazo">No</p-input> 
                   </div>
                   <div class="direccion-cliente" v-show="desplazo">
-                      <input type="text" name="direccion_cliente" id="direccion_cliente" placeholder="Ingrese su dirección" class="form-control">
+                      <input type="text" name="direccion" v-model="direccion" placeholder="Ingrese su dirección" class="form-control">
                   </div>
             </div>
-
             <div class="col-lg-12 col-sm-12">
               <button type="button" @click="seleccionarFechas()" class="btn btn-primary btn-busqueda-detallada">SELECCIONAR FECHAS</button>
             </div>
-
         </div>
-    
-    </div>
+        <!-- FIN SECCION INTERIOR DE DATOS -->
+        
 
-      <div class="servicios_seleccionados espacio-reservas" v-show="mostrarFechas">
-
-        <h2 class="sub-tit"><i class="icon-calendar esp-icono-bio"></i>HORARIOS DISPONIBLES</h2>
-
-        <div class="form-row" style="margin-top:20px;">
-            
-            <div class="col-lg-6 col-sm-12">
-                
-                <vc-calendar color="pink"  @dayclick='dayClicked' :attributes='attributes' v-model='diaSeleccionado' is-inline :min-date='new Date()' />
-
-                <v-date-picker mode="single" :value="null" color="red" is-dark is-inline />
-                
+        <!-- SECCION INTERIOR DE FECHA -->
+        <div class="espacio-reservas" style="margin-top:40px;" v-show="mostrarFechas">
+            <h2 class="sub-tit"><i class="icon-calendar esp-icono-bio"></i>HORARIOS DISPONIBLES</h2>
+            <div class="form-row" style="margin-top:20px;">
+                <div class="col-lg-6 col-sm-12">
+                    <vc-calendar color="pink"  @dayclick='dayClicked' :attributes='attributes' v-model='diaSeleccionado' is-inline :min-date='new Date()' />
+                </div>
+                <div class="col-lg-6 col-sm-12">
+                    <ul>
+                        <li v-for="(horario, index) in arHorariosGenerados" :key=" 'h_' + index"><p-input type="radio" name="horario_seleccionado" color="info" @change=" horario_seleccionado = horario " v-model="horario_seleccionado">{{horario.desde.substr(11, 5)}} -  {{horario.hasta.substr(11, 5)}}</p-input></li>
+                    </ul>
+                </div>
             </div>
-            <div class="col-lg-6 col-sm-12">
-                <ul>
-                    <li v-for="(horario, index) in arHorariosGenerados" :key=" 'h_' + index"><p-input type="radio" name="horario_seleccionado" color="info" @change=" horario_seleccionado = horario " v-model="horario_seleccionado">{{horario.desde.substr(11, 5)}} -  {{horario.hasta.substr(11, 5)}}</p-input></li>
-                </ul>
-               
+            <div class="form-row" style="margin-top:20px;">
+                <div class="col-lg-6 col-sm-12">
+                <button type="button" @click="cambiarDatos()" class="btn btn-primary btn-busqueda-detallada">CAMBIAR DATOS</button>
+                </div>
+                <div class="col-lg-6 col-sm-12">
+                <button type="button" @click="realizarReserva()" class="btn btn-primary btn-busqueda-detallada">REALIZAR RESERVA</button>
+                </div>
             </div>
-           
         </div>
-
-
-        <div class="form-row" style="margin-top:20px;">
-
-            <div class="col-lg-6 col-sm-12">
-              <button type="button" @click="cambiarDatos()" class="btn btn-primary btn-busqueda-detallada">CAMBIAR DATOS</button>
-            </div>
-
-            <div class="col-lg-6 col-sm-12">
-              <button type="button" @click="realizarReserva()" class="btn btn-primary btn-busqueda-detallada">REALIZAR RESERVA</button>
-            </div>
-
-        </div>
+        <!-- FIN SECCION INTERIOR DE FECHA -->
     
     </div>
     
@@ -169,7 +159,6 @@
         mounted() {
             this.mostrarTarifas();
             this.mostrarDisponibilidad();
-            //this.generarHorarios();
         },
         data(){
             return {
@@ -192,10 +181,53 @@
                 horario_seleccionado : [],
                 diaSeleccionado : null,
                 mostrarFechas : 0,
-                mostrarDatos : 1
+                mostrarDatos : 1,
+                direccion : "",
+                email : "",
+                extras: "",
+                totalTarifa : 0
             }
         },
+        computed:{
+
+            calcularServicios () {
+
+                let sum = 0;
+                this.arTarifasSeleccionadas.forEach(function(item) { sum += item.costo_tarifa; });
+
+                this.totalTarifa = sum;
+
+                return sum;
+
+            }
+
+        },
         methods:{
+
+            realizarReserva() {
+
+                let me = this;
+
+                console.log(me.horario_seleccionado.hasta);
+
+                axios.post('/perfil/reservas/' + me.apodoData, {
+                    'apodo': me.apodoData,
+                    'idusuario': me.idusuario,
+                    'desde' : me.horario_seleccionado.desde,
+                    'hasta' : me.horario_seleccionado.hasta,
+                    'servicios' : me.arTarifasSeleccionadas,
+                    'direccion' : me.direccion,
+                    'extras' : me.extras,
+                    'total' : me.totalTarifa
+                } ).then(function (response) {
+
+                    var respuesta = response.data;
+
+                    console.log(respuesta);
+
+                }).catch(function (error) {  console.log(error);  });
+
+            },
             seleccionarFechas(){
 
                 let me = this;
@@ -255,16 +287,6 @@
                     console.log(me.arHorariosGenerados);
 
                 }).catch(function (error) {  console.log(error);     });
-
-                /*axios.get('/perfil/horarios/piwicho').then(function (response) {
-
-                    var respuesta= response.data;
-
-                    me.arHorariosGenerados = respuesta.horarios;
-
-                    console.log(me.arHorariosGenerados);
-
-                }).catch(function (error) {  console.log(error);     });*/
 
             },
             mostrarDisponibilidad(){
