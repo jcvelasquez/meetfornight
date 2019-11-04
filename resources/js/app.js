@@ -21,7 +21,6 @@ import listPlugin from '@fullcalendar/list';*/
 
 import PrettyCheckbox from 'pretty-checkbox-vue';
 import PrettyRadio from 'pretty-checkbox-vue/radio';
-
 import VCalendar from 'v-calendar';
 
 // Use v-calendar & v-date-picker components
@@ -42,23 +41,29 @@ Vue.component('perfil-profesional', require('./components/PerfilProfesional.vue'
 Vue.component('servicios-profesional', require('./components/ServiciosProfesional.vue').default);
 Vue.component('contacto-profesional', require('./components/ContactoProfesional.vue').default);
 Vue.component('agenda-profesional', require('./components/AgendaProfesional.vue').default);
-Vue.component('reservas-profesional', require('./components/ReservasProfesional.vue').default);
 Vue.component('tarifas-profesional', require('./components/TarifasProfesional.vue').default);
 Vue.component('fotos-profesional', require('./components/FotosProfesional.vue').default);
 Vue.component('creditos-profesional', require('./components/CreditosProfesional.vue').default);
 Vue.component('booster-profesional', require('./components/BoosterProfesional.vue').default);
 Vue.component('estadisticas-profesional', require('./components/EstadisticasProfesional.vue').default);
 Vue.component('mensajes-profesional', require('./components/MensajesProfesional.vue').default);
+Vue.component('mensajes-profesional-front', require('./components/MensajesProfesionalFront.vue').default);
 Vue.component('alerta-profesional', require('./components/AlertaProfesional.vue').default);
 Vue.component('valoracion-profesional', require('./components/ValoracionProfesional.vue').default);
 Vue.component('listado-profesionales', require('./components/ListadoProfesionales.vue').default);
-//Vue.component('reserva-perfil', require('./components/ReservaPerfil.vue').default);
+Vue.component('reservas-profesional', require('./components/ReservasProfesional.vue').default);
 Vue.component('reservas-profesional-front', require('./components/ReservasProfesionalFront.vue').default);
+Vue.component('disponibilidad-profesional-front', require('./components/DisponibilidadProfesionalFront.vue').default);
 
 
 
-Vue.prototype.$idusuario = document.querySelector("meta[name='user-id']").getAttribute('content');
+
+
 Vue.prototype.$csrf_token = document.querySelector("meta[name='csrf-token']").getAttribute('content');
+
+Vue.prototype.$idprofesional = document.querySelector("meta[name='profesional-id']").getAttribute('content');
+Vue.prototype.$idusuario = document.querySelector("meta[name='usuario-id']").getAttribute('content');
+
 
 
 

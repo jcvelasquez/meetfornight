@@ -1,11 +1,13 @@
 <template>
-  <form action="#" method="post">
+
+  <div>
+
     <h5 class="formulario-titulos">CARGAR FOTOS:</h5>
 
      <div class="cargar-imagenes" id="dropzone_fotos">
       <span class="titulo-cargar-imagenes">Sube tus imágenes</span>
       <span class="haz-click">Haz click</span>
-      <button type="button" class="btn btn-primary"><i class="icon-cargar-archivo cargar"></i>SUBIR</button>
+      <button :disabled="arFotos.length >= 5" type="button" class="btn btn-primary"><i class="icon-cargar-archivo cargar"></i>SUBIR</button>
 
       <div class="fallback">
         <input name="file" type="files" multiple accept="image/jpeg, image/png, image/jpg" />
@@ -58,28 +60,36 @@
     </div>
 
 
-    <div class="img-cargada" v-for="(foto, index) in arFotos" :key="foto.id">
-      <div class="img-cargada-izq">
-        <img :src=" 'fotos-profesionales/' + foto.url_foto" />
-        <div class="img-cargada-datos">
-          <span class="nom-img" v-text="foto.url_foto"></span>
-          <span class="peso-img">234 KB</span>
-        </div>
-      </div>
-      <div class="img-cargada-der">
-        <button class="btn btn-primary x-cargar-img" @click="eliminarFoto(foto, index)">
-          <i class="icon-x"></i>
-        </button>
-      </div>
-    </div>
+    <draggable v-model="arFotos" @change="cambiarOrden()">
+        <transition-group>
+            <div class="img-cargada" v-for="(foto, index) in arFotos" :key="foto.id">
+                <div class="img-cargada-izq">
+                  <img :src=" 'fotos-profesionales/' + foto.url_foto" />
+                  <div class="img-cargada-datos">
+                    <span class="nom-img" v-text="foto.url_foto"></span>
+                    <span class="peso-img">234 KB</span>
+                  </div>
+                </div>
+                <div class="img-cargada-der">
+                  <button type="button" class="btn btn-primary x-cargar-img" @click="eliminarFoto(foto, index)">
+                    <i class="icon-x"></i>
+                  </button>
+                </div>
+            </div>
+        </transition-group>
+    </draggable>
 
-
-
-  </form>
+  </div>
 </template>
 
 <script>
+
+import draggable from 'vuedraggable'
+
 export default {
+  components: {
+      draggable,
+  },
    mounted() {
       
       this.listarFotos();
@@ -94,77 +104,91 @@ export default {
       }
   },
    methods:{
+     cambiarOrden(){
+
+        let me = this;
+
+        me.arFotos.forEach(function(item, index){
+            me.arFotos.find(foto => foto.id === item.id).orden = index;
+        })
+
+        axios.post('/fotos-profesional/ordenar', {
+            'idprofesional': me.$idprofesional,
+            'fotos' : me.arFotos
+        } ).then(function (response) {
+
+            var respuesta = response.data;
+
+        }).catch(function (error) {  console.log(error);  });
+        
+     },
      initDropZone(){
 
        let me = this;
-
-        var total_photos_counter = 0;
 
         var DropFotos = new Dropzone("#dropzone_fotos", { url: "/fotos-profesional/subir", 
                         acceptedFiles: ".jpeg,.jpg,.png,.gif",
                         clickable: "#dropzone_fotos button", 
                         maxFiles: 5, 
-                        addRemoveLinks:true,
+                        addRemoveLinks:false,
                         headers: {
                           'X-CSRF-TOKEN': me.$csrf_token
                         },
-                        data: {idusuario: me.$idusuario },
+                        data: {idusuario: me.$idprofesional },
                         error: function(file, response){
                             return false;
                         },
-                        init: function () {
-                            this.on("removedfile", function (file) {
-                                $.post({
-                                    url: '/foto-profesional/eliminar',
-                                    data: {id: file.name, _token: me.$csrf_token },
-                                    dataType: 'json',
-                                    success: function (data) {
-                                        //total_photos_counter--;
-                                        //$("#counter").text("# " + total_photos_counter);
-                                    }
-                                });
-                            });
-                        },
                         success: function (file, done) {
-                            total_photos_counter++;
 
-                            console.log("# " + total_photos_counter);
+                            me.listarFotos();
 
                         }
-                        /*removedfile: function(file) 
-                        {
-                            var name = file.upload.filename;
-                            $.ajax({
-                                headers: {
-                                            'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                                        },
-                                type: 'POST',
-                                url: '{{ url("image/delete") }}',
-                                data: {filename: name},
-                                success: function (data){
-                                    console.log("File has been successfully removed!!");
-                                },
-                                error: function(e) {
-                                    console.log(e);
-                                }});
-                                var fileRef;
-                                return (fileRef = file.previewElement) != null ? 
-                                fileRef.parentNode.removeChild(file.previewElement) : void 0;
-                        }*/
+                        
                         });
      },
      listarFotos(){
 
-      let me = this;
+        let me = this;
 
         axios.get('/fotos-profesional/listar').then(function (response) {
 
             var respuesta= response.data;
             me.arFotos = respuesta.fotos;
 
-            console.log(me.arFotos);
-
         }).catch(function (error) {  console.log(error);     });
+
+    },
+    eliminarFoto(item, index){
+
+        let me = this;
+
+        Swal.fire({
+                    title: 'CONFIRMAR',
+                    text: 'Una vez eliminada, no se podra recuperar la foto',
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Si, Eliminar!',
+                    cancelButtonText: 'No, Cancelar'
+                  }).then((result) => {
+                    
+                      if (result.value) {
+
+                             axios.post('/fotos-profesional/eliminar', {
+                                  'idprofesional': me.$idprofesional,
+                                  'url' : item.url_foto,
+                                  'idfoto' : item.id
+                              } ).then(function (response) {
+
+                                  //me.cambiarOrden();
+                                  me.listarFotos();
+
+                              }).catch(function (error) {  console.log(error);  });
+
+                      } 
+                    
+                  })
+
+       
 
     }
 

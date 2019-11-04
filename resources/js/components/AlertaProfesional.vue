@@ -157,7 +157,7 @@
                   }
 
                   axios.post('alerta-profesional/registrar', {
-                    'idusuario' : me.$idusuario,
+                    'idusuario' : me.$idprofesional,
                     'nombre' : me.nombre,
                     'apellido' : me.apellido,
                     'idalerta' : me.idalerta,

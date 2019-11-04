@@ -39,9 +39,6 @@ Route::get('perfil/{apodo}',  'PerfilController@mostrar');
 Route::get('perfil/tarifas/{apodo}', 'PerfilController@tarifas' );
 Route::get('perfil/disponibilidad/{apodo}', 'PerfilController@disponibilidad' );
 Route::post('perfil/horarios/{apodo}', 'PerfilController@horarios' );
-//Route::post('perfil/reservas/{apodo}', 'PerfilController@registrarReserva' );
-Route::post('perfil/reservas/{apodo}', 'ReservasProfesionalController@registrar' );
-
 
 
 
@@ -129,11 +126,13 @@ Route::group(['middleware'=>['auth']],function(){
 
     Route::group(['middleware'=>['usuario']],function(){
 
+            Route::post('perfil/reservas/{apodo}', 'ReservasProfesionalController@registrar' );
+
             //URLS PARA EL USUARIO
-            Route::get('perfil-usuario', 'UsuarioController@mostrarPerfilUsuarioLogueado');
+            Route::get('perfil-usuario', 'UsuarioController@mostrarPerfilUsuarioLogueado')->name('perfil-usuario');
 
             Route::post('perfil-usuario/registrar', 'UsuarioController@registrarDataUsuario')->name('registrar-usuario');  
-            Route::get('perfil-usuario/editar', 'UsuarioController@editarDataUsuario');
+            Route::post('perfil-usuario/editar', 'UsuarioController@editarDataUsuario');
             Route::put('perfil-usuario/actualizar', 'UsuarioController@actualizarDataUsuario');
             Route::get('seguridad-usuario', function () {
                 return view('forms-perfil-usuario.seguridad-usuario');
@@ -154,11 +153,14 @@ Route::group(['middleware'=>['auth']],function(){
             Route::get('contacto-profesional', 'ContactoProfesionalController@mostrar' );
             Route::get('contacto-profesional/listar', 'ContactoProfesionalController@list' );
             Route::post('contacto-profesional/registrar', 'ContactoProfesionalController@store');  
-
-
             Route::get('disponibilidad-profesional/listar', 'DisponibilidadProfesionalController@list');  
             Route::post('disponibilidad-profesional/registrar', 'DisponibilidadProfesionalController@store');  
 
+            //RESERVAS            
+            Route::get('reservas-profesional', 'ReservasProfesionalController@mostrar' );
+            Route::get('reservas-profesional/listar', 'ReservasProfesionalController@listar' );
+            Route::post('reservas-profesional/aceptar', 'ReservasProfesionalController@aceptar'); 
+            Route::post('reservas-profesional/rechazar', 'ReservasProfesionalController@rechazar'); 
 
 
             //URLS PARA EL PROFESIONAL
@@ -175,16 +177,12 @@ Route::group(['middleware'=>['auth']],function(){
 
             
             
-            
             //AGENDA
             Route::get('agenda-profesional', function () {
                 return view('forms-perfil-profesional.agenda-profesional');
             });
             
-            //RESERVAS
-            Route::get('reservas-profesional', function () {
-                return view('forms-perfil-profesional.reservas-profesional');
-            });
+            
             
             //TARIFAS
             Route::get('tarifas-profesional', function () {
@@ -197,11 +195,11 @@ Route::group(['middleware'=>['auth']],function(){
             
 
 
-
-            
             Route::get('fotos-profesional', function () {   return view('forms-perfil-profesional.fotos-videos-profesional');  });
-            Route::get('fotos-profesional/listar', 'FotoProfesionalController@list' );
-            Route::post('fotos-profesional/subir', 'FotoProfesionalController@fileStore')->name('fotos-profesional/subir');
+            Route::get('fotos-profesional/listar', 'FotoProfesionalController@listar' );
+            Route::post('fotos-profesional/subir', 'FotoProfesionalController@subir')->name('fotos-profesional/subir');
+            Route::post('fotos-profesional/ordenar', 'FotoProfesionalController@ordenar' );
+            Route::post('fotos-profesional/eliminar', 'FotoProfesionalController@eliminar' );
 
 
             

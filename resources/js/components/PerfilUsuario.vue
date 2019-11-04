@@ -118,8 +118,9 @@ export default {
             let me = this;
 
             // Make a request for a user with a given ID
-            axios.get('/perfil-usuario/editar?id=1')
-            .then(function (response) {
+            axios.post('/perfil-usuario/editar', {
+                    'idusuario' : me.$idusuario
+            }).then(function (response) {
                 // handle success
               
                 me.nombre = response.data.nombre;

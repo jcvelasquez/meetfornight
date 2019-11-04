@@ -22,6 +22,7 @@ mix.js(['resources/js/app.js'], 'public/js/app.js')
         'resources/css/asRange.css',
         'resources/fonts/style.css',
         'resources/css/smart_wizard.css',
+        'resources/css/dropzone.css',
         'resources/css/smart_wizard_theme_circles.css',
         'resources/css/fontawesome.css',
         'resources/css/fullcalendar.core.css',

@@ -6,7 +6,9 @@
 
     <title>Meet for Night - @yield('title')</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="user-id" content="{{ optional(Auth::user())->id }}">
+    <meta name="profesional-id" content="{{ optional(Auth::user())->id }}">
+    <meta name="usuario-id" content="{{ optional(Auth::user())->id }}">
+
 
     <link href="https://fonts.googleapis.com/css?family=Fauna+One|Lato:300,400,700,900|Marck+Script|Merriweather:300,400,700,900" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Yellowtail" rel="stylesheet">

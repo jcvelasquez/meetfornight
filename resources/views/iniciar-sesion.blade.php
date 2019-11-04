@@ -15,7 +15,6 @@
 
             <h2>MI CUENTA</h2>
             <div class="form-group">
-
              
               <input id="email" type="email" placeholder="Correo electronico" class="form-control" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 

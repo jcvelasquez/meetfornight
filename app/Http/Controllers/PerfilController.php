@@ -8,6 +8,7 @@ use App\DisponibilidadProfesional;
 use App\ServiciosXProfesional;
 use App\TarifaProfesional;
 use App\ReservasProfesional;
+use App\FotoProfesional;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -109,8 +110,10 @@ class PerfilController extends Controller
             data_set($serv_pers, 'es_marcado', '1');
             
         }
+
+        $fotos = FotoProfesional::where('idusuario', '=', $usuario->id)->orderBy('orden','asc')->get();
        
-        return view('perfil', compact('perfil', 'servicios', 'personalizados'));
+        return view('perfil', compact('perfil', 'servicios', 'personalizados','fotos'));
 
     }
 
@@ -218,7 +221,7 @@ class PerfilController extends Controller
                 continue;
             }*/  
 
-            $available_slots[] = array('desde' => $desde_slot, 'hasta' => $fechaselec." ".$hasta_slot->format('H:i'));
+            $available_slots[] = array('id' => uniqid(), 'desde' => $desde_slot, 'hasta' => $fechaselec." ".$hasta_slot->format('H:i'));
             
         }
 

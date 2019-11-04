@@ -35,6 +35,7 @@
         "sweetalert2": "^8.17.1",
         "v-calendar": "^1.0.0-beta.22",
         "vue-cal": "^2.12.1",
-        "vue-range-component": "^1.0.3"
+        "vue-range-component": "^1.0.3",
+        "vuedraggable": "^2.23.2"
     }
 }

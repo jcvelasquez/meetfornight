@@ -3,30 +3,6 @@
 
 <div>
 
-    <div class="espacio-reservas">
-
-        <h2 class="sub-tit"><i class="icon-calendar esp-icono-bio"></i>DISPONIBILIDAD</h2>
-
-        <div class="disponibilidad">
- 
-            <div class="fecha" v-for="dispo in arDisponibilidad" :key=" 'm_' + dispo.id">      
-                <div v-if="estaDisponible(dispo)">
-                    <span class="dias" v-text="dispo.dia.substr(0, 3)"></span>
-                    <p v-text="dispo.desde"></p>
-                    <p v-text="dispo.hasta"></p>
-                </div>
-                <div v-else>
-                    <span class="dias" style="background:#f20f21;" v-text="dispo.dia.substr(0, 3)"></span>
-                    <p>N/D</p>
-                </div>
-
-            </div>
-
-
-        </div>
-
-    </div>
-
     <div class="espacio-reservas" style="margin-top:40px;">
             <h2 class="sub-tit"><i class="icon-money esp-icono-bio"></i>TARIFAS SERVICIO</h2>
             <div class="tarifario-vertical">
@@ -87,7 +63,7 @@
                 <strong>TOTAL SERVICIO:</strong>
             </div>
             <div class="col-lg-2 col-sm-12 text-right">
-                ${{calcularServicios}}
+                <strong>${{calcularServicios}}</strong>
             </div>  
         </div>
 
@@ -103,14 +79,14 @@
                 <input type="text" name="email" placeholder="Email *" v-model="email" class="form-control espacio-campos">
             </div>
             <div class="col-lg-12 col-sm-12">
-                <textarea type="text" rows="5" name="extras" v-model="extras"  class="form-control"></textarea>
+                <textarea type="text" rows="3" placeholder="¿Desea agregar algun extra, pedido especial o comentario?" name="extras" v-model="extras"  class="form-control"></textarea>
             </div>
             <div class="col-lg-12 col-sm-12  espacio-campos">
                   <div class="direccion-cliente"> 
-                      ¿Usted es el que se despalaza? <p-input type="radio" name="desplazo" color="info" :value="0" v-model="desplazo">Si</p-input>
-                      <p-input type="radio" name="desplazo" color="info" :value="1" checked v-model="desplazo">No</p-input> 
+                      ¿Usted es el que se despalaza? <p-input type="radio" name="desplazo" color="info" :value="0" v-model="se_desplaza">Si</p-input>
+                      <p-input type="radio" name="desplazo" color="info" :value="1" checked v-model="se_desplaza">No</p-input> 
                   </div>
-                  <div class="direccion-cliente" v-show="desplazo">
+                  <div class="direccion-cliente" v-show="se_desplaza">
                       <input type="text" name="direccion" v-model="direccion" placeholder="Ingrese su dirección" class="form-control">
                   </div>
             </div>
@@ -122,7 +98,7 @@
         
 
         <!-- SECCION INTERIOR DE FECHA -->
-        <div class="espacio-reservas" style="margin-top:40px;" v-show="mostrarFechas">
+        <div class="espacio-reservas" style="margin-top:40px; margin-bottom:0;" v-show="mostrarFechas">
             <h2 class="sub-tit"><i class="icon-calendar esp-icono-bio"></i>HORARIOS DISPONIBLES</h2>
             <div class="form-row" style="margin-top:20px;">
                 <div class="col-lg-6 col-sm-12">
@@ -130,7 +106,8 @@
                 </div>
                 <div class="col-lg-6 col-sm-12">
                     <ul>
-                        <li v-for="(horario, index) in arHorariosGenerados" :key=" 'h_' + index"><p-input type="radio" name="horario_seleccionado" color="info" @change=" horario_seleccionado = horario " v-model="horario_seleccionado">{{horario.desde.substr(11, 5)}} -  {{horario.hasta.substr(11, 5)}}</p-input></li>
+                        <li v-for="horario in arHorariosGenerados" :key="horario.id">
+                            <p-input type="radio" name="horario_seleccionado" color="info" @change="horarioSeleccionado = horario" v-model="horarioSeleccionado">{{horario.desde.substr(11, 5)}} -  {{horario.hasta.substr(11, 5)}}</p-input></li>
                     </ul>
                 </div>
             </div>
@@ -139,7 +116,7 @@
                 <button type="button" @click="cambiarDatos()" class="btn btn-primary btn-busqueda-detallada">CAMBIAR DATOS</button>
                 </div>
                 <div class="col-lg-6 col-sm-12">
-                <button type="button" @click="realizarReserva()" class="btn btn-primary btn-busqueda-detallada">REALIZAR RESERVA</button>
+                <button type="button" @click="realizarReserva()" :disabled="horarioSeleccionado.length < 1" class="btn btn-primary btn-busqueda-detallada">REALIZAR RESERVA</button>
                 </div>
             </div>
         </div>
@@ -157,8 +134,10 @@
     export default {
         props: ['apodoData'],
         mounted() {
-            this.mostrarTarifas();
-            this.mostrarDisponibilidad();
+            this.mostrarTarifas();  
+            var currentDateWithFormat = new Date().toJSON().slice(0,10).replace(/-/g,'-');
+            this.mostrarHorarios(currentDateWithFormat)
+
         },
         data(){
             return {
@@ -170,16 +149,15 @@
                     }
                 ],
                 errorServicio : 0,
-                erroresTarifas: [],
+                erroresDatos: [],
                 arTarifas : [],
                 arTarifasSeleccionadas: [],
-                arDisponibilidad: [],
-                arHorariosGenerados: [],
+                arHorariosGenerados : [],
                 idusuario : 0,
-                desplazo: 0,
+                se_desplaza: 0,
                 tiempo : 60,
-                horario_seleccionado : [],
                 diaSeleccionado : null,
+                horarioSeleccionado : [],
                 mostrarFechas : 0,
                 mostrarDatos : 1,
                 direccion : "",
@@ -194,7 +172,6 @@
 
                 let sum = 0;
                 this.arTarifasSeleccionadas.forEach(function(item) { sum += item.costo_tarifa; });
-
                 this.totalTarifa = sum;
 
                 return sum;
@@ -208,24 +185,59 @@
 
                 let me = this;
 
-                console.log(me.horario_seleccionado.hasta);
 
-                axios.post('/perfil/reservas/' + me.apodoData, {
-                    'apodo': me.apodoData,
-                    'idusuario': me.idusuario,
-                    'desde' : me.horario_seleccionado.desde,
-                    'hasta' : me.horario_seleccionado.hasta,
-                    'servicios' : me.arTarifasSeleccionadas,
-                    'direccion' : me.direccion,
-                    'extras' : me.extras,
-                    'total' : me.totalTarifa
-                } ).then(function (response) {
+                Swal.fire({
+                    title: '¿Confirmar reserva?',
+                    text: 'Una vez realizada la reserva, deberá ser confirmada por el profesional',
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Si, confirmar!',
+                    cancelButtonText: 'No, Cancelar'
+                  }).then((result) => {
+                    
+                      if (result.value) {
 
-                    var respuesta = response.data;
+                            axios.post('/perfil/reservas/' + me.apodoData, {
+                                'apodo': me.apodoData,
+                                'idusuario': me.$idusuario,
+                                'desde' : me.horarioSeleccionado.desde,
+                                'hasta' : me.horarioSeleccionado.hasta,
+                                'servicios' : me.arTarifasSeleccionadas,
+                                'se_desplaza' : me.se_desplaza,
+                                'direccion' : me.direccion,
+                                'extras' : me.extras,
+                                'total' : me.totalTarifa
+                            } ).then(function (response) {
 
-                    console.log(respuesta);
+                                var respuesta = response.data;
 
-                }).catch(function (error) {  console.log(error);  });
+                                Swal.fire('CONFIRMACION', respuesta.mensaje,'success');
+                                me.limpiarReserva();
+
+                            }).catch(function (error) {  console.log(error);  });
+
+                      } 
+                    
+                  })
+
+            },
+            limpiarReserva(){
+
+                let me = this;
+
+                me.mostrarFechas = 0;
+                me.mostrarDatos = 1;
+                me.diaSeleccionado = null;
+                me.arTarifasSeleccionadas = [];
+                me.arHorariosGenerados = [];
+                me.se_desplaza = 0;
+                me.tiempo = 0;
+                me.diaSeleccionado = null;
+                me.horarioSeleccionado = [];
+                me.totalTarifa = 0;
+                me.direccion = "";
+                me.email = "";
+                me.extras = "";
 
             },
             seleccionarFechas(){
@@ -244,18 +256,13 @@
                 me.mostrarDatos = 1;
 
             },
-            estaDisponible(dispo) {
-
-                return dispo.idesde > 0 && dispo.ihasta > 0
-                
-            },
             dayClicked(day) {
 
                 let me = this;
 
                 me.diaSeleccionado = day;
 
-                me.generarHorarios(me.diaSeleccionado.id);
+                me.mostrarHorarios(me.diaSeleccionado.id);
 
             },
             mostrarTarifas(){
@@ -270,9 +277,13 @@
                   }).catch(function (error) {  console.log(error);     });
 
             },
-            generarHorarios(fecha){
+            mostrarHorarios(fecha){
 
                 let me = this;
+
+                me.horario_seleccionado = [];
+                me.arHorariosGenerados = [];
+                me.horarioSeleccionado = [];
 
                 axios.post('/perfil/horarios/' + me.apodoData, {
                     'apodo': me.apodoData,
@@ -281,25 +292,10 @@
                 } ).then(function (response) {
 
                     var respuesta = response.data;
-
                     me.arHorariosGenerados = respuesta.horarios;
-
-                    console.log(me.arHorariosGenerados);
 
                 }).catch(function (error) {  console.log(error);     });
 
-            },
-            mostrarDisponibilidad(){
-
-                  let me = this;
-
-                  axios.get('/perfil/disponibilidad/' + me.apodoData ).then(function (response) {
-
-                      var respuesta= response.data;
-                      me.arDisponibilidad = respuesta.disponibilidad;
-
-                  }).catch(function (error) {  console.log(error);     });
-                
             },
             filtrarPor(tarifas, value) {
               return tarifas.filter( tarifas => {

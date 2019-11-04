@@ -301,7 +301,7 @@
                   }
 
                   axios.post('tarifas-profesional/registrar', {
-                    'idusuario' : me.$idusuario,
+                    'idusuario' : me.$idprofesional,
                     'opcion_tarifa' : opcion,
                     'costo_tarifa' : tarifa,
                     'categoria_tarifa' : tipo
@@ -335,22 +335,22 @@
                     cancelButtonText: 'No, Cancelar'
                   }).then((result) => {
                     
-                    if (result.value) {
+                      if (result.value) {
 
-                       axios.delete('/tarifas-profesional/eliminar/' + data.id)
-                        .then(function (response) {
+                        axios.delete('/tarifas-profesional/eliminar/' + data.id)
+                          .then(function (response) {
 
-                           me.$delete(me.arTarifas, index);
+                            me.$delete(me.arTarifas, index);
 
-                            Swal.fire(
-                              '¡Eliminado!',
-                              'Se borró el registro seleccionado',
-                              'success'
-                            )
+                              Swal.fire(
+                                '¡Eliminado!',
+                                'Se borró el registro seleccionado',
+                                'success'
+                              )
 
-                        }).catch(function(error){ console.log(error); });
+                          }).catch(function(error){ console.log(error); });
 
-                    } 
+                      } 
                     
                   })
 

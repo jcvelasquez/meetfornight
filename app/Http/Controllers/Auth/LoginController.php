@@ -22,10 +22,15 @@ class LoginController extends Controller
 
             if( Auth::user()->idrol == 4) {
                 return redirect()->route('perfil-profesional');
-            }else{
-                return redirect()->route('perfil-usuario');
-            }
+            }else if( Auth::user()->idrol == 3){
 
+                if(isset($request->toredirect)){
+                    return redirect($request->toredirect);
+                }else{
+                    return redirect()->route('perfil-usuario');
+                }
+                
+            }
             
         }
 

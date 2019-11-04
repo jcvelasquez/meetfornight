@@ -28,15 +28,6 @@ class AlertaProfesionalController extends Controller
 
     public function store(Request $request)
     {
-        //
-
-       /* $validatedData = $request->validate([
-            'idusuario'=>'required',
-            'opcion_tarifa'=>'required',
-            'costo_tarifa'=>'required',
-            'categoria_tarifa'=>'required'
-        ]);*/
-
 
         $alerta = new AlertaProfesional;
         $alerta->idusuario = Auth::user()->id;

@@ -85,87 +85,40 @@
             <div class="sidebar__inner">
               <!-- Content goes here -->
                   <div class="espacio-reservas">
-
                     <div class="reservas-img-grande">
-
-                      <img id="currentImg" src="{{ asset('img/galeria/galeria-1.png') }}" class="img-responsive">
-
-                      <a id="currentImg2" href="{{ asset('img/galeria/galeria-1.png') }}" data-fancybox="gallery" data-caption="Sexy Woman">
-
-                        <div class="img-grande-lupa">
-
-                          <i class="icon-search"></i>
-
-                        </div>
-
-                      </a>
-
+                      <img id="currentImg" src="{{ asset('fotos-profesionales/galeria-1.png') }}" class="img-responsive">
+												<a id="currentImg2" href="{{ asset('fotos-profesionales/galeria-1.png') }}" data-fancybox="gallery" data-caption="Sexy Woman">
+													<div class="img-grande-lupa">
+														<i class="icon-search"></i>
+													</div>
+												</a>
                       <div class="img-grande-logo">
-
                         <img src="{{ asset('img/logo-blanco.png') }}">
-
                       </div>
-
                     </div>
-
                   </div>
 
                   <div class="reservas-img-pequenas espacio-reservas">
-
-                      <div class="item-reservas-img-pequenas">
-
-                        <img src="{{asset('img/galeria/galeria-1.png')}}" class="img-responsive" onclick="showImage('galeria-1.png'), nombre('galeria-1.png');" />
-
-                        <a class="nunca-mostrar" data-fancybox="gallery" href="{{ asset('img/galeria/galeria-1.png') }}" data-caption="Sexy Woman"></a>
-
-                      </div>
-
-                      <div class="item-reservas-img-pequenas">
-
-                        <img src="{{ asset('img/galeria/galeria-1.png') }}" class="img-responsive" onclick="showImage('galeria-2.png'), nombre('galeria-2.png');" />
-
-                        <a class="nunca-mostrar" data-fancybox="gallery" href="{{ asset('img/galeria/galeria-1.png') }}" data-caption="Sexy Woman"></a>
-
-                      </div>
-
-                      <div class="item-reservas-img-pequenas">
-
-                        <img src="{{ asset('img/galeria/galeria-3.png') }}" class="img-responsive" onclick="showImage('galeria-3.png'), nombre('galeria-3.png');" />
-
-                        <a class="nunca-mostrar" data-fancybox="gallery" href="img/galeria/galeria-3.png" data-caption="Sexy Woman"></a>
-
-                      </div>
-
-                      <div class="item-reservas-img-pequenas">
-
-                        <img src="{{ asset('img/galeria/galeria-4.png') }}" class="img-responsive" onclick="showImage('galeria-4.png'), nombre('galeria-4.png');" />
-
-                        <a class="nunca-mostrar" data-fancybox="gallery" href="img/galeria/galeria-4.png" data-caption="Sexy Woman"></a>
-
-                      </div>
-
+										@foreach($fotos as $foto)
+												@if($foto->orden > 0)
+													<div class="item-reservas-img-pequenas">
+														<img src="{{asset('img/galeria/galeria-1.png')}}" class="img-responsive" onclick="showImage('galeria-1.png'), nombre('galeria-1.png');" />
+														<a class="nunca-mostrar" data-fancybox="gallery" href="{{ asset('img/galeria/galeria-1.png') }}" data-caption="Sexy Woman"></a>
+													</div>
+												@endif
+										@endforeach
                   </div>
 
                   <div class="espacio-reservas">
-
                     <h2 class="subtitulo-reservas">PERFIL</h2>
-
                     <div class="reserva-info">
-
                       <ul>
-
                         <li>
-
                           <div class="reserva-info-morado">Sexo</div>
-
                           <div class="reserva-info-plomo">{{ $perfil[0]->sexo }}</div>
-
                         </li>
-
                         <li>
-
                           <div class="reserva-info-morado">Orientación</div>
-
                           <div class="reserva-info-plomo">{{ $perfil[0]->orientacion }}</div>
 
                         </li>
@@ -567,70 +520,96 @@
 
     
           <div id="widget">
+
+
         
-             <reservas-profesional-front :apodo-data="{{json_encode($perfil[0]->apodo)}}"></reservas-profesional-front>
+             <disponibilidad-profesional-front :apodo-data="{{json_encode($perfil[0]->apodo)}}"></disponibilidad-profesional-front>
 
-          </div>
+             @if(Auth::check())
+                @if (Auth::user()->idrol == 4)
+
+                  <div class="servicios_seleccionados espacio-reservas">
+
+                    <h2 class="sub-tit"><i class="icon-calendar esp-icono-bio"></i>ACCEDISTE COMO PROFESIONAL</h2>
+
+                        <div class="form-row" style="margin-top:20px;">
+                            <div class="col-lg-12 col-sm-12">
+                              <p>Para ver las tarifas del profesional o realizar una reserva, debes iniciar sesión como un usuario. Si no tienes una cuenta de usuario, primero debes <a href="{{ route('cerrar-sesion') }}">cerrar la sesión</a>, y luego <a href="{{url('crear-cuenta')}}">registrarse desde aquí</a>.
+                              </p>
+                            </div>
+                        </div>
+
+                    </div> 
+                @elseif (Auth::user()->idrol == 3)
+                    <reservas-profesional-front :apodo-data="{{json_encode($perfil[0]->apodo)}}"></reservas-profesional-front>
+                @endif
+
+             @else
+                  
+            <div class="servicios_seleccionados espacio-reservas">
+
+              <h2 class="sub-tit"><i class="icon-calendar esp-icono-bio"></i>INICIAR SESION</h2>
+
+                  <div class="form-row" style="margin-top:20px;">
+                      <div class="col-lg-12 col-sm-12">
+                        Para ver las tarifas del profesional o realizar una reserva, debes iniciar sesión. Si no tiene una cuenta con nosotros aún, <a href="{{url('crear-cuenta')}}">registrarse desde aquí</a>. Si no recuerdas su contraseña también puedes 
+                        
+                        @if (Route::has('password.request'))
+                            <a href="{{ route('password.request') }}">
+                                {{ __('recuperarla desde aquí') }}
+                            </a>
+                        @endif
+                        
+                      </div>
+                  </div>
+
+                  <form action="{{ route('iniciar-sesion') }}" method="POST">
+                    @csrf
+                    <!-- SECCION INTERIOR DE DATOS -->
+                    <div class="form-row" style="margin-top:20px;">
+                        <div class="col-lg-6 col-sm-12">
+
+                            <input id="email" type="email" placeholder="Correo electronico" class="form-control espacio-campos" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+
+                            {!!$errors->first('email','<span class="invalid-feedback">:message</span>')!!}
+
+                        </div>
+                        <div class="col-lg-6 col-sm-12">
+                            <input id="password" type="password" class="form-control espacio-campos" name="password" required autocomplete="current-password" placeholder="Password">
+                            {!!$errors->first('password','<span class="invalid-feedback">:message</span>')!!}
+                            <input type="hidden" name="toredirect" value="{{url()->current()}}">
+                        </div>
+                        <div class="col-lg-12 col-sm-12">
+                          <button type="submit" class="btn btn-primary btn-busqueda-detallada">INICIAR SESION</button>
+                        </div>
+                    </div>
+                    <!-- FIN SECCION INTERIOR DE DATOS -->
+                  </form>
+
+            </div> 
+            
+            @endif
+
+            
+
+          
 
           <div class="espacio-reservas">
-
             <h2 class="sub-tit"><i class="icon-medical-stethoscope esp-icono-bio"></i>SALUD</h2>
-
             <div class="reserva-salud">
-
               <img src="{{ asset('img/control-sanitario.png') }}">
-
               <p class="texto-salud-reserva">La gestión de la agenda es responsabilidad del administrador del perfil, por lo tanto no nos hacemos responsables de la reserva.</p>
-
             </div>
-
           </div>
 
           <div class="espacio-reservas">
-
             <h2 class="sub-tit"><i class="icon-like esp-icono-bio"></i>SEGURIDAD</h2>
-
             <div class="texto-biografia">
-
               <p>Únicamente asisto a citas con usuarios de perfiles registrados con datos reales, DNI y fotos aprobadas por el administrador de la web.</p>
-
             </div>
-
           </div>
 
-          <div class="espacio-reservas">
-
-            <h2 class="sub-tit"><i class="icon-chat esp-icono-bio"></i>DÉJAME UN MENSAJE</h2>
-
-            <form>
-
-              <div class="form-group">
-
-                <input type="text" class="form-control" id="exampleInputEmail1" name="nombre" placeholder="Nombre *" required>
-
-              </div>
-
-              <div class="form-group">
-
-                <input type="cel" class="form-control" id="exampleInputPassword1" name="celular" placeholder="Celular">
-
-              </div>
-
-              <div class="form-group">
-
-                <input type="email" class="form-control" id="exampleInputPassword1" name="email" placeholder="Email *" required>
-
-              </div>
-
-              <div class="form-group">
-
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" name="mensaje" placeholder="Mensaje"></textarea>
-
-              </div>
-
-              <button type="submit" class="btn btn-primary btn-reserva">ENVIAR</button>
-
-            </form>
+          <mensajes-profesional-front :apodo-data="{{json_encode($perfil[0]->apodo)}}"></mensajes-profesional-front> 
 
           </div>
         

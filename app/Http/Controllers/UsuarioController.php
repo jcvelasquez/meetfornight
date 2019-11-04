@@ -108,7 +108,7 @@ class UsuarioController extends Controller
 
     public function editarDataUsuario(Request $request)
     {
-        return Usuario::findOrFail(41);
+        return Usuario::findOrFail($request->idusuario);
     }
 
 

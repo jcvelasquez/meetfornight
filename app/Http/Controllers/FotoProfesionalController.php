@@ -19,35 +19,56 @@ class FotoProfesionalController extends Controller
         $this->fotos_profesional_path = public_path('fotos-profesionales');
     }
 
-    public function list(Request $request)
+    public function listar(Request $request)
     {
 
-        //$idusuario = Auth::user()->id;
+        $idusuario = Auth::user()->id;
 
-        $fotos = FotoProfesional::where('idusuario', '=', 34)->get();
+        $fotos = FotoProfesional::where('idusuario', '=', $idusuario)->orderBy('orden','asc')->get();
 
         return ['fotos' => $fotos];  
 
     }
 
-    /*
-    public function store(Request $request)
+    public function ordenar(Request $request)
     {
-         
-        $image = $request->file('file');
-        $imageName = time().$image->getClientOriginalName();
-        $upload_success = $image->move(public_path('images'),$imageName);
-        
-        if ($upload_success) {
-            return response()->json($upload_success, 200);
-        } else {
-            return response()->json('error', 400);
+
+        foreach ($request->fotos as $item) {
+
+            $foto = FotoProfesional::find($item['id']);
+            $foto->orden = $item['orden'];
+            $foto->save();
+            
         }
 
-    }*/
+        return ['mensaje' => 'Se actualizo el orden correctamente'];  
 
-    public function fileStore(Request $request)
+    }
+
+    public function eliminar(Request $request)
     {
+
+        $idfoto = $request->idfoto;
+
+        $uploaded_image = $this->fotos_profesional_path."/".$request->url;
+ 
+        if (file_exists($uploaded_image)) {
+            unlink($uploaded_image);
+        }
+
+        if (!empty($uploaded_image)) {
+            FotoProfesional::where('id', '=', $idfoto)->delete();
+        }
+ 
+        return Response::json(['message' => 'File successfully delete'], 200);
+
+    }
+
+
+    public function subir(Request $request)
+    {
+
+        $idusuario = Auth::user()->id;
        
         $image = $request->file('file');
         $imageName = $image->getClientOriginalName();
@@ -55,13 +76,17 @@ class FotoProfesionalController extends Controller
 
         if ($upload_success) {
 
+            $totalFotos = FotoProfesional::where('idusuario', '=', $idusuario)->count();
+
             $fotoProfesional = new FotoProfesional();
-            $fotoProfesional->idusuario = Auth::user()->id;
+            $fotoProfesional->idusuario = $idusuario;
             $fotoProfesional->url_foto = $imageName;
+            $fotoProfesional->orden = $totalFotos;
             $fotoProfesional->save();
             
             return Response::json([
-                'success' => $imageName
+                'success' => $imageName,
+                'total' => $totalFotos
             ], 200);
 
         } else {     return Response::json('error', 400);   }
@@ -132,10 +157,6 @@ class FotoProfesionalController extends Controller
             unlink($file_path);
         }
  
-        /*if (file_exists($resized_file)) {
-            unlink($resized_file);
-        }*/
- 
         if (!empty($uploaded_image)) {
             $uploaded_image->delete();
         }
@@ -143,26 +164,8 @@ class FotoProfesionalController extends Controller
         return Response::json(['message' => 'File successfully delete'], 200);
     }
 
-   
+       
     
-    public function show($id)
-    {
-        //
-    }
-
-
-    
-    public function edit($id)
-    {
-        //
-    }
-
-  
-    
-    public function update(Request $request, $id)
-    {
-        //
-    }
 
 
 

@@ -17,6 +17,7 @@ class CreateFotoProfesionalTable extends Migration
             $table->bigIncrements('id');
             $table->integer('idusuario')->unsigned();
             $table->string('url_foto');
+            $table->integer('orden');
             $table->foreign('idusuario')->references('id')->on('usuarios');
             //$table->timestamps();
         });

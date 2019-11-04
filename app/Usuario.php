@@ -34,9 +34,18 @@ class Usuario extends Authenticatable
         return $this->hasMany('App\TarifaProfesional', 'idusuario', 'id');
     }
 
+    public function reservas(){
+        return $this->hasMany('App\ReservasProfesional', 'idprofesional', 'id');
+    }
+
     public function disponibilidades()
     {
         return $this->hasMany('App\DisponibilidadProfesional', 'idusuario', 'id');
+    }
+
+    public function fotos()
+    {
+        return $this->hasMany('App\FotoProfesional', 'idusuario', 'id');
     }
 
 
@@ -70,12 +79,6 @@ class Usuario extends Authenticatable
     {
         return $this->belongsTo('App\Rol');
     }
-
-/*
-    public function rol()
-    {
-        return $this->belongsToMany('App\Rol')->withTimestamps();
-    }*/
 
     public function hasRole($rol)
     {

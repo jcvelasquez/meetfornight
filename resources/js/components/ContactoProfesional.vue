@@ -377,22 +377,4 @@
         }
     }
 
-    /*
-    $(document).ready(function($) {
-
-
-      $("#horario_miercoles, #horario_jueves, #horario_viernes, #horario_sabado, #horario_domingo").asRange({
-        range: true,
-        limit: false
-      });
-
-      martes = $("#horario_martes").asRange({
-              range: true,
-              limit: false
-            });
-
-    });*/
-
-
-
 </script>
