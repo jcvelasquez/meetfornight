@@ -7,7 +7,6 @@ use Carbon\Carbon;
 
 class ReservasProfesional extends Model
 {
-    //
 
     public $table = "reservas_profesional";
 

@@ -143,7 +143,6 @@
                 <tbody>
 
                   <tr v-for="(extra, index) in arTarifas" :key="extra.id">
-
                     <template v-if="extra.categoria_tarifa == 'EXTRAS' ">
                         <td scope="row" v-text="extra.id">1</td>
                         <td v-text="extra.opcion_tarifa"></td>
@@ -151,9 +150,7 @@
                         <td><button type="button" @click="eliminarTarifa(extra, index)" class="btn btn-primary x-circulo"><i class="fa fa-times"></i></button></td>
                     </template>
                     <template v-else>
-
                     </template>
-
                   </tr>
                   
                 </tbody>

@@ -127,6 +127,8 @@ Route::group(['middleware'=>['auth']],function(){
     Route::group(['middleware'=>['usuario']],function(){
 
             Route::post('perfil/reservas/{apodo}', 'ReservasProfesionalController@registrar' );
+            Route::post('perfil/mensaje/{apodo}', 'MensajeProfesionalController@enviar' );
+            
 
             //URLS PARA EL USUARIO
             Route::get('perfil-usuario', 'UsuarioController@mostrarPerfilUsuarioLogueado')->name('perfil-usuario');
@@ -168,6 +170,12 @@ Route::group(['middleware'=>['auth']],function(){
                 return view('forms-perfil-profesional.planes-profesional');
             });
 
+            //MENSAJES
+            Route::get('mensajes-profesional', 'MensajeProfesionalController@mostrar');
+            Route::get('mensajes-profesional/listar', 'MensajeProfesionalController@listar');
+            Route::post('mensajes-profesional/responder', 'MensajeProfesionalController@responder');
+            
+
 
             //SERVICIOS
             Route::get('servicios-profesional', function () {
@@ -181,6 +189,7 @@ Route::group(['middleware'=>['auth']],function(){
             Route::get('agenda-profesional', function () {
                 return view('forms-perfil-profesional.agenda-profesional');
             });
+
             
             
             
@@ -204,12 +213,10 @@ Route::group(['middleware'=>['auth']],function(){
 
             
             Route::get('creditos-profesional', function () {   return view('forms-perfil-profesional.creditos-profesional');   });
-            
             Route::get('booster-profesional', function () {  return view('forms-perfil-profesional.booster-profesional');  });
-            
             Route::get('estadisticas-profesional', function () {  return view('forms-perfil-profesional.estadisticas-profesional');  });
             
-            Route::get('mensajes-profesional', function () {  return view('forms-perfil-profesional.mensajes-profesional');  });
+            
             
             Route::get('alerta-profesional', function () {  return view('forms-perfil-profesional.alerta-profesional');  });
             Route::get('alerta-profesional/listar', 'AlertaProfesionalController@list' );

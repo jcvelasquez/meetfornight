@@ -4,6 +4,6 @@
 
 @section('content')
 
-<mensajes-profesionales></mensajes-profesionales>
+<mensajes-profesional></mensajes-profesional>
 
 @endsection

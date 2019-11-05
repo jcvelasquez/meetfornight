@@ -9996,25 +9996,56 @@ label.error { font-size: 12px; color:red; }
 }
 
 .btn-aceptar-reserva{
-
     width: 100%;
     border-radius: 0.5em;
     color: #fff;
     font-weight: bold;
     background-color: #5b376f;
     border-color: #5b376f;
-
 }
 
 .btn-cerrar-reserva{
-
     width: 100%;
     border-radius: 0.5em;
     color: #fff;
     font-weight: bold;
     background-color: #0069d9;
     border-color: #0069d9;
-
 }
 
+.item-mensaje {
+    border-radius: 0 20px 20px 0;
+    border: solid 2px #dcc2db;
+    padding:20px;
+    margin-bottom:20px;
+}
+.item-mensaje:hover {
+    background: #fbf9fc;
+    cursor:pointer;
+}
+.item-mensaje button {
+    background:none; 
+    border:none;
+}
+.item-mensaje .datos-mensaje {
+    padding-left:15px;
+}
+.item-mensaje hr { margin:10px 0 13px 0; }
+.item-mensaje .datos-mensaje h6 {
+    color:#59417b;
+    font-weight: 400;
+}
+.item-mensaje .datos-mensaje a {
+    color:#838383;
+}
 
+.item-mensaje .datos-mensaje a.btn-eliminar {
+    color:#a969a5;
+    font-size:22px;
+    float:right;
+}
+
+.item-mensaje .fecha {
+    color:#a969a5;
+    float:right;
+}

@@ -3278,9 +3278,94 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      nombre: "",
+      celular: "",
+      email: "",
+      mensaje: "",
+      existeError: 0,
+      erroresMensaje: [],
+      arMensajes: [],
+      usuarioMensaje: [],
+      mensajeSeleccionado: []
+    };
+  },
   mounted: function mounted() {
-    console.log("Component mounted.");
+    this.listarMensajes();
+  },
+  methods: {
+    listarMensajes: function listarMensajes() {
+      var me = this;
+      axios.get('/mensajes-profesional/listar').then(function (response) {
+        var respuesta = response.data;
+        me.arMensajes = respuesta.mensajes;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    responderMensaje: function responderMensaje() {
+      var me = this;
+
+      if (me.validarMensaje()) {
+        Swal.fire('ERROR', me.erroresMensaje.toString(), 'error');
+        return;
+      }
+
+      axios.post('/mensajes/enviar/', {
+        'nombre': me.nombre,
+        'celular': me.celular,
+        'email': me.email,
+        'mensaje': me.mensaje
+      }).then(function (response) {
+        var respuesta = response.data; //me.arDisponibilidad = respuesta.disponibilidad;
+
+        console.log(respuesta);
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    seleccionarMensaje: function seleccionarMensaje(mensaje) {
+      var me = this;
+      me.mensajeSeleccionado = mensaje;
+      me.usuarioMensaje = mensaje.usuario;
+      /*me.serviciosReserva = JSON.parse(reserva.servicios);
+      me.mostrarReserva = 1;*/
+    },
+    limpiarMensaje: function limpiarMensaje() {
+      var me = this;
+      me.mostrarReserva = 0;
+      me.reservaSeleccionada = [];
+      me.usuarioReserva = [];
+      me.serviciosReserva = [];
+    }
   }
 });
 
@@ -3324,15 +3409,40 @@ __webpack_require__.r(__webpack_exports__);
       nombre: "",
       celular: "",
       email: "",
-      mensaje: ""
+      mensaje: "",
+      existeError: 0,
+      erroresMensaje: []
     };
   },
   methods: {
+    validarMensaje: function validarMensaje() {
+      var me = this;
+      me.existeError = 0;
+      me.erroresMensaje = [];
+      if (!me.nombre) me.erroresMensaje.push("Ingresa el nombre del mensaje");
+      if (!me.celular) me.erroresMensaje.push("Ingresa un celular de contacto");
+      if (!me.email) me.erroresMensaje.push("Ingresa un email de contacto");
+      if (!me.mensaje) me.erroresMensaje.push("Ingresa tu mensaje");
+      if (me.erroresMensaje.length) me.existeError = 1;
+      return me.existeError;
+    },
     enviarMensaje: function enviarMensaje() {
       var me = this;
-      axios.get('/perfil/disponibilidad/' + me.apodoData).then(function (response) {
-        var respuesta = response.data;
-        me.arDisponibilidad = respuesta.disponibilidad;
+
+      if (me.validarMensaje()) {
+        Swal.fire('ERROR', me.erroresMensaje.toString(), 'error');
+        return;
+      }
+
+      axios.post('/perfil/mensaje/' + me.apodoData, {
+        'nombre': me.nombre,
+        'celular': me.celular,
+        'email': me.email,
+        'mensaje': me.mensaje
+      }).then(function (response) {
+        var respuesta = response.data; //me.arDisponibilidad = respuesta.disponibilidad;
+
+        console.log(respuesta);
       })["catch"](function (error) {
         console.log(error);
       });
@@ -5095,9 +5205,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
 //
 //
 //
@@ -51906,24 +52013,104 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("form", { attrs: { action: "#", method: "post" } }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "bloques-de-perfil" },
+      _vm._l(_vm.arMensajes, function(mensaje, index) {
+        return _c(
+          "div",
+          { key: mensaje.id, staticClass: "form-row item-mensaje" },
+          [
+            _vm._m(1, true),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-lg-11 col-sm-12 datos-mensaje" }, [
+              _c("small", [_vm._v("Usuario Cuenta Free")]),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      return _vm.eliminarTarifa(mensaje, index)
+                    }
+                  }
+                },
+                [_c("i", { staticClass: "fa fa-trash-o" })]
+              ),
+              _vm._v(" "),
+              _c("hr", { staticClass: "linea" }),
+              _vm._v(" "),
+              _c("h6", [_vm._v(_vm._s(mensaje.usuario.nombre))]),
+              _vm._v(" "),
+              _c("span", { staticClass: "fecha" }, [
+                _vm._v(_vm._s(mensaje.created_at))
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "clear" }),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      return _vm.seleccionarMensaje(mensaje)
+                    }
+                  }
+                },
+                [_vm._v("Ver mensaje")]
+              ),
+              _vm._v(" | "),
+              _c("button", { attrs: { type: "button" } }, [_vm._v("Responder")])
+            ])
+          ]
+        )
+      }),
+      0
+    )
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("form", { attrs: { action: "#", method: "post" } }, [
-      _c("div", { staticClass: "bloques-de-perfil" }, [
-        _c("h5", { staticClass: "formulario-titulos" }, [_vm._v("MENSAJES:")]),
-        _vm._v(" "),
-        _c("p"),
-        _vm._v(" "),
-        _c("img", {
-          staticClass: "img-responsive",
-          attrs: { src: "img/mensajes.jpg" }
-        })
-      ])
+    return _c("div", { staticClass: "bloques-de-perfil" }, [
+      _c("h5", { staticClass: "formulario-titulos" }, [_vm._v("MENSAJES:")]),
+      _vm._v(" "),
+      _c("p", [
+        _c("strong", { staticClass: "precio-morado" }, [_vm._v("La Reserva")]),
+        _vm._v(
+          " te permite propulsar tu anuncio nuevamente a las primeras posiciones y multiplicar de esta manera la visibilidad de tu anuncio y aumentar el número de contactos.\n    "
+        )
+      ]),
+      _vm._v(" "),
+      _c("p", [
+        _vm._v(
+          "\n      Recuerda que cuando publicas un anuncio este va perdiendo posiciones en función de las nuevas inscripciones y/o de los\n      "
+        ),
+        _c("strong", { staticClass: "precio-morado" }, [_vm._v("BOOSTERS")]),
+        _vm._v(
+          " utilizados por las demás personas de la comunidad Meet For Night.\n    "
+        )
+      ]),
+      _vm._v(" "),
+      _c("p", [_vm._v("Si estas interesado sigue estos pasos:")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-lg-1 col-sm-12" }, [
+      _c("img", {
+        staticClass: "img-responsive",
+        attrs: { src: "fotos-profesionales/oswaldo_salaverry.jpg", alt: "" }
+      })
     ])
   }
 ]
@@ -51948,79 +52135,140 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "espacio-reservas" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("form", [
+      _c("div", { staticClass: "form-group" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.nombre,
+              expression: "nombre"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: {
+            type: "text",
+            name: "nombre",
+            placeholder: "Nombre *",
+            required: ""
+          },
+          domProps: { value: _vm.nombre },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.nombre = $event.target.value
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.celular,
+              expression: "celular"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { type: "cel", name: "celular", placeholder: "Celular" },
+          domProps: { value: _vm.celular },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.celular = $event.target.value
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.email,
+              expression: "email"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: {
+            type: "email",
+            name: "email",
+            placeholder: "Email *",
+            required: ""
+          },
+          domProps: { value: _vm.email },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.email = $event.target.value
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("textarea", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.mensaje,
+              expression: "mensaje"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { rows: "4", name: "mensaje", placeholder: "Mensaje" },
+          domProps: { value: _vm.mensaje },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.mensaje = $event.target.value
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary btn-reserva",
+          attrs: { type: "button" },
+          on: {
+            click: function($event) {
+              return _vm.enviarMensaje()
+            }
+          }
+        },
+        [_vm._v("ENVIAR")]
+      )
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "espacio-reservas" }, [
-      _c("h2", { staticClass: "sub-tit" }, [
-        _c("i", { staticClass: "icon-chat esp-icono-bio" }),
-        _vm._v("DÉJAME UN MENSAJE")
-      ]),
-      _vm._v(" "),
-      _c("form", [
-        _c("div", { staticClass: "form-group" }, [
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              type: "text",
-              id: "exampleInputEmail1",
-              name: "nombre",
-              placeholder: "Nombre *",
-              required: ""
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              type: "cel",
-              id: "exampleInputPassword1",
-              name: "celular",
-              placeholder: "Celular"
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              type: "email",
-              id: "exampleInputPassword1",
-              name: "email",
-              placeholder: "Email *",
-              required: ""
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("textarea", {
-            staticClass: "form-control",
-            attrs: {
-              id: "exampleFormControlTextarea1",
-              rows: "4",
-              name: "mensaje",
-              placeholder: "Mensaje"
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-primary btn-reserva",
-            attrs: { type: "button" }
-          },
-          [_vm._v("ENVIAR")]
-        )
-      ])
+    return _c("h2", { staticClass: "sub-tit" }, [
+      _c("i", { staticClass: "icon-chat esp-icono-bio" }),
+      _vm._v("DÉJAME UN MENSAJE")
     ])
   }
 ]
