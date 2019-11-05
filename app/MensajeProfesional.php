@@ -27,6 +27,11 @@ class MensajeProfesional extends Model
         return $this->belongsTo('App\MensajeProfesional', 'parent_id', 'id');
     }
 
+    public function respuestas()
+    {
+        //return $this->belongsTo('App\MensajeProfesional', 'parent_id', 'id')->where('parent_id','!=',NULL);
+    }
+
     public function getCreatedAtAttribute( $value ) {
         return (new Carbon($value))->format('d/m/Y - H:i:s');
     }

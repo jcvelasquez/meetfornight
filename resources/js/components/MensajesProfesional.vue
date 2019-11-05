@@ -13,22 +13,45 @@
     </div>
 
     <div class="bloques-de-perfil">
-     
         <div class="form-row item-mensaje" v-for="(mensaje, index) in arMensajes" :key="mensaje.id">
             <div class="col-lg-1 col-sm-12">
                 <img src="fotos-profesionales/oswaldo_salaverry.jpg" class="img-responsive" alt="">
             </div>
             <div class="col-lg-11 col-sm-12 datos-mensaje">
                 <small>Usuario Cuenta Free</small>
-                <button @click="eliminarTarifa(mensaje, index)" type="button"><i class="fa fa-trash-o"></i></button>
+                <button @click="eliminarTarifa(mensaje, index)" class="btn-eliminar" type="button"><i class="fa fa-trash-o"></i></button>
                 <hr class="linea">
                 <h6>{{mensaje.usuario.nombre}}</h6>
                 <span class="fecha">{{mensaje.created_at}}</span>
                 <div class="clear"></div>
-                <button @click="seleccionarMensaje(mensaje)" type="button">Ver mensaje</button> | <button type="button">Responder</button>
+                <div class="mensaje">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod blandit vestibulum. Donec aliquet, ipsum quis consequat faucibus, lectus orci posuere ex, a vestibulum risus dolor ac odio. Praesent commodo dolor nec interdum euismod. Donec fermentum quam eget nunc laoreet ultrices. Duis pellentesque pretium ligula vitae vehicula.</p>
+                </div>
+                <button @click="seleccionarMensaje(mensaje)" type="button">Responder mensaje</button>
+                <div class="clear"></div>
+                <!-- AQUI EMPIEZAN LAS RESPUESTAS -->
+
+                <div class="form-row form-respuesta" v-show="mostrarFormulario">
+                    <textarea name="respuesta" class="form-control" rows="4"></textarea>
+                    <button type="button" class="btn btn-primary btn-responder-mensaje">ENVIAR RESPUESTA</button>
+                </div>
+
+                <div class="form-row item-respuesta" v-for="respuesta in mensajeRespuestas" :key="respuesta.id"> 
+                    <div class="col-lg-1 col-sm-12">
+                        <img src="fotos-profesionales/oswaldo_salaverry.jpg" class="img-responsive" alt="">
+                    </div>
+                    <div class="col-lg-11 col-sm-12  datos-mensaje">
+                        <h6>{{mensaje.usuario.nombre}}</h6>
+                        <span class="fecha">{{mensaje.created_at}}</span>
+                        <div class="clear"></div>
+                        <div class="mensaje">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod blandit vestibulum. Donec aliquet, ipsum quis consequat faucibus, lectus orci posuere ex, a vestibulum risus dolor ac odio. Praesent commodo dolor nec interdum euismod. Donec fermentum quam eget nunc laoreet ultrices. Duis pellentesque pretium ligula vitae vehicula.</p>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>        
-  
     </div>
 
   </form>
@@ -46,7 +69,9 @@
                 erroresMensaje: [],
                 arMensajes: [],
                 usuarioMensaje: [],
-                mensajeSeleccionado: []
+                mensajeSeleccionado: [],
+                mensajeRespuestas: [],
+                mostrarFormulario : 0
             }
         },
         mounted() {
@@ -82,7 +107,6 @@
                   }).then(function (response) {
 
                       var respuesta = response.data;
-                      //me.arDisponibilidad = respuesta.disponibilidad;
                       console.log(respuesta);
 
                   }).catch(function (error) {  console.log(error);     });

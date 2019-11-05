@@ -2938,8 +2938,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vuedraggable__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuedraggable */ "./node_modules/vuedraggable/dist/vuedraggable.common.js");
-/* harmony import */ var vuedraggable__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vuedraggable__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vuedraggable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuedraggable */ "./node_modules/vuedraggable/dist/vuedraggable.common.js");
+/* harmony import */ var vuedraggable__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vuedraggable__WEBPACK_IMPORTED_MODULE_1__);
 //
 //
 //
@@ -3027,7 +3027,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    draggable: vuedraggable__WEBPACK_IMPORTED_MODULE_0___default.a
+    draggable: vuedraggable__WEBPACK_IMPORTED_MODULE_1___default.a
   },
   mounted: function mounted() {
     this.listarFotos();
@@ -3304,6 +3304,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3315,7 +3338,9 @@ __webpack_require__.r(__webpack_exports__);
       erroresMensaje: [],
       arMensajes: [],
       usuarioMensaje: [],
-      mensajeSeleccionado: []
+      mensajeSeleccionado: [],
+      mensajeRespuestas: [],
+      mostrarFormulario: 0
     };
   },
   mounted: function mounted() {
@@ -3345,8 +3370,7 @@ __webpack_require__.r(__webpack_exports__);
         'email': me.email,
         'mensaje': me.mensaje
       }).then(function (response) {
-        var respuesta = response.data; //me.arDisponibilidad = respuesta.disponibilidad;
-
+        var respuesta = response.data;
         console.log(respuesta);
       })["catch"](function (error) {
         console.log(error);
@@ -52026,47 +52050,114 @@ var render = function() {
           [
             _vm._m(1, true),
             _vm._v(" "),
-            _c("div", { staticClass: "col-lg-11 col-sm-12 datos-mensaje" }, [
-              _c("small", [_vm._v("Usuario Cuenta Free")]),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  attrs: { type: "button" },
-                  on: {
-                    click: function($event) {
-                      return _vm.eliminarTarifa(mensaje, index)
+            _c(
+              "div",
+              { staticClass: "col-lg-11 col-sm-12 datos-mensaje" },
+              [
+                _c("small", [_vm._v("Usuario Cuenta Free")]),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn-eliminar",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        return _vm.eliminarTarifa(mensaje, index)
+                      }
                     }
-                  }
-                },
-                [_c("i", { staticClass: "fa fa-trash-o" })]
-              ),
-              _vm._v(" "),
-              _c("hr", { staticClass: "linea" }),
-              _vm._v(" "),
-              _c("h6", [_vm._v(_vm._s(mensaje.usuario.nombre))]),
-              _vm._v(" "),
-              _c("span", { staticClass: "fecha" }, [
-                _vm._v(_vm._s(mensaje.created_at))
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "clear" }),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  attrs: { type: "button" },
-                  on: {
-                    click: function($event) {
-                      return _vm.seleccionarMensaje(mensaje)
+                  },
+                  [_c("i", { staticClass: "fa fa-trash-o" })]
+                ),
+                _vm._v(" "),
+                _c("hr", { staticClass: "linea" }),
+                _vm._v(" "),
+                _c("h6", [_vm._v(_vm._s(mensaje.usuario.nombre))]),
+                _vm._v(" "),
+                _c("span", { staticClass: "fecha" }, [
+                  _vm._v(_vm._s(mensaje.created_at))
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "clear" }),
+                _vm._v(" "),
+                _vm._m(2, true),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        return _vm.seleccionarMensaje(mensaje)
+                      }
                     }
-                  }
-                },
-                [_vm._v("Ver mensaje")]
-              ),
-              _vm._v(" | "),
-              _c("button", { attrs: { type: "button" } }, [_vm._v("Responder")])
-            ])
+                  },
+                  [_vm._v("Responder mensaje")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "clear" }),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.mostrarFormulario,
+                        expression: "mostrarFormulario"
+                      }
+                    ],
+                    staticClass: "form-row form-respuesta"
+                  },
+                  [
+                    _c("textarea", {
+                      staticClass: "form-control",
+                      attrs: { name: "respuesta", rows: "4" }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary btn-responder-mensaje",
+                        attrs: { type: "button" }
+                      },
+                      [_vm._v("ENVIAR RESPUESTA")]
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _vm._l(_vm.mensajeRespuestas, function(respuesta) {
+                  return _c(
+                    "div",
+                    {
+                      key: respuesta.id,
+                      staticClass: "form-row item-respuesta"
+                    },
+                    [
+                      _vm._m(3, true),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "col-lg-11 col-sm-12  datos-mensaje" },
+                        [
+                          _c("h6", [_vm._v(_vm._s(mensaje.usuario.nombre))]),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "fecha" }, [
+                            _vm._v(_vm._s(mensaje.created_at))
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "clear" }),
+                          _vm._v(" "),
+                          _vm._m(4, true)
+                        ]
+                      )
+                    ]
+                  )
+                })
+              ],
+              2
+            )
           ]
         )
       }),
@@ -52111,6 +52202,41 @@ var staticRenderFns = [
         staticClass: "img-responsive",
         attrs: { src: "fotos-profesionales/oswaldo_salaverry.jpg", alt: "" }
       })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "mensaje" }, [
+      _c("p", [
+        _vm._v(
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod blandit vestibulum. Donec aliquet, ipsum quis consequat faucibus, lectus orci posuere ex, a vestibulum risus dolor ac odio. Praesent commodo dolor nec interdum euismod. Donec fermentum quam eget nunc laoreet ultrices. Duis pellentesque pretium ligula vitae vehicula."
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-lg-1 col-sm-12" }, [
+      _c("img", {
+        staticClass: "img-responsive",
+        attrs: { src: "fotos-profesionales/oswaldo_salaverry.jpg", alt: "" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "mensaje" }, [
+      _c("p", [
+        _vm._v(
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod blandit vestibulum. Donec aliquet, ipsum quis consequat faucibus, lectus orci posuere ex, a vestibulum risus dolor ac odio. Praesent commodo dolor nec interdum euismod. Donec fermentum quam eget nunc laoreet ultrices. Duis pellentesque pretium ligula vitae vehicula."
+        )
+      ])
     ])
   }
 ]

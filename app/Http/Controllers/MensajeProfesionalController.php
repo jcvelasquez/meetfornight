@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\MensajeProfesional;
 
 
@@ -18,9 +19,20 @@ class MensajeProfesionalController extends Controller
   
     public function listar(Request $request)
     {
+
         $idprofesional = Auth::user()->id;
-        
-        $mensajes = MensajeProfesional::where('idprofesional', '=', $idprofesional)->where('parent_id','=', NULL)->with('usuario')->with('parent')->get();
+
+        $mensajes = MensajeProfesional::where('idprofesional', '=', $idprofesional)->where('parent_id','=', NULL)->with('usuario')->get();
+
+       /* $mensajes = DB::table('mensaje_profesional')
+                     ->select('*')
+                     ->select(DB::raw('select * as respuestas'))
+                     //->selectRaw('* AS respuestas WHERE parent_id = mensaje_profesional.id')
+                     ->where('idprofesional', '=', $idprofesional)
+                     ->where('parent_id','=', NULL)
+                     ->get();*/
+
+        //
 
         return ['mensajes' => $mensajes];
     }

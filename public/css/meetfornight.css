@@ -10004,6 +10004,7 @@ label.error { font-size: 12px; color:red; }
     border-color: #5b376f;
 }
 
+
 .btn-cerrar-reserva{
     width: 100%;
     border-radius: 0.5em;
@@ -10034,12 +10035,13 @@ label.error { font-size: 12px; color:red; }
 .item-mensaje .datos-mensaje h6 {
     color:#59417b;
     font-weight: 400;
+    float: left;
 }
 .item-mensaje .datos-mensaje a {
     color:#838383;
 }
 
-.item-mensaje .datos-mensaje a.btn-eliminar {
+.item-mensaje .datos-mensaje .btn-eliminar {
     color:#a969a5;
     font-size:22px;
     float:right;
@@ -10049,3 +10051,17 @@ label.error { font-size: 12px; color:red; }
     color:#a969a5;
     float:right;
 }
+.item-mensaje .clear { clear: both; }
+
+.item-respuesta { margin-top: 20px; border-top:1px solid #ccc; padding-top: 15px; }
+
+.btn-responder-mensaje{
+    width: 100%;
+    margin-top: 10px;
+    border-radius: 0.5em;
+    color: #fff;
+    font-weight: bold;
+    background-color: #5b376f !important;
+    border-color: #5b376f !important;
+}
+.form-respuesta { margin: 20px 0;}
