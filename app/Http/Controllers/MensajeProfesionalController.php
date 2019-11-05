@@ -22,15 +22,15 @@ class MensajeProfesionalController extends Controller
 
         $idprofesional = Auth::user()->id;
 
-        $mensajes = MensajeProfesional::where('idprofesional', '=', $idprofesional)->where('parent_id','=', NULL)->with('usuario')->get();
+        //$mensajes = MensajeProfesional::where('idprofesional', '=', $idprofesional)->where('parent_id','=', NULL)->with('usuario')->get();
 
-       /* $mensajes = DB::table('mensaje_profesional')
+        $mensajes = DB::table('mensaje_profesional')
                      ->select('*')
                      ->select(DB::raw('select * as respuestas'))
                      //->selectRaw('* AS respuestas WHERE parent_id = mensaje_profesional.id')
                      ->where('idprofesional', '=', $idprofesional)
                      ->where('parent_id','=', NULL)
-                     ->get();*/
+                     ->get();
 
         //
 
