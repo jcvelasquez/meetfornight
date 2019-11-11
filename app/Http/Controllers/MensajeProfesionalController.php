@@ -24,10 +24,9 @@ class MensajeProfesionalController extends Controller
 
         $idprofesional = Auth::user()->id;
 
-        $mensajes = MensajeProfesional::where('idprofesional', $idprofesional)->join('usuarios', 'usuarios.id', '=', 'mensaje_profesional.idusuario')->select('mensaje_profesional.id','mensaje_profesional.idprofesional','mensaje_profesional.idusuario','usuarios.nombre', 'usuarios.email','usuarios.celular','mensaje_profesional.mensaje','mensaje_profesional.created_at')->where('mensaje_profesional.parent_id','=', NULL)->get();
 
 
-        foreach ($mensajes as $mensaje) {
+
 
             $mensaje->respuestas = DB::table('usuarios')->select('mensaje_profesional.id','mensaje_profesional.idusuario','usuarios.nombre', 'usuarios.email','usuarios.celular','mensaje_profesional.mensaje', DB::raw("DATE_FORMAT(mensaje_profesional.created_at, '%d/%m/%Y - %H:%i:%s') as enviado_el"))->join('mensaje_profesional', 'usuarios.id', '=', 'mensaje_profesional.idusuario')->where('mensaje_profesional.idprofesional', '=', $idprofesional)->where('mensaje_profesional.parent_id','=',  $mensaje->id)->orderBy('mensaje_profesional.created_at','desc')->get();  
 
