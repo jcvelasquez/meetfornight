@@ -3,7 +3,7 @@
         <h2 class="sub-tit"><i class="icon-chat esp-icono-bio"></i>DÉJAME UN MENSAJE</h2>
         <form>
             <div class="form-group">
-            <input type="text" class="form-control" name="nombre" v-model="nombre" placeholder="Nombre *" required>
+            <input type="text" readonly class="form-control" name="nombre" v-model="nombre" placeholder="Nombre *" required>
             </div>
             <div class="form-group">
             <input type="cel" class="form-control" name="celular" v-model="celular" placeholder="Celular">

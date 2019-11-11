@@ -609,7 +609,74 @@
             </div>
           </div>
 
-          <mensajes-profesional-front :apodo-data="{{json_encode($perfil[0]->apodo)}}"></mensajes-profesional-front> 
+
+          @if(Auth::check())
+
+                @if (Auth::user()->idrol == 4)
+
+                <div class="servicios_seleccionados espacio-reservas">
+
+                  <h2 class="sub-tit"><i class="icon-calendar esp-icono-bio"></i>ACCEDISTE COMO PROFESIONAL</h2>
+
+                      <div class="form-row" style="margin-top:20px;">
+                          <div class="col-lg-12 col-sm-12">
+                            <p>Para enviar un mensaje al profesional, debes iniciar sesión como un usuario. Si no tienes una cuenta de usuario, primero debes <a href="{{ route('cerrar-sesion') }}">cerrar la sesión</a>, y luego <a href="{{url('crear-cuenta')}}">registrarse desde aquí</a>.
+                            </p>
+                          </div>
+                      </div>
+
+                  </div> 
+                @elseif (Auth::user()->idrol == 3)
+                    <mensajes-profesional-front :apodo-data="{{json_encode($perfil[0]->apodo)}}"></mensajes-profesional-front> 
+                @endif
+
+          @else
+                  
+            <div class="servicios_seleccionados espacio-reservas">
+
+              <h2 class="sub-tit"><i class="icon-calendar esp-icono-bio"></i>INICIAR SESION</h2>
+
+                  <div class="form-row" style="margin-top:20px;">
+                      <div class="col-lg-12 col-sm-12">
+                        Para enviar un mensaje al profesional, debes iniciar sesión. Si no tiene una cuenta con nosotros aún, <a href="{{url('crear-cuenta')}}">registrarse desde aquí</a>. Si no recuerdas su contraseña también puedes 
+                        
+                        @if (Route::has('password.request'))
+                            <a href="{{ route('password.request') }}">
+                                {{ __('recuperarla desde aquí') }}
+                            </a>
+                        @endif
+                        
+                      </div>
+                  </div>
+
+                  <form action="{{ route('iniciar-sesion') }}" method="POST">
+                    @csrf
+                    <!-- SECCION INTERIOR DE DATOS -->
+                    <div class="form-row" style="margin-top:20px;">
+                        <div class="col-lg-6 col-sm-12">
+
+                            <input id="email" type="email" placeholder="Correo electronico" class="form-control espacio-campos" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+
+                            {!!$errors->first('email','<span class="invalid-feedback">:message</span>')!!}
+
+                        </div>
+                        <div class="col-lg-6 col-sm-12">
+                            <input id="password" type="password" class="form-control espacio-campos" name="password" required autocomplete="current-password" placeholder="Password">
+                            {!!$errors->first('password','<span class="invalid-feedback">:message</span>')!!}
+                            <input type="hidden" name="toredirect" value="{{url()->current()}}">
+                        </div>
+                        <div class="col-lg-12 col-sm-12">
+                          <button type="submit" class="btn btn-primary btn-busqueda-detallada">INICIAR SESION</button>
+                        </div>
+                    </div>
+                    <!-- FIN SECCION INTERIOR DE DATOS -->
+                  </form>
+
+            </div> 
+            
+            @endif
+
+          
 
           </div>
         

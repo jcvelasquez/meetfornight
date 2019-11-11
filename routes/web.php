@@ -174,6 +174,7 @@ Route::group(['middleware'=>['auth']],function(){
             Route::get('mensajes-profesional', 'MensajeProfesionalController@mostrar');
             Route::get('mensajes-profesional/listar', 'MensajeProfesionalController@listar');
             Route::post('mensajes-profesional/responder', 'MensajeProfesionalController@responder');
+            Route::post('mensajes-profesional/eliminar', 'MensajeProfesionalController@eliminar');
             
 
 

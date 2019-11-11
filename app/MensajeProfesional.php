@@ -11,6 +11,7 @@ class MensajeProfesional extends Model
     public $table = "mensaje_profesional";
  
     protected $fillable = ['idprofesional','mensaje'];
+    protected $appends = ['responder','esActivo'];
 
     public function usuario()
     {
@@ -29,11 +30,19 @@ class MensajeProfesional extends Model
 
     public function respuestas()
     {
-        //return $this->belongsTo('App\MensajeProfesional', 'parent_id', 'id')->where('parent_id','!=',NULL);
+        return $this->belongsTo('App\MensajeProfesional', 'parent_id', 'id');
     }
 
     public function getCreatedAtAttribute( $value ) {
         return (new Carbon($value))->format('d/m/Y - H:i:s');
+    }
+
+    public function getEsActivoAttribute( $value ) {
+        return 0;
+    }
+
+    public function getResponderAttribute( $value ) {
+        return "";
     }
 
 }

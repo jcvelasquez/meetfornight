@@ -2938,8 +2938,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vuedraggable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuedraggable */ "./node_modules/vuedraggable/dist/vuedraggable.common.js");
-/* harmony import */ var vuedraggable__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vuedraggable__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var vuedraggable__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuedraggable */ "./node_modules/vuedraggable/dist/vuedraggable.common.js");
+/* harmony import */ var vuedraggable__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vuedraggable__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -3027,7 +3027,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    draggable: vuedraggable__WEBPACK_IMPORTED_MODULE_1___default.a
+    draggable: vuedraggable__WEBPACK_IMPORTED_MODULE_0___default.a
   },
   mounted: function mounted() {
     this.listarFotos();
@@ -3327,6 +3327,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3337,7 +3360,6 @@ __webpack_require__.r(__webpack_exports__);
       existeError: 0,
       erroresMensaje: [],
       arMensajes: [],
-      usuarioMensaje: [],
       mensajeSeleccionado: [],
       mensajeRespuestas: [],
       mostrarFormulario: 0
@@ -3356,39 +3378,78 @@ __webpack_require__.r(__webpack_exports__);
         console.log(error);
       });
     },
-    responderMensaje: function responderMensaje() {
+    responderMensaje: function responderMensaje(mensaje) {
       var me = this;
 
-      if (me.validarMensaje()) {
+      if (me.validarMensaje(mensaje)) {
         Swal.fire('ERROR', me.erroresMensaje.toString(), 'error');
         return;
       }
 
-      axios.post('/mensajes/enviar/', {
-        'nombre': me.nombre,
-        'celular': me.celular,
-        'email': me.email,
-        'mensaje': me.mensaje
-      }).then(function (response) {
-        var respuesta = response.data;
-        console.log(respuesta);
-      })["catch"](function (error) {
-        console.log(error);
+      Swal.fire({
+        title: 'CONFIRMAR ACCIÓN',
+        text: 'Estas a punto de responder un mensaje al usuario, se le notificará via email.',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Si, Enviar',
+        cancelButtonText: 'No, Cancelar'
+      }).then(function (result) {
+        if (result.value) {
+          axios.post('/mensajes-profesional/responder', {
+            'parent_id': mensaje.id,
+            'idprofesional': mensaje.idprofesional,
+            'idusuario': mensaje.idprofesional,
+            'mensaje': mensaje.responder
+          }).then(function (response) {
+            var respuesta = response.data;
+            Swal.fire('CONFIRMACIÓN', respuesta.mensaje, 'success');
+            me.listarMensajes(); //me.cancelarMensaje(mensaje);
+          })["catch"](function (error) {
+            console.log(error);
+          });
+        }
+      });
+    },
+    eliminarMensaje: function eliminarMensaje(mensaje) {
+      var me = this;
+      Swal.fire({
+        title: 'CONFIRMAR ACCIÓN',
+        text: 'Estas a punto de eliminar un mensaje, esta acción no de puede deshacer.',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Si, Eliminar',
+        cancelButtonText: 'No, Cancelar'
+      }).then(function (result) {
+        if (result.value) {
+          axios.post('/mensajes-profesional/eliminar', {
+            'id': mensaje.id
+          }).then(function (response) {
+            var respuesta = response.data;
+            Swal.fire('CONFIRMACIÓN', respuesta.mensaje, 'success');
+            me.listarMensajes();
+          })["catch"](function (error) {
+            console.log(error);
+          });
+        }
       });
     },
     seleccionarMensaje: function seleccionarMensaje(mensaje) {
       var me = this;
-      me.mensajeSeleccionado = mensaje;
-      me.usuarioMensaje = mensaje.usuario;
-      /*me.serviciosReserva = JSON.parse(reserva.servicios);
-      me.mostrarReserva = 1;*/
+      mensaje.esActivo = true;
     },
-    limpiarMensaje: function limpiarMensaje() {
+    cancelarMensaje: function cancelarMensaje(mensaje) {
       var me = this;
-      me.mostrarReserva = 0;
-      me.reservaSeleccionada = [];
-      me.usuarioReserva = [];
-      me.serviciosReserva = [];
+      mensaje.responder = ""; //mensaje.esActivo = !mensaje.esActivo;
+
+      mensaje.esActivo = false;
+    },
+    validarMensaje: function validarMensaje(mensaje) {
+      var me = this;
+      me.existeError = 0;
+      me.erroresMensaje = [];
+      if (!mensaje.responder) me.erroresMensaje.push("Debes ingresar una respuesta válida.");
+      if (me.erroresMensaje.length) me.existeError = 1;
+      return me.existeError;
     }
   }
 });
@@ -52043,121 +52104,164 @@ var render = function() {
     _c(
       "div",
       { staticClass: "bloques-de-perfil" },
-      _vm._l(_vm.arMensajes, function(mensaje, index) {
+      _vm._l(_vm.arMensajes, function(mensaje) {
         return _c(
           "div",
           { key: mensaje.id, staticClass: "form-row item-mensaje" },
           [
             _vm._m(1, true),
             _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "col-lg-11 col-sm-12 datos-mensaje" },
-              [
-                _c("small", [_vm._v("Usuario Cuenta Free")]),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn-eliminar",
-                    attrs: { type: "button" },
-                    on: {
-                      click: function($event) {
-                        return _vm.eliminarTarifa(mensaje, index)
-                      }
+            _c("div", { staticClass: "col-lg-11 col-sm-12 datos-mensaje" }, [
+              _c("small", [_vm._v("Usuario Cuenta Free")]),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn-eliminar",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      return _vm.eliminarMensaje(mensaje)
                     }
-                  },
-                  [_c("i", { staticClass: "fa fa-trash-o" })]
-                ),
-                _vm._v(" "),
-                _c("hr", { staticClass: "linea" }),
-                _vm._v(" "),
-                _c("h6", [_vm._v(_vm._s(mensaje.usuario.nombre))]),
-                _vm._v(" "),
-                _c("span", { staticClass: "fecha" }, [
-                  _vm._v(_vm._s(mensaje.created_at))
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "clear" }),
-                _vm._v(" "),
-                _vm._m(2, true),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    attrs: { type: "button" },
-                    on: {
-                      click: function($event) {
-                        return _vm.seleccionarMensaje(mensaje)
-                      }
-                    }
-                  },
-                  [_vm._v("Responder mensaje")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "clear" }),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: _vm.mostrarFormulario,
-                        expression: "mostrarFormulario"
-                      }
+                  }
+                },
+                [_c("i", { staticClass: "fa fa-trash-o" })]
+              ),
+              _vm._v(" "),
+              _c("hr", { staticClass: "linea" }),
+              _vm._v(" "),
+              _c("h6", [_vm._v(_vm._s(mensaje.nombre))]),
+              _vm._v(" "),
+              _c("span", { staticClass: "fecha" }, [
+                _vm._v(_vm._s(mensaje.enviado_el))
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "clear" }),
+              _vm._v(" "),
+              _vm._m(2, true),
+              _vm._v(" "),
+              _c("div", { staticClass: "clear" }),
+              _vm._v(" "),
+              mensaje.esActivo
+                ? _c(
+                    "div",
+                    [
+                      _c("div", { staticClass: "form-row form-respuesta" }, [
+                        _c("textarea", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: mensaje.responder,
+                              expression: "mensaje.responder"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { name: "responder", rows: "4" },
+                          domProps: { value: mensaje.responder },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                mensaje,
+                                "responder",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-row form-respuesta" }, [
+                        _c("div", { staticClass: "col-lg-6 col-sm-12" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass:
+                                "btn btn-primary btn-responder-mensaje",
+                              attrs: { type: "button" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.responderMensaje(mensaje)
+                                }
+                              }
+                            },
+                            [_vm._v("ENVIAR RESPUESTA")]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-lg-6 col-sm-12" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass:
+                                "btn btn-primary btn-rechazar-reserva",
+                              attrs: { type: "button" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.cancelarMensaje(mensaje)
+                                }
+                              }
+                            },
+                            [_vm._v("CANCELAR")]
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _vm._l(mensaje.respuestas, function(respuesta) {
+                        return _c(
+                          "div",
+                          {
+                            key: respuesta.id,
+                            staticClass: "form-row item-respuesta"
+                          },
+                          [
+                            _vm._m(3, true),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "col-lg-11 col-sm-12  datos-mensaje"
+                              },
+                              [
+                                _c("h6", [_vm._v(_vm._s(respuesta.nombre))]),
+                                _vm._v(" "),
+                                _c("span", { staticClass: "fecha" }, [
+                                  _vm._v(_vm._s(respuesta.enviado_el))
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "clear" }),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "mensaje" }, [
+                                  _c("p", [_vm._v(_vm._s(respuesta.mensaje))])
+                                ])
+                              ]
+                            )
+                          ]
+                        )
+                      })
                     ],
-                    staticClass: "form-row form-respuesta"
-                  },
-                  [
-                    _c("textarea", {
-                      staticClass: "form-control",
-                      attrs: { name: "respuesta", rows: "4" }
-                    }),
-                    _vm._v(" "),
+                    2
+                  )
+                : _c("div", [
                     _c(
                       "button",
                       {
-                        staticClass: "btn btn-primary btn-responder-mensaje",
-                        attrs: { type: "button" }
+                        staticClass: "btn-responder-texto",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.seleccionarMensaje(mensaje)
+                          }
+                        }
                       },
-                      [_vm._v("ENVIAR RESPUESTA")]
+                      [_vm._v("Responder mensaje")]
                     )
-                  ]
-                ),
-                _vm._v(" "),
-                _vm._l(_vm.mensajeRespuestas, function(respuesta) {
-                  return _c(
-                    "div",
-                    {
-                      key: respuesta.id,
-                      staticClass: "form-row item-respuesta"
-                    },
-                    [
-                      _vm._m(3, true),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "col-lg-11 col-sm-12  datos-mensaje" },
-                        [
-                          _c("h6", [_vm._v(_vm._s(mensaje.usuario.nombre))]),
-                          _vm._v(" "),
-                          _c("span", { staticClass: "fecha" }, [
-                            _vm._v(_vm._s(mensaje.created_at))
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "clear" }),
-                          _vm._v(" "),
-                          _vm._m(4, true)
-                        ]
-                      )
-                    ]
-                  )
-                })
-              ],
-              2
-            )
+                  ])
+            ])
           ]
         )
       }),
@@ -52226,18 +52330,6 @@ var staticRenderFns = [
         attrs: { src: "fotos-profesionales/oswaldo_salaverry.jpg", alt: "" }
       })
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "mensaje" }, [
-      _c("p", [
-        _vm._v(
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod blandit vestibulum. Donec aliquet, ipsum quis consequat faucibus, lectus orci posuere ex, a vestibulum risus dolor ac odio. Praesent commodo dolor nec interdum euismod. Donec fermentum quam eget nunc laoreet ultrices. Duis pellentesque pretium ligula vitae vehicula."
-        )
-      ])
-    ])
   }
 ]
 render._withStripped = true
@@ -52278,6 +52370,7 @@ var render = function() {
           staticClass: "form-control",
           attrs: {
             type: "text",
+            readonly: "",
             name: "nombre",
             placeholder: "Nombre *",
             required: ""
