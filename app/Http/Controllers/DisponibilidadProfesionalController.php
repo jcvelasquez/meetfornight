@@ -14,7 +14,9 @@ class DisponibilidadProfesionalController extends Controller
     {
         
         //
-            $disponibilidad = DisponibilidadProfesional::where('idusuario', 34)->get();
+            $idprofesional = Auth::user()->id;
+
+            $disponibilidad = DisponibilidadProfesional::where('idusuario', $idprofesional)->get();
 
             return ['disponibilidad' => $disponibilidad];  
 

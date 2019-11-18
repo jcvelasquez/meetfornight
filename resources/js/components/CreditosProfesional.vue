@@ -13,7 +13,7 @@
     <div class="bloques-de-perfil">
       <h6 class="total-actual formulario-titulos">
         Dispones actualmente de
-        <span>" 20 "</span> créditos en tu cuenta.
+        <span>" {{calcularCreditos}} "</span> créditos en tu cuenta.
       </h6>
       <div class="row">
         <div class="col-lg-12 form-row">
@@ -22,12 +22,7 @@
             class="col-form-label formulario-titulos tamano-pequeno"
           >Créditos para comprar</label>
           <div class="col-lg-2 espaciado-mb">
-            <select
-              type="text"
-              class="form-control"
-              id="inputPassword"
-              name="cuantos-quieres-comprar"
-            >
+            <select  class="form-control" v-model="cantidad_creditos" name="cantidad_creditos">
               <option value="10">10</option>
               <option value="20">20</option>
               <option value="30">30</option>
@@ -41,44 +36,31 @@
             <div class="input-group-prepend">
               <div class="input-group-text">$</div>
             </div>
-            <input type="text" class="form-control" id="inlineFormInputGroup" value="100" disabled />
+            <input type="text" class="form-control" value="100" v-model="monto_creditos" readonly />
           </div>
         </div>
       </div>
       <h5 class="formulario-titulos">MÉTODOS DE PAGO:</h5>
+      <div class="row">  
+        <div class="no-margin-right-check col-lg-12 col-md-12 col-sm-12 espacio-campos">
+            <p-input type="radio" name="metodo_pago" color="info" value="PAYPAL" v-model="metodo_pago">Accede con tu cuenta <img src="img/paypal-logo.png" width="50" /></p-input>
+        </div>
+      </div> 
       <div class="row">
-        <div
-          class="custom-control custom-radio custom-control-inline no-margin-right-check col-lg-12 col-md-12 col-sm-12 espacio-campos"
-        >
-          <input type="radio" id="tatuaje(s)-si" name="tatuaje(s)" class="custom-control-input" />
-          <label class="custom-control-label custom-control-label-espacio" for="tatuaje(s)-si">
-            Tarjetas de crédito o débito bancario
-            <img src="img/tarjetas.jpg" class="cards" />
-          </label>
+        <div class="no-margin-right-check col-lg-12 col-md-12 col-sm-12 espacio-campos">
+            <p-input type="radio" name="metodo_pago" color="info" value="STRIPE" v-model="metodo_pago">Tarjetas de crédito o débito bancario  <img src="img/tarjetas.jpg" width="100" /></p-input>
         </div>
-        <div
-          class="custom-control custom-radio custom-control-inline no-margin-right-check col-lg-12 col-md-12 col-sm-12 espacio-campos"
-        >
-          <input type="radio" id="tatuaje(s)-no" name="tatuaje(s)" class="custom-control-input" />
-          <label class="custom-control-label custom-control-label-espacio" for="tatuaje(s)-no">
-            <img src="img/paypal-logo.png" class="paypal" />
-          </label>
+      </div>
+      <div class="row">  
+        <div class="no-margin-right-check col-lg-12 col-md-12 col-sm-12 espacio-campos">
+            <p-input type="radio" name="metodo_pago" color="info" value="DEPOSITO" v-model="metodo_pago">
+               Deposito Bancario
+            </p-input>  
         </div>
-        <div
-          class="custom-control custom-radio custom-control-inline no-margin-right-check col-lg-12 col-md-12 col-sm-12 espacio-campos"
-        >
-          <input type="radio" id="tatuaje(s)-re" name="tatuaje(s)" class="custom-control-input" />
-          <label class="custom-control-label custom-control-label-espacio" for="tatuaje(s)-re">
-            <i class="icon-credit-cards esp-icono-bio"></i> Deposito Bancario
-          </label>
-        </div>
-        <div
-          class="custom-control custom-radio custom-control-inline no-margin-right-check col-lg-12 col-md-12 col-sm-12 espacio-campos"
-        >
-          <input type="radio" id="tatuaje(s)-re" name="tatuaje(s)" class="custom-control-input" />
-          <label class="custom-control-label custom-control-label-espacio" for="tatuaje(s)-re">
-            <i class="icon-credit-cards esp-icono-bio"></i> Pago en Efectivo
-          </label>
+      </div>
+      <div class="row">  
+        <div class="no-margin-right-check col-lg-12 col-md-12 col-sm-12 espacio-campos">
+          <p-input type="radio" name="metodo_pago" color="info" value="EFECTIVO" v-model="metodo_pago"> Pago en Efectivo </p-input>    
         </div>
       </div>
 
@@ -89,64 +71,222 @@
             class="col-form-label formulario-titulos tamano-pequeno"
           >Código Promocional</label>
           <div class="col-lg-2 espaciado-mb">
-            <input type="text" class="form-control" id="inlineFormInputGroup" value="457DABCCC" />
+            <input type="text" class="form-control" v-model="codigo_promocional" name="codigo_promocional" placeholder="457DABCCC" />
           </div>
+
+          <label class="col-form-label formulario-titulos tamano-pequeno">Descuento</label>
+          <div class="input-group espaciado-mb mb-2 col-lg-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">$</div>
+            </div>
+            <input type="text" class="form-control" value="100" v-model="monto_creditos" readonly />
+          </div>
+          
         </div>
       </div>
 
-      <!--<div class="row">
-                    <div class="col-lg-12 form-row centro">
-                      <button type="submit" class="btn btn-primary btn-red">Validar</button>
-                    </div>
-      </div>-->
+      <h5 class="formulario-titulos">SELECCIONE CATEGORIAS:</h5>
+
+
+
       <div class="bloques-de-perfil">
-        <button type="submit" class="btn btn-primary btn-espacio-fuc btn-tarjeta-credito">
-          <span>VALIDAR</span>
+        <button type="button" class="btn btn-primary btn-espacio-fuc btn-tarjeta-credito">
+          <span>CONFIRMAR COMPRA ($123)</span>
         </button>
       </div>
     </div>
 
     <div class="row">
       <div class="col-md-12">
-        <div class="historico espacio-campos">Histórico de los créditos</div>
+        <div class="historico espacio-campos">Histórico Compra de créditos</div>
         <div class="table-responsive">
           <table class="table">
             <thead class="cabecera-fake">
               <tr>
-                <th scope="col">Nombre</th>
-                <th scope="col">Hora</th>
+                <th scope="col">Metodo Pago</th>
                 <th scope="col">Fecha</th>
-                <th scope="col">Créditos contratados</th>
-                <th scope="col">Total Pagado ($)</th>
+                <th scope="col">Hora</th>
+                <th scope="col"># Cráditos</th>
+                <th scope="col">Total($)</th>
               </tr>
             </thead>
             <tbody class="resultado-fake">
-              <tr>
-                <td>Booster</td>
-                <td>05:30 pm</td>
-                <td>18/11/2018</td>
-                <td>80</td>
-                <td>160</td>
+
+              <tr v-for="credito in arCreditos" :key="credito.id">
+                <td>{{credito.metodo_pago}}</td>
+                <td>{{credito.fecha}}</td>
+                <td>{{credito.hora}}</td>
+                <td>{{credito.cantidad_creditos}}</td>
+                <td>{{credito.total_creditos}}</td>
               </tr>
-              <tr>
-                <td>Booster</td>
-                <td>05:30 pm</td>
-                <td>18/11/2018</td>
-                <td>80</td>
-                <td>-</td>
-              </tr>
+              
             </tbody>
           </table>
         </div>
       </div>
     </div>
+
+    
   </form>
 </template>
 
+
 <script>
-export default {
-  mounted() {
-    console.log("Component mounted.");
-  }
-};
+    export default {
+        data(){
+            return {
+                codigo_promocional: "",
+                metodo_pago: "",
+                cantidad_creditos: 0,
+                descuento_creditos: 0,
+                monto_creditos: 0,
+                total_creditos: 0,
+                suma_creditos:0,
+                descuento_creditos: 0,
+                existeError : 0,
+                erroresCreditos: [],
+                arCreditos: []
+            }
+        },
+        computed:{
+
+            calcularCreditos () {
+
+                let sum = 0;
+                this.arCreditos.forEach(function(item) { sum += item.cantidad_creditos; });
+                this.suma_creditos = sum;
+
+                return sum;
+
+            }
+
+        },
+        mounted() {
+            this.listarCreditos();
+        },
+        methods:{
+            listarCreditos(){
+
+                  let me = this;
+
+                  axios.get('/creditos-profesional/listar').then(function (response) {
+
+                      var respuesta= response.data;
+                      me.arCreditos = respuesta.creditos;
+
+                  }).catch(function (error) {  console.log(error);     });
+                
+            },
+            responderMensaje(mensaje){
+
+                  let me = this;
+
+                  if(me.validarMensaje(mensaje)){
+                    Swal.fire('ERROR', me.erroresMensaje.toString(),'error');
+                    return;
+                  }
+
+
+                     Swal.fire({
+                        title: 'CONFIRMAR ACCIÓN',
+                        text: 'Estas a punto de responder un mensaje al usuario, se le notificará via email.',
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Si, Enviar',
+                        cancelButtonText: 'No, Cancelar'
+                    }).then((result) => {
+                    
+                      if (result.value) {
+
+                            axios.post('/mensajes-profesional/responder', {
+                                'parent_id' : mensaje.id,
+                                'idprofesional' : mensaje.idprofesional,
+                                'idusuario' : mensaje.idprofesional,
+                                'mensaje' : mensaje.responder
+                            }).then(function (response) {
+
+                                var respuesta = response.data;
+
+                                Swal.fire('CONFIRMACIÓN', respuesta.mensaje,'success');
+
+                                me.listarMensajes();
+
+                                //me.cancelarMensaje(mensaje);
+
+                            }).catch(function (error) {  console.log(error);     });
+
+                      } 
+                    
+                  });
+
+                  
+                
+            },
+            eliminarMensaje(mensaje){
+
+                  let me = this;
+
+                     Swal.fire({
+                        title: 'CONFIRMAR ACCIÓN',
+                        text: 'Estas a punto de eliminar un mensaje, esta acción no de puede deshacer.',
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Si, Eliminar',
+                        cancelButtonText: 'No, Cancelar'
+                    }).then((result) => {
+                    
+                      if (result.value) {
+
+                            axios.post('/mensajes-profesional/eliminar', {
+                                'id' : mensaje.id
+                            }).then(function (response) {
+
+                                var respuesta = response.data;
+
+                                Swal.fire('CONFIRMACIÓN', respuesta.mensaje,'success');
+
+                                me.listarMensajes();
+
+                            }).catch(function (error) {  console.log(error);     });
+
+                      } 
+                    
+                  });     
+                
+            },
+            seleccionarMensaje(mensaje){
+
+                let me = this;
+
+                mensaje.esActivo = true;
+
+            },
+            cancelarMensaje(mensaje){
+
+                let me = this;
+
+                mensaje.responder = "";
+                //mensaje.esActivo = !mensaje.esActivo;
+                mensaje.esActivo = false;
+
+            },
+            validarMensaje(mensaje){
+
+                let me = this;
+
+                me.existeError = 0;
+                me.erroresMensaje = [];
+ 
+                 if(!mensaje.responder) me.erroresMensaje.push("Debes ingresar una respuesta válida.");
+
+                if(me.erroresMensaje.length) me.existeError = 1;
+
+                return me.existeError;
+
+            
+            }
+
+         }
+
+    }
 </script>

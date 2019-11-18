@@ -113,3 +113,12 @@ label.error { font-size: 12px; color:red; }
     border-color: #5b376f;
 }
 .form-respuesta { margin: 0 0 20px 0;}
+
+.total-actual {
+    width: 100%;
+    text-align: center;
+}
+
+.interior-frecuencia { margin:10px 0 0 20px; }
+
+.espacio-frecuencia { padding:20px 0; }

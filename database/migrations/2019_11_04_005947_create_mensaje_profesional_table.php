@@ -18,9 +18,6 @@ class CreateMensajeProfesionalTable extends Migration
             $table->integer('idprofesional')->unsigned();
             $table->integer('idusuario')->unsigned();
             $table->integer('parent_id')->unsigned()->nullable();
-            //$table->string('nombre')->nullable();
-            //$table->string('celular')->nullable();
-            //$table->string('email')->nullable();
             $table->text('mensaje');
             $table->timestamps();
         });

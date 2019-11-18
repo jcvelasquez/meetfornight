@@ -15,6 +15,10 @@ class CreateBoosterProfesionalTable extends Migration
     {
         Schema::create('booster_profesional', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('idprofesional')->unsigned();
+            $table->enum('frecuencia',['DESACTIVADO','AUTOMATICO','MANUAL']);
+            $table->integer('desactivarNoche');
+            $table->foreign('idprofesional')->references('id')->on('usuarios');
             $table->timestamps();
         });
     }

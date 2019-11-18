@@ -21,7 +21,6 @@ class AlertaProfesionalSeeder extends Seeder
         $alerta->celular = '967554123';
         $alerta->email = 'fperezar3@gmail.com';
         $alerta->razon = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent justo metus, egestas at sodales eget, commodo sit amet dui. Sed cursus magna at elementum faucibus. Orci varius natoque penatibus et magnis dis parturient montes';
-        $alerta->created_at = '2019-09-15 15:10:25';
         $alerta->save();
 
 
@@ -33,7 +32,6 @@ class AlertaProfesionalSeeder extends Seeder
         $alerta->celular = '967554123';
         $alerta->email = 'martinposr34@gmail.com';
         $alerta->razon = 'Mnascetur ridiculus mus. Nunc non elit molestie, laoreet turpis a, dignissim ante. Vestibulum et sem arcu. Sed sed rhoncus mauris, eget imperdiet neque. Ut dignissim imperdiet justo.';
-        $alerta->created_at = '2019-09-13 13:03:25';
         $alerta->save();
 
 

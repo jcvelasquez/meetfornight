@@ -22,8 +22,7 @@ class CreateAlertaProfesionalTable extends Migration
             $table->string('celular');
             $table->string('email');
             $table->text('razon');
-            $table->dateTime('created_at');
-
+            $table->timestamps();
             $table->foreign('idusuario')->references('id')->on('usuarios');
         });
     }

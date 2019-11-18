@@ -7,4 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class BoosterProfesional extends Model
 {
     //
+
+    public $table = "booster_profesional";
+    
+    protected $fillable = ['idprofesional','frecuencia','desactivarNoche'];
+
+    public function usuario()
+    {
+        return $this->belongsTo('App\Usuario', 'idprofesional', 'id');
+    }
+
 }

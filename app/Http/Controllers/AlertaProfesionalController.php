@@ -40,8 +40,6 @@ class AlertaProfesionalController extends Controller
         $alerta->created_at = new \DateTime();
         $alerta->save();
 
-       // $tarifa = TarifaProfesional::create($validatedData);
-
         return ['mensaje' => 'Alerta registrada correctamente', 'alerta' => $alerta];
 
     }

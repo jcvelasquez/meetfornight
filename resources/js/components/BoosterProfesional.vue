@@ -27,6 +27,7 @@
 
     <div class="bloques-de-perfil">
       <div class="row">
+
         <div class="col-lg-12 col-sm-12 form-row espacio-campos">
           <h6 class="total-actual formulario-titulos">
             Dispones actualmente de
@@ -34,121 +35,90 @@
             <span>" 10 "</span> booster(s)
           </h6>
         </div>
-        <div class="col-lg-12 col-sm-12 form-row espacio-campos">
-          <div
-            class="custom-control custom-radio custom-control-inline no-margin-right-check col-sm-12 espacio-campos form-row-no borde-abajo"
-          >
-            <input type="radio" id="frecuencia" name="elige" class="custom-control-input" />
-            <label class="custom-control-label custom-control-label-espacio" for="frecuencia">
-              <h3 class="formulario-titulos tamano-pequeno">Frecuencia Automática</h3>
-              <div class="espacio-campos">
-                <select type="text" class="form-control auto-width" id="inputPassword">
-                  <option value="Cada 15 min">Cada 15 min</option>
-                  <option value="Cada 30 min">Cada 30 min</option>
-                  <option value="Cada hora">Cada hora</option>
-                  <option value="Cada 2 horas">Cada 2 horas</option>
-                  <option value="Cada 3 horas">Cada 3 horas</option>
-                  <option value="Cada 4 horas">Cada 4 horas</option>
-                  <option value="Cada 6 horas">Cada 6 horas</option>
-                  <option value="Cada día">Cada día</option>
-                  <option value="Cada 48">Cada 2 días</option>
-                </select>
-              </div>
-              <span class="aparecer">Desactivar Booster por la noche (De 00:00 a 9:00am)</span>
-              <div class="form-row">
-                <div
-                  class="custom-control custom-radio custom-control-inline no-margin-right-check col-lg col-md-12 col-sm-12 espacio-campos"
-                >
-                  <input
-                    type="radio"
-                    id="customRadioInline1"
-                    name="customRadioInline1"
-                    class="custom-control-input"
-                  />
-                  <label
-                    class="custom-control-label custom-control-label-espacio"
-                    for="customRadioInline1"
-                  >Si</label>
-                </div>
 
-                <div
-                  class="custom-control custom-radio custom-control-inline no-margin-right-check col-lg col-md-12 col-sm-12 espacio-campos"
-                >
-                  <input
-                    type="radio"
-                    id="customRadioInline5"
-                    name="customRadioInline1"
-                    class="custom-control-input"
-                  />
-                  <label
-                    class="custom-control-label custom-control-label-espacio"
-                    for="customRadioInline5"
-                  >No</label>
-                </div>
-              </div>
-            </label>
+      </div>
+
+      <div class="form-row">
+          <div class="col-lg-12 col-sm-12 form-row-no espacio-campos borde-abajo">
+              <p-input type="radio" name="frecuencia" color="info" value="DESACTIVADO" @change="actualizarConfiguracion()" v-model="frecuencia">Desactivado</p-input>
           </div>
-        </div>
-        <div class="col-lg-12 col-sm-12 form-row">
-          <div
-            class="custom-control custom-radio  no-margin-right-check col-sm-12 espacio-campos">
+      </div>  
+      <div class="form-row">
+          <div class="col-lg-12 col-sm-12 espacio-campos borde-abajo">            
+                <p-input type="radio" name="frecuencia" color="info" value="AUTOMATICO" @change="actualizarConfiguracion()" v-model="frecuencia"><strong>Frecuencia Automática</strong>
+                </p-input>
 
+               
+                <div class="form-row interior-frecuencia"  v-show="frecuencia == 'AUTOMATICO'">
+                  <select type="text" class="form-control auto-width" id="inputPassword">
+                    <option value="*/15 * * * *">Cada 15 min</option>
+                    <option value="*/30 * * * *">Cada 30 min</option>
+                    <option value="0 * * * *">Cada hora</option>
+                    <option value="0 */2 * * *">Cada 2 horas</option>
+                    <option value="0 */3 * * *">Cada 3 horas</option>
+                    <option value="0 */4 * * *">Cada 4 horas</option>
+                    <option value="0 */6 * * *">Cada 6 horas</option>
+                    <option value="Cada día">Cada día</option>
+                    <option value="Cada 48">Cada 2 días</option>
+                  </select>
+                </div>
+                <div class="form-row interior-frecuencia" v-show="frecuencia == 'AUTOMATICO'">
+                    <span class="aparecer">Desactivar Booster por la noche (De 00:00 a 9:00am)</span>
+                </div>
+                <div class="form-row interior-frecuencia" v-show="frecuencia == 'AUTOMATICO'">
+                    <p-input type="radio" name="desactivar" color="info" :value="1" v-model="desactivarNoche">Si</p-input>
+                    <p-input type="radio" name="desactivar" color="info" :value="0" v-model="desactivarNoche">No</p-input> 
+                </div>
 
-            <input type="radio" id="manualmente" name="elige" class="custom-control-input" />
-            <label class="custom-control-label custom-control-label-espacio" for="manualmente">
-              <h3 class="formulario-titulos tamano-pequeno">Frecuencia Manual</h3>
-              </label>
+          </div>
+      </div>
 
+      <div class="form-row">
 
-              <div class="repeater col-lg-12 col-sm-12 form-row">
+        <div class="col-lg-12 col-sm-12 espacio-campos">
 
-                <div data-repeater-list="frecuencia_manual">
+                <p-input type="radio" name="frecuencia" color="info" value="MANUAL" @change="actualizarConfiguracion()" v-model="frecuencia"><strong>Frecuencia Manual</strong>
+                </p-input>
 
-                    <div class="horizontal" data-repeater-item>
-                      <label
-                        for="inputPassword"
-                        class="col-form-label formulario-titulos tamano-pequeno esp-radio"
-                      >Fecha</label>
-                      <div class="espacio-campos esp-radio">
-                        <input type="date" name="fecha" class="form-control icono-calendario" />
+                <div class="form-row" v-show="frecuencia == 'MANUAL'">
+
+                      <div class="horizontal interior-frecuencia col-lg-12 col-sm-12 form-row" v-for="(frecuencia, index) in arFrecuencia" :key="frecuencia.id">
+                        <label class="col-form-label formulario-titulos tamano-pequeno esp-radio">Fecha</label>
+                        <div class="esp-radio">
+                          {{frecuencia.fecha}}
+                        </div>
+                        <label class="col-form-label formulario-titulos tamano-pequeno esp-radio">Hora</label>
+                        <div class="esp-radio">
+                          {{frecuencia.hora}}
+                        </div>
+                        <div class="">
+                          <button type="button" @click="eliminarFrecuencia(frecuencia, index)" class="btn btn-primary x-circulo">
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                          </button>
+                        </div>
                       </div>
-                      <label
-                        for="inputPassword"
-                        class="col-form-label formulario-titulos tamano-pequeno esp-radio"
-                      >Hora</label>
-                      <div class="espacio-campos esp-radio">
-                        <input type="text" name="hora" class="form-control" value="00:00" />
+
+                      <div class="horizontal" style="margin-top:20px;">
+                        <label class="col-form-label formulario-titulos tamano-pequeno esp-radio">Fecha</label>
+                        <div class="espacio-campos esp-radio">
+                          <input type="date" name="fechabooster" v-model="fechabooster"  class="form-control icono-calendario" />
+                        </div>
+                        <label class="col-form-label formulario-titulos tamano-pequeno esp-radio">Hora</label>
+                        <div class="espacio-campos esp-radio">
+                          <input type="time" name="horabooster" v-model="horabooster" class="form-control" value="00:00" />
+                        </div>
+                      
+                        <div class="espacio-campos">
+                          <button type="button" class="btn btn-primary" @click="agregarFrecuencia()">
+                            <i class="fa fa-plus" aria-hidden="true"></i> AGREGAR
+                          </button>
+                        </div>
                       </div>
-                     <!--  <div class="espacio-campos esp-radio">
-                        <select type="text" class="form-control" id="inputPassword">
-                          <option value="am">am</option>
-                          <option value="pm">pm</option>
-                        </select>
-                      </div> -->
-                      <div class="espacio-campos">
-                        <button type="button" data-repeater-delete class="btn btn-primary x-circulo">
-                          <i class="fa fa-times" aria-hidden="true"></i>
-                        </button>
-                      </div>
-                    </div>
 
                 </div>
 
-                <div class="repeater col-lg-12 col-sm-12 form-row">
-
-                  <div class="espacio-campos">
-                    <button type="button" class="btn btn-primary mas-cuadrado" data-repeater-create>
-                      <i class="fa fa-plus" aria-hidden="true"></i>
-                    </button>
-                  </div>
-
-                  </div>
-
-              </div>
-
-            
-          </div>
         </div>
+
       </div>
     </div>
 
@@ -195,9 +165,156 @@
 </template>
 
 <script>
-export default {
-  mounted() {
-    console.log("Component mounted.");
-  }
-};
+    export default {
+        data(){
+            return {
+                frecuencia : "",
+                existeError : 0,
+                frecuencia: "",
+                fechabooster: "",
+                horabooster: "",
+                desactivarNoche : 0,
+                erroresBooster: [],
+                arFrecuencia: [],
+                arBooster: []
+            }
+        },
+        mounted() {
+            this.listarFrecuenciaBoosters();
+            this.listarConfiguracionBoosters();
+        },
+        methods:{
+            actualizarConfiguracion(){
+
+                let me = this;
+
+                axios.post('/booster-profesional/actualizar', {
+                    'id' : me.arBooster.id,
+                    'frecuencia' : me.frecuencia
+                }).then(function (response) {
+
+                    var respuesta = response.data;
+
+                    console.log(respuesta);
+
+                    //Swal.fire('CONFIRMACIÓN', respuesta.mensaje,'success');
+
+                }).catch(function (error) {  console.log(error);     });
+                
+
+            },
+            agregarFrecuencia(){
+
+                  let me = this;
+
+                  axios.post('/frecuencia-booster/agregar', {
+                      'fecha' : me.fechabooster,
+                      'hora' : me.horabooster
+                  }).then(function(response){
+
+                      var respuesta = response.data;
+                      me.listarFrecuenciaBoosters();
+                      Swal.fire('CONFIRMACIÓN', respuesta.mensaje,'success');
+
+                  }).catch(function(error){ console.log(error); });
+
+            },
+            listarFrecuenciaBoosters(){
+
+                  let me = this;
+
+                  axios.get('/frecuencia-booster/listar').then(function (response) {
+
+                      var respuesta= response.data;
+                      me.arFrecuencia = respuesta.frecuencia;
+
+                      
+
+                  }).catch(function (error) {  console.log(error);     });
+                
+            },
+            listarConfiguracionBoosters(){
+
+                  let me = this;
+
+                  axios.get('/booster-profesional/listar').then(function (response) {
+
+                      var respuesta = response.data;
+                      me.arBooster = respuesta.booster;
+
+                      console.log(me.arBooster);
+
+                      me.frecuencia = me.arBooster.frecuencia;
+                      me.desactivarNoche = me.arBooster.desactivarNoche;
+
+                  }).catch(function (error) {  console.log(error);     });
+                
+            },
+            eliminarFrecuencia(frecuencia, index){
+
+                  let me = this;
+
+                     Swal.fire({
+                        title: 'CONFIRMAR ACCIÓN',
+                        text: 'Estas a punto de eliminar un registro, esta acción no de puede deshacer.',
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Si, Eliminar',
+                        cancelButtonText: 'No, Cancelar'
+                    }).then((result) => {
+                    
+                      if (result.value) {
+
+                            axios.post('/frecuencia-booster/eliminar', {
+                                'id' : frecuencia.id
+                            }).then(function (response) {
+
+                                var respuesta = response.data;
+
+                                Swal.fire('CONFIRMACIÓN', respuesta.mensaje,'success');
+
+                                 me.$delete(me.arFrecuencia, index);
+
+                            }).catch(function (error) {  console.log(error);     });
+
+                      } 
+                    
+                  });     
+                
+            },
+            seleccionarMensaje(mensaje){
+
+                let me = this;
+
+                mensaje.esActivo = true;
+
+            },
+            cancelarMensaje(mensaje){
+
+                let me = this;
+
+                mensaje.responder = "";
+                //mensaje.esActivo = !mensaje.esActivo;
+                mensaje.esActivo = false;
+
+            },
+            validarMensaje(mensaje){
+
+                let me = this;
+
+                me.existeError = 0;
+                me.erroresMensaje = [];
+ 
+                 if(!mensaje.responder) me.erroresMensaje.push("Debes ingresar una respuesta válida.");
+
+                if(me.erroresMensaje.length) me.existeError = 1;
+
+                return me.existeError;
+
+            
+            }
+
+         }
+
+    }
 </script>

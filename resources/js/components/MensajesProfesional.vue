@@ -64,14 +64,8 @@
                 </div>
 
                 <div v-else>
-
                         <button @click="seleccionarMensaje(mensaje)" class="btn-responder-texto" type="button">Responder mensaje</button>
-
                 </div>
-
-
-
-                
 
             </div>
         </div>        

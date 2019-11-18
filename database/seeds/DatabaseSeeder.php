@@ -21,6 +21,9 @@ class DatabaseSeeder extends Seeder
         $this->call(ServiciosXProfesionalSeeder::class);
         $this->call(DisponibilidadProfesionalSeeder::class);
         $this->call(ReservasProfesionalSeeder::class);
+        $this->call(CreditosProfesionalSeeder::class);
+        $this->call(CodigosPromocionalesSeeder::class);
+        $this->call(FrecuenciaBoosterSeeder::class);        
         
     }
 }

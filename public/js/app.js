@@ -2055,36 +2055,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2252,8 +2224,106 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    var _ref;
+
+    return _ref = {
+      frecuencia: "",
+      existeError: 0
+    }, _defineProperty(_ref, "frecuencia", ""), _defineProperty(_ref, "fechabooster", ""), _defineProperty(_ref, "horabooster", ""), _defineProperty(_ref, "desactivarNoche", 0), _defineProperty(_ref, "erroresBooster", []), _defineProperty(_ref, "arFrecuencia", []), _defineProperty(_ref, "arBooster", []), _ref;
+  },
   mounted: function mounted() {
-    console.log("Component mounted.");
+    this.listarFrecuenciaBoosters();
+    this.listarConfiguracionBoosters();
+  },
+  methods: {
+    actualizarConfiguracion: function actualizarConfiguracion() {
+      var me = this;
+      axios.post('/booster-profesional/actualizar', {
+        'id': me.arBooster.id,
+        'frecuencia': me.frecuencia
+      }).then(function (response) {
+        var respuesta = response.data;
+        console.log(respuesta); //Swal.fire('CONFIRMACIÓN', respuesta.mensaje,'success');
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    agregarFrecuencia: function agregarFrecuencia() {
+      var me = this;
+      axios.post('/frecuencia-booster/agregar', {
+        'fecha': me.fechabooster,
+        'hora': me.horabooster
+      }).then(function (response) {
+        var respuesta = response.data;
+        me.listarFrecuenciaBoosters();
+        Swal.fire('CONFIRMACIÓN', respuesta.mensaje, 'success');
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    listarFrecuenciaBoosters: function listarFrecuenciaBoosters() {
+      var me = this;
+      axios.get('/frecuencia-booster/listar').then(function (response) {
+        var respuesta = response.data;
+        me.arFrecuencia = respuesta.frecuencia;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    listarConfiguracionBoosters: function listarConfiguracionBoosters() {
+      var me = this;
+      axios.get('/booster-profesional/listar').then(function (response) {
+        var respuesta = response.data;
+        me.arBooster = respuesta.booster;
+        console.log(me.arBooster);
+        me.frecuencia = me.arBooster.frecuencia;
+        me.desactivarNoche = me.arBooster.desactivarNoche;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    eliminarFrecuencia: function eliminarFrecuencia(frecuencia, index) {
+      var me = this;
+      Swal.fire({
+        title: 'CONFIRMAR ACCIÓN',
+        text: 'Estas a punto de eliminar un registro, esta acción no de puede deshacer.',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Si, Eliminar',
+        cancelButtonText: 'No, Cancelar'
+      }).then(function (result) {
+        if (result.value) {
+          axios.post('/frecuencia-booster/eliminar', {
+            'id': frecuencia.id
+          }).then(function (response) {
+            var respuesta = response.data;
+            Swal.fire('CONFIRMACIÓN', respuesta.mensaje, 'success');
+            me.$delete(me.arFrecuencia, index);
+          })["catch"](function (error) {
+            console.log(error);
+          });
+        }
+      });
+    },
+    seleccionarMensaje: function seleccionarMensaje(mensaje) {
+      var me = this;
+      mensaje.esActivo = true;
+    },
+    cancelarMensaje: function cancelarMensaje(mensaje) {
+      var me = this;
+      mensaje.responder = ""; //mensaje.esActivo = !mensaje.esActivo;
+
+      mensaje.esActivo = false;
+    },
+    validarMensaje: function validarMensaje(mensaje) {
+      var me = this;
+      me.existeError = 0;
+      me.erroresMensaje = [];
+      if (!mensaje.responder) me.erroresMensaje.push("Debes ingresar una respuesta válida.");
+      if (me.erroresMensaje.length) me.existeError = 1;
+      return me.existeError;
+    }
   }
 });
 
@@ -2628,18 +2698,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2774,8 +2834,115 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    var _ref;
+
+    return _ref = {
+      codigo_promocional: "",
+      metodo_pago: "",
+      cantidad_creditos: 0,
+      descuento_creditos: 0,
+      monto_creditos: 0,
+      total_creditos: 0,
+      suma_creditos: 0
+    }, _defineProperty(_ref, "descuento_creditos", 0), _defineProperty(_ref, "existeError", 0), _defineProperty(_ref, "erroresCreditos", []), _defineProperty(_ref, "arCreditos", []), _ref;
+  },
+  computed: {
+    calcularCreditos: function calcularCreditos() {
+      var sum = 0;
+      this.arCreditos.forEach(function (item) {
+        sum += item.cantidad_creditos;
+      });
+      this.suma_creditos = sum;
+      return sum;
+    }
+  },
   mounted: function mounted() {
-    console.log("Component mounted.");
+    this.listarCreditos();
+  },
+  methods: {
+    listarCreditos: function listarCreditos() {
+      var me = this;
+      axios.get('/creditos-profesional/listar').then(function (response) {
+        var respuesta = response.data;
+        me.arCreditos = respuesta.creditos;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    responderMensaje: function responderMensaje(mensaje) {
+      var me = this;
+
+      if (me.validarMensaje(mensaje)) {
+        Swal.fire('ERROR', me.erroresMensaje.toString(), 'error');
+        return;
+      }
+
+      Swal.fire({
+        title: 'CONFIRMAR ACCIÓN',
+        text: 'Estas a punto de responder un mensaje al usuario, se le notificará via email.',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Si, Enviar',
+        cancelButtonText: 'No, Cancelar'
+      }).then(function (result) {
+        if (result.value) {
+          axios.post('/mensajes-profesional/responder', {
+            'parent_id': mensaje.id,
+            'idprofesional': mensaje.idprofesional,
+            'idusuario': mensaje.idprofesional,
+            'mensaje': mensaje.responder
+          }).then(function (response) {
+            var respuesta = response.data;
+            Swal.fire('CONFIRMACIÓN', respuesta.mensaje, 'success');
+            me.listarMensajes(); //me.cancelarMensaje(mensaje);
+          })["catch"](function (error) {
+            console.log(error);
+          });
+        }
+      });
+    },
+    eliminarMensaje: function eliminarMensaje(mensaje) {
+      var me = this;
+      Swal.fire({
+        title: 'CONFIRMAR ACCIÓN',
+        text: 'Estas a punto de eliminar un mensaje, esta acción no de puede deshacer.',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Si, Eliminar',
+        cancelButtonText: 'No, Cancelar'
+      }).then(function (result) {
+        if (result.value) {
+          axios.post('/mensajes-profesional/eliminar', {
+            'id': mensaje.id
+          }).then(function (response) {
+            var respuesta = response.data;
+            Swal.fire('CONFIRMACIÓN', respuesta.mensaje, 'success');
+            me.listarMensajes();
+          })["catch"](function (error) {
+            console.log(error);
+          });
+        }
+      });
+    },
+    seleccionarMensaje: function seleccionarMensaje(mensaje) {
+      var me = this;
+      mensaje.esActivo = true;
+    },
+    cancelarMensaje: function cancelarMensaje(mensaje) {
+      var me = this;
+      mensaje.responder = ""; //mensaje.esActivo = !mensaje.esActivo;
+
+      mensaje.esActivo = false;
+    },
+    validarMensaje: function validarMensaje(mensaje) {
+      var me = this;
+      me.existeError = 0;
+      me.erroresMensaje = [];
+      if (!mensaje.responder) me.erroresMensaje.push("Debes ingresar una respuesta válida.");
+      if (me.erroresMensaje.length) me.existeError = 1;
+      return me.existeError;
+    }
   }
 });
 
@@ -3268,12 +3435,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -49530,440 +49691,592 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("form", { attrs: { action: "#", method: "post" } }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "bloques-de-perfil" }, [
+      _vm._m(1),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-row" }, [
+        _c(
+          "div",
+          {
+            staticClass:
+              "col-lg-12 col-sm-12 form-row-no espacio-campos borde-abajo"
+          },
+          [
+            _c(
+              "p-input",
+              {
+                attrs: {
+                  type: "radio",
+                  name: "frecuencia",
+                  color: "info",
+                  value: "DESACTIVADO"
+                },
+                on: {
+                  change: function($event) {
+                    return _vm.actualizarConfiguracion()
+                  }
+                },
+                model: {
+                  value: _vm.frecuencia,
+                  callback: function($$v) {
+                    _vm.frecuencia = $$v
+                  },
+                  expression: "frecuencia"
+                }
+              },
+              [_vm._v("Desactivado")]
+            )
+          ],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-row" }, [
+        _c(
+          "div",
+          { staticClass: "col-lg-12 col-sm-12 espacio-campos borde-abajo" },
+          [
+            _c(
+              "p-input",
+              {
+                attrs: {
+                  type: "radio",
+                  name: "frecuencia",
+                  color: "info",
+                  value: "AUTOMATICO"
+                },
+                on: {
+                  change: function($event) {
+                    return _vm.actualizarConfiguracion()
+                  }
+                },
+                model: {
+                  value: _vm.frecuencia,
+                  callback: function($$v) {
+                    _vm.frecuencia = $$v
+                  },
+                  expression: "frecuencia"
+                }
+              },
+              [_c("strong", [_vm._v("Frecuencia Automática")])]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.frecuencia == "AUTOMATICO",
+                    expression: "frecuencia == 'AUTOMATICO'"
+                  }
+                ],
+                staticClass: "form-row interior-frecuencia"
+              },
+              [_vm._m(2)]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.frecuencia == "AUTOMATICO",
+                    expression: "frecuencia == 'AUTOMATICO'"
+                  }
+                ],
+                staticClass: "form-row interior-frecuencia"
+              },
+              [
+                _c("span", { staticClass: "aparecer" }, [
+                  _vm._v("Desactivar Booster por la noche (De 00:00 a 9:00am)")
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.frecuencia == "AUTOMATICO",
+                    expression: "frecuencia == 'AUTOMATICO'"
+                  }
+                ],
+                staticClass: "form-row interior-frecuencia"
+              },
+              [
+                _c(
+                  "p-input",
+                  {
+                    attrs: {
+                      type: "radio",
+                      name: "desactivar",
+                      color: "info",
+                      value: 1
+                    },
+                    model: {
+                      value: _vm.desactivarNoche,
+                      callback: function($$v) {
+                        _vm.desactivarNoche = $$v
+                      },
+                      expression: "desactivarNoche"
+                    }
+                  },
+                  [_vm._v("Si")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "p-input",
+                  {
+                    attrs: {
+                      type: "radio",
+                      name: "desactivar",
+                      color: "info",
+                      value: 0
+                    },
+                    model: {
+                      value: _vm.desactivarNoche,
+                      callback: function($$v) {
+                        _vm.desactivarNoche = $$v
+                      },
+                      expression: "desactivarNoche"
+                    }
+                  },
+                  [_vm._v("No")]
+                )
+              ],
+              1
+            )
+          ],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-row" }, [
+        _c(
+          "div",
+          { staticClass: "col-lg-12 col-sm-12 espacio-campos" },
+          [
+            _c(
+              "p-input",
+              {
+                attrs: {
+                  type: "radio",
+                  name: "frecuencia",
+                  color: "info",
+                  value: "MANUAL"
+                },
+                on: {
+                  change: function($event) {
+                    return _vm.actualizarConfiguracion()
+                  }
+                },
+                model: {
+                  value: _vm.frecuencia,
+                  callback: function($$v) {
+                    _vm.frecuencia = $$v
+                  },
+                  expression: "frecuencia"
+                }
+              },
+              [_c("strong", [_vm._v("Frecuencia Manual")])]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.frecuencia == "MANUAL",
+                    expression: "frecuencia == 'MANUAL'"
+                  }
+                ],
+                staticClass: "form-row"
+              },
+              [
+                _vm._l(_vm.arFrecuencia, function(frecuencia, index) {
+                  return _c(
+                    "div",
+                    {
+                      key: frecuencia.id,
+                      staticClass:
+                        "horizontal interior-frecuencia col-lg-12 col-sm-12 form-row"
+                    },
+                    [
+                      _c(
+                        "label",
+                        {
+                          staticClass:
+                            "col-form-label formulario-titulos tamano-pequeno esp-radio"
+                        },
+                        [_vm._v("Fecha")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "esp-radio" }, [
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(frecuencia.fecha) +
+                            "\n                      "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass:
+                            "col-form-label formulario-titulos tamano-pequeno esp-radio"
+                        },
+                        [_vm._v("Hora")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "esp-radio" }, [
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(frecuencia.hora) +
+                            "\n                      "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", {}, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-primary x-circulo",
+                            attrs: { type: "button" },
+                            on: {
+                              click: function($event) {
+                                return _vm.eliminarFrecuencia(frecuencia, index)
+                              }
+                            }
+                          },
+                          [
+                            _c("i", {
+                              staticClass: "fa fa-times",
+                              attrs: { "aria-hidden": "true" }
+                            })
+                          ]
+                        )
+                      ])
+                    ]
+                  )
+                }),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "horizontal",
+                    staticStyle: { "margin-top": "20px" }
+                  },
+                  [
+                    _c(
+                      "label",
+                      {
+                        staticClass:
+                          "col-form-label formulario-titulos tamano-pequeno esp-radio"
+                      },
+                      [_vm._v("Fecha")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "espacio-campos esp-radio" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.fechabooster,
+                            expression: "fechabooster"
+                          }
+                        ],
+                        staticClass: "form-control icono-calendario",
+                        attrs: { type: "date", name: "fechabooster" },
+                        domProps: { value: _vm.fechabooster },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.fechabooster = $event.target.value
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass:
+                          "col-form-label formulario-titulos tamano-pequeno esp-radio"
+                      },
+                      [_vm._v("Hora")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "espacio-campos esp-radio" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.horabooster,
+                            expression: "horabooster"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "time",
+                          name: "horabooster",
+                          value: "00:00"
+                        },
+                        domProps: { value: _vm.horabooster },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.horabooster = $event.target.value
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "espacio-campos" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              return _vm.agregarFrecuencia()
+                            }
+                          }
+                        },
+                        [
+                          _c("i", {
+                            staticClass: "fa fa-plus",
+                            attrs: { "aria-hidden": "true" }
+                          }),
+                          _vm._v(" AGREGAR\n                        ")
+                        ]
+                      )
+                    ])
+                  ]
+                )
+              ],
+              2
+            )
+          ],
+          1
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _vm._m(3),
+    _vm._v(" "),
+    _c("p", [
+      _vm._v(
+        "El uso de este servicio incrementa las posibilidades de éxito de tu anuncio pero no lo garantiza. Si quiere tener éxito la oferta debe ser competitiva."
+      )
+    ]),
+    _vm._v(" "),
+    _c("p", [
+      _vm._v(
+        "Para evitar gastar tus créditos en horas en las que no hay tantos usuarios conectados a la página, te aconsejamos no usar tus boosters entre las 00:00 y las 09:00 am."
+      )
+    ]),
+    _vm._v(" "),
+    _c("p", [
+      _vm._v(
+        "Si los anuncios son eliminados el servicio de booster se detiene automáticamente. También puede ser detenido manualmente. Y los créditos en la cuenta no utilizados se reembolsarían."
+      )
+    ]),
+    _vm._v(" "),
+    _vm._m(4)
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("form", { attrs: { action: "#", method: "post" } }, [
-      _c("div", { staticClass: "bloques-de-perfil" }, [
-        _c("h5", { staticClass: "formulario-titulos" }, [_vm._v("BOOSTER:")]),
-        _vm._v(" "),
-        _c("p", [
-          _c("strong", { staticClass: "precio-morado" }, [
-            _vm._v("EL BOOSTER")
-          ]),
-          _vm._v(
-            " te permite propulsar tu anuncio nuevamente a las primeras posiciones y multiplicar de esta manera la visibilidad de tu anuncio y aumentar el número de contactos.\n    "
-          )
-        ]),
-        _vm._v(" "),
-        _c("p", [
-          _vm._v(
-            "\n      Recuerda que cuando publicas un anuncio este va perdiendo posiciones en función de las nuevas inscripciones y/o de los\n      "
-          ),
-          _c("strong", { staticClass: "precio-morado" }, [_vm._v("BOOSTERS")]),
-          _vm._v(
-            " utilizados por las demás personas de la comunidad Meet For Night.\n    "
-          )
-        ]),
-        _vm._v(" "),
-        _c("p", [
-          _vm._v("\n      El servicio\n      "),
-          _c("strong", { staticClass: "precio-morado" }, [_vm._v("BOOSTER")]),
-          _vm._v(
-            " sube automáticamente tu anuncio a las primeras posiciones cada 1,2,3,6,24 o 48 horas de forma automática pero también lo podrías hacer manualmente si así lo deseas y elegir los días y la horas que mejor consideres.\n    "
-          )
-        ]),
-        _vm._v(" "),
-        _c("p", [
-          _vm._v(
-            "\n      Los anuncios que aparecen marcados con este símbolo\n      "
-          ),
-          _c("i", { staticClass: "icon-podium fucsia" }),
-          _vm._v(
-            " se mantienen por encima del resto de los anuncios durante algún tiempo (en función de la saturación de la categoría).\n    "
-          )
-        ]),
-        _vm._v(" "),
-        _c("p", [
-          _vm._v("\n      Por tanto, podrás utilizar los\n      "),
-          _c("strong", { staticClass: "precio-morado" }, [_vm._v("BOOSTERS")]),
-          _vm._v(
-            " cada vez que lo desees para darle un impulso a tu anuncio.\n    "
-          )
-        ]),
-        _vm._v(" "),
-        _c("p", [_vm._v("Si estas interesado sigue estos pasos:")])
+    return _c("div", { staticClass: "bloques-de-perfil" }, [
+      _c("h5", { staticClass: "formulario-titulos" }, [_vm._v("BOOSTER:")]),
+      _vm._v(" "),
+      _c("p", [
+        _c("strong", { staticClass: "precio-morado" }, [_vm._v("EL BOOSTER")]),
+        _vm._v(
+          " te permite propulsar tu anuncio nuevamente a las primeras posiciones y multiplicar de esta manera la visibilidad de tu anuncio y aumentar el número de contactos.\n    "
+        )
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "bloques-de-perfil" }, [
-        _c("div", { staticClass: "row" }, [
-          _c(
-            "div",
-            { staticClass: "col-lg-12 col-sm-12 form-row espacio-campos" },
-            [
-              _c("h6", { staticClass: "total-actual formulario-titulos" }, [
-                _vm._v("\n          Dispones actualmente de\n          "),
-                _c("span", [_vm._v('" 20 "')]),
-                _vm._v(" crédito(s) y te permite hacer\n          "),
-                _c("span", [_vm._v('" 10 "')]),
-                _vm._v(" booster(s)\n        ")
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "col-lg-12 col-sm-12 form-row espacio-campos" },
-            [
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "custom-control custom-radio custom-control-inline no-margin-right-check col-sm-12 espacio-campos form-row-no borde-abajo"
-                },
-                [
-                  _c("input", {
-                    staticClass: "custom-control-input",
-                    attrs: { type: "radio", id: "frecuencia", name: "elige" }
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "label",
-                    {
-                      staticClass:
-                        "custom-control-label custom-control-label-espacio",
-                      attrs: { for: "frecuencia" }
-                    },
-                    [
-                      _c(
-                        "h3",
-                        { staticClass: "formulario-titulos tamano-pequeno" },
-                        [_vm._v("Frecuencia Automática")]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "espacio-campos" }, [
-                        _c(
-                          "select",
-                          {
-                            staticClass: "form-control auto-width",
-                            attrs: { type: "text", id: "inputPassword" }
-                          },
-                          [
-                            _c("option", { attrs: { value: "Cada 15 min" } }, [
-                              _vm._v("Cada 15 min")
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "Cada 30 min" } }, [
-                              _vm._v("Cada 30 min")
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "Cada hora" } }, [
-                              _vm._v("Cada hora")
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "Cada 2 horas" } }, [
-                              _vm._v("Cada 2 horas")
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "Cada 3 horas" } }, [
-                              _vm._v("Cada 3 horas")
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "Cada 4 horas" } }, [
-                              _vm._v("Cada 4 horas")
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "Cada 6 horas" } }, [
-                              _vm._v("Cada 6 horas")
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "Cada día" } }, [
-                              _vm._v("Cada día")
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "Cada 48" } }, [
-                              _vm._v("Cada 2 días")
-                            ])
-                          ]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "aparecer" }, [
-                        _vm._v(
-                          "Desactivar Booster por la noche (De 00:00 a 9:00am)"
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-row" }, [
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "custom-control custom-radio custom-control-inline no-margin-right-check col-lg col-md-12 col-sm-12 espacio-campos"
-                          },
-                          [
-                            _c("input", {
-                              staticClass: "custom-control-input",
-                              attrs: {
-                                type: "radio",
-                                id: "customRadioInline1",
-                                name: "customRadioInline1"
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c(
-                              "label",
-                              {
-                                staticClass:
-                                  "custom-control-label custom-control-label-espacio",
-                                attrs: { for: "customRadioInline1" }
-                              },
-                              [_vm._v("Si")]
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "custom-control custom-radio custom-control-inline no-margin-right-check col-lg col-md-12 col-sm-12 espacio-campos"
-                          },
-                          [
-                            _c("input", {
-                              staticClass: "custom-control-input",
-                              attrs: {
-                                type: "radio",
-                                id: "customRadioInline5",
-                                name: "customRadioInline1"
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c(
-                              "label",
-                              {
-                                staticClass:
-                                  "custom-control-label custom-control-label-espacio",
-                                attrs: { for: "customRadioInline5" }
-                              },
-                              [_vm._v("No")]
-                            )
-                          ]
-                        )
-                      ])
-                    ]
-                  )
-                ]
-              )
-            ]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-lg-12 col-sm-12 form-row" }, [
-            _c(
-              "div",
-              {
-                staticClass:
-                  "custom-control custom-radio  no-margin-right-check col-sm-12 espacio-campos"
-              },
-              [
-                _c("input", {
-                  staticClass: "custom-control-input",
-                  attrs: { type: "radio", id: "manualmente", name: "elige" }
-                }),
-                _vm._v(" "),
-                _c(
-                  "label",
-                  {
-                    staticClass:
-                      "custom-control-label custom-control-label-espacio",
-                    attrs: { for: "manualmente" }
-                  },
-                  [
-                    _c(
-                      "h3",
-                      { staticClass: "formulario-titulos tamano-pequeno" },
-                      [_vm._v("Frecuencia Manual")]
-                    )
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "repeater col-lg-12 col-sm-12 form-row" },
-                  [
-                    _c(
-                      "div",
-                      { attrs: { "data-repeater-list": "frecuencia_manual" } },
-                      [
-                        _c(
-                          "div",
-                          {
-                            staticClass: "horizontal",
-                            attrs: { "data-repeater-item": "" }
-                          },
-                          [
-                            _c(
-                              "label",
-                              {
-                                staticClass:
-                                  "col-form-label formulario-titulos tamano-pequeno esp-radio",
-                                attrs: { for: "inputPassword" }
-                              },
-                              [_vm._v("Fecha")]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              { staticClass: "espacio-campos esp-radio" },
-                              [
-                                _c("input", {
-                                  staticClass: "form-control icono-calendario",
-                                  attrs: { type: "date", name: "fecha" }
-                                })
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "label",
-                              {
-                                staticClass:
-                                  "col-form-label formulario-titulos tamano-pequeno esp-radio",
-                                attrs: { for: "inputPassword" }
-                              },
-                              [_vm._v("Hora")]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              { staticClass: "espacio-campos esp-radio" },
-                              [
-                                _c("input", {
-                                  staticClass: "form-control",
-                                  attrs: {
-                                    type: "text",
-                                    name: "hora",
-                                    value: "00:00"
-                                  }
-                                })
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "espacio-campos" }, [
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-primary x-circulo",
-                                  attrs: {
-                                    type: "button",
-                                    "data-repeater-delete": ""
-                                  }
-                                },
-                                [
-                                  _c("i", {
-                                    staticClass: "fa fa-times",
-                                    attrs: { "aria-hidden": "true" }
-                                  })
-                                ]
-                              )
-                            ])
-                          ]
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "repeater col-lg-12 col-sm-12 form-row" },
-                      [
-                        _c("div", { staticClass: "espacio-campos" }, [
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-primary mas-cuadrado",
-                              attrs: {
-                                type: "button",
-                                "data-repeater-create": ""
-                              }
-                            },
-                            [
-                              _c("i", {
-                                staticClass: "fa fa-plus",
-                                attrs: { "aria-hidden": "true" }
-                              })
-                            ]
-                          )
-                        ])
-                      ]
-                    )
-                  ]
-                )
-              ]
-            )
+      _c("p", [
+        _vm._v(
+          "\n      Recuerda que cuando publicas un anuncio este va perdiendo posiciones en función de las nuevas inscripciones y/o de los\n      "
+        ),
+        _c("strong", { staticClass: "precio-morado" }, [_vm._v("BOOSTERS")]),
+        _vm._v(
+          " utilizados por las demás personas de la comunidad Meet For Night.\n    "
+        )
+      ]),
+      _vm._v(" "),
+      _c("p", [
+        _vm._v("\n      El servicio\n      "),
+        _c("strong", { staticClass: "precio-morado" }, [_vm._v("BOOSTER")]),
+        _vm._v(
+          " sube automáticamente tu anuncio a las primeras posiciones cada 1,2,3,6,24 o 48 horas de forma automática pero también lo podrías hacer manualmente si así lo deseas y elegir los días y la horas que mejor consideres.\n    "
+        )
+      ]),
+      _vm._v(" "),
+      _c("p", [
+        _vm._v(
+          "\n      Los anuncios que aparecen marcados con este símbolo\n      "
+        ),
+        _c("i", { staticClass: "icon-podium fucsia" }),
+        _vm._v(
+          " se mantienen por encima del resto de los anuncios durante algún tiempo (en función de la saturación de la categoría).\n    "
+        )
+      ]),
+      _vm._v(" "),
+      _c("p", [
+        _vm._v("\n      Por tanto, podrás utilizar los\n      "),
+        _c("strong", { staticClass: "precio-morado" }, [_vm._v("BOOSTERS")]),
+        _vm._v(
+          " cada vez que lo desees para darle un impulso a tu anuncio.\n    "
+        )
+      ]),
+      _vm._v(" "),
+      _c("p", [_vm._v("Si estas interesado sigue estos pasos:")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c(
+        "div",
+        { staticClass: "col-lg-12 col-sm-12 form-row espacio-campos" },
+        [
+          _c("h6", { staticClass: "total-actual formulario-titulos" }, [
+            _vm._v("\n          Dispones actualmente de\n          "),
+            _c("span", [_vm._v('" 20 "')]),
+            _vm._v(" crédito(s) y te permite hacer\n          "),
+            _c("span", [_vm._v('" 10 "')]),
+            _vm._v(" booster(s)\n        ")
           ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "bloques-de-perfil" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-primary btn-espacio-fuc btn-tarjeta-credito",
-            attrs: { type: "submit" }
-          },
-          [
-            _c("i", { staticClass: "icon-credit-cards esp-icono-bio" }),
-            _vm._v(" "),
-            _c("span", [_vm._v("COMPRAR CRÉDITOS")])
-          ]
-        )
-      ]),
-      _vm._v(" "),
-      _c("p", [
-        _vm._v(
-          "El uso de este servicio incrementa las posibilidades de éxito de tu anuncio pero no lo garantiza. Si quiere tener éxito la oferta debe ser competitiva."
-        )
-      ]),
-      _vm._v(" "),
-      _c("p", [
-        _vm._v(
-          "Para evitar gastar tus créditos en horas en las que no hay tantos usuarios conectados a la página, te aconsejamos no usar tus boosters entre las 00:00 y las 09:00 am."
-        )
-      ]),
-      _vm._v(" "),
-      _c("p", [
-        _vm._v(
-          "Si los anuncios son eliminados el servicio de booster se detiene automáticamente. También puede ser detenido manualmente. Y los créditos en la cuenta no utilizados se reembolsarían."
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-12" }, [
-          _c("div", { staticClass: "historico espacio-campos" }, [
-            _vm._v("Histórico de los booster")
-          ]),
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "select",
+      {
+        staticClass: "form-control auto-width",
+        attrs: { type: "text", id: "inputPassword" }
+      },
+      [
+        _c("option", { attrs: { value: "*/15 * * * *" } }, [
+          _vm._v("Cada 15 min")
+        ]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "*/30 * * * *" } }, [
+          _vm._v("Cada 30 min")
+        ]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "0 * * * *" } }, [_vm._v("Cada hora")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "0 */2 * * *" } }, [
+          _vm._v("Cada 2 horas")
+        ]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "0 */3 * * *" } }, [
+          _vm._v("Cada 3 horas")
+        ]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "0 */4 * * *" } }, [
+          _vm._v("Cada 4 horas")
+        ]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "0 */6 * * *" } }, [
+          _vm._v("Cada 6 horas")
+        ]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "Cada día" } }, [_vm._v("Cada día")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "Cada 48" } }, [_vm._v("Cada 2 días")])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "bloques-de-perfil" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary btn-espacio-fuc btn-tarjeta-credito",
+          attrs: { type: "submit" }
+        },
+        [
+          _c("i", { staticClass: "icon-credit-cards esp-icono-bio" }),
           _vm._v(" "),
-          _c("div", { staticClass: "table-responsive" }, [
-            _c("table", { staticClass: "table" }, [
-              _c("thead", { staticClass: "cabecera-fake" }, [
-                _c("tr", [
-                  _c("th", { attrs: { scope: "col" } }, [_vm._v("Nombre")]),
-                  _vm._v(" "),
-                  _c("th", { attrs: { scope: "col" } }, [_vm._v("Hora")]),
-                  _vm._v(" "),
-                  _c("th", { attrs: { scope: "col" } }, [_vm._v("Fecha")])
-                ])
+          _c("span", [_vm._v("COMPRAR CRÉDITOS")])
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-12" }, [
+        _c("div", { staticClass: "historico espacio-campos" }, [
+          _vm._v("Histórico de los booster")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "table-responsive" }, [
+          _c("table", { staticClass: "table" }, [
+            _c("thead", { staticClass: "cabecera-fake" }, [
+              _c("tr", [
+                _c("th", { attrs: { scope: "col" } }, [_vm._v("Nombre")]),
+                _vm._v(" "),
+                _c("th", { attrs: { scope: "col" } }, [_vm._v("Hora")]),
+                _vm._v(" "),
+                _c("th", { attrs: { scope: "col" } }, [_vm._v("Fecha")])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("tbody", { staticClass: "resultado-fake" }, [
+              _c("tr", [
+                _c("td", [_vm._v("Booster activado")]),
+                _vm._v(" "),
+                _c("td", [_vm._v("05:30 pm")]),
+                _vm._v(" "),
+                _c("td", [_vm._v("18/11/2018")])
               ]),
               _vm._v(" "),
-              _c("tbody", { staticClass: "resultado-fake" }, [
-                _c("tr", [
-                  _c("td", [_vm._v("Booster activado")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("05:30 pm")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("18/11/2018")])
-                ]),
+              _c("tr", [
+                _c("td", [_vm._v("Booster activado")]),
                 _vm._v(" "),
-                _c("tr", [
-                  _c("td", [_vm._v("Booster activado")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("05:30 pm")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("18/11/2018")])
-                ])
+                _c("td", [_vm._v("05:30 pm")]),
+                _vm._v(" "),
+                _c("td", [_vm._v("18/11/2018")])
               ])
             ])
           ])
@@ -51074,342 +51387,439 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("form", { attrs: { action: "#", method: "post" } }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "bloques-de-perfil" }, [
+      _c("h6", { staticClass: "total-actual formulario-titulos" }, [
+        _vm._v("\n      Dispones actualmente de\n      "),
+        _c("span", [_vm._v('" ' + _vm._s(_vm.calcularCreditos) + ' "')]),
+        _vm._v(" créditos en tu cuenta.\n    ")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-lg-12 form-row" }, [
+          _c(
+            "label",
+            {
+              staticClass: "col-form-label formulario-titulos tamano-pequeno",
+              attrs: { for: "inputPassword" }
+            },
+            [_vm._v("Créditos para comprar")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-2 espaciado-mb" }, [
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.cantidad_creditos,
+                    expression: "cantidad_creditos"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { name: "cantidad_creditos" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.cantidad_creditos = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
+                }
+              },
+              [
+                _c("option", { attrs: { value: "10" } }, [_vm._v("10")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "20" } }, [_vm._v("20")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "30" } }, [_vm._v("30")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "40" } }, [_vm._v("40")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "50" } }, [_vm._v("50")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "60" } }, [_vm._v("60")])
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "label",
+            {
+              staticClass: "col-form-label formulario-titulos tamano-pequeno",
+              attrs: { for: "inputPassword" }
+            },
+            [_vm._v("Total")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "input-group espaciado-mb mb-2 col-lg-2" }, [
+            _vm._m(1),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.monto_creditos,
+                  expression: "monto_creditos"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text", value: "100", readonly: "" },
+              domProps: { value: _vm.monto_creditos },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.monto_creditos = $event.target.value
+                }
+              }
+            })
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("h5", { staticClass: "formulario-titulos" }, [
+        _vm._v("MÉTODOS DE PAGO:")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c(
+          "div",
+          {
+            staticClass:
+              "no-margin-right-check col-lg-12 col-md-12 col-sm-12 espacio-campos"
+          },
+          [
+            _c(
+              "p-input",
+              {
+                attrs: {
+                  type: "radio",
+                  name: "metodo_pago",
+                  color: "info",
+                  value: "PAYPAL"
+                },
+                model: {
+                  value: _vm.metodo_pago,
+                  callback: function($$v) {
+                    _vm.metodo_pago = $$v
+                  },
+                  expression: "metodo_pago"
+                }
+              },
+              [
+                _vm._v("Accede con tu cuenta "),
+                _c("img", {
+                  attrs: { src: "img/paypal-logo.png", width: "50" }
+                })
+              ]
+            )
+          ],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c(
+          "div",
+          {
+            staticClass:
+              "no-margin-right-check col-lg-12 col-md-12 col-sm-12 espacio-campos"
+          },
+          [
+            _c(
+              "p-input",
+              {
+                attrs: {
+                  type: "radio",
+                  name: "metodo_pago",
+                  color: "info",
+                  value: "STRIPE"
+                },
+                model: {
+                  value: _vm.metodo_pago,
+                  callback: function($$v) {
+                    _vm.metodo_pago = $$v
+                  },
+                  expression: "metodo_pago"
+                }
+              },
+              [
+                _vm._v("Tarjetas de crédito o débito bancario  "),
+                _c("img", { attrs: { src: "img/tarjetas.jpg", width: "100" } })
+              ]
+            )
+          ],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c(
+          "div",
+          {
+            staticClass:
+              "no-margin-right-check col-lg-12 col-md-12 col-sm-12 espacio-campos"
+          },
+          [
+            _c(
+              "p-input",
+              {
+                attrs: {
+                  type: "radio",
+                  name: "metodo_pago",
+                  color: "info",
+                  value: "DEPOSITO"
+                },
+                model: {
+                  value: _vm.metodo_pago,
+                  callback: function($$v) {
+                    _vm.metodo_pago = $$v
+                  },
+                  expression: "metodo_pago"
+                }
+              },
+              [_vm._v("\n             Deposito Bancario\n          ")]
+            )
+          ],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c(
+          "div",
+          {
+            staticClass:
+              "no-margin-right-check col-lg-12 col-md-12 col-sm-12 espacio-campos"
+          },
+          [
+            _c(
+              "p-input",
+              {
+                attrs: {
+                  type: "radio",
+                  name: "metodo_pago",
+                  color: "info",
+                  value: "EFECTIVO"
+                },
+                model: {
+                  value: _vm.metodo_pago,
+                  callback: function($$v) {
+                    _vm.metodo_pago = $$v
+                  },
+                  expression: "metodo_pago"
+                }
+              },
+              [_vm._v(" Pago en Efectivo ")]
+            )
+          ],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-lg-12 form-row" }, [
+          _c(
+            "label",
+            {
+              staticClass: "col-form-label formulario-titulos tamano-pequeno",
+              attrs: { for: "inputPassword" }
+            },
+            [_vm._v("Código Promocional")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-2 espaciado-mb" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.codigo_promocional,
+                  expression: "codigo_promocional"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                type: "text",
+                name: "codigo_promocional",
+                placeholder: "457DABCCC"
+              },
+              domProps: { value: _vm.codigo_promocional },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.codigo_promocional = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c(
+            "label",
+            { staticClass: "col-form-label formulario-titulos tamano-pequeno" },
+            [_vm._v("Descuento")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "input-group espaciado-mb mb-2 col-lg-2" }, [
+            _vm._m(2),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.monto_creditos,
+                  expression: "monto_creditos"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text", value: "100", readonly: "" },
+              domProps: { value: _vm.monto_creditos },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.monto_creditos = $event.target.value
+                }
+              }
+            })
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("h5", { staticClass: "formulario-titulos" }, [
+        _vm._v("SELECCIONE CATEGORIAS:")
+      ]),
+      _vm._v(" "),
+      _vm._m(3)
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-12" }, [
+        _c("div", { staticClass: "historico espacio-campos" }, [
+          _vm._v("Histórico Compra de créditos")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "table-responsive" }, [
+          _c("table", { staticClass: "table" }, [
+            _vm._m(4),
+            _vm._v(" "),
+            _c(
+              "tbody",
+              { staticClass: "resultado-fake" },
+              _vm._l(_vm.arCreditos, function(credito) {
+                return _c("tr", { key: credito.id }, [
+                  _c("td", [_vm._v(_vm._s(credito.metodo_pago))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(credito.fecha))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(credito.hora))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(credito.cantidad_creditos))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(credito.total_creditos))])
+                ])
+              }),
+              0
+            )
+          ])
+        ])
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("form", { attrs: { action: "#", method: "post" } }, [
-      _c("div", { staticClass: "bloques-de-perfil" }, [
-        _c("h5", { staticClass: "formulario-titulos" }, [_vm._v("CRÉDITOS:")]),
-        _vm._v(" "),
-        _c("p", [
-          _vm._v(
-            "Los créditos valen para comprar tus boosters y así mejorar la visibilidad del anuncio para que tu negocio sea más redondo y lucrativo."
-          )
-        ]),
-        _vm._v(" "),
-        _c("p", [
-          _vm._v("\n      Cada vez que utilices un\n      "),
-          _c("strong", { staticClass: "precio-morado" }, [_vm._v("BOOSTER")]),
-          _vm._v(
-            " se consumirán 1 o 2 créditos en función del plan que hayas elegido.\n      "
-          )
-        ]),
-        _vm._v(" "),
-        _c("p", { staticClass: "espacio-campos" }, [
-          _vm._v(
-            "Con tus créditos podrás hacer una gestión eficiente de tu cuenta."
-          )
-        ])
+    return _c("div", { staticClass: "bloques-de-perfil" }, [
+      _c("h5", { staticClass: "formulario-titulos" }, [_vm._v("CRÉDITOS:")]),
+      _vm._v(" "),
+      _c("p", [
+        _vm._v(
+          "Los créditos valen para comprar tus boosters y así mejorar la visibilidad del anuncio para que tu negocio sea más redondo y lucrativo."
+        )
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "bloques-de-perfil" }, [
-        _c("h6", { staticClass: "total-actual formulario-titulos" }, [
-          _vm._v("\n      Dispones actualmente de\n      "),
-          _c("span", [_vm._v('" 20 "')]),
-          _vm._v(" créditos en tu cuenta.\n    ")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-lg-12 form-row" }, [
-            _c(
-              "label",
-              {
-                staticClass: "col-form-label formulario-titulos tamano-pequeno",
-                attrs: { for: "inputPassword" }
-              },
-              [_vm._v("Créditos para comprar")]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-lg-2 espaciado-mb" }, [
-              _c(
-                "select",
-                {
-                  staticClass: "form-control",
-                  attrs: {
-                    type: "text",
-                    id: "inputPassword",
-                    name: "cuantos-quieres-comprar"
-                  }
-                },
-                [
-                  _c("option", { attrs: { value: "10" } }, [_vm._v("10")]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "20" } }, [_vm._v("20")]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "30" } }, [_vm._v("30")]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "40" } }, [_vm._v("40")]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "50" } }, [_vm._v("50")]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "60" } }, [_vm._v("60")])
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c(
-              "label",
-              {
-                staticClass: "col-form-label formulario-titulos tamano-pequeno",
-                attrs: { for: "inputPassword" }
-              },
-              [_vm._v("Total")]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "input-group espaciado-mb mb-2 col-lg-2" },
-              [
-                _c("div", { staticClass: "input-group-prepend" }, [
-                  _c("div", { staticClass: "input-group-text" }, [_vm._v("$")])
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  staticClass: "form-control",
-                  attrs: {
-                    type: "text",
-                    id: "inlineFormInputGroup",
-                    value: "100",
-                    disabled: ""
-                  }
-                })
-              ]
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("h5", { staticClass: "formulario-titulos" }, [
-          _vm._v("MÉTODOS DE PAGO:")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
-          _c(
-            "div",
-            {
-              staticClass:
-                "custom-control custom-radio custom-control-inline no-margin-right-check col-lg-12 col-md-12 col-sm-12 espacio-campos"
-            },
-            [
-              _c("input", {
-                staticClass: "custom-control-input",
-                attrs: {
-                  type: "radio",
-                  id: "tatuaje(s)-si",
-                  name: "tatuaje(s)"
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass:
-                    "custom-control-label custom-control-label-espacio",
-                  attrs: { for: "tatuaje(s)-si" }
-                },
-                [
-                  _vm._v(
-                    "\n          Tarjetas de crédito o débito bancario\n          "
-                  ),
-                  _c("img", {
-                    staticClass: "cards",
-                    attrs: { src: "img/tarjetas.jpg" }
-                  })
-                ]
-              )
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass:
-                "custom-control custom-radio custom-control-inline no-margin-right-check col-lg-12 col-md-12 col-sm-12 espacio-campos"
-            },
-            [
-              _c("input", {
-                staticClass: "custom-control-input",
-                attrs: {
-                  type: "radio",
-                  id: "tatuaje(s)-no",
-                  name: "tatuaje(s)"
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass:
-                    "custom-control-label custom-control-label-espacio",
-                  attrs: { for: "tatuaje(s)-no" }
-                },
-                [
-                  _c("img", {
-                    staticClass: "paypal",
-                    attrs: { src: "img/paypal-logo.png" }
-                  })
-                ]
-              )
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass:
-                "custom-control custom-radio custom-control-inline no-margin-right-check col-lg-12 col-md-12 col-sm-12 espacio-campos"
-            },
-            [
-              _c("input", {
-                staticClass: "custom-control-input",
-                attrs: {
-                  type: "radio",
-                  id: "tatuaje(s)-re",
-                  name: "tatuaje(s)"
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass:
-                    "custom-control-label custom-control-label-espacio",
-                  attrs: { for: "tatuaje(s)-re" }
-                },
-                [
-                  _c("i", { staticClass: "icon-credit-cards esp-icono-bio" }),
-                  _vm._v(" Deposito Bancario\n        ")
-                ]
-              )
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass:
-                "custom-control custom-radio custom-control-inline no-margin-right-check col-lg-12 col-md-12 col-sm-12 espacio-campos"
-            },
-            [
-              _c("input", {
-                staticClass: "custom-control-input",
-                attrs: {
-                  type: "radio",
-                  id: "tatuaje(s)-re",
-                  name: "tatuaje(s)"
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass:
-                    "custom-control-label custom-control-label-espacio",
-                  attrs: { for: "tatuaje(s)-re" }
-                },
-                [
-                  _c("i", { staticClass: "icon-credit-cards esp-icono-bio" }),
-                  _vm._v(" Pago en Efectivo\n        ")
-                ]
-              )
-            ]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-lg-12 form-row" }, [
-            _c(
-              "label",
-              {
-                staticClass: "col-form-label formulario-titulos tamano-pequeno",
-                attrs: { for: "inputPassword" }
-              },
-              [_vm._v("Código Promocional")]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-lg-2 espaciado-mb" }, [
-              _c("input", {
-                staticClass: "form-control",
-                attrs: {
-                  type: "text",
-                  id: "inlineFormInputGroup",
-                  value: "457DABCCC"
-                }
-              })
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "bloques-de-perfil" }, [
-          _c(
-            "button",
-            {
-              staticClass:
-                "btn btn-primary btn-espacio-fuc btn-tarjeta-credito",
-              attrs: { type: "submit" }
-            },
-            [_c("span", [_vm._v("VALIDAR")])]
-          )
-        ])
+      _c("p", [
+        _vm._v("\n      Cada vez que utilices un\n      "),
+        _c("strong", { staticClass: "precio-morado" }, [_vm._v("BOOSTER")]),
+        _vm._v(
+          " se consumirán 1 o 2 créditos en función del plan que hayas elegido.\n      "
+        )
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-12" }, [
-          _c("div", { staticClass: "historico espacio-campos" }, [
-            _vm._v("Histórico de los créditos")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "table-responsive" }, [
-            _c("table", { staticClass: "table" }, [
-              _c("thead", { staticClass: "cabecera-fake" }, [
-                _c("tr", [
-                  _c("th", { attrs: { scope: "col" } }, [_vm._v("Nombre")]),
-                  _vm._v(" "),
-                  _c("th", { attrs: { scope: "col" } }, [_vm._v("Hora")]),
-                  _vm._v(" "),
-                  _c("th", { attrs: { scope: "col" } }, [_vm._v("Fecha")]),
-                  _vm._v(" "),
-                  _c("th", { attrs: { scope: "col" } }, [
-                    _vm._v("Créditos contratados")
-                  ]),
-                  _vm._v(" "),
-                  _c("th", { attrs: { scope: "col" } }, [
-                    _vm._v("Total Pagado ($)")
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("tbody", { staticClass: "resultado-fake" }, [
-                _c("tr", [
-                  _c("td", [_vm._v("Booster")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("05:30 pm")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("18/11/2018")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("80")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("160")])
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _c("td", [_vm._v("Booster")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("05:30 pm")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("18/11/2018")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("80")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("-")])
-                ])
-              ])
-            ])
-          ])
-        ])
+      _c("p", { staticClass: "espacio-campos" }, [
+        _vm._v(
+          "Con tus créditos podrás hacer una gestión eficiente de tu cuenta."
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c("div", { staticClass: "input-group-text" }, [_vm._v("$")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c("div", { staticClass: "input-group-text" }, [_vm._v("$")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "bloques-de-perfil" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary btn-espacio-fuc btn-tarjeta-credito",
+          attrs: { type: "button" }
+        },
+        [_c("span", [_vm._v("CONFIRMAR COMPRA ($123)")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "cabecera-fake" }, [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Metodo Pago")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Fecha")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Hora")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("# Cráditos")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Total($)")])
       ])
     ])
   }

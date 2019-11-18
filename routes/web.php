@@ -175,24 +175,17 @@ Route::group(['middleware'=>['auth']],function(){
             Route::get('mensajes-profesional/listar', 'MensajeProfesionalController@listar');
             Route::post('mensajes-profesional/responder', 'MensajeProfesionalController@responder');
             Route::post('mensajes-profesional/eliminar', 'MensajeProfesionalController@eliminar');
-            
-
 
             //SERVICIOS
             Route::get('servicios-profesional', function () {
                 return view('forms-perfil-profesional.servicios-profesional');
             });
             Route::get('servicios-profesional/listar', 'ServiciosProfesionalController@listar' );
-
-            
             
             //AGENDA
             Route::get('agenda-profesional', function () {
                 return view('forms-perfil-profesional.agenda-profesional');
             });
-
-            
-            
             
             //TARIFAS
             Route::get('tarifas-profesional', function () {
@@ -213,7 +206,21 @@ Route::group(['middleware'=>['auth']],function(){
 
 
             
-            Route::get('creditos-profesional', function () {   return view('forms-perfil-profesional.creditos-profesional');   });
+            Route::get('creditos-profesional', 'CreditoProfesionalController@mostrar' );
+            Route::get('creditos-profesional/listar', 'CreditoProfesionalController@listar' );
+
+            Route::get('codigos-promocionales/listar', 'CodigoPromocionalController@listar' );
+            Route::get('codigos-promocionales/consultar/{codigo}', 'CodigoPromocionalController@consultar' );
+
+            Route::get('frecuencia-booster/listar', 'FrecuenciaBoosterController@listar' );
+            Route::post('frecuencia-booster/eliminar', 'FrecuenciaBoosterController@eliminar' );
+            Route::post('frecuencia-booster/agregar', 'FrecuenciaBoosterController@agregar' );
+            
+
+            Route::get('booster-profesional/listar', 'BoosterProfesionalController@listar' );
+            Route::post('booster-profesional/actualizar', 'BoosterProfesionalController@actualizar' );
+            
+
             Route::get('booster-profesional', function () {  return view('forms-perfil-profesional.booster-profesional');  });
             Route::get('estadisticas-profesional', function () {  return view('forms-perfil-profesional.estadisticas-profesional');  });
             
