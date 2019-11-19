@@ -38,6 +38,10 @@ class Usuario extends Authenticatable
         return $this->hasMany('App\ReservasProfesional', 'idprofesional', 'id');
     }
 
+    public function categorias(){
+        return $this->hasMany('App\CategoriasProfesional', 'idprofesional', 'id');
+    }
+
     public function disponibilidades()
     {
         return $this->hasMany('App\DisponibilidadProfesional', 'idusuario', 'id');

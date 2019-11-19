@@ -105,18 +105,22 @@
             <div class="form-row">
                 <div class="col-lg-6 col-sm-12">
                     <div class="busqueda-detallada-range espacio-campos">
-                      <label>Estatura</label>
-                      <span class="esp-i">140 cm</span>
-                      <input class="rango-perfil" type="text" min="140" max="210" value="140" name="estatura" id="estatura" v-model="estatura" step="1" />
-                      <span class="esp-d">210 cm</span>
+                        <div class="col-lg-3 col-sm-12">
+                            <label>Estatura</label>
+                        </div>
+                        <div class="col-lg-9 col-sm-12">
+                            <vue-range-slider ref="slider" :min="140" :max="240" v-model="estatura"></vue-range-slider>
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-6 col-sm-12">
                     <div class="busqueda-detallada-range espacio-campos">
-                      <label>Peso</label>
-                      <span class="esp-i">45 kg</span>
-                      <input class="rango-perfil" type="text" min="45" max="150" value="45" name="peso" id="peso" v-model="peso" step="1" />
-                      <span class="esp-d">150 kg</span>
+                      <div class="col-lg-3 col-sm-12">
+                            <label>Peso</label>
+                        </div>
+                        <div class="col-lg-9 col-sm-12">
+                            <vue-range-slider ref="slider" :min="45" :max="150" v-model="peso"></vue-range-slider>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -285,11 +289,11 @@
           <div class="bloques-de-perfil">
             <h5 class="formulario-titulos">PIERCING(S):</h5>
             <div class="form-row">
-              <div class="custom-control custom-radio custom-control-inline no-margin-right-check col-lg-1 col-md-12 col-sm-12 espacio-campos">
+              <div class="no-margin-right-check col-lg-1 col-md-12 col-sm-12 espacio-campos">
                 <input type="radio" id="piercing(s)-si" name="piercing(s)" class="custom-control-input">
                 <label class="custom-control-label custom-control-label-espacio" for="piercing(s)-si">Sí</label>
               </div>
-              <div class="custom-control custom-radio custom-control-inline no-margin-right-check col-lg-1 col-md-12 col-sm-12 espacio-campos">
+              <div class="no-margin-right-check col-lg-1 col-md-12 col-sm-12 espacio-campos">
                 <input type="radio" id="piercing(s)-no" name="piercing(s)" class="custom-control-input">
                 <label class="custom-control-label custom-control-label-espacio" for="piercing(s)-no">No</label>
               </div>
@@ -299,13 +303,11 @@
           <div class="bloques-de-perfil">
             <h5 class="formulario-titulos">FUMADOR(A):</h5>
             <div class="form-row">
-              <div class="custom-control custom-radio custom-control-inline no-margin-right-check col-lg-1 col-md-12 col-sm-12 espacio-campos">
-                <input type="radio" id="fumador(a)-si" name="fumador(a)" class="custom-control-input">
-                <label class="custom-control-label custom-control-label-espacio" for="fumador(a)-si">Sí</label>
+              <div class="no-margin-right-check col-lg-1 col-md-12 col-sm-12 espacio-campos">
+                <p-input type="radio" name="fumador" color="info" :value="1" v-model="fumador">Si</p-input>
               </div>
-              <div class="custom-control custom-radio custom-control-inline no-margin-right-check col-lg-1 col-md-12 col-sm-12 espacio-campos">
-                <input type="radio" id="fumador(a)-no" name="fumador(a)" class="custom-control-input">
-                <label class="custom-control-label custom-control-label-espacio" for="fumador(a)-no">No</label>
+              <div class="no-margin-right-check col-lg-1 col-md-12 col-sm-12 espacio-campos">
+                <p-input type="radio" name="fumador" color="info" :value="0" v-model="fumador">No</p-input>
               </div>
             </div>
           </div>
@@ -354,6 +356,9 @@
 
 
 <script>
+
+import VueRangeSlider from 'vue-range-component'
+
 export default {
 
     data(){
@@ -366,7 +371,6 @@ export default {
             confirmar_email : '',
             clave : '',
             verificar_clave : '',
-            usuario : '',
             fecha_nacimiento : '',
             sexo : '',
             nacionalidad : '',
@@ -379,17 +383,20 @@ export default {
             color_ojos : '',
             color_cabello : '',
             corte_intimo : '',
-            estatura : '',
-            peso : '',
+            estatura : 140,
+            peso : 50,
             orientacion : '',
             tatuaje : '',
             piercing : '',
-            fumador : '',
+            fumador : 0,
             seguridad : '',
             estado : '',
             errorPerfil : 0,
             erroresPerfil: [],
-            id_perfil : 0
+            id_perfil : 0,
+            usuario: [],
+            extras: [],
+            categorias: []
         }
     },
     methods:{
@@ -397,16 +404,20 @@ export default {
 
             let me = this;
 
-            var url= '/perfil-profesional/editar?id=1';
-
             // Make a request for a user with a given ID
-            axios.get(url)
+            axios.get('/perfil-profesional/editar')
             .then(function (response) {
                 // handle success
+                
+                //me.usuario = response.data.usuario;     
+                //me.extras = response.data.usuario.extras;    
+                me.categorias = response.data.usuario.categorias;   
 
-                var usuario = response.data.usuario;              
+                me.estatura = response.data.usuario.extras.estatura;
+                me.peso = response.data.usuario.extras.peso;
+                me.fumador = response.data.usuario.extras.fumador;
 
-                me.nombre = usuario.nombre;
+                /*me.nombre = usuario.nombre;
                 me.departamento = usuario.departamento;
                 me.apodo = usuario.apodo;
                 me.frase = usuario.frase;
@@ -415,7 +426,7 @@ export default {
                 me.confirmar_email = usuario.email;
                 me.clave = usuario.clave;
                 me.verificar_clave = usuario.clave;
-                me.usuario = usuario.usuario;
+                //me.usuario = usuario.usuario;
                 me.fecha_nacimiento = usuario.fecha_nacimiento;
                 me.sexo = usuario.sexo;
                 me.nacionalidad = usuario.nacionalidad;
@@ -431,11 +442,9 @@ export default {
                 me.tatuaje = usuario.tatuaje;
                 me.piercing = usuario.piercing;
                 me.fumador = usuario.fumador;
-                me.seguridad = usuario.seguridad;
+                me.seguridad = usuario.seguridad;*/
 
 
-                $("#estatura").asRange('val', response.data.estatura);
-                $("#peso").asRange('val', response.data.peso);
 
             })
             .catch(function (error) {
@@ -495,6 +504,9 @@ export default {
 
         }
     },
+    components: {
+      VueRangeSlider
+    },
     mounted() {
         console.log("Component mounted.");
         this.mostrarPerfilProfesional();
@@ -502,14 +514,3 @@ export default {
 
 };
 </script>
-
-<style>
-  .div-error {
-    display:flex;
-    justify-content:center;
-  }
-  .text-error{
-    color:red;
-    font-weight:bold;
-  }
-</style>
