@@ -10,7 +10,8 @@ class MensajeProfesional extends Model
     
     public $table = "mensaje_profesional";
  
-    protected $fillable = ['idprofesional','mensaje'];
+    protected $fillable = ['idprofesional','idusuario','mensaje'];
+
     protected $appends = ['responder','esActivo'];
 
     public function usuario()

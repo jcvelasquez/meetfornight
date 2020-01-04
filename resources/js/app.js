@@ -53,30 +53,29 @@ Vue.component('valoracion-profesional', require('./components/ValoracionProfesio
 Vue.component('listado-profesionales', require('./components/ListadoProfesionales.vue').default);
 Vue.component('reservas-profesional', require('./components/ReservasProfesional.vue').default);
 Vue.component('reservas-profesional-front', require('./components/ReservasProfesionalFront.vue').default);
-Vue.component('disponibilidad-profesional-front', require('./components/DisponibilidadProfesionalFront.vue').default);
 
+//COMPONENTES HOME
+Vue.component('disponibilidad-profesional-front', require('./components/DisponibilidadProfesionalFront.vue').default);
+//Vue.component('busqueda-detallada', require('./components/BusquedaDetallada.vue').default);
+Vue.component('banner-superior', require('./components/BannerSuperior.vue').default);
+Vue.component('banner-inferior', require('./components/BannerInferior.vue').default);
+//Vue.component('modal-busqueda', require('./components/ModalBusqueda.vue').default);
+Vue.component('modal-denuncia', require('./components/ModalDenuncia.vue').default);
+
+//COMPONENTES DASHBOARD
+Vue.component('usuarios-administrador', require('./components/UsuariosAdministrador.vue').default);
+Vue.component('mensajes-administrador', require('./components/MensajesAdministrador.vue').default);
+Vue.component('alertas-administrador', require('./components/AlertasAdministrador.vue').default);
+Vue.component('idiomas-administrador', require('./components/IdiomasAdministrador.vue').default);
+Vue.component('categorias-administrador', require('./components/CategoriasAdministrador.vue').default);
 
 
 
 
 Vue.prototype.$csrf_token = document.querySelector("meta[name='csrf-token']").getAttribute('content');
-
 Vue.prototype.$idprofesional = document.querySelector("meta[name='profesional-id']").getAttribute('content');
 Vue.prototype.$idusuario = document.querySelector("meta[name='usuario-id']").getAttribute('content');
-
-
-
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
 
 const app = new Vue({
     el: '#widget'
 });
-
-
-
-

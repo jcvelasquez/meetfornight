@@ -18,7 +18,11 @@ class FrecuenciaBoosterController extends Controller
        
         $idprofesional = Auth::user()->id;
 
-        $frecuencia = FrecuenciaBooster::where('idprofesional', '=', $idprofesional)->orderBy('fecha_booster','desc')->get();
+        $frecuencia = FrecuenciaBooster::where('idprofesional', '=', $idprofesional)->orderBy('fecha_booster','desc')
+                                        ->join('categorias', 'categorias.id', '=', 'booster_frecuencia_profesional.idcategoria')
+                                        ->select('booster_frecuencia_profesional.*','categorias.nombre_categoria')
+                                        ->get();
+
         return ['frecuencia' => $frecuencia];  
 
     }
@@ -32,6 +36,7 @@ class FrecuenciaBoosterController extends Controller
 
         $frecuencia = new FrecuenciaBooster();
         $frecuencia->idprofesional = $idprofesional;
+        $frecuencia->idcategoria = $request->idcategoria;
         $frecuencia->fecha_booster = $fecha_formato." ".$request->hora.":00";
         $frecuencia->save();
 

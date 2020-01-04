@@ -10,7 +10,7 @@ class BoosterProfesional extends Model
 
     public $table = "booster_profesional";
     
-    protected $fillable = ['idprofesional','frecuencia','desactivarNoche'];
+    protected $fillable = ['idprofesional','frecuencia','intervalo','desactivarNoche'];
 
     public function usuario()
     {

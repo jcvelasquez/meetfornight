@@ -31,8 +31,8 @@
         <div class="col-lg-12 col-sm-12 form-row espacio-campos">
           <h6 class="total-actual formulario-titulos">
             Dispones actualmente de
-            <span>" 20 "</span> crédito(s) y te permite hacer
-            <span>" 10 "</span> booster(s)
+            <span>"{{creditos}}"</span> crédito(s) y te permite hacer
+            <span>"{{boosters}}"</span> booster(s)
           </h6>
         </div>
 
@@ -49,25 +49,25 @@
                 </p-input>
 
                
-                <div class="form-row interior-frecuencia"  v-show="frecuencia == 'AUTOMATICO'">
-                  <select type="text" class="form-control auto-width" id="inputPassword">
-                    <option value="*/15 * * * *">Cada 15 min</option>
-                    <option value="*/30 * * * *">Cada 30 min</option>
-                    <option value="0 * * * *">Cada hora</option>
-                    <option value="0 */2 * * *">Cada 2 horas</option>
-                    <option value="0 */3 * * *">Cada 3 horas</option>
-                    <option value="0 */4 * * *">Cada 4 horas</option>
-                    <option value="0 */6 * * *">Cada 6 horas</option>
-                    <option value="Cada día">Cada día</option>
-                    <option value="Cada 48">Cada 2 días</option>
+                <div class="form-row interior-frecuencia" v-show="frecuencia == 'AUTOMATICO'">
+                  <select type="text" class="form-control auto-width" v-model="intervalo" @change="actualizarConfiguracion()">
+                    <option value="15m">Cada 15 min</option>
+                    <option value="30m">Cada 30 min</option>
+                    <option value="1h">Cada hora</option>
+                    <option value="2h">Cada 2 horas</option>
+                    <option value="3h">Cada 3 horas</option>
+                    <option value="4h">Cada 4 horas</option>
+                    <option value="6h">Cada 6 horas</option>
+                    <option value="1d">Cada día</option>
+                    <option value="2d">Cada 2 días</option>
                   </select>
                 </div>
                 <div class="form-row interior-frecuencia" v-show="frecuencia == 'AUTOMATICO'">
                     <span class="aparecer">Desactivar Booster por la noche (De 00:00 a 9:00am)</span>
                 </div>
                 <div class="form-row interior-frecuencia" v-show="frecuencia == 'AUTOMATICO'">
-                    <p-input type="radio" name="desactivar" color="info" :value="1" v-model="desactivarNoche">Si</p-input>
-                    <p-input type="radio" name="desactivar" color="info" :value="0" v-model="desactivarNoche">No</p-input> 
+                    <p-input type="radio" name="desactivar" color="info" :value="1" @change="actualizarConfiguracion()" v-model="desactivarNoche">Si</p-input>
+                    <p-input type="radio" name="desactivar" color="info" :value="0" @change="actualizarConfiguracion()" v-model="desactivarNoche">No</p-input> 
                 </div>
 
           </div>
@@ -91,6 +91,10 @@
                         <div class="esp-radio">
                           {{frecuencia.hora}}
                         </div>
+                        <label class="col-form-label formulario-titulos tamano-pequeno esp-radio">Categoria</label>
+                        <div class="esp-radio">
+                          {{frecuencia.nombre_categoria}}
+                        </div>
                         <div class="">
                           <button type="button" @click="eliminarFrecuencia(frecuencia, index)" class="btn btn-primary x-circulo">
                             <i class="fa fa-times" aria-hidden="true"></i>
@@ -103,9 +107,17 @@
                         <div class="espacio-campos esp-radio">
                           <input type="date" name="fechabooster" v-model="fechabooster"  class="form-control icono-calendario" />
                         </div>
+
                         <label class="col-form-label formulario-titulos tamano-pequeno esp-radio">Hora</label>
                         <div class="espacio-campos esp-radio">
                           <input type="time" name="horabooster" v-model="horabooster" class="form-control" value="00:00" />
+                        </div>
+
+                        <label class="col-form-label formulario-titulos tamano-pequeno esp-radio">Categoria</label>
+                        <div class="espacio-campos esp-radio">
+                          <select name="idcategoria" v-model="idcategoria" class="form-control">
+                              <option v-for="cat in arCategorias" v-bind:value="cat.idcategoria" v-bind:key="cat.idcategoria">{{ cat.nombre_categoria }}</option>
+                            </select>
                         </div>
                       
                         <div class="espacio-campos">
@@ -123,10 +135,10 @@
     </div>
 
     <div class="bloques-de-perfil">
-      <button type="submit" class="btn btn-primary btn-espacio-fuc btn-tarjeta-credito">
+      <a href="/creditos-profesional/" class="btn btn-primary btn-espacio-fuc btn-tarjeta-credito">
         <i class="icon-credit-cards esp-icono-bio"></i>
         <span>COMPRAR CRÉDITOS</span>
-      </button>
+      </a>
     </div>
 
     <p>El uso de este servicio incrementa las posibilidades de éxito de tu anuncio pero no lo garantiza. Si quiere tener éxito la oferta debe ser competitiva.</p>
@@ -140,22 +152,21 @@
           <table class="table">
             <thead class="cabecera-fake">
               <tr>
-                <th scope="col">Nombre</th>
-                <th scope="col">Hora</th>
+                <th scope="col">Evento</th>
+                <th scope="col"># Cantidad</th>
                 <th scope="col">Fecha</th>
+                <th scope="col">Hora</th>
               </tr>
             </thead>
             <tbody class="resultado-fake">
-              <tr>
-                <td>Booster activado</td>
-                <td>05:30 pm</td>
-                <td>18/11/2018</td>
+
+              <tr v-for="cobrado in arCobrados" :key="cobrado.id">
+                <td>Booster cobrado</td>
+                <td>{{cobrado.cantidad_boosters}} booster(s)</td>
+                <td>{{cobrado.fecha}}</td>
+                <td>{{cobrado.hora}}</td>
               </tr>
-              <tr>
-                <td>Booster activado</td>
-                <td>05:30 pm</td>
-                <td>18/11/2018</td>
-              </tr>
+            
             </tbody>
           </table>
         </div>
@@ -171,33 +182,89 @@
                 frecuencia : "",
                 existeError : 0,
                 frecuencia: "",
+                intervalo: "",
                 fechabooster: "",
                 horabooster: "",
+                idcategoria: 0,
+                creditos:0,
+                boosters:0,
                 desactivarNoche : 0,
                 erroresBooster: [],
                 arFrecuencia: [],
-                arBooster: []
+                arConfiguracion: [],
+                arCategorias: [],
+                arCobrados: []
             }
         },
         mounted() {
             this.listarFrecuenciaBoosters();
             this.listarConfiguracionBoosters();
+            this.listarCategoriasProfesional();
+            this.listarBoostersCobrados();
         },
         methods:{
+            listarCategoriasProfesional(){
+
+                let me = this;
+
+                axios.get('/categorias-profesional/listar').then(function (response) {
+
+                    var respuesta = response.data;
+
+                    me.arCategorias = respuesta.categorias;
+
+                }).catch(function (error) {  console.log(error);     });
+                
+
+            },
+            listarBoostersCobrados(){
+
+                let me = this;
+
+                axios.get('/booster-cobrado/listar').then(function (response) {
+
+                    var respuesta = response.data;
+
+                    me.arCobrados = respuesta.cobrados;
+
+                }).catch(function (error) {  console.log(error);     });
+                
+
+            },
+            listarConfiguracionBoosters(){
+
+                  let me = this;
+
+                  axios.get('/booster-profesional/listar').then(function (response) {
+
+                      var respuesta = response.data;
+                      me.arConfiguracion = respuesta.configuracion;
+
+                      me.frecuencia = me.arConfiguracion.frecuencia;
+                      me.intervalo = me.arConfiguracion.intervalo;
+                      me.desactivarNoche = me.arConfiguracion.desactivarNoche;
+
+
+                      me.creditos = respuesta.creditos;
+                      me.boosters = respuesta.boosters;
+
+                  }).catch(function (error) {  console.log(error);     });
+                
+            },
             actualizarConfiguracion(){
 
                 let me = this;
 
                 axios.post('/booster-profesional/actualizar', {
-                    'id' : me.arBooster.id,
-                    'frecuencia' : me.frecuencia
+                    'id' : me.arConfiguracion.id,
+                    'frecuencia' : me.frecuencia,
+                    'intervalo' : me.intervalo,
+                    'desactivarNoche' : me.desactivarNoche
                 }).then(function (response) {
 
                     var respuesta = response.data;
 
-                    console.log(respuesta);
-
-                    //Swal.fire('CONFIRMACIÓN', respuesta.mensaje,'success');
+                    Swal.fire('CONFIRMACIÓN', respuesta.mensaje,'success');
 
                 }).catch(function (error) {  console.log(error);     });
                 
@@ -209,14 +276,27 @@
 
                   axios.post('/frecuencia-booster/agregar', {
                       'fecha' : me.fechabooster,
-                      'hora' : me.horabooster
+                      'hora' : me.horabooster,
+                      'idcategoria' : me.idcategoria
                   }).then(function(response){
 
                       var respuesta = response.data;
+                      
                       me.listarFrecuenciaBoosters();
+                      me.limpiarFrecuencia();
+
                       Swal.fire('CONFIRMACIÓN', respuesta.mensaje,'success');
 
                   }).catch(function(error){ console.log(error); });
+
+            },
+            limpiarFrecuencia(){
+
+                let me = this;
+
+                me.fechabooster = "";
+                me.horabooster = "";
+                me.idcategoria = 0;
 
             },
             listarFrecuenciaBoosters(){
@@ -227,25 +307,6 @@
 
                       var respuesta= response.data;
                       me.arFrecuencia = respuesta.frecuencia;
-
-                      
-
-                  }).catch(function (error) {  console.log(error);     });
-                
-            },
-            listarConfiguracionBoosters(){
-
-                  let me = this;
-
-                  axios.get('/booster-profesional/listar').then(function (response) {
-
-                      var respuesta = response.data;
-                      me.arBooster = respuesta.booster;
-
-                      console.log(me.arBooster);
-
-                      me.frecuencia = me.arBooster.frecuencia;
-                      me.desactivarNoche = me.arBooster.desactivarNoche;
 
                   }).catch(function (error) {  console.log(error);     });
                 

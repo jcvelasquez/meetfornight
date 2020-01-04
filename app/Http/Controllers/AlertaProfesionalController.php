@@ -24,6 +24,18 @@ class AlertaProfesionalController extends Controller
 
     }
 
+    public function listarAlertasAdmin(Request $request)
+    {
+
+        $alertas = DB::table('alerta_profesional')->join('usuarios', 'alerta_profesional.idusuario', '=', 'usuarios.id')
+                                        ->select('usuarios.nombre as nombre_usuario','alerta_profesional.*')
+                                        ->orderBy('id', 'desc')
+                                        ->get();
+
+        return ['alertas' => $alertas];  
+
+    }
+
 
 
     public function store(Request $request)
@@ -37,7 +49,7 @@ class AlertaProfesionalController extends Controller
         $alerta->celular = $request->celular;
         $alerta->email = $request->email;
         $alerta->razon = $request->razon;
-        $alerta->created_at = new \DateTime();
+        $alerta->created_at = new DateTime();
         $alerta->save();
 
         return ['mensaje' => 'Alerta registrada correctamente', 'alerta' => $alerta];

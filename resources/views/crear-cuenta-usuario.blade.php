@@ -10,7 +10,7 @@
     @include('tops.top-crear-perfil')
 
 
-    <div class="container espacio-perfil">
+    <div class="container espacio-perfil" style="margin-bottom:30px;">
     
         <div class="titulo-perfil">
           <i class="icon-user-woman"></i>
@@ -38,7 +38,7 @@
             <!-- SmartWizard html -->
             <div id="smartwizard">
     
-                <ul>
+                <ul style="margin-bottom:80px;">
                     <li><a href="#planes"> 1 <span>PLANES</span> </a></li>
                     <li><a href="#perfil"> 2 <span>PERFIL</span> </a></li>
                     <li><a href="#seguridad"> 3 <span>SEGURIDAD</span></a></li>
@@ -73,7 +73,6 @@
 
         </form>
 
-
             <div class="row">
               <div class="col-lg-2"></div>
               <div class="col-lg-4 col-sm-12 espacio-campos">
@@ -100,11 +99,15 @@
 
         $(document).ready(function(){
 
+          
             // validate signup form on keyup and submit
             $("#form-cuenta-usuario").validate({
               ignore: ":hidden",
               debug: true,
               rules: {
+                radioPlan: {
+                  required : true
+                },
                 nombre: {
                   required : true
                 },
@@ -120,7 +123,14 @@
                 },
                 email: {
                   email: true,
-                  required: true
+                  required: true,
+                  remote: {
+                    url: "email/check",
+                    type: "POST",
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                  }
                 },
                 confirmar_email: {
                   email: true,
@@ -146,26 +156,80 @@
               errorPlacement: function(error, element) {
                 //error.appendTo(element.parent("div").next("td"));
                 error.insertAfter(element); 
+
+                  if ( element.is(":radio") ) {
+                      error.insertAfter( element.parents('.section_planes') );
+                  }else{ // This is the default behavior 
+                      error.insertAfter( element );
+                  }
+                
               },
               doNotHideMessage: false, 
               //errorClass: "invalid",
               messages: {
                 nombre: "El nombre es obligatorio",
                 apodo: "El apodo es obligatorio",
-                email: "El email es obligatorio",
+                email: {
+                    email: "Ingrese un email válido",
+                    required: "El email es obligatorio",
+                    remote: jQuery.validator.format("El correo {0} ya está en uso.")
+                },
                 confirmar_email: "Debe confirmar su email",
+                confirmar_clave: "Debe confirmar su clave",
                 password: "La clave es obligatoria",
                 fecha_nacimiento: "La fecha de nacimiento es obligatoria",
                 sexo: "El sexo es obligatorio",
                 nacionalidad: "La nacionalidad es obligatoria",
-                idioma: "El idioma es obligatorio"
-              }/*,
-              highlight: function (element) { // hightlight error inputs
-                $(element).closest('.col-lg-12').addClass('has-error'); 
+                idioma: "El idioma es obligatorio",
+                radioPlan: "Seleccione un plan para su cuenta"
               },
-              unhighlight: function (element) { // revert the change done by hightlight
-                $(element).closest('.col-lg-12').removeClass('has-error'); 
-              }*/
+              submitHandler: function() {
+
+                  //DESACTIVO LOS BOTONES
+                  $("#prev-btn").attr('disabled', true);
+                  $("#next-btn").attr('disabled', true);
+                  $(".btn-primary").attr('disabled', true);
+                  
+                
+                  axios.post('registrar-usuario', {
+                      'nombre' : $('#nombre').val(),
+                      'apodo' : $('#apodo').val(),
+                      'email' : $('#email').val(),
+                      'password' : $('#password').val(),
+                      'fecha_nacimiento' : $('#fecha_nacimiento').val(),
+                      'sexo' : $('#sexo').val(),
+                      'nacionalidad' : $('#nacionalidad').val(),
+                      'idioma' : $('#idioma').val(),
+                      'celular' : $('#celular').val(),
+                      'idplan' : $("input[name='radioPlan']").val(),
+                      'meses' : 6
+                    }, { headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
+                    })
+                    .then(function (response) {
+
+                        var _mensaje = response.data.mensaje;
+
+                        Swal.fire({
+                          title: 'CONFIRMACION',
+                          icon: 'success',
+                          text: _mensaje,
+                          showCancelButton: false,
+                          confirmButtonText: 'ACEPTAR'
+                        }).then((result) => {
+                          if (result.value) {
+                            
+                            window.location.href = '/iniciar-sesion';
+
+                          }
+                        })
+
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        console.log(error);
+                    });
+
+              }
             });
           
 
@@ -173,12 +237,12 @@
             $("#smartwizard").on("showStep", function(e, anchorObject, stepNumber, stepDirection, stepPosition) {
                //alert("You are on step "+stepNumber+" now");
                if(stepPosition === 'first'){
-                   $("#prev-btn").addClass('disabled');
+                   $("#prev-btn").addClass('disabled').attr('disabled', true);
                }else if(stepPosition === 'final'){
-                   $("#next-btn").addClass('disabled');
+                   $("#next-btn").addClass('disabled').attr('disabled', true);
                }else{
-                   $("#prev-btn").removeClass('disabled');
-                   $("#next-btn").removeClass('disabled');
+                   $("#prev-btn").removeClass('disabled').attr('disabled', false);
+                   $("#next-btn").removeClass('disabled').attr('disabled', false);
                }
             });
 
@@ -188,6 +252,7 @@
                     selected: 0,
                     theme: 'circles',
                     transitionEffect:'fade',
+                    autoAdjustHeight: false,
                     keyNavigation:false,
                     showStepURLhash: true,
                     toolbarSettings: {toolbarPosition: 'bottom',
@@ -197,26 +262,49 @@
                                     }
             });
 
+            $('#smartwizard').smartWizard("reset"); 
 
-            // External Button Events
-            $("#finish-btn").on("click", function() {
-                alert('Finish Clicked');
-                return true;
+
+            //MOSTRAR LOS VALORES EN LA PANTALLA DE ACTIVAR
+            $("#nombre").on("blur", function() {
+                $("#nombre_label").html( $(this).val() );
             });
 
+            $("#email").on("blur", function() {
+                $("#email_label").html( $(this).val() );
+            });
+
+            $("#celular").on("blur", function() {
+                $("#movil_label").html( $(this).val() );
+            });
+
+            $("input[name='radioPlan']").on("change", function() {
+
+              $("#plan_label").html( "Cuenta: " + $(this).parent(".container-radio").find("input[name='plan_seleccionado']").val() );
+
+              //SI EL PRECIO DEL PLAN SELECCIONADO ES MAS DE CERO MOSTRAR PERIODOS
+              if(parseFloat($(this).parent(".container-radio").find("input[name='precio_seleccionado']").val()) > 0) {
+                  $("#periodos_planes").slideDown();
+              }else{
+                $("#periodos_planes").slideUp();
+              }
+             
+              
+              
+
+            });
+
+
             $("#prev-btn").on("click", function() {
-                // Navigate previous
                 $('#smartwizard').smartWizard("prev");
                 return true;
             });
-
+            
             $("#next-btn").on("click", function() {
-
-                  if ( $("#form-cuenta-usuario").valid() ){        
-                    $('#smartwizard').smartWizard("next");
-                    return true;
-                  }
-                
+                if ( $("#form-cuenta-usuario").valid() ){        
+                  $('#smartwizard').smartWizard("next");
+                  return true;
+                }
             });
 
             $("#dropzone_perfil").dropzone({ url: "/file/post", clickable: "#dropzone_perfil button", maxFiles: 1, addRemoveLinks:true });

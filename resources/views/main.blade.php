@@ -64,27 +64,47 @@
               </div>
             </div>
 
-        <div class="row cuerpo-perfil">
-          <div class="col-lg-3 col-sm-12">
-              
-          @if(Auth::check())
-            @if (Auth::user()->idrol == 4)
-                @include('menus.menu-lateral-profesional')
-            @else
-                @include('menus.menu-lateral-usuario')
+        @if(Auth::check())
+
+            @if (Auth::user()->idrol == 4 || Auth::user()->idrol == 3)
+
+                <div class="row cuerpo-perfil">
+                  <div class="col-lg-3 col-sm-12">
+                      
+                        @if (Auth::user()->idrol == 4)
+                            @include('menus.menu-lateral-profesional')
+                        @elseif (Auth::user()->idrol == 3)
+                            @include('menus.menu-lateral-usuario')
+                        @endif
+                      
+                  </div>
+                  <div class="col-lg-9 col-sm-12">
+                      <div id="widget">
+                          @yield('content')
+                      </div>
+                  </div>
+                </div>
+
+            @elseif (Auth::user()->idrol == 1)
+
+
+                <div class="row cuerpo-perfil">
+                  <div class="col-lg-3 col-sm-12">
+                      @include('menus.menu-lateral-administrador')
+                  </div>
+                  <div class="col-lg-9 col-sm-12">
+                      <div id="widget">
+                          @yield('content')
+                      </div>
+                  </div>
+                 
+                </div>
+
             @endif
- 
+
         @endif
 
-          </div>
-          <div class="col-lg-9 col-sm-12">
 
-              <div id="widget">
-                  @yield('content')
-              </div>
-                 
-          </div>
-        </div>
       </div>
 
 

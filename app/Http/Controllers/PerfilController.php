@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Usuario;
 use App\ServiciosProfesional;
 use App\DisponibilidadProfesional;
+use App\MensajeProfesional;
 use App\ServiciosXProfesional;
 use App\TarifaProfesional;
 use App\ReservasProfesional;
@@ -234,7 +235,22 @@ class PerfilController extends Controller
 
     }
 
+    public function enviarMensaje(Request $request)
+    {
+        
+        $mensaje = new MensajeProfesional();
+        $mensaje->idprofesional = $request->idprofesional;
+        $mensaje->idusuario = $request->idusuario;
+        $mensaje->parent_id = NULL;
+        $mensaje->mensaje = $request->mensaje;
+        $mensaje->save(); 
 
+        //::where('apodo', '=', $request->apodo)->firstOrFail()->disponibilidades()->get();        
+
+        return ['disponibilidad' => $disponibilidad];  
+
+    }
+    
     public function calcularEdad($nacimiento){
 
 

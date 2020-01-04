@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Carbon\Carbon;
+
 
 class UsuariosSeeder extends Seeder
 {
@@ -20,11 +22,13 @@ class UsuariosSeeder extends Seeder
             'password'=> Hash::make("123456"),
             'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
-            'apodo' => 'coqueta12',
+            'apodo' => Str::random(7),
             'nacionalidad'=>'PE',
             'celular' => '967994927',
             'idioma'=>'ES',
-            'estado'=> '1'
+            'estado'=> '1',
+            'fecha_booster' => Carbon::now()->format('Y-m-d H:i:s'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
         
@@ -35,11 +39,13 @@ class UsuariosSeeder extends Seeder
             'password'=> Hash::make("123456"),
             'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
-            'apodo' => 'coqueta12',
+            'apodo' => Str::random(7),
             'nacionalidad'=>'PE',
             'celular' => '967994927',
             'idioma'=>'ES',
-            'estado'=> '1'
+            'estado'=> '1',
+            'fecha_booster' => Carbon::now()->format('Y-m-d H:i:s'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
 
@@ -51,11 +57,13 @@ class UsuariosSeeder extends Seeder
             'password'=> Hash::make("123456"),
             'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
-            'apodo' => 'coqueta12',
+            'apodo' => Str::random(7),
             'nacionalidad'=>'PE',
             'celular' => '967994927',
             'idioma'=>'ES',
-            'estado'=> '1'
+            'estado'=> '1',
+            'fecha_booster' => Carbon::now()->format('Y-m-d H:i:s'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
 
@@ -67,11 +75,13 @@ class UsuariosSeeder extends Seeder
             'password'=> Hash::make("123456"),
             'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
-            'apodo' => 'coqueta12',
+            'apodo' => Str::random(7),
             'nacionalidad'=>'PE',
             'celular' => '967994927',
             'idioma'=>'ES',
-            'estado'=> '1'
+            'estado'=> '1',
+            'fecha_booster' => Carbon::now()->format('Y-m-d H:i:s'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
 
@@ -83,11 +93,13 @@ class UsuariosSeeder extends Seeder
             'password'=> Hash::make("123456"),
             'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
-            'apodo' => 'coqueta12',
+            'apodo' => Str::random(7),
             'nacionalidad'=>'PE',
             'celular' => '967994927',
             'idioma'=>'ES',
-            'estado'=> '1'
+            'estado'=> '1',
+            'fecha_booster' => Carbon::now()->format('Y-m-d H:i:s'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
 
@@ -99,11 +111,13 @@ class UsuariosSeeder extends Seeder
             'password'=> Hash::make("123456"),
             'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
-            'apodo' => 'coqueta12',
+            'apodo' => Str::random(7),
             'nacionalidad'=>'PE',
             'celular' => '967994927',
             'idioma'=>'ES',
-            'estado'=> '1'
+            'estado'=> '1',
+            'fecha_booster' => Carbon::now()->format('Y-m-d H:i:s'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
 
@@ -115,11 +129,13 @@ class UsuariosSeeder extends Seeder
             'password'=> Hash::make("123456"),
             'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
-            'apodo' => 'coqueta12',
+            'apodo' => Str::random(7),
             'nacionalidad'=>'PE',
             'celular' => '967994927',
             'idioma'=>'ES',
-            'estado'=> '1'
+            'estado'=> '1',
+            'fecha_booster' => Carbon::now()->format('Y-m-d H:i:s'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
 
@@ -131,11 +147,13 @@ class UsuariosSeeder extends Seeder
             'password'=> Hash::make("123456"),
             'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
-            'apodo' => 'coqueta12',
+            'apodo' => Str::random(7),
             'nacionalidad'=>'PE',
             'celular' => '967994927',
             'idioma'=>'ES',
-            'estado'=> '1'
+            'estado'=> '1',
+            'fecha_booster' => Carbon::now()->format('Y-m-d H:i:s'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
 
@@ -147,11 +165,13 @@ class UsuariosSeeder extends Seeder
             'password'=> Hash::make("123456"),
             'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
-            'apodo' => 'coqueta12',
+            'apodo' => Str::random(7),
             'nacionalidad'=>'PE',
             'celular' => '967994927',
             'idioma'=>'ES',
-            'estado'=> '1'
+            'estado'=> '1',
+            'fecha_booster' => Carbon::now()->format('Y-m-d H:i:s'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
 
@@ -163,11 +183,13 @@ class UsuariosSeeder extends Seeder
             'password'=> Hash::make("123456"),
             'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
-            'apodo' => 'coqueta12',
+            'apodo' => Str::random(7),
             'nacionalidad'=>'PE',
             'celular' => '967994927',
             'idioma'=>'ES',
-            'estado'=> '1'
+            'estado'=> '1',
+            'fecha_booster' => Carbon::now()->format('Y-m-d H:i:s'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
 
@@ -179,11 +201,13 @@ class UsuariosSeeder extends Seeder
             'password'=> Hash::make("123456"),
             'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
-            'apodo' => 'coqueta12',
+            'apodo' => Str::random(7),
             'nacionalidad'=>'PE',
             'celular' => '967994927',
             'idioma'=>'ES',
-            'estado'=> '1'
+            'estado'=> '1',
+            'fecha_booster' => Carbon::now()->format('Y-m-d H:i:s'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
 
@@ -195,11 +219,13 @@ class UsuariosSeeder extends Seeder
             'password'=> Hash::make("123456"),
             'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
-            'apodo' => 'coqueta12',
+            'apodo' => Str::random(7),
             'nacionalidad'=>'PE',
             'celular' => '967994927',
             'idioma'=>'ES',
-            'estado'=> '1'
+            'estado'=> '1',
+            'fecha_booster' => Carbon::now()->format('Y-m-d H:i:s'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
 
@@ -211,11 +237,13 @@ class UsuariosSeeder extends Seeder
             'password'=> Hash::make("123456"),
             'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
-            'apodo' => 'coqueta12',
+            'apodo' => Str::random(7),
             'nacionalidad'=>'PE',
             'celular' => '967994927',
             'idioma'=>'ES',
-            'estado'=> '1'
+            'estado'=> '1',
+            'fecha_booster' => Carbon::now()->format('Y-m-d H:i:s'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
 
@@ -227,11 +255,13 @@ class UsuariosSeeder extends Seeder
             'password'=> Hash::make("123456"),
             'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
-            'apodo' => 'coqueta12',
+            'apodo' => Str::random(7),
             'nacionalidad'=>'PE',
             'celular' => '967994927',
             'idioma'=>'ES',
-            'estado'=> '1'
+            'estado'=> '1',
+            'fecha_booster' => Carbon::now()->format('Y-m-d H:i:s'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
 
@@ -243,11 +273,13 @@ class UsuariosSeeder extends Seeder
             'password'=> Hash::make("123456"),
             'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
-            'apodo' => 'coqueta12',
+            'apodo' => Str::random(7),
             'nacionalidad'=>'PE',
             'celular' => '967994927',
             'idioma'=>'ES',
-            'estado'=> '1'
+            'estado'=> '1',
+            'fecha_booster' => Carbon::now()->format('Y-m-d H:i:s'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
 
@@ -259,11 +291,13 @@ class UsuariosSeeder extends Seeder
             'password'=> Hash::make("123456"),
             'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
-            'apodo' => 'coqueta12',
+            'apodo' => Str::random(7),
             'nacionalidad'=>'PE',
             'celular' => '967994927',
             'idioma'=>'ES',
-            'estado'=> '1'
+            'estado'=> '1',
+            'fecha_booster' => Carbon::now()->format('Y-m-d H:i:s'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
 
@@ -275,11 +309,13 @@ class UsuariosSeeder extends Seeder
             'password'=> Hash::make("123456"),
             'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
-            'apodo' => 'coqueta12',
+            'apodo' => Str::random(7),
             'nacionalidad'=>'PE',
             'celular' => '967994927',
             'idioma'=>'ES',
-            'estado'=> '1'
+            'estado'=> '1',
+            'fecha_booster' => Carbon::now()->format('Y-m-d H:i:s'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
 
@@ -291,11 +327,13 @@ class UsuariosSeeder extends Seeder
             'password'=> Hash::make("123456"),
             'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
-            'apodo' => 'coqueta12',
+            'apodo' => Str::random(7),
             'nacionalidad'=>'PE',
             'celular' => '967994927',
             'idioma'=>'ES',
-            'estado'=> '1'
+            'estado'=> '1',
+            'fecha_booster' => Carbon::now()->format('Y-m-d H:i:s'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
 
@@ -307,11 +345,13 @@ class UsuariosSeeder extends Seeder
             'password'=> Hash::make("123456"),
             'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
-            'apodo' => 'coqueta12',
+            'apodo' => Str::random(7),
             'nacionalidad'=>'PE',
             'celular' => '967994927',
             'idioma'=>'ES',
-            'estado'=> '1'
+            'estado'=> '1',
+            'fecha_booster' => Carbon::now()->format('Y-m-d H:i:s'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
 
@@ -323,11 +363,13 @@ class UsuariosSeeder extends Seeder
             'password'=> Hash::make("123456"),
             'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
-            'apodo' => 'coqueta12',
+            'apodo' => Str::random(7),
             'nacionalidad'=>'PE',
             'celular' => '967994927',
             'idioma'=>'ES',
-            'estado'=> '1'
+            'estado'=> '1',
+            'fecha_booster' => Carbon::now()->format('Y-m-d H:i:s'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
 
@@ -339,11 +381,13 @@ class UsuariosSeeder extends Seeder
             'password'=> Hash::make("123456"),
             'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
-            'apodo' => 'coqueta12',
+            'apodo' => Str::random(7),
             'nacionalidad'=>'PE',
             'celular' => '967994927',
             'idioma'=>'ES',
-            'estado'=> '1'
+            'estado'=> '1',
+            'fecha_booster' => Carbon::now()->format('Y-m-d H:i:s'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
 
@@ -355,11 +399,13 @@ class UsuariosSeeder extends Seeder
             'password'=> Hash::make("123456"),
             'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
-            'apodo' => 'coqueta12',
+            'apodo' => Str::random(7),
             'nacionalidad'=>'PE',
             'celular' => '967994927',
             'idioma'=>'ES',
-            'estado'=> '1'
+            'estado'=> '1',
+            'fecha_booster' => Carbon::now()->format('Y-m-d H:i:s'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
 
@@ -371,11 +417,13 @@ class UsuariosSeeder extends Seeder
             'password'=> Hash::make("123456"),
             'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
-            'apodo' => 'coqueta12',
+            'apodo' => Str::random(7),
             'nacionalidad'=>'PE',
             'celular' => '967994927',
             'idioma'=>'ES',
-            'estado'=> '1'
+            'estado'=> '1',
+            'fecha_booster' => Carbon::now()->format('Y-m-d H:i:s'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
 
@@ -387,11 +435,13 @@ class UsuariosSeeder extends Seeder
             'password'=> Hash::make("123456"),
             'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
-            'apodo' => 'coqueta12',
+            'apodo' => Str::random(7),
             'nacionalidad'=>'PE',
             'celular' => '967994927',
             'idioma'=>'ES',
-            'estado'=> '1'
+            'estado'=> '1',
+            'fecha_booster' => Carbon::now()->format('Y-m-d H:i:s'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
 
@@ -403,11 +453,13 @@ class UsuariosSeeder extends Seeder
             'password'=> Hash::make("123456"),
             'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
-            'apodo' => 'coqueta12',
+            'apodo' => Str::random(7),
             'nacionalidad'=>'PE',
             'celular' => '967994927',
             'idioma'=>'ES',
-            'estado'=> '1'
+            'estado'=> '1',
+            'fecha_booster' => Carbon::now()->format('Y-m-d H:i:s'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
 
@@ -419,11 +471,13 @@ class UsuariosSeeder extends Seeder
             'password'=> Hash::make("123456"),
             'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
-            'apodo' => 'coqueta12',
+            'apodo' => Str::random(7),
             'nacionalidad'=>'PE',
             'celular' => '967994927',
             'idioma'=>'ES',
-            'estado'=> '1'
+            'estado'=> '1',
+            'fecha_booster' => Carbon::now()->format('Y-m-d H:i:s'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
 
@@ -435,11 +489,13 @@ class UsuariosSeeder extends Seeder
             'password'=> Hash::make("123456"),
             'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
-            'apodo' => 'coqueta12',
+            'apodo' => Str::random(7),
             'nacionalidad'=>'PE',
             'celular' => '967994927',
             'idioma'=>'ES',
-            'estado'=> '1'
+            'estado'=> '1',
+            'fecha_booster' => Carbon::now()->format('Y-m-d H:i:s'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
 
@@ -451,11 +507,13 @@ class UsuariosSeeder extends Seeder
             'password'=> Hash::make("123456"),
             'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
-            'apodo' => 'coqueta12',
+            'apodo' => Str::random(7),
             'nacionalidad'=>'PE',
             'celular' => '967994927',
             'idioma'=>'ES',
-            'estado'=> '1'
+            'estado'=> '1',
+            'fecha_booster' => Carbon::now()->format('Y-m-d H:i:s'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
 
@@ -467,11 +525,13 @@ class UsuariosSeeder extends Seeder
             'password'=> Hash::make("123456"),
             'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
-            'apodo' => 'coqueta12',
+            'apodo' => Str::random(7),
             'nacionalidad'=>'PE',
             'celular' => '967994927',
             'idioma'=>'ES',
-            'estado'=> '1'
+            'estado'=> '1',
+            'fecha_booster' => Carbon::now()->format('Y-m-d H:i:s'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
 
@@ -483,11 +543,13 @@ class UsuariosSeeder extends Seeder
             'password'=> Hash::make("123456"),
             'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
-            'apodo' => 'coqueta12',
+            'apodo' => Str::random(7),
             'nacionalidad'=>'PE',
             'celular' => '967994927',
             'idioma'=>'ES',
-            'estado'=> '1'
+            'estado'=> '1',
+            'fecha_booster' => Carbon::now()->format('Y-m-d H:i:s'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
 
@@ -499,11 +561,13 @@ class UsuariosSeeder extends Seeder
             'password'=> Hash::make("123456"),
             'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
-            'apodo' => 'coqueta12',
+            'apodo' => Str::random(7),
             'nacionalidad'=>'PE',
             'celular' => '967994927',
             'idioma'=>'ES',
-            'estado'=> '1'
+            'estado'=> '1',
+            'fecha_booster' => Carbon::now()->format('Y-m-d H:i:s'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
 
@@ -515,11 +579,13 @@ class UsuariosSeeder extends Seeder
             'password'=> Hash::make("123456"),
             'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
-            'apodo' => 'coqueta12',
+            'apodo' => Str::random(7),
             'nacionalidad'=>'PE',
             'celular' => '967994927',
             'idioma'=>'ES',
-            'estado'=> '1'
+            'estado'=> '1',
+            'fecha_booster' => Carbon::now()->format('Y-m-d H:i:s'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
 
@@ -531,11 +597,13 @@ class UsuariosSeeder extends Seeder
             'password'=> Hash::make("123456"),
             'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
-            'apodo' => 'coqueta12',
+            'apodo' => Str::random(7),
             'nacionalidad'=>'PE',
             'celular' => '967994927',
             'idioma'=>'ES',
-            'estado'=> '1'
+            'estado'=> '1',
+            'fecha_booster' => Carbon::now()->format('Y-m-d H:i:s'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
 
@@ -551,7 +619,9 @@ class UsuariosSeeder extends Seeder
             'nacionalidad'=>'PE',
             'celular' => '967994927',
             'idioma'=>'ES',
-            'estado'=> '1'
+            'estado'=> '1',
+            'fecha_booster' => Carbon::now()->format('Y-m-d H:i:s'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
 
@@ -563,11 +633,13 @@ class UsuariosSeeder extends Seeder
             'password'=> Hash::make("123456"),
             'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
-            'apodo' => 'coqueta12',
+            'apodo' => Str::random(7),
             'nacionalidad'=>'PE',
             'celular' => '967994927',
             'idioma'=>'ES',
-            'estado'=> '1'
+            'estado'=> '1',
+            'fecha_booster' => Carbon::now()->format('Y-m-d H:i:s'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
 
@@ -579,11 +651,13 @@ class UsuariosSeeder extends Seeder
             'password'=> Hash::make("123456"),
             'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
-            'apodo' => 'coqueta12',
+            'apodo' => Str::random(7),
             'nacionalidad'=>'PE',
             'celular' => '967994927',
             'idioma'=>'ES',
-            'estado'=> '1'
+            'estado'=> '1',
+            'fecha_booster' => Carbon::now()->format('Y-m-d H:i:s'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
 
@@ -595,11 +669,13 @@ class UsuariosSeeder extends Seeder
             'password'=> Hash::make("123456"),
             'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
-            'apodo' => 'coqueta12',
+            'apodo' => Str::random(7),
             'nacionalidad'=>'PE',
             'celular' => '967994927',
             'idioma'=>'ES',
-            'estado'=> '1'
+            'estado'=> '1',
+            'fecha_booster' => Carbon::now()->format('Y-m-d H:i:s'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
 
@@ -611,11 +687,13 @@ class UsuariosSeeder extends Seeder
             'password'=> Hash::make("123456"),
             'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
-            'apodo' => 'coqueta12',
+            'apodo' => Str::random(7),
             'nacionalidad'=>'PE',
             'celular' => '967994927',
             'idioma'=>'ES',
-            'estado'=> '1'
+            'estado'=> '1',
+            'fecha_booster' => Carbon::now()->format('Y-m-d H:i:s'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
 
@@ -627,11 +705,13 @@ class UsuariosSeeder extends Seeder
             'password'=> Hash::make("123456"),
             'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
-            'apodo' => 'coqueta12',
+            'apodo' => Str::random(7),
             'nacionalidad'=>'PE',
             'celular' => '967994927',
             'idioma'=>'ES',
-            'estado'=> '1'
+            'estado'=> '1',
+            'fecha_booster' => Carbon::now()->format('Y-m-d H:i:s'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
 
@@ -643,11 +723,13 @@ class UsuariosSeeder extends Seeder
             'password'=> Hash::make("123456"),
             'fecha_nacimiento'=> random_int ( 1985, 2001 ).'-06-13',
             'sexo'=> 'M',
-            'apodo' => 'coqueta12',
+            'apodo' => Str::random(7),
             'nacionalidad'=>'PE',
             'celular' => '967994927',
             'idioma'=>'ES',
-            'estado'=> '1'
+            'estado'=> '1',
+            'fecha_booster' => Carbon::now()->format('Y-m-d H:i:s'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
 

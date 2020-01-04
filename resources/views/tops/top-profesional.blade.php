@@ -1,7 +1,7 @@
   <!--TOP-->
   <header class="header-perfil">
   	<div class="container header-perfil-creado">
-  		<a href="index-free.php"><img src="img/logo-blanco-intranet.png"></a>
+  		<a href="{{ url('/') }}"><img src="img/logo-blanco-intranet.png"></a>
       <span class="quedan-tiempo">30 días | 24 hrs | 40 min</span>
       <a href="" class="reactivar">RENOVAR</a>
   		<div class="usuario-creado">

@@ -25,7 +25,7 @@ class IniciarSesionController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/perfil-usuario';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.

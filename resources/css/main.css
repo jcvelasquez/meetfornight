@@ -905,19 +905,15 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5c376f', end
     transition: al ease .5;
 
 }
-
+/*
 .boton-contenido-collapse:hover i{
-
     color: #f20f21;
+}*/
 
-}
-
+.boton-contenido-collapse .state i,
 .boton-contenido-collapse i{
-
     margin-bottom: 0.5em;
-
     font-size: 2em;
-
 }
 
 .total-100{

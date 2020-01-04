@@ -16,7 +16,7 @@ class CreateReservasProfesionalTable extends Migration
             $table->integer('idusuario')->unsigned();
             $table->dateTime('desde');
             $table->dateTime('hasta');
-            $table->json('servicios');
+            $table->text('servicios');
             $table->integer('se_desplaza');
             $table->string('direccion', 250)->nullable();
             $table->text('extras')->nullable();

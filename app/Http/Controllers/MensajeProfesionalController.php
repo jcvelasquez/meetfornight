@@ -36,6 +36,22 @@ class MensajeProfesionalController extends Controller
   
     }
 
+    public function enviarMensaje(Request $request)
+    {
+
+        $idusuario = Auth::user()->id;
+        
+        $mensaje = new MensajeProfesional();
+        $mensaje->parent_id = $request->parent_id;
+        $mensaje->idprofesional = $request->idprofesional;
+        $mensaje->idusuario = $request->idusuario;
+        $mensaje->mensaje = $request->mensaje;
+        $mensaje->save();
+
+        return Response::json(['mensaje' => 'Mensaje enviado correctamente'], 200);
+
+    }
+
    
     public function responder(Request $request)
     {

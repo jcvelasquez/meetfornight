@@ -6,8 +6,10 @@ use App\Rol;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\Usuario as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 
-class Usuario extends Authenticatable
+
+class Usuario extends Authenticatable implements MustVerifyEmail
 {
     //
     use Notifiable;
@@ -39,7 +41,7 @@ class Usuario extends Authenticatable
     }
 
     public function categorias(){
-        return $this->hasMany('App\CategoriasProfesional', 'idprofesional', 'id');
+        return $this->hasMany('App\CategoriasProfesional', 'idprofesional', 'id')->join('categorias', 'categorias_profesional.idcategoria','=', 'categorias.id');
     }
 
     public function disponibilidades()
@@ -50,6 +52,11 @@ class Usuario extends Authenticatable
     public function fotos()
     {
         return $this->hasMany('App\FotoProfesional', 'idusuario', 'id');
+    }
+
+    public function rol()
+    {
+        return $this->belongsTo('App\Rol', 'idrol', 'id');
     }
 
 
@@ -77,11 +84,6 @@ class Usuario extends Authenticatable
             }
         }
         return false;
-    }
-
-    public function rol()
-    {
-        return $this->belongsTo('App\Rol');
     }
 
     public function hasRole($rol)

@@ -2,19 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\ContactoProfesional;
+use App\UsuarioExtras;
+use App\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class ContactoProfesionalController extends Controller
 {
-
-    
-    public function list()
-    {
-        //
-    }
 
     public function mostrar()
     {
@@ -23,46 +18,18 @@ class ContactoProfesionalController extends Controller
         
     }
 
-  
-    
-    public function create()
+    public function listar(Request $request)
     {
         //
+
+        $idprofesional = Auth::user()->id;
+        
+        $contacto = Usuario::where('usuarios.id', '=', $idprofesional)->join('usuarios_extras','usuarios_extras.idusuario','=','usuarios.id')->select('usuarios.id','usuarios_extras.web','usuarios.celular','usuarios.tipo_celular','usuarios_extras.tipo_contacto','usuarios_extras.agenda')->first();
+
+        return ['contacto' => $contacto];  
+
+        
     }
 
   
-    
-    public function store(Request $request)
-    {
-        //
-
-       
-    }
-
-  
-    
-    public function show($id)
-    {
-        //
-    }
-
-  
-    
-    public function edit($id)
-    {
-        //
-    }
-
- 
-    
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    
-    public function destroy($id)
-    {
-        //
-    }
 }

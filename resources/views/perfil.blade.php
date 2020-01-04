@@ -7,7 +7,7 @@
   <body>
 
 
-  @include('tops.top')
+  @include('tops.top-free')
 
 
   <!--BANNER-->
@@ -50,7 +50,7 @@
 
           <div class="botones-cabecera-chicas">
 
-            <a href="index.php">Inicio</a>
+            <a href="{{url('/')}}">Inicio</a>
 
             <span><i class="fa fa-angle-right"></i></span>
 
@@ -86,8 +86,8 @@
               <!-- Content goes here -->
                   <div class="espacio-reservas">
                     <div class="reservas-img-grande">
-                      <img id="currentImg" src="{{ asset('fotos-profesionales/galeria-1.png') }}" class="img-responsive">
-												<a id="currentImg2" href="{{ asset('fotos-profesionales/galeria-1.png') }}" data-fancybox="gallery" data-caption="Sexy Woman">
+                      <img src="{{ asset('fotos-profesionales').'/'.$fotos[0]->url_foto }}" class="img-responsive">
+												<a href="{{ asset('fotos-profesionales').'/'.$fotos[0]->url_foto }}" data-fancybox="gallery" data-caption="Sexy Woman">
 													<div class="img-grande-lupa">
 														<i class="icon-search"></i>
 													</div>
@@ -120,121 +120,63 @@
                         <li>
                           <div class="reserva-info-morado">Orientación</div>
                           <div class="reserva-info-plomo">{{ $perfil[0]->orientacion }}</div>
-
                         </li>
-
                         <li>
-
                           <div class="reserva-info-morado">Nacionalidad</div>
-
                           <div class="reserva-info-plomo">{{ $perfil[0]->nacionalidad }}</div>
-
                         </li>
-
                         <li>
-
                           <div class="reserva-info-morado">Ciudad</div>
-
                           <div class="reserva-info-plomo">{{ $perfil[0]->departamento }}</div>
-
                         </li>
-
                         <li>
-
                           <div class="reserva-info-morado">Distrito</div>
-
                           <div class="reserva-info-plomo">{{ $perfil[0]->distrito }}</div>
-
                         </li>
-
                         <li>
-
                           <div class="reserva-info-morado">Idiomas</div>
-
                           <div class="reserva-info-plomo">{{ $perfil[0]->idioma }}</div>
-
                         </li>
-
                         <li>
-
                           <div class="reserva-info-morado">Edad</div>
-
                           <div class="reserva-info-plomo">{{ $perfil[0]->edad }}</div>
-
                         </li>
-
                         <li>
-
                           <div class="reserva-info-morado">Tamaño</div>
-
                           <div class="reserva-info-plomo">{{ $perfil[0]->estatura }}</div>
-
                         </li>
-
                         <li>
-
                           <div class="reserva-info-morado">Peso</div>
-
                           <div class="reserva-info-plomo">{{ $perfil[0]->peso }}Kg</div>
-
                         </li>
-
                         <li>
-
                           <div class="reserva-info-morado">Cabello</div>
-
                           <div class="reserva-info-plomo">{{ $perfil[0]->color_cabello }}</div>
-
                         </li>
-
                         <li>
-
                           <div class="reserva-info-morado">Ojos</div>
-
                           <div class="reserva-info-plomo">{{ $perfil[0]->color_ojos }}</div>
-
                         </li>
-
                         <li>
-
                           <div class="reserva-info-morado">Corte íntimo</div>
-
                           <div class="reserva-info-plomo">{{ $perfil[0]->corte_intimo }}</div>
-
                         </li>
-
                         <li>
-
                           <div class="reserva-info-morado">Copa</div>
-
                           <div class="reserva-info-plomo">{{ $perfil[0]->pecho }}</div>
-
                         </li>
-
                         <li>
-
                           <div class="reserva-info-morado">Tatuajes</div>
-
                           <div class="reserva-info-plomo">{{ $perfil[0]->tatuaje }}</div>
-
                         </li>
-
                         <li>
-
                           <div class="reserva-info-morado">Piercing</div>
-
                           <div class="reserva-info-plomo">{{ $perfil[0]->piercing }}</div>
-
                         </li>
-
                         <li>
-
                           <div class="reserva-info-morado">Fumador(a)</div>
-
                           <div class="reserva-info-plomo">{{ $perfil[0]->fumador }}</div>
-
                         </li>
-
                       </ul>
 
                     </div>
@@ -563,7 +505,7 @@
                       </div>
                   </div>
 
-                  <form action="{{ route('iniciar-sesion') }}" method="POST">
+                  <form action="{{ route('comprobar-credenciales') }}" method="POST">
                     @csrf
                     <!-- SECCION INTERIOR DE DATOS -->
                     <div class="form-row" style="margin-top:20px;">
@@ -649,7 +591,7 @@
                       </div>
                   </div>
 
-                  <form action="{{ route('iniciar-sesion') }}" method="POST">
+                  <form action="{{ route('comprobar-credenciales') }}" method="POST">
                     @csrf
                     <!-- SECCION INTERIOR DE DATOS -->
                     <div class="form-row" style="margin-top:20px;">

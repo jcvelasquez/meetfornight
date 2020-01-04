@@ -30,14 +30,6 @@
       </div>
     </div>
 
- <!--     <div class="form-row div-error" v-show="errorAlerta">
-          <div class="text-center text-error">
-              <div v-for="error in erroresAlerta" :key="error" v-text="error">
-
-              </div>
-          </div>
-      </div> -->
-
     <div class="form-row espacio-campos-big">
       <button type="button" @click="registrarAlerta()" class="btn btn-primary btn-busqueda-detallada">BUSCAR / AGREGAR</button>
     </div>

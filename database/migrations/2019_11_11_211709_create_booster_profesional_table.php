@@ -17,6 +17,7 @@ class CreateBoosterProfesionalTable extends Migration
             $table->bigIncrements('id');
             $table->integer('idprofesional')->unsigned();
             $table->enum('frecuencia',['DESACTIVADO','AUTOMATICO','MANUAL']);
+            $table->string('intervalo');
             $table->integer('desactivarNoche');
             $table->foreign('idprofesional')->references('id')->on('usuarios');
             $table->timestamps();

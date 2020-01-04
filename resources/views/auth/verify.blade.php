@@ -1,24 +1,45 @@
-@extends('layouts.app')
+<!doctype html>
+<html lang="es">
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Verify Your Email Address') }}</div>
+  @include('header')
 
-                <div class="card-body">
-                    @if (session('resent'))
-                        <div class="alert alert-success" role="alert">
-                            {{ __('A fresh verification link has been sent to your email address.') }}
-                        </div>
-                    @endif
+  <body class="bg-intranet">
 
-                    {{ __('Before proceeding, please check your email for a verification link.') }}
-                    {{ __('If you did not receive the email') }}, <a href="{{ route('verification.resend') }}">{{ __('click here to request another') }}</a>.
-                </div>
+    <div class="centrar-intranet">
+      <div class="acceso-intranet">
+        <div class="bg-img-acceso bg-persona"></div>
+        <div class="espacio-acceso-intranet">
+          <div class="accesos-derecha"><a href="index-free.php"><img src="../img/logo-blanco-intranet.png"></a></div>
+
+          <form class="intranet-accesos" action="#" method="POST">
+            @csrf
+
+            <h2 style="text-align:center;"><strong>VERIFICA TU CUENTA</strong></h2>
+          
+   
+            <div class="form-group" style="color:#fff;">
+
+                @if (session('resent'))
+                    <div class="alert alert-success" role="alert">
+                        {{ __('Un nuevo enlace de activación ha sido enviado a tu email.') }}
+                    </div>
+                @endif
+
+                {{ __('Antes de ingresar a tu perfil, debes confirmar tu correo electrónico con el enlace de verificación que se envió a tu bandeja.') }}
+                {{ __('Si no recibiste el email') }}, <a class="enlace_verificacion" href="{{ route('verification.resend') }}">{{ __('haz clic aquí para recibir un nuevo código') }}</a>.
+
             </div>
+          </form>
+
         </div>
+      </div>
     </div>
-</div>
-@endsection
+
+  </body>
+
+</html>
+
+
+
+
+

@@ -23,13 +23,12 @@ class DatabaseSeeder extends Seeder
         $this->call(ReservasProfesionalSeeder::class);
         $this->call(CreditosProfesionalSeeder::class);
         $this->call(CodigosPromocionalesSeeder::class);
-        $this->call(FrecuenciaBoosterSeeder::class);      
         $this->call(CategoriasSeeder::class);      
-        $this->call(CategoriasProfesionalSeeder::class);     
-
-
-
-          
+        $this->call(CategoriasProfesionalSeeder::class);  
+        $this->call(FotoProfesionalSeeder::class);  
+        $this->call(FrecuenciaBoosterSeeder::class);    
+        $this->call(IdiomasSeeder::class);    
+        //$this->call(IdiomasProfesionalesSeeder::class);        
         
     }
 }

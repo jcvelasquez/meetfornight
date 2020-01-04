@@ -5,12 +5,14 @@
 
   <body>
 
+  <div id="widget">
+
   @include('tops.top-free')
 
   <!--BANNER-->
   <div id="banner-internas">
     <div class="container-fluid no-container-fluid-esp">
-      <img src="img/banner-internas/banner-internas-1.jpg" class="img-responsive">
+      <img src="{{ asset('img/banner-internas/banner-internas-1.jpg') }}" class="img-responsive">
     </div>
   </div>
 
@@ -41,31 +43,17 @@
         </div>
         <div class="col-lg-9">
           <div class="titulo-cabecera-chicas-sub">
-            <h2>MUJERES</h2>
-            <h3>Anuncios de mujeres que están en casa o en una casa privada.</h3>
+            <h2 style="text-transform:uppercase;">{!! $title !!}</h2>
+            <h3>Anuncios de {!! $title !!} que están en casa o en una casa privada.</h3>
           </div>
           <div class="linea-morada-delgada-sub">
             <div class="linea-morada-gruesa-sub"></div>
           </div>
           <div class="row"> 
 
-            @include('loop.content-profesional')
+            <listado-profesionales :categoria-data="{{json_encode($title)}}"></listado-profesionales>
 
           </div>
-
-          <div class="row">
-        <div class="col-lg-12">
-          <nav aria-label="Page navigation example">
-            <ul class="pagination ir-derecha paginador-meet">
-              <li class="page-item"><a class="page-link" href="#">Anterior</a></li>
-              <li class="page-item active"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">Siguiente</a></li>
-            </ul>
-          </nav>
-        </div>
-      </div>
 
         </div>
       </div>
@@ -76,6 +64,11 @@
   @include('footers.footer-free')
 
   @include('modal')
+
+  </div>
+
+  <script src="{{ asset('js/app.js') }}"></script>
+  <script src="{{ asset('js/meetfornight.js') }}"></script>
 
   </body>
 </html>

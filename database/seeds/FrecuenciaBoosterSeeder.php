@@ -16,17 +16,20 @@ class FrecuenciaBoosterSeeder extends Seeder
 
         $frecuencia = new FrecuenciaBooster();
         $frecuencia->idprofesional = 34;
-        $frecuencia->fecha_booster = '2019-11-14 13:05:00';
+        $frecuencia->idcategoria = 1;
+        $frecuencia->fecha_booster = '2019-11-27 13:05:00';
         $frecuencia->save();
 
         $frecuencia = new FrecuenciaBooster();
         $frecuencia->idprofesional = 34;
-        $frecuencia->fecha_booster = '2019-11-15 11:43:00';
+        $frecuencia->idcategoria = 8;
+        $frecuencia->fecha_booster = '2019-11-27 11:43:00';
         $frecuencia->save();
 
         $frecuencia = new FrecuenciaBooster();
         $frecuencia->idprofesional = 34;
-        $frecuencia->fecha_booster = '2019-11-16 20:50:00';
+        $frecuencia->idcategoria = 3;
+        $frecuencia->fecha_booster = '2019-11-27 20:50:00';
         $frecuencia->save();
 
     }

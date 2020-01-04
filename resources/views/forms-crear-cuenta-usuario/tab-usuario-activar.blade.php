@@ -3,7 +3,7 @@
 
       <div class="row">
       <div class="col-lg-4 col-sm-12 espacio-campos">
-        <img src="img/usuario.jpg" class="img-responsive">
+        <img src="img/usuario.jpg" id="foto_label" class="img-responsive">
       </div>
       <div class="col-lg-8 col-sm-12 espacio-campos">
         <div class="bloques-de-perfil">
@@ -12,16 +12,16 @@
             </div>
             <div class="form-row">
               <div class="col-lg-12 col-sm-12">
-                <span class="inf-prin">Luigio Fossati</span>
+                <span class="inf-prin" id="nombre_label"></span>
               </div>
               <div class="col-lg-12 col-sm-12">
-                <span class="inf-prin">Luigio@gmail.com</span>
+                <span class="inf-prin" id="email_label"></span>
               </div>
               <div class="col-lg-12 col-sm-12">
-                <span class="inf-prin">987 654 321</span>
+                <span class="inf-prin" id="movil_label"></span>
               </div>
               <div class="col-lg-12 col-sm-12">
-                <span class="inf-prin">Cuenta FREE</span>
+                <span class="inf-prin" id="plan_label"></span>
               </div>
             </div>
           </div>

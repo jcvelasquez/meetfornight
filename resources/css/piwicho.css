@@ -122,3 +122,79 @@ label.error { font-size: 12px; color:red; }
 .interior-frecuencia { margin:10px 0 0 20px; }
 
 .espacio-frecuencia { padding:20px 0; }
+
+.espacio-busqueda-edad { margin:20px 0; }
+
+.modal-backdrop { z-index:1; }
+
+.label_categoria { text-transform: capitalize; }
+
+/*
+.categoria_buscar:hover,
+.categoria_buscar:hover span,
+.categoria_buscar:hover i { color:#5b376f; text-decoration:none !important; }*/
+
+.boton-contenido-collapse .state i { width:100%; }
+.boton-contenido-collapse .state label { margin-top: 10px; position: absolute; bottom: 0; left: 0; text-align: center; display:block; text-indent: initial; text-transform: uppercase; width: 100%; }
+
+.boton-contenido-collapse .state.p-on i,
+.boton-contenido-collapse .state.p-on label { color:#5b376f; text-decoration:none; }
+
+
+.lista-plan-beneficios li {
+
+    padding-left:2em;
+    background: url('../img/icon-list.png') no-repeat 12px 10px;
+    font: 1.1em 'Lato';
+    font-weight: bold;
+    color: #808080;
+    padding-top:8px;
+    padding-bottom:8px;
+    border-bottom: 1px solid #ededed;
+    list-style: none;
+
+}
+
+.card { width:100%; border:1px solid #a86ba4; }
+.card .card-header { background:#a86ba4; color:#fff; }
+.card ul, .card li.repeater-usuario { padding:0; margin:0; list-style: none;}
+.card li.repeater-usuario { margin-bottom: 15px; border:2px solid #ccc; border-radius: 0 14px 14px 0; padding: 15px; border-left: 6px solid green; }
+
+
+/*LISTADO DE USUARIO DE DASHBOARD*/
+.item-usuario button { float: right; margin-left: 8px; background: none; border:none; } 
+.item-usuario .datos { float: left; } 
+.item-usuario .datos h5 { color:#5b376f; font-weight:700; } 
+.item-usuario .datos .categorias { color:#a86ba4; } 
+.item-usuario .datos .valoracion i { color:#5b376f; } 
+
+.item-usuario nav { margin-top: 20px; }
+
+.item-usuario .adicionales { float: right; } 
+.item-usuario .adicionales h5 { margin-top:15px; text-align:right; color:#5b376f; font-weight:bold; } 
+
+.repeater-usuario h5 { margin-bottom:0; }
+
+.precio-tiempo { text-transform: lowercase !important; }
+
+.bg-tipo-plomo .titulo-tipo,
+.bg-tipo-plomo .precio-cuenta { color: #59427c; }
+
+.bg-tipo-cuenta .titulo-tipo,
+.bg-tipo-cuenta .precio-cuenta { color: #ffffff; }
+
+
+#radioPlan-error {
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+    font-size: 16px;
+}
+
+.hide { display:none; }
+
+.enlace_verificacion { color: #fff; text-decoration: underline; font-weight: bold; }
+.enlace_verificacion:hover { color: #59427c; }
+
+
+

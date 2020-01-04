@@ -3,7 +3,7 @@
     <div class="header-top">
       <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light">
-          <a class="navbar-brand" href="{{ url('/') }}"><img src="img/logo-top.png" class="logo-responsive-top"></a>
+          <a class="navbar-brand" href="{{ url('/') }}"><img src="{{ asset('img/logo-top.png') }}" class="logo-responsive-top"></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -58,15 +58,14 @@
                   <span class="color-header-bottom">ANUNCIOS</span>
                 </a>
                 <div class="dropdown-menu bg-drop-header-bottom" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item sub-menu-top" href="{{ url('mujeres') }}"><span class="color-header-bottom">MUJERES</span></a>
-                  <a class="dropdown-item sub-menu-top" href="{{ url('gigolos') }}"><span class="color-header-bottom">GIGOLÓS</span></a>
-                  <a class="dropdown-item sub-menu-top" href="{{ url('gays') }}"><span class="color-header-bottom">GAYS</span></a>
-                  <a class="dropdown-item sub-menu-top" href="{{ url('habitaciones') }}"><span class="color-header-bottom">HABITACIONES</span></a>
-                  <a class="dropdown-item sub-menu-top" href="{{ url('trans') }}"><span class="color-header-bottom">TRANS</span></a>
-                  <a class="dropdown-item sub-menu-top" href="{{ url('travestis') }}"><span class="color-header-bottom">TRAVESTIS</span></a>
-                  <a class="dropdown-item sub-menu-top" href="{{ url('fetiches') }}"><span class="color-header-bottom">FETICHES</span></a>
-                  <a class="dropdown-item sub-menu-top" href="{{ url('masajes') }}"><span class="color-header-bottom">MASAJES</span></a>
-                  <a class="dropdown-item sub-menu-top" href="{{ url('parejas') }}"><span class="color-header-bottom">PAREJAS</span></a>
+                  <a class="dropdown-item sub-menu-top" href="{{ url('anuncios/mujeres') }}"><span class="color-header-bottom">MUJERES</span></a>
+                  <a class="dropdown-item sub-menu-top" href="{{ url('anuncios/gigolos') }}"><span class="color-header-bottom">GIGOLÓS</span></a>
+                  <a class="dropdown-item sub-menu-top" href="{{ url('anuncios/gays') }}"><span class="color-header-bottom">GAYS</span></a>
+                  <a class="dropdown-item sub-menu-top" href="{{ url('anuncios/trans') }}"><span class="color-header-bottom">TRANS</span></a>
+                  <a class="dropdown-item sub-menu-top" href="{{ url('anuncios/travestis') }}"><span class="color-header-bottom">TRAVESTIS</span></a>
+                  <a class="dropdown-item sub-menu-top" href="{{ url('anuncios/fetiches') }}"><span class="color-header-bottom">FETICHES</span></a>
+                  <a class="dropdown-item sub-menu-top" href="{{ url('anuncios/masajes') }}"><span class="color-header-bottom">MASAJES</span></a>
+                  <a class="dropdown-item sub-menu-top" href="{{ url('anuncios/parejas') }}"><span class="color-header-bottom">PAREJAS</span></a>
                 </div>
               </li>
               <li class="nav-item espaciado-btn-header-bottom dropdown">

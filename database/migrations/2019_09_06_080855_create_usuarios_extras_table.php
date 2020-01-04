@@ -28,7 +28,7 @@ class CreateUsuariosExtrasTable extends Migration
             $table->string('corte_intimo');
             $table->integer('estatura');
             $table->integer('peso');
-            $table->enum('orientacion',['LESB','HETE','TRAN','HOMO','BISE']);
+            $table->enum('orientacion',['LESBIANA','HETEROSEXUAL','TRANSEXUAL','HOMOSEXUAL','BISEXUAL']);
             $table->enum('tipo_contacto',['MENSAJE','CORREO','NA'])->nullable();
             $table->integer('tatuaje');
             $table->integer('piercing');

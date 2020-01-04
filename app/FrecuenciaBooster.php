@@ -11,7 +11,7 @@ class FrecuenciaBooster extends Model
 
     public $table = "booster_frecuencia_profesional";
  
-    protected $fillable = ['idprofesional','fecha_booster'];
+    protected $fillable = ['idprofesional','idcategoria','fecha_booster'];
 
     protected $appends = ['fecha','hora'];
 

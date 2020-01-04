@@ -49,7 +49,7 @@
 
                 <select type="text" class="form-control espacio-campos" name="sexo" id="sexo">
 
-                <option value="">Seleccione</option>
+                <option value="">Seleccione su sexo</option>
                 
                   <option value="M">Masculino</option>
 
@@ -63,7 +63,7 @@
 
                 <select type="text" class="form-control espacio-campos" name="nacionalidad" id="nacionalidad">
 
-                <option value="">Seleccione</option>
+                <option value="">Seleccione su nacionalidad</option>
 
                   <option value="PE">Peruana</option>
 
@@ -79,7 +79,7 @@
 
                 <select type="text" class="form-control espacio-campos" name="idioma" id="idioma">
 
-                <option value="">Seleccione</option>
+                <option value="">Seleccione tu idioma</option>
 
                   <option value="ES">Español</option>
 

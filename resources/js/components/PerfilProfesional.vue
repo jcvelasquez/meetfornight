@@ -129,25 +129,20 @@
           <div class="bloques-de-perfil">
             <h5 class="formulario-titulos">ORIENTACIÓN SEXUAL:</h5>
             <div class="form-row">
-              <div class="custom-control custom-radio custom-control-inline no-margin-right-check col-lg col-md-12 col-sm-12 espacio-campos">
-                <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
-                <label class="custom-control-label custom-control-label-espacio" for="customRadioInline1">Lesbiana</label>
+              <div class="no-margin-right-check col-lg col-md-12 col-sm-12 espacio-campos">
+                <p-input type="radio" name="orientacion" color="info" value="LESBIANA" v-model="orientacion">Lesbiana</p-input>
               </div>
-              <div class="custom-control custom-radio custom-control-inline no-margin-right-check col-lg col-md-12 col-sm-12 espacio-campos">
-                <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
-                <label class="custom-control-label custom-control-label-espacio" for="customRadioInline2">Heterosexual</label>
+              <div class="no-margin-right-check col-lg col-md-12 col-sm-12 espacio-campos">
+                <p-input type="radio" name="orientacion" color="info" value="HETEROSEXUAL" v-model="orientacion">Heterosexual</p-input>
               </div>
-              <div class="custom-control custom-radio custom-control-inline no-margin-right-check col-lg col-md-12 col-sm-12 espacio-campos">
-                <input type="radio" id="customRadioInline3" name="customRadioInline1" class="custom-control-input">
-                <label class="custom-control-label custom-control-label-espacio" for="customRadioInline3">Transexual</label>
+              <div class="no-margin-right-check col-lg col-md-12 col-sm-12 espacio-campos">
+                <p-input type="radio" name="orientacion" color="info" value="TRANSEXUAL" v-model="orientacion">Transexual</p-input>
               </div>
-              <div class="custom-control custom-radio custom-control-inline no-margin-right-check col-lg col-md-12 col-sm-12 espacio-campos">
-                <input type="radio" id="customRadioInline4" name="customRadioInline1" class="custom-control-input">
-                <label class="custom-control-label custom-control-label-espacio" for="customRadioInline4">Homosexual</label>
+              <div class="no-margin-right-check col-lg col-md-12 col-sm-12 espacio-campos">
+                <p-input type="radio" name="orientacion" color="info" value="HOMOSEXUAL" v-model="orientacion">Homosexual</p-input>
               </div>
-              <div class="custom-control custom-radio custom-control-inline no-margin-right-check col-lg col-md-12 col-sm-12 espacio-campos">
-                <input type="radio" id="customRadioInline5" name="customRadioInline1" class="custom-control-input">
-                <label class="custom-control-label custom-control-label-espacio" for="customRadioInline5">Bisexual</label>
+              <div class="no-margin-right-check col-lg col-md-12 col-sm-12 espacio-campos">
+                <p-input type="radio" name="orientacion" color="info" value="BISEXUAL" v-model="orientacion">Bisexual</p-input>
               </div>
             </div>
           </div>
@@ -156,132 +151,25 @@
             <h5 class="formulario-titulos no-marmar">CATEGORÍA:</h5>
             <span class="aparecer">En la(s) que quieres aparecer</span>
             <div class="form-row">
-              <div class="col-lg-4 col-sm-12">
-                    <div class="form-group checksito-total">
-                      <input type="radio" id="customRadioCategory1" name="customRadioCategory" class="custom-control-input">
-                      <label class="cbx" for="mas">
-                        <span>
-                          <svg width="12px" height="10px" viewBox="0 0 12 10">
-                            <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                          </svg>
-                        </span>
-                        <span class="color-check">Mujeres</span>
-                      </label>
-                    </div>
-
-                    <div class="form-group checksito-total">
-                      <input type="radio" id="customRadioCategory2" name="customRadioCategory" class="custom-control-input">
-                      <label class="cbx" for="mas2">
-                        <span>
-                          <svg width="12px" height="10px" viewBox="0 0 12 10">
-                            <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                          </svg>
-                        </span>
-                        <span class="color-check">Gigolós</span>
-                      </label>
-                    </div>
-
-                    <div class="form-group checksito-total">
-                      <input type="radio" id="customRadioCategory3" name="customRadioCategory" class="custom-control-input">
-                      <label class="cbx" for="mas3">
-                        <span>
-                          <svg width="12px" height="10px" viewBox="0 0 12 10">
-                            <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                          </svg>
-                        </span>
-                        <span class="color-check">Gays</span>
-                      </label>
-                    </div>
-              </div>
-
-              <div class="col-lg-4 col-sm-12">
-                    <div class="form-group checksito-total">
-                      <input type="radio" id="customRadioCategory4" name="customRadioCategory" class="custom-control-input">
-                      <label class="cbx" for="mas4">
-                        <span>
-                          <svg width="12px" height="10px" viewBox="0 0 12 10">
-                            <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                          </svg>
-                        </span>
-                        <span class="color-check">Habitaciones</span>
-                      </label>
-                    </div>
-
-                    <div class="form-group checksito-total">
-                      <input type="radio" id="customRadioCategory5" name="customRadioCategory" class="custom-control-input">
-                      <label class="cbx" for="mas5">
-                        <span>
-                          <svg width="12px" height="10px" viewBox="0 0 12 10">
-                            <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                          </svg>
-                        </span>
-                        <span class="color-check">Trans</span>
-                      </label>
-                    </div>
-
-                    <div class="form-group checksito-total">
-                      <input type="radio" id="customRadioCategory6" name="customRadioCategory" class="custom-control-input">
-                      <label class="cbx" for="mas6">
-                        <span>
-                          <svg width="12px" height="10px" viewBox="0 0 12 10">
-                            <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                          </svg>
-                        </span>
-                        <span class="color-check">Fetiches</span>
-                      </label>
-                    </div>
-              </div>
-
-              <div class="col-lg-4 col-sm-12">
-                    <div class="form-group checksito-total">
-                      <input type="radio" id="customRadioCategory7" name="customRadioCategory" class="custom-control-input">
-                      <label class="cbx" for="mas7">
-                        <span>
-                          <svg width="12px" height="10px" viewBox="0 0 12 10">
-                            <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                          </svg>
-                        </span>
-                        <span class="color-check">Masajes</span>
-                      </label>
-                    </div>
-
-                    <div class="form-group checksito-total">
-                      <input type="radio" id="customRadioCategory8" name="customRadioCategory" class="custom-control-input">
-                      <label class="cbx" for="mas8">
-                        <span>
-                          <svg width="12px" height="10px" viewBox="0 0 12 10">
-                            <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                          </svg>
-                        </span>
-                        <span class="color-check">Parejas</span>
-                      </label>
-                    </div>
-
-                    <div class="form-group checksito-total">
-                      <input type="radio" id="customRadioCategory9" name="customRadioCategory" class="custom-control-input">
-                      <label class="cbx" for="mas9">
-                        <span>
-                          <svg width="12px" height="10px" viewBox="0 0 12 10">
-                            <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                          </svg>
-                        </span>
-                        <span class="color-check">Travestis</span>
-                      </label>
-                    </div>
-              </div>
+                <div class="col-lg-4 col-sm-12" v-for="categoria in arCategorias" :key=" 'o_' + categoria.id">
+                  <!-- Start Categorias -->
+                  <div class="form-group checksito-total">
+                      <p-input type="checkbox" color="info" :true-value="1" :false-value="0" v-model="categoria.es_marcado" @change="checkCategoria(categoria)">{{categoria.nombre_categoria}}</p-input>       
+                  </div>
+                  <!-- End Categorias -->
+                </div>
             </div>
           </div>
+
 
           <div class="bloques-de-perfil">
             <h5 class="formulario-titulos">TATUAJE(S):</h5>
             <div class="form-row">
-              <div class="custom-control custom-radio custom-control-inline no-margin-right-check col-lg-1 col-md-12 col-sm-12 espacio-campos">
-                <input type="radio" id="tatuaje(s)-si" name="tatuaje(s)" class="custom-control-input">
-                <label class="custom-control-label custom-control-label-espacio" for="tatuaje(s)-si">Sí</label>
+              <div class="no-margin-right-check col-lg-1 col-md-12 col-sm-12 espacio-campos">
+                <p-input type="radio" name="tatuaje" color="info" :value="1" v-model="tatuaje">Si</p-input>
               </div>
-              <div class="custom-control custom-radio custom-control-inline no-margin-right-check col-lg-1 col-md-12 col-sm-12 espacio-campos">
-                <input type="radio" id="tatuaje(s)-no" name="tatuaje(s)" class="custom-control-input">
-                <label class="custom-control-label custom-control-label-espacio" for="tatuaje(s)-no">No</label>
+              <div class="no-margin-right-check col-lg-1 col-md-12 col-sm-12 espacio-campos">
+                <p-input type="radio" name="tatuaje" color="info" :value="0" v-model="tatuaje">No</p-input>
               </div>
             </div>
           </div>
@@ -290,12 +178,10 @@
             <h5 class="formulario-titulos">PIERCING(S):</h5>
             <div class="form-row">
               <div class="no-margin-right-check col-lg-1 col-md-12 col-sm-12 espacio-campos">
-                <input type="radio" id="piercing(s)-si" name="piercing(s)" class="custom-control-input">
-                <label class="custom-control-label custom-control-label-espacio" for="piercing(s)-si">Sí</label>
+                <p-input type="radio" name="piercing" color="info" :value="1" v-model="piercing">Si</p-input>
               </div>
               <div class="no-margin-right-check col-lg-1 col-md-12 col-sm-12 espacio-campos">
-                <input type="radio" id="piercing(s)-no" name="piercing(s)" class="custom-control-input">
-                <label class="custom-control-label custom-control-label-espacio" for="piercing(s)-no">No</label>
+                <p-input type="radio" name="piercing" color="info" :value="0" v-model="piercing">No</p-input>
               </div>
             </div>
           </div>
@@ -313,18 +199,16 @@
           </div>
 
           <div class="bloques-de-perfil">
-            <h5 class="formulario-titulos">SEGURIDAD:</h5>
-            <div class="form-group checksito-total">
-                      <input class="inp-cbx" id="seguridad" type="checkbox" style="display: none;">
-                      <label class="cbx" for="seguridad">
-                        <span>
-                          <svg width="12px" height="10px" viewBox="0 0 12 10">
-                            <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                          </svg>
-                        </span>
+                <h5 class="formulario-titulos">SEGURIDAD:</h5>
+                <div class="form-group checksito-total">
+                      
+                      
+                      <p-input type="checkbox" color="info" :true-value="1" :false-value="0" v-model="seguridad"></p-input>   
+                      <label>
                         <span class="color-check espe">Esta opción ocultará tus datos de contacto (teléfono y/o WhatsApp y correo) a los usuarios y/o clientes no registrados debidamente en nuestra plataforma, es decir, a los usuarios y/o clientes anónimos. No obstante, ten presente que esta opción afectará el porcentaje de clientes potenciales (la mayoría de nuestros usuarios y/o clientes son anónimos).</span>
-                      </label>
-                    </div>
+                      </label>    
+
+                </div>
           </div>
 
           <div class="bloques-de-perfil">
@@ -386,17 +270,17 @@ export default {
             estatura : 140,
             peso : 50,
             orientacion : '',
-            tatuaje : '',
-            piercing : '',
+            tatuaje : 0,
+            piercing : 0,
             fumador : 0,
-            seguridad : '',
+            seguridad : 0,
             estado : '',
             errorPerfil : 0,
             erroresPerfil: [],
             id_perfil : 0,
             usuario: [],
             extras: [],
-            categorias: []
+            arCategorias: []
         }
     },
     methods:{
@@ -411,11 +295,18 @@ export default {
                 
                 //me.usuario = response.data.usuario;     
                 //me.extras = response.data.usuario.extras;    
-                me.categorias = response.data.usuario.categorias;   
+                me.arCategorias = response.data.usuario.categorias;   
 
                 me.estatura = response.data.usuario.extras.estatura;
                 me.peso = response.data.usuario.extras.peso;
                 me.fumador = response.data.usuario.extras.fumador;
+                me.tatuaje = response.data.usuario.extras.tatuaje;
+                me.piercing = response.data.usuario.extras.piercing;
+
+                me.orientacion = response.data.usuario.extras.orientacion;
+                me.seguridad = response.data.usuario.extras.seguridad;
+                me.frase = response.data.usuario.extras.frase;
+                me.descripcion = response.data.usuario.extras.descripcion;
 
                 /*me.nombre = usuario.nombre;
                 me.departamento = usuario.departamento;
@@ -454,6 +345,11 @@ export default {
             .finally(function () {
                 // always executed
             });
+
+        },
+        checkCategoria(categoria){
+
+          console.log(categoria);
 
         },
         validarPerfilProfesional(){
