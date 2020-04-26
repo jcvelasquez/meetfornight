@@ -1,0 +1,269 @@
+label.error { font-size: 12px; color:red; }
+
+.nav-tabs { padding-bottom: 0; }
+.nav-tabs .nav-item { padding:0; }
+
+.margen-otras-chicas { margin-top:30px; }
+
+.direccion-cliente { margin-top: 20px;}
+.direccion-cliente input { padding-top: 10px;}
+
+.btn-busqueda-detallada.marcado { background: rgb(5, 182, 5);}
+
+.servicios_seleccionados {
+    padding: 28px;
+    border: 1px solid #a95db6;
+    border-radius: 14px;
+    background: #eded;
+}
+.vue-slider-process {
+    background-color: #a86ba4 !important;
+}
+.lista-plan-reservas {
+
+    padding-left: 1em;
+    background: url('../img/icon-list.png') no-repeat 0px 17px;
+    color: #808080;
+    margin-left: 30px;
+    padding-top:15px;
+    padding-bottom:15px;
+    border-bottom: 1px solid #c7c7c7;
+
+}
+
+.btn-rechazar-reserva{
+
+    width: 100%;
+    border-radius: 0.5em;
+    color: #fff;
+    font-weight: bold;
+    background-color: #f20f21 !important; 
+    border-color: #f20f21 !important;
+
+}
+
+.btn-aceptar-reserva{
+    width: 100%;
+    border-radius: 0.5em;
+    color: #fff;
+    font-weight: bold;
+    background-color: #5b376f;
+    border-color: #5b376f;
+}
+
+
+.btn-cerrar-reserva{
+    width: 100%;
+    border-radius: 0.5em;
+    color: #fff;
+    font-weight: bold;
+    background-color: #0069d9;
+    border-color: #0069d9;
+}
+
+.item-mensaje {
+    border-radius: 0 20px 20px 0;
+    border: solid 2px #dcc2db;
+    padding:20px;
+    margin-bottom:20px;
+}
+.item-mensaje:hover {
+    background: #fbf9fc;
+    cursor:pointer;
+}
+.item-mensaje .btn-responder-texto {
+    background:none; 
+    border:none;
+}
+.item-mensaje .datos-mensaje {
+    padding-left:15px;
+}
+.item-mensaje hr { margin:10px 0 13px 0; }
+.item-mensaje .datos-mensaje h6 {
+    color:#59417b;
+    font-weight: 400;
+    float: left;
+}
+.item-mensaje .datos-mensaje a {
+    color:#838383;
+}
+
+.item-mensaje .btn-eliminar {
+    color:#a969a5;
+    float:right;
+    background:none; 
+    border:none;
+}
+.item-mensaje .btn-eliminar i {
+    font-size:22px;
+}
+
+.item-mensaje .fecha {
+    color:#a969a5;
+    float:right;
+}
+.item-mensaje .clear { clear: both; }
+
+.item-respuesta { margin-top: 20px; border-top:1px solid #ccc; padding-top: 15px; }
+
+.btn-responder-mensaje{
+    width: 100%;
+    border-radius: 0.5em;
+    color: #fff;
+    font-weight: bold;
+    background-color: #5b376f;
+    border-color: #5b376f;
+}
+.form-respuesta { margin: 0 0 20px 0;}
+
+.total-actual {
+    width: 100%;
+    text-align: center;
+}
+
+.interior-frecuencia { margin:10px 0 0 20px; }
+
+.espacio-frecuencia { padding:20px 0; }
+
+.espacio-busqueda-edad { margin:20px 0; }
+
+.modal-backdrop { z-index:1; }
+
+.label_categoria { text-transform: capitalize; }
+
+/*
+.categoria_buscar:hover,
+.categoria_buscar:hover span,
+.categoria_buscar:hover i { color:#5b376f; text-decoration:none !important; }*/
+
+.boton-contenido-collapse .state i { width:100%; }
+.boton-contenido-collapse .state label { margin-top: 10px; position: absolute; bottom: 0; left: 0; text-align: center; display:block; text-indent: initial; text-transform: uppercase; width: 100%; }
+
+.boton-contenido-collapse .state.p-on i,
+.boton-contenido-collapse .state.p-on label { color:#5b376f; text-decoration:none; }
+
+
+.lista-plan-beneficios li {
+
+    padding-left:2em;
+    background: url('../img/icon-list.png') no-repeat 12px 10px;
+    font: 1.1em 'Lato';
+    font-weight: bold;
+    color: #808080;
+    padding-top:8px;
+    padding-bottom:8px;
+    border-bottom: 1px solid #ededed;
+    list-style: none;
+
+}
+
+.card { width:100%; border:1px solid #a86ba4; }
+.card .card-header { background:#a86ba4; color:#fff; }
+.card ul, .card li.repeater-usuario { padding:0; margin:0; list-style: none;}
+.card li.repeater-usuario { margin-bottom: 15px; border:2px solid #ccc; border-radius: 0 14px 14px 0; padding: 15px; border-left: 6px solid green; }
+
+
+/*LISTADO DE USUARIO DE DASHBOARD*/
+.item-usuario button { float: right; margin-left: 8px; background: none; border:none; } 
+.item-usuario .datos { float: left; } 
+.item-usuario .datos h5 { color:#5b376f; font-weight:700; } 
+.item-usuario .datos .categorias { color:#a86ba4; } 
+.item-usuario .datos .valoracion i { color:#5b376f; } 
+
+.item-usuario nav { margin-top: 20px; }
+
+.item-usuario .adicionales { float: right; } 
+.item-usuario .adicionales h5 { margin-top:15px; text-align:right; color:#5b376f; font-weight:bold; } 
+
+.repeater-usuario h5 { margin-bottom:0; }
+
+.precio-tiempo { text-transform: lowercase !important; }
+
+.bg-tipo-plomo .titulo-tipo,
+.bg-tipo-plomo .precio-cuenta { color: #59427c; }
+
+.bg-tipo-cuenta .titulo-tipo,
+.bg-tipo-cuenta .precio-cuenta { color: #ffffff; }
+
+
+#radioPlan-error {
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+    color: red !important;
+    font-size: 16px;
+}
+
+.hide { display:none; }
+
+.enlace_verificacion { color: #fff; text-decoration: underline; font-weight: bold; }
+.enlace_verificacion:hover { color: #59427c; }
+
+label.error {
+    color: red !important;
+}
+
+.check-idiomas { text-transform: uppercase; }
+
+#tipo_celular-error { padding-left: 24px; }
+
+.centrando-disponibilidad  { margin: 1.5em 0 }
+
+.agenda_check { color: #5b376f; }
+
+.strong_morado {
+    text-decoration: none;
+    color: #5b376f;
+}
+
+ul.lista-opciones li {
+    background: url(../img/check.png) no-repeat scroll 0 0 transparent;
+    background-position: left;
+    padding-left: 2em !important;
+    list-style: none;
+}
+    
+
+ul.lista-opciones {
+    margin-left: 1em;
+}
+
+
+.nodisponible span.dias { background:red; }
+
+.fecha.lunes .dias:hover,
+.fecha.martes .dias:hover,
+.fecha.miercoles .dias:hover,
+.fecha.jueves .dias:hover,
+.fecha.viernes .dias:hover,
+.fecha.sabado .dias:hover,
+.fecha.domingo .dias:hover {
+    background: #5b376f;
+}
+
+.fecha.lunes.nodisponible .dias:hover,
+.fecha.martes.nodisponible .dias:hover,
+.fecha.miercoles.nodisponible .dias:hover,
+.fecha.jueves.nodisponible .dias:hover,
+.fecha.viernes.nodisponible .dias:hover,
+.fecha.sabado.nodisponible .dias:hover,
+.fecha.domingo.nodisponible .dias:hover {
+    background: red;
+}
+
+#icon_celular.fa-mobile { font-size: 20px; }
+
+.vdpComponent.vdpWithInput { width: 100%; }
+
+
+.inp-cbx:disabled + .cbx span:first-child {
+    background: #ccc;
+    border-color: #ccc;
+}
+
+.cuadro-servicios-especial .inp-cbx:disabled + .cbx span:first-child {
+    background: #ccc;
+    border-color: #ccc;
+}
+.btn_eliminar_personalizado { background:#a86ba4; color: #fff; font-size: 11px; margin-left: 10px; }
+
