@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 
 use App\MensajeProfesional;
-
+use App\Usuario;
 
 class MensajeProfesionalController extends Controller
 {
@@ -40,12 +40,15 @@ class MensajeProfesionalController extends Controller
     {
 
         $idusuario = Auth::user()->id;
+
+        $profesional = Usuario::where('apodo', $request->apodo)->select('id')->first();
         
         $mensaje = new MensajeProfesional();
-        $mensaje->parent_id = $request->parent_id;
-        $mensaje->idprofesional = $request->idprofesional;
-        $mensaje->idusuario = $request->idusuario;
+        $mensaje->parent_id = NULL;
+        $mensaje->idprofesional = $profesional->id;
+        $mensaje->idusuario = $idusuario;
         $mensaje->mensaje = $request->mensaje;
+        $mensaje->es_leido = 0;
         $mensaje->save();
 
         return Response::json(['mensaje' => 'Mensaje enviado correctamente'], 200);
@@ -61,6 +64,7 @@ class MensajeProfesionalController extends Controller
         $mensaje->idprofesional = $request->idprofesional;
         $mensaje->idusuario = $request->idusuario;
         $mensaje->mensaje = $request->mensaje;
+        $mensaje->es_leido = 0;
         $mensaje->save();
 
         return Response::json(['mensaje' => 'Mensaje enviado correctamente'], 200);

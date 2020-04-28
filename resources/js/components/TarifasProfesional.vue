@@ -7,13 +7,17 @@
             <p>Elige el tipo de moneda con el que deseas trabajar con tus clientes.</p>
             <div class="linea-morada">
               <div class="row">
-                <div class="custom-control custom-radio custom-control-inline no-margin-right-check col-lg-1 col-md-12 col-sm-12 espacio-campos">
-                  <input type="radio" id="tatuaje(s)-si" name="tatuaje(s)" class="custom-control-input">
-                  <label class="custom-control-label custom-control-label-espacio" for="tatuaje(s)-si">/S.</label>
+                <div class="custom-control custom-radio custom-control-inline no-margin-right-check col-lg-1 col-md-12 col-sm-12 espacio-campos" v-show=" pais == 'PE' ">
+                  <input type="radio" id="pen" name="tipo_moneda" @click=" simbolo_moneda = 'S/' " v-model="tipo_moneda" value="PEN" class="custom-control-input">
+                  <label class="custom-control-label custom-control-label-espacio" for="pen">S/</label>
                 </div>
-                <div class="custom-control custom-radio custom-control-inline no-margin-right-check col-lg-1 col-md-12 col-sm-12 espacio-campos">
-                  <input type="radio" id="tatuaje(s)-no" name="tatuaje(s)" class="custom-control-input">
-                  <label class="custom-control-label custom-control-label-espacio" for="tatuaje(s)-no">$</label>
+                <div class="custom-control custom-radio custom-control-inline no-margin-right-check col-lg-1 col-md-12 col-sm-12 espacio-campos" v-show=" pais == 'PE' || pais == 'PA' ">
+                  <input type="radio" id="dolar" name="tipo_moneda" @click=" simbolo_moneda = '$' " v-model="tipo_moneda" value="USD" class="custom-control-input">
+                  <label class="custom-control-label custom-control-label-espacio" for="dolar">$</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline no-margin-right-check col-lg-1 col-md-12 col-sm-12 espacio-campos" v-show=" pais == 'ES' ">
+                  <input type="radio"  id="euro" name="tipo_moneda" @click=" simbolo_moneda = '€' " v-model="tipo_moneda" value="EUR" class="custom-control-input">
+                  <label class="custom-control-label custom-control-label-espacio" for="euro">€</label>
                 </div>
               </div>
             </div>
@@ -28,7 +32,7 @@
                   <tr>
                     <th scope="col" width="40">#</th>
                     <th scope="col">Tipo</th>
-                    <th scope="col">Tarifa</th>
+                    <th scope="col">Tarifa {{simbolo_moneda}}</th>
                     <th scope="col" width="80">Eliminar</th>
                   </tr>
                 </thead>
@@ -39,7 +43,7 @@
                     <template v-if="servicio.categoria_tarifa == 'SERVICIO' ">
                         <td v-text="servicio.id" scope="row" >1</td>
                         <td v-text="servicio.opcion_tarifa"></td>
-                        <td v-text="servicio.costo_tarifa"></td>
+                        <td v-text=" simbolo_moneda + '' + servicio.costo_tarifa"></td>
                         <td><button type="button" @click="eliminarTarifa(servicio, index)" class="btn btn-primary x-circulo"><i class="fa fa-times"></i></button></td>
                     </template>
                   </tr>
@@ -61,7 +65,7 @@
                     </select>
                   </div>
                   <div class="col-lg col-sm-12 espacio-campos">
-                    <input type="number" class="form-control" name="servicio_tarifa" v-model="servicio_tarifa" placeholder="S/">
+                    <input type="number" class="form-control" name="servicio_tarifa" v-model="servicio_tarifa" :placeholder=" simbolo_moneda ">
                   </div>
                   <div class="col-lg-1 col-sm-12 espacio-campos">
                     <button type="button" @click="registrarTarifa('SERVICIO')" class="btn btn-primary mas-cuadrado"><i class="fa fa-plus"></i></button>
@@ -81,7 +85,7 @@
                   <tr>
                     <th scope="col" width="40">#</th>
                     <th scope="col">Tipo</th>
-                    <th scope="col">Tarifa</th>
+                    <th scope="col">Tarifa {{simbolo_moneda}}</th>
                     <th scope="col" width="80">Eliminar</th>
                   </tr>
                 </thead>
@@ -92,7 +96,7 @@
                     <template v-if="escort.categoria_tarifa == 'ESCORT' ">
                         <td scope="row" v-text="escort.id">1</td>
                         <td v-text="escort.opcion_tarifa"></td>
-                        <td v-text="escort.costo_tarifa"></td>
+                        <td v-text=" simbolo_moneda + '' + escort.costo_tarifa"></td>
                         <td><button type="button" @click="eliminarTarifa(escort, index)" class="btn btn-primary x-circulo"><i class="fa fa-times"></i></button></td>
                     </template>
                     <template v-else>
@@ -118,7 +122,7 @@
                     </select>
                   </div>
                   <div class="col-lg col-sm-12 espacio-campos">
-                    <input type="number" class="form-control" name="escort_tarifa" id="escort_tarifa" v-model="escort_tarifa" placeholder="S/">
+                    <input type="number" class="form-control" name="escort_tarifa" id="escort_tarifa" v-model="escort_tarifa" :placeholder=" simbolo_moneda " >
                   </div>
                   <div class="col-lg-1 col-sm-12 espacio-campos">
                     <button type="button" @click="registrarTarifa('ESCORT')" class="btn btn-primary mas-cuadrado"><i class="fa fa-plus"></i></button>
@@ -136,7 +140,7 @@
                   <tr>
                     <th scope="col" width="40">#</th>
                     <th scope="col">Tipo</th>
-                    <th scope="col">Tarifa</th>
+                    <th scope="col">Tarifa {{simbolo_moneda}}</th>
                     <th scope="col" width="80">Eliminar</th>
                   </tr>
                 </thead>
@@ -146,7 +150,7 @@
                     <template v-if="extra.categoria_tarifa == 'EXTRAS' ">
                         <td scope="row" v-text="extra.id">1</td>
                         <td v-text="extra.opcion_tarifa"></td>
-                        <td v-text="extra.costo_tarifa"></td>
+                        <td v-text=" simbolo_moneda  + '' + extra.costo_tarifa"></td>
                         <td><button type="button" @click="eliminarTarifa(extra, index)" class="btn btn-primary x-circulo"><i class="fa fa-times"></i></button></td>
                     </template>
                     <template v-else>
@@ -180,7 +184,7 @@
                   </div>
                   
                   <div class="col-lg col-sm-12 espacio-campos">
-                    <input type="number" class="form-control" name="extra_tarifa" v-model="extra_tarifa" placeholder="S/">
+                    <input type="number" class="form-control" name="extra_tarifa" v-model="extra_tarifa" :placeholder=" simbolo_moneda " >
                   </div>
                   <div class="col-lg-1 col-sm-12 espacio-campos">
                     <button type="button" @click="registrarTarifa('EXTRAS')" class="btn btn-primary mas-cuadrado"><i class="fa fa-plus"></i></button>
@@ -212,7 +216,10 @@
                 escort_opcion : '',
                 escort_tarifa : '',
                 extra_opcion : '',
-                extra_tarifa : ''
+                extra_tarifa : '',
+                tipo_moneda : '',
+                simbolo_moneda : '',
+                pais : ''
             }
         },
          methods:{
@@ -225,6 +232,9 @@
 
                       var respuesta= response.data;
                       me.arTarifas = respuesta.tarifas;
+                      me.tipo_moneda = respuesta.moneda;
+                      me.simbolo_moneda = respuesta.simbolo;
+                      me.pais = respuesta.pais;
 
                   }).catch(function (error) {  console.log(error);     });
                 

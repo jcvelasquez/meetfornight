@@ -295,7 +295,8 @@
 
                 <div class="form-group checksito">
                   <input id="seguridad" name="seguridad" :true-value="1" :false-value="0" type="checkbox" v-model="seguridad" class="inp-cbx" style="display: none;"> 
-                  <label for="seguridad" class="cbx"><span><svg width="12px" height="10px" viewBox="0 0 12 10"><polyline points="1.5 6 4.5 9 10.5 1"></polyline></svg></span> <span class="tam-check">Esta opción ocultará sus datos de contacto (teléfono y/o WhatsApp y correo) a los usuarios no registrados debidamente. No obstante, tenga presente que esta opción afectará el porcentaje de clientes potenciales (la mayoría de nuestros usuarios son usuarios no registrados).</span></label></div>
+                  <label for="seguridad" class="cbx"><span><svg width="12px" height="10px" viewBox="0 0 12 10"><polyline points="1.5 6 4.5 9 10.5 1"></polyline></svg></span> <span class="tam-check">Esta opción ocultará sus datos de contacto (teléfono y/o WhatsApp y correo) a los usuarios no registrados debidamente. No obstante, tenga presente que esta opción afectará el porcentaje de clientes potenciales (la mayoría de nuestros usuarios son usuarios no registrados).</span></label>
+                </div>
 
           </div>
 
@@ -340,7 +341,6 @@ import 'vue-slider-component/theme/default.css';
 
 import { required, minLength } from 'vuelidate/lib/validators';
 
-//Vue.component('VueSlider', VueSlider)
 
 export default {
     components: {

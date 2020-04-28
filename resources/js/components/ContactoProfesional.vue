@@ -11,12 +11,12 @@
           </div>
           <div class="col-lg-6 col-sm-12 espacio-campos">
               <div class="form-row">
-                  <div class="form-group checksito centrando-opciones custom-control custom-radio custom-control-inline no-margin-right-check col-lg col-md-12 col-sm-12">
-                      <p-input type="radio" name="tipo_celular" color="info" value="WHATSAPP" v-model="tipo_celular"><i class="icon-whatsapp-green esp-icono-bio"></i>Whatsapp</p-input>
+
+                  <div class="form-group checksito margin-left-contacto">
+                    <input id="wasap" true-value="WHATSAPP" false-value="CELULAR" type="checkbox" v-model="tipo_celular" class="inp-cbx" style="display: none;"> 
+                    <label for="wasap" class="cbx"><span><svg width="12px" height="10px" viewBox="0 0 12 10"><polyline points="1.5 6 4.5 9 10.5 1"></polyline></svg></span> <span class="tam-check"> <i class="icon-whatsapp-green esp-icono-bio"></i> Tengo Whatsapp</span></label>
                   </div>
-                  <div class="form-group checksito centrando-opciones custom-control custom-radio custom-control-inline no-margin-right-check col-lg col-md-12 col-sm-12">
-                      <p-input type="radio" name="tipo_celular" color="info" value="CELULAR" v-model="tipo_celular"><i class="fa fa-mobile esp-icono-bio"></i>Celular</p-input>
-                  </div>
+
               </div>
           </div>
         </div>
@@ -37,24 +37,31 @@
       <div class="bloques-de-perfil">
         <h5 class="formulario-titulos">CONTACTO:</h5>
         <div class="form-row espacio-campos obligando-columna">
+
               <div class="bloque-opcion">
-                <div class="no-margin-right-check col-lg col-md-12 col-sm-12">
-                <p-input type="radio" name="contacto" value="MENSAJE" v-model="tipo_contacto"><span>Mensaje</span></p-input>
-                <p>Unicamente <strong>los usuarios registrados</strong> podrán enviarte un mensaje. Podrás leer y contestar a los mensajes a través del panel de control.</p>   
-                </div>
+                  <div class="custom-radio custom-control-inline no-margin-right-check col-lg-1 col-md-12 col-sm-12 espacio-campos" style="padding-left:0;">
+                    <input type="radio" id="mensaje" name="contacto" value="MENSAJE" class="custom-control-input" v-model="tipo_contacto">
+                    <label class="custom-control-label custom-control-label-espacio" for="mensaje">Mensaje</label>
+                  </div>
+                  <p>Unicamente <strong>los usuarios registrados</strong> podrán enviarte un mensaje. Podrás leer y contestar a los mensajes a través del panel de control.</p>   
               </div>
+
               <div class="bloque-opcion">
-                <div class="no-margin-right-check col-lg col-md-12 col-sm-12">
-                <p-input type="radio" name="contacto" value="CORREO" v-model="tipo_contacto"><span>Correos</span></p-input>
-                <p>Todos <strong>los usuarios anónimos y registrados</strong> podrán enviarte un correo a través de la web. Podrás responder por medio de tu correo a los mensajes (tú correo no será visible en la pagina web).</p>
-                </div>
+                <div class="custom-radio custom-control-inline no-margin-right-check col-lg-1 col-md-12 col-sm-12 espacio-campos" style="padding-left:0;">
+                    <input type="radio" id="correo" name="contacto" value="CORREO" class="custom-control-input" v-model="tipo_contacto">
+                    <label class="custom-control-label custom-control-label-espacio" for="correo">Correo</label>
+                  </div>
+                  <p>Todos <strong>los usuarios anónimos y registrados</strong> podrán enviarte un correo a través de la web. Podrás responder por medio de tu correo a los mensajes (tú correo no será visible en la pagina web).</p>
               </div>
+
               <div class="bloque-opcion">
-                <div class="no-margin-right-check col-lg col-md-12 col-sm-12">
-                  <p-input type="radio" name="contacto" value="NA" v-model="tipo_contacto"><span>Ninguna de las anteriores</span></p-input>
-                  <p>No quieres recibir mensajes o correos de los visitantes. Serás contactado solamente por teléfono y/o whatsapp.</p>
-                </div>
-              </div>
+                  <div class="custom-radio custom-control-inline no-margin-right-check col-lg-1 col-md-12 col-sm-12 espacio-campos" style="padding-left:0;">
+                    <input type="radio" id="na" name="contacto" value="NA" class="custom-control-input" v-model="tipo_contacto">
+                    <label class="custom-control-label custom-control-label-espacio" for="na">Ninguno</label>
+                  </div>
+                  <p><strong>No quieres recibir</strong> mensajes o correos de los visitantes. Serás contactado solamente por teléfono y/o whatsapp.</p>                  
+              </div> 
+
         </div>
       </div>
 
@@ -69,7 +76,7 @@
                   </div>   
               </div>
               <div class="col-lg-3 col-sm-12" style="padding-top:1.5em;">
-                    <vue-range-slider ref="slider" :min="0" :max="24" v-model="horario_lunes"></vue-range-slider>
+                    <vue-slider :marks="[0, 24]" :min="0" :max="24" v-model="horario_lunes"></vue-slider>
               </div>
               <div class="col-lg-3 col-sm-12">       
                     <div class="busqueda-detallada-range">
@@ -78,8 +85,10 @@
               </div>
               <div class="col-lg-4 col-sm-12">
                   <div class="busqueda-detallada-range">
-                    <p-input type="radio" name="lunes" color="info" value="24" v-model="disponibilidad_lunes" @change=" horario_lunes = [0,24] ">24/24</p-input>
-                    <p-input type="radio" name="lunes" color="info" value="0" v-model="disponibilidad_lunes" @change=" horario_lunes = [0,0] ">No disponible</p-input>
+                      <div class="form-group checksito">
+                        <input id="nd_lunes" @change=" horario_lunes = [0,0]" type="checkbox" v-model="disponibilidad_lunes" class="inp-cbx" style="display: none;"> 
+                        <label for="nd_lunes" class="cbx"><span><svg width="12px" height="10px" viewBox="0 0 12 10"><polyline points="1.5 6 4.5 9 10.5 1"></polyline></svg></span> <span class="tam-check">No disponible</span></label>
+                      </div>
                   </div>  
               </div>
           </div>
@@ -91,7 +100,7 @@
                   </div>   
               </div>
               <div class="col-lg-3 col-sm-12" style="padding-top:1.5em;">
-                    <vue-range-slider ref="slider" :min="0" :max="24" v-model="horario_martes"></vue-range-slider>
+                    <vue-slider :marks="[0, 24]" :min="0" :max="24" v-model="horario_martes"></vue-slider>
               </div>
               <div class="col-lg-3 col-sm-12">       
                     <div class="busqueda-detallada-range">
@@ -100,8 +109,10 @@
               </div>
               <div class="col-lg-4 col-sm-12">
                   <div class="busqueda-detallada-range">
-                    <p-input type="radio" name="martes" color="info" value="24" v-model="disponibilidad_martes" @change=" horario_martes = [0,24] ">24/24</p-input>
-                    <p-input type="radio" name="martes" color="info" value="0" v-model="disponibilidad_martes" @change=" horario_martes = [0,0] ">No disponible</p-input>
+                     <div class="form-group checksito">
+                        <input id="nd_martes" @change=" horario_martes = [0,0]" type="checkbox" v-model="disponibilidad_martes" class="inp-cbx" style="display: none;"> 
+                        <label for="nd_martes" class="cbx"><span><svg width="12px" height="10px" viewBox="0 0 12 10"><polyline points="1.5 6 4.5 9 10.5 1"></polyline></svg></span> <span class="tam-check">No disponible</span></label>
+                      </div>
                   </div>  
               </div>
           </div>
@@ -113,7 +124,7 @@
                     </div>   
                 </div>
                 <div class="col-lg-3 col-sm-12" style="padding-top:1.5em;">
-                      <vue-range-slider ref="slider" :min="0" :max="24" v-model="horario_miercoles"></vue-range-slider>
+                      <vue-slider :marks="[0, 24]" :min="0" :max="24" v-model="horario_miercoles"></vue-slider>
                 </div>
                 <div class="col-lg-3 col-sm-12">       
                       <div class="busqueda-detallada-range">
@@ -122,8 +133,10 @@
                 </div>
                 <div class="col-lg-4 col-sm-12">
                     <div class="busqueda-detallada-range">
-                      <p-input type="radio" name="miercoles" color="info" value="24" v-model="disponibilidad_miercoles" @change=" horario_miercoles = [0,24] ">24/24</p-input>
-                      <p-input type="radio" name="miercoles" color="info" value="0" v-model="disponibilidad_miercoles" @change=" horario_miercoles = [0,0] ">No disponible</p-input>
+                      <div class="form-group checksito">
+                        <input id="nd_miercoles" @change=" horario_miercoles = [0,0]" type="checkbox" v-model="disponibilidad_miercoles" class="inp-cbx" style="display: none;"> 
+                        <label for="nd_miercoles" class="cbx"><span><svg width="12px" height="10px" viewBox="0 0 12 10"><polyline points="1.5 6 4.5 9 10.5 1"></polyline></svg></span> <span class="tam-check">No disponible</span></label>
+                      </div>
                     </div>  
                 </div>
             </div>
@@ -135,7 +148,7 @@
                     </div>   
                 </div>
                 <div class="col-lg-3 col-sm-12" style="padding-top:1.5em;">
-                      <vue-range-slider ref="slider" :min="0" :max="24" v-model="horario_jueves"></vue-range-slider>
+                      <vue-slider :marks="[0, 24]" :min="0" :max="24" v-model="horario_jueves"></vue-slider>
                 </div>
                 <div class="col-lg-3 col-sm-12">       
                       <div class="busqueda-detallada-range">
@@ -144,8 +157,12 @@
                 </div>
                 <div class="col-lg-4 col-sm-12">
                     <div class="busqueda-detallada-range">
-                      <p-input type="radio" name="jueves" color="info" value="24" v-model="disponibilidad_jueves" @change=" horario_jueves = [0,24] ">24/24</p-input>
-                      <p-input type="radio" name="jueves" color="info" value="0" v-model="disponibilidad_jueves" @change=" horario_jueves = [0,0] ">No disponible</p-input>
+
+                      <div class="form-group checksito">
+                        <input id="nd_jueves" @change=" horario_jueves = [0,0]" type="checkbox" v-model="disponibilidad_jueves" class="inp-cbx" style="display: none;"> 
+                        <label for="nd_jueves" class="cbx"><span><svg width="12px" height="10px" viewBox="0 0 12 10"><polyline points="1.5 6 4.5 9 10.5 1"></polyline></svg></span> <span class="tam-check">No disponible</span></label>
+                      </div>
+
                     </div>  
                 </div>
             </div>
@@ -157,7 +174,7 @@
                     </div>   
                 </div>
                 <div class="col-lg-3 col-sm-12" style="padding-top:1.5em;">
-                      <vue-range-slider ref="slider" :min="0" :max="24" v-model="horario_viernes"></vue-range-slider>
+                      <vue-slider :marks="[0, 24]" :min="0" :max="24" v-model="horario_viernes"></vue-slider>
                 </div>
                 <div class="col-lg-3 col-sm-12">       
                       <div class="busqueda-detallada-range">
@@ -166,8 +183,12 @@
                 </div>
                 <div class="col-lg-4 col-sm-12">
                     <div class="busqueda-detallada-range">
-                      <p-input type="radio" name="viernes" color="info" value="24" v-model="disponibilidad_viernes" @change=" horario_viernes = [0,24] ">24/24</p-input>
-                      <p-input type="radio" name="viernes" color="info" value="0" v-model="disponibilidad_viernes" @change=" horario_viernes = [0,0] ">No disponible</p-input>
+
+                      <div class="form-group checksito">
+                        <input id="nd_viernes" @change=" horario_viernes = [0,0]" type="checkbox" v-model="disponibilidad_viernes" class="inp-cbx" style="display: none;"> 
+                        <label for="nd_viernes" class="cbx"><span><svg width="12px" height="10px" viewBox="0 0 12 10"><polyline points="1.5 6 4.5 9 10.5 1"></polyline></svg></span> <span class="tam-check">No disponible</span></label>
+                      </div>
+
                     </div>  
                 </div>
             </div>
@@ -179,7 +200,7 @@
                     </div>   
                 </div>
                 <div class="col-lg-3 col-sm-12" style="padding-top:1.5em;">
-                      <vue-range-slider ref="slider" :min="0" :max="24" v-model="horario_sabado"></vue-range-slider>
+                      <vue-slider :marks="[0, 24]" :min="0" :max="24" v-model="horario_sabado"></vue-slider>
                 </div>
                 <div class="col-lg-3 col-sm-12">       
                       <div class="busqueda-detallada-range">
@@ -188,8 +209,12 @@
                 </div>
                 <div class="col-lg-4 col-sm-12">
                     <div class="busqueda-detallada-range">
-                      <p-input type="radio" name="sabado" color="info" value="24" v-model="disponibilidad_sabado" @change=" horario_sabado = [0,24] ">24/24</p-input>
-                      <p-input type="radio" name="sabado" color="info" value="0" v-model="disponibilidad_sabado" @change=" horario_sabado = [0,0] ">No disponible</p-input>
+
+                      <div class="form-group checksito">
+                        <input id="nd_sabado" @change=" horario_sabado = [0,0]" type="checkbox" v-model="disponibilidad_sabado" class="inp-cbx" style="display: none;"> 
+                        <label for="nd_sabado" class="cbx"><span><svg width="12px" height="10px" viewBox="0 0 12 10"><polyline points="1.5 6 4.5 9 10.5 1"></polyline></svg></span> <span class="tam-check">No disponible</span></label>
+                      </div>
+
                     </div>  
                 </div>
             </div>
@@ -201,7 +226,8 @@
                     </div>   
                 </div>
                 <div class="col-lg-3 col-sm-12" style="padding-top:1.5em;">
-                      <vue-range-slider ref="slider" :min="0" :max="24" v-model="horario_domingo"></vue-range-slider>
+                      <vue-slider :marks="[0, 24]" :min="0" :max="24" v-model="horario_domingo"></vue-slider>
+                      
                 </div>
                 <div class="col-lg-3 col-sm-12">       
                       <div class="busqueda-detallada-range">
@@ -210,8 +236,12 @@
                 </div>
                 <div class="col-lg-4 col-sm-12">
                     <div class="busqueda-detallada-range">
-                      <p-input type="radio" name="domingo" color="info" value="24" v-model="disponibilidad_domingo" @change=" horario_domingo = [0,24] ">24/24</p-input>
-                      <p-input type="radio" name="domingo" color="info" value="0" v-model="disponibilidad_domingo" @change=" horario_domingo = [0,0] ">No disponible</p-input>
+
+                      <div class="form-group checksito">
+                        <input id="nd_domingo" @change=" horario_domingo = [0,0]" type="checkbox" v-model="disponibilidad_domingo" class="inp-cbx" style="display: none;"> 
+                        <label for="nd_domingo" class="cbx"><span><svg width="12px" height="10px" viewBox="0 0 12 10"><polyline points="1.5 6 4.5 9 10.5 1"></polyline></svg></span> <span class="tam-check">No disponible</span></label>
+                      </div>
+
                     </div>  
                 </div>
             </div>
@@ -220,24 +250,19 @@
 
 
         <div class="bloques-de-perfil">
-          <div class="form-row">
-            <div class="col-lg-12 col-sm-12">
-              <div class="form-group bloque-opcion">
 
-                <p-check class="p-default p-curve" v-model="agenda" :true-value=1 :false-value=0 @change="actualizarHorarios()" color="success" off-color="danger" toggle>
-                    <span>AGENDA COMPARTIDA</span>
-                    <label slot="off-label"><span>AGENDA OCULTA</span></label>
-                </p-check>
+            <h5 class="formulario-titulos">AGENDA:</h5>
 
-                <p>La <span>agenda compartida</span> le permite a tus clientes reservar una cita y de la misma forma pueden ver en que momento estas disponible. Por el contrario, cambia a la opcion a <span>agenda oculta</span> si deseas mantener tu disponibilidad en privado.</p>
-              </div>
+            <div class="form-group checksito">
+              <input id="agenda" name="agenda" :true-value="1" :false-value="0" type="checkbox" v-model="agenda" class="inp-cbx" style="display: none;"> 
+              <label for="agenda" class="cbx"><span><svg width="12px" height="10px" viewBox="0 0 12 10"><polyline points="1.5 6 4.5 9 10.5 1"></polyline></svg></span> <span class="tam-check"><p>La <strong>agenda compartida</strong> le permite a tus clientes reservar una cita y de la misma forma pueden ver en que momento estas disponible. Por el contrario, cambia a la opcion a <strong>agenda oculta</strong> si deseas mantener tu disponibilidad en privado.</p></span></label>
             </div>
-          </div>
+          
         </div>
 
         <div class="bloques-de-perfil">
           <div class="form-row">
-            <button type="button" @click="actualizarHorarios()" class="btn btn-primary btn-busqueda-detallada">ACTUALIZAR DATOS</button>
+            <button type="button" @click="actualizarContacto();" class="btn btn-primary btn-busqueda-detallada">ACTUALIZAR DATOS</button>
           </div>
         </div>
 
@@ -247,7 +272,13 @@
 
 <script>
 
+import VueSlider from 'vue-slider-component';
+import 'vue-slider-component/theme/default.css';
+
     export default {
+        components: {
+          VueSlider
+        },
         mounted() {
 
           this.listarDisponibilidad();
@@ -271,6 +302,13 @@
             disponibilidad_sabado : 0,
             disponibilidad_domingo : 0,
             arDisponibilidad : [],
+            arLunes : [],
+            arMartes : [],
+            arMiercoles : [],
+            arJueves : [],
+            arViernes : [],
+            arSabado : [],
+            arDomingo : [],
             celular : '',
             web: '',
             tipo_celular: '',
@@ -304,10 +342,26 @@
                   axios.get('/disponibilidad-profesional/listar').then(function (response) {
 
                       var respuesta= response.data;
+
+                      /*me.arLunes = respuesta.lunes;
+                      me.arMartes = respuesta.martes;
+                      me.arMiercoles = respuesta.miercoles;
+                      me.arJueves = respuesta.jueves;
+                      me.arViernes = respuesta.viernes;
+                      me.arSabado = respuesta.sabado;
+                      me.arDomingo = respuesta.domingo;*/
+
+                      /*me.horario_lunes = [me.arLunes.idesde, me.arLunes.ihasta];
+                      me.horario_martes = [me.arMartes.idesde, me.arMartes.ihasta];
+                      me.horario_miercoles = [me.arMiercoles.idesde, me.arMiercoles.ihasta];
+                      me.horario_jueves = [me.arJueves.idesde, me.arJueves.ihasta];
+                      me.horario_viernes = [me.arViernes.idesde, me.arViernes.ihasta];
+                      me.horario_sabado = [me.arSabado.idesde, me.arSabado.ihasta];
+                      me.horario_domingo = [me.arDomingo.idesde, me.arDomingo.ihasta];*/
+
                       me.arDisponibilidad = respuesta.disponibilidad;
 
                       if(me.arDisponibilidad.length > 0){
-
                             me.horario_lunes = me.obtenerHorarioDia(me.arDisponibilidad, 'LUNES');
                             me.horario_martes = me.obtenerHorarioDia(me.arDisponibilidad, 'MARTES');
                             me.horario_miercoles = me.obtenerHorarioDia(me.arDisponibilidad, 'MIERCOLES');
@@ -315,7 +369,6 @@
                             me.horario_viernes = me.obtenerHorarioDia(me.arDisponibilidad, 'VIERNES');
                             me.horario_sabado = me.obtenerHorarioDia(me.arDisponibilidad, 'SABADO');
                             me.horario_domingo = me.obtenerHorarioDia(me.arDisponibilidad, 'DOMINGO');
-
                       }
 
 
@@ -323,18 +376,50 @@
 
             },
             obtenerHorarioDia(disponibilidad, dia) {
-
               for(var i=0; i < disponibilidad.length; i++){
                   if(disponibilidad[i].dia == dia){
                       return [disponibilidad[i].idesde, disponibilidad[i].ihasta];
                   }
               }
+            },
+            obtenerDisponibilidad() {    
+
+              let me = this;
+
+              var arrDisponibilidad = [];
+              
+              arrDisponibilidad.push({ "desde" : me.horario_lunes[0], "hasta" : me.horario_lunes[1], "dia" : "LUNES" });
+              arrDisponibilidad.push({ "desde" : me.horario_martes[0], "hasta" : me.horario_martes[1], "dia" : "MARTES" });
+              arrDisponibilidad.push({ "desde" : me.horario_miercoles[0], "hasta" : me.horario_miercoles[1], "dia" : "MIERCOLES" });
+              arrDisponibilidad.push({ "desde" : me.horario_jueves[0], "hasta" : me.horario_jueves[1], "dia" : "JUEVES" });
+              arrDisponibilidad.push({ "desde" : me.horario_viernes[0], "hasta" : me.horario_viernes[1], "dia" : "VIERNES" });
+              arrDisponibilidad.push({ "desde" : me.horario_sabado[0], "hasta" : me.horario_sabado[1], "dia" : "SABADO" });
+              arrDisponibilidad.push({ "desde" : me.horario_domingo[0], "hasta" : me.horario_domingo[1], "dia" : "DOMINGO" });
+
+              return JSON.stringify(arrDisponibilidad);
 
             },
-            actualizarHorarios(){
+            actualizarContacto(){
 
                   let me = this;
-                  var tarifa, opcion;
+
+                  axios.post('contacto-profesional/actualizar', {
+                      'celular' : me.celular,
+                      'web' : me.web,
+                      'agenda' : me.agenda,
+                      'tipo_contacto' : me.tipo_contacto,
+                      'tipo_celular' : me.tipo_celular,
+                      'disponibilidad' : me.obtenerDisponibilidad()
+                  })
+                  .then(function (response) {
+                      
+                     Swal.fire('CONFIRMACION', response.data.mensaje ,'success');
+
+                  })
+                  .catch(function (error) {
+                      console.log(error);
+                  });
+                  
 
             }
             

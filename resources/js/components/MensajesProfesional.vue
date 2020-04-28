@@ -25,7 +25,7 @@
                 <span class="fecha">{{mensaje.enviado_el}}</span>
                 <div class="clear"></div>
                 <div class="mensaje">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod blandit vestibulum. Donec aliquet, ipsum quis consequat faucibus, lectus orci posuere ex, a vestibulum risus dolor ac odio. Praesent commodo dolor nec interdum euismod. Donec fermentum quam eget nunc laoreet ultrices. Duis pellentesque pretium ligula vitae vehicula.</p>
+                    <p>{{mensaje.mensaje}}</p>
                 </div>
                 
                 <div class="clear"></div>
@@ -64,7 +64,7 @@
                 </div>
 
                 <div v-else>
-                        <button @click="seleccionarMensaje(mensaje)" class="btn-responder-texto" type="button">Responder mensaje</button>
+                        <button @click="seleccionarMensaje(mensaje)" class="btn-responder-mensaje-profesional" type="button">Responder mensaje</button>
                 </div>
 
             </div>

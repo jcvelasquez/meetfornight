@@ -267,3 +267,14 @@ ul.lista-opciones {
 }
 .btn_eliminar_personalizado { background:#a86ba4; color: #fff; font-size: 11px; margin-left: 10px; }
 
+.btn-responder-mensaje-profesional { background:#a86ba4; padding:6px 10px; color: #fff; font-size: 12px; margin-left: 0px; border:none; }
+
+.busqueda-detallada-range label { display: inline-flex; }
+
+.busqueda-detallada-range .esp-d { margin: 0 auto;}
+
+.margin-left-contacto .cbx span:last-child {
+    display: inline;
+}
+
+.margin-left-contacto { margin-left: 20px; }

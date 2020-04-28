@@ -1882,6 +1882,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuelidate/lib/validators */ "./node_modules/vuelidate/lib/validators/index.js");
+/* harmony import */ var vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -1956,28 +1958,115 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var requiredCelular = Object(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["requiredIf"])(function () {
+  return this.isCelularRequired;
+});
+var requiredEmail = Object(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["requiredIf"])(function () {
+  return this.isEmailRequired;
+});
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {
-    this.listarAlertas();
-  },
   data: function data() {
     return {
       errorAlerta: 0,
       erroresAlerta: [],
       arAlertas: [],
       idusuario: 0,
-      nombre: '',
-      apellido: '',
-      idalerta: '',
+      nombres: '',
+      apellidos: '',
+      apodo: '',
       celular: '',
       email: '',
-      razon: ''
+      razon: '',
+      tipo_cliente: 'CLIENTE',
+      submitted: false
     };
+  },
+  computed: {
+    isEmailRequired: function isEmailRequired() {
+      return this.celular == "" ? true : false;
+    },
+    isCelularRequired: function isCelularRequired() {
+      return this.email == "" ? true : false;
+    },
+    getTipoCliente: function getTipoCliente() {
+      return this.tipo_cliente;
+    }
+  },
+  validations: function validations() {
+    var me = this;
+
+    if (me.tipo_cliente == "CLIENTE") {
+      return {
+        nombres: {
+          required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["required"]
+        },
+        apellidos: {
+          required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["required"]
+        },
+        razon: {
+          required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["required"]
+        },
+        celular: {
+          required: requiredCelular
+        },
+        email: {
+          required: requiredEmail
+        }
+      };
+    } else if (me.tipo_cliente == "PROFESIONAL") {
+      return {
+        apodo: {
+          required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["required"]
+        },
+        razon: {
+          required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["required"]
+        },
+        celular: {
+          required: requiredCelular
+        },
+        email: {
+          required: requiredEmail
+        }
+      };
+    }
+  },
+  mounted: function mounted() {
+    this.listarAlertas();
   },
   methods: {
     listarAlertas: function listarAlertas() {
       var me = this;
-      axios.get('/alerta-profesional/listar').then(function (response) {
+      axios.get('alerta-profesional/listar').then(function (response) {
         var respuesta = response.data;
         me.arAlertas = respuesta.alertas;
       })["catch"](function (error) {
@@ -1986,47 +2075,45 @@ __webpack_require__.r(__webpack_exports__);
     },
     limpiarCampos: function limpiarCampos() {
       var me = this;
-      me.nombre = '';
-      me.apellido = '';
-      me.idalerta = '';
+      me.nombres = '';
+      me.apellidos = '';
+      me.apodo = '';
       me.celular = '';
       me.email = '';
       me.razon = '';
+      me.submitted = false;
     },
-    validarAlertas: function validarAlertas() {
-      var me = this;
-      me.errorAlerta = 0;
-      me.erroresAlerta = [];
-      if (!me.nombre) me.erroresAlerta.push("Selecciona el nombre");
-      if (!me.apellido) me.erroresAlerta.push("Ingresa el apellidos");
-      if (!me.idalerta) me.erroresAlerta.push("Ingresa el ID");
-      if (!me.celular) me.erroresAlerta.push("Ingresa el celular");
-      if (!me.email) me.erroresAlerta.push("Ingresa el email");
-      if (!me.razon) me.erroresAlerta.push("Ingresa la razon");
-      if (me.erroresAlerta.length) me.errorAlerta = 1;
-      return me.errorAlerta;
+    validarAlertaProfesional: function validarAlertaProfesional() {
+      this.$v.$touch();
+      this.submitted = true;
+
+      if (this.$v.$invalid) {
+        return 1;
+      } else {
+        // do your submit logic here
+        return 0;
+      }
     },
     registrarAlerta: function registrarAlerta() {
       var me = this;
 
-      if (me.validarAlertas()) {
-        Swal.fire('ERROR', me.erroresAlerta.toString(), 'error');
+      if (me.validarAlertaProfesional()) {
+        Swal.fire('ERROR', 'Verifique todos los campos antes de registrar la alerta.', 'error');
         return;
       }
 
       axios.post('alerta-profesional/registrar', {
-        'idusuario': me.$idprofesional,
-        'nombre': me.nombre,
-        'apellido': me.apellido,
-        'idalerta': me.idalerta,
+        'tipo_cliente': me.tipo_cliente,
+        'nombres': me.nombres,
+        'apellidos': me.apellidos,
+        'apodo': me.apodo,
         'celular': me.celular,
         'email': me.email,
         'razon': me.razon
       }).then(function (response) {
         var _alerta = response.data.alerta;
-        console.log(_alerta);
         me.limpiarCampos();
-        me.arAlertas.push(_alerta);
+        me.listarAlertas();
         Swal.fire('CONFIRMACION', 'Alerta agregada correctamente', 'success');
       })["catch"](function (error) {
         // handle error
@@ -2874,6 +2961,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue_slider_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-slider-component */ "./node_modules/vue-slider-component/dist/vue-slider-component.umd.min.js");
+/* harmony import */ var vue_slider_component__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_slider_component__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue_slider_component_theme_default_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-slider-component/theme/default.css */ "./node_modules/vue-slider-component/theme/default.css");
+/* harmony import */ var vue_slider_component_theme_default_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_slider_component_theme_default_css__WEBPACK_IMPORTED_MODULE_1__);
 //
 //
 //
@@ -3121,7 +3212,37 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    VueSlider: vue_slider_component__WEBPACK_IMPORTED_MODULE_0___default.a
+  },
   mounted: function mounted() {
     this.listarDisponibilidad();
     this.listarConfiguracion();
@@ -3143,6 +3264,13 @@ __webpack_require__.r(__webpack_exports__);
       disponibilidad_sabado: 0,
       disponibilidad_domingo: 0,
       arDisponibilidad: [],
+      arLunes: [],
+      arMartes: [],
+      arMiercoles: [],
+      arJueves: [],
+      arViernes: [],
+      arSabado: [],
+      arDomingo: [],
       celular: '',
       web: '',
       tipo_celular: '',
@@ -3168,6 +3296,22 @@ __webpack_require__.r(__webpack_exports__);
       var me = this;
       axios.get('/disponibilidad-profesional/listar').then(function (response) {
         var respuesta = response.data;
+        /*me.arLunes = respuesta.lunes;
+        me.arMartes = respuesta.martes;
+        me.arMiercoles = respuesta.miercoles;
+        me.arJueves = respuesta.jueves;
+        me.arViernes = respuesta.viernes;
+        me.arSabado = respuesta.sabado;
+        me.arDomingo = respuesta.domingo;*/
+
+        /*me.horario_lunes = [me.arLunes.idesde, me.arLunes.ihasta];
+        me.horario_martes = [me.arMartes.idesde, me.arMartes.ihasta];
+        me.horario_miercoles = [me.arMiercoles.idesde, me.arMiercoles.ihasta];
+        me.horario_jueves = [me.arJueves.idesde, me.arJueves.ihasta];
+        me.horario_viernes = [me.arViernes.idesde, me.arViernes.ihasta];
+        me.horario_sabado = [me.arSabado.idesde, me.arSabado.ihasta];
+        me.horario_domingo = [me.arDomingo.idesde, me.arDomingo.ihasta];*/
+
         me.arDisponibilidad = respuesta.disponibilidad;
 
         if (me.arDisponibilidad.length > 0) {
@@ -3190,9 +3334,60 @@ __webpack_require__.r(__webpack_exports__);
         }
       }
     },
-    actualizarHorarios: function actualizarHorarios() {
+    obtenerDisponibilidad: function obtenerDisponibilidad() {
       var me = this;
-      var tarifa, opcion;
+      var arrDisponibilidad = [];
+      arrDisponibilidad.push({
+        "desde": me.horario_lunes[0],
+        "hasta": me.horario_lunes[1],
+        "dia": "LUNES"
+      });
+      arrDisponibilidad.push({
+        "desde": me.horario_martes[0],
+        "hasta": me.horario_martes[1],
+        "dia": "MARTES"
+      });
+      arrDisponibilidad.push({
+        "desde": me.horario_miercoles[0],
+        "hasta": me.horario_miercoles[1],
+        "dia": "MIERCOLES"
+      });
+      arrDisponibilidad.push({
+        "desde": me.horario_jueves[0],
+        "hasta": me.horario_jueves[1],
+        "dia": "JUEVES"
+      });
+      arrDisponibilidad.push({
+        "desde": me.horario_viernes[0],
+        "hasta": me.horario_viernes[1],
+        "dia": "VIERNES"
+      });
+      arrDisponibilidad.push({
+        "desde": me.horario_sabado[0],
+        "hasta": me.horario_sabado[1],
+        "dia": "SABADO"
+      });
+      arrDisponibilidad.push({
+        "desde": me.horario_domingo[0],
+        "hasta": me.horario_domingo[1],
+        "dia": "DOMINGO"
+      });
+      return JSON.stringify(arrDisponibilidad);
+    },
+    actualizarContacto: function actualizarContacto() {
+      var me = this;
+      axios.post('contacto-profesional/actualizar', {
+        'celular': me.celular,
+        'web': me.web,
+        'agenda': me.agenda,
+        'tipo_contacto': me.tipo_contacto,
+        'tipo_celular': me.tipo_celular,
+        'disponibilidad': me.obtenerDisponibilidad()
+      }).then(function (response) {
+        Swal.fire('CONFIRMACION', response.data.mensaje, 'success');
+      })["catch"](function (error) {
+        console.log(error);
+      });
     }
   }
 });
@@ -3617,6 +3812,9 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuedraggable__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuedraggable */ "./node_modules/vuedraggable/dist/vuedraggable.common.js");
 /* harmony import */ var vuedraggable__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vuedraggable__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
 //
 //
 //
@@ -4851,12 +5049,13 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
 
-      axios.post('perfil/mensaje/' + me.apodoData, {
-        'mensaje': me.mensaje
+      axios.post('../perfil/mensaje/' + me.apodoData, {
+        'mensaje': me.mensaje,
+        'apodo': me.apodoData
       }).then(function (response) {
-        var respuesta = response.data; //me.arDisponibilidad = respuesta.disponibilidad;
-
-        console.log(respuesta);
+        var respuesta = response.data;
+        Swal.fire('CONFIRMACION', 'El mensaje ha sido enviado correctamente', 'success');
+        me.mensaje = '';
       })["catch"](function (error) {
         console.log(error);
       });
@@ -5288,12 +5487,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 //import VueRangeSlider from 'vue-range-component'
 
 
 
 
- //Vue.component('VueSlider', VueSlider)
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -7085,6 +7284,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     //console.log(this.$userId)
@@ -7101,7 +7304,10 @@ __webpack_require__.r(__webpack_exports__);
       escort_opcion: '',
       escort_tarifa: '',
       extra_opcion: '',
-      extra_tarifa: ''
+      extra_tarifa: '',
+      tipo_moneda: '',
+      simbolo_moneda: '',
+      pais: ''
     };
   },
   methods: {
@@ -7110,6 +7316,9 @@ __webpack_require__.r(__webpack_exports__);
       axios.get('/tarifas-profesional/listar').then(function (response) {
         var respuesta = response.data;
         me.arTarifas = respuesta.tarifas;
+        me.tipo_moneda = respuesta.moneda;
+        me.simbolo_moneda = respuesta.simbolo;
+        me.pais = respuesta.pais;
       })["catch"](function (error) {
         console.log(error);
       });
@@ -7385,6 +7594,51 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -51189,88 +51443,218 @@ var render = function() {
     _vm._v(" "),
     _c("p", [
       _vm._v(
-        "El modulo ALERTA te permite verificar facilmente si ha habido informes negativos sobre un cliente que debes evitar para tu seguridad."
+        "El modulo ALERTA es una base de datos mantenida por la comunidad Meet For Night que te permite verificar facilmente si ha habido informes negativos sobre un cliente que debes evitar para tu seguridad."
       )
     ]),
     _vm._v(" "),
-    _c("p", [
-      _vm._v(
-        "El modulo ALERTA es una base de datos mantenida por la comunidad Meet For Night."
-      )
+    _c("div", { staticClass: "bloques-de-perfil" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "linea-morada" }, [
+        _c("div", { staticClass: "row" }, [
+          _c(
+            "div",
+            {
+              staticClass:
+                "custom-control custom-radio custom-control-inline no-margin-right-check espacio-campos"
+            },
+            [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.tipo_cliente,
+                    expression: "tipo_cliente"
+                  }
+                ],
+                staticClass: "custom-control-input",
+                attrs: {
+                  type: "radio",
+                  id: "cliente",
+                  name: "tipo_cliente",
+                  value: "CLIENTE"
+                },
+                domProps: { checked: _vm._q(_vm.tipo_cliente, "CLIENTE") },
+                on: {
+                  change: function($event) {
+                    _vm.tipo_cliente = "CLIENTE"
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass:
+                    "custom-control-label custom-control-label-espacio",
+                  attrs: { for: "cliente" }
+                },
+                [_vm._v("Cliente")]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "custom-control custom-radio custom-control-inline no-margin-right-check espacio-campos"
+            },
+            [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.tipo_cliente,
+                    expression: "tipo_cliente"
+                  }
+                ],
+                staticClass: "custom-control-input",
+                attrs: {
+                  type: "radio",
+                  id: "profesional",
+                  name: "tipo_cliente",
+                  value: "PROFESIONAL"
+                },
+                domProps: { checked: _vm._q(_vm.tipo_cliente, "PROFESIONAL") },
+                on: {
+                  change: function($event) {
+                    _vm.tipo_cliente = "PROFESIONAL"
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass:
+                    "custom-control-label custom-control-label-espacio",
+                  attrs: { for: "profesional" }
+                },
+                [_vm._v("Profesional")]
+              )
+            ]
+          )
+        ])
+      ])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "form-row" }, [
-      _c("div", { staticClass: "col-lg-12 col-sm-12 espacio-campos" }, [
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.nombre,
-              expression: "nombre"
-            }
-          ],
-          staticClass: "form-control",
-          attrs: { type: "text", name: "nombre", placeholder: "Nombre" },
-          domProps: { value: _vm.nombre },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
+      _vm.tipo_cliente == "CLIENTE"
+        ? _c("div", { staticClass: "col-lg-12 col-sm-12 espacio-campos" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.nombres,
+                  expression: "nombres"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                type: "text",
+                name: "nombres",
+                placeholder: "Ingrese los nombres del cliente"
+              },
+              domProps: { value: _vm.nombres },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.nombres = $event.target.value
+                }
               }
-              _vm.nombre = $event.target.value
-            }
-          }
-        })
-      ]),
+            }),
+            _vm._v(" "),
+            _vm.submitted && !_vm.$v.nombres.required
+              ? _c("label", { staticClass: "error" }, [
+                  _vm._v(
+                    "Los nombres son obligatorios si ha seleccionado cliente"
+                  )
+                ])
+              : _vm._e()
+          ])
+        : _vm._e(),
       _vm._v(" "),
-      _c("div", { staticClass: "col-lg-12 col-sm-12 espacio-campos" }, [
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.apellido,
-              expression: "apellido"
-            }
-          ],
-          staticClass: "form-control",
-          attrs: { type: "text", name: "apellido", placeholder: "Apellido" },
-          domProps: { value: _vm.apellido },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
+      _vm.tipo_cliente == "CLIENTE"
+        ? _c("div", { staticClass: "col-lg-12 col-sm-12 espacio-campos" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.apellidos,
+                  expression: "apellidos"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                type: "text",
+                name: "apellidos",
+                placeholder: "Ingrese los apellidos del cliente"
+              },
+              domProps: { value: _vm.apellidos },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.apellidos = $event.target.value
+                }
               }
-              _vm.apellido = $event.target.value
-            }
-          }
-        })
-      ]),
+            }),
+            _vm._v(" "),
+            _vm.submitted && !_vm.$v.apellidos.required
+              ? _c("label", { staticClass: "error" }, [
+                  _vm._v(
+                    "Los nombres son obligatorios si ha seleccionado cliente"
+                  )
+                ])
+              : _vm._e()
+          ])
+        : _vm._e(),
       _vm._v(" "),
-      _c("div", { staticClass: "col-lg-12 col-sm-12 espacio-campos" }, [
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.idalerta,
-              expression: "idalerta"
-            }
-          ],
-          staticClass: "form-control",
-          attrs: { type: "text", name: "idalerta", placeholder: "ID" },
-          domProps: { value: _vm.idalerta },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
+      _vm.tipo_cliente == "PROFESIONAL"
+        ? _c("div", { staticClass: "col-lg-12 col-sm-12 espacio-campos" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.apodo,
+                  expression: "apodo"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                type: "text",
+                name: "apodo",
+                placeholder: "Ingrese el Apodo del profesional"
+              },
+              domProps: { value: _vm.apodo },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.apodo = $event.target.value
+                }
               }
-              _vm.idalerta = $event.target.value
-            }
-          }
-        })
-      ]),
+            }),
+            _vm._v(" "),
+            _vm.submitted && !_vm.$v.apodo.required
+              ? _c("label", { staticClass: "error" }, [
+                  _vm._v(
+                    "Los nombres son obligatorios si ha seleccionado cliente"
+                  )
+                ])
+              : _vm._e()
+          ])
+        : _vm._e(),
       _vm._v(" "),
       _c("div", { staticClass: "col-lg-12 col-sm-12 espacio-campos" }, [
         _c("input", {
@@ -51283,7 +51667,11 @@ var render = function() {
             }
           ],
           staticClass: "form-control",
-          attrs: { type: "text", name: "celular", placeholder: "Celular" },
+          attrs: {
+            type: "text",
+            name: "celular",
+            placeholder: "Celular (Obligatorio si no ingreso el email)"
+          },
           domProps: { value: _vm.celular },
           on: {
             input: function($event) {
@@ -51295,14 +51683,11 @@ var render = function() {
           }
         }),
         _vm._v(" "),
-        _c(
-          "small",
-          {
-            staticClass: "form-text text-muted informativo",
-            attrs: { id: "emailHelp" }
-          },
-          [_vm._v("Ejm: +51 947 827 191")]
-        )
+        _vm.submitted && !_vm.$v.celular.required
+          ? _c("label", { staticClass: "error" }, [
+              _vm._v("El celular es obligatorio si no ha ingresado un email")
+            ])
+          : _vm._e()
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "col-lg-12 col-sm-12 espacio-campos" }, [
@@ -51316,7 +51701,11 @@ var render = function() {
             }
           ],
           staticClass: "form-control",
-          attrs: { type: "email", name: "email", placeholder: "Email" },
+          attrs: {
+            type: "email",
+            name: "email",
+            placeholder: "Email (Obligatorio si no ingreso el celular)"
+          },
           domProps: { value: _vm.email },
           on: {
             input: function($event) {
@@ -51326,7 +51715,13 @@ var render = function() {
               _vm.email = $event.target.value
             }
           }
-        })
+        }),
+        _vm._v(" "),
+        _vm.submitted && !_vm.$v.email.required
+          ? _c("label", { staticClass: "error" }, [
+              _vm._v("El email es obligatorio si no ha ingresado un celular")
+            ])
+          : _vm._e()
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "col-lg-12 col-sm-12 espacio-campos" }, [
@@ -51357,14 +51752,13 @@ var render = function() {
           }
         }),
         _vm._v(" "),
-        _c(
-          "small",
-          {
-            staticClass: "form-text text-muted espacio-campos informativo",
-            attrs: { id: "emailHelp" }
-          },
-          [_vm._v("Sólo 150 caracteres")]
-        )
+        _vm.submitted && !_vm.$v.razon.required
+          ? _c("label", { staticClass: "error" }, [
+              _vm._v(
+                "Describa el motivo por el cual esta registrando la alerta"
+              )
+            ])
+          : _vm._e()
       ])
     ]),
     _vm._v(" "),
@@ -51384,38 +51778,70 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
-    _vm._m(0),
-    _vm._v(" "),
-    _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-lg-12" }, [
-        _c("div", { staticClass: "table-responsive" }, [
-          _c("table", { staticClass: "table" }, [
-            _vm._m(1),
-            _vm._v(" "),
-            _c(
-              "tbody",
-              { staticClass: "resultado-fake" },
-              _vm._l(_vm.arAlertas, function(alerta) {
-                return _c("tr", { key: alerta.id }, [
-                  _c("td", {
-                    domProps: { textContent: _vm._s(alerta.nombre) }
+    _c(
+      "div",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.arAlertas.length > 0,
+            expression: " arAlertas.length > 0"
+          }
+        ],
+        attrs: { id: "listado_alertas" }
+      },
+      [
+        _c("h5", { staticClass: "formulario-titulos" }, [
+          _vm._v("ALERTAS REGISTRADAS:")
+        ]),
+        _vm._v(" "),
+        _c("p", [_vm._v("Estas son todas las alertas registradas por ti:")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-lg-12" }, [
+            _c("div", { staticClass: "table-responsive" }, [
+              _c("table", { staticClass: "table" }, [
+                _vm._m(1),
+                _vm._v(" "),
+                _c(
+                  "tbody",
+                  { staticClass: "resultado-fake" },
+                  _vm._l(_vm.arAlertas, function(alerta) {
+                    return _c("tr", { key: alerta.id }, [
+                      _c("td", [
+                        _vm._v(
+                          _vm._s(alerta.nombres) +
+                            " " +
+                            _vm._s(alerta.apellidos)
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("td", {
+                        domProps: { textContent: _vm._s(alerta.tipo_cliente) }
+                      }),
+                      _vm._v(" "),
+                      _c("td", {
+                        domProps: { textContent: _vm._s(alerta.celular) }
+                      }),
+                      _vm._v(" "),
+                      _c("td", {
+                        domProps: { textContent: _vm._s(alerta.email) }
+                      }),
+                      _vm._v(" "),
+                      _c("td", {
+                        domProps: { textContent: _vm._s(alerta.razon) }
+                      })
+                    ])
                   }),
-                  _vm._v(" "),
-                  _c("td", {
-                    domProps: { textContent: _vm._s(alerta.celular) }
-                  }),
-                  _vm._v(" "),
-                  _c("td", { domProps: { textContent: _vm._s(alerta.email) } }),
-                  _vm._v(" "),
-                  _c("td", { domProps: { textContent: _vm._s(alerta.razon) } })
-                ])
-              }),
-              0
-            )
+                  0
+                )
+              ])
+            ])
           ])
         ])
-      ])
-    ])
+      ]
+    )
   ])
 }
 var staticRenderFns = [
@@ -51423,10 +51849,10 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("h5", { staticClass: "formulario-titulos-fake" }, [
-      _vm._v("\n  LISTA DE ALERTAS\n  "),
-      _c("br"),
-      _vm._v("(DE TODA LA COMUNIDAD MEET FOR NIGHT)\n")
+    return _c("p", [
+      _vm._v("Elige el "),
+      _c("strong", [_vm._v("tipo de usuario")]),
+      _vm._v(" que deseas reportar:")
     ])
   },
   function() {
@@ -51435,7 +51861,9 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", { staticClass: "cabecera-fake" }, [
       _c("tr", [
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nombre")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nombres completo")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tipo")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Teléfono")]),
         _vm._v(" "),
@@ -52964,70 +53392,75 @@ var render = function() {
           _c("div", { staticClass: "form-row" }, [
             _c(
               "div",
-              {
-                staticClass:
-                  "form-group checksito centrando-opciones custom-control custom-radio custom-control-inline no-margin-right-check col-lg col-md-12 col-sm-12"
-              },
+              { staticClass: "form-group checksito margin-left-contacto" },
               [
-                _c(
-                  "p-input",
-                  {
-                    attrs: {
-                      type: "radio",
-                      name: "tipo_celular",
-                      color: "info",
-                      value: "WHATSAPP"
-                    },
-                    model: {
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
                       value: _vm.tipo_celular,
-                      callback: function($$v) {
-                        _vm.tipo_celular = $$v
-                      },
                       expression: "tipo_celular"
                     }
+                  ],
+                  staticClass: "inp-cbx",
+                  staticStyle: { display: "none" },
+                  attrs: {
+                    id: "wasap",
+                    "true-value": "WHATSAPP",
+                    "false-value": "CELULAR",
+                    type: "checkbox"
                   },
-                  [
-                    _c("i", {
-                      staticClass: "icon-whatsapp-green esp-icono-bio"
-                    }),
-                    _vm._v("Whatsapp")
-                  ]
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass:
-                  "form-group checksito centrando-opciones custom-control custom-radio custom-control-inline no-margin-right-check col-lg col-md-12 col-sm-12"
-              },
-              [
-                _c(
-                  "p-input",
-                  {
-                    attrs: {
-                      type: "radio",
-                      name: "tipo_celular",
-                      color: "info",
-                      value: "CELULAR"
-                    },
-                    model: {
-                      value: _vm.tipo_celular,
-                      callback: function($$v) {
-                        _vm.tipo_celular = $$v
-                      },
-                      expression: "tipo_celular"
+                  domProps: {
+                    checked: Array.isArray(_vm.tipo_celular)
+                      ? _vm._i(_vm.tipo_celular, null) > -1
+                      : _vm._q(_vm.tipo_celular, "WHATSAPP")
+                  },
+                  on: {
+                    change: function($event) {
+                      var $$a = _vm.tipo_celular,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? "WHATSAPP" : "CELULAR"
+                      if (Array.isArray($$a)) {
+                        var $$v = null,
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 && (_vm.tipo_celular = $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            (_vm.tipo_celular = $$a
+                              .slice(0, $$i)
+                              .concat($$a.slice($$i + 1)))
+                        }
+                      } else {
+                        _vm.tipo_celular = $$c
+                      }
                     }
-                  },
-                  [
-                    _c("i", { staticClass: "fa fa-mobile esp-icono-bio" }),
-                    _vm._v("Celular")
-                  ]
-                )
-              ],
-              1
+                  }
+                }),
+                _vm._v(" "),
+                _c("label", { staticClass: "cbx", attrs: { for: "wasap" } }, [
+                  _c("span", [
+                    _c(
+                      "svg",
+                      {
+                        attrs: {
+                          width: "12px",
+                          height: "10px",
+                          viewBox: "0 0 12 10"
+                        }
+                      },
+                      [
+                        _c("polyline", {
+                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
+                        })
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(0)
+                ])
+              ]
             )
           ])
         ])
@@ -53062,7 +53495,7 @@ var render = function() {
           })
         ]),
         _vm._v(" "),
-        _vm._m(0)
+        _vm._m(1)
       ])
     ]),
     _vm._v(" "),
@@ -53073,83 +53506,145 @@ var render = function() {
         _c("div", { staticClass: "bloque-opcion" }, [
           _c(
             "div",
-            { staticClass: "no-margin-right-check col-lg col-md-12 col-sm-12" },
+            {
+              staticClass:
+                "custom-radio custom-control-inline no-margin-right-check col-lg-1 col-md-12 col-sm-12 espacio-campos",
+              staticStyle: { "padding-left": "0" }
+            },
             [
-              _c(
-                "p-input",
-                {
-                  attrs: { type: "radio", name: "contacto", value: "MENSAJE" },
-                  model: {
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
                     value: _vm.tipo_contacto,
-                    callback: function($$v) {
-                      _vm.tipo_contacto = $$v
-                    },
                     expression: "tipo_contacto"
                   }
+                ],
+                staticClass: "custom-control-input",
+                attrs: {
+                  type: "radio",
+                  id: "mensaje",
+                  name: "contacto",
+                  value: "MENSAJE"
                 },
-                [_c("span", [_vm._v("Mensaje")])]
-              ),
+                domProps: { checked: _vm._q(_vm.tipo_contacto, "MENSAJE") },
+                on: {
+                  change: function($event) {
+                    _vm.tipo_contacto = "MENSAJE"
+                  }
+                }
+              }),
               _vm._v(" "),
-              _vm._m(1)
-            ],
-            1
-          )
+              _c(
+                "label",
+                {
+                  staticClass:
+                    "custom-control-label custom-control-label-espacio",
+                  attrs: { for: "mensaje" }
+                },
+                [_vm._v("Mensaje")]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _vm._m(2)
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "bloque-opcion" }, [
           _c(
             "div",
-            { staticClass: "no-margin-right-check col-lg col-md-12 col-sm-12" },
+            {
+              staticClass:
+                "custom-radio custom-control-inline no-margin-right-check col-lg-1 col-md-12 col-sm-12 espacio-campos",
+              staticStyle: { "padding-left": "0" }
+            },
             [
-              _c(
-                "p-input",
-                {
-                  attrs: { type: "radio", name: "contacto", value: "CORREO" },
-                  model: {
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
                     value: _vm.tipo_contacto,
-                    callback: function($$v) {
-                      _vm.tipo_contacto = $$v
-                    },
                     expression: "tipo_contacto"
                   }
+                ],
+                staticClass: "custom-control-input",
+                attrs: {
+                  type: "radio",
+                  id: "correo",
+                  name: "contacto",
+                  value: "CORREO"
                 },
-                [_c("span", [_vm._v("Correos")])]
-              ),
+                domProps: { checked: _vm._q(_vm.tipo_contacto, "CORREO") },
+                on: {
+                  change: function($event) {
+                    _vm.tipo_contacto = "CORREO"
+                  }
+                }
+              }),
               _vm._v(" "),
-              _vm._m(2)
-            ],
-            1
-          )
+              _c(
+                "label",
+                {
+                  staticClass:
+                    "custom-control-label custom-control-label-espacio",
+                  attrs: { for: "correo" }
+                },
+                [_vm._v("Correo")]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _vm._m(3)
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "bloque-opcion" }, [
           _c(
             "div",
-            { staticClass: "no-margin-right-check col-lg col-md-12 col-sm-12" },
+            {
+              staticClass:
+                "custom-radio custom-control-inline no-margin-right-check col-lg-1 col-md-12 col-sm-12 espacio-campos",
+              staticStyle: { "padding-left": "0" }
+            },
             [
-              _c(
-                "p-input",
-                {
-                  attrs: { type: "radio", name: "contacto", value: "NA" },
-                  model: {
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
                     value: _vm.tipo_contacto,
-                    callback: function($$v) {
-                      _vm.tipo_contacto = $$v
-                    },
                     expression: "tipo_contacto"
                   }
+                ],
+                staticClass: "custom-control-input",
+                attrs: {
+                  type: "radio",
+                  id: "na",
+                  name: "contacto",
+                  value: "NA"
                 },
-                [_c("span", [_vm._v("Ninguna de las anteriores")])]
-              ),
+                domProps: { checked: _vm._q(_vm.tipo_contacto, "NA") },
+                on: {
+                  change: function($event) {
+                    _vm.tipo_contacto = "NA"
+                  }
+                }
+              }),
               _vm._v(" "),
-              _c("p", [
-                _vm._v(
-                  "No quieres recibir mensajes o correos de los visitantes. Serás contactado solamente por teléfono y/o whatsapp."
-                )
-              ])
-            ],
-            1
-          )
+              _c(
+                "label",
+                {
+                  staticClass:
+                    "custom-control-label custom-control-label-espacio",
+                  attrs: { for: "na" }
+                },
+                [_vm._v("Ninguno")]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _vm._m(4)
         ])
       ])
     ]),
@@ -53157,93 +53652,6 @@ var render = function() {
     _c("div", { staticClass: "bloques-de-perfil" }, [
       _c("h5", { staticClass: "formulario-titulos" }, [
         _vm._v("DISPONIBILIDAD EN HORAS:")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-row" }, [
-        _vm._m(3),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "col-lg-3 col-sm-12",
-            staticStyle: { "padding-top": "1.5em" }
-          },
-          [
-            _c("vue-range-slider", {
-              ref: "slider",
-              attrs: { min: 0, max: 24 },
-              model: {
-                value: _vm.horario_lunes,
-                callback: function($$v) {
-                  _vm.horario_lunes = $$v
-                },
-                expression: "horario_lunes"
-              }
-            })
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _vm._m(4),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-lg-4 col-sm-12" }, [
-          _c(
-            "div",
-            { staticClass: "busqueda-detallada-range" },
-            [
-              _c(
-                "p-input",
-                {
-                  attrs: {
-                    type: "radio",
-                    name: "lunes",
-                    color: "info",
-                    value: "24"
-                  },
-                  on: {
-                    change: function($event) {
-                      _vm.horario_lunes = [0, 24]
-                    }
-                  },
-                  model: {
-                    value: _vm.disponibilidad_lunes,
-                    callback: function($$v) {
-                      _vm.disponibilidad_lunes = $$v
-                    },
-                    expression: "disponibilidad_lunes"
-                  }
-                },
-                [_vm._v("24/24")]
-              ),
-              _vm._v(" "),
-              _c(
-                "p-input",
-                {
-                  attrs: {
-                    type: "radio",
-                    name: "lunes",
-                    color: "info",
-                    value: "0"
-                  },
-                  on: {
-                    change: function($event) {
-                      _vm.horario_lunes = [0, 0]
-                    }
-                  },
-                  model: {
-                    value: _vm.disponibilidad_lunes,
-                    callback: function($$v) {
-                      _vm.disponibilidad_lunes = $$v
-                    },
-                    expression: "disponibilidad_lunes"
-                  }
-                },
-                [_vm._v("No disponible")]
-              )
-            ],
-            1
-          )
-        ])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-row" }, [
@@ -53256,15 +53664,14 @@ var render = function() {
             staticStyle: { "padding-top": "1.5em" }
           },
           [
-            _c("vue-range-slider", {
-              ref: "slider",
-              attrs: { min: 0, max: 24 },
+            _c("vue-slider", {
+              attrs: { marks: [0, 24], min: 0, max: 24 },
               model: {
-                value: _vm.horario_martes,
+                value: _vm.horario_lunes,
                 callback: function($$v) {
-                  _vm.horario_martes = $$v
+                  _vm.horario_lunes = $$v
                 },
-                expression: "horario_martes"
+                expression: "horario_lunes"
               }
             })
           ],
@@ -53274,62 +53681,79 @@ var render = function() {
         _vm._m(6),
         _vm._v(" "),
         _c("div", { staticClass: "col-lg-4 col-sm-12" }, [
-          _c(
-            "div",
-            { staticClass: "busqueda-detallada-range" },
-            [
-              _c(
-                "p-input",
-                {
-                  attrs: {
-                    type: "radio",
-                    name: "martes",
-                    color: "info",
-                    value: "24"
-                  },
-                  on: {
-                    change: function($event) {
-                      _vm.horario_martes = [0, 24]
-                    }
-                  },
-                  model: {
-                    value: _vm.disponibilidad_martes,
-                    callback: function($$v) {
-                      _vm.disponibilidad_martes = $$v
-                    },
-                    expression: "disponibilidad_martes"
+          _c("div", { staticClass: "busqueda-detallada-range" }, [
+            _c("div", { staticClass: "form-group checksito" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.disponibilidad_lunes,
+                    expression: "disponibilidad_lunes"
                   }
+                ],
+                staticClass: "inp-cbx",
+                staticStyle: { display: "none" },
+                attrs: { id: "nd_lunes", type: "checkbox" },
+                domProps: {
+                  checked: Array.isArray(_vm.disponibilidad_lunes)
+                    ? _vm._i(_vm.disponibilidad_lunes, null) > -1
+                    : _vm.disponibilidad_lunes
                 },
-                [_vm._v("24/24")]
-              ),
+                on: {
+                  change: [
+                    function($event) {
+                      var $$a = _vm.disponibilidad_lunes,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = null,
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            (_vm.disponibilidad_lunes = $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            (_vm.disponibilidad_lunes = $$a
+                              .slice(0, $$i)
+                              .concat($$a.slice($$i + 1)))
+                        }
+                      } else {
+                        _vm.disponibilidad_lunes = $$c
+                      }
+                    },
+                    function($event) {
+                      _vm.horario_lunes = [0, 0]
+                    }
+                  ]
+                }
+              }),
               _vm._v(" "),
-              _c(
-                "p-input",
-                {
-                  attrs: {
-                    type: "radio",
-                    name: "martes",
-                    color: "info",
-                    value: "0"
-                  },
-                  on: {
-                    change: function($event) {
-                      _vm.horario_martes = [0, 0]
-                    }
-                  },
-                  model: {
-                    value: _vm.disponibilidad_martes,
-                    callback: function($$v) {
-                      _vm.disponibilidad_martes = $$v
+              _c("label", { staticClass: "cbx", attrs: { for: "nd_lunes" } }, [
+                _c("span", [
+                  _c(
+                    "svg",
+                    {
+                      attrs: {
+                        width: "12px",
+                        height: "10px",
+                        viewBox: "0 0 12 10"
+                      }
                     },
-                    expression: "disponibilidad_martes"
-                  }
-                },
-                [_vm._v("No disponible")]
-              )
-            ],
-            1
-          )
+                    [
+                      _c("polyline", {
+                        attrs: { points: "1.5 6 4.5 9 10.5 1" }
+                      })
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("span", { staticClass: "tam-check" }, [
+                  _vm._v("No disponible")
+                ])
+              ])
+            ])
+          ])
         ])
       ]),
       _vm._v(" "),
@@ -53343,15 +53767,14 @@ var render = function() {
             staticStyle: { "padding-top": "1.5em" }
           },
           [
-            _c("vue-range-slider", {
-              ref: "slider",
-              attrs: { min: 0, max: 24 },
+            _c("vue-slider", {
+              attrs: { marks: [0, 24], min: 0, max: 24 },
               model: {
-                value: _vm.horario_miercoles,
+                value: _vm.horario_martes,
                 callback: function($$v) {
-                  _vm.horario_miercoles = $$v
+                  _vm.horario_martes = $$v
                 },
-                expression: "horario_miercoles"
+                expression: "horario_martes"
               }
             })
           ],
@@ -53361,62 +53784,79 @@ var render = function() {
         _vm._m(8),
         _vm._v(" "),
         _c("div", { staticClass: "col-lg-4 col-sm-12" }, [
-          _c(
-            "div",
-            { staticClass: "busqueda-detallada-range" },
-            [
-              _c(
-                "p-input",
-                {
-                  attrs: {
-                    type: "radio",
-                    name: "miercoles",
-                    color: "info",
-                    value: "24"
-                  },
-                  on: {
-                    change: function($event) {
-                      _vm.horario_miercoles = [0, 24]
-                    }
-                  },
-                  model: {
-                    value: _vm.disponibilidad_miercoles,
-                    callback: function($$v) {
-                      _vm.disponibilidad_miercoles = $$v
-                    },
-                    expression: "disponibilidad_miercoles"
+          _c("div", { staticClass: "busqueda-detallada-range" }, [
+            _c("div", { staticClass: "form-group checksito" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.disponibilidad_martes,
+                    expression: "disponibilidad_martes"
                   }
+                ],
+                staticClass: "inp-cbx",
+                staticStyle: { display: "none" },
+                attrs: { id: "nd_martes", type: "checkbox" },
+                domProps: {
+                  checked: Array.isArray(_vm.disponibilidad_martes)
+                    ? _vm._i(_vm.disponibilidad_martes, null) > -1
+                    : _vm.disponibilidad_martes
                 },
-                [_vm._v("24/24")]
-              ),
+                on: {
+                  change: [
+                    function($event) {
+                      var $$a = _vm.disponibilidad_martes,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = null,
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            (_vm.disponibilidad_martes = $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            (_vm.disponibilidad_martes = $$a
+                              .slice(0, $$i)
+                              .concat($$a.slice($$i + 1)))
+                        }
+                      } else {
+                        _vm.disponibilidad_martes = $$c
+                      }
+                    },
+                    function($event) {
+                      _vm.horario_martes = [0, 0]
+                    }
+                  ]
+                }
+              }),
               _vm._v(" "),
-              _c(
-                "p-input",
-                {
-                  attrs: {
-                    type: "radio",
-                    name: "miercoles",
-                    color: "info",
-                    value: "0"
-                  },
-                  on: {
-                    change: function($event) {
-                      _vm.horario_miercoles = [0, 0]
-                    }
-                  },
-                  model: {
-                    value: _vm.disponibilidad_miercoles,
-                    callback: function($$v) {
-                      _vm.disponibilidad_miercoles = $$v
+              _c("label", { staticClass: "cbx", attrs: { for: "nd_martes" } }, [
+                _c("span", [
+                  _c(
+                    "svg",
+                    {
+                      attrs: {
+                        width: "12px",
+                        height: "10px",
+                        viewBox: "0 0 12 10"
+                      }
                     },
-                    expression: "disponibilidad_miercoles"
-                  }
-                },
-                [_vm._v("No disponible")]
-              )
-            ],
-            1
-          )
+                    [
+                      _c("polyline", {
+                        attrs: { points: "1.5 6 4.5 9 10.5 1" }
+                      })
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("span", { staticClass: "tam-check" }, [
+                  _vm._v("No disponible")
+                ])
+              ])
+            ])
+          ])
         ])
       ]),
       _vm._v(" "),
@@ -53430,15 +53870,14 @@ var render = function() {
             staticStyle: { "padding-top": "1.5em" }
           },
           [
-            _c("vue-range-slider", {
-              ref: "slider",
-              attrs: { min: 0, max: 24 },
+            _c("vue-slider", {
+              attrs: { marks: [0, 24], min: 0, max: 24 },
               model: {
-                value: _vm.horario_jueves,
+                value: _vm.horario_miercoles,
                 callback: function($$v) {
-                  _vm.horario_jueves = $$v
+                  _vm.horario_miercoles = $$v
                 },
-                expression: "horario_jueves"
+                expression: "horario_miercoles"
               }
             })
           ],
@@ -53448,62 +53887,83 @@ var render = function() {
         _vm._m(10),
         _vm._v(" "),
         _c("div", { staticClass: "col-lg-4 col-sm-12" }, [
-          _c(
-            "div",
-            { staticClass: "busqueda-detallada-range" },
-            [
-              _c(
-                "p-input",
-                {
-                  attrs: {
-                    type: "radio",
-                    name: "jueves",
-                    color: "info",
-                    value: "24"
-                  },
-                  on: {
-                    change: function($event) {
-                      _vm.horario_jueves = [0, 24]
-                    }
-                  },
-                  model: {
-                    value: _vm.disponibilidad_jueves,
-                    callback: function($$v) {
-                      _vm.disponibilidad_jueves = $$v
-                    },
-                    expression: "disponibilidad_jueves"
+          _c("div", { staticClass: "busqueda-detallada-range" }, [
+            _c("div", { staticClass: "form-group checksito" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.disponibilidad_miercoles,
+                    expression: "disponibilidad_miercoles"
                   }
+                ],
+                staticClass: "inp-cbx",
+                staticStyle: { display: "none" },
+                attrs: { id: "nd_miercoles", type: "checkbox" },
+                domProps: {
+                  checked: Array.isArray(_vm.disponibilidad_miercoles)
+                    ? _vm._i(_vm.disponibilidad_miercoles, null) > -1
+                    : _vm.disponibilidad_miercoles
                 },
-                [_vm._v("24/24")]
-              ),
+                on: {
+                  change: [
+                    function($event) {
+                      var $$a = _vm.disponibilidad_miercoles,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = null,
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            (_vm.disponibilidad_miercoles = $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            (_vm.disponibilidad_miercoles = $$a
+                              .slice(0, $$i)
+                              .concat($$a.slice($$i + 1)))
+                        }
+                      } else {
+                        _vm.disponibilidad_miercoles = $$c
+                      }
+                    },
+                    function($event) {
+                      _vm.horario_miercoles = [0, 0]
+                    }
+                  ]
+                }
+              }),
               _vm._v(" "),
               _c(
-                "p-input",
-                {
-                  attrs: {
-                    type: "radio",
-                    name: "jueves",
-                    color: "info",
-                    value: "0"
-                  },
-                  on: {
-                    change: function($event) {
-                      _vm.horario_jueves = [0, 0]
-                    }
-                  },
-                  model: {
-                    value: _vm.disponibilidad_jueves,
-                    callback: function($$v) {
-                      _vm.disponibilidad_jueves = $$v
-                    },
-                    expression: "disponibilidad_jueves"
-                  }
-                },
-                [_vm._v("No disponible")]
+                "label",
+                { staticClass: "cbx", attrs: { for: "nd_miercoles" } },
+                [
+                  _c("span", [
+                    _c(
+                      "svg",
+                      {
+                        attrs: {
+                          width: "12px",
+                          height: "10px",
+                          viewBox: "0 0 12 10"
+                        }
+                      },
+                      [
+                        _c("polyline", {
+                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
+                        })
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "tam-check" }, [
+                    _vm._v("No disponible")
+                  ])
+                ]
               )
-            ],
-            1
-          )
+            ])
+          ])
         ])
       ]),
       _vm._v(" "),
@@ -53517,15 +53977,14 @@ var render = function() {
             staticStyle: { "padding-top": "1.5em" }
           },
           [
-            _c("vue-range-slider", {
-              ref: "slider",
-              attrs: { min: 0, max: 24 },
+            _c("vue-slider", {
+              attrs: { marks: [0, 24], min: 0, max: 24 },
               model: {
-                value: _vm.horario_viernes,
+                value: _vm.horario_jueves,
                 callback: function($$v) {
-                  _vm.horario_viernes = $$v
+                  _vm.horario_jueves = $$v
                 },
-                expression: "horario_viernes"
+                expression: "horario_jueves"
               }
             })
           ],
@@ -53535,62 +53994,79 @@ var render = function() {
         _vm._m(12),
         _vm._v(" "),
         _c("div", { staticClass: "col-lg-4 col-sm-12" }, [
-          _c(
-            "div",
-            { staticClass: "busqueda-detallada-range" },
-            [
-              _c(
-                "p-input",
-                {
-                  attrs: {
-                    type: "radio",
-                    name: "viernes",
-                    color: "info",
-                    value: "24"
-                  },
-                  on: {
-                    change: function($event) {
-                      _vm.horario_viernes = [0, 24]
-                    }
-                  },
-                  model: {
-                    value: _vm.disponibilidad_viernes,
-                    callback: function($$v) {
-                      _vm.disponibilidad_viernes = $$v
-                    },
-                    expression: "disponibilidad_viernes"
+          _c("div", { staticClass: "busqueda-detallada-range" }, [
+            _c("div", { staticClass: "form-group checksito" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.disponibilidad_jueves,
+                    expression: "disponibilidad_jueves"
                   }
+                ],
+                staticClass: "inp-cbx",
+                staticStyle: { display: "none" },
+                attrs: { id: "nd_jueves", type: "checkbox" },
+                domProps: {
+                  checked: Array.isArray(_vm.disponibilidad_jueves)
+                    ? _vm._i(_vm.disponibilidad_jueves, null) > -1
+                    : _vm.disponibilidad_jueves
                 },
-                [_vm._v("24/24")]
-              ),
+                on: {
+                  change: [
+                    function($event) {
+                      var $$a = _vm.disponibilidad_jueves,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = null,
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            (_vm.disponibilidad_jueves = $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            (_vm.disponibilidad_jueves = $$a
+                              .slice(0, $$i)
+                              .concat($$a.slice($$i + 1)))
+                        }
+                      } else {
+                        _vm.disponibilidad_jueves = $$c
+                      }
+                    },
+                    function($event) {
+                      _vm.horario_jueves = [0, 0]
+                    }
+                  ]
+                }
+              }),
               _vm._v(" "),
-              _c(
-                "p-input",
-                {
-                  attrs: {
-                    type: "radio",
-                    name: "viernes",
-                    color: "info",
-                    value: "0"
-                  },
-                  on: {
-                    change: function($event) {
-                      _vm.horario_viernes = [0, 0]
-                    }
-                  },
-                  model: {
-                    value: _vm.disponibilidad_viernes,
-                    callback: function($$v) {
-                      _vm.disponibilidad_viernes = $$v
+              _c("label", { staticClass: "cbx", attrs: { for: "nd_jueves" } }, [
+                _c("span", [
+                  _c(
+                    "svg",
+                    {
+                      attrs: {
+                        width: "12px",
+                        height: "10px",
+                        viewBox: "0 0 12 10"
+                      }
                     },
-                    expression: "disponibilidad_viernes"
-                  }
-                },
-                [_vm._v("No disponible")]
-              )
-            ],
-            1
-          )
+                    [
+                      _c("polyline", {
+                        attrs: { points: "1.5 6 4.5 9 10.5 1" }
+                      })
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("span", { staticClass: "tam-check" }, [
+                  _vm._v("No disponible")
+                ])
+              ])
+            ])
+          ])
         ])
       ]),
       _vm._v(" "),
@@ -53604,15 +54080,14 @@ var render = function() {
             staticStyle: { "padding-top": "1.5em" }
           },
           [
-            _c("vue-range-slider", {
-              ref: "slider",
-              attrs: { min: 0, max: 24 },
+            _c("vue-slider", {
+              attrs: { marks: [0, 24], min: 0, max: 24 },
               model: {
-                value: _vm.horario_sabado,
+                value: _vm.horario_viernes,
                 callback: function($$v) {
-                  _vm.horario_sabado = $$v
+                  _vm.horario_viernes = $$v
                 },
-                expression: "horario_sabado"
+                expression: "horario_viernes"
               }
             })
           ],
@@ -53622,62 +54097,83 @@ var render = function() {
         _vm._m(14),
         _vm._v(" "),
         _c("div", { staticClass: "col-lg-4 col-sm-12" }, [
-          _c(
-            "div",
-            { staticClass: "busqueda-detallada-range" },
-            [
-              _c(
-                "p-input",
-                {
-                  attrs: {
-                    type: "radio",
-                    name: "sabado",
-                    color: "info",
-                    value: "24"
-                  },
-                  on: {
-                    change: function($event) {
-                      _vm.horario_sabado = [0, 24]
-                    }
-                  },
-                  model: {
-                    value: _vm.disponibilidad_sabado,
-                    callback: function($$v) {
-                      _vm.disponibilidad_sabado = $$v
-                    },
-                    expression: "disponibilidad_sabado"
+          _c("div", { staticClass: "busqueda-detallada-range" }, [
+            _c("div", { staticClass: "form-group checksito" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.disponibilidad_viernes,
+                    expression: "disponibilidad_viernes"
                   }
+                ],
+                staticClass: "inp-cbx",
+                staticStyle: { display: "none" },
+                attrs: { id: "nd_viernes", type: "checkbox" },
+                domProps: {
+                  checked: Array.isArray(_vm.disponibilidad_viernes)
+                    ? _vm._i(_vm.disponibilidad_viernes, null) > -1
+                    : _vm.disponibilidad_viernes
                 },
-                [_vm._v("24/24")]
-              ),
+                on: {
+                  change: [
+                    function($event) {
+                      var $$a = _vm.disponibilidad_viernes,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = null,
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            (_vm.disponibilidad_viernes = $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            (_vm.disponibilidad_viernes = $$a
+                              .slice(0, $$i)
+                              .concat($$a.slice($$i + 1)))
+                        }
+                      } else {
+                        _vm.disponibilidad_viernes = $$c
+                      }
+                    },
+                    function($event) {
+                      _vm.horario_viernes = [0, 0]
+                    }
+                  ]
+                }
+              }),
               _vm._v(" "),
               _c(
-                "p-input",
-                {
-                  attrs: {
-                    type: "radio",
-                    name: "sabado",
-                    color: "info",
-                    value: "0"
-                  },
-                  on: {
-                    change: function($event) {
-                      _vm.horario_sabado = [0, 0]
-                    }
-                  },
-                  model: {
-                    value: _vm.disponibilidad_sabado,
-                    callback: function($$v) {
-                      _vm.disponibilidad_sabado = $$v
-                    },
-                    expression: "disponibilidad_sabado"
-                  }
-                },
-                [_vm._v("No disponible")]
+                "label",
+                { staticClass: "cbx", attrs: { for: "nd_viernes" } },
+                [
+                  _c("span", [
+                    _c(
+                      "svg",
+                      {
+                        attrs: {
+                          width: "12px",
+                          height: "10px",
+                          viewBox: "0 0 12 10"
+                        }
+                      },
+                      [
+                        _c("polyline", {
+                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
+                        })
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "tam-check" }, [
+                    _vm._v("No disponible")
+                  ])
+                ]
               )
-            ],
-            1
-          )
+            ])
+          ])
         ])
       ]),
       _vm._v(" "),
@@ -53691,9 +54187,111 @@ var render = function() {
             staticStyle: { "padding-top": "1.5em" }
           },
           [
-            _c("vue-range-slider", {
-              ref: "slider",
-              attrs: { min: 0, max: 24 },
+            _c("vue-slider", {
+              attrs: { marks: [0, 24], min: 0, max: 24 },
+              model: {
+                value: _vm.horario_sabado,
+                callback: function($$v) {
+                  _vm.horario_sabado = $$v
+                },
+                expression: "horario_sabado"
+              }
+            })
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _vm._m(16),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-lg-4 col-sm-12" }, [
+          _c("div", { staticClass: "busqueda-detallada-range" }, [
+            _c("div", { staticClass: "form-group checksito" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.disponibilidad_sabado,
+                    expression: "disponibilidad_sabado"
+                  }
+                ],
+                staticClass: "inp-cbx",
+                staticStyle: { display: "none" },
+                attrs: { id: "nd_sabado", type: "checkbox" },
+                domProps: {
+                  checked: Array.isArray(_vm.disponibilidad_sabado)
+                    ? _vm._i(_vm.disponibilidad_sabado, null) > -1
+                    : _vm.disponibilidad_sabado
+                },
+                on: {
+                  change: [
+                    function($event) {
+                      var $$a = _vm.disponibilidad_sabado,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = null,
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            (_vm.disponibilidad_sabado = $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            (_vm.disponibilidad_sabado = $$a
+                              .slice(0, $$i)
+                              .concat($$a.slice($$i + 1)))
+                        }
+                      } else {
+                        _vm.disponibilidad_sabado = $$c
+                      }
+                    },
+                    function($event) {
+                      _vm.horario_sabado = [0, 0]
+                    }
+                  ]
+                }
+              }),
+              _vm._v(" "),
+              _c("label", { staticClass: "cbx", attrs: { for: "nd_sabado" } }, [
+                _c("span", [
+                  _c(
+                    "svg",
+                    {
+                      attrs: {
+                        width: "12px",
+                        height: "10px",
+                        viewBox: "0 0 12 10"
+                      }
+                    },
+                    [
+                      _c("polyline", {
+                        attrs: { points: "1.5 6 4.5 9 10.5 1" }
+                      })
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("span", { staticClass: "tam-check" }, [
+                  _vm._v("No disponible")
+                ])
+              ])
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-row" }, [
+        _vm._m(17),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "col-lg-3 col-sm-12",
+            staticStyle: { "padding-top": "1.5em" }
+          },
+          [
+            _c("vue-slider", {
+              attrs: { marks: [0, 24], min: 0, max: 24 },
               model: {
                 value: _vm.horario_domingo,
                 callback: function($$v) {
@@ -53706,115 +54304,150 @@ var render = function() {
           1
         ),
         _vm._v(" "),
-        _vm._m(16),
+        _vm._m(18),
         _vm._v(" "),
         _c("div", { staticClass: "col-lg-4 col-sm-12" }, [
-          _c(
-            "div",
-            { staticClass: "busqueda-detallada-range" },
-            [
-              _c(
-                "p-input",
-                {
-                  attrs: {
-                    type: "radio",
-                    name: "domingo",
-                    color: "info",
-                    value: "24"
-                  },
-                  on: {
-                    change: function($event) {
-                      _vm.horario_domingo = [0, 24]
-                    }
-                  },
-                  model: {
+          _c("div", { staticClass: "busqueda-detallada-range" }, [
+            _c("div", { staticClass: "form-group checksito" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
                     value: _vm.disponibilidad_domingo,
-                    callback: function($$v) {
-                      _vm.disponibilidad_domingo = $$v
-                    },
                     expression: "disponibilidad_domingo"
                   }
+                ],
+                staticClass: "inp-cbx",
+                staticStyle: { display: "none" },
+                attrs: { id: "nd_domingo", type: "checkbox" },
+                domProps: {
+                  checked: Array.isArray(_vm.disponibilidad_domingo)
+                    ? _vm._i(_vm.disponibilidad_domingo, null) > -1
+                    : _vm.disponibilidad_domingo
                 },
-                [_vm._v("24/24")]
-              ),
-              _vm._v(" "),
-              _c(
-                "p-input",
-                {
-                  attrs: {
-                    type: "radio",
-                    name: "domingo",
-                    color: "info",
-                    value: "0"
-                  },
-                  on: {
-                    change: function($event) {
+                on: {
+                  change: [
+                    function($event) {
+                      var $$a = _vm.disponibilidad_domingo,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = null,
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            (_vm.disponibilidad_domingo = $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            (_vm.disponibilidad_domingo = $$a
+                              .slice(0, $$i)
+                              .concat($$a.slice($$i + 1)))
+                        }
+                      } else {
+                        _vm.disponibilidad_domingo = $$c
+                      }
+                    },
+                    function($event) {
                       _vm.horario_domingo = [0, 0]
                     }
-                  },
-                  model: {
-                    value: _vm.disponibilidad_domingo,
-                    callback: function($$v) {
-                      _vm.disponibilidad_domingo = $$v
-                    },
-                    expression: "disponibilidad_domingo"
-                  }
-                },
-                [_vm._v("No disponible")]
+                  ]
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                { staticClass: "cbx", attrs: { for: "nd_domingo" } },
+                [
+                  _c("span", [
+                    _c(
+                      "svg",
+                      {
+                        attrs: {
+                          width: "12px",
+                          height: "10px",
+                          viewBox: "0 0 12 10"
+                        }
+                      },
+                      [
+                        _c("polyline", {
+                          attrs: { points: "1.5 6 4.5 9 10.5 1" }
+                        })
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "tam-check" }, [
+                    _vm._v("No disponible")
+                  ])
+                ]
               )
-            ],
-            1
-          )
+            ])
+          ])
         ])
       ])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "bloques-de-perfil" }, [
-      _c("div", { staticClass: "form-row" }, [
-        _c("div", { staticClass: "col-lg-12 col-sm-12" }, [
-          _c(
-            "div",
-            { staticClass: "form-group bloque-opcion" },
-            [
-              _c(
-                "p-check",
-                {
-                  staticClass: "p-default p-curve",
-                  attrs: {
-                    "true-value": 1,
-                    "false-value": 0,
-                    color: "success",
-                    "off-color": "danger",
-                    toggle: ""
-                  },
-                  on: {
-                    change: function($event) {
-                      return _vm.actualizarHorarios()
-                    }
-                  },
-                  model: {
-                    value: _vm.agenda,
-                    callback: function($$v) {
-                      _vm.agenda = $$v
-                    },
-                    expression: "agenda"
-                  }
-                },
-                [
-                  _c("span", [_vm._v("AGENDA COMPARTIDA")]),
-                  _vm._v(" "),
-                  _c(
-                    "label",
-                    { attrs: { slot: "off-label" }, slot: "off-label" },
-                    [_c("span", [_vm._v("AGENDA OCULTA")])]
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _vm._m(17)
-            ],
-            1
-          )
+      _c("h5", { staticClass: "formulario-titulos" }, [_vm._v("AGENDA:")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group checksito" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.agenda,
+              expression: "agenda"
+            }
+          ],
+          staticClass: "inp-cbx",
+          staticStyle: { display: "none" },
+          attrs: {
+            id: "agenda",
+            name: "agenda",
+            "true-value": 1,
+            "false-value": 0,
+            type: "checkbox"
+          },
+          domProps: {
+            checked: Array.isArray(_vm.agenda)
+              ? _vm._i(_vm.agenda, null) > -1
+              : _vm._q(_vm.agenda, 1)
+          },
+          on: {
+            change: function($event) {
+              var $$a = _vm.agenda,
+                $$el = $event.target,
+                $$c = $$el.checked ? 1 : 0
+              if (Array.isArray($$a)) {
+                var $$v = null,
+                  $$i = _vm._i($$a, $$v)
+                if ($$el.checked) {
+                  $$i < 0 && (_vm.agenda = $$a.concat([$$v]))
+                } else {
+                  $$i > -1 &&
+                    (_vm.agenda = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+                }
+              } else {
+                _vm.agenda = $$c
+              }
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("label", { staticClass: "cbx", attrs: { for: "agenda" } }, [
+          _c("span", [
+            _c(
+              "svg",
+              {
+                attrs: { width: "12px", height: "10px", viewBox: "0 0 12 10" }
+              },
+              [_c("polyline", { attrs: { points: "1.5 6 4.5 9 10.5 1" } })]
+            )
+          ]),
+          _vm._v(" "),
+          _vm._m(19)
         ])
       ])
     ]),
@@ -53828,7 +54461,7 @@ var render = function() {
             attrs: { type: "button" },
             on: {
               click: function($event) {
-                return _vm.actualizarHorarios()
+                return _vm.actualizarContacto()
               }
             }
           },
@@ -53839,6 +54472,15 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "tam-check" }, [
+      _c("i", { staticClass: "icon-whatsapp-green esp-icono-bio" }),
+      _vm._v(" Tengo Whatsapp")
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -53872,6 +54514,17 @@ var staticRenderFns = [
       _c("strong", [_vm._v("los usuarios anónimos y registrados")]),
       _vm._v(
         " podrán enviarte un correo a través de la web. Podrás responder por medio de tu correo a los mensajes (tú correo no será visible en la pagina web)."
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", [
+      _c("strong", [_vm._v("No quieres recibir")]),
+      _vm._v(
+        " mensajes o correos de los visitantes. Serás contactado solamente por teléfono y/o whatsapp."
       )
     ])
   },
@@ -54019,14 +54672,16 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("p", [
-      _vm._v("La "),
-      _c("span", [_vm._v("agenda compartida")]),
-      _vm._v(
-        " le permite a tus clientes reservar una cita y de la misma forma pueden ver en que momento estas disponible. Por el contrario, cambia a la opcion a "
-      ),
-      _c("span", [_vm._v("agenda oculta")]),
-      _vm._v(" si deseas mantener tu disponibilidad en privado.")
+    return _c("span", { staticClass: "tam-check" }, [
+      _c("p", [
+        _vm._v("La "),
+        _c("strong", [_vm._v("agenda compartida")]),
+        _vm._v(
+          " le permite a tus clientes reservar una cita y de la misma forma pueden ver en que momento estas disponible. Por el contrario, cambia a la opcion a "
+        ),
+        _c("strong", [_vm._v("agenda oculta")]),
+        _vm._v(" si deseas mantener tu disponibilidad en privado.")
+      ])
     ])
   }
 ]
@@ -54885,7 +55540,13 @@ var render = function() {
             _vm._l(_vm.arFotos, function(foto, index) {
               return _c("div", { key: foto.id, staticClass: "img-cargada" }, [
                 _c("div", { staticClass: "img-cargada-izq" }, [
+                  _c("i", {
+                    staticClass: "fa fa-arrows-v",
+                    attrs: { "aria-hidden": "true" }
+                  }),
+                  _vm._v(" "),
                   _c("img", {
+                    staticStyle: { "margin-left": "15px" },
                     attrs: { src: "fotos-profesionales/" + foto.url_foto }
                   }),
                   _vm._v(" "),
@@ -56598,7 +57259,9 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "clear" }),
               _vm._v(" "),
-              _vm._m(2, true),
+              _c("div", { staticClass: "mensaje" }, [
+                _c("p", [_vm._v(_vm._s(mensaje.mensaje))])
+              ]),
               _vm._v(" "),
               _c("div", { staticClass: "clear" }),
               _vm._v(" "),
@@ -56678,7 +57341,7 @@ var render = function() {
                             staticClass: "form-row item-respuesta"
                           },
                           [
-                            _vm._m(3, true),
+                            _vm._m(2, true),
                             _vm._v(" "),
                             _c(
                               "div",
@@ -56710,7 +57373,7 @@ var render = function() {
                     _c(
                       "button",
                       {
-                        staticClass: "btn-responder-texto",
+                        staticClass: "btn-responder-mensaje-profesional",
                         attrs: { type: "button" },
                         on: {
                           click: function($event) {
@@ -56766,18 +57429,6 @@ var staticRenderFns = [
         staticClass: "img-responsive",
         attrs: { src: "fotos-profesionales/oswaldo_salaverry.jpg", alt: "" }
       })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "mensaje" }, [
-      _c("p", [
-        _vm._v(
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod blandit vestibulum. Donec aliquet, ipsum quis consequat faucibus, lectus orci posuere ex, a vestibulum risus dolor ac odio. Praesent commodo dolor nec interdum euismod. Donec fermentum quam eget nunc laoreet ultrices. Duis pellentesque pretium ligula vitae vehicula."
-        )
-      ])
     ])
   },
   function() {
@@ -60558,29 +61209,7 @@ var render = function() {
                 staticStyle: { "margin-top": "20px" }
               },
               [
-                _c(
-                  "div",
-                  { staticClass: "col-lg-6 col-sm-12" },
-                  [
-                    _c("vc-calendar", {
-                      attrs: {
-                        color: "pink",
-                        attributes: _vm.attributes,
-                        "is-inline": "",
-                        "min-date": new Date()
-                      },
-                      on: { dayclick: _vm.dayClicked },
-                      model: {
-                        value: _vm.diaSeleccionado,
-                        callback: function($$v) {
-                          _vm.diaSeleccionado = $$v
-                        },
-                        expression: "diaSeleccionado"
-                      }
-                    })
-                  ],
-                  1
-                ),
+                _c("div", { staticClass: "col-lg-6 col-sm-12" }),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-lg-6 col-sm-12" }, [
                   _c(
@@ -62500,17 +63129,205 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm._m(0),
+    _c("div", { staticClass: "bloques-de-perfil" }, [
+      _c("h5", { staticClass: "formulario-titulos" }, [_vm._v("TARIFAS:")]),
+      _vm._v(" "),
+      _c("p", [
+        _vm._v(
+          "Elige el tipo de moneda con el que deseas trabajar con tus clientes."
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "linea-morada" }, [
+        _c("div", { staticClass: "row" }, [
+          _c(
+            "div",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.pais == "PE",
+                  expression: " pais == 'PE' "
+                }
+              ],
+              staticClass:
+                "custom-control custom-radio custom-control-inline no-margin-right-check col-lg-1 col-md-12 col-sm-12 espacio-campos"
+            },
+            [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.tipo_moneda,
+                    expression: "tipo_moneda"
+                  }
+                ],
+                staticClass: "custom-control-input",
+                attrs: {
+                  type: "radio",
+                  id: "pen",
+                  name: "tipo_moneda",
+                  value: "PEN"
+                },
+                domProps: { checked: _vm._q(_vm.tipo_moneda, "PEN") },
+                on: {
+                  click: function($event) {
+                    _vm.simbolo_moneda = "S/"
+                  },
+                  change: function($event) {
+                    _vm.tipo_moneda = "PEN"
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass:
+                    "custom-control-label custom-control-label-espacio",
+                  attrs: { for: "pen" }
+                },
+                [_vm._v("S/")]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.pais == "PE" || _vm.pais == "PA",
+                  expression: " pais == 'PE' || pais == 'PA' "
+                }
+              ],
+              staticClass:
+                "custom-control custom-radio custom-control-inline no-margin-right-check col-lg-1 col-md-12 col-sm-12 espacio-campos"
+            },
+            [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.tipo_moneda,
+                    expression: "tipo_moneda"
+                  }
+                ],
+                staticClass: "custom-control-input",
+                attrs: {
+                  type: "radio",
+                  id: "dolar",
+                  name: "tipo_moneda",
+                  value: "USD"
+                },
+                domProps: { checked: _vm._q(_vm.tipo_moneda, "USD") },
+                on: {
+                  click: function($event) {
+                    _vm.simbolo_moneda = "$"
+                  },
+                  change: function($event) {
+                    _vm.tipo_moneda = "USD"
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass:
+                    "custom-control-label custom-control-label-espacio",
+                  attrs: { for: "dolar" }
+                },
+                [_vm._v("$")]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.pais == "ES",
+                  expression: " pais == 'ES' "
+                }
+              ],
+              staticClass:
+                "custom-control custom-radio custom-control-inline no-margin-right-check col-lg-1 col-md-12 col-sm-12 espacio-campos"
+            },
+            [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.tipo_moneda,
+                    expression: "tipo_moneda"
+                  }
+                ],
+                staticClass: "custom-control-input",
+                attrs: {
+                  type: "radio",
+                  id: "euro",
+                  name: "tipo_moneda",
+                  value: "EUR"
+                },
+                domProps: { checked: _vm._q(_vm.tipo_moneda, "EUR") },
+                on: {
+                  click: function($event) {
+                    _vm.simbolo_moneda = "€"
+                  },
+                  change: function($event) {
+                    _vm.tipo_moneda = "EUR"
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass:
+                    "custom-control-label custom-control-label-espacio",
+                  attrs: { for: "euro" }
+                },
+                [_vm._v("€")]
+              )
+            ]
+          )
+        ])
+      ])
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "bloques-de-perfil" }, [
       _c("h5", { staticClass: "formulario-titulos" }, [
         _vm._v("PRECIO DE LOS SERVICIOS:")
       ]),
       _vm._v(" "),
-      _vm._m(1),
+      _vm._m(0),
       _vm._v(" "),
       _c("table", { staticClass: "table" }, [
-        _vm._m(2),
+        _c("thead", [
+          _c("tr", [
+            _c("th", { attrs: { scope: "col", width: "40" } }, [_vm._v("#")]),
+            _vm._v(" "),
+            _c("th", { attrs: { scope: "col" } }, [_vm._v("Tipo")]),
+            _vm._v(" "),
+            _c("th", { attrs: { scope: "col" } }, [
+              _vm._v("Tarifa " + _vm._s(_vm.simbolo_moneda))
+            ]),
+            _vm._v(" "),
+            _c("th", { attrs: { scope: "col", width: "80" } }, [
+              _vm._v("Eliminar")
+            ])
+          ])
+        ]),
         _vm._v(" "),
         _c(
           "tbody",
@@ -62537,7 +63354,11 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("td", {
-                        domProps: { textContent: _vm._s(servicio.costo_tarifa) }
+                        domProps: {
+                          textContent: _vm._s(
+                            _vm.simbolo_moneda + "" + servicio.costo_tarifa
+                          )
+                        }
                       }),
                       _vm._v(" "),
                       _c("td", [
@@ -62636,7 +63457,7 @@ var render = function() {
             attrs: {
               type: "number",
               name: "servicio_tarifa",
-              placeholder: "S/"
+              placeholder: _vm.simbolo_moneda
             },
             domProps: { value: _vm.servicio_tarifa },
             on: {
@@ -62671,14 +63492,28 @@ var render = function() {
     _c("div", { staticClass: "bloques-de-perfil" }, [
       _c("h5", { staticClass: "formulario-titulos" }, [_vm._v("ESCORT:")]),
       _vm._v(" "),
+      _vm._m(1),
+      _vm._v(" "),
+      _vm._m(2),
+      _vm._v(" "),
       _vm._m(3),
       _vm._v(" "),
-      _vm._m(4),
-      _vm._v(" "),
-      _vm._m(5),
-      _vm._v(" "),
       _c("table", { staticClass: "table" }, [
-        _vm._m(6),
+        _c("thead", [
+          _c("tr", [
+            _c("th", { attrs: { scope: "col", width: "40" } }, [_vm._v("#")]),
+            _vm._v(" "),
+            _c("th", { attrs: { scope: "col" } }, [_vm._v("Tipo")]),
+            _vm._v(" "),
+            _c("th", { attrs: { scope: "col" } }, [
+              _vm._v("Tarifa " + _vm._s(_vm.simbolo_moneda))
+            ]),
+            _vm._v(" "),
+            _c("th", { attrs: { scope: "col", width: "80" } }, [
+              _vm._v("Eliminar")
+            ])
+          ])
+        ]),
         _vm._v(" "),
         _c(
           "tbody",
@@ -62703,7 +63538,11 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("td", {
-                        domProps: { textContent: _vm._s(escort.costo_tarifa) }
+                        domProps: {
+                          textContent: _vm._s(
+                            _vm.simbolo_moneda + "" + escort.costo_tarifa
+                          )
+                        }
                       }),
                       _vm._v(" "),
                       _c("td", [
@@ -62805,7 +63644,7 @@ var render = function() {
               type: "number",
               name: "escort_tarifa",
               id: "escort_tarifa",
-              placeholder: "S/"
+              placeholder: _vm.simbolo_moneda
             },
             domProps: { value: _vm.escort_tarifa },
             on: {
@@ -62840,10 +63679,24 @@ var render = function() {
     _c("div", { staticClass: "bloques-de-perfil" }, [
       _c("h5", { staticClass: "formulario-titulos" }, [_vm._v("EXTRAS:")]),
       _vm._v(" "),
-      _vm._m(7),
+      _vm._m(4),
       _vm._v(" "),
       _c("table", { staticClass: "table" }, [
-        _vm._m(8),
+        _c("thead", [
+          _c("tr", [
+            _c("th", { attrs: { scope: "col", width: "40" } }, [_vm._v("#")]),
+            _vm._v(" "),
+            _c("th", { attrs: { scope: "col" } }, [_vm._v("Tipo")]),
+            _vm._v(" "),
+            _c("th", { attrs: { scope: "col" } }, [
+              _vm._v("Tarifa " + _vm._s(_vm.simbolo_moneda))
+            ]),
+            _vm._v(" "),
+            _c("th", { attrs: { scope: "col", width: "80" } }, [
+              _vm._v("Eliminar")
+            ])
+          ])
+        ]),
         _vm._v(" "),
         _c(
           "tbody",
@@ -62868,7 +63721,11 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("td", {
-                        domProps: { textContent: _vm._s(extra.costo_tarifa) }
+                        domProps: {
+                          textContent: _vm._s(
+                            _vm.simbolo_moneda + "" + extra.costo_tarifa
+                          )
+                        }
                       }),
                       _vm._v(" "),
                       _c("td", [
@@ -63010,7 +63867,11 @@ var render = function() {
               }
             ],
             staticClass: "form-control",
-            attrs: { type: "number", name: "extra_tarifa", placeholder: "S/" },
+            attrs: {
+              type: "number",
+              name: "extra_tarifa",
+              placeholder: _vm.simbolo_moneda
+            },
             domProps: { value: _vm.extra_tarifa },
             on: {
               input: function($event) {
@@ -63047,102 +63908,12 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "bloques-de-perfil" }, [
-      _c("h5", { staticClass: "formulario-titulos" }, [_vm._v("TARIFAS:")]),
-      _vm._v(" "),
-      _c("p", [
-        _vm._v(
-          "Elige el tipo de moneda con el que deseas trabajar con tus clientes."
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "linea-morada" }, [
-        _c("div", { staticClass: "row" }, [
-          _c(
-            "div",
-            {
-              staticClass:
-                "custom-control custom-radio custom-control-inline no-margin-right-check col-lg-1 col-md-12 col-sm-12 espacio-campos"
-            },
-            [
-              _c("input", {
-                staticClass: "custom-control-input",
-                attrs: {
-                  type: "radio",
-                  id: "tatuaje(s)-si",
-                  name: "tatuaje(s)"
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass:
-                    "custom-control-label custom-control-label-espacio",
-                  attrs: { for: "tatuaje(s)-si" }
-                },
-                [_vm._v("/S.")]
-              )
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass:
-                "custom-control custom-radio custom-control-inline no-margin-right-check col-lg-1 col-md-12 col-sm-12 espacio-campos"
-            },
-            [
-              _c("input", {
-                staticClass: "custom-control-input",
-                attrs: {
-                  type: "radio",
-                  id: "tatuaje(s)-no",
-                  name: "tatuaje(s)"
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass:
-                    "custom-control-label custom-control-label-espacio",
-                  attrs: { for: "tatuaje(s)-no" }
-                },
-                [_vm._v("$")]
-              )
-            ]
-          )
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("p", [
       _vm._v("Especifica tus "),
       _c("strong", { staticClass: "precio-morado" }, [
         _vm._v("tarifas privadas")
       ]),
       _vm._v(" a continuación")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", { attrs: { scope: "col", width: "40" } }, [_vm._v("#")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tipo")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tarifa")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col", width: "80" } }, [_vm._v("Eliminar")])
-      ])
     ])
   },
   function() {
@@ -63191,44 +63962,12 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", { attrs: { scope: "col", width: "40" } }, [_vm._v("#")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tipo")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tarifa")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col", width: "80" } }, [_vm._v("Eliminar")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("p", [
       _vm._v("Especifica tus "),
       _c("strong", { staticClass: "precio-morado" }, [
         _vm._v("tarifas adicionales")
       ]),
       _vm._v(" a continuación (Las posibilidades se toman del paso anterior)")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", { attrs: { scope: "col", width: "40" } }, [_vm._v("#")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tipo")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tarifa")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col", width: "80" } }, [_vm._v("Eliminar")])
-      ])
     ])
   }
 ]
@@ -63500,18 +64239,18 @@ var staticRenderFns = [
             _c("strong", [_vm._v("IMPORTANTE:")])
           ]),
           _vm._v(
-            " Para que ellos te puedan valorar tendrás que enviar tú mismo el formulario de valoración a tus clientes directamente a su correo a través del botón\n      "
+            " Para que ellos te puedan valorar tendrás que enviar tú mismo el formulario de valoración a tus clientes directamente a su correo a través del botón\n        "
           ),
           _c("strong", { staticClass: "precio-morado" }, [
             _vm._v('"ENVIAR MAIL"')
           ]),
           _vm._v(
-            ' o a su "WhatsApp" copiando y pegando la URL que te hemos atribuido con el botón\n      '
+            ' o a su "WhatsApp" copiando y pegando la URL que te hemos atribuido con el botón\n        '
           ),
           _c("strong", { staticClass: "precio-morado" }, [
             _vm._v('"COPIAR LINK"')
           ]),
-          _vm._v(".\n    ")
+          _vm._v(".\n      ")
         ])
       ]),
       _vm._v(" "),
@@ -63522,13 +64261,25 @@ var staticRenderFns = [
             _vm._v(" "),
             _c("div", { staticClass: "info-estadistica" }, [
               _c("span", { staticClass: "inf-estadistica-num" }, [
+                _vm._v("500")
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "inf-estadistica" }, [
+                _vm._v("\n              RESERVAS\n              "),
+                _c("br"),
+                _vm._v("REALIZADOS\n            ")
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "info-estadistica" }, [
+              _c("span", { staticClass: "inf-estadistica-num" }, [
                 _vm._v("300")
               ]),
               _vm._v(" "),
               _c("span", { staticClass: "inf-estadistica" }, [
-                _vm._v("\n            SERVICIOS\n            "),
+                _vm._v("\n              SERVICIOS\n              "),
                 _c("br"),
-                _vm._v("VALORADOS\n          ")
+                _vm._v("VALORADOS\n            ")
               ])
             ])
           ])
@@ -63624,68 +64375,59 @@ var staticRenderFns = [
             _vm._v(" "),
             _c("span", [_vm._v("2 Ptos.")])
           ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "bloques-de-perfil" }, [
-        _c("h5", { staticClass: "formulario-titulos" }, [
-          _vm._v("ENVIAR FORMULARIO DE VALORACIÓN:")
         ]),
         _vm._v(" "),
-        _c("p", [_vm._v("Elige al cliente que deseas que te evalue.")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
-          _c(
-            "div",
-            { staticClass: "col-lg-8 col-md-8 col-sm-12 espacio-campos" },
-            [
-              _c("input", {
-                staticClass: "form-control",
-                attrs: { type: "email", name: "email", placeholder: "Email" }
-              })
-            ]
-          ),
+        _c("div", { staticClass: "col-lg-12 casilla-valoracion" }, [
+          _c("span", [_vm._v("LIMPIEZA")]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-lg-4 col-md-4 col-sm-12" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-primary btn-busqueda-detallada",
-                attrs: { type: "submit" }
-              },
-              [_vm._v("Enviar mail")]
-            )
+          _c("div", { staticClass: "puntaje-estrella" }, [
+            _c("i", { staticClass: "icon-star precio-morado" }),
+            _vm._v(" "),
+            _c("i", { staticClass: "icon-star precio-morado" }),
+            _vm._v(" "),
+            _c("i", { staticClass: "icon-star precio-plomo" }),
+            _vm._v(" "),
+            _c("i", { staticClass: "icon-star precio-plomo" }),
+            _vm._v(" "),
+            _c("i", { staticClass: "icon-star precio-plomo" }),
+            _vm._v(" "),
+            _c("span", [_vm._v("2 Ptos.")])
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "linea-valor" }),
-        _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
-          _c(
-            "div",
-            { staticClass: "col-lg-8 col-md-8 col-sm-12 espacio-campos" },
-            [
-              _c("input", {
-                staticClass: "form-control bg-in",
-                attrs: {
-                  type: "text",
-                  name: "url",
-                  placeholder: "Link",
-                  value: "https://www.meetfornight.com/35345647"
-                }
-              })
-            ]
-          ),
+        _c("div", { staticClass: "col-lg-12 casilla-valoracion" }, [
+          _c("span", [_vm._v("BELLEZA")]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-lg-4 col-md-4 col-sm-12" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-primary btn-rojo",
-                attrs: { type: "submit" }
-              },
-              [_vm._v("Copiar Link")]
-            )
+          _c("div", { staticClass: "puntaje-estrella" }, [
+            _c("i", { staticClass: "icon-star precio-morado" }),
+            _vm._v(" "),
+            _c("i", { staticClass: "icon-star precio-morado" }),
+            _vm._v(" "),
+            _c("i", { staticClass: "icon-star precio-plomo" }),
+            _vm._v(" "),
+            _c("i", { staticClass: "icon-star precio-plomo" }),
+            _vm._v(" "),
+            _c("i", { staticClass: "icon-star precio-plomo" }),
+            _vm._v(" "),
+            _c("span", [_vm._v("2 Ptos.")])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-lg-12 casilla-valoracion" }, [
+          _c("span", [_vm._v("PERFORMANCE")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "puntaje-estrella" }, [
+            _c("i", { staticClass: "icon-star precio-morado" }),
+            _vm._v(" "),
+            _c("i", { staticClass: "icon-star precio-morado" }),
+            _vm._v(" "),
+            _c("i", { staticClass: "icon-star precio-plomo" }),
+            _vm._v(" "),
+            _c("i", { staticClass: "icon-star precio-plomo" }),
+            _vm._v(" "),
+            _c("i", { staticClass: "icon-star precio-plomo" }),
+            _vm._v(" "),
+            _c("span", [_vm._v("2 Ptos.")])
           ])
         ])
       ])

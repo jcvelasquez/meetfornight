@@ -19,6 +19,10 @@ class FotoProfesionalController extends Controller
         $this->fotos_profesional_path = public_path('fotos-profesionales');
     }
 
+    public function mostrar(){
+        return view('forms-perfil-profesional.fotos-videos-profesional');
+    }
+
     public function listar(Request $request)
     {
 

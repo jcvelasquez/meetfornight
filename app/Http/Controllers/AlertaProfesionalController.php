@@ -12,7 +12,11 @@ class AlertaProfesionalController extends Controller
 {
 
     
-    public function list(Request $request)
+    public function mostrar(){
+        return view('forms-perfil-profesional.alerta-profesional');
+    }
+
+    public function listar(Request $request)
     {
 
         $alertas = DB::table('alerta_profesional')->join('usuarios', 'alerta_profesional.idusuario', '=', 'usuarios.id')
@@ -38,21 +42,21 @@ class AlertaProfesionalController extends Controller
 
 
 
-    public function store(Request $request)
+    public function registrar(Request $request)
     {
 
         $alerta = new AlertaProfesional;
         $alerta->idusuario = Auth::user()->id;
-        $alerta->nombre = $request->nombre;
-        $alerta->apellido = $request->apellido;
-        $alerta->idalerta = $request->idalerta;
+        $alerta->tipo_cliente = $request->tipo_cliente;
+        $alerta->nombres = $request->nombres;
+        $alerta->apellidos = $request->apellidos;
+        $alerta->apodo = $request->apodo;
         $alerta->celular = $request->celular;
         $alerta->email = $request->email;
         $alerta->razon = $request->razon;
-        $alerta->created_at = new DateTime();
         $alerta->save();
 
-        return ['mensaje' => 'Alerta registrada correctamente', 'alerta' => $alerta];
+        return ['mensaje' => 'La alerta se registró correctamente.'];
 
     }
 

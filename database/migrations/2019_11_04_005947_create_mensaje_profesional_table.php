@@ -19,6 +19,7 @@ class CreateMensajeProfesionalTable extends Migration
             $table->integer('idusuario')->unsigned();
             $table->integer('parent_id')->unsigned()->nullable();
             $table->text('mensaje');
+            $table->integer('es_leido');
             $table->timestamps();
         });
 

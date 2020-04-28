@@ -72,13 +72,16 @@
                     return;
                   }
 
-                  axios.post('perfil/mensaje/' + me.apodoData, {
-                    'mensaje' : me.mensaje
+                  axios.post('../perfil/mensaje/' + me.apodoData, {
+                    'mensaje' : me.mensaje,
+                    'apodo' : me.apodoData
                   }).then(function (response) {
 
                       var respuesta = response.data;
-                      //me.arDisponibilidad = respuesta.disponibilidad;
-                      console.log(respuesta);
+
+                      Swal.fire('CONFIRMACION','El mensaje ha sido enviado correctamente','success');
+
+                      me.mensaje = '';
 
                   }).catch(function (error) {  console.log(error);     });
                 

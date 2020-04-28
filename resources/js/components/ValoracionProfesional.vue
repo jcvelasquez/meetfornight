@@ -18,6 +18,13 @@
         <div class="estadistica-datos">
           <i class="icon-star tam-icon-grande"></i>
           <div class="info-estadistica">
+            <span class="inf-estadistica-num">500</span>
+            <span class="inf-estadistica">
+              RESERVAS
+              <br />REALIZADOS
+            </span>
+          </div>
+          <div class="info-estadistica">
             <span class="inf-estadistica-num">300</span>
             <span class="inf-estadistica">
               SERVICIOS
@@ -84,8 +91,45 @@
           <span>2 Ptos.</span>
         </div>
       </div>
-    </div>
+      <div class="col-lg-12 casilla-valoracion">
+        <span>LIMPIEZA</span>
+        <div class="puntaje-estrella">
+          <i class="icon-star precio-morado"></i>
+          <i class="icon-star precio-morado"></i>
+          <i class="icon-star precio-plomo"></i>
+          <i class="icon-star precio-plomo"></i>
+          <i class="icon-star precio-plomo"></i>
+          <span>2 Ptos.</span>
+        </div>
+      </div>
 
+      <div class="col-lg-12 casilla-valoracion">
+        <span>BELLEZA</span>
+        <div class="puntaje-estrella">
+          <i class="icon-star precio-morado"></i>
+          <i class="icon-star precio-morado"></i>
+          <i class="icon-star precio-plomo"></i>
+          <i class="icon-star precio-plomo"></i>
+          <i class="icon-star precio-plomo"></i>
+          <span>2 Ptos.</span>
+        </div>
+      </div>
+
+      <div class="col-lg-12 casilla-valoracion">
+        <span>PERFORMANCE</span>
+        <div class="puntaje-estrella">
+          <i class="icon-star precio-morado"></i>
+          <i class="icon-star precio-morado"></i>
+          <i class="icon-star precio-plomo"></i>
+          <i class="icon-star precio-plomo"></i>
+          <i class="icon-star precio-plomo"></i>
+          <span>2 Ptos.</span>
+        </div>
+      </div>
+
+
+    </div>
+<!-- 
     <div class="bloques-de-perfil">
       <h5 class="formulario-titulos">ENVIAR FORMULARIO DE VALORACIÓN:</h5>
       <p>Elige al cliente que deseas que te evalue.</p>
@@ -113,6 +157,7 @@
         </div>
       </div>
     </div>
+     -->
   </form>
 </template>
 

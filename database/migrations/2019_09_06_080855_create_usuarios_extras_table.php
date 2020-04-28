@@ -27,6 +27,7 @@ class CreateUsuariosExtrasTable extends Migration
             $table->integer('peso');
             $table->enum('orientacion',['LESBIANA','HETEROSEXUAL','TRANSEXUAL','HOMOSEXUAL','BISEXUAL']);
             $table->enum('tipo_contacto',['MENSAJE','CORREO','NA'])->nullable();
+            $table->enum('tipo_moneda',['PEN','USD','EUR']);
             $table->integer('tatuaje');
             $table->integer('piercing');
             $table->integer('fumador');

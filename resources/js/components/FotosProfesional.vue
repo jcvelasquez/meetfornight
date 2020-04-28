@@ -63,8 +63,11 @@
     <draggable v-model="arFotos" @change="cambiarOrden()">
         <transition-group>
             <div class="img-cargada" v-for="(foto, index) in arFotos" :key="foto.id">
+                
+
                 <div class="img-cargada-izq">
-                  <img :src=" 'fotos-profesionales/' + foto.url_foto" />
+                  <i class="fa fa-arrows-v" aria-hidden="true"></i>
+                  <img :src=" 'fotos-profesionales/' + foto.url_foto" style="margin-left:15px;" />
                   <div class="img-cargada-datos">
                     <span class="nom-img" v-text="foto.url_foto"></span>
                     <span class="peso-img">234 KB</span>

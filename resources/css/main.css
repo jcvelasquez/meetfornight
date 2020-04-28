@@ -5859,7 +5859,8 @@ footer ul li a:hover{
 
 }
 
-.bloque-opcion span{
+.bloque-opcion span,
+.bloque-opcion label {
 
     color: #5b376f;
 

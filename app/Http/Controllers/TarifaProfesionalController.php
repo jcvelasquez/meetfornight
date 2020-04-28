@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\TarifaProfesional;
+use App\UsuarioExtras;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -9,6 +10,11 @@ use Illuminate\Support\Facades\Auth;
 class TarifaProfesionalController extends Controller
 {
 
+
+    public function mostrar(){
+        return view('forms-perfil-profesional.tarifas-profesional');
+    }
+    
     public function list(Request $request)
     {
 
@@ -16,7 +22,25 @@ class TarifaProfesionalController extends Controller
 
         $tarifas = TarifaProfesional::where('idusuario', $idprofesional)->get();
 
-        return ['tarifas' => $tarifas];  
+        $opciones = UsuarioExtras::where('idusuario', $idprofesional)->select('tipo_moneda')->first();
+
+        if($opciones->tipo_moneda == "PEN"){
+            $simbolo_moneda = "S/";
+        }else if($opciones->tipo_moneda == "USD"){
+            $simbolo_moneda = "$";
+        }else{
+            $simbolo_moneda = "€";
+        }
+
+        if(Auth::user()->idcountry == 172){
+            $pais = "PE";
+        }else if(Auth::user()->idcountry == 169){
+            $pais = "PA";
+        }else{
+            $pais = "ES";
+        }
+
+        return ['tarifas' => $tarifas, 'moneda' => $opciones->tipo_moneda, 'simbolo' => $simbolo_moneda, 'pais' => $pais]; 
 
     }
 

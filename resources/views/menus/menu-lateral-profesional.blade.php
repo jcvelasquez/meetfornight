@@ -18,8 +18,8 @@
 
     <li><a href="{{ url('fotos-profesional') }}" class="{{ request()->is('fotos-profesional') ? 'menu-lateral-usuario-active' : '' }}"><span><i class="icon-video esp-icono-bio"></i>FOTOS</span><span><i class="fa fa-angle-right" aria-hidden="true"></i></span></a></li>
 
-    <li><a href="{{ url('creditos-profesional') }}" class="{{ request()->is('creditos-profesional') ? 'menu-lateral-usuario-active' : '' }}"><span class="resaltar"><i class="icon-moneda-nuevo-sol esp-icono-bio"></i>CRÉDITOS</span><span><i class="fa fa-angle-right" aria-hidden="true"></i></span></a></li>
-
+<!--     <li><a href="{{ url('creditos-profesional') }}" class="{{ request()->is('creditos-profesional') ? 'menu-lateral-usuario-active' : '' }}"><span class="resaltar"><i class="icon-moneda-nuevo-sol esp-icono-bio"></i>CRÉDITOS</span><span><i class="fa fa-angle-right" aria-hidden="true"></i></span></a></li>
+ -->
     <li><a href="{{ url('booster-profesional') }}" class="{{ request()->is('booster-profesional') ? 'menu-lateral-usuario-active' : '' }}"><span class="resaltar"><i class="icon-podium esp-icono-bio"></i>BOOSTER</span><span><i class="fa fa-angle-right" aria-hidden="true"></i></span></a></li>
 
     <li><a href="{{ url('estadisticas-profesional') }}" class="{{ request()->is('estadisticas-profesional') ? 'menu-lateral-usuario-active' : '' }}"><span><i class="icon-estadisticas esp-icono-bio"></i>ESTADÍSTICAS</span><span><i class="fa fa-angle-right" aria-hidden="true"></i></span></a></li>

@@ -90,7 +90,6 @@ class ServiciosProfesionalController extends Controller
         $servicios = json_decode($request['servicios']);
 
         ServiciosXProfesional::where('idusuario', Auth::user()->id )->where('idservicio', '!=', NULL )->delete();
-
         
         if(!empty($servicios)){
             foreach ($servicios as $serv) {

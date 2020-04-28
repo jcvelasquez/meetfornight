@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use phpDocumentor\Reflection\Types\Nullable;
 
 class CreateAlertaProfesionalTable extends Migration
 {
@@ -16,11 +17,12 @@ class CreateAlertaProfesionalTable extends Migration
         Schema::create('alerta_profesional', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('idusuario')->unsigned();
-            $table->string('nombre');
-            $table->string('apellido');
-            $table->string('idalerta');
-            $table->string('celular');
-            $table->string('email');
+            $table->enum('tipo_cliente',['CLIENTE','PROFESIONAL']);
+            $table->string('nombres')->nullable();
+            $table->string('apellidos')->nullable();
+            $table->string('apodo')->nullable();
+            $table->string('celular')->nullable();
+            $table->string('email')->nullable();
             $table->text('razon');
             $table->timestamps();
             $table->foreign('idusuario')->references('id')->on('usuarios');

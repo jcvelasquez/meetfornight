@@ -128,9 +128,12 @@ Route::group(['middleware'=>['auth','verified']],function(){
             //CONTACTO
             Route::get('contacto-profesional', 'ContactoProfesionalController@mostrar')->name('contacto-profesional');
             Route::get('contacto-profesional/listar', 'ContactoProfesionalController@listar');
+            Route::post('contacto-profesional/actualizar', 'ContactoProfesionalController@actualizar' );
 
-            Route::get('disponibilidad-profesional/listar', 'DisponibilidadProfesionalController@list');  
+            //DISPONIBILIDAD
+            Route::get('disponibilidad-profesional/listar', 'DisponibilidadProfesionalController@listar');  
             Route::post('disponibilidad-profesional/registrar', 'DisponibilidadProfesionalController@store');  
+            Route::post('disponibilidad-profesional/actualizar', 'DisponibilidadProfesionalController@actualizar' );
 
             //RESERVAS            
             Route::get('reservas-profesional', 'ReservasProfesionalController@mostrar' )->name('reservas-profesional');
@@ -148,37 +151,37 @@ Route::group(['middleware'=>['auth','verified']],function(){
             Route::post('mensajes-profesional/responder', 'MensajeProfesionalController@responder');
             Route::post('mensajes-profesional/eliminar', 'MensajeProfesionalController@eliminar');
 
-            
+            //FOTOS
+            Route::get('fotos-profesional', 'FotoProfesionalController@mostrar');
+            Route::get('fotos-profesional/listar', 'FotoProfesionalController@listar' );
+            Route::post('fotos-profesional/subir', 'FotoProfesionalController@subir')->name('fotos-profesional/subir');
+            Route::post('fotos-profesional/ordenar', 'FotoProfesionalController@ordenar' );
+            Route::post('fotos-profesional/eliminar', 'FotoProfesionalController@eliminar' );
+
+            //ALERTA
+            Route::get('alerta-profesional', 'AlertaProfesionalController@mostrar');
+            Route::get('alerta-profesional/listar', 'AlertaProfesionalController@listar' );
+            Route::post('alerta-profesional/registrar', 'AlertaProfesionalController@registrar');  
             
             //AGENDA
-            Route::get('agenda-profesional', function () {
-                return view('forms-perfil-profesional.agenda-profesional');
-            });
+            Route::get('agenda-profesional', 'AgendaProfesionalController@mostrar');
             
             //TARIFAS
-            Route::get('tarifas-profesional', function () {
-                return view('forms-perfil-profesional.tarifas-profesional');
-            });
-
+            Route::get('tarifas-profesional', 'TarifaProfesionalController@mostrar');
             Route::get('tarifas-profesional/listar', 'TarifaProfesionalController@list' );
             Route::delete('tarifas-profesional/eliminar/{id}', 'TarifaProfesionalController@destroy' );
             Route::post('tarifas-profesional/registrar', 'TarifaProfesionalController@store');
             
 
 
-            Route::get('fotos-profesional', function () {   return view('forms-perfil-profesional.fotos-videos-profesional');  });
-            Route::get('fotos-profesional/listar', 'FotoProfesionalController@listar' );
-            Route::post('fotos-profesional/subir', 'FotoProfesionalController@subir')->name('fotos-profesional/subir');
-            Route::post('fotos-profesional/ordenar', 'FotoProfesionalController@ordenar' );
-            Route::post('fotos-profesional/eliminar', 'FotoProfesionalController@eliminar' );
-
-
-            
+        
+            //CREDITOS
             Route::get('creditos-profesional', 'CreditoProfesionalController@mostrar' );
             Route::get('creditos-profesional/listar', 'CreditoProfesionalController@listar' );
 
             Route::get('codigos-promocionales/listar', 'CodigoPromocionalController@listar' );
             Route::get('codigos-promocionales/consultar/{codigo}', 'CodigoPromocionalController@consultar' );
+
 
             Route::get('frecuencia-booster/listar', 'FrecuenciaBoosterController@listar' );
             Route::post('frecuencia-booster/eliminar', 'FrecuenciaBoosterController@eliminar' );
@@ -195,10 +198,6 @@ Route::group(['middleware'=>['auth','verified']],function(){
             Route::get('estadisticas-profesional', function () {  return view('forms-perfil-profesional.estadisticas-profesional');  });
             
             
-            
-            Route::get('alerta-profesional', function () {  return view('forms-perfil-profesional.alerta-profesional');  });
-            Route::get('alerta-profesional/listar', 'AlertaProfesionalController@list' );
-            Route::post('alerta-profesional/registrar', 'AlertaProfesionalController@store');  
             
             
             Route::get('valoracion-profesional', function () {  return view('forms-perfil-profesional.valoracion-profesional');  });

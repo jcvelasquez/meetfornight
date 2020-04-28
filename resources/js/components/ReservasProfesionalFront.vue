@@ -102,8 +102,8 @@
             <h2 class="sub-tit"><i class="icon-calendar esp-icono-bio"></i>HORARIOS DISPONIBLES</h2>
             <div class="form-row" style="margin-top:20px;">
                 <div class="col-lg-6 col-sm-12">
-                    <vc-calendar color="pink"  @dayclick='dayClicked' :attributes='attributes' v-model='diaSeleccionado' is-inline :min-date='new Date()' />
-                </div>
+<!--                     <vc-calendar color="pink"  @dayclick='dayClicked' :attributes='attributes' v-model='diaSeleccionado' is-inline :min-date='new Date()' />
+ -->                </div>
                 <div class="col-lg-6 col-sm-12">
                     <ul>
                         <li v-for="horario in arHorariosGenerados" :key="horario.id">
