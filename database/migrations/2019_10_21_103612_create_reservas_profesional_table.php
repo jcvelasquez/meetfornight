@@ -11,7 +11,7 @@ class CreateReservasProfesionalTable extends Migration
     public function up()
     {
         Schema::create('reservas_profesional', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->integer('idprofesional')->unsigned();
             $table->integer('idusuario')->unsigned();
             $table->dateTime('desde');

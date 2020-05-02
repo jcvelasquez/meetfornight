@@ -8,6 +8,47 @@
     </div>
 
     <div class="bloques-de-perfil">
+      <div class="bloque-estadistica-2">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="estadistica-datos-2">
+              <i class="icon-podium tam-icon-grande-2"></i>
+              <div class="info-estadistica-2">
+                <span class="inf-estadistica-num-2">150</span>
+                <span class="inf-estadistica-2">
+                  BOOSTERS UTILIZADOS PARA ANUNCIARTE
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="estadistica-datos-2">
+              <i class="icon-heart-all tam-icon-grande-2"></i>
+              <div class="info-estadistica-2">
+                <span class="inf-estadistica-num-2">100</span>
+                <span class="inf-estadistica-2">USUARIOS TE TIENEN EN SUS FAVORITOS
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+   
+
+    <div class="bloques-de-perfil">
+        <select name="" id="" class="form-control col-lg-6">
+          <option value="">Seleccionar mes de reporte</option>
+        </select>
+    </div>
+
+    <div class="bloques-de-perfil">
+      <ve-line :data="chartData" :colors="colors" :legend-visible="false" :settings="chartSettings"></ve-line>
+    </div>
+
+    <!-- 
+
+     <div class="bloques-de-perfil">
       <div class="bloque-estadistica">
         <div class="estadistica-datos">
           <i class="icon-user-woman tam-icon-grande"></i>
@@ -19,55 +60,45 @@
             </span>
           </div>
         </div>
-        <a href="#" class="tam-abajo-flecha">
-          <i class="icon-down-arrow"></i>
-        </a>
       </div>
-    </div>
+    </div> -->
 
-    <div class="bloques-de-perfil">
-      <img src="img/estadisticas.jpg" class="img-responsive" />
-    </div>
 
-    <div class="bloques-de-perfil">
-      <div class="bloque-estadistica-2">
-        <div class="estadistica-datos-2">
-          <i class="icon-podium tam-icon-grande-2"></i>
-          <div class="info-estadistica-2">
-            <span class="inf-estadistica-num-2">15</span>
-            <span class="inf-estadistica-2">
-              BOOSTERS
-              <br />UTILIZADOS
-            </span>
-          </div>
-        </div>
-        <a href="#" class="tam-abajo-flecha-2">
-          <i class="icon-arrow-right"></i>
-        </a>
-      </div>
-    </div>
-
-    <div class="bloques-de-perfil">
-      <div class="bloque-estadistica-2">
-        <div class="estadistica-datos-2">
-          <i class="icon-heart-all tam-icon-grande-2"></i>
-          <div class="info-estadistica-2">
-            <span class="inf-estadistica-num-2">100</span>
-            <span class="inf-estadistica-2">
-              USUARIOS TE TIENEN
-              <br />EN SUS FAVORITOS
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
   </form>
 </template>
 
 <script>
+import VeLine from "v-charts/lib/line.common";
+
 export default {
+  components: {
+    VeLine
+  },
   mounted() {
     console.log("Component mounted.");
+  },
+  created: function() {
+    this.chartData = {
+      columns: ["date", "people"],
+      rows: [
+        { date: "01/01", people: 150, booster: 50 },
+        { date: "01/02", people: 200, booster: 34 },
+        { date: "01/03", people: 180, booster: 28 },
+        { date: "01/04", people: 230, booster: 15 },
+        { date: "01/05", people: 120, booster: 10 },
+        { date: "01/06", people: 80, booster: 20 }
+      ]
+    };
+    this.chartSettings = {
+      stack: { sell: ["people","booster"] },
+      area: true,
+      yAxisType: ["normal"] 
+    };
+
+    this.colors = ["#a86ba4"];
+  },
+  data() {
+    return {};
   }
 };
 </script>

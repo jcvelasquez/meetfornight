@@ -1,17 +1,12 @@
 <template>
   <form action="#" method="post">
-    <div class="bloques-de-perfil">
+   <!--  <div class="bloques-de-perfil">
       <h5 class="formulario-titulos">RESERVAS:</h5>
       <p>
-        <strong class="precio-morado">La Reserva</strong> te permite propulsar tu anuncio nuevamente a las primeras posiciones y multiplicar de esta manera la visibilidad de tu anuncio y aumentar el número de contactos.
-      </p>
-      <p>
-        Recuerda que cuando publicas un anuncio este va perdiendo posiciones en función de las nuevas inscripciones y/o de los
-        <strong class="precio-morado">BOOSTERS</strong> utilizados por las demás personas de la comunidad Meet For Night.
-      </p>
-      <p>Si estas interesado sigue estos pasos:</p>
+        Desde aqui puedes <strong class="precio-morado">gestionar todas las acciones</strong> relacionadas con tus reservas, como aceptarlas o rechazarlas.</p>
+      
     </div>
-
+ -->
     
       <div class="servicios_seleccionados espacio-reservas" v-show="mostrarReserva" >
 
@@ -102,8 +97,9 @@
         <p>Especifica tus <strong class="precio-morado">tarifas privadas</strong> a continuación</p>
         
         <table class="table">
-            <thead>
-              <tr>
+            <thead class="cabecera-fake">
+<!--               <tr><th scope="col" colspan="7" style="text-align: center; text-transform: uppercase; background: rgb(91, 55, 111);">LISTA DE RESERVAS</th></tr>
+ -->              <tr>
                 <th scope="col" width="40">#</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Fecha</th>
@@ -113,7 +109,7 @@
                 <th scope="col" ></th>
               </tr>
             </thead>
-            <tbody>
+            <tbody class="resultado-fake">
  
               <tr v-for="reserva in arReservas" :key="reserva.id">
 

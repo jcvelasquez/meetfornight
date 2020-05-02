@@ -20,6 +20,7 @@ class AlertaProfesionalController extends Controller
     {
 
         $alertas = DB::table('alerta_profesional')->join('usuarios', 'alerta_profesional.idusuario', '=', 'usuarios.id')
+                                        ->where('idusuario', Auth::user()->id )
                                         ->select('alerta_profesional.*')
                                         ->orderBy('id', 'desc')
                                         ->get();

@@ -52,6 +52,8 @@ Route::group(['middleware'=>['guest']],function(){
         Route::get('crear-cuenta', 'CrearCuentaController@mostrarOpcionesRegistro');   
         Route::get('crear-cuenta-profesional', 'CrearCuentaController@mostrarRegistroProfesional');   
         Route::get('crear-cuenta-usuario', 'CrearCuentaController@mostrarRegistroUsuario');      
+        Route::get('crear-cuenta-empresa', 'CrearCuentaController@mostrarRegistroEmpresa');   
+
         Route::get('faq-perfil-usuario', 'HomeController@mostrarFaqUsuario');   
         Route::get('faq-perfil-profesional', 'HomeController@mostrarFaqProfesional');   
         Route::get('faq-perfil-empresa', 'HomeController@mostrarFaqEmpresa');   
@@ -61,6 +63,7 @@ Route::group(['middleware'=>['guest']],function(){
 
         Route::post('registrar-usuario', 'CrearCuentaController@registrarUsuario')->name('registrar-usuario');
         Route::post('registrar-profesional', 'CrearCuentaController@registrarProfesional')->name('registrar-profesional');
+        Route::post('registrar-empresa', 'CrearCuentaController@registrarEmpresa')->name('registrar-empresa');
 
         Route::post('seleccionar-states', 'CrearCuentaController@seleccionarStates');
         Route::post('seleccionar-cities', 'CrearCuentaController@seleccionarCities');
@@ -165,6 +168,7 @@ Route::group(['middleware'=>['auth','verified']],function(){
             
             //AGENDA
             Route::get('agenda-profesional', 'AgendaProfesionalController@mostrar');
+            Route::get('agenda-profesional/listar', 'AgendaProfesionalController@listar');
             
             //TARIFAS
             Route::get('tarifas-profesional', 'TarifaProfesionalController@mostrar');
@@ -200,7 +204,8 @@ Route::group(['middleware'=>['auth','verified']],function(){
             
             
             
-            Route::get('valoracion-profesional', function () {  return view('forms-perfil-profesional.valoracion-profesional');  });
+            Route::get('valoracion-profesional', 'ValoracionProfesionalController@mostrar' );
+            Route::get('valoracion-profesional/listar', 'ValoracionProfesionalController@listar' );
 
     });
 

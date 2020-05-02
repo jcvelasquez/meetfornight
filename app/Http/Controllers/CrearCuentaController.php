@@ -254,6 +254,17 @@ class CrearCuentaController extends Controller
 
     }
 
+    public function mostrarRegistroEmpresa(Request $request){
+
+
+        $planes = Planes::where('estado_plan','=',1)->where('tipo_usuario','=','PROFESIONAL')->get();    
+
+        $countries = Countries::where('sortname','=','ES')->orWhere('sortname','=','PE')->orWhere('sortname','=','PA')->get();   
+
+        return view('crear-cuenta-empresa',compact('planes','countries'));
+
+    }
+
 
     public function mostrarRegistroUsuario(Request $request){
 

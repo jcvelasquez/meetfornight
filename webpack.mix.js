@@ -13,6 +13,7 @@ const mix = require('laravel-mix');
 
 mix.js(['resources/js/app.js'], 'public/js/app.js')
     .js(['resources/js/crear_profesional_footer.js'], 'public/js/crear_profesional_footer.js')
+    .js(['resources/js/crear_empresa_footer.js'], 'public/js/crear_empresa_footer.js')
     .sass('resources/sass/app.scss', 'public/css/app.css')
     .styles([
         'resources/css/bootstrap.min.css',

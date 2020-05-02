@@ -46,7 +46,7 @@
             <img src="img/acc-1.png" class="img-responsive">
             <div class="linea-acc"></div>
             <p class="text-acceder">Si eres una empresa, establecimiento o profesional del sector y deseas anunciarte.</p>
-            <div class="centrar-btn-acceder"><a href="intranet-empresa.php" class="btn-acceder">INGRESAR</a></div>
+            <div class="centrar-btn-acceder"><a href="{{ url('crear-cuenta-empresa') }}" class="btn-acceder">INGRESAR</a></div>
 
          <!--    <div class="lateral-triangulo">
               <img src="img/triangulo-beta-free.png">

@@ -18,7 +18,7 @@
                 <img src="fotos-profesionales/oswaldo_salaverry.jpg" class="img-responsive" alt="">
             </div>
             <div class="col-lg-11 col-sm-12 datos-mensaje">
-                <small>Usuario Cuenta Free</small>
+                <small>{{mensaje.nombre_plan}}</small>
                 <button @click="eliminarMensaje(mensaje)" class="btn-eliminar" type="button"><i class="fa fa-trash-o"></i></button>
                 <hr class="linea">
                 <h6>{{mensaje.nombre}}</h6>
@@ -64,7 +64,7 @@
                 </div>
 
                 <div v-else>
-                        <button @click="seleccionarMensaje(mensaje)" class="btn-responder-mensaje-profesional" type="button">Responder mensaje</button>
+                        <button @click="seleccionarMensaje(mensaje)" class="btn-responder-mensaje-profesional" type="button">Ver más</button>
                 </div>
 
             </div>
@@ -98,7 +98,7 @@
 
                   let me = this;
 
-                  axios.get('/mensajes-profesional/listar').then(function (response) {
+                  axios.get('mensajes-profesional/listar').then(function (response) {
 
                       var respuesta= response.data;
                       me.arMensajes = respuesta.mensajes;

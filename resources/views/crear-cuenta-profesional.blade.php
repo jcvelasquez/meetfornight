@@ -137,7 +137,7 @@
     
         <div class="titulo-perfil">
           <i class="icon-user-woman"></i>
-          <h2>CREA TU PERFIL</h2>
+          <h2>CREA TU PERFIL PROFESIONAL</h2>
         </div>
 
         @if ($errors->any())

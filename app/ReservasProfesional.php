@@ -23,14 +23,14 @@ class ReservasProfesional extends Model
         'se_desplaza'
     ];
 
-    protected $appends = ['fecha'];
+    protected $appends = ['fecha', 'desdeunix'];
 
     protected $casts = [
         'servicios' => 'array'
     ];
 
     public function getFechaAttribute( $value ) {
-        return (new Carbon($value))->format('d/m/y');
+        return (new Carbon($this->attributes['desde']))->format('d/m/Y');
     }
 
     public function getDesdeAttribute( $value ) {
@@ -40,6 +40,11 @@ class ReservasProfesional extends Model
     public function getHastaAttribute( $value ) {
         return (new Carbon($value))->format('H:i');
     }
+
+    public function getDesdeunixAttribute( $value ) {
+        return strtotime($this->attributes['desde']); 
+    }
+
     public function usuario()
     {
         return $this->belongsTo('App\Usuario', 'idusuario', 'id');

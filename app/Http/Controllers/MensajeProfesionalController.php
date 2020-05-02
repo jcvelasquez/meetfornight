@@ -23,8 +23,19 @@ class MensajeProfesionalController extends Controller
     {
 
         $idprofesional = Auth::user()->id;
+        /*
+        $mensajes = MensajeProfesional::where('idprofesional', $idprofesional)
+                                        ->join('usuarios', 'usuarios.id', '=', 'mensaje_profesional.idusuario')
+                                        ->select('mensaje_profesional.id', 'mensaje_profesional.idprofesional','mensaje_profesional.idusuario','usuarios.nombre', 'usuarios.email','usuarios.celular','mensaje_profesional.mensaje', 'mensaje_profesional.es_leido', 'mensaje_profesional.created_at')->where('mensaje_profesional.parent_id','=', NULL)->get();*/
 
-        $mensajes = MensajeProfesional::where('idprofesional', $idprofesional)->join('usuarios', 'usuarios.id', '=', 'mensaje_profesional.idusuario')->select('mensaje_profesional.id','mensaje_profesional.idprofesional','mensaje_profesional.idusuario','usuarios.nombre', 'usuarios.email','usuarios.celular','mensaje_profesional.mensaje','mensaje_profesional.created_at')->where('mensaje_profesional.parent_id','=', NULL)->get();
+
+        $mensajes = DB::table('mensaje_profesional')->join('usuarios', 'mensaje_profesional.idusuario', '=', 'usuarios.id')
+                                                    ->join('planes_profesional', 'planes_profesional.idprofesional', '=', 'usuarios.id')
+                                                    ->join('planes', 'planes.id', '=', 'planes_profesional.idplan')
+                                                    ->where('mensaje_profesional.idprofesional', $idprofesional )
+                                                    ->select('mensaje_profesional.id', 'mensaje_profesional.idprofesional', DB::raw("CONCAT(planes.tipo_usuario, ' ', planes.nombre_plan) as nombre_plan"), 'mensaje_profesional.idusuario','usuarios.nombre', 'usuarios.email','usuarios.celular','mensaje_profesional.mensaje', 'mensaje_profesional.es_leido', 'mensaje_profesional.created_at', DB::raw(" '' as responder"), DB::raw(" 0 as esActivo") )
+                                                    ->where('mensaje_profesional.parent_id','=', NULL)
+                                                    ->get();
 
         foreach ($mensajes as $mensaje) {
 

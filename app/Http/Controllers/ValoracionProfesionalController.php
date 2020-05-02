@@ -2,83 +2,38 @@
 
 namespace App\Http\Controllers;
 
+use App\ReservasProfesional;
+use App\ValoracionProfesional;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ValoracionProfesionalController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+
+    public function mostrar()
     {
         //
+        return view('forms-perfil-profesional.valoracion-profesional');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function listar(Request $request)
     {
         //
+        
+        $valoraciones = DB::table('valoracion_profesional as valo')->join('criterios_valoracion as cri', 'valo.idcriterio', '=', 'cri.id')
+                                ->select('cri.nombre_criterio', DB::raw(' ROUND( AVG(valo.puntuacion), 1) as puntuacion, CAST(ROUND( AVG(valo.puntuacion), 0) AS UNSIGNED) as puntuacion_int ') )
+                                ->where('idprofesional', Auth::user()->id )
+                                ->groupBy('valo.idcriterio')->get();
+
+        $reservas = ReservasProfesional::where('idprofesional', Auth::user()->id )->count();
+
+        $registradas =  DB::table('valoracion_profesional')->where('idprofesional', Auth::user()->id)->select('idreserva')->groupBy('idreserva')->get();
+
+
+        return ['valoraciones' => $valoraciones, 'reservas_registradas' => $reservas, 'valoraciones_registradas' => $registradas->count() ];
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

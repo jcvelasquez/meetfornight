@@ -28,7 +28,13 @@ class DatabaseSeeder extends Seeder
         $this->call(FotoProfesionalSeeder::class);  
         $this->call(FrecuenciaBoosterSeeder::class);    
         $this->call(IdiomasSeeder::class);    
-        $this->call(PlanesSeeder::class);        
+        $this->call(PlanesSeeder::class);     
+        $this->call(CriteriosValoracionSeeder::class);     
+        $this->call(ValoracionProfesionalSeeder::class);     
+           
+
+        
+     
         
     }
 }

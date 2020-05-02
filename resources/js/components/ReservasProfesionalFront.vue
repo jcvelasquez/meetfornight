@@ -269,7 +269,7 @@
 
                   let me = this;
 
-                  axios.get('/perfil/tarifas/' + me.apodoData ).then(function (response) {
+                  axios.get('perfil/tarifas/' + me.apodoData ).then(function (response) {
 
                       var respuesta= response.data;
                       me.arTarifas = respuesta.tarifas;
@@ -285,7 +285,7 @@
                 me.arHorariosGenerados = [];
                 me.horarioSeleccionado = [];
 
-                axios.post('/perfil/horarios/' + me.apodoData, {
+                axios.post('perfil/horarios/' + me.apodoData, {
                     'apodo': me.apodoData,
                     'tiempo': me.tiempo,
                     'fechaselec' : fecha

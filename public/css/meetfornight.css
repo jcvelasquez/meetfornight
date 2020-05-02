@@ -10450,3 +10450,13 @@ ul.lista-opciones {
 }
 
 .margin-left-contacto { margin-left: 20px; }
+
+.vc-container { width: 100% !important; }
+
+.vc-weekday { background: #5b376f; color:#fff !important; }
+
+.reserva-item { background: #f1f1f1; border-radius: 15px; padding: 30px;; }
+
+.reserva-item ul li { list-style: none; margin-bottom: 10px; }
+.reserva-item ul li i { color: #5b376f; margin-right: 10px;  }
+.reserva-item ul li strong { color: #5b376f; margin-right: 10px;  }

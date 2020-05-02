@@ -134,23 +134,23 @@
       </div>
     </div>
 
-    <div class="bloques-de-perfil">
+<!--     <div class="bloques-de-perfil">
       <a href="/creditos-profesional/" class="btn btn-primary btn-espacio-fuc btn-tarjeta-credito">
         <i class="icon-credit-cards esp-icono-bio"></i>
         <span>COMPRAR CRÉDITOS</span>
       </a>
-    </div>
+    </div> -->
 
-    <p>El uso de este servicio incrementa las posibilidades de éxito de tu anuncio pero no lo garantiza. Si quiere tener éxito la oferta debe ser competitiva.</p>
-    <p>Para evitar gastar tus créditos en horas en las que no hay tantos usuarios conectados a la página, te aconsejamos no usar tus boosters entre las 00:00 y las 09:00 am.</p>
-    <p>Si los anuncios son eliminados el servicio de booster se detiene automáticamente. También puede ser detenido manualmente. Y los créditos en la cuenta no utilizados se reembolsarían.</p>
+    <p>El uso de este servicio incrementa las posibilidades de éxito de tu anuncio pero no lo garantiza. Si quiere tener éxito la oferta debe ser competitiva.  Para evitar gastar tus créditos en horas en las que no hay tantos usuarios conectados a la página, te aconsejamos no usar tus boosters entre las 00:00 y las 09:00 am.</p><p> Si los anuncios son eliminados el servicio de booster se detiene automáticamente. También puede ser detenido manualmente. Y los créditos en la cuenta no utilizados se reembolsarían.</p>
 
     <div class="row">
       <div class="col-md-12">
-        <div class="historico espacio-campos">Histórico de los booster</div>
         <div class="table-responsive">
           <table class="table">
             <thead class="cabecera-fake">
+              <tr>
+                <th scope="col" colspan="4" style="text-align:center;text-transform:uppercase; background:#5b376f;">Histórico de los booster</th>
+              </tr>
               <tr>
                 <th scope="col">Evento</th>
                 <th scope="col"># Cantidad</th>
@@ -160,12 +160,26 @@
             </thead>
             <tbody class="resultado-fake">
 
-              <tr v-for="cobrado in arCobrados" :key="cobrado.id">
-                <td>Booster cobrado</td>
-                <td>{{cobrado.cantidad_boosters}} booster(s)</td>
-                <td>{{cobrado.fecha}}</td>
-                <td>{{cobrado.hora}}</td>
-              </tr>
+              <template v-if="arCobrados.length > 0">
+
+                  <tr v-for="cobrado in arCobrados" :key="cobrado.id">
+                    <td>Booster cobrado</td>
+                    <td>{{cobrado.cantidad_boosters}} booster(s)</td>
+                    <td>{{cobrado.fecha}}</td>
+                    <td>{{cobrado.hora}}</td>
+                  </tr>
+
+              </template>
+
+              <template v-else>
+
+                  <tr>
+                    <td colspan="4" style="text-align:center;">No existen uso de boosters registrados aún.</td>
+                  </tr>
+
+              </template>
+
+              
             
             </tbody>
           </table>

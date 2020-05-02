@@ -18,115 +18,30 @@
         <div class="estadistica-datos">
           <i class="icon-star tam-icon-grande"></i>
           <div class="info-estadistica">
-            <span class="inf-estadistica-num">500</span>
-            <span class="inf-estadistica">
-              RESERVAS
-              <br />REALIZADOS
-            </span>
+            <span class="inf-estadistica-num">{{reservas_registradas}}</span>
+            <span class="inf-estadistica">RESERVA(S)<br />REALIZADA(S)</span>
           </div>
           <div class="info-estadistica">
-            <span class="inf-estadistica-num">300</span>
-            <span class="inf-estadistica">
-              SERVICIOS
-              <br />VALORADOS
-            </span>
+            <span class="inf-estadistica-num">{{valoraciones_registradas}}</span>
+            <span class="inf-estadistica">SERVICIO(S)<br />VALORADO(S)</span>
           </div>
         </div>
       </div>
     </div>
 
     <div class="bloques-de-perfil">
-      <div class="col-lg-12 casilla-valoracion">
-        <span>AMABILIDAD</span>
-        <div class="puntaje-estrella">
-          <i class="icon-star precio-morado"></i>
-          <i class="icon-star precio-morado"></i>
-          <i class="icon-star precio-morado"></i>
-          <i class="icon-star precio-morado"></i>
-          <i class="icon-star precio-morado"></i>
-          <span>5 Ptos.</span>
-        </div>
-      </div>
-      <div class="col-lg-12 casilla-valoracion">
-        <span>SENSUALIDAD</span>
-        <div class="puntaje-estrella">
-          <i class="icon-star precio-morado"></i>
-          <i class="icon-star precio-morado"></i>
-          <i class="icon-star precio-morado"></i>
-          <i class="icon-star precio-morado"></i>
-          <i class="icon-star precio-plomo"></i>
-          <span>4 Ptos.</span>
-        </div>
-      </div>
-      <div class="col-lg-12 casilla-valoracion">
-        <span>CONVERSACIÓN</span>
-        <div class="puntaje-estrella">
-          <i class="icon-star precio-morado"></i>
-          <i class="icon-star precio-morado"></i>
-          <i class="icon-star precio-morado"></i>
-          <i class="icon-star precio-plomo"></i>
-          <i class="icon-star precio-plomo"></i>
-          <span>3 Ptos.</span>
-        </div>
-      </div>
-      <div class="col-lg-12 casilla-valoracion">
-        <span>DIVERSIÓN</span>
-        <div class="puntaje-estrella">
-          <i class="icon-star precio-morado"></i>
-          <i class="icon-star precio-morado"></i>
-          <i class="icon-star precio-morado"></i>
-          <i class="icon-star precio-morado"></i>
-          <i class="icon-star precio-plomo"></i>
-          <span>4 Ptos.</span>
-        </div>
-      </div>
-      <div class="col-lg-12 casilla-valoracion">
-        <span>CORRESPONDE A LA(S) FOTO(S)</span>
-        <div class="puntaje-estrella">
-          <i class="icon-star precio-morado"></i>
-          <i class="icon-star precio-morado"></i>
-          <i class="icon-star precio-plomo"></i>
-          <i class="icon-star precio-plomo"></i>
-          <i class="icon-star precio-plomo"></i>
-          <span>2 Ptos.</span>
-        </div>
-      </div>
-      <div class="col-lg-12 casilla-valoracion">
-        <span>LIMPIEZA</span>
-        <div class="puntaje-estrella">
-          <i class="icon-star precio-morado"></i>
-          <i class="icon-star precio-morado"></i>
-          <i class="icon-star precio-plomo"></i>
-          <i class="icon-star precio-plomo"></i>
-          <i class="icon-star precio-plomo"></i>
-          <span>2 Ptos.</span>
-        </div>
-      </div>
 
-      <div class="col-lg-12 casilla-valoracion">
-        <span>BELLEZA</span>
-        <div class="puntaje-estrella">
-          <i class="icon-star precio-morado"></i>
-          <i class="icon-star precio-morado"></i>
-          <i class="icon-star precio-plomo"></i>
-          <i class="icon-star precio-plomo"></i>
-          <i class="icon-star precio-plomo"></i>
-          <span>2 Ptos.</span>
-        </div>
-      </div>
+      
 
-      <div class="col-lg-12 casilla-valoracion">
-        <span>PERFORMANCE</span>
-        <div class="puntaje-estrella">
-          <i class="icon-star precio-morado"></i>
-          <i class="icon-star precio-morado"></i>
-          <i class="icon-star precio-plomo"></i>
-          <i class="icon-star precio-plomo"></i>
-          <i class="icon-star precio-plomo"></i>
-          <span>2 Ptos.</span>
+        <div class="col-lg-12 casilla-valoracion" v-for="valoracion in arValoraciones" :key="valoracion.nombre_criterio">
+          <span v-text="valoracion.nombre_criterio"></span>
+          <div class="puntaje-estrella">
+            <span v-html="calcularEstrellas(valoracion.puntuacion_int)"></span>
+            <span>{{valoracion.puntuacion}} Ptos.</span>
+          </div>
         </div>
-      </div>
 
+      
 
     </div>
 <!-- 
@@ -161,10 +76,53 @@
   </form>
 </template>
 
+
 <script>
-export default {
-  mounted() {
-    console.log("Component mounted.");
-  }
-};
+    export default {
+        mounted() {
+
+            this.listarValoraciones();
+
+        },
+        data(){
+            return {
+                errorPerfil : 0,
+                erroresPerfil: [],
+                arValoraciones : [],
+                reservas_registradas : 0,
+                valoraciones_registradas : 0
+            }
+        },
+         methods:{
+           
+            listarValoraciones(){
+
+                  let me = this;
+
+                  axios.get('valoracion-profesional/listar').then(function (response) {
+
+                      var respuesta= response.data;
+                      me.arValoraciones = respuesta.valoraciones;
+                      me.valoraciones_registradas = respuesta.valoraciones_registradas;
+                      me.reservas_registradas = respuesta.reservas_registradas;
+                      
+
+                  }).catch(function (error) {  console.log(error);     });
+                
+            },
+            calcularEstrellas(total) {
+
+              let estrellas = "";
+              var restantes = 0;
+
+              for(var i=0; i< total; i++){ estrellas += '<i class="icon-star precio-morado"></i>'; }
+              for(var a=0; a < 5 - total; a++){ estrellas += '<i class="icon-star precio-plomo"></i>'; }
+              
+              return estrellas;
+
+         }
+
+         }
+
+    }
 </script>

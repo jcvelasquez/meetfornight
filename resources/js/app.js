@@ -5,56 +5,24 @@
  */
 
 
-
+require('sticky-sidebar');
 require('./bootstrap');
+
 window.Dropzone = require('./dropzone');
 window.Swal = require('sweetalert2');
 window.Vue = require('vue');
 
-require('sticky-sidebar');
-
-
-/*import {Calendar} from '@fullcalendar/core';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import timeGridPlugin from '@fullcalendar/timegrid';
-import listPlugin from '@fullcalendar/list';*/
 
 import PrettyCheckbox from 'pretty-checkbox-vue';
 import PrettyRadio from 'pretty-checkbox-vue/radio';
 import VCalendar from 'v-calendar';
 import Vuelidate from 'vuelidate';
-//import DatePicker from 'v-calendar/lib/components/date-picker.umd'
-
-//
-// Use v-calendar & v-date-picker components
-/* Vue.use(VCalendar, { componentPrefix: 'vc' }); */
-
-/*
-Vue.use(VCalendar, {
-    componentPrefix: 'vc',
-    locales: {
-      'es-ES': {
-        firstDayOfWeek: 1,
-        masks: {
-          L: 'DD/MM/YYYY',
-          input : ["DD/MM/YYYY"],
-          data: ["DD/MM/YYYY"]
-          // ...optional `title`, `weekdays`, `navMonths`, etc
-        }
-      }
-    }
-  });
-*/
 
 
-
+Vue.use(VCalendar, { componentPrefix: 'vc' }); 
 Vue.use(Vuelidate);
-
 Vue.use(PrettyCheckbox);
 Vue.use(PrettyRadio);
-
-//Vue.use(VueRangeSlider);
-
 
 Vue.component('perfil-usuario', require('./components/PerfilUsuario.vue').default);
 Vue.component('planes-profesional', require('./components/PlanesProfesional.vue').default);

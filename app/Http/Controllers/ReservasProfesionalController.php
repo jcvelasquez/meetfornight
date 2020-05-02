@@ -4,10 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use App\ReservasProfesional;
 use App\Usuario;
-use DateTime;
 
 class ReservasProfesionalController extends Controller
 {
@@ -15,8 +13,7 @@ class ReservasProfesionalController extends Controller
     
     public function mostrar()
     {
-        return view('forms-perfil-profesional.reservas-profesional');
-        
+        return view('forms-perfil-profesional.reservas-profesional'); 
     }
 
     public function listar(Request $request)
