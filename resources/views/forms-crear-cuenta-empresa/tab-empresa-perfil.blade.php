@@ -9,8 +9,11 @@
         <div class="col-lg-12 col-sm-12">
           <input type="text" class="form-control espacio-campos" name="nombre" id="nombre" placeholder="Nombre *">
         </div>
-        <div class="col-lg-12 col-sm-12">
+        <div class="col-lg-6 col-sm-12">
           <input type="text" class="form-control espacio-campos" name="empresa" id="empresa" placeholder="Empresa *">
+        </div>
+        <div class="col-lg-6 col-sm-12">
+          <input type="text" class="form-control espacio-campos" name="celular" id="celular" placeholder="Celular *">
         </div>
         <div class="col-lg-6 col-sm-12">
           <input type="email" class="form-control espacio-campos" name="email" id="email" placeholder="Email *">
@@ -26,35 +29,31 @@
         <div class="col-lg-6 col-sm-12">
           <input type="password" class="form-control espacio-campos" id="confirmar_clave" name="confirmar_clave" placeholder="Verificar Contraseña *">
         </div>
-
-        <div class="espaciado-formulario">
-          <h5 class="formulario-titulos">LOCALIZACION:</h5>
-        </div>
-
-        <div class="form-row">
-          <div class="col-lg-6 col-sm-12">
-            <select type="text" class="form-control espacio-campos" name="idcountry" id="idcountry">
-              <option value="">Seleccione una nacionalidad</option>
-              @foreach($countries as $country)
-              <option value="{{$country->id}}">{{$country->name}}</option>
-              @endforeach
-            </select>
-          </div>
-          <div class="col-lg-6 col-sm-12">
-            <select type="text" class="form-control espacio-campos" name="idstate" id="idstate">
-              <option value="">Seleccione un departamento</option>
-            </select>
-          </div>
-          <div class="col-lg-6 col-sm-12">
-            <select type="text" class="form-control espacio-campos" name="idcity" id="idcity">
-              <option value="">Seleccione un distrito</option>
-            </select>
-          </div>
-        </div>
-        
-        
-       
       </div>
+      <div class="espaciado-formulario">
+        <h5 class="formulario-titulos">LOCALIZACION:</h5>
+      </div>
+      <div class="form-row">
+        <div class="col-lg-6 col-sm-12">
+          <select type="text" class="form-control espacio-campos" name="idcountry" id="idcountry">
+            <option value="">Seleccione una nacionalidad</option>
+            @foreach($countries as $country)
+            <option value="{{$country->id}}">{{$country->name}}</option>
+            @endforeach
+          </select>
+        </div>
+        <div class="col-lg-6 col-sm-12">
+          <select type="text" class="form-control espacio-campos" name="idstate" id="idstate">
+            <option value="">Seleccione un departamento</option>
+          </select>
+        </div>
+        <div class="col-lg-6 col-sm-12">
+          <select type="text" class="form-control espacio-campos" name="idcity" id="idcity">
+            <option value="">Seleccione un distrito</option>
+          </select>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>

@@ -36,6 +36,14 @@ class UsuarioController extends Controller
 
     }
 
+    public function mostrarPerfilEmpresaLogueado(Request $request){
+
+        return view('forms-perfil-empresa.perfil-empresa');
+
+    }
+
+    
+
 
     public function editarDataPerfilProfesional(Request $request){
 

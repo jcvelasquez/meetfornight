@@ -6,7 +6,7 @@
 
   <body class="flotando">
 
-
+<!-- 
       <div class="msj-flotando">
 
         <div id="consultor">
@@ -32,7 +32,7 @@
           </form>
         </div>
 
-      </div>
+      </div> -->
 
 
         @if(Auth::check())
@@ -59,14 +59,14 @@
                 </div>
                 <div class="usuario-nombre">
                 <h2>¡Hola  {{ Auth::user()->apodo }} !  </h2>
-                <span class="identificador">ID: 4789020</span>
+                <span class="identificador" style="text-transform: uppercase;">ID: {{ Auth::user()->apodo }} </span>
                 </div>
               </div>
             </div>
 
         @if(Auth::check())
 
-            @if (Auth::user()->idrol == 4 || Auth::user()->idrol == 3)
+            @if (Auth::user()->idrol == 4 || Auth::user()->idrol == 3 || Auth::user()->idrol == 2)
 
                 <div class="row cuerpo-perfil">
                   <div class="col-lg-3 col-sm-12">
@@ -75,6 +75,8 @@
                             @include('menus.menu-lateral-profesional')
                         @elseif (Auth::user()->idrol == 3)
                             @include('menus.menu-lateral-usuario')
+                        @elseif (Auth::user()->idrol == 2)
+                            @include('menus.menu-lateral-empresa')    
                         @endif
                       
                   </div>

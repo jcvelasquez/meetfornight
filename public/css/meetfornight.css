@@ -10460,3 +10460,49 @@ ul.lista-opciones {
 .reserva-item ul li { list-style: none; margin-bottom: 10px; }
 .reserva-item ul li i { color: #5b376f; margin-right: 10px;  }
 .reserva-item ul li strong { color: #5b376f; margin-right: 10px;  }
+
+
+.titulo-cargar-banner {
+    color: #5b376f;
+    font-size: 1.5em;
+    font-weight: bold;
+    display: block;
+    position: absolute;
+    top:10px;
+    left: 20px;
+}
+
+.size-banner {
+    color: #5b376f;
+    font-size: 1.5em;
+    font-weight: bold;
+    display: block;
+    position: absolute;
+    top:10px;
+    right: 20px;
+}
+
+
+#dropzone_subir_banner { border:2px solid #5b376f; }
+
+.cargar-imagenes.banner {
+    padding: 5em 0 3em 0;
+}
+
+#dropzone_subir_banner .haz-click:after { content:''; width: 100%; height: 5px; border-bottom: dashed 2px #ccc; display: block; padding-top:50px; }
+
+.restante-banner {
+    color: #807e7e;
+    font-size: 1em;
+    display: block;
+    text-align: center;
+    padding-top:30px;
+}
+
+#btn_buscar_banner:disabled { opacity: 1; background: #ccc; border-color:#ccc 1px solid ;}
+
+.cargar-imagenes #btn_buscar_banner:hover { border:1px solid #ccc; }
+
+#foto_banner {
+    border: 5px solid #ededed;
+}

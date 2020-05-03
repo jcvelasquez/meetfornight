@@ -22,8 +22,8 @@ class CreateUsuariosTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->date('fecha_nacimiento');
-            $table->enum('sexo',['M','F','T']);
+            $table->date('fecha_nacimiento')->nullable();
+            $table->enum('sexo',['M','F','T'])->nullable();
             $table->integer('idcountry')->unsigned();
             $table->integer('idstate')->unsigned();
             $table->integer('idcity')->unsigned();

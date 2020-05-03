@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\BannerEmpresa;
 use Illuminate\Http\Request;
 use App\Planes;
 use App\Usuario;
@@ -21,7 +22,8 @@ use App\TarifaProfesional;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
 use App\Notifications\VerificarEmail;
-
+use Illuminate\Auth\Access\Response;
+use Illuminate\Support\Facades\Auth;
 
 class CrearCuentaController extends Controller
 {
@@ -34,6 +36,7 @@ class CrearCuentaController extends Controller
         $this->usuario_id = 0;
     }
 
+    
     public function checkEmail(Request $request)
     {
 
@@ -44,6 +47,7 @@ class CrearCuentaController extends Controller
         }
   
     }
+
 
     public function registrarUsuario(Request $request)
     {
@@ -69,6 +73,38 @@ class CrearCuentaController extends Controller
         
 
         return ['mensaje' => 'Cuenta creada correctamente, se envio un correo de confirmación. Pulse aceptar para iniciar sesión en nuestra plataforma'];
+
+    }
+
+    public function registrarEmpresa(Request $request)
+    {
+
+        $usuario = new Usuario();
+        $usuario->idrol = 2;
+        $usuario->nombre = $request->nombre;
+        $usuario->apodo = $request->empresa;
+        $usuario->email = $request->email;
+        $usuario->password = Hash::make( $request->password );
+        $usuario->fecha_nacimiento = NULL;
+        $usuario->sexo = NULL;
+        $usuario->idcountry = $request->idcountry;
+        $usuario->idstate = $request->idstate;
+        $usuario->idcity = $request->idcity;
+        $usuario->tipo_celular = "CELULAR";
+        $usuario->idioma = "ES";        
+        $usuario->celular = $request->celular;
+        $usuario->estado = 1;
+        $usuario->save();      
+
+        //$usuario->notify(new VerificarEmail($usuario));
+
+        if($usuario){ 
+            return ['status' => 'success', "idempresa" => $usuario->id ];
+        }else{
+            return ['status' => 'error' ];
+        }
+        
+        
 
     }
 
@@ -226,24 +262,7 @@ class CrearCuentaController extends Controller
                 }
             }
 
-
-            //$usuario->notify(new VerificarEmail($usuario));
-
-            /*   
-            if(){
-                foreach(){
-                    $foto = new FotoProfesional();
-                    $foto->idusuario = $usuario->id;
-                    $foto->opcion_tarifa = XXX;
-                    $foto->tiempo_tarifa = xxxxx;
-                    $foto->costo_tarifa = xxxxx;
-                    $foto->categoria_tarifa = xxxxx;
-                    $foto->save();
-                }
-            }
-            */
-    
-            return ['mensaje' => 'Cuenta creada correctamente, se envio un correo de confirmación. Pulse aceptar para iniciar sesión en nuestra plataforma', 'status' => 'success'];
+            return ['mensaje' => 'Cuenta creada correctamente, se envio un correo de confirmación. Pulse aceptar para iniciar sesión en nuestra plataforma', 'status' => 'success', 'newidempresa' => $this->usuario_id];
 
         }else{
 
