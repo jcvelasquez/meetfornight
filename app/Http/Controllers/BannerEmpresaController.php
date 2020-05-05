@@ -15,7 +15,22 @@ class BannerEmpresaController extends Controller
 
     public function __construct()
     {
-        $this->banner_empresa_path = public_path('banners-empresa');
+        $this->banner_empresa_path = public_path('banners_empresas');
+    }
+
+    public function mostrar()
+    {
+        return view('forms-perfil-empresa.banners-empresa');
+    }
+
+    public function listar()
+    {
+
+        $idempresa = Auth::user()->id;
+
+        $banners = BannerEmpresa::where('idempresa',$idempresa)->get();
+
+        return ["banners" => $banners];
     }
 
     public function subirBannerEmpresa(Request $request)

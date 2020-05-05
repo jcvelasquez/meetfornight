@@ -1,9 +1,3 @@
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-
 
 require('sticky-sidebar');
 require('./bootstrap');
@@ -12,12 +6,10 @@ window.Dropzone = require('./dropzone');
 window.Swal = require('sweetalert2');
 window.Vue = require('vue');
 
-
 import PrettyCheckbox from 'pretty-checkbox-vue';
 import PrettyRadio from 'pretty-checkbox-vue/radio';
 import VCalendar from 'v-calendar';
 import Vuelidate from 'vuelidate';
-
 
 Vue.use(VCalendar, { componentPrefix: 'vc' }); 
 Vue.use(Vuelidate);
@@ -25,13 +17,17 @@ Vue.use(PrettyCheckbox);
 Vue.use(PrettyRadio);
 
 Vue.component('perfil-usuario', require('./components/PerfilUsuario.vue').default);
-Vue.component('planes-profesional', require('./components/PlanesProfesional.vue').default);
+Vue.component('perfil-empresa', require('./components/PerfilEmpresa.vue').default);
 Vue.component('perfil-profesional', require('./components/PerfilProfesional.vue').default);
+
+Vue.component('planes-profesional', require('./components/PlanesProfesional.vue').default);
 Vue.component('servicios-profesional', require('./components/ServiciosProfesional.vue').default);
 Vue.component('contacto-profesional', require('./components/ContactoProfesional.vue').default);
 Vue.component('agenda-profesional', require('./components/AgendaProfesional.vue').default);
 Vue.component('tarifas-profesional', require('./components/TarifasProfesional.vue').default);
 Vue.component('fotos-profesional', require('./components/FotosProfesional.vue').default);
+Vue.component('banners-empresa', require('./components/BannersEmpresa.vue').default);
+
 Vue.component('creditos-profesional', require('./components/CreditosProfesional.vue').default);
 Vue.component('booster-profesional', require('./components/BoosterProfesional.vue').default);
 Vue.component('estadisticas-profesional', require('./components/EstadisticasProfesional.vue').default);
@@ -57,9 +53,6 @@ Vue.component('mensajes-administrador', require('./components/MensajesAdministra
 Vue.component('alertas-administrador', require('./components/AlertasAdministrador.vue').default);
 Vue.component('idiomas-administrador', require('./components/IdiomasAdministrador.vue').default);
 Vue.component('categorias-administrador', require('./components/CategoriasAdministrador.vue').default);
-
-
-
 
 Vue.prototype.$csrf_token = document.querySelector("meta[name='csrf-token']").getAttribute('content');
 Vue.prototype.$idprofesional = document.querySelector("meta[name='profesional-id']").getAttribute('content');

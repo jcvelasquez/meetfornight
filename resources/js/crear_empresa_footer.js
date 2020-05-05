@@ -127,11 +127,8 @@ $(document).ready(function(){
               .then(function (response) {
 
                   if(response.data.status == "success"){
-
                     $('#idempresa').val(response.data.idempresa);
-
                     DropEmpresa.processQueue();
-
                   }else{
                     Swal.fire("ERROR", "Hubo un error en el registro de la cuenta. Comuniquese con el area de soporte." , "error" );
                   }
@@ -145,7 +142,7 @@ $(document).ready(function(){
 
       
       var DropEmpresa = new Dropzone("#dropzone_subir_banner", { 
-        url: "banners-empresa/subir", 
+        url: "registrar-banner", 
         acceptedFiles: ".jpeg,.jpg,.png,.gif",
         clickable: "#dropzone_subir_banner button", 
         maxFiles: 1, 
@@ -174,8 +171,16 @@ $(document).ready(function(){
               $('.banner_size_info').hide();
             });
 
+            this.on("maxfilesexceeded", function(file) { 
+              this.removeFile(file);
+            });
+
             this.on("sending", function(file, xhr, formData) { 
               formData.append("idempresa", $("#idempresa").val());  
+            });
+
+            this.on("removedfile", function(file) { 
+                if(this.files.length < 1)  $('#btn_buscar_banner').attr('disabled',false);
             });
 
             this.on("removedfile", function(file) { 

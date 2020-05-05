@@ -17,10 +17,11 @@ class FotoProfesionalController extends Controller
     public function __construct()
     {
         $this->fotos_profesional_path = public_path('fotos-profesionales');
+        $this->middleware(['auth','verified']);
     }
 
     public function mostrar(){
-        return view('forms-perfil-profesional.fotos-videos-profesional');
+        return view('forms-perfil-profesional.fotos-profesional');
     }
 
     public function listar(Request $request)

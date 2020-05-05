@@ -172,10 +172,12 @@
                 </ul>
                 <div>
                     <div id="planes" class=""> 
-                        @include('forms-crear-cuenta-profesional.tab-profesional-planes')
+                        
+                        @include('forms-crear-cuenta-profesional.tab-profesional-fotos')
                     </div>
                     <div id="perfil" class="">
-                        @include('forms-crear-cuenta-profesional.tab-profesional-perfil')
+                        @include('forms-crear-cuenta-profesional.tab-profesional-activar')
+                        
                     </div>
                     <div id="servicios" class="">  
                         @include('forms-crear-cuenta-profesional.tab-profesional-servicios')
@@ -187,10 +189,10 @@
                         @include('forms-crear-cuenta-profesional.tab-profesional-tarifas') 
                     </div>
                     <div id="fotos" class="">  
-                        @include('forms-crear-cuenta-profesional.tab-profesional-fotos')
+                        @include('forms-crear-cuenta-profesional.tab-profesional-planes')
                     </div>
                     <div id="activar" class="">
-                        @include('forms-crear-cuenta-profesional.tab-profesional-activar')
+                        @include('forms-crear-cuenta-profesional.tab-profesional-perfil')
                     </div>
                 </div>
             </div>

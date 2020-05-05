@@ -4,6 +4,6 @@
 
 @section('content')
 
-<perfil-usuario></perfil-usuario>
+<perfil-empresa></perfil-empresa>
 
 @endsection

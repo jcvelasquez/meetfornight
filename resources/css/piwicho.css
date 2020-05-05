@@ -327,10 +327,19 @@ ul.lista-opciones {
     padding-top:30px;
 }
 
-#btn_buscar_banner:disabled { opacity: 1; background: #ccc; border-color:#ccc 1px solid ;}
+#btn_buscar_banner:disabled,
+#dropzone_subir_profesional button:disabled { opacity: 1; background: #ccc; border:#ccc 1px solid !important;}
 
-.cargar-imagenes #btn_buscar_banner:hover { border:1px solid #ccc; }
+.cargar-imagenes #btn_buscar_banner:hover,
+#dropzone_subir_profesional button:hover { border:1px solid #ccc !important; }
 
 #foto_banner {
     border: 5px solid #ededed;
 }
+
+.item-profesional-img-pequena img,
+.item-profesional-img-grande img { border-radius: 8px; }
+
+#thumbnail_list { overflow: hidden;}
+#thumbnail_list li { list-style:none; }
+#thumbnail_list li:nth-child(n+2) { float: left; width: 25%; margin-top: 5px; padding:5px; }

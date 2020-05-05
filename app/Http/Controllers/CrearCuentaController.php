@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\BannerEmpresa;
 use Illuminate\Http\Request;
 use App\Planes;
 use App\Usuario;
@@ -22,8 +21,6 @@ use App\TarifaProfesional;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
 use App\Notifications\VerificarEmail;
-use Illuminate\Auth\Access\Response;
-use Illuminate\Support\Facades\Auth;
 
 class CrearCuentaController extends Controller
 {
@@ -34,6 +31,45 @@ class CrearCuentaController extends Controller
     public function __construct()
     {
         $this->usuario_id = 0;
+    }
+
+
+    public function mostrarRegistroEmpresa(Request $request){
+
+
+        $planes = Planes::where('estado_plan','=',1)->where('tipo_usuario','=','PROFESIONAL')->get();    
+        $countries = Countries::where('sortname','=','ES')->orWhere('sortname','=','PE')->orWhere('sortname','=','PA')->get();   
+
+        return view('crear-cuenta-empresa',compact('planes','countries'));
+
+    }
+
+
+    public function mostrarRegistroUsuario(Request $request)
+    {
+
+        $planes = Planes::where('estado_plan','=',1)->where('tipo_usuario','=','USUARIO')->get();    
+
+        return view('crear-cuenta-usuario',compact('planes'));
+
+    }
+
+    public function mostrarRegistroProfesional(Request $request){
+
+        $planes = Planes::where('estado_plan','=',1)->where('tipo_usuario','=','PROFESIONAL')->get();    
+        $countries = Countries::where('sortname','=','ES')->orWhere('sortname','=','PE')->orWhere('sortname','=','PA')->get();   
+        $categorias = Categorias::where('estado_categoria', 1)->get();
+        $idiomas = Idiomas::where('estado_idioma', 1)->get();
+        $servicios = ServiciosProfesional::where('estado_servicio', 1)->where('es_admin', 1)->get();
+
+        return view('crear-cuenta-profesional',compact('planes','countries','categorias','idiomas','servicios'));
+
+    }
+
+    public function mostrarOpcionesRegistro(Request $request){
+
+        return view('crear-cuenta');
+
     }
 
     
@@ -96,7 +132,7 @@ class CrearCuentaController extends Controller
         $usuario->estado = 1;
         $usuario->save();      
 
-        //$usuario->notify(new VerificarEmail($usuario));
+        $usuario->notify(new VerificarEmail($usuario));
 
         if($usuario){ 
             return ['status' => 'success', "idempresa" => $usuario->id ];
@@ -262,7 +298,7 @@ class CrearCuentaController extends Controller
                 }
             }
 
-            return ['mensaje' => 'Cuenta creada correctamente, se envio un correo de confirmación. Pulse aceptar para iniciar sesión en nuestra plataforma', 'status' => 'success', 'newidempresa' => $this->usuario_id];
+            return ['mensaje' => 'Cuenta creada correctamente, se envio un correo de confirmación. Pulse aceptar para iniciar sesión en nuestra plataforma', 'status' => 'success', 'idprofesional' => $this->usuario_id];
 
         }else{
 
@@ -273,48 +309,7 @@ class CrearCuentaController extends Controller
 
     }
 
-    public function mostrarRegistroEmpresa(Request $request){
-
-
-        $planes = Planes::where('estado_plan','=',1)->where('tipo_usuario','=','PROFESIONAL')->get();    
-
-        $countries = Countries::where('sortname','=','ES')->orWhere('sortname','=','PE')->orWhere('sortname','=','PA')->get();   
-
-        return view('crear-cuenta-empresa',compact('planes','countries'));
-
-    }
-
-
-    public function mostrarRegistroUsuario(Request $request){
-
-
-        $planes = Planes::where('estado_plan','=',1)->where('tipo_usuario','=','USUARIO')->get();    
-
-        return view('crear-cuenta-usuario',compact('planes'));
-
-    }
-
-    public function mostrarRegistroProfesional(Request $request){
-
-        $planes = Planes::where('estado_plan','=',1)->where('tipo_usuario','=','PROFESIONAL')->get();    
-
-        $countries = Countries::where('sortname','=','ES')->orWhere('sortname','=','PE')->orWhere('sortname','=','PA')->get();   
-
-        $categorias = Categorias::where('estado_categoria', 1)->get();
-
-        $idiomas = Idiomas::where('estado_idioma', 1)->get();
-
-        $servicios = ServiciosProfesional::where('estado_servicio', 1)->where('es_admin', 1)->get();
-
-        return view('crear-cuenta-profesional',compact('planes','countries','categorias','idiomas','servicios'));
-
-    }
-
-    public function mostrarOpcionesRegistro(Request $request){
-
-        return view('crear-cuenta');
-
-    }
+    
 
     public function seleccionarStates(Request $request){
 
@@ -332,14 +327,6 @@ class CrearCuentaController extends Controller
 
     }
 
-    
-
-    
-
-    
-
-
-    
     
 
 }

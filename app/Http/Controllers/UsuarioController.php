@@ -42,9 +42,26 @@ class UsuarioController extends Controller
 
     }
 
+    public function editarDataUsuario(Request $request)
+    {
+        return Usuario::findOrFail($request->idusuario);
+    }
+
+
+    public function editarDataEmpresa(Request $request)
+    {
+
+        $idempresa = Auth::user()->id;
+
+        $usuario = Usuario::where('id', '=', $idempresa)->with('states')->with('cities')->first();
+
+        return ['usuario' => $usuario];     
+
+    }
+
+
+
     
-
-
     public function editarDataPerfilProfesional(Request $request){
 
         $idprofesional = Auth::user()->id;
@@ -83,6 +100,28 @@ class UsuarioController extends Controller
         $usuario->idiomas = $idiomas;
 
         return ['usuario' => $usuario];     
+
+    }
+
+    
+    public function actualizarDataEmpresa(Request $request)
+    {
+        $idempresa = Auth::user()->id;
+
+        //------------------------------
+        //ACTUALIZAR USUARIO
+        //------------------------------
+        $usuario = Usuario::find( $idempresa );
+        $usuario->nombre = $request->nombre;
+        $usuario->apodo = $request->apodo;
+        $usuario->celular = $request->celular;
+        //$usuario->password = Hash::make( $request->password );
+        $usuario->idcountry = $request->idcountry;
+        $usuario->idstate = $request->idstate;
+        $usuario->idcity = $request->idcity;
+        $usuario->save();
+
+        return ['mensaje' => 'Los datos fueron actualizados correctamente'];     
 
     }
 
@@ -201,10 +240,7 @@ class UsuarioController extends Controller
     }
 
 
-    public function editarDataUsuario(Request $request)
-    {
-        return Usuario::findOrFail($request->idusuario);
-    }
+    
 
 
     public function obtenerUsuarioLogueado()

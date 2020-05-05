@@ -4,30 +4,14 @@
     <div class="row" id="main-perfil">
       <div class="col-lg-4" id="sidebar">
         <div class="sidebar__inner">
+
           <!-- Content goes here -->
           <div class="espacio-reservas">
-            <div class="reservas-img-grande">
-              <img src="http://meetfornight.test:4516/fotos-profesionales/mockup hpc proyectos.jpg" class="img-responsive">
-              <div class="img-grande-logo">
-                <img src="http://meetfornight.test:4516/img/logo-blanco.png">
-              </div>
-            </div>
+
+            <ul id="thumbnail_list"></ul>
+
           </div>
 
-          <div class="reservas-img-pequenas espacio-reservas">
-            <div class="item-reservas-img-pequenas">
-              <img src="http://meetfornight.test:4516/img/galeria/galeria-1.png" class="img-responsive">
-            </div>
-            <div class="item-reservas-img-pequenas">
-              <img src="http://meetfornight.test:4516/img/galeria/galeria-1.png" class="img-responsive">
-            </div>
-            <div class="item-reservas-img-pequenas">
-              <img src="http://meetfornight.test:4516/img/galeria/galeria-1.png" class="img-responsive">
-            </div>
-            <div class="item-reservas-img-pequenas">
-              <img src="http://meetfornight.test:4516/img/galeria/galeria-1.png" class="img-responsive">
-            </div>
-          </div>
 
           <div class="espacio-reservas">
             <h2 class="subtitulo-reservas">PERFIL</h2>
@@ -41,27 +25,6 @@
                   <div class="reserva-info-morado">Orientación</div>
                   <div class="reserva-info-plomo" id="label_orientacion"> </div>
                 </li>
-                <!--  
-                <li>
-                  <div class="reserva-info-morado">Nacionalidad</div>
-                  <div class="reserva-info-plomo" id="nacionalidad_label">Peruana</div>
-                </li>
-                <li>
-                  <div class="reserva-info-morado">Ciudad</div>
-                  <div class="reserva-info-plomo" id="ciudad_label"></div>
-                </li>
-                <li>
-                  <div class="reserva-info-morado">Distrito</div>
-                  <div class="reserva-info-plomo" id="distrito_label"></div>
-                </li>
-                <li>
-                  <div class="reserva-info-morado">Idiomas</div> 
-                  <div class="reserva-info-plomo" id="idioma_label">Español</div>
-                </li>
-                <li>
-                  <div class="reserva-info-morado">Edad</div>
-                  <div class="reserva-info-plomo" id="edad_label"> </div>
-                </li>-->
                 <li>
                   <div class="reserva-info-morado">Estatura</div>
                   <div class="reserva-info-plomo" id="estatura_label"> </div>
@@ -398,6 +361,7 @@
         <div class="col-lg-2"></div>
         <div class="col-lg-8">
             <button type="submit" id="btn-enviar" class="btn btn-primary btn-busqueda-detallada" style="background-color:green;">CONFIRMAR REGISTRO</button>
+            <input type="hidden" id="idprofesional" name="idprofesional" value="">
         </div>
         <div class="col-lg-2"></div>
     </div>

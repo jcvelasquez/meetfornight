@@ -54,7 +54,7 @@ Route::group(['middleware'=>['guest']],function(){
         Route::get('crear-cuenta-usuario', 'CrearCuentaController@mostrarRegistroUsuario');      
         Route::get('crear-cuenta-empresa', 'CrearCuentaController@mostrarRegistroEmpresa');   
 
-        Route::post('banners-empresa/subir', 'BannerEmpresaController@subirBannerEmpresa');   
+        
 
         Route::get('faq-perfil-usuario', 'HomeController@mostrarFaqUsuario');   
         Route::get('faq-perfil-profesional', 'HomeController@mostrarFaqProfesional');   
@@ -66,6 +66,7 @@ Route::group(['middleware'=>['guest']],function(){
         Route::post('registrar-usuario', 'CrearCuentaController@registrarUsuario')->name('registrar-usuario');
         Route::post('registrar-profesional', 'CrearCuentaController@registrarProfesional')->name('registrar-profesional');
         Route::post('registrar-empresa', 'CrearCuentaController@registrarEmpresa')->name('registrar-empresa');
+        Route::post('registrar-banner', 'BannerEmpresaController@subirBannerEmpresa');   
 
         Route::post('seleccionar-states', 'CrearCuentaController@seleccionarStates');
         Route::post('seleccionar-cities', 'CrearCuentaController@seleccionarCities');
@@ -98,15 +99,18 @@ Route::group(['middleware'=>['auth','verified']],function(){
         
         //URLS PARA EL USUARIO
         Route::get('perfil-empresa', 'UsuarioController@mostrarPerfilEmpresaLogueado')->name('perfil-empresa');
-        Route::post('perfil-empresa/editar', 'UsuarioController@editarDataEmpresa');
+        Route::get('perfil-empresa/editar', 'UsuarioController@editarDataEmpresa');
         Route::put('perfil-empresa/actualizar', 'UsuarioController@actualizarDataEmpresa');
+
+        Route::get('banners-empresa', 'BannerEmpresaController@mostrar');
+        Route::get('banners-empresa/listar', 'BannerEmpresaController@listar');
         
         /*Route::put('seguridad-usuario', 'SeguridadUsuarioController@mostrar')->name('seguridad-usuario');
         Route::get('perfil/usuario/sesion', 'UsuarioController@obtenerUsuarioLogueado');
         Route::get('perfil/tarifas/{apodo}', 'PerfilController@tarifas' );
         Route::post('perfil/horarios/{apodo}', 'PerfilController@horarios' ); */
 
-});
+    });
 
 
     Route::group(['middleware'=>['admin']],function(){

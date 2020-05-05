@@ -432,7 +432,16 @@ $(document).ready(function(){
               })
               .then(function (response) {
 
-                  Swal.fire('CONFIRMACIÓN', response.data.mensaje , response.data.status );
+
+                if(response.data.status == "success"){
+
+                  $('#idprofesional').val(response.data.idprofesional);
+
+                  DropProfesional.processQueue();
+
+                }else{
+                  Swal.fire("ERROR", "Hubo un error en el registro de la cuenta. Comuniquese con el area de soporte." , "error" );
+                }
 
 
               })
@@ -871,50 +880,74 @@ $(document).ready(function(){
           });
 
 
-        var DropPerfil = new Dropzone("#dropzone_subir_perfil", { 
-                  url: "/fotos-profesional/subir", 
-                  acceptedFiles: ".jpeg,.jpg,.png,.gif",
-                  clickable: "#dropzone_subir_perfil button", 
-                  maxFiles: 1, 
-                  autoProcessQueue : false,
-                  addRemoveLinks:true,
-                  headers: {
-                    'X-CSRF-TOKEN': $("meta[name='csrf-token']").attr("content")
-                  },
-                  //data: {idusuario: me.$idprofesional },
-                  error: function(file, response){
-                      return false;
-                  },
-                  success: function (file, done) {
+        var DropProfesional = new Dropzone("#dropzone_subir_profesional", { 
+          url: "registrar-banner", 
+          acceptedFiles: ".jpeg,.jpg,.png,.gif",
+          clickable: "#dropzone_subir_profesional button", 
+          maxFiles: 5, 
+          autoProcessQueue : false,
+          addRemoveLinks:true,
+          headers: {
+            'X-CSRF-TOKEN': $("meta[name='csrf-token']").attr("content")
+          },
+          params: {
+              "idprofesional": $("#idprofesional").val()
+          },
+          error: function(file, response){
+              return false;
+          },
+          success: function (file, done) {
+  
+              Swal.fire('CONFIRMACIÓN', "Se registró la cuenta profesional, deberá confirmar el correo electrónico registrado para poder iniciar sesión." , 'success' ).then(function() {
+                window.location = "/iniciar-sesion";
+            });;
+            
+          },
+          init: function(){           
+  
+              this.on("maxfilesreached", function(file) { 
+                Swal.fire('AVISO', "Solo puede subir 5 fotos como máximo." , 'warning' );
+                $('#dropzone_subir_profesional button').attr('disabled',true);
+              });
+
+              this.on("maxfilesexceeded", function(file) { 
+                this.removeFile(file);
+              });
+
+              this.on("removedfile", function(file) { 
+                 if(this.files.length < 5)  $('#dropzone_subir_profesional button').attr('disabled',false);
+                 mostrarMiniaturas();
+              });
+
+              this.on("reset", function(file) { 
+                $('#dropzone_subir_profesional button').attr('disabled',false);
+              });
+  
+              this.on("thumbnail", function(file, dataUrl){ 
+                
+                if(file.status == "queued")
+                {
+                  mostrarMiniaturas();
+                } 
+     
+              });             
+  
+          }
+          
+      });   
+
+      function mostrarMiniaturas(){
+
+        $("#thumbnail_list").empty();
+
+        for(var i = 0; i < DropProfesional.getAcceptedFiles().length; i++)
+        {
+         $("#thumbnail_list").append('<li><img src="' + DropProfesional.getAcceptedFiles()[i].dataURL + '" class="img-responsive"></li>');
+        }
+
+      }
 
 
-                    
-                  }
-                  
-                  });
-
-
-        var DropAdicionales = new Dropzone("#dropzone_subir_adicionales", { 
-                  url: "/fotos-profesional/subir", 
-                  acceptedFiles: ".jpeg,.jpg,.png,.gif",
-                  clickable: "#dropzone_subir_adicionales button", 
-                  maxFiles: 4, 
-                  autoProcessQueue : false,
-                  addRemoveLinks:true,
-                  headers: {
-                    'X-CSRF-TOKEN': $("meta[name='csrf-token']").attr("content")
-                  },
-                  //data: {idusuario: me.$idprofesional },
-                  error: function(file, response){
-                      return false;
-                  },
-                  success: function (file, done) {
-
-
-                    
-                  }
-                  
-                  });
 
       //MOSTRAR LOS VALORES EN LA PANTALLA DE ACTIVAR
       $("input[name='nombre']").on("blur", function() {
