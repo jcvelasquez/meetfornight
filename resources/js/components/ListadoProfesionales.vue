@@ -223,7 +223,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6" v-for="profesional in arUsuarios" :key="profesional.id">
                     <div class="item-chica">
                         <div class="triangulo">
-                            <a href="#"><i class="icon-heart"></i></a>
+                            <a href="#" @click.prevent="agregarFavoritos(profesional)" ><i class="icon-heart"></i></a>
                         </div>
                         <div class="texto-chica">
                             <h3 v-text="profesional.apodo"></h3>
@@ -239,7 +239,7 @@
                             <a :href="'perfil/' + profesional.apodo">VER PERFIL</a>
                             
                         </div>
-                        <img :src="'fotos-profesionales/' + profesional.url_foto" class="img-responsive" />
+                        <img :src="'fotos_profesionales/' + profesional.url_foto" class="img-responsive" />
                     </div>
                 </div>
             </div>
@@ -384,6 +384,19 @@
                 this.$refs.slider_peso.refresh();
                 this.$refs.slider_estatura.refresh();
                 
+            },
+            agregarFavoritos(profesional){
+
+                let me = this;
+                
+                axios.post('favoritos-usuario/agregar', { 'apodo' : profesional.apodo }).then(function (response) {
+                   Swal.fire('CONFIRMACION', response.data.mensaje ,'success');
+                }).catch(function (error) {  
+                    if (error.response.status === 401) {
+                         Swal.fire('ERROR', 'Debes iniciar sesión para poder agregar a favoritos','error');
+                    }
+                });
+
             },
             cambiarPagina(pagina){
 

@@ -60,8 +60,8 @@ class ContactoProfesionalController extends Controller
         if(!empty($disponibilidad)){
             foreach ($disponibilidad as $dispo) {
                 $dispro = DisponibilidadProfesional::where('idusuario', $idprofesional)->where('dia', $dispo->dia)->first();
-                $dispro->desde = Carbon::createFromFormat('G', $dispo->desde )->format('H:i:s');
-                $dispro->hasta = Carbon::createFromFormat('G', $dispo->hasta )->format('H:i:s');
+                $dispro->desde = Carbon::createFromFormat('H:i', $dispo->desde )->format('H:i:s');
+                $dispro->hasta = Carbon::createFromFormat('H:i', $dispo->hasta )->format('H:i:s');
                 $dispro->save();            
             }
         }

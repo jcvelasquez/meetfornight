@@ -58,7 +58,7 @@
     export default {
         mounted() {
 
-            this.mostrarPerfil();
+            //this.mostrarPerfil();
 
         },
         data(){

@@ -17,6 +17,7 @@ use App\ServiciosProfesional;
 use App\CategoriasProfesional;
 use App\ServiciosXProfesional;
 use App\DisponibilidadProfesional;
+use App\FotoProfesional;
 use App\TarifaProfesional;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
@@ -27,10 +28,13 @@ class CrearCuentaController extends Controller
     //
 
     private $usuario_id;
+    private $fotos_profesional_path;
 
     public function __construct()
     {
         $this->usuario_id = 0;
+        
+        $this->fotos_profesional_path = public_path('fotos_profesionales');
     }
 
 
@@ -49,8 +53,9 @@ class CrearCuentaController extends Controller
     {
 
         $planes = Planes::where('estado_plan','=',1)->where('tipo_usuario','=','USUARIO')->get();    
+        $countries = Countries::where('sortname','=','ES')->orWhere('sortname','=','PE')->orWhere('sortname','=','PA')->get();   
 
-        return view('crear-cuenta-usuario',compact('planes'));
+        return view('crear-cuenta-usuario',compact('planes','countries'));
 
     }
 
@@ -94,22 +99,38 @@ class CrearCuentaController extends Controller
         $usuario->apodo = $request->apodo;
         $usuario->email = $request->email;
         $usuario->password = Hash::make( $request->password );
-        $usuario->fecha_nacimiento = $request->fecha_nacimiento;
+        $usuario->fecha_nacimiento = Carbon::createFromFormat('d/m/Y', $request->fecha_nacimiento );
         $usuario->sexo = $request->sexo;
         $usuario->idcountry = $request->idcountry;
         $usuario->idstate = $request->idstate;
         $usuario->idcity = $request->idcity;
         $usuario->tipo_celular = "CELULAR";
-        $usuario->idioma = $request->idioma;        
+        $usuario->idioma = "ES";
         $usuario->celular = $request->celular;
         $usuario->estado = 1;
         $usuario->save();      
 
-        $usuario->notify(new VerificarEmail($usuario));
+        //$usuario->notify(new VerificarEmail($usuario));
         
 
-        return ['mensaje' => 'Cuenta creada correctamente, se envio un correo de confirmación. Pulse aceptar para iniciar sesión en nuestra plataforma'];
+        if($usuario){ 
 
+            //------------------------------
+            //CREAR PLANES
+            //------------------------------
+            $plan = new PlanesProfesional();
+            $plan->idprofesional = $usuario->id;
+            $plan->idplan = $request->idplan;
+            $plan->meses_suscripcion = 3;
+            $plan->inicio_suscripcion = Carbon::now()->format('Y-m-d H:i:s');
+            $plan->estado_suscripcion = 1;
+            $plan->save();
+
+
+            return ['status' => 'success', "idusuario" => $usuario->id ];
+        }else{
+            return ['status' => 'error' ];
+        }
     }
 
     public function registrarEmpresa(Request $request)
@@ -135,6 +156,19 @@ class CrearCuentaController extends Controller
         $usuario->notify(new VerificarEmail($usuario));
 
         if($usuario){ 
+
+            //------------------------------
+            //CREAR PLANES
+            //------------------------------
+            $plan = new PlanesProfesional();
+            $plan->idprofesional = $usuario->id;
+            $plan->idplan = $request->idplan;
+            $plan->meses_suscripcion = 3;
+            $plan->inicio_suscripcion = Carbon::now()->format('Y-m-d H:i:s');
+            $plan->estado_suscripcion = 1;
+            $plan->save();
+
+
             return ['status' => 'success', "idempresa" => $usuario->id ];
         }else{
             return ['status' => 'error' ];
@@ -189,6 +223,7 @@ class CrearCuentaController extends Controller
             $usuarioExtra->peso = $request->peso;
             $usuarioExtra->orientacion = $request->orientacion;
             $usuarioExtra->tipo_contacto = $request->tipo_contacto;
+            $usuarioExtra->tipo_moneda = $request->tipo_moneda;
             $usuarioExtra->tatuaje = $request->tatuaje;
             $usuarioExtra->piercing = $request->piercing;
             $usuarioExtra->fumador = $request->fumador;
@@ -201,7 +236,7 @@ class CrearCuentaController extends Controller
             //------------------------------
             $plan = new PlanesProfesional();
             $plan->idprofesional = $this->usuario_id;
-            $plan->idplan = $request->radioPlan;
+            $plan->idplan = $request->idplan;
             $plan->meses_suscripcion = 3;
             $plan->inicio_suscripcion = Carbon::now()->format('Y-m-d H:i:s');
             $plan->estado_suscripcion = 1;
@@ -306,6 +341,63 @@ class CrearCuentaController extends Controller
 
         }
         
+
+    }
+
+    
+
+    //FUNCION PARA SUBIR LAS FOTOS DEL PROFESIONAL DESDE EL FORMULARIO DE CREAR CUENTA
+    public function subirFotoUsuarioRegistro(Request $request)
+    {
+
+        $idusuario = $request->idusuario;
+
+        $image = $request->file('file');
+        $random = sha1(date('YmdHis') . uniqid());
+        $save_name = $random . '.' . $image->getClientOriginalExtension();
+            
+        if ( $image->move( $this->fotos_profesional_path ,$save_name) ) {
+
+            $foto = new FotoProfesional();
+            $foto->idusuario =  $idusuario;
+            $foto->url_foto = $save_name;
+            $foto->orden = 0;
+            $foto->save();
+            
+            return [ 'status' =>  'success'];
+
+        } else {     
+            return [ 'status' =>  'error'];
+        }
+
+    }
+
+
+    //FUNCION PARA SUBIR LAS FOTOS DEL PROFESIONAL DESDE EL FORMULARIO DE CREAR CUENTA
+    public function subirFotoProfesionalRegistro(Request $request)
+    {
+
+        $idprofesional = $request->idprofesional;
+
+        $image = $request->file('file');
+        $random = sha1(date('YmdHis') . uniqid());
+        $save_name = $random . '.' . $image->getClientOriginalExtension();
+            
+        if ( $image->move( $this->fotos_profesional_path ,$save_name) ) {
+
+            $totalFotos = FotoProfesional::where('idusuario', '=', $idprofesional)->count();
+
+            $foto = new FotoProfesional();
+            $foto->idusuario =  $idprofesional;
+            $foto->url_foto = $save_name;
+            $foto->orden = $totalFotos;
+            $foto->save();
+            
+            return [ 'status' =>  'success'];
+
+        } else {     
+            return [ 'status' =>  'error'];
+        }
 
     }
 

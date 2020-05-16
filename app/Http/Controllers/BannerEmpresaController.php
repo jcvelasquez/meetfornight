@@ -36,10 +36,8 @@ class BannerEmpresaController extends Controller
     public function subirBannerEmpresa(Request $request)
     {
 
-        //$idempresa = Auth::user()->id;
         $image = $request->file('file');
         $random = sha1(date('YmdHis') . uniqid());
-        //$imageName = $image->getClientOriginalName();
         $save_name = $random . '.' . $image->getClientOriginalExtension();
             
         if ( $image->move( $this->banner_empresa_path ,$save_name) ) {

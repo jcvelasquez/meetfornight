@@ -69,7 +69,7 @@
 
         <!-- SECCION INTERIOR DE DATOS -->
         <div class="form-row" style="margin-top:20px;" v-show="arTarifasSeleccionadas.length && mostrarDatos">
-            <div class="col-lg-12 col-sm-12">
+            <!-- <div class="col-lg-12 col-sm-12">
                 <input type="text" name="nombres" placeholder="Nombres *" class="form-control espacio-campos">
             </div>
             <div class="col-lg-6 col-sm-12">
@@ -77,7 +77,7 @@
             </div>
             <div class="col-lg-6 col-sm-12">
                 <input type="text" name="email" placeholder="Email *" v-model="email" class="form-control espacio-campos">
-            </div>
+            </div> -->
             <div class="col-lg-12 col-sm-12">
                 <textarea type="text" rows="3" placeholder="¿Desea agregar algun extra, pedido especial o comentario?" name="extras" v-model="extras"  class="form-control"></textarea>
             </div>
@@ -102,8 +102,8 @@
             <h2 class="sub-tit"><i class="icon-calendar esp-icono-bio"></i>HORARIOS DISPONIBLES</h2>
             <div class="form-row" style="margin-top:20px;">
                 <div class="col-lg-6 col-sm-12">
-<!--                     <vc-calendar color="pink"  @dayclick='dayClicked' :attributes='attributes' v-model='diaSeleccionado' is-inline :min-date='new Date()' />
- -->                </div>
+                    <vc-calendar color="pink"  @dayclick='dayClicked' :attributes='attributes' v-model='diaSeleccionado' is-inline :min-date='new Date()' />
+               </div>
                 <div class="col-lg-6 col-sm-12">
                     <ul>
                         <li v-for="horario in arHorariosGenerados" :key="horario.id">
@@ -187,12 +187,12 @@
 
 
                 Swal.fire({
-                    title: '¿Confirmar reserva?',
+                    title: 'CONFIRMAR',
                     text: 'Una vez realizada la reserva, deberá ser confirmada por el profesional',
                     type: 'warning',
                     showCancelButton: true,
-                    confirmButtonText: 'Si, confirmar!',
-                    cancelButtonText: 'No, Cancelar'
+                    confirmButtonText: 'REGISTRAR',
+                    cancelButtonText: 'CANCELAR'
                   }).then((result) => {
                     
                       if (result.value) {
@@ -207,18 +207,58 @@
                                 'direccion' : me.direccion,
                                 'extras' : me.extras,
                                 'total' : me.totalTarifa
-                            } ).then(function (response) {
+                            }).then(function (response) {
 
                                 var respuesta = response.data;
 
-                                Swal.fire('CONFIRMACION', respuesta.mensaje,'success');
                                 me.limpiarReserva();
+                                
+                                Swal.fire('CONFIRMACION', respuesta.mensaje,'success').then(function() {  window.location = "/reservas-usuario";  });
+                                
 
-                            }).catch(function (error) {  console.log(error);  });
+                            }).catch(function (error) {  
+                                
+                                if (error.response.status === 401) {
+                                    Swal.fire('ERROR', 'Debes iniciar sesión para poder realizar una reserva.','error');
+                                }
+                                
+                            });
 
                       } 
                     
                   })
+
+            },
+            mostrarTarifas(){
+
+                  let me = this;
+
+                  axios.get('/perfil/tarifas/' + me.apodoData ).then(function (response) {
+
+                      var respuesta= response.data;
+                      me.arTarifas = respuesta.tarifas;
+
+                  }).catch(function (error) {  console.log(error);     });
+
+            },
+            mostrarHorarios(fecha){
+
+                let me = this;
+
+                me.horario_seleccionado = [];
+                me.arHorariosGenerados = [];
+                me.horarioSeleccionado = [];
+
+                axios.post('/perfil/horarios/' + me.apodoData, {
+                    'apodo': me.apodoData,
+                    'tiempo': me.tiempo,
+                    'fechaselec' : fecha
+                } ).then(function (response) {
+
+                    var respuesta = response.data;
+                    me.arHorariosGenerados = respuesta.horarios;
+
+                }).catch(function (error) {  console.log(error);     });
 
             },
             limpiarReserva(){
@@ -263,38 +303,6 @@
                 me.diaSeleccionado = day;
 
                 me.mostrarHorarios(me.diaSeleccionado.id);
-
-            },
-            mostrarTarifas(){
-
-                  let me = this;
-
-                  axios.get('perfil/tarifas/' + me.apodoData ).then(function (response) {
-
-                      var respuesta= response.data;
-                      me.arTarifas = respuesta.tarifas;
-
-                  }).catch(function (error) {  console.log(error);     });
-
-            },
-            mostrarHorarios(fecha){
-
-                let me = this;
-
-                me.horario_seleccionado = [];
-                me.arHorariosGenerados = [];
-                me.horarioSeleccionado = [];
-
-                axios.post('perfil/horarios/' + me.apodoData, {
-                    'apodo': me.apodoData,
-                    'tiempo': me.tiempo,
-                    'fechaselec' : fecha
-                } ).then(function (response) {
-
-                    var respuesta = response.data;
-                    me.arHorariosGenerados = respuesta.horarios;
-
-                }).catch(function (error) {  console.log(error);     });
 
             },
             filtrarPor(tarifas, value) {

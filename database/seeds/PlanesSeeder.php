@@ -16,7 +16,7 @@ class PlanesSeeder extends Seeder
         $plan = new Planes();
         $plan->nombre_plan = "FREE";
         $plan->periodo_plan = "MENSUAL";
-        $plan->precio_plan = 9.99;
+        $plan->precio_plan = 0;
         $plan->tipo_usuario = "USUARIO";
         $plan->fondo_plan = "bg-tipo-plomo";
         $plan->triangulo_plan = "triangulo-beta.png";
@@ -32,13 +32,13 @@ class PlanesSeeder extends Seeder
         $plan->tipo_usuario = "USUARIO";
         $plan->fondo_plan = "bg-tipo-cuenta";
         $plan->triangulo_plan = "triangulo-beta-free.png";
-        $plan->estado_plan = 1;
+        $plan->estado_plan = 0;
         $plan->save();
 
         $plan = new Planes();
         $plan->nombre_plan = "FREE";
         $plan->periodo_plan = "MENSUAL";
-        $plan->precio_plan = 19.99;
+        $plan->precio_plan = 0;
         $plan->tipo_usuario = "PROFESIONAL";
         $plan->fondo_plan = "bg-tipo-plomo";
         $plan->triangulo_plan = "triangulo-beta.png";
@@ -49,7 +49,7 @@ class PlanesSeeder extends Seeder
         $plan->nombre_plan = "PREMIUM";
         $plan->precio_plan = 29.99;
         $plan->periodo_plan = "MENSUAL";
-        $plan->estado_plan = 1;
+        $plan->estado_plan = 0;
         $plan->fondo_plan = "bg-tipo-cuenta";
         $plan->triangulo_plan = "triangulo-beta-free.png";
         $plan->tipo_usuario = "PROFESIONAL";
@@ -62,7 +62,7 @@ class PlanesSeeder extends Seeder
         $plan->tipo_usuario = "PROFESIONAL";
         $plan->fondo_plan = "bg-tipo-plomo";
         $plan->triangulo_plan = "triangulo-beta.png";
-        $plan->estado_plan = 1;
+        $plan->estado_plan = 0;
         $plan->save();    
 
     }

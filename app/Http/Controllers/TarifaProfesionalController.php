@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\TarifaProfesional;
+use App\Usuario;
 use App\UsuarioExtras;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -44,6 +45,21 @@ class TarifaProfesionalController extends Controller
 
     }
 
+    
+
+    public function actualizarTipoMoneda(Request $request)
+    {
+
+
+        $idprofesional = Auth::user()->id;
+
+        $usuario = UsuarioExtras::find($idprofesional);
+        $usuario->tipo_moneda =  $request->tipo_moneda;
+        $usuario->save();
+        
+        return ['mensaje' => 'Tipo de moneda actualizada correctamente', 'status' => 'success'];
+     
+    }
 
     public function store(Request $request)
     {

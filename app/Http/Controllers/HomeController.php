@@ -41,7 +41,7 @@ class HomeController extends Controller
 
     public function __construct() 
     {
-        $this->fotos_profesional_path = public_path('fotos-profesionales');
+        $this->fotos_profesional_path = public_path('fotos_profesionales');
     }
 
     public function mostrar(Request $request)

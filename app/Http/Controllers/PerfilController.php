@@ -119,16 +119,6 @@ class PerfilController extends Controller
 
     }
 
-
-    public function disponibilidad(Request $request)
-    {
-        
-            $disponibilidad = Usuario::where('apodo', '=', $request->apodo)->firstOrFail()->disponibilidades()->get();
-
-            return ['disponibilidad' => $disponibilidad];  
-
-    }
-
     public function tarifas(Request $request)
     {
 
@@ -248,7 +238,7 @@ class PerfilController extends Controller
 
         //::where('apodo', '=', $request->apodo)->firstOrFail()->disponibilidades()->get();        
 
-        return ['disponibilidad' => $disponibilidad];  
+        return ['disponibilidad' => "Se envio el mensaje"];  
 
     }
     

@@ -5,10 +5,9 @@
 
             <div class="espaciado-formulario"><h5 class="formulario-titulos">DATOS:</h5>  <span class="obligatorio">(*) Campos Obligatorios</span></div>
 
-
             <div class="form-row">
               <div class="col-lg-12 col-sm-12">
-                  <input type="text" v-model.trim="$v.nombre.$model" class="form-control espacio-campos" name="nombre" placeholder="Nombre *" v-model="nombre">
+                  <input type="text" class="form-control espacio-campos" name="nombre" placeholder="Nombre *" v-model="nombre">
                   <label class="error" v-if="!$v.nombre.required">El nombre es obligatorio</label>
               </div>
             </div>
@@ -21,14 +20,14 @@
                   <input type="email" class="form-control espacio-campos" readonly name="email" v-model="email" placeholder="Email *">
               </div>
             </div>
-            <div class="form-row"> 
+            <!-- <div class="form-row"> 
               <div class="col-lg-6 col-sm-12">
                 <input type="password" class="form-control espacio-campos" name="clave" v-model="clave" placeholder="Cambiar contraseña (opcional)">
               </div>
               <div class="col-lg-6 col-sm-12">
                 <input type="password" class="form-control espacio-campos" name="verificar_clave" v-model="verificar_clave" placeholder="Confirmar Contraseña (opcional)">
               </div>
-            </div>
+            </div> -->
             <div class="form-row">
               <div class="col-lg-6 col-sm-12">
                   <date-pick v-model="fecha_nacimiento" v-model.trim="$v.fecha_nacimiento.$model" :inputAttributes="{readonly: false, class: 'form-control espacio-campos', placeholder: 'Ingrese una fecha de nacimiento' }" :format="'DD/MM/YYYY'"></date-pick>
@@ -48,31 +47,32 @@
                   <h5 class="formulario-titulos">LOCALIZACION:</h5> <span class="obligatorio">(*) Campos Obligatorios</span>
               </div>
               <div class="form-row">
-                <div class="col-lg-6 col-sm-12">
-                  <select type="text" class="form-control espacio-campos" name="idcountry" v-model="idcountry">
-                    <option value="">Seleccione una nacionalidad</option>
-                    <option value="205">España</option>
-                    <option value="169">Panama</option> 
-                    <option value="172">Peru</option> 
-                  </select>
-                </div>
-                <div class="col-lg-6 col-sm-12">
-                  <select type="text" class="form-control espacio-campos" name="idstate" v-model="idstate">
-                    <option value="">Seleccione un departamento</option>
-                    <option v-for="(option, index) in arStates" :key="index" :value="option.id" :selected="option.id === idstate ? 'selected' : ''">{{ option.name }}</option>
-
-                  </select>
-                </div>
-            </div>
-            <div class="form-row"> 
-              <div class="col-lg-6 col-sm-12">
-                  <select type="text" class="form-control espacio-campos" name="idcity" v-model="idcity">
-                    <option value="">Seleccione un distrito</option>
-                    <option v-for="(option, index) in arCities" :key="index" :value="option.id" :selected="option.id === idcity ? 'selected' : ''">{{ option.name }}</option>
-                  </select>
+                  <div class="col-lg-6 col-sm-12">
+                    <select type="text" class="form-control espacio-campos" v-model.trim="$v.idcountry.$model" @change="cambiarPais()" name="idcountry" v-model="idcountry">
+                      <option value="">Seleccione una nacionalidad</option>
+                      <option value="205">España</option>
+                      <option value="169">Panama</option> 
+                      <option value="172">Peru</option> 
+                    </select>
+                    <label class="error" v-if="!$v.idcountry.required">El país es obligatorio</label>
+                  </div>
+                  <div class="col-lg-6 col-sm-12">
+                    <select type="text" class="form-control espacio-campos" v-model.trim="$v.idstate.$model"  @change="cambiarDepartamento()" name="idstate" v-model="idstate">
+                      <option value="">Seleccione un departamento</option>
+                      <option v-for="(option, index) in arStates" :key="index" :value="option.id" :selected="option.id === idstate ? 'selected' : ''">{{ option.name }}</option>
+                    </select>
+                    <label class="error" v-if="!$v.idstate.required">El departamento es obligatorio</label>
+                  </div>
               </div>
-
-            </div>
+              <div class="form-row"> 
+                <div class="col-lg-6 col-sm-12">
+                    <select type="text" class="form-control espacio-campos" v-model.trim="$v.idcity.$model" name="idcity" v-model="idcity">
+                      <option value="">Seleccione un distrito</option>
+                      <option v-for="(option, index) in arCities" :key="index" :value="option.id" :selected="option.id === idcity ? 'selected' : ''">{{ option.name }}</option>
+                    </select>
+                    <label class="error" v-if="!$v.idcity.required">La ciudad es obligatoria</label>
+                </div>
+              </div>
 
               <div class="espaciado-formulario">
                   <h5 class="formulario-titulos">CARACTERISTICAS PERSONALES:</h5> <span class="obligatorio">(*) Campos Obligatorios</span>
@@ -335,17 +335,20 @@
 
 import DatePick from 'vue-date-pick';
 import 'vue-date-pick/dist/vueDatePick.css';
-
 import VueSlider from 'vue-slider-component';
 import 'vue-slider-component/theme/default.css';
 
 import { required, minLength } from 'vuelidate/lib/validators';
 
+import { ValidationProvider } from 'vee-validate';
+
+
 
 export default {
     components: {
       DatePick,
-      VueSlider
+      VueSlider,
+      ValidationProvider
     },
     data(){
         return {
@@ -401,7 +404,16 @@ export default {
       fecha_nacimiento: {
         required
       },
-       selectedCategorias: {
+      idcountry: {
+        required
+      },
+      idstate: {
+        required
+      },
+      idcity: {
+        required
+      }
+      /* selectedCategorias: {
         checked (val) {
           return val
         }
@@ -410,7 +422,7 @@ export default {
         checked: value => {
           return value.length
         }
-      }
+      } */
     },
     methods:{
         mostrarPerfilProfesional(){
@@ -471,6 +483,40 @@ export default {
             });
          
         },
+        cambiarPais(){
+                
+                let me = this;
+
+                axios.post('seleccionar-states', {
+                    'idcountry' : me.idcountry
+                })
+                .then(function (response) {
+
+                    me.arStates = response.data.states;   
+
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+                
+        },
+        cambiarDepartamento(){
+
+            let me = this;
+
+            axios.post('seleccionar-cities', {
+              'idstate' : me.idstate
+            })
+            .then(function (response) {
+
+                me.arCities = response.data.cities; 
+
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+        },
         checkVisibility(categoria){
 
             if(this.orientacion == "LESBIANA" && categoria == "MUJERES") return true;
@@ -530,7 +576,6 @@ export default {
               'idcountry' : this.idcountry,
               'idstate' : this.idstate,
               'idcity' : this.idcity,
-              'idioma' : this.idioma,
               'frase' : this.frase,
               'descripcion' : this.descripcion,
               'pecho' : this.pecho,

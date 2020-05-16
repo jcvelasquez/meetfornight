@@ -101,7 +101,7 @@
 <!--               <tr><th scope="col" colspan="7" style="text-align: center; text-transform: uppercase; background: rgb(91, 55, 111);">LISTA DE RESERVAS</th></tr>
  -->              <tr>
                 <th scope="col" width="40">#</th>
-                <th scope="col">Nombre</th>
+                <th scope="col">Cliente</th>
                 <th scope="col">Fecha</th>
                 <th scope="col">Desde</th>
                 <th scope="col">Hasta</th>

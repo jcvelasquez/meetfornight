@@ -2,8 +2,14 @@
 
 namespace App\Http\Controllers;
 use App\CategoriasProfesional;
+use App\DisponibilidadProfesional;
+use App\FotoProfesional;
+use App\IdiomasProfesional;
+use App\PlanesProfesional;
+use App\ServiciosXProfesional;
+use App\TarifaProfesional;
 use App\Usuario;
-
+use App\UsuarioExtras;
 use Illuminate\Http\Request;
 
 class AdministradorController extends Controller
@@ -13,7 +19,7 @@ class AdministradorController extends Controller
 
     public function __construct()
     {
-        $this->middleware(['auth','verified']);
+        //$this->middleware(['auth','verified']);
         $this->fotos_profesional_path = public_path('fotos-profesionales');
     }
 
@@ -49,9 +55,25 @@ class AdministradorController extends Controller
     }
 
 
+    public function eliminarProfesional()
+    { 
 
+          $id = 42;
 
-    
+          CategoriasProfesional::where('idprofesional', $id )->delete();
+          DisponibilidadProfesional::where('idusuario',$id)->delete();
+          FotoProfesional::where('idusuario',$id)->delete();
+          IdiomasProfesional::where('idprofesional',$id)->delete();
+          PlanesProfesional::where('idprofesional',$id)->delete();
+          ServiciosXProfesional::where('idusuario',$id)->delete();
+          TarifaProfesional::where('idusuario',$id)->delete();
+          UsuarioExtras::where('idusuario',$id)->delete();
+          Usuario::where('id',$id)->delete();
+          
+          return ["status" => "success"];
+    }
+
+   
 
     public function listarProfesionalesAdmin(Request $request)
     {

@@ -16,7 +16,7 @@ class FotoProfesionalController extends Controller
 
     public function __construct()
     {
-        $this->fotos_profesional_path = public_path('fotos-profesionales');
+        $this->fotos_profesional_path = public_path('fotos_profesionales');
         $this->middleware(['auth','verified']);
     }
 
@@ -69,69 +69,36 @@ class FotoProfesionalController extends Controller
 
     }
 
+    
+    
 
+    //FUNCION PARA SUBIR LAS FOTOS DEL PROFESIONAL DESDE EL PERFIL DE MI CUENTA
     public function subir(Request $request)
     {
 
         $idusuario = Auth::user()->id;
        
         $image = $request->file('file');
-        $imageName = $image->getClientOriginalName();
-        $upload_success = $image->move( $this->fotos_profesional_path ,$imageName);
+        $random = sha1(date('YmdHis') . uniqid());
+        $save_name = $random . '.' . $image->getClientOriginalExtension();
+        
 
-        if ($upload_success) {
+        if ( $image->move( $this->fotos_profesional_path ,$save_name) ) {
 
             $totalFotos = FotoProfesional::where('idusuario', '=', $idusuario)->count();
 
             $fotoProfesional = new FotoProfesional();
             $fotoProfesional->idusuario = $idusuario;
-            $fotoProfesional->url_foto = $imageName;
+            $fotoProfesional->url_foto = $save_name;
             $fotoProfesional->orden = $totalFotos;
             $fotoProfesional->save();
             
-            return Response::json([
-                'success' => $imageName,
-                'total' => $totalFotos
-            ], 200);
+            return [ 'status' =>  'success'];
 
-        } else {     return Response::json('error', 400);   }
+        } else {     
+            return [ 'status' =>  'error'];
+        }
         
-
-        /*$photos = $request->file('file');
- 
-        if (!is_array($photos)) {
-            $photos = [$photos];
-        }
- 
-        if (!is_dir($this->photos_path)) {
-            mkdir($this->photos_path, 0777);
-        }
- 
-        for ($i = 0; $i < count($photos); $i++) {
-            $photo = $photos[$i];
-            $name = sha1(date('YmdHis') . str_random(30));
-            $save_name = $name . '.' . $photo->getClientOriginalExtension();
-            //$resize_name = $name . str_random(2) . '.' . $photo->getClientOriginalExtension();
- 
-            Image::make($photo)
-                ->resize(250, null, function ($constraints) {
-                    $constraints->aspectRatio();
-                })
-                ->save($this->photos_path . '/' . $resize_name);
- 
-            $photo->move($this->photos_path, $save_name);
- 
-            $upload = new Upload();
-            $upload->filename = $save_name;
-            //$upload->resized_name = $resize_name;
-            $upload->original_name = basename($photo->getClientOriginalName());
-            $upload->save();
-        }
-
-        return Response::json([
-            'message' => 'Image saved Successfully'
-        ], 200);*/
-
 
     }
 

@@ -76,15 +76,13 @@
                   </div>   
               </div>
               <div class="col-lg-3 col-sm-12" style="padding-top:1.5em;">
-                    <vue-slider :marks="[0, 24]" :min="0" :max="24" v-model="horario_lunes"></vue-slider>
+                    <vue-timepicker auto-scroll placeholder="Desde" v-model="desde_lunes"></vue-timepicker>
               </div>
-              <div class="col-lg-3 col-sm-12">       
-                    <div class="busqueda-detallada-range">
-                        <span class="esp-d">00:00/24:00</span>  
-                    </div>     
+              <div class="col-lg-3 col-sm-12" style="padding-top:1.5em;">    
+                    <vue-timepicker auto-scroll placeholder="Hasta" v-model="hasta_lunes"></vue-timepicker>   
               </div>
               <div class="col-lg-4 col-sm-12">
-                  <div class="busqueda-detallada-range">
+                  <div class="busqueda-detallada-range" style="padding-top:2em;">
                       <div class="form-group checksito">
                         <input id="nd_lunes" @change=" horario_lunes = [0,0]" type="checkbox" v-model="disponibilidad_lunes" class="inp-cbx" style="display: none;"> 
                         <label for="nd_lunes" class="cbx"><span><svg width="12px" height="10px" viewBox="0 0 12 10"><polyline points="1.5 6 4.5 9 10.5 1"></polyline></svg></span> <span class="tam-check">No disponible</span></label>
@@ -100,15 +98,13 @@
                   </div>   
               </div>
               <div class="col-lg-3 col-sm-12" style="padding-top:1.5em;">
-                    <vue-slider :marks="[0, 24]" :min="0" :max="24" v-model="horario_martes"></vue-slider>
+                    <vue-timepicker auto-scroll placeholder="Desde" v-model="desde_martes"></vue-timepicker>
               </div>
-              <div class="col-lg-3 col-sm-12">       
-                    <div class="busqueda-detallada-range">
-                        <span class="esp-d">00:00/24:00</span>  
-                    </div>     
+              <div class="col-lg-3 col-sm-12" style="padding-top:1.5em;">    
+                    <vue-timepicker auto-scroll placeholder="Hasta" v-model="hasta_martes"></vue-timepicker>   
               </div>
               <div class="col-lg-4 col-sm-12">
-                  <div class="busqueda-detallada-range">
+                  <div class="busqueda-detallada-range" style="padding-top:2em;">
                      <div class="form-group checksito">
                         <input id="nd_martes" @change=" horario_martes = [0,0]" type="checkbox" v-model="disponibilidad_martes" class="inp-cbx" style="display: none;"> 
                         <label for="nd_martes" class="cbx"><span><svg width="12px" height="10px" viewBox="0 0 12 10"><polyline points="1.5 6 4.5 9 10.5 1"></polyline></svg></span> <span class="tam-check">No disponible</span></label>
@@ -124,15 +120,13 @@
                     </div>   
                 </div>
                 <div class="col-lg-3 col-sm-12" style="padding-top:1.5em;">
-                      <vue-slider :marks="[0, 24]" :min="0" :max="24" v-model="horario_miercoles"></vue-slider>
+                    <vue-timepicker auto-scroll placeholder="Desde" v-model="desde_miercoles"></vue-timepicker>
                 </div>
-                <div class="col-lg-3 col-sm-12">       
-                      <div class="busqueda-detallada-range">
-                          <span class="esp-d">00:00/24:00</span>  
-                      </div>     
+                <div class="col-lg-3 col-sm-12" style="padding-top:1.5em;">    
+                      <vue-timepicker auto-scroll placeholder="Hasta" v-model="hasta_miercoles"></vue-timepicker>   
                 </div>
                 <div class="col-lg-4 col-sm-12">
-                    <div class="busqueda-detallada-range">
+                    <div class="busqueda-detallada-range" style="padding-top:2em;">
                       <div class="form-group checksito">
                         <input id="nd_miercoles" @change=" horario_miercoles = [0,0]" type="checkbox" v-model="disponibilidad_miercoles" class="inp-cbx" style="display: none;"> 
                         <label for="nd_miercoles" class="cbx"><span><svg width="12px" height="10px" viewBox="0 0 12 10"><polyline points="1.5 6 4.5 9 10.5 1"></polyline></svg></span> <span class="tam-check">No disponible</span></label>
@@ -148,15 +142,13 @@
                     </div>   
                 </div>
                 <div class="col-lg-3 col-sm-12" style="padding-top:1.5em;">
-                      <vue-slider :marks="[0, 24]" :min="0" :max="24" v-model="horario_jueves"></vue-slider>
+                      <vue-timepicker auto-scroll placeholder="Desde" v-model="desde_jueves"></vue-timepicker>
                 </div>
-                <div class="col-lg-3 col-sm-12">       
-                      <div class="busqueda-detallada-range">
-                          <span class="esp-d">00:00/24:00</span>  
-                      </div>     
+                <div class="col-lg-3 col-sm-12" style="padding-top:1.5em;">    
+                      <vue-timepicker auto-scroll placeholder="Hasta" v-model="hasta_jueves"></vue-timepicker>   
                 </div>
                 <div class="col-lg-4 col-sm-12">
-                    <div class="busqueda-detallada-range">
+                    <div class="busqueda-detallada-range" style="padding-top:2em;">
 
                       <div class="form-group checksito">
                         <input id="nd_jueves" @change=" horario_jueves = [0,0]" type="checkbox" v-model="disponibilidad_jueves" class="inp-cbx" style="display: none;"> 
@@ -174,15 +166,13 @@
                     </div>   
                 </div>
                 <div class="col-lg-3 col-sm-12" style="padding-top:1.5em;">
-                      <vue-slider :marks="[0, 24]" :min="0" :max="24" v-model="horario_viernes"></vue-slider>
+                      <vue-timepicker auto-scroll placeholder="Desde" v-model="desde_viernes"></vue-timepicker>
                 </div>
-                <div class="col-lg-3 col-sm-12">       
-                      <div class="busqueda-detallada-range">
-                          <span class="esp-d">00:00/24:00</span>  
-                      </div>     
+                <div class="col-lg-3 col-sm-12" style="padding-top:1.5em;">    
+                      <vue-timepicker auto-scroll placeholder="Hasta" v-model="hasta_viernes"></vue-timepicker>   
                 </div>
                 <div class="col-lg-4 col-sm-12">
-                    <div class="busqueda-detallada-range">
+                    <div class="busqueda-detallada-range" style="padding-top:2em;">
 
                       <div class="form-group checksito">
                         <input id="nd_viernes" @change=" horario_viernes = [0,0]" type="checkbox" v-model="disponibilidad_viernes" class="inp-cbx" style="display: none;"> 
@@ -200,15 +190,13 @@
                     </div>   
                 </div>
                 <div class="col-lg-3 col-sm-12" style="padding-top:1.5em;">
-                      <vue-slider :marks="[0, 24]" :min="0" :max="24" v-model="horario_sabado"></vue-slider>
+                      <vue-timepicker auto-scroll placeholder="Desde" v-model="desde_sabado"></vue-timepicker>
                 </div>
-                <div class="col-lg-3 col-sm-12">       
-                      <div class="busqueda-detallada-range">
-                          <span class="esp-d">00:00/24:00</span>  
-                      </div>     
+                <div class="col-lg-3 col-sm-12" style="padding-top:1.5em;">    
+                      <vue-timepicker auto-scroll placeholder="Hasta" v-model="hasta_sabado"></vue-timepicker>   
                 </div>
                 <div class="col-lg-4 col-sm-12">
-                    <div class="busqueda-detallada-range">
+                    <div class="busqueda-detallada-range" style="padding-top:2em;">
 
                       <div class="form-group checksito">
                         <input id="nd_sabado" @change=" horario_sabado = [0,0]" type="checkbox" v-model="disponibilidad_sabado" class="inp-cbx" style="display: none;"> 
@@ -226,16 +214,13 @@
                     </div>   
                 </div>
                 <div class="col-lg-3 col-sm-12" style="padding-top:1.5em;">
-                      <vue-slider :marks="[0, 24]" :min="0" :max="24" v-model="horario_domingo"></vue-slider>
-                      
+                      <vue-timepicker auto-scroll placeholder="Desde" v-model="desde_domingo"></vue-timepicker>
                 </div>
-                <div class="col-lg-3 col-sm-12">       
-                      <div class="busqueda-detallada-range">
-                          <span class="esp-d">00:00/24:00</span>  
-                      </div>     
+                <div class="col-lg-3 col-sm-12" style="padding-top:1.5em;">    
+                      <vue-timepicker auto-scroll placeholder="Hasta" v-model="hasta_domingo"></vue-timepicker>   
                 </div>
                 <div class="col-lg-4 col-sm-12">
-                    <div class="busqueda-detallada-range">
+                    <div class="busqueda-detallada-range" style="padding-top:2em;">
 
                       <div class="form-group checksito">
                         <input id="nd_domingo" @change=" horario_domingo = [0,0]" type="checkbox" v-model="disponibilidad_domingo" class="inp-cbx" style="display: none;"> 
@@ -275,9 +260,16 @@
 import VueSlider from 'vue-slider-component';
 import 'vue-slider-component/theme/default.css';
 
+// Main JS (in UMD format)
+import VueTimepicker from 'vue2-timepicker'
+
+// CSS
+import 'vue2-timepicker/dist/VueTimepicker.css'
+
     export default {
         components: {
-          VueSlider
+          VueSlider,
+          VueTimepicker
         },
         mounted() {
 
@@ -287,13 +279,6 @@ import 'vue-slider-component/theme/default.css';
         },
         data() {
           return {
-            horario_lunes: [],
-            horario_martes: [],
-            horario_miercoles: [],
-            horario_jueves: [],
-            horario_viernes: [],
-            horario_sabado: [],
-            horario_domingo: [],
             disponibilidad_lunes : 0,
             disponibilidad_martes : 0,
             disponibilidad_miercoles : 0,
@@ -301,19 +286,25 @@ import 'vue-slider-component/theme/default.css';
             disponibilidad_viernes : 0,
             disponibilidad_sabado : 0,
             disponibilidad_domingo : 0,
-            arDisponibilidad : [],
-            arLunes : [],
-            arMartes : [],
-            arMiercoles : [],
-            arJueves : [],
-            arViernes : [],
-            arSabado : [],
-            arDomingo : [],
             celular : '',
             web: '',
             tipo_celular: '',
             tipo_contacto: '',
-            agenda: ''
+            agenda: '',
+            desde_lunes: "",
+            hasta_lunes: "",
+            desde_martes: "",
+            hasta_martes: "",
+            desde_miercoles: "",
+            hasta_miercoles: "",
+            desde_jueves: "",
+            hasta_jueves: "",
+            desde_viernes: "",
+            hasta_viernes: "",
+            desde_sabado: "",
+            hasta_sabado: "",
+            desde_domingo: "",
+            hasta_domingo: "",
           }
         },
         methods:{
@@ -321,7 +312,7 @@ import 'vue-slider-component/theme/default.css';
 
                 let me = this;
 
-                  axios.get('/contacto-profesional/listar').then(function (response) {
+                  axios.get('contacto-profesional/listar').then(function (response) {
 
                       var respuesta= response.data;
 
@@ -339,64 +330,27 @@ import 'vue-slider-component/theme/default.css';
 
                   let me = this;
 
-                  axios.get('/disponibilidad-profesional/listar').then(function (response) {
+                  axios.get('disponibilidad-profesional/listar').then(function (response) {
 
                       var respuesta= response.data;
 
-                      /*me.arLunes = respuesta.lunes;
-                      me.arMartes = respuesta.martes;
-                      me.arMiercoles = respuesta.miercoles;
-                      me.arJueves = respuesta.jueves;
-                      me.arViernes = respuesta.viernes;
-                      me.arSabado = respuesta.sabado;
-                      me.arDomingo = respuesta.domingo;*/
-
-                      /*me.horario_lunes = [me.arLunes.idesde, me.arLunes.ihasta];
-                      me.horario_martes = [me.arMartes.idesde, me.arMartes.ihasta];
-                      me.horario_miercoles = [me.arMiercoles.idesde, me.arMiercoles.ihasta];
-                      me.horario_jueves = [me.arJueves.idesde, me.arJueves.ihasta];
-                      me.horario_viernes = [me.arViernes.idesde, me.arViernes.ihasta];
-                      me.horario_sabado = [me.arSabado.idesde, me.arSabado.ihasta];
-                      me.horario_domingo = [me.arDomingo.idesde, me.arDomingo.ihasta];*/
-
-                      me.arDisponibilidad = respuesta.disponibilidad;
-
-                      if(me.arDisponibilidad.length > 0){
-                            me.horario_lunes = me.obtenerHorarioDia(me.arDisponibilidad, 'LUNES');
-                            me.horario_martes = me.obtenerHorarioDia(me.arDisponibilidad, 'MARTES');
-                            me.horario_miercoles = me.obtenerHorarioDia(me.arDisponibilidad, 'MIERCOLES');
-                            me.horario_jueves = me.obtenerHorarioDia(me.arDisponibilidad, 'JUEVES');
-                            me.horario_viernes = me.obtenerHorarioDia(me.arDisponibilidad, 'VIERNES');
-                            me.horario_sabado = me.obtenerHorarioDia(me.arDisponibilidad, 'SABADO');
-                            me.horario_domingo = me.obtenerHorarioDia(me.arDisponibilidad, 'DOMINGO');
-                      }
+                      me.desde_lunes = respuesta.lunes.desde;
+                      me.hasta_lunes = respuesta.lunes.hasta;
+                      me.desde_martes = respuesta.martes.desde;
+                      me.hasta_martes = respuesta.martes.hasta;
+                      me.desde_miercoles = respuesta.miercoles.desde;
+                      me.hasta_miercoles = respuesta.miercoles.hasta;
+                      me.desde_jueves = respuesta.jueves.desde;
+                      me.hasta_jueves = respuesta.jueves.hasta;
+                      me.desde_viernes = respuesta.viernes.desde;
+                      me.hasta_viernes = respuesta.viernes.hasta;
+                      me.desde_sabado = respuesta.sabado.desde;
+                      me.hasta_sabado = respuesta.sabado.hasta;
+                      me.desde_domingo = respuesta.domingo.desde;
+                      me.hasta_domingo = respuesta.domingo.hasta;
 
 
                   }).catch(function (error) {  console.log(error);     });
-
-            },
-            obtenerHorarioDia(disponibilidad, dia) {
-              for(var i=0; i < disponibilidad.length; i++){
-                  if(disponibilidad[i].dia == dia){
-                      return [disponibilidad[i].idesde, disponibilidad[i].ihasta];
-                  }
-              }
-            },
-            obtenerDisponibilidad() {    
-
-              let me = this;
-
-              var arrDisponibilidad = [];
-              
-              arrDisponibilidad.push({ "desde" : me.horario_lunes[0], "hasta" : me.horario_lunes[1], "dia" : "LUNES" });
-              arrDisponibilidad.push({ "desde" : me.horario_martes[0], "hasta" : me.horario_martes[1], "dia" : "MARTES" });
-              arrDisponibilidad.push({ "desde" : me.horario_miercoles[0], "hasta" : me.horario_miercoles[1], "dia" : "MIERCOLES" });
-              arrDisponibilidad.push({ "desde" : me.horario_jueves[0], "hasta" : me.horario_jueves[1], "dia" : "JUEVES" });
-              arrDisponibilidad.push({ "desde" : me.horario_viernes[0], "hasta" : me.horario_viernes[1], "dia" : "VIERNES" });
-              arrDisponibilidad.push({ "desde" : me.horario_sabado[0], "hasta" : me.horario_sabado[1], "dia" : "SABADO" });
-              arrDisponibilidad.push({ "desde" : me.horario_domingo[0], "hasta" : me.horario_domingo[1], "dia" : "DOMINGO" });
-
-              return JSON.stringify(arrDisponibilidad);
 
             },
             actualizarContacto(){
@@ -420,6 +374,23 @@ import 'vue-slider-component/theme/default.css';
                       console.log(error);
                   });
                   
+
+            },
+            obtenerDisponibilidad() {    
+
+              let me = this;
+
+              var arrDisponibilidad = [];
+              
+              arrDisponibilidad.push({ "desde" : me.desde_lunes, "hasta" : me.hasta_lunes, "dia" : "LUNES" });
+              arrDisponibilidad.push({ "desde" : me.desde_martes, "hasta" : me.hasta_martes, "dia" : "MARTES" });
+              arrDisponibilidad.push({ "desde" : me.desde_miercoles, "hasta" : me.hasta_miercoles, "dia" : "MIERCOLES" });
+              arrDisponibilidad.push({ "desde" : me.desde_jueves, "hasta" : me.hasta_jueves, "dia" : "JUEVES" });
+              arrDisponibilidad.push({ "desde" : me.desde_viernes, "hasta" : me.hasta_viernes, "dia" : "VIERNES" });
+              arrDisponibilidad.push({ "desde" : me.desde_sabado, "hasta" : me.hasta_sabado, "dia" : "SABADO" });
+              arrDisponibilidad.push({ "desde" : me.desde_domingo, "hasta" : me.hasta_domingo, "dia" : "DOMINGO" });
+
+              return JSON.stringify(arrDisponibilidad);
 
             }
             

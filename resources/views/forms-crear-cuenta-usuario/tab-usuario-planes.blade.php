@@ -3,7 +3,7 @@
 
 
 <div class="row justify-content-center cuerpo-perfil">
-<div class="col-lg-10 col-sm-12">
+<div class="col-lg-8 col-sm-12">
 
         <!-- Start Box - Planes -->
         <div class="row justify-content-center section_planes">

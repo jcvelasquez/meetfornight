@@ -69,18 +69,19 @@
     </div>
 
     <div class="bloques-de-perfil">
-      <h5 class="formulario-titulos">DISPONIBILIDAD EN HORAS:</h5>
-      <div class="form-row">
-        <div class="col-lg-8 col-sm-12">
-          <div class="busqueda-detallada-range">
-            <span class="esp-i">Lunes</span>
-            <input class="slider-horario" id="slider_lunes" data-horas="horas_lunes" name="slider_lunes" type="hidden" value="0,24" />
-            <span class="esp-d">00:00/24:00</span>
-          </div>
+      <h5 class="formulario-titulos espacio-campos">DISPONIBILIDAD EN HORAS:</h5>
+      <div class="form-row espacio-campos">
+        <div class="col-lg-2 col-sm-12">
+          <span class="esp-i">Lunes</span>
         </div>
-        <div class="col-lg-4 col-sm-12">
+        <div class="col-lg-3 col-sm-12">        
+            <input type="text" readonly name="desde_lunes" class="form-control selector_horario" placeholder="Desde" autocomplete="nope"/>
+        </div>
+        <div class="col-lg-3 col-sm-12">        
+            <input type="text" readonly name="hasta_lunes" class="form-control selector_horario" placeholder="Hasta" autocomplete="nope"/>
+        </div>
+        <div class="col-lg-4 col-sm-12 text-center">
 
-          <div class="centrando-disponibilidad form-group custom-control">
             <input class="inp-cbx " id="disponibilidad_lunes_0" name="horas_lunes" data-dia="lunes" type="checkbox" value="0" style="display: none;" />
             <label class="cbx" for="disponibilidad_lunes_0">
               <span>
@@ -90,21 +91,21 @@
               </span>
               <span class="agenda_check">No disponible </span>
             </label>
-          </div>
 
         </div>
       </div>
-      <div class="form-row">
-        <div class="col-lg-8 col-sm-12">
-          <div class="busqueda-detallada-range">
-            <span class="esp-i">Martes</span>
-            <input class="slider-horario" name="slider_martes" data-horas="horas_martes" type="hidden" value="0,24" />
-            <span class="esp-d">00:00/24:00</span>
-          </div>
+      <div class="form-row espacio-campos">
+        <div class="col-lg-2 col-sm-12">
+          <span class="esp-i">Martes</span>
         </div>
-        <div class="col-lg-4 col-sm-12">
+        <div class="col-lg-3 col-sm-12">        
+            <input type="text" readonly name="desde_martes" class="form-control selector_horario" placeholder="Desde" autocomplete="nope"/>
+        </div>
+        <div class="col-lg-3 col-sm-12">        
+            <input type="text" readonly name="hasta_martes" class="form-control selector_horario" placeholder="Hasta" autocomplete="nope"/>
+        </div>
+        <div class="col-lg-4 col-sm-12 text-center">
 
-          <div class="centrando-disponibilidad form-group custom-control">
             <input class="inp-cbx " id="disponibilidad_martes_0" name="horas_martes" data-dia="martes" type="checkbox" value="0" style="display: none;" />
             <label class="cbx" for="disponibilidad_martes_0">
               <span>
@@ -114,21 +115,21 @@
               </span>
               <span class="agenda_check">No disponible </span>
             </label>
-          </div>
 
         </div>
       </div>
-      <div class="form-row">
-        <div class="col-lg-8 col-sm-12">
-          <div class="busqueda-detallada-range">
-            <span class="esp-i">Miércoles</span>
-            <input class="slider-horario" name="slider_miercoles" data-horas="horas_miercoles" type="hidden" value="0,24" />
-            <span class="esp-d">00:00/24:00</span>
-          </div>
+      <div class="form-row espacio-campos">
+        <div class="col-lg-2 col-sm-12">
+          <span class="esp-i">Miercoles</span>
         </div>
-        <div class="col-lg-4 col-sm-12">
+        <div class="col-lg-3 col-sm-12">        
+            <input type="text" readonly name="desde_miercoles" class="form-control selector_horario" placeholder="Desde" autocomplete="nope"/>
+        </div>
+        <div class="col-lg-3 col-sm-12">        
+            <input type="text" readonly name="hasta_miercoles" class="form-control selector_horario" placeholder="Hasta" autocomplete="nope"/>
+        </div>
+        <div class="col-lg-4 col-sm-12 text-center">
 
-          <div class="centrando-disponibilidad form-group custom-control">
             <input class="inp-cbx " id="disponibilidad_miercoles_0" name="horas_miercoles" data-dia="miercoles" type="checkbox" value="0" style="display: none;" />
             <label class="cbx" for="disponibilidad_miercoles_0">
               <span>
@@ -138,21 +139,21 @@
               </span>
               <span class="agenda_check">No disponible </span>
             </label>
-          </div>
 
         </div>
       </div>
-      <div class="form-row">
-        <div class="col-lg-8 col-sm-12">
-          <div class="busqueda-detallada-range">
-            <span class="esp-i">Jueves</span>
-            <input class="slider-horario" name="slider_jueves" data-horas="horas_jueves" type="hidden" value="0,24" />
-            <span class="esp-d">00:00/24:00</span>
-          </div>
+      <div class="form-row espacio-campos">
+        <div class="col-lg-2 col-sm-12">
+          <span class="esp-i">Jueves</span>
         </div>
-        <div class="col-lg-4 col-sm-12">
+        <div class="col-lg-3 col-sm-12">        
+            <input type="text" readonly name="desde_jueves" class="form-control selector_horario" placeholder="Desde" autocomplete="nope"/>
+        </div>
+        <div class="col-lg-3 col-sm-12">        
+            <input type="text" readonly name="hasta_jueves" class="form-control selector_horario" placeholder="Hasta" autocomplete="nope"/>
+        </div>
+        <div class="col-lg-4 col-sm-12 text-center">
 
-          <div class="centrando-disponibilidad form-group custom-control">
             <input class="inp-cbx " id="disponibilidad_jueves_0" name="horas_jueves" data-dia="jueves" type="checkbox" value="0" style="display: none;" />
             <label class="cbx" for="disponibilidad_jueves_0">
               <span>
@@ -162,21 +163,21 @@
               </span>
               <span class="agenda_check">No disponible </span>
             </label>
-          </div>
 
         </div>
       </div>
-      <div class="form-row">
-        <div class="col-lg-8 col-sm-12">
-          <div class="busqueda-detallada-range">
-            <span class="esp-i">Viernes</span>
-            <input class="slider-horario" id="slider_viernes" name="slider_viernes" data-horas="horas_viernes" type="hidden" value="0,24" />
-            <span class="esp-d">00:00/24:00</span>
-          </div>
+      <div class="form-row espacio-campos">
+        <div class="col-lg-2 col-sm-12">
+          <span class="esp-i">Viernes</span>
         </div>
-        <div class="col-lg-4 col-sm-12">
+        <div class="col-lg-3 col-sm-12">        
+            <input type="text" readonly name="desde_viernes" class="form-control selector_horario" placeholder="Desde" autocomplete="nope"/>
+        </div>
+        <div class="col-lg-3 col-sm-12">        
+            <input type="text" readonly name="hasta_viernes" class="form-control selector_horario" placeholder="Hasta" autocomplete="nope"/>
+        </div>
+        <div class="col-lg-4 col-sm-12 text-center">
 
-          <div class="centrando-disponibilidad form-group custom-control">
             <input class="inp-cbx " id="disponibilidad_viernes_0" name="horas_viernes" data-dia="viernes" type="checkbox" value="0" style="display: none;" />
             <label class="cbx" for="disponibilidad_viernes_0">
               <span>
@@ -186,21 +187,21 @@
               </span>
               <span class="agenda_check">No disponible </span>
             </label>
-          </div>
 
         </div>
       </div>
-      <div class="form-row">
-        <div class="col-lg-8 col-sm-12">
-          <div class="busqueda-detallada-range">
-            <span class="esp-i">Sábado</span>
-            <input class="slider-horario" name="slider_sabado" data-horas="horas_sabado" type="hidden" value="0,24" />
-            <span class="esp-d">00:00/24:00</span>
-          </div>
+      <div class="form-row espacio-campos">
+        <div class="col-lg-2 col-sm-12">
+          <span class="esp-i">Sábado</span>
         </div>
-        <div class="col-lg-4 col-sm-12">
+        <div class="col-lg-3 col-sm-12">        
+            <input type="text" readonly name="desde_sabado" class="form-control selector_horario" placeholder="Desde" autocomplete="nope"/>
+        </div>
+        <div class="col-lg-3 col-sm-12">        
+            <input type="text" readonly name="hasta_sabado" class="form-control selector_horario" placeholder="Hasta" autocomplete="nope"/>
+        </div>
+        <div class="col-lg-4 col-sm-12  text-center">
 
-          <div class="centrando-disponibilidad form-group custom-control">
             <input class="inp-cbx " id="disponibilidad_sabado_0" name="horas_sabado" data-dia="sabado" type="checkbox" value="0" style="display: none;" />
             <label class="cbx" for="disponibilidad_sabado_0">
               <span>
@@ -210,22 +211,21 @@
               </span>
               <span class="agenda_check">No disponible </span>
             </label>
-          </div>
 
         </div>
       </div>
       <div class="form-row">
-        <div class="col-lg-8 col-sm-12">
-          <div class="busqueda-detallada-range">
-            <span class="esp-i">Domingo</span>
-            <input class="slider-horario" name="slider_domingo" data-horas="horas_domingo" type="hidden" value="0,24" />
-            <span class="esp-d">00:00/24:00</span>
-          </div>
+        <div class="col-lg-2 col-sm-12">
+          <span class="esp-i">Domingo</span>
         </div>
-        <div class="col-lg-4 col-sm-12">
+        <div class="col-lg-3 col-sm-12">        
+            <input type="text" readonly name="desde_domingo" class="form-control selector_horario" placeholder="Desde" autocomplete="nope"/>
+        </div>
+        <div class="col-lg-3 col-sm-12">        
+            <input type="text" readonly name="hasta_domingo" class="form-control selector_horario" placeholder="Hasta" autocomplete="nope"/>
+        </div>
+        <div class="col-lg-4 col-sm-12 text-center">
 
-
-          <div class="centrando-disponibilidad form-group custom-control">
             <input class="inp-cbx " id="disponibilidad_domingo_0" name="horas_domingo" data-dia="domingo" type="checkbox" value="0" style="display: none;" />
             <label class="cbx" for="disponibilidad_domingo_0">
               <span>
@@ -235,7 +235,6 @@
               </span>
               <span class="agenda_check">No disponible </span>
             </label>
-          </div>
 
         </div>
       </div>

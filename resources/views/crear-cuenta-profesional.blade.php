@@ -118,13 +118,6 @@
 
     }
 
-
-    function obtenerDisponibilidad(horas){
-
-        return ( horas < 10 )?  "0" + horas + ":00" : horas + ":00";     
-
-    }
-
   
   </script>
 
@@ -156,7 +149,7 @@
         </div>
         @endif
 
-        <form method="post" action="{{ route('registrar-profesional') }}" id="form-cuenta-profesional">
+        <form method="post" action="{{ route('registrar-profesional') }}" id="form-cuenta-profesional" autocomplete="off">
           @csrf
 
             <!-- SmartWizard html -->
@@ -172,12 +165,10 @@
                 </ul>
                 <div>
                     <div id="planes" class=""> 
-                        
-                        @include('forms-crear-cuenta-profesional.tab-profesional-fotos')
+                        @include('forms-crear-cuenta-profesional.tab-profesional-planes')
                     </div>
                     <div id="perfil" class="">
-                        @include('forms-crear-cuenta-profesional.tab-profesional-activar')
-                        
+                        @include('forms-crear-cuenta-profesional.tab-profesional-perfil')
                     </div>
                     <div id="servicios" class="">  
                         @include('forms-crear-cuenta-profesional.tab-profesional-servicios')
@@ -189,30 +180,31 @@
                         @include('forms-crear-cuenta-profesional.tab-profesional-tarifas') 
                     </div>
                     <div id="fotos" class="">  
-                        @include('forms-crear-cuenta-profesional.tab-profesional-planes')
+                        @include('forms-crear-cuenta-profesional.tab-profesional-fotos')
                     </div>
                     <div id="activar" class="">
-                        @include('forms-crear-cuenta-profesional.tab-profesional-perfil')
+                        @include('forms-crear-cuenta-profesional.tab-profesional-activar')
                     </div>
                 </div>
             </div>
              <!-- END SmartWizard html -->    
             
-        </form>
+       
 
-        <div class="row">
-              <div class="col-lg-2">  </div> 
-              <div class="col-lg-4 col-sm-12 espacio-campos">
-                <button class="btn btn-primary btn-busqueda-detallada" id="prev-btn" type="button">PASO ANTERIOR</button>
-              </div>
-              <div class="col-lg-4 col-sm-12 espacio-campos">
-                <button class="btn btn-primary btn-busqueda-detallada" id="next-btn" type="button">SIGUIENTE PASO</button>
-              </div>
-              <div class="col-lg-2">  </div> 
-              <!-- <div class="col-lg-4">
-                <button type="button" class="btn btn-primary btn-busqueda-detallada" style="background-color:green;">CONFIRMAR REGISTRO</button>
-              </div> -->
+            <div class="row row justify-content-center cuerpo-perfil">
+                <div class="col-lg-4 col-sm-12 espacio-campos">
+                  <button class="btn btn-primary btn-busqueda-detallada" id="prev-btn" type="button">ANTERIOR</button>
+                </div>
+                <div class="col-lg-4 col-sm-12 espacio-campos" id="button_siguiente">
+                  <button class="btn btn-primary btn-busqueda-detallada" id="next-btn" type="button">SIGUIENTE</button>
+                </div>
+                <div class="col-lg-4 hide" id="button_confirmar">
+                  <button type="submit" id="btn-enviar" class="btn btn-primary btn-busqueda-detallada" style="background-color:green;">CONFIRMAR REGISTRO</button>
+                  <input type="hidden" id="idprofesional" name="idprofesional" value="">
+                </div> 
             </div>
+
+        </form>
 
     </div>
 

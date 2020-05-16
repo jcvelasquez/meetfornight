@@ -9,35 +9,24 @@
         <div class="col-lg-12 col-sm-12">
           <input type="text" class="form-control espacio-campos" name="nombre" id="nombre" placeholder="Nombre *" v-model="nombre" />
         </div>
-        <div class="col-lg-12 col-sm-12">
+        <div class="col-lg-6 col-sm-12">
           <input type="text" class="form-control" v-model="apodo" id="apodo" name="apodo" placeholder="Apodo *" />
-          <small
-            id="emailHelp"
-            class="form-text text-muted espacio-campos informativo"
-          >El Apodo será el único dato personal que se visualizará en la web</small>
+          <small id="emailHelp" class="form-text espacio-campos informativo" style="text-align:left;">El Apodo será el único dato personal que se visualizará en la web</small>
         </div>
-        <div class="col-lg-12 col-sm-12">
-          <input
-            type="password"
-            class="form-control espacio-campos"
-            name="password"
-            id="password"
-            v-model="password"
-            placeholder="Contraseña *"
-          />
+    
+        <div class="col-lg-6 col-sm-12">
+          <input type="email" class="form-control espacio-campos" readonly name="email" id="email" v-model="email" placeholder="Email *"  />
         </div>
-        <div class="col-lg-12 col-sm-12">
-          <input
-            type="password"
-            class="form-control espacio-campos"
-            name="confirmar_password"
-            id="confirmar_password"
-            v-model="password"
-            placeholder="Verificar Contraseña *"
-          />
+
+       <!--  <div class="col-lg-6 col-sm-12">
+          <input type="password" class="form-control espacio-campos" name="password" id="password" v-model="password" placeholder="Contraseña *"/>
         </div>
         <div class="col-lg-6 col-sm-12">
-          <input type="date" class="form-control espacio-campos" name="fecha_nacimiento" id="fecha_nacimiento" v-model="fecha_nacimiento" />
+          <input type="password" class="form-control espacio-campos" name="confirmar_password" id="confirmar_password" v-model="password" placeholder="Verificar Contraseña *" />
+        </div> -->
+        <div class="col-lg-6 col-sm-12">
+            <date-pick v-model="fecha_nacimiento" v-model.trim="$v.fecha_nacimiento.$model" :inputAttributes="{readonly: false, class: 'form-control espacio-campos', placeholder: 'Ingrese una fecha de nacimiento' }" :format="'DD/MM/YYYY'"></date-pick>
+            <label class="error" v-if="!$v.fecha_nacimiento.required">La fecha de nacimiento es obligatoria</label>
         </div>
         <div class="col-lg-6 col-sm-12">
           <select type="text" class="form-control espacio-campos" name="sexo" id="sexo" v-model="sexo">
@@ -46,31 +35,38 @@
             <option value="F">Femenino</option>
           </select>
         </div>
-        <div class="col-lg-12 col-sm-12">
-          <select type="text" class="form-control espacio-campos" name="nacionalidad" id="nacionalidad" v-model="nacionalidad">
-            <option value="">Seleccione una nacionalidad</option>
-            <option value="PE">Peruana</option>
-            <option value="PA">Panameña</option>
-            <option value="ES">Española</option>
-          </select>
-        </div>
-        <div class="col-lg-12 col-sm-12">
-          <select type="text" class="form-control espacio-campos" name="idioma" id="idioma" v-model="idioma">
-            <option value="">Seleccione un idioma</option>
-            <option value="ES">Español</option>
-            <option value="EN">Ingles</option>
-          </select>
-        </div>
-        <div class="col-lg-6 col-sm-12">
-          <input type="email" class="form-control espacio-campos" name="email" id="email" v-model="email" placeholder="Email *"
-          />
-        </div>
-        <div class="col-lg-6 col-sm-12">
-          <input type="email" class="form-control espacio-campos" name="confirmar-email" v-model="email" placeholder="Confirmar email *"
-          />
-        </div>
-
       </div>
+
+      <div class="espaciado-formulario">
+          <h5 class="formulario-titulos">LOCALIZACION:</h5> <span class="obligatorio">(*) Campos Obligatorios</span>
+      </div>
+      <div class="form-row">
+            <div class="col-lg-6 col-sm-12">
+              <select type="text" class="form-control espacio-campos" name="idcountry" v-model="idcountry">
+                <option value="">Seleccione una nacionalidad</option>
+                <option value="205">España</option>
+                <option value="169">Panama</option> 
+                <option value="172">Peru</option> 
+              </select>
+            </div>
+            <div class="col-lg-6 col-sm-12">
+              <select type="text" class="form-control espacio-campos" name="idstate" v-model="idstate">
+                <option value="">Seleccione un departamento</option>
+                <option v-for="(option, index) in arStates" :key="index" :value="option.id" :selected="option.id === idstate ? 'selected' : ''">{{ option.name }}</option>
+
+              </select>
+            </div>
+        </div>
+        <div class="form-row"> 
+          <div class="col-lg-6 col-sm-12">
+              <select type="text" class="form-control espacio-campos" name="idcity" v-model="idcity">
+                <option value="">Seleccione un distrito</option>
+                <option v-for="(option, index) in arCities" :key="index" :value="option.id" :selected="option.id === idcity ? 'selected' : ''">{{ option.name }}</option>
+              </select>
+          </div>
+      </div>
+
+      
 
       <div class="form-row div-error" v-show="errorPerfil">
           <div class="text-center text-error">
@@ -92,8 +88,16 @@
 </template>
 
 <script>
-export default {
 
+import DatePick from 'vue-date-pick';
+import 'vue-date-pick/dist/vueDatePick.css';
+import { required, minLength } from 'vuelidate/lib/validators';
+
+
+export default {
+    components: {
+      DatePick
+    },
     data(){
         return {
             nombre : '',
@@ -103,14 +107,30 @@ export default {
             confirmar_password : '',
             fecha_nacimiento : '',
             sexo : '',
-            nacionalidad : '',
-            idioma : '',
+            idcountry : 0,
+            idstate : 0,
+            idcity : 0,
             celular : '',
             estado : '',
             errorPerfil : 0,
             erroresPerfil: [],
-            id_perfil : 0
+            arStates: [],
+            arCities: []
         }
+    },
+    validations: {
+      nombre: {
+        required
+      },
+      apodo: {
+        required
+      },
+      sexo: {
+        required
+      },
+      fecha_nacimiento: {
+        required
+      }
     },
     methods:{
         mostrarPerfilUsuario(){
@@ -118,22 +138,22 @@ export default {
             let me = this;
 
             // Make a request for a user with a given ID
-            axios.post('/perfil-usuario/editar', {
-                    'idusuario' : me.$idusuario
-            }).then(function (response) {
+            axios.get('/perfil-usuario/editar')
+            .then(function (response) {
                 // handle success
+
+                var usuario = response.data.usuario
               
-                me.nombre = response.data.nombre;
-                me.apodo = response.data.apodo;
-                me.email = response.data.email;
-                me.password = response.data.password;
-                me.confirmar_password = response.data.password;
-                me.fecha_nacimiento = response.data.fecha_nacimiento;
-                me.sexo = response.data.sexo;
-                me.nacionalidad = response.data.nacionalidad;
-                me.idioma = response.data.idioma;
-                me.celular = response.data.celular;
-                me.estado = response.data.estado;
+                me.nombre = usuario.nombre;
+                me.apodo = usuario.apodo;
+                me.email = usuario.email;
+                me.fecha_nacimiento = usuario.fecha_nacimiento;
+                me.sexo = usuario.sexo;
+                me.idcountry = usuario.idcountry;
+                me.idstate = usuario.idstate;
+                me.idcity = usuario.idcity;
+                me.arStates = usuario.states;
+                me.arCities = usuario.cities;
 
                 console.log(response.data);
 
@@ -169,21 +189,19 @@ export default {
 
             // Make a request for a user with a given ID
             axios.put('/perfil-usuario/actualizar', {
-              'nombre' : this.nombre,
-              'apodo' : this.apodo,
-              'email' : this.email,
-              'password' : this.password,
-              'fecha_nacimiento' : this.fecha_nacimiento,
-              'sexo' : this.sexo,
-              'nacionalidad' : this.nacionalidad,
-              'idioma' : this.idioma,
-              'celular' : this.celular,
-              'estado' : this.estado,
-              'id' : 1
+              'nombre' : me.nombre,
+              'apodo' : me.apodo,
+              'password' : me.password,
+              'fecha_nacimiento' : me.fecha_nacimiento,
+              'sexo' : me.sexo,
+              'nacionalidad' : me.nacionalidad,
+              'idcountry' : me.idcountry,
+              'idstate' : me.idstate,
+              'idcity' : me.idcity              
             })
             .then(function (response) {
                 // handle success
-                console.log(response);
+                Swal.fire('CONFIRMACION!', response.data.mensaje, 'success');
             })
             .catch(function (error) {
                 // handle error

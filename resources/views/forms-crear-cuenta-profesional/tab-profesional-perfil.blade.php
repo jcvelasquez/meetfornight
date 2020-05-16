@@ -26,7 +26,7 @@
           <input type="password" class="form-control espacio-campos" name="confirmar_clave" placeholder="Verificar Contraseña *">
         </div>
         <div class="col-lg-6 col-sm-12">
-          <input type="text" class="form-control espacio-campos" name="fecha_nacimiento" placeholder="Fecha nacimiento (dd/mm/yyyy) *" id="fecha_nacimiento">
+          <input type="text" class="form-control espacio-campos" name="fecha_nacimiento" data-date-format='dd/mm/yyyy' placeholder="Fecha nacimiento (dd/mm/yyyy) *" id="fecha_nacimiento">
         </div>
         <div class="col-lg-6 col-sm-12">
           <select type="text" class="form-control espacio-campos" name="sexo" id="sexo">
@@ -238,11 +238,11 @@
       <h5 class="formulario-titulos">FUMADOR(A):</h5>
       <div class="form-row radio-fumador">
         <div class="custom-control custom-radio custom-control-inline no-margin-right-check col-lg-1 col-md-12 col-sm-12 espacio-campos">
-          <input type="radio" id="fumador_si" name="fumador" class="custom-control-input">
+          <input type="radio" id="fumador_si" name="fumador" value="1" class="custom-control-input">
           <label class="custom-control-label custom-control-label-espacio" for="fumador_si">Sí</label>
         </div>
         <div class="custom-control custom-radio custom-control-inline no-margin-right-check col-lg-1 col-md-12 col-sm-12 espacio-campos">
-          <input type="radio" id="fumador_no" name="fumador" class="custom-control-input">
+          <input type="radio" id="fumador_no" name="fumador" value="0" class="custom-control-input">
           <label class="custom-control-label custom-control-label-espacio" for="fumador_no">No</label>
         </div>
       </div>

@@ -2,8 +2,8 @@
 <ul>
     <li class="especial-interna-usuario"><a href="intranet.php"><span>PANEL DE CONTROL</span></a></li>
 
-    <li><a href="{{ url('planes-profesional') }}" class="{{ request()->is('planes-profesional') ? 'menu-lateral-usuario-active' : '' }}"><span><i class="icon-people esp-icono-bio"></i>PLANES</span><span><i class="fa fa-angle-right" aria-hidden="true"></i></span></a></li>
-
+<!--     <li><a href="{{ url('planes-profesional') }}" class="{{ request()->is('planes-profesional') ? 'menu-lateral-usuario-active' : '' }}"><span><i class="icon-people esp-icono-bio"></i>PLANES</span><span><i class="fa fa-angle-right" aria-hidden="true"></i></span></a></li>
+ -->
     <li><a href="{{ url('perfil-profesional') }}" class="{{ request()->is('perfil-profesional') ? 'menu-lateral-usuario-active' : '' }}"><span><i class="icon-user-woman esp-icono-bio"></i>MI PERFIL</span><span><i class="fa fa-angle-right" aria-hidden="true"></i></span></a></li>
 
     <li><a href="{{ url('servicios-profesional') }}" class="{{ request()->is('servicios-profesional') ? 'menu-lateral-usuario-active' : '' }}"><span><i class="icon-massage esp-icono-bio"></i>SERVICIOS</span><span><i class="fa fa-angle-right" aria-hidden="true"></i></span></a></li>

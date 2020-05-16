@@ -203,11 +203,9 @@
               <div class="web"><i class="icon-world esp-icono-bio"></i><a href="#" target="_blank">www.franchescarhodes.com</a></div>
             </div>
           </div>
-          <div class="espacio-reservas">
+          <!-- <div class="espacio-reservas">
             <h2 class="sub-tit"><i class="icon-video esp-icono-bio"></i>VIDEO</h2>
-         <!--    <iframe width="100%" height="315" src="https://www.youtube.com/embed/r1ncXWTwx2g" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe> -->
-
-          </div>
+          </div> -->
 
 
           <div class="espacio-reservas servicios-reservas">

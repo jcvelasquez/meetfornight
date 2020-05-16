@@ -183,7 +183,48 @@ $(document).ready(function () {
   $('#extras tbody').on('click', 'a.deleteExtras', function () {
     dtExtras.row($(this).parents('tr')).remove().draw(false);
     llenarTarifasExtras();
-  }); // validate signup form on keyup and submit
+  });
+
+  function obtenerDisponibilidad() {
+    var arDisponibilidad = [];
+    arDisponibilidad.push({
+      "desde": $('input[name="desde_lunes"]').val(),
+      "hasta": $('input[name="hasta_lunes"]').val(),
+      "dia": "LUNES"
+    });
+    arDisponibilidad.push({
+      "desde": $('input[name="desde_martes"]').val(),
+      "hasta": $('input[name="hasta_martes"]').val(),
+      "dia": "MARTES"
+    });
+    arDisponibilidad.push({
+      "desde": $('input[name="desde_miercoles"]').val(),
+      "hasta": $('input[name="hasta_miercoles"]').val(),
+      "dia": "MIERCOLES"
+    });
+    arDisponibilidad.push({
+      "desde": $('input[name="desde_jueves"]').val(),
+      "hasta": $('input[name="hasta_jueves"]').val(),
+      "dia": "JUEVES"
+    });
+    arDisponibilidad.push({
+      "desde": $('input[name="desde_viernes"]').val(),
+      "hasta": $('input[name="hasta_viernes"]').val(),
+      "dia": "VIERNES"
+    });
+    arDisponibilidad.push({
+      "desde": $('input[name="desde_sabado"]').val(),
+      "hasta": $('input[name="hasta_sabado"]').val(),
+      "dia": "SABADO"
+    });
+    arDisponibilidad.push({
+      "desde": $('input[name="desde_domingo"]').val(),
+      "hasta": $('input[name="hasta_domingo"]').val(),
+      "dia": "DOMINGO"
+    });
+    return arDisponibilidad;
+  } // validate signup form on keyup and submit
+
 
   $("#form-cuenta-profesional").validate({
     ignore: ":hidden :not('inp-cbx.always-validate') ",
@@ -281,6 +322,9 @@ $(document).ready(function () {
       corte_intimo: {
         required: true
       },
+      color_ojos: {
+        required: true
+      },
       //PESTAÑA SERVICIOS
       "masajes[]": {
         required: true,
@@ -311,6 +355,52 @@ $(document).ready(function () {
         required: true
       },
       tipo_contacto: {
+        required: true
+      },
+      desde_lunes: {
+        required: true
+      },
+      hasta_lunes: {
+        required: true
+      },
+      desde_martes: {
+        required: true
+      },
+      hasta_martes: {
+        required: true
+      },
+      desde_miercoles: {
+        required: true
+      },
+      hasta_miercoles: {
+        required: true
+      },
+      desde_jueves: {
+        required: true
+      },
+      hasta_jueves: {
+        required: true
+      },
+      desde_viernes: {
+        required: true
+      },
+      hasta_viernes: {
+        required: true
+      },
+      desde_sabado: {
+        required: true
+      },
+      hasta_sabado: {
+        required: true
+      },
+      desde_domingo: {
+        required: true
+      },
+      hasta_domingo: {
+        required: true
+      },
+      //PESTAÑA TARIFAS
+      tipo_moneda: {
         required: true
       }
     },
@@ -354,6 +444,7 @@ $(document).ready(function () {
       idcity: "Selecciona una opcion",
       color_cabello: "Selecciona una opcion",
       corte_intimo: "Selecciona una opcion",
+      color_ojos: "Selecciona una opcion",
       //PESTAÑA SERVICIOS
       "masajes[]": {
         required: "Selecciona una opcion al menos"
@@ -379,6 +470,51 @@ $(document).ready(function () {
       },
       tipo_contacto: {
         required: "Seleccione el tipo de contacto preferido"
+      },
+      tipo_moneda: {
+        required: "Seleccione el tipo de moneda"
+      },
+      desde_lunes: {
+        required: "Seleccione"
+      },
+      hasta_lunes: {
+        required: "Seleccione"
+      },
+      desde_martes: {
+        required: "Seleccione"
+      },
+      hasta_martes: {
+        required: "Seleccione"
+      },
+      desde_miercoles: {
+        required: "Seleccione"
+      },
+      hasta_miercoles: {
+        required: "Seleccione"
+      },
+      desde_jueves: {
+        required: "Seleccione"
+      },
+      hasta_jueves: {
+        required: "Seleccione"
+      },
+      desde_viernes: {
+        required: "Seleccione"
+      },
+      hasta_viernes: {
+        required: "Seleccione"
+      },
+      desde_sabado: {
+        required: "Seleccione"
+      },
+      hasta_sabado: {
+        required: "Seleccione"
+      },
+      desde_domingo: {
+        required: "Seleccione"
+      },
+      hasta_domingo: {
+        required: "Seleccione"
       }
     },
     //errorLabelContainer: ".js-errors",
@@ -391,6 +527,7 @@ $(document).ready(function () {
         error.insertAfter(element.parents('.radio-tatuaje'));
         error.insertAfter(element.parents('.radio-piercing'));
         error.insertAfter(element.parents('.radio-fumador'));
+        error.insertAfter(element.parents('.radio-moneda'));
       } else if (element.is(":checkbox")) {
         error.insertAfter(element.parents('.form-row'));
       } else {
@@ -483,21 +620,28 @@ $(document).ready(function () {
       });
       axios.post('registrar-profesional', (_axios$post = {
         //PLANES
-        'radioPlan': $('input[name="radioPlan"]:checked').val(),
+        'idplan': $('input[name="radioPlan"]:checked').val(),
         //PERFIL
         'nombre': $('input[name="nombre"]').val(),
         'apodo': $('input[name="apodo"]').val(),
         'password': $('input[name="password"]').val(),
         'email': $('input[name="email"]').val(),
         'fecha_nacimiento': $('input[name="fecha_nacimiento"]').val()
-      }, _defineProperty(_axios$post, "apodo", $("input[name='apodo']").val()), _defineProperty(_axios$post, 'orientacion', $("input[name='orientacion']:checked").val()), _defineProperty(_axios$post, 'sexo', $('select[name="sexo"]').val()), _defineProperty(_axios$post, 'categorias', JSON.stringify(arCategorias)), _defineProperty(_axios$post, 'idiomas', JSON.stringify(arIdiomas)), _defineProperty(_axios$post, 'idcountry', $('select[name="idcountry"]').val()), _defineProperty(_axios$post, 'idstate', $('select[name="idstate"]').val()), _defineProperty(_axios$post, 'idcity', $('select[name="idcity"]').val()), _defineProperty(_axios$post, 'tatuaje', $('input[name="tatuaje"]').is(":checked") ? "1" : "0"), _defineProperty(_axios$post, 'piercing', $('input[name="piercing"]').is(":checked") ? "1" : "0"), _defineProperty(_axios$post, 'fumador', $('input[name="fumador"]').is(":checked") ? "1" : "0"), _defineProperty(_axios$post, 'pene', $('select[name="pene"]').val()), _defineProperty(_axios$post, 'pecho', $('select[name="pecho"]').val()), _defineProperty(_axios$post, 'color_cabello', $('select[name="color_cabello"]').val()), _defineProperty(_axios$post, 'corte_intimo', $('select[name="corte_intimo"]').val()), _defineProperty(_axios$post, 'color_ojos', $('select[name="color_ojos"]').val()), _defineProperty(_axios$post, 'estatura', $('input[name="estatura"]').val()), _defineProperty(_axios$post, 'peso', $('input[name="peso"]').val()), _defineProperty(_axios$post, 'descripcion', $("textarea[name='descripcion']").val()), _defineProperty(_axios$post, 'frase', $("input[name='frase']").val()), _defineProperty(_axios$post, 'seguridad', $('input[name="seguridad"]').is(":checked") ? "1" : "0"), _defineProperty(_axios$post, 'servicios', JSON.stringify(arServicios)), _defineProperty(_axios$post, 'celular', $('input[name="celular"]').val()), _defineProperty(_axios$post, 'tipo_celular', $("input[name='tipo_celular']").is(":checked") ? "WHATSAPP" : "CELULAR"), _defineProperty(_axios$post, 'tipo_contacto', $('input[name="tipo_contacto"]:checked').val()), _defineProperty(_axios$post, 'pagina_web', $("input[name='pagina_web']").val()), _defineProperty(_axios$post, 'disponibilidad', JSON.stringify(JSON.parse('[{ "desde" : "' + obtenerDisponibilidad($('input[name="slider_lunes"]').jRange('getValue').split(',')[0]) + '" , "hasta": "' + obtenerDisponibilidad($('input[name="slider_lunes"]').jRange('getValue').split(',')[1]) + '" , "dia": "LUNES" }, { "desde" : "' + obtenerDisponibilidad($('input[name="slider_martes"]').jRange('getValue').split(',')[0]) + '", "hasta" : "' + obtenerDisponibilidad($('input[name="slider_martes"]').jRange('getValue').split(',')[1]) + '", "dia" : "MARTES" }, { "desde" : "' + obtenerDisponibilidad($('input[name="slider_miercoles"]').jRange('getValue').split(',')[0]) + '", "hasta" : "' + obtenerDisponibilidad($('input[name="slider_miercoles"]').jRange('getValue').split(',')[1]) + '", "dia" : "MIERCOLES" }, { "desde" : "' + obtenerDisponibilidad($('input[name="slider_jueves"]').jRange('getValue').split(',')[0]) + '", "hasta" : "' + obtenerDisponibilidad($('input[name="slider_jueves"]').jRange('getValue').split(',')[1]) + '", "dia" : "JUEVES" }, { "desde" : "' + obtenerDisponibilidad($('input[name="slider_viernes"]').jRange('getValue').split(',')[0]) + '", "hasta" : "' + obtenerDisponibilidad($('input[name="slider_viernes"]').jRange('getValue').split(',')[1]) + '", "dia" : "VIERNES" }, { "desde" : "' + obtenerDisponibilidad($('input[name="slider_sabado"]').jRange('getValue').split(',')[0]) + '", "hasta" : "' + obtenerDisponibilidad($('input[name="slider_sabado"]').jRange('getValue').split(',')[1]) + '", "dia" : "SABADO" }, { "desde" : "' + obtenerDisponibilidad($('input[name="slider_domingo"]').jRange('getValue').split(',')[0]) + '", "hasta" : "' + obtenerDisponibilidad($('input[name="slider_domingo"]').jRange('getValue').split(',')[1]) + '", "dia" : "DOMINGO" } ]'))), _defineProperty(_axios$post, 'agenda', $("input[name='agenda']").is(":checked") ? "1" : "0"), _defineProperty(_axios$post, 'tarifas', JSON.stringify(arTarifas)), _axios$post), {
+      }, _defineProperty(_axios$post, "apodo", $("input[name='apodo']").val()), _defineProperty(_axios$post, 'orientacion', $("input[name='orientacion']:checked").val()), _defineProperty(_axios$post, 'sexo', $('select[name="sexo"]').val()), _defineProperty(_axios$post, 'categorias', JSON.stringify(arCategorias)), _defineProperty(_axios$post, 'idiomas', JSON.stringify(arIdiomas)), _defineProperty(_axios$post, 'idcountry', $('select[name="idcountry"]').val()), _defineProperty(_axios$post, 'idstate', $('select[name="idstate"]').val()), _defineProperty(_axios$post, 'idcity', $('select[name="idcity"]').val()), _defineProperty(_axios$post, 'tatuaje', $("input[name='tatuaje']:checked").val()), _defineProperty(_axios$post, 'piercing', $("input[name='piercing']:checked").val()), _defineProperty(_axios$post, 'fumador', $("input[name='fumador']:checked").val()), _defineProperty(_axios$post, 'pene', $('select[name="pene"]').val()), _defineProperty(_axios$post, 'pecho', $('select[name="pecho"]').val()), _defineProperty(_axios$post, 'color_cabello', $('select[name="color_cabello"]').val()), _defineProperty(_axios$post, 'corte_intimo', $('select[name="corte_intimo"]').val()), _defineProperty(_axios$post, 'color_ojos', $('select[name="color_ojos"]').val()), _defineProperty(_axios$post, 'estatura', $('input[name="estatura"]').val()), _defineProperty(_axios$post, 'peso', $('input[name="peso"]').val()), _defineProperty(_axios$post, 'descripcion', $("textarea[name='descripcion']").val()), _defineProperty(_axios$post, 'frase', $("input[name='frase']").val()), _defineProperty(_axios$post, 'seguridad', $('input[name="seguridad"]').is(":checked") ? "1" : "0"), _defineProperty(_axios$post, 'servicios', JSON.stringify(arServicios)), _defineProperty(_axios$post, 'celular', $('input[name="celular"]').val()), _defineProperty(_axios$post, 'tipo_celular', $("input[name='tipo_celular']").is(":checked") ? "WHATSAPP" : "CELULAR"), _defineProperty(_axios$post, 'tipo_moneda', $("input[name='tipo_moneda']:checked").val()), _defineProperty(_axios$post, 'tipo_contacto', $('input[name="tipo_contacto"]:checked').val()), _defineProperty(_axios$post, 'pagina_web', $("input[name='pagina_web']").val()), _defineProperty(_axios$post, 'disponibilidad', JSON.stringify(obtenerDisponibilidad())), _defineProperty(_axios$post, 'agenda', $("input[name='agenda']").is(":checked") ? "1" : "0"), _defineProperty(_axios$post, 'tarifas', JSON.stringify(arTarifas)), _axios$post), {
         headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
       }).then(function (response) {
         if (response.data.status == "success") {
           $('#idprofesional').val(response.data.idprofesional);
-          DropProfesional.processQueue();
+
+          if (DropProfesional.getQueuedFiles().length > 0) {
+            DropProfesional.processQueue();
+          } else {
+            Swal.fire('CONFIRMACIÓN', "Se registró la cuenta profesional, deberá confirmar el correo electrónico registrado para poder iniciar sesión.", 'success').then(function () {
+              window.location = "/iniciar-sesion";
+            });
+          }
         } else {
           Swal.fire("ERROR", "Hubo un error en el registro de la cuenta. Comuniquese con el area de soporte.", "error");
         }
@@ -507,21 +651,38 @@ $(document).ready(function () {
       });
     }
   });
+  $('.selector_horario').timeselector({
+    hours12: false,
+    step: 1,
+    min: '00:00',
+    max: '23:59'
+  });
   $("#fecha_nacimiento").datepicker({
     dateFormat: "dd/mm/yyyy",
-    clearBtn: true,
-    language: "es"
+    clearBtn: true
   }); // Step show event
 
   $("#smartwizard").on("showStep", function (e, anchorObject, stepNumber, stepDirection, stepPosition) {
     //alert("You are on step "+stepNumber+" now");
     if (stepPosition === 'first') {
-      $("#prev-btn").addClass('disabled');
+      $("#prev-btn").addClass('disabled'); //OCULTAR BOTON CONFIRMAR
+
+      $("#button_confirmar").hide(); //MOSTRAR BOTON SIGUIENTE
+
+      $("#button_siguiente").show();
     } else if (stepPosition === 'final') {
-      $("#next-btn").addClass('disabled');
+      $("#next-btn").addClass('disabled'); //MOSTRAR BOTON CONFIRMAR
+
+      $("#button_confirmar").show(); //OCULTAR BOTON SIGUIENTE
+
+      $("#button_siguiente").hide();
     } else {
       $("#prev-btn").removeClass('disabled');
-      $("#next-btn").removeClass('disabled');
+      $("#next-btn").removeClass('disabled'); //MOSTRAR BOTON SIGUIENTE
+
+      $("#button_siguiente").show(); //OCULTAR BOTON CONFIRMAR
+
+      $("#button_confirmar").hide();
     }
   }); // Smart Wizard
 
@@ -812,8 +973,8 @@ $(document).ready(function () {
       $("#catMUJERES").hide();
     }
   });
-  $("input[name='radioPlan']").on("change", function () {
-    $("#plan_label").html("Cuenta: " + $(this).parent(".container-radio").find("input[name='plan_seleccionado']").val()); //SI EL PRECIO DEL PLAN SELECCIONADO ES MAS DE CERO MOSTRAR PERIODOS
+  $("input[name='plan_seleccionado']").on("change", function () {
+    $("#plan_label").html("Cuenta: " + $(this).parent(".container-radio").find("input[name='plan_seleccionado']:checked").val()); //SI EL PRECIO DEL PLAN SELECCIONADO ES MAS DE CERO MOSTRAR PERIODOS
 
     if (parseFloat($(this).parent(".container-radio").find("input[name='precio_seleccionado']").val()) > 0) {
       $("#periodos_planes").slideDown();
@@ -823,6 +984,24 @@ $(document).ready(function () {
   });
   $("#idcountry").on("change", function () {
     var idcountry = $(this).val();
+
+    if (idcountry == 169) {
+      //PANAMA
+      $("#moneda_pen").hide();
+      $("#moneda_eur").hide();
+      $("#moneda_usd").show();
+    } else if (idcountry == 172) {
+      //PERU
+      $("#moneda_pen").show();
+      $("#moneda_eur").hide();
+      $("#moneda_usd").show();
+    } else {
+      //ESPAÑA
+      $("#moneda_pen").hide();
+      $("#moneda_eur").show();
+      $("#moneda_usd").hide();
+    }
+
     $('#idstate').find('option').remove().end().append(new Option("Seleccione un departamento", ""));
     axios.post('seleccionar-states', {
       'idcountry': idcountry
@@ -860,7 +1039,7 @@ $(document).ready(function () {
     });
   });
   var DropProfesional = new Dropzone("#dropzone_subir_profesional", {
-    url: "registrar-banner",
+    url: "registrar-profesional-fotos",
     acceptedFiles: ".jpeg,.jpg,.png,.gif",
     clickable: "#dropzone_subir_profesional button",
     maxFiles: 5,
@@ -869,22 +1048,23 @@ $(document).ready(function () {
     headers: {
       'X-CSRF-TOKEN': $("meta[name='csrf-token']").attr("content")
     },
-    params: {
-      "idprofesional": $("#idprofesional").val()
-    },
     error: function error(file, response) {
       return false;
     },
-    success: function success(file, done) {
-      Swal.fire('CONFIRMACIÓN', "Se registró la cuenta profesional, deberá confirmar el correo electrónico registrado para poder iniciar sesión.", 'success').then(function () {
-        window.location = "/iniciar-sesion";
-      });
-      ;
+    complete: function complete(file) {
+      if (this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0) {
+        Swal.fire('CONFIRMACIÓN', "Se registró la cuenta profesional, deberá confirmar el correo electrónico registrado para poder iniciar sesión.", 'success').then(function () {
+          window.location = "/iniciar-sesion";
+        });
+      }
     },
     init: function init() {
       this.on("maxfilesreached", function (file) {
         Swal.fire('AVISO', "Solo puede subir 5 fotos como máximo.", 'warning');
         $('#dropzone_subir_profesional button').attr('disabled', true);
+      });
+      this.on("processing", function () {
+        this.options.autoProcessQueue = true;
       });
       this.on("maxfilesexceeded", function (file) {
         this.removeFile(file);
@@ -892,6 +1072,9 @@ $(document).ready(function () {
       this.on("removedfile", function (file) {
         if (this.files.length < 5) $('#dropzone_subir_profesional button').attr('disabled', false);
         mostrarMiniaturas();
+      });
+      this.on("sending", function (file, xhr, formData) {
+        formData.append("idprofesional", $("#idprofesional").val());
       });
       this.on("reset", function (file) {
         $('#dropzone_subir_profesional button').attr('disabled', false);

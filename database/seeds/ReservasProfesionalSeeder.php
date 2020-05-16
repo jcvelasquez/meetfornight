@@ -17,7 +17,7 @@ class ReservasProfesionalSeeder extends Seeder
         //
 
         $reservas = new ReservasProfesional();
-        $reservas->idprofesional = 46;
+        $reservas->idprofesional = 34;
         $reservas->idusuario = 2;
         $reservas->desde = '2019-11-06 10:40:00';
         $reservas->hasta = '2019-11-06 13:00:00';
@@ -30,7 +30,7 @@ class ReservasProfesionalSeeder extends Seeder
         $reservas->save();
 
         $reservas = new ReservasProfesional();
-        $reservas->idprofesional = 46;
+        $reservas->idprofesional = 34;
         $reservas->idusuario = 2;
         $reservas->desde = '2019-11-05 15:10:00';
         $reservas->hasta = '2019-11-05 16:00:00';
@@ -43,7 +43,7 @@ class ReservasProfesionalSeeder extends Seeder
         $reservas->save();
 
         $reservas = new ReservasProfesional();
-        $reservas->idprofesional = 46;
+        $reservas->idprofesional = 34;
         $reservas->idusuario = 2;
         $reservas->desde = '2019-11-05 18:00:00';
         $reservas->hasta = '2019-11-05 19:20:00';

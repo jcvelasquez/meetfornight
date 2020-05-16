@@ -190,11 +190,11 @@ $(document).ready(function () {
       e.preventDefault(); //DESACTIVO LOS BOTONES
 
       $("#prev-btn").attr('disabled', true);
-      $("#next-btn").attr('disabled', true); //$("#btn-enviar").attr('disabled', true);
-
+      $("#next-btn").attr('disabled', true);
+      $("#btn-enviar").attr('disabled', true);
       axios.post('registrar-empresa', {
         //PLANES
-        'radioPlan': $('input[name="radioPlan"]:checked').val(),
+        'idplan': $('input[name="radioPlan"]:checked').val(),
         //PERFIL
         'nombre': $('input[name="nombre"]').val(),
         'empresa': $('input[name="empresa"]').val(),
@@ -221,7 +221,7 @@ $(document).ready(function () {
     }
   });
   var DropEmpresa = new Dropzone("#dropzone_subir_banner", {
-    url: "registrar-banner",
+    url: "registrar-empresa-banner",
     acceptedFiles: ".jpeg,.jpg,.png,.gif",
     clickable: "#dropzone_subir_banner button",
     maxFiles: 1,
@@ -229,9 +229,6 @@ $(document).ready(function () {
     addRemoveLinks: true,
     headers: {
       'X-CSRF-TOKEN': $("meta[name='csrf-token']").attr("content")
-    },
-    params: {
-      "idempresa": $("#idempresa").val()
     },
     error: function error(file, response) {
       return false;
@@ -269,12 +266,24 @@ $(document).ready(function () {
   $("#smartwizardEmpresa").on("showStep", function (e, anchorObject, stepNumber, stepDirection, stepPosition) {
     //alert("You are on step "+stepNumber+" now");
     if (stepPosition === 'first') {
-      $("#prev-btn").addClass('disabled');
+      $("#prev-btn").addClass('disabled'); //OCULTAR BOTON CONFIRMAR
+
+      $("#button_confirmar").hide(); //MOSTRAR BOTON SIGUIENTE
+
+      $("#button_siguiente").show();
     } else if (stepPosition === 'final') {
-      $("#next-btn").addClass('disabled');
+      $("#next-btn").addClass('disabled'); //MOSTRAR BOTON CONFIRMAR
+
+      $("#button_confirmar").show(); //OCULTAR BOTON SIGUIENTE
+
+      $("#button_siguiente").hide();
     } else {
       $("#prev-btn").removeClass('disabled');
-      $("#next-btn").removeClass('disabled');
+      $("#next-btn").removeClass('disabled'); //MOSTRAR BOTON SIGUIENTE
+
+      $("#button_siguiente").show(); //OCULTAR BOTON CONFIRMAR
+
+      $("#button_confirmar").hide();
     }
   }); // Smart Wizard
 
@@ -304,15 +313,6 @@ $(document).ready(function () {
     }
   }); //SLIDERS PERFIL
 
-  $("input[name='radioPlan']").on("change", function () {
-    $("#plan_label").html("Empresa " + $(this).parent(".container-radio").find("input[name='plan_seleccionado']").val()); //SI EL PRECIO DEL PLAN SELECCIONADO ES MAS DE CERO MOSTRAR PERIODOS
-
-    /*if(parseFloat($(this).parent(".container-radio").find("input[name='precio_seleccionado']").val()) > 0) {
-        $("#periodos_planes").slideDown();
-    }else{
-      $("#periodos_planes").slideUp();
-    }*/
-  });
   $("#idcountry").on("change", function () {
     var idcountry = $(this).val();
     $('#idstate').find('option').remove().end().append(new Option("Seleccione un departamento", ""));
@@ -350,6 +350,15 @@ $(document).ready(function () {
     })["catch"](function (error) {
       console.log(error);
     });
+  });
+  $("input[name='plan_seleccionado']").on("change", function () {
+    $("#plan_label").html("Empresa " + $(this).parent(".container-radio").find("input[name='plan_seleccionado']:checked").val()); //SI EL PRECIO DEL PLAN SELECCIONADO ES MAS DE CERO MOSTRAR PERIODOS
+
+    /*if(parseFloat($(this).parent(".container-radio").find("input[name='precio_seleccionado']").val()) > 0) {
+        $("#periodos_planes").slideDown();
+    }else{
+      $("#periodos_planes").slideUp();
+    }*/
   }); //MOSTRAR LOS VALORES EN LA PANTALLA DE ACTIVAR
 
   $("input[name='nombre']").on("blur", function () {

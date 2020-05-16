@@ -3,6 +3,7 @@
     "/css/app.css": "/css/app.css",
     "/js/crear_empresa_footer.js": "/js/crear_empresa_footer.js",
     "/js/crear_profesional_footer.js": "/js/crear_profesional_footer.js",
+    "/js/crear_usuario_footer.js": "/js/crear_usuario_footer.js",
     "/css/meetfornight.css": "/css/meetfornight.css",
     "/js/meetfornight.js": "/js/meetfornight.js"
 }

@@ -1,7 +1,7 @@
 <template>
   <form action="#" method="post">
     <div class="bloques-de-perfil">
-      <h5 class="formulario-titulos">ESTADÍSTICA:</h5>
+      <h5 class="formulario-titulos">ESTADÍSTICAS:</h5>
       <p>Con las Estadisticas podrás hacer que tu anuncio sea lo más eficiente posible y podrás controlar a su vez el exito que estás teniendo en nuestra plataforma.</p>
 
       <p>Queremos que tengas en todo momento el control de tu anuncio y de tu presupuesto.</p>

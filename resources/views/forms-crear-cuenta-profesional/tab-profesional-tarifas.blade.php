@@ -2,22 +2,26 @@
       <div class="col-lg-8 col-sm-12">
           
 
-       <!--    <div class="bloques-de-perfil">
+          <div class="bloques-de-perfil">
             <h5 class="formulario-titulos">TIPO DE MONEDA:</h5>
             <p>Elige el tipo de moneda en el que deseas trabajar con tus clientes.</p>
             <div class="linea-morada">
-              <div class="row">
-                <div class="custom-control custom-radio custom-control-inline no-margin-right-check col-lg-1 col-md-12 col-sm-12 espacio-campos">
-                  <input type="radio" id="tatuaje(s)-si" name="tatuaje(s)" class="custom-control-input">
-                  <label class="custom-control-label custom-control-label-espacio" for="tatuaje(s)-si">/S.</label>
+              <div class="row radio-moneda">
+                <div class="custom-control custom-radio custom-control-inline no-margin-right-check col-lg-1 col-md-12 col-sm-12 espacio-campos hide" id="moneda_pen">
+                  <input type="radio" name="tipo_moneda" id="pen" value="PEN" class="custom-control-input">
+                  <label class="custom-control-label custom-control-label-espacio" for="pen">S/</label>
                 </div>
-                <div class="custom-control custom-radio custom-control-inline no-margin-right-check col-lg-1 col-md-12 col-sm-12 espacio-campos">
-                  <input type="radio" id="tatuaje(s)-no" name="tatuaje(s)" class="custom-control-input">
-                  <label class="custom-control-label custom-control-label-espacio" for="tatuaje(s)-no">$</label>
+                <div class="custom-control custom-radio custom-control-inline no-margin-right-check col-lg-1 col-md-12 col-sm-12 espacio-campos hide" id="moneda_usd">
+                  <input type="radio" name="tipo_moneda" id="usd" value="USD" class="custom-control-input">
+                  <label class="custom-control-label custom-control-label-espacio" for="usd">$</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline no-margin-right-check col-lg-1 col-md-12 col-sm-12 espacio-campos hide" id="moneda_eur">
+                  <input type="radio" name="tipo_moneda" id="eur" value="EUR" class="custom-control-input">
+                  <label class="custom-control-label custom-control-label-espacio" for="eur">€</label>
                 </div>
               </div>
             </div>
-          </div> -->
+          </div> 
 
           <div class="bloques-de-perfil">
             <h5 class="formulario-titulos">TARIFAS:</h5>

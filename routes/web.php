@@ -45,7 +45,10 @@ Route::get('idiomas/listar', 'IdiomasController@listar');
 
 //VISTA DE PERFIL
 Route::get('perfil/{apodo}',  'PerfilController@mostrar');
-Route::get('perfil/disponibilidad/{apodo}', 'PerfilController@disponibilidad' );
+Route::get('perfil/disponibilidad/{apodo}', 'DisponibilidadProfesionalController@listar' );
+
+Route::post('seleccionar-states', 'CrearCuentaController@seleccionarStates');
+Route::post('seleccionar-cities', 'CrearCuentaController@seleccionarCities');
 
 Route::group(['middleware'=>['guest']],function(){
   
@@ -54,22 +57,30 @@ Route::group(['middleware'=>['guest']],function(){
         Route::get('crear-cuenta-usuario', 'CrearCuentaController@mostrarRegistroUsuario');      
         Route::get('crear-cuenta-empresa', 'CrearCuentaController@mostrarRegistroEmpresa');   
 
-        
-
         Route::get('faq-perfil-usuario', 'HomeController@mostrarFaqUsuario');   
         Route::get('faq-perfil-profesional', 'HomeController@mostrarFaqProfesional');   
         Route::get('faq-perfil-empresa', 'HomeController@mostrarFaqEmpresa');   
 
         Route::post('comprobar-credenciales', 'Auth\LoginController@login')->name('comprobar-credenciales');
+
         Route::get('iniciar-sesion', 'Auth\LoginController@showLoginForm')->name('iniciar-sesion');
 
         Route::post('registrar-usuario', 'CrearCuentaController@registrarUsuario')->name('registrar-usuario');
-        Route::post('registrar-profesional', 'CrearCuentaController@registrarProfesional')->name('registrar-profesional');
-        Route::post('registrar-empresa', 'CrearCuentaController@registrarEmpresa')->name('registrar-empresa');
-        Route::post('registrar-banner', 'BannerEmpresaController@subirBannerEmpresa');   
+        Route::post('registrar-usuario-fotos', 'CrearCuentaController@subirFotoUsuarioRegistro');   
 
-        Route::post('seleccionar-states', 'CrearCuentaController@seleccionarStates');
-        Route::post('seleccionar-cities', 'CrearCuentaController@seleccionarCities');
+        
+        Route::post('registrar-profesional', 'CrearCuentaController@registrarProfesional')->name('registrar-profesional');
+        Route::post('registrar-profesional-fotos', 'CrearCuentaController@subirFotoProfesionalRegistro');   
+
+        Route::post('registrar-empresa', 'CrearCuentaController@registrarEmpresa')->name('registrar-empresa');
+        Route::post('registrar-empresa-banner', 'BannerEmpresaController@subirBannerEmpresa');   
+        
+
+        
+
+
+        Route::get('eliminar-profesional', 'AdministradorController@eliminarProfesional');
+        
 
 });
 
@@ -86,12 +97,36 @@ Route::group(['middleware'=>['auth','verified']],function(){
             
             //URLS PARA EL USUARIO
             Route::get('perfil-usuario', 'UsuarioController@mostrarPerfilUsuarioLogueado')->name('perfil-usuario');
-            Route::post('perfil-usuario/editar', 'UsuarioController@editarDataUsuario');
+            Route::get('perfil-usuario/editar', 'UsuarioController@editarDataUsuario');
             Route::put('perfil-usuario/actualizar', 'UsuarioController@actualizarDataUsuario');
-            Route::put('seguridad-usuario', 'SeguridadUsuarioController@mostrar')->name('seguridad-usuario');
+
+            //MENSAJES
+            Route::get('mensajes-usuario', 'MensajeUsuarioController@mostrar');
+            Route::get('mensajes-usuario/listar', 'MensajeUsuarioController@listar');
+            Route::post('mensajes-usuario/responder', 'MensajeUsuarioController@responder');
+            Route::post('mensajes-usuario/eliminar', 'MensajeUsuarioController@eliminar');
+
+            //RESERVAS
+            Route::get('reservas-usuario', 'ReservasUsuarioController@mostrar' );
+            Route::get('reservas-usuario/listar', 'ReservasUsuarioController@listar' );
+
+            //FAVORITOS
+            Route::get('favoritos-usuario', 'FavoritoUsuarioController@mostrar');
+            Route::get('favoritos-usuario/listar', 'FavoritoUsuarioController@listar');
+
             Route::get('perfil/usuario/sesion', 'UsuarioController@obtenerUsuarioLogueado');
             Route::get('perfil/tarifas/{apodo}', 'PerfilController@tarifas' );
             Route::post('perfil/horarios/{apodo}', 'PerfilController@horarios' );     
+
+            Route::post('favoritos-usuario/agregar', 'FavoritoUsuarioController@agregar' );    
+            
+            Route::get('reservas-usuario', 'ReservasUsuarioController@mostrar' )->name('reservas-usuario');
+            Route::get('reservas-usuario/listar', 'ReservasUsuarioController@listar' );
+            Route::post('reservas-usuario/aceptar', 'ReservasUsuarioController@cancelar'); 
+
+            Route::get('seguridad-usuario', 'SeguridadUsuarioController@mostrar');
+            Route::get('seguridad-usuario/listar', 'SeguridadUsuarioController@listar');
+
 
     });
 
@@ -104,6 +139,14 @@ Route::group(['middleware'=>['auth','verified']],function(){
 
         Route::get('banners-empresa', 'BannerEmpresaController@mostrar');
         Route::get('banners-empresa/listar', 'BannerEmpresaController@listar');
+        
+        Route::get('planes-empresa', 'PlanesEmpresaController@mostrar');
+        Route::get('planes-empresa/listar', 'PlanesEmpresaController@listar');
+
+        Route::get('estadisticas-empresa', function () {  return view('forms-perfil-empresa.estadisticas-empresa');  });
+
+
+       
         
         /*Route::put('seguridad-usuario', 'SeguridadUsuarioController@mostrar')->name('seguridad-usuario');
         Route::get('perfil/usuario/sesion', 'UsuarioController@obtenerUsuarioLogueado');
@@ -193,6 +236,8 @@ Route::group(['middleware'=>['auth','verified']],function(){
             Route::get('tarifas-profesional/listar', 'TarifaProfesionalController@list' );
             Route::delete('tarifas-profesional/eliminar/{id}', 'TarifaProfesionalController@destroy' );
             Route::post('tarifas-profesional/registrar', 'TarifaProfesionalController@store');
+
+            Route::post('tipo-moneda/actualizar', 'TarifaProfesionalController@actualizarTipoMoneda');
             
             //CREDITOS
             Route::get('creditos-profesional', 'CreditoProfesionalController@mostrar' );

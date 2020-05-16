@@ -23,40 +23,4 @@ class PlanesProfesionalController extends Controller
     }
 
 
-    
-    public function create()
-    {
-        //
-    }
-
- 
-    
-    public function store(Request $request)
-    {
-        //
-    }
-
-
-    public function show(PlanesProfesional $planesProfesional)
-    {
-        //
-    }
-
-
-    public function edit(PlanesProfesional $planesProfesional)
-    {
-        //
-    }
-
-
-    public function update(Request $request, PlanesProfesional $planesProfesional)
-    {
-        //
-    }
-
- 
-    public function destroy(PlanesProfesional $planesProfesional)
-    {
-        //
-    }
 }

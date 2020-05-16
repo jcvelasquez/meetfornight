@@ -29,11 +29,13 @@ class ReservasProfesionalController extends Controller
     public function registrar(Request $request)
     {
 
+        $idusuario = Auth::user()->id;
+
         $usuario = Usuario::where('apodo', '=', $request->apodo)->firstOrFail();
 
         $reserva = new ReservasProfesional();
-        $reserva->idprofesional = 34;
-        $reserva->idusuario = $usuario->id;
+        $reserva->idprofesional = $usuario->id;
+        $reserva->idusuario = $idusuario;
         $reserva->desde = $request->desde;
         $reserva->hasta = $request->hasta;
         $reserva->servicios = json_encode($request->servicios);

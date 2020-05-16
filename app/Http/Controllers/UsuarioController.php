@@ -42,9 +42,14 @@ class UsuarioController extends Controller
 
     }
 
-    public function editarDataUsuario(Request $request)
+    public function editarDataUsuario()
     {
-        return Usuario::findOrFail($request->idusuario);
+        $idusuario = Auth::user()->id;
+
+        $usuario = Usuario::where('id', '=', $idusuario)->with('states')->with('cities')->first();
+        
+        return ['usuario' => $usuario];     
+        
     }
 
 
@@ -115,7 +120,27 @@ class UsuarioController extends Controller
         $usuario->nombre = $request->nombre;
         $usuario->apodo = $request->apodo;
         $usuario->celular = $request->celular;
-        //$usuario->password = Hash::make( $request->password );
+        $usuario->idcountry = $request->idcountry;
+        $usuario->idstate = $request->idstate;
+        $usuario->idcity = $request->idcity;
+        $usuario->save();
+
+        return ['mensaje' => 'Los datos fueron actualizados correctamente'];     
+
+    }
+
+    public function actualizarDataUsuario(Request $request)
+    {
+        $idusuario = Auth::user()->id;
+
+        //------------------------------
+        //ACTUALIZAR USUARIO
+        //------------------------------
+        $usuario = Usuario::find( $idusuario );
+        $usuario->nombre = $request->nombre;
+        $usuario->apodo = $request->apodo;
+        $usuario->fecha_nacimiento = Carbon::createFromFormat('d/m/Y', $request->fecha_nacimiento );
+        $usuario->sexo = $request->sexo;
         $usuario->idcountry = $request->idcountry;
         $usuario->idstate = $request->idstate;
         $usuario->idcity = $request->idcity;
@@ -136,8 +161,6 @@ class UsuarioController extends Controller
         $usuario = Usuario::find( $idprofesional );
         $usuario->nombre = $request->nombre;
         $usuario->apodo = $request->apodo;
-        $usuario->email = $request->email;
-        //$usuario->password = Hash::make( $request->password );
         $usuario->fecha_nacimiento = Carbon::createFromFormat('d/m/Y', $request->fecha_nacimiento );
         $usuario->sexo = $request->sexo;
         $usuario->idcountry = $request->idcountry;
@@ -171,76 +194,65 @@ class UsuarioController extends Controller
 
         $categorias = json_decode($request['categorias']);
 
-        if( CategoriasProfesional::where('idprofesional', $idprofesional )->delete() ){
+        //ELIMINO LOS PREVIOS
+        CategoriasProfesional::where('idprofesional', $idprofesional )->delete();
 
-            if(!empty($categorias)){
-                foreach ($categorias as $cat) {
-                    if($cat->es_marcado){
-                        $catpro = new CategoriasProfesional();
-                        $catpro->idprofesional = $idprofesional;
-                        $catpro->idcategoria = $cat->id;
-                        $catpro->save();
-                    }
+        if(!empty($categorias)){
+            foreach ($categorias as $cat) {
+                if($cat->es_marcado){
+                    $catpro = new CategoriasProfesional();
+                    $catpro->idprofesional = $idprofesional;
+                    $catpro->idcategoria = $cat->id;
+                    $catpro->save();
                 }
             }
         }
+        
 
         //------------------------------
         //IDIOMAS
         //------------------------------
         $idiomas = json_decode($request['idiomas']);
 
-        if( IdiomasProfesional::where('idprofesional', $idprofesional )->delete() ){
+        //ELIMINO LOS PREVIOS
+        IdiomasProfesional::where('idprofesional', $idprofesional )->delete();
 
-            if(!empty($idiomas)){
-                foreach ($idiomas as $idi) {
-                    if($idi->es_marcado){
-                        $idiopro = new IdiomasProfesional();
-                        $idiopro->idprofesional = $idprofesional;
-                        $idiopro->ididioma = $idi->id;
-                        $idiopro->save();
-                    }
+        if(!empty($idiomas)){
+            foreach ($idiomas as $idi) {
+                if($idi->es_marcado){
+                    $idiopro = new IdiomasProfesional();
+                    $idiopro->idprofesional = $idprofesional;
+                    $idiopro->ididioma = $idi->id;
+                    $idiopro->save();
                 }
             }
-
         }
 
-        return ['mensaje' => 'Se actualizaron los datos', 'status' => 'success' ];     
+        
+
+        return ['mensaje' => "Se actualizo satisfactoriamente el perfil ", 'status' => 'success' ];     
         
     }
 
     public function checkCategoriaSeleccionada($cat_seleccionados, $id){
-
         foreach ($cat_seleccionados as $selec) {
-            
             if($selec->idcategoria == $id){
                 return true;
                 break;
-            }
-            
+            } 
         }
-
         return false;
-
     }
 
     public function checkIdiomaSeleccionado($idio_seleccionados, $id){
-
         foreach ($idio_seleccionados as $selec) {
-            
             if($selec->ididioma == $id){
                 return true;
                 break;
-            }
-            
+            }        
         }
-
         return false;
-
     }
-
-
-    
 
 
     public function obtenerUsuarioLogueado()

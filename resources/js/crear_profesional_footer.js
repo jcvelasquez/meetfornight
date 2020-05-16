@@ -96,8 +96,25 @@ $(document).ready(function(){
 
       });
 
-                      
 
+      function obtenerDisponibilidad(){
+
+        var arDisponibilidad = [];
+
+        arDisponibilidad.push( {"desde": $('input[name="desde_lunes"]').val() ,"hasta": $('input[name="hasta_lunes"]').val() ,"dia": "LUNES" } );
+        arDisponibilidad.push( {"desde": $('input[name="desde_martes"]').val()  ,"hasta":  $('input[name="hasta_martes"]').val() ,"dia": "MARTES" } );
+        arDisponibilidad.push( {"desde": $('input[name="desde_miercoles"]').val() ,"hasta": $('input[name="hasta_miercoles"]').val() ,"dia": "MIERCOLES" } );
+        arDisponibilidad.push( {"desde": $('input[name="desde_jueves"]').val() ,"hasta": $('input[name="hasta_jueves"]').val() ,"dia": "JUEVES" } );
+        arDisponibilidad.push( {"desde": $('input[name="desde_viernes"]').val() ,"hasta": $('input[name="hasta_viernes"]').val() ,"dia": "VIERNES" } );
+        arDisponibilidad.push( {"desde": $('input[name="desde_sabado"]').val() ,"hasta": $('input[name="hasta_sabado"]').val() ,"dia": "SABADO" } );
+        arDisponibilidad.push( {"desde": $('input[name="desde_domingo"]').val() ,"hasta": $('input[name="hasta_domingo"]').val() ,"dia": "DOMINGO" } );
+
+        return arDisponibilidad;
+        
+      }
+
+
+   
       // validate signup form on keyup and submit
       $("#form-cuenta-profesional").validate({
         ignore: ":hidden :not('inp-cbx.always-validate') ",
@@ -195,6 +212,9 @@ $(document).ready(function(){
           corte_intimo:  {
             required : true
           },
+          color_ojos:  {
+            required : true
+          },
           //PESTAÑA SERVICIOS
           "masajes[]": {
             required: true,
@@ -226,7 +246,54 @@ $(document).ready(function(){
           },
           tipo_contacto:{
             required: true
+          },
+          desde_lunes:{
+            required: true
+          },
+          hasta_lunes:{
+            required: true
+          },
+          desde_martes:{
+            required: true
+          },
+          hasta_martes:{
+            required: true
+          },
+          desde_miercoles:{
+            required: true
+          },
+          hasta_miercoles:{
+            required: true
+          },
+          desde_jueves:{
+            required: true
+          },
+          hasta_jueves:{
+            required: true
+          },
+          desde_viernes:{
+            required: true
+          },
+          hasta_viernes:{
+            required: true
+          },
+          desde_sabado:{
+            required: true
+          },
+          hasta_sabado:{
+            required: true
+          },
+          desde_domingo:{
+            required: true
+          },
+          hasta_domingo:{
+            required: true
+          },
+          //PESTAÑA TARIFAS
+          tipo_moneda:{
+            required: true
           }
+          
         },
         messages: {
           //PESTAÑA PLAN
@@ -268,6 +335,7 @@ $(document).ready(function(){
           idcity : "Selecciona una opcion",
           color_cabello : "Selecciona una opcion",
           corte_intimo : "Selecciona una opcion",
+          color_ojos: "Selecciona una opcion",
           //PESTAÑA SERVICIOS
           "masajes[]": {
             required: "Selecciona una opcion al menos"
@@ -293,6 +361,51 @@ $(document).ready(function(){
           },
           tipo_contacto: {
             required: "Seleccione el tipo de contacto preferido"
+          },
+          tipo_moneda: {
+            required: "Seleccione el tipo de moneda"
+          },
+          desde_lunes:{
+            required: "Seleccione"
+          },
+          hasta_lunes:{
+            required: "Seleccione"
+          },
+          desde_martes:{
+            required: "Seleccione"
+          },
+          hasta_martes:{
+            required: "Seleccione"
+          },
+          desde_miercoles:{
+            required: "Seleccione"
+          },
+          hasta_miercoles:{
+            required: "Seleccione"
+          },
+          desde_jueves:{
+            required: "Seleccione"
+          },
+          hasta_jueves:{
+            required: "Seleccione"
+          },
+          desde_viernes:{
+            required: "Seleccione"
+          },
+          hasta_viernes:{
+            required: "Seleccione"
+          },
+          desde_sabado:{
+            required: "Seleccione"
+          },
+          hasta_sabado:{
+            required: "Seleccione"
+          },
+          desde_domingo:{
+            required: "Seleccione"
+          },
+          hasta_domingo:{
+            required: "Seleccione"
           }
 
         },
@@ -308,6 +421,9 @@ $(document).ready(function(){
               error.insertAfter( element.parents('.radio-tatuaje') );
               error.insertAfter( element.parents('.radio-piercing') );
               error.insertAfter( element.parents('.radio-fumador') );
+              error.insertAfter( element.parents('.radio-moneda') );
+
+              
               
             }else  if ( element.is(":checkbox") ) {
 
@@ -326,13 +442,15 @@ $(document).ready(function(){
             //DESACTIVO LOS BOTONES
             $("#prev-btn").attr('disabled', true);
             $("#next-btn").attr('disabled', true);
+
+            
             //$("#btn-enviar").attr('disabled', true);
             
             var arCategorias = [];
             var arIdiomas = [];
             var arTarifas = [];
             var arServicios = [];
-
+            
             $('input[name="masajes[]"]:checked').each(function() { 
               arServicios.push( { "idservicio" : $(this).val() , "nombre_servicio" : "", "categoria_servicio" : "MASAJES" } ); 
             }); 
@@ -357,7 +475,6 @@ $(document).ready(function(){
               arServicios.push( { "idservicio" : $(this).val() , "nombre_servicio" : "", "categoria_servicio" : "DISCAPACITADOS" } ); 
             }); 
 
-
             $('input[name="categorias[]"]:checked').each(function() { 
               arCategorias.push($(this).val()); 
             }); 
@@ -366,29 +483,23 @@ $(document).ready(function(){
               arIdiomas.push($(this).val()); 
             }); 
 
-
             $.each( dtTarifas.rows().data().toArray(), function() { 
-
               arTarifas.push( {"opcion_tarifa" : this.opcion_tarifa, "costo_tarifa" : this.costo_tarifa, "categoria_tarifa": this.categoria_tarifa } ); 
-  
             }); 
 
             $.each( dtEscort.rows().data().toArray(), function() { 
-
               arTarifas.push( {"opcion_tarifa" : this.opcion_tarifa, "costo_tarifa" : this.costo_tarifa, "categoria_tarifa": this.categoria_tarifa } ); 
-  
             }); 
 
             $.each( dtExtras.rows().data().toArray(), function() { 
-
               arTarifas.push( {"opcion_tarifa" : this.opcion_tarifa, "costo_tarifa" : this.costo_tarifa, "categoria_tarifa": this.categoria_tarifa } ); 
-  
             }); 
 
+          
 
             axios.post('registrar-profesional', {
                 //PLANES
-                'radioPlan' : $('input[name="radioPlan"]:checked').val(),
+                'idplan' : $('input[name="radioPlan"]:checked').val(),
                 //PERFIL
                 'nombre' : $('input[name="nombre"]').val(),
                 'apodo' : $('input[name="apodo"]').val(),
@@ -403,9 +514,9 @@ $(document).ready(function(){
                 'idcountry' :  $('select[name="idcountry"]').val(),
                 'idstate' :  $('select[name="idstate"]').val(),
                 'idcity' :  $('select[name="idcity"]').val(),
-                'tatuaje' :  ($('input[name="tatuaje"]').is(":checked"))? "1" : "0",
-                'piercing' :  ($('input[name="piercing"]').is(":checked"))? "1" : "0",
-                'fumador' :  ($('input[name="fumador"]').is(":checked"))? "1" : "0",
+                'tatuaje' :  $("input[name='tatuaje']:checked").val(),
+                'piercing' :  $("input[name='piercing']:checked").val(),
+                'fumador' :  $("input[name='fumador']:checked").val(),
                 'pene' : $('select[name="pene"]').val(),
                 'pecho' : $('select[name="pecho"]').val(),
                 'color_cabello' : $('select[name="color_cabello"]').val(),
@@ -421,9 +532,10 @@ $(document).ready(function(){
                 //CONTACTO
                 'celular' : $('input[name="celular"]').val(), 
                 'tipo_celular' : ($("input[name='tipo_celular']").is(":checked"))? "WHATSAPP" : "CELULAR",
+                'tipo_moneda' : $("input[name='tipo_moneda']:checked").val(),
                 'tipo_contacto' : $('input[name="tipo_contacto"]:checked').val(),
                 'pagina_web' : $("input[name='pagina_web']").val(),
-                'disponibilidad' : JSON.stringify( JSON.parse( '[{ "desde" : "' + obtenerDisponibilidad( $('input[name="slider_lunes"]').jRange('getValue').split(',')[0] ) + '" , "hasta": "' + obtenerDisponibilidad( $('input[name="slider_lunes"]').jRange('getValue').split(',')[1] ) + '" , "dia": "LUNES" }, { "desde" : "' + obtenerDisponibilidad( $('input[name="slider_martes"]').jRange('getValue').split(',')[0] ) + '", "hasta" : "' + obtenerDisponibilidad( $('input[name="slider_martes"]').jRange('getValue').split(',')[1] ) + '", "dia" : "MARTES" }, { "desde" : "' + obtenerDisponibilidad( $('input[name="slider_miercoles"]').jRange('getValue').split(',')[0] ) + '", "hasta" : "' + obtenerDisponibilidad( $('input[name="slider_miercoles"]').jRange('getValue').split(',')[1] ) + '", "dia" : "MIERCOLES" }, { "desde" : "' + obtenerDisponibilidad( $('input[name="slider_jueves"]').jRange('getValue').split(',')[0] ) + '", "hasta" : "' + obtenerDisponibilidad( $('input[name="slider_jueves"]').jRange('getValue').split(',')[1] ) + '", "dia" : "JUEVES" }, { "desde" : "' + obtenerDisponibilidad( $('input[name="slider_viernes"]').jRange('getValue').split(',')[0] ) + '", "hasta" : "' + obtenerDisponibilidad( $('input[name="slider_viernes"]').jRange('getValue').split(',')[1] ) + '", "dia" : "VIERNES" }, { "desde" : "' + obtenerDisponibilidad( $('input[name="slider_sabado"]').jRange('getValue').split(',')[0] ) + '", "hasta" : "' + obtenerDisponibilidad( $('input[name="slider_sabado"]').jRange('getValue').split(',')[1] ) + '", "dia" : "SABADO" }, { "desde" : "' + obtenerDisponibilidad( $('input[name="slider_domingo"]').jRange('getValue').split(',')[0] ) + '", "hasta" : "' + obtenerDisponibilidad( $('input[name="slider_domingo"]').jRange('getValue').split(',')[1] ) + '", "dia" : "DOMINGO" } ]' ) ),
+                'disponibilidad' : JSON.stringify( obtenerDisponibilidad() ),
                 'agenda' : ($("input[name='agenda']").is(":checked"))? "1" : "0",
                 //TARIFAS
                 'tarifas' : JSON.stringify( arTarifas )
@@ -437,7 +549,11 @@ $(document).ready(function(){
 
                   $('#idprofesional').val(response.data.idprofesional);
 
-                  DropProfesional.processQueue();
+                  if (DropProfesional.getQueuedFiles().length > 0) {
+                      DropProfesional.processQueue();
+                  }else{
+                      Swal.fire('CONFIRMACIÓN', "Se registró la cuenta profesional, deberá confirmar el correo electrónico registrado para poder iniciar sesión." , 'success' ).then(function() {  window.location = "/iniciar-sesion";  });
+                  }
 
                 }else{
                   Swal.fire("ERROR", "Hubo un error en el registro de la cuenta. Comuniquese con el area de soporte." , "error" );
@@ -455,10 +571,12 @@ $(document).ready(function(){
       });
 
 
+      $('.selector_horario').timeselector({ hours12:false, step: 1, min: '00:00', max: '23:59' });
+
+
       $("#fecha_nacimiento").datepicker({
           dateFormat : "dd/mm/yyyy",
-          clearBtn: true,
-          language: "es"
+          clearBtn: true
       });
                   
 
@@ -467,11 +585,31 @@ $(document).ready(function(){
          //alert("You are on step "+stepNumber+" now");
          if(stepPosition === 'first'){
              $("#prev-btn").addClass('disabled');
+             //OCULTAR BOTON CONFIRMAR
+             $("#button_confirmar").hide();
+             
+             //MOSTRAR BOTON SIGUIENTE
+             $("#button_siguiente").show();
+
          }else if(stepPosition === 'final'){
              $("#next-btn").addClass('disabled');
+
+             //MOSTRAR BOTON CONFIRMAR
+             $("#button_confirmar").show();
+
+             //OCULTAR BOTON SIGUIENTE
+             $("#button_siguiente").hide();
+             
          }else{
              $("#prev-btn").removeClass('disabled');
              $("#next-btn").removeClass('disabled');
+
+             //MOSTRAR BOTON SIGUIENTE
+             $("#button_siguiente").show();
+
+             //OCULTAR BOTON CONFIRMAR
+             $("#button_confirmar").hide();
+
          }
       });
 
@@ -505,8 +643,9 @@ $(document).ready(function(){
           }
       });
 
+     
+
       //SLIDERS PERFIL
-      
      $('#estatura').jRange({
           from: 140,
           to: 210,
@@ -516,9 +655,7 @@ $(document).ready(function(){
           showLabels: true,
           snap: true,
           onstatechange: function () {
-
             $("#estatura_label").html( $('#estatura').jRange('getValue') + "cm" );
-
           }
          
       });
@@ -532,9 +669,7 @@ $(document).ready(function(){
           showLabels: true,
           snap: true,
           onstatechange: function () {
-
             $("#peso_label").html( $('#peso').jRange('getValue') + "Kg" );
-
           }
       });
  
@@ -689,33 +824,24 @@ $(document).ready(function(){
           var sexo = $(this).val();
 
           if(sexo == "M"){
-
               $("#campo_pene").show();
               //OCULTAR
               $("#campo_pecho").hide();
-
           }else if(sexo == "F"){
-
               $("#campo_pecho").show();
               //OCULTAR
               $("#campo_pene").hide();
-
           }else if(sexo == "T"){
-
             $("#campo_pecho").show();
               //OCULTAR
             $("#campo_pene").show();
-
           }else{
-
             //OCULTAR
             $("#campo_pecho").hide();
             $("#campo_pene").hide();
-
             //LIMPIAR
             $("#pene").val("");
             $("#pecho").val("");
-
           }
 
       });
@@ -808,9 +934,9 @@ $(document).ready(function(){
       });
 
 
-      $("input[name='radioPlan']").on("change", function() {
+      $("input[name='plan_seleccionado']").on("change", function() {
 
-          $("#plan_label").html( "Cuenta: " + $(this).parent(".container-radio").find("input[name='plan_seleccionado']").val() );
+          $("#plan_label").html( "Cuenta: " + $(this).parent(".container-radio").find("input[name='plan_seleccionado']:checked").val() );
 
           //SI EL PRECIO DEL PLAN SELECCIONADO ES MAS DE CERO MOSTRAR PERIODOS
           if(parseFloat($(this).parent(".container-radio").find("input[name='precio_seleccionado']").val()) > 0) {
@@ -825,63 +951,84 @@ $(document).ready(function(){
 
           var idcountry = $(this).val();
 
+          if(idcountry == 169){ //PANAMA
+
+            $("#moneda_pen").hide();
+            $("#moneda_eur").hide();     
+            $("#moneda_usd").show();     
+                  
+
+          }else if(idcountry == 172){ //PERU
+
+            $("#moneda_pen").show();
+            $("#moneda_eur").hide();
+            $("#moneda_usd").show();    
+
+          }else{ //ESPAÑA
+
+            $("#moneda_pen").hide();
+            $("#moneda_eur").show();
+            $("#moneda_usd").hide();    
+
+          }
+
           $('#idstate').find('option').remove().end().append(new Option("Seleccione un departamento", ""));
 
           axios.post('seleccionar-states', {
-                'idcountry' : idcountry
-              },{ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
-              })
-              .then(function (response) {
+            'idcountry' : idcountry
+          },{ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
+          })
+          .then(function (response) {
 
-                  var states = [];    
+              var states = [];    
 
-                  states = response.data.states;   
-                  
-                  $.each( states, function( key, value ) {
+              states = response.data.states;   
+              
+              $.each( states, function( key, value ) {
 
-                    $('#idstate').append(new Option(value.name, value.id));
+                $('#idstate').append(new Option(value.name, value.id));
 
-                  });
-
-              })
-              .catch(function (error) {
-                  console.log(error);
               });
+
+          })
+          .catch(function (error) {
+              console.log(error);
+          });
 
       });
 
       $("#idstate").on("change", function() {
 
-          var idstate = $(this).val();
+            var idstate = $(this).val();
 
-          $('#idcity').find('option').remove().end().append(new Option("Seleccione un distrito", ""));
+            $('#idcity').find('option').remove().end().append(new Option("Seleccione un distrito", ""));
 
-          axios.post('seleccionar-cities', {
-                'idstate' : idstate
-              },{ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
-              })
-              .then(function (response) {
+            axios.post('seleccionar-cities', {
+              'idstate' : idstate
+            },{ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
+            })
+            .then(function (response) {
 
-                  var cities = [];    
+                var cities = [];    
 
-                  cities = response.data.cities;   
-                  
-                  $.each( cities, function( key, value ) {
+                cities = response.data.cities;   
+                
+                $.each( cities, function( key, value ) {
 
-                    $('#idcity').append(new Option(value.name, value.id));
+                  $('#idcity').append(new Option(value.name, value.id));
 
-                  });
+                });
 
-              })
-              .catch(function (error) {
-                  console.log(error);
-              });
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
 
-          });
+      });
 
 
         var DropProfesional = new Dropzone("#dropzone_subir_profesional", { 
-          url: "registrar-banner", 
+          url: "registrar-profesional-fotos", 
           acceptedFiles: ".jpeg,.jpg,.png,.gif",
           clickable: "#dropzone_subir_profesional button", 
           maxFiles: 5, 
@@ -890,24 +1037,27 @@ $(document).ready(function(){
           headers: {
             'X-CSRF-TOKEN': $("meta[name='csrf-token']").attr("content")
           },
-          params: {
-              "idprofesional": $("#idprofesional").val()
-          },
           error: function(file, response){
               return false;
           },
-          success: function (file, done) {
-  
-              Swal.fire('CONFIRMACIÓN', "Se registró la cuenta profesional, deberá confirmar el correo electrónico registrado para poder iniciar sesión." , 'success' ).then(function() {
-                window.location = "/iniciar-sesion";
-            });;
-            
+          complete: function(file){  
+
+            if (this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0) {
+
+              Swal.fire('CONFIRMACIÓN', "Se registró la cuenta profesional, deberá confirmar el correo electrónico registrado para poder iniciar sesión." , 'success' ).then(function() {  window.location = "/iniciar-sesion";  });
+
+            }
+
           },
           init: function(){           
   
               this.on("maxfilesreached", function(file) { 
                 Swal.fire('AVISO', "Solo puede subir 5 fotos como máximo." , 'warning' );
                 $('#dropzone_subir_profesional button').attr('disabled',true);
+              });
+
+              this.on("processing", function() {
+                  this.options.autoProcessQueue = true;
               });
 
               this.on("maxfilesexceeded", function(file) { 
@@ -917,6 +1067,10 @@ $(document).ready(function(){
               this.on("removedfile", function(file) { 
                  if(this.files.length < 5)  $('#dropzone_subir_profesional button').attr('disabled',false);
                  mostrarMiniaturas();
+              });
+
+              this.on("sending", function(file, xhr, formData) { 
+                formData.append("idprofesional", $("#idprofesional").val());  
               });
 
               this.on("reset", function(file) { 

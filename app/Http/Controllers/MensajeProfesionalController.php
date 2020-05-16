@@ -56,7 +56,7 @@ class MensajeProfesionalController extends Controller
         $mensaje->es_leido = 0;
         $mensaje->save();
 
-        return Response::json(['mensaje' => 'Mensaje enviado correctamente'], 200);
+        return ['mensaje' => 'Mensaje enviado correctamente'];
 
     }
 
@@ -72,7 +72,7 @@ class MensajeProfesionalController extends Controller
         $mensaje->es_leido = 0;
         $mensaje->save();
 
-        return Response::json(['mensaje' => 'Mensaje enviado correctamente'], 200);
+        return ['mensaje' => 'Mensaje enviado correctamente'];
 
     }
 
@@ -83,7 +83,9 @@ class MensajeProfesionalController extends Controller
         MensajeProfesional::where('parent_id', '=', $request->id)->delete();
         MensajeProfesional::where('id', '=', $request->id)->delete();
 
-        return Response::json(['mensaje' => 'Mensaje eliminado satisfactoriamente'], 200);
+        return ['mensaje' => 'Mensaje eliminado satisfactoriamente'];
 
     }
+
+
 }

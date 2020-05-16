@@ -343,3 +343,27 @@ ul.lista-opciones {
 #thumbnail_list { overflow: hidden;}
 #thumbnail_list li { list-style:none; }
 #thumbnail_list li:nth-child(n+2) { float: left; width: 25%; margin-top: 5px; padding:5px; }
+
+.vue__time-picker input.display-time {
+    border: 2px solid #a86ba4 !important;
+    border-radius: 8px;
+}
+
+.vue__time-picker .dropdown ul li:not([disabled]).active, 
+.vue__time-picker .dropdown ul li:not([disabled]).active:focus, 
+.vue__time-picker .dropdown ul li:not([disabled]).active:hover {
+    background: #a86ba433 !important;
+    color: #a86ba4 !important;
+}
+
+.btn-rechazar-reserva:disabled,
+.btn-primary:disabled {
+    background-color: #ccc !important;
+    border-color: #ccc !important;
+    opacity: 1;
+}
+
+.seccion_seguridad {
+    background:#a86ba414;
+    border-radius: 10px;
+}

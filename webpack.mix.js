@@ -14,6 +14,7 @@ const mix = require('laravel-mix');
 mix.js(['resources/js/app.js'], 'public/js/app.js')
     .js(['resources/js/crear_profesional_footer.js'], 'public/js/crear_profesional_footer.js')
     .js(['resources/js/crear_empresa_footer.js'], 'public/js/crear_empresa_footer.js')
+    .js(['resources/js/crear_usuario_footer.js'], 'public/js/crear_usuario_footer.js')
     .sass('resources/sass/app.scss', 'public/css/app.css')
     .styles([
         'resources/css/bootstrap.min.css',
@@ -33,6 +34,7 @@ mix.js(['resources/js/app.js'], 'public/js/app.js')
         'resources/css/datatables.min.css',
         'resources/css/bootstrap-datepicker3.min.css',
         'resources/css/owl.carousel.min.css',
+        'resources/css/jquery.timeselector.css',
         'resources/css/piwicho.css',
     ], 'public/css/meetfornight.css')
     .scripts([
@@ -48,6 +50,7 @@ mix.js(['resources/js/app.js'], 'public/js/app.js')
         'resources/js/fullcalendar.timegrid.js',
         'resources/js/jquery.range.js',
         'resources/js/datatables.min.js',
+        'resources/js/jquery.timeselector.js',
         'resources/js/owl.carousel.min.js',
         'resources/js/bootstrap-datepicker.min.js'
     ], 'public/js/meetfornight.js');

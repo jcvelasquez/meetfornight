@@ -8,15 +8,15 @@
             <div class="linea-morada">
               <div class="row">
                 <div class="custom-control custom-radio custom-control-inline no-margin-right-check col-lg-1 col-md-12 col-sm-12 espacio-campos" v-show=" pais == 'PE' ">
-                  <input type="radio" id="pen" name="tipo_moneda" @click=" simbolo_moneda = 'S/' " v-model="tipo_moneda" value="PEN" class="custom-control-input">
+                  <input type="radio" @change="actualizarMoneda()" id="pen" name="tipo_moneda" @click=" simbolo_moneda = 'S/' " v-model="tipo_moneda" value="PEN" class="custom-control-input">
                   <label class="custom-control-label custom-control-label-espacio" for="pen">S/</label>
                 </div>
                 <div class="custom-control custom-radio custom-control-inline no-margin-right-check col-lg-1 col-md-12 col-sm-12 espacio-campos" v-show=" pais == 'PE' || pais == 'PA' ">
-                  <input type="radio" id="dolar" name="tipo_moneda" @click=" simbolo_moneda = '$' " v-model="tipo_moneda" value="USD" class="custom-control-input">
+                  <input type="radio" @change="actualizarMoneda()" id="dolar" name="tipo_moneda" @click=" simbolo_moneda = '$' " v-model="tipo_moneda" value="USD" class="custom-control-input">
                   <label class="custom-control-label custom-control-label-espacio" for="dolar">$</label>
                 </div>
                 <div class="custom-control custom-radio custom-control-inline no-margin-right-check col-lg-1 col-md-12 col-sm-12 espacio-campos" v-show=" pais == 'ES' ">
-                  <input type="radio"  id="euro" name="tipo_moneda" @click=" simbolo_moneda = '€' " v-model="tipo_moneda" value="EUR" class="custom-control-input">
+                  <input type="radio" @change="actualizarMoneda()" id="euro" name="tipo_moneda" @click=" simbolo_moneda = '€' " v-model="tipo_moneda" value="EUR" class="custom-control-input">
                   <label class="custom-control-label custom-control-label-espacio" for="euro">€</label>
                 </div>
               </div>
@@ -28,7 +28,7 @@
             <p>Especifica tus <strong class="precio-morado">tarifas privadas</strong> a continuación</p>
            
             <table class="table">
-                <thead>
+                <thead class="cabecera-fake">
                   <tr>
                     <th scope="col" width="40">#</th>
                     <th scope="col">Tipo</th>
@@ -36,7 +36,7 @@
                     <th scope="col" width="80">Eliminar</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody class="resultado-fake">
 
                   <tr v-for="(servicio, index) in arTarifas" :key="servicio.id">
 
@@ -44,7 +44,7 @@
                         <td v-text="servicio.id" scope="row" >1</td>
                         <td v-text="servicio.opcion_tarifa"></td>
                         <td v-text=" simbolo_moneda + '' + servicio.costo_tarifa"></td>
-                        <td><button type="button" @click="eliminarTarifa(servicio, index)" class="btn btn-primary x-circulo"><i class="fa fa-times"></i></button></td>
+                        <td align="center"><button type="button" @click="eliminarTarifa(servicio, index)" class="btn btn-primary x-circulo"><i class="fa fa-times"></i></button></td>
                     </template>
                   </tr>
                   
@@ -81,7 +81,7 @@
             <p>Especifica tus <strong class="precio-morado">tarifas de acompañante</strong> a continuación</p>
             
             <table class="table">
-                <thead>
+                <thead class="cabecera-fake">
                   <tr>
                     <th scope="col" width="40">#</th>
                     <th scope="col">Tipo</th>
@@ -89,7 +89,7 @@
                     <th scope="col" width="80">Eliminar</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody class="resultado-fake">
 
                   <tr v-for="(escort, index) in arTarifas" :key="escort.id">
 
@@ -97,7 +97,7 @@
                         <td scope="row" v-text="escort.id">1</td>
                         <td v-text="escort.opcion_tarifa"></td>
                         <td v-text=" simbolo_moneda + '' + escort.costo_tarifa"></td>
-                        <td><button type="button" @click="eliminarTarifa(escort, index)" class="btn btn-primary x-circulo"><i class="fa fa-times"></i></button></td>
+                        <td align="center"><button type="button" @click="eliminarTarifa(escort, index)" class="btn btn-primary x-circulo"><i class="fa fa-times"></i></button></td>
                     </template>
                     <template v-else>
 
@@ -136,7 +136,7 @@
             <p>Especifica tus <strong class="precio-morado">tarifas adicionales</strong> a continuación (Las posibilidades se toman del paso anterior)</p>
             
               <table class="table">
-                <thead>
+                <thead class="cabecera-fake">
                   <tr>
                     <th scope="col" width="40">#</th>
                     <th scope="col">Tipo</th>
@@ -144,14 +144,14 @@
                     <th scope="col" width="80">Eliminar</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody class="resultado-fake">
 
                   <tr v-for="(extra, index) in arTarifas" :key="extra.id">
                     <template v-if="extra.categoria_tarifa == 'EXTRAS' ">
                         <td scope="row" v-text="extra.id">1</td>
                         <td v-text="extra.opcion_tarifa"></td>
                         <td v-text=" simbolo_moneda  + '' + extra.costo_tarifa"></td>
-                        <td><button type="button" @click="eliminarTarifa(extra, index)" class="btn btn-primary x-circulo"><i class="fa fa-times"></i></button></td>
+                        <td align="center"><button type="button" @click="eliminarTarifa(extra, index)" class="btn btn-primary x-circulo"><i class="fa fa-times"></i></button></td>
                     </template>
                     <template v-else>
                     </template>
@@ -321,6 +321,24 @@
                       me.arTarifas.push(_tarifa);
 
                       Swal.fire('CONFIRMACION', 'Tarifa agregada correctamente','success');
+
+                  })
+                  .catch(function (error) {
+                      // handle error
+                      console.log(error);
+                  });
+
+            },
+            actualizarMoneda(){
+
+              let me = this;
+
+              axios.post('tipo-moneda/actualizar', {
+                    'tipo_moneda' : me.tipo_moneda
+                  })
+                  .then(function (response) {
+
+                      Swal.fire('CONFIRMACION', response.data.mensaje ,'success');
 
                   })
                   .catch(function (error) {

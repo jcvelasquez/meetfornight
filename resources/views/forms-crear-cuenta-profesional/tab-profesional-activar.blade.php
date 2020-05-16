@@ -357,15 +357,7 @@
       </div>
     </div>
 
-    <div class="form-row">
-        <div class="col-lg-2"></div>
-        <div class="col-lg-8">
-            <button type="submit" id="btn-enviar" class="btn btn-primary btn-busqueda-detallada" style="background-color:green;">CONFIRMAR REGISTRO</button>
-            <input type="hidden" id="idprofesional" name="idprofesional" value="">
-        </div>
-        <div class="col-lg-2"></div>
-    </div>
-
+    
   </div>
 
 </div>
