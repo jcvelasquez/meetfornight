@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\BannerEmpresa;
 use Illuminate\Http\Request;
 use App\Planes;
 use App\Usuario;
@@ -29,12 +30,17 @@ class CrearCuentaController extends Controller
 
     private $usuario_id;
     private $fotos_profesional_path;
+    private $fotos_usuario_path;
+    private $banners_empresas_path;
 
     public function __construct()
     {
         $this->usuario_id = 0;
         
         $this->fotos_profesional_path = public_path('fotos_profesionales');
+        $this->fotos_usuario_path = public_path('fotos_usuario');
+        $this->banners_empresas_path = public_path('banners_empresas');
+        
     }
 
 
@@ -110,7 +116,7 @@ class CrearCuentaController extends Controller
         $usuario->estado = 1;
         $usuario->save();      
 
-        //$usuario->notify(new VerificarEmail($usuario));
+        $usuario->notify(new VerificarEmail($usuario));
         
 
         if($usuario){ 
@@ -125,6 +131,14 @@ class CrearCuentaController extends Controller
             $plan->inicio_suscripcion = Carbon::now()->format('Y-m-d H:i:s');
             $plan->estado_suscripcion = 1;
             $plan->save();
+
+            //------------------------------
+            //CREAR EXTRAS DE USUARIO
+            //------------------------------
+            $usuarioExtra = new UsuarioExtras();
+            $usuarioExtra->idusuario = $usuario->id;
+            $usuarioExtra->seguridad = 0;
+            $usuarioExtra->save();
 
 
             return ['status' => 'success', "idusuario" => $usuario->id ];
@@ -168,6 +182,14 @@ class CrearCuentaController extends Controller
             $plan->estado_suscripcion = 1;
             $plan->save();
 
+            //------------------------------
+            //CREAR EXTRAS DE USUARIO
+            //------------------------------
+            $usuarioExtra = new UsuarioExtras();
+            $usuarioExtra->idusuario = $usuario->id;
+            $usuarioExtra->seguridad = 0;
+            $usuarioExtra->save();
+
 
             return ['status' => 'success', "idempresa" => $usuario->id ];
         }else{
@@ -201,6 +223,8 @@ class CrearCuentaController extends Controller
         $usuario->celular = $request->celular;
         $usuario->estado = 1;
         $usuario->save();
+
+        $usuario->notify(new VerificarEmail($usuario));
 
         if($usuario){
 
@@ -356,7 +380,7 @@ class CrearCuentaController extends Controller
         $random = sha1(date('YmdHis') . uniqid());
         $save_name = $random . '.' . $image->getClientOriginalExtension();
             
-        if ( $image->move( $this->fotos_profesional_path ,$save_name) ) {
+        if ( $image->move( $this->fotos_usuario_path ,$save_name) ) {
 
             $foto = new FotoProfesional();
             $foto->idusuario =  $idusuario;
@@ -399,6 +423,30 @@ class CrearCuentaController extends Controller
             return [ 'status' =>  'error'];
         }
 
+    }
+
+
+    public function subirBannerEmpresaRegistro(Request $request)
+    {
+
+        $image = $request->file('file');
+        $random = sha1(date('YmdHis') . uniqid());
+        $save_name = $random . '.' . $image->getClientOriginalExtension();
+            
+        if ( $image->move( $this->banners_empresas_path ,$save_name) ) {
+
+            $banner = new BannerEmpresa();
+            $banner->idempresa = $request->idempresa;
+            $banner->url_foto = $save_name;
+            $banner->save();
+            
+            return [ 'status' =>  'success'];
+
+        } else {     
+            return [ 'status' =>  'error'];
+        }
+        
+        
     }
 
     

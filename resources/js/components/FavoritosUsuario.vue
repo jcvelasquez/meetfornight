@@ -15,7 +15,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6" v-for="profesional in arFavoritos" :key="profesional.id">
                     <div class="item-chica">
                         <div class="triangulo">
-                            <a href="#" @click.prevent="agregarFavoritos(profesional)" ><i class="icon-heart"></i></a>
+                            <a href="#" @click.prevent="eliminarFavorito(profesional)"> <i class="icon-x"></i></a>
                         </div>
                         <div class="texto-chica">
                              <h3 v-text="profesional.apodo"></h3>
@@ -96,6 +96,23 @@
 
                   }).catch(function (error) {  console.log(error);     });
                 
+            },
+            eliminarFavorito(profesional){
+
+                let me = this;
+                
+                axios.post('favoritos-usuario/agregar', { 'apodo' : profesional.apodo }).then(function (response) {
+
+                   Swal.fire('CONFIRMACION', response.data.mensaje ,'success');
+
+                   me.listarFavoritos();
+
+                }).catch(function (error) {  
+                    if (error.response.status === 401) {
+                         Swal.fire('ERROR', 'Debes iniciar sesión para poder agregar a favoritos','error');
+                    }
+                });
+
             },
             cambiarPagina(pagina){
 

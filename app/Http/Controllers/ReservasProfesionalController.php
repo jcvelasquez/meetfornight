@@ -68,6 +68,11 @@ class ReservasProfesionalController extends Controller
         $reserva->es_aceptada = 2;
         $reserva->save();
 
+        /*$order = App\Order::find(1);
+
+        return (new App\Notifications\StatusUpdate($order))
+                ->toMail($order->user);*/
+
         return ['mensaje' => 'Reserva rechazada satisfactoriamente, se le notificó al usuario.'];
 
     }

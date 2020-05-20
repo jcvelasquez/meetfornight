@@ -3,6 +3,9 @@
 //use App\Http\Middleware\Admin;
 //use App\Http\Middleware\Profesional;
 //use App\Http\Middleware\CheckRol;
+
+use App\Notifications\VerificarEmail;
+use App\Usuario;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,9 +26,8 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('passw
 // Email Verification Routes...
 Route::get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
 Route::get('email/verify/{id}', 'Auth\VerificationController@verify')->name('verification.verify');
-Route::get('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
+Route::get('email/reenviar', 'Auth\VerificationController@reenviar')->name('verification.reenviar');
 Route::post('email/check', 'CrearCuentaController@checkEmail');  
-
 
 Route::get('/',  'HomeController@mostrar')->name('home');
 
@@ -46,7 +48,6 @@ Route::get('idiomas/listar', 'IdiomasController@listar');
 //VISTA DE PERFIL
 Route::get('perfil/{apodo}',  'PerfilController@mostrar');
 Route::get('perfil/disponibilidad/{apodo}', 'DisponibilidadProfesionalController@listar' );
-
 Route::post('seleccionar-states', 'CrearCuentaController@seleccionarStates');
 Route::post('seleccionar-cities', 'CrearCuentaController@seleccionarCities');
 
@@ -73,14 +74,9 @@ Route::group(['middleware'=>['guest']],function(){
         Route::post('registrar-profesional-fotos', 'CrearCuentaController@subirFotoProfesionalRegistro');   
 
         Route::post('registrar-empresa', 'CrearCuentaController@registrarEmpresa')->name('registrar-empresa');
-        Route::post('registrar-empresa-banner', 'BannerEmpresaController@subirBannerEmpresa');   
+        Route::post('registrar-empresa-banner', 'CrearCuentaController@subirBannerEmpresaRegistro');   
         
-
-        
-
-
-        Route::get('eliminar-profesional', 'AdministradorController@eliminarProfesional');
-        
+        Route::get('eliminar-profesional', 'AdministradorController@eliminarProfesional');      
 
 });
 
@@ -126,6 +122,10 @@ Route::group(['middleware'=>['auth','verified']],function(){
 
             Route::get('seguridad-usuario', 'SeguridadUsuarioController@mostrar');
             Route::get('seguridad-usuario/listar', 'SeguridadUsuarioController@listar');
+            Route::post('seguridad-usuario/eliminar', 'SeguridadUsuarioController@eliminar');
+            Route::post('seguridad-usuario/subir', 'SeguridadUsuarioController@subir');
+
+            
 
 
     });
@@ -139,19 +139,13 @@ Route::group(['middleware'=>['auth','verified']],function(){
 
         Route::get('banners-empresa', 'BannerEmpresaController@mostrar');
         Route::get('banners-empresa/listar', 'BannerEmpresaController@listar');
+        Route::post('banners-empresa/eliminar', 'BannerEmpresaController@eliminar');
+        Route::post('banners-empresa/subir', 'BannerEmpresaController@subir');
         
         Route::get('planes-empresa', 'PlanesEmpresaController@mostrar');
         Route::get('planes-empresa/listar', 'PlanesEmpresaController@listar');
 
         Route::get('estadisticas-empresa', function () {  return view('forms-perfil-empresa.estadisticas-empresa');  });
-
-
-       
-        
-        /*Route::put('seguridad-usuario', 'SeguridadUsuarioController@mostrar')->name('seguridad-usuario');
-        Route::get('perfil/usuario/sesion', 'UsuarioController@obtenerUsuarioLogueado');
-        Route::get('perfil/tarifas/{apodo}', 'PerfilController@tarifas' );
-        Route::post('perfil/horarios/{apodo}', 'PerfilController@horarios' ); */
 
     });
 

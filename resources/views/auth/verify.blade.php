@@ -26,7 +26,7 @@
                 @endif
 
                 {{ __('Antes de ingresar a tu perfil, debes confirmar tu correo electrónico con el enlace de verificación que se envió a tu bandeja.') }}
-                {{ __('Si no recibiste el email') }}, <a class="enlace_verificacion" href="{{ route('verification.resend') }}">{{ __('haz clic aquí para recibir un nuevo código') }}</a>.
+                {{ __('Si no recibiste el email') }}, <a class="enlace_verificacion" href="{{ route('verification.reenviar') }}">{{ __('haz clic aquí para recibir un nuevo código') }}</a>.
 
             </div>
           </form>

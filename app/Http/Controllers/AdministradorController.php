@@ -5,12 +5,15 @@ use App\CategoriasProfesional;
 use App\DisponibilidadProfesional;
 use App\FotoProfesional;
 use App\IdiomasProfesional;
+use App\Notifications\VerificarEmail;
 use App\PlanesProfesional;
 use App\ServiciosXProfesional;
 use App\TarifaProfesional;
 use App\Usuario;
 use App\UsuarioExtras;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AdministradorController extends Controller
 {
@@ -71,6 +74,41 @@ class AdministradorController extends Controller
           Usuario::where('id',$id)->delete();
           
           return ["status" => "success"];
+    }
+
+
+    public function testEmail()
+    { 
+/*
+          Usuario::where("email", "=" ,"jcvelasquez@minegociovr.pe")->delete();
+
+          $usuario = new Usuario();
+          $usuario->idrol = 3;
+          $usuario->nombre = "Test Email";
+          $usuario->apodo = "apodo";
+          $usuario->email = "jcvelasquez@minegociovr.pe";
+          $usuario->password = Hash::make( "123456" );
+          $usuario->fecha_nacimiento = Carbon::createFromFormat('d/m/Y', "25/09/1986" );
+          $usuario->sexo = "M";
+          $usuario->idcountry = 1;
+          $usuario->idstate = 1;
+          $usuario->idcity = 1;
+          $usuario->tipo_celular = "CELULAR";
+          $usuario->idioma = "ES";
+          $usuario->celular = "964997924";
+          $usuario->estado = 1;
+          $usuario->save();   
+
+
+          $usuario->notify(new VerificarEmail($usuario));*/
+
+          $usuario = Usuario::find(55);
+
+          //return (new VerificarEmail($usuario));
+
+          $usuario->notify(new VerificarEmail($usuario));
+          
+          //return ["status" => "success", "usuario" => $usuario];
     }
 
    

@@ -850,24 +850,8 @@ class UsuariosExtrasSeeder extends Seeder
         ]);
 
         DB::table('usuarios_extras')->insert([
-            'idusuario' => '40',
-            'frase' => 'Carpe Diem',
-            'descripcion' => 'Vivamus dignissim quis ligula vel venenatis. Sed pretium volutpat lacus, non pretium felis efficitur vel. Morbi accumsan posuere enim aliquet feugiat. Phasellus mattis lobortis dolor',
-            'web' => 'www.mipagina.com',
-            'pecho' => '',
-            'pene' => 'SMALL',
-            'color_ojos' => 'Marrones',
-            'color_cabello' => 'Negro',
-            'corte_intimo' => 'Natural',
-            'estatura' => '173',
-            'peso' => '80',
-            'orientacion' => 'HETEROSEXUAL',
-            'tipo_contacto' => 'CORREO',
-            'tatuaje' => '1',
-            'piercing' => '0',
-            'fumador' => '1',
-            'seguridad' => '1',
-            'agenda' => '0'
+            'idusuario' => '43',
+            'seguridad' => '0'
         ]);
 
 

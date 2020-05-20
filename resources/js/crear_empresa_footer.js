@@ -2,7 +2,6 @@
 
 $(document).ready(function(){
                    
-
       // validate signup form on keyup and submit
       $("#form-cuenta-empresa").validate({
         ignore: ":hidden :not('inp-cbx.always-validate') ",
@@ -106,7 +105,6 @@ $(document).ready(function(){
             $("#btn-enviar").attr('disabled', true);
 
           
-
             axios.post('registrar-empresa', {
                 //PLANES
                 'idplan' : $('input[name="radioPlan"]:checked').val(),
@@ -319,9 +317,11 @@ $(document).ready(function(){
 
       });
 
-      $("input[name='plan_seleccionado']").on("change", function() {
+      $("input[name='radioPlan']").on("change", function () {
 
-        $("#plan_label").html( "Empresa " + $(this).parent(".container-radio").find("input[name='plan_seleccionado']:checked").val() );
+        console.log( "Empresa " + $(this).parent(".container-radio").find("input[name='plan_seleccionado']").val() );
+
+        $("#plan_label").html( "Empresa " + $(this).parent(".container-radio").find("input[name='plan_seleccionado']").val() );
 
         //SI EL PRECIO DEL PLAN SELECCIONADO ES MAS DE CERO MOSTRAR PERIODOS
         /*if(parseFloat($(this).parent(".container-radio").find("input[name='precio_seleccionado']").val()) > 0) {

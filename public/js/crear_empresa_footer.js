@@ -351,8 +351,9 @@ $(document).ready(function () {
       console.log(error);
     });
   });
-  $("input[name='plan_seleccionado']").on("change", function () {
-    $("#plan_label").html("Empresa " + $(this).parent(".container-radio").find("input[name='plan_seleccionado']:checked").val()); //SI EL PRECIO DEL PLAN SELECCIONADO ES MAS DE CERO MOSTRAR PERIODOS
+  $("input[name='radioPlan']").on("change", function () {
+    console.log("Empresa " + $(this).parent(".container-radio").find("input[name='plan_seleccionado']").val());
+    $("#plan_label").html("Empresa " + $(this).parent(".container-radio").find("input[name='plan_seleccionado']").val()); //SI EL PRECIO DEL PLAN SELECCIONADO ES MAS DE CERO MOSTRAR PERIODOS
 
     /*if(parseFloat($(this).parent(".container-radio").find("input[name='precio_seleccionado']").val()) > 0) {
         $("#periodos_planes").slideDown();

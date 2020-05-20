@@ -57,7 +57,7 @@
                     <label class="error" v-if="!$v.idcountry.required">El país es obligatorio</label>
                   </div>
                   <div class="col-lg-6 col-sm-12">
-                    <select type="text" class="form-control espacio-campos" v-model.trim="$v.idstate.$model"  @change="cambiarDepartamento()" name="idstate" v-model="idstate">
+                    <select type="text" class="form-control espacio-campos" v-model.trim="$v.idstate.$model" @change="cambiarDepartamento()" name="idstate" v-model="idstate">
                       <option value="">Seleccione un departamento</option>
                       <option v-for="(option, index) in arStates" :key="index" :value="option.id" :selected="option.id === idstate ? 'selected' : ''">{{ option.name }}</option>
                     </select>
@@ -493,6 +493,7 @@ export default {
                 .then(function (response) {
 
                     me.arStates = response.data.states;   
+                    me.arCities = [];
 
                 })
                 .catch(function (error) {

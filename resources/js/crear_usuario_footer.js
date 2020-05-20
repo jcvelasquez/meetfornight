@@ -456,9 +456,9 @@ $(document).ready(function () {
         $("#celular_label").html( $(this).val() );
       });
 
-      $("input[name='plan_seleccionado']").on("change", function () {
+      $("input[name='radioPlan']").on("change", function () {
 
-        $("#plan_label").html( "Cuenta: " + $(this).parent(".container-radio").find("input[name='plan_seleccionado']:checked").val() );
+        $("#plan_label").html( "Cuenta: USUARIO " + $(this).parent(".container-radio").find("input[name='plan_seleccionado']").val() );
 
         //SI EL PRECIO DEL PLAN SELECCIONADO ES MAS DE CERO MOSTRAR PERIODOS
         /*if (parseFloat($(this).parent(".container-radio").find("input[name='precio_seleccionado']").val()) > 0) {

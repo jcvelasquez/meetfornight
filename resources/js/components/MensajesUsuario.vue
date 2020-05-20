@@ -27,6 +27,8 @@
             </thead>
             <tbody class="resultado-fake">
 
+                <template v-if="arMensajes.length > 0">
+
                     <template v-for="mensaje in arMensajes">
 
                         <tr v-bind:key="mensaje.id">
@@ -38,13 +40,11 @@
                                 <button @click="seleccionarMensaje(mensaje)" class="btn-responder-mensaje-profesional" type="button"> <i class="fa fa-search"></i></button>
                             </td>
                         </tr>
-                        <tr v-if="mensaje.esActivo">
-                            
+                        <tr v-if="mensaje.esActivo" v-bind:key=" 'resp' + mensaje.id">
                             <td colspan="5" style="background:#ededed;">
                                 <div class="form-row form-respuesta">
                                     <textarea name="responder" v-model="mensaje.responder" class="form-control" rows="4"></textarea>
                                 </div>
-
                                 <div class="form-row form-respuesta">
                                     <div class="col-lg-6 col-sm-12">
                                         <button type="button" @click="responderMensaje(mensaje)" class="btn btn-primary btn-responder-mensaje">ENVIAR RESPUESTA</button>
@@ -53,9 +53,7 @@
                                         <button type="button" @click="cancelarMensaje(mensaje)" class="btn btn-primary btn-rechazar-reserva">CANCELAR</button>
                                     </div>
                                 </div>
-
                                 <div class="form-row item-respuesta" v-for="respuesta in mensaje.respuestas" :key="respuesta.id"> 
-                        
                                     <div class="col-lg-12 col-sm-12  datos-mensaje">
                                         <h6>{{respuesta.nombre}}</h6>
                                         <span class="fecha">{{respuesta.enviado_el}}</span>
@@ -67,84 +65,24 @@
                                 </div>
                             </td>
                         </tr>
-
                     </template>
-                        
 
-                <!--         <template v-show=" mensaje.esActivo">
+                </template>
 
-                            <tr>
-                                
-                            </tr> 
+                <template v-else>
+                    <tr>
+                        <td colspan="4" align="center"> No existen mensajes registrados en tu cuenta</td>
+                    </tr>
+                </template>
 
-                        </template> -->
-                                     
-                
             </tbody>
-            <tfoot class="item-mensaje" v-if=" isSeleccionado ">
 
-                    
-
-            </tfoot>
             </table>
 
         </div>
         </div>
     </div> 
 
-<!-- 
-  <div class="bloques-de-perfil">
-        <div class="form-row item-mensaje" v-for="mensaje in arMensajes" :key="mensaje.id">
-            <div class="col-lg-1 col-sm-12">
-                <img src="fotos-profesionales/oswaldo_salaverry.jpg" class="img-responsive" alt="">
-            </div>
-            <div class="col-lg-11 col-sm-12 datos-mensaje">
-                <small>{{mensaje.nombre_plan}}</small>
-                <button @click="eliminarMensaje(mensaje)" class="btn-eliminar" type="button"><i class="fa fa-trash-o"></i></button>
-                <hr class="linea">
-                <h6>{{mensaje.nombre}}</h6>
-                <span class="fecha">{{mensaje.enviado_el}}</span>
-                <div class="clear"></div>
-                <div class="mensaje">
-                    <p>{{mensaje.mensaje}}</p>
-                </div>
-                
-                <div class="clear"></div>
-
-                <div v-if="mensaje.esActivo">
-                    <div class="form-row form-respuesta">
-                        <textarea name="responder" v-model="mensaje.responder" class="form-control" rows="4"></textarea>
-                    </div>
-                    <div class="form-row form-respuesta">
-                        <div class="col-lg-6 col-sm-12">
-                            <button type="button" @click="responderMensaje(mensaje)" class="btn btn-primary btn-responder-mensaje">ENVIAR RESPUESTA</button>
-                        </div>
-                        <div class="col-lg-6 col-sm-12">
-                            <button type="button" @click="cancelarMensaje(mensaje)" class="btn btn-primary btn-rechazar-reserva">CANCELAR</button>
-                        </div>
-                    </div>
-                    <div class="form-row item-respuesta" v-for="respuesta in mensaje.respuestas" :key="respuesta.id"> 
-                        <div class="col-lg-1 col-sm-12">
-                            <img src="fotos-profesionales/oswaldo_salaverry.jpg" class="img-responsive" alt="">
-                        </div>
-                        <div class="col-lg-11 col-sm-12  datos-mensaje">
-                            <h6>{{respuesta.nombre}}</h6>
-                            <span class="fecha">{{respuesta.enviado_el}}</span>
-                            <div class="clear"></div>
-                            <div class="mensaje"> <p>{{respuesta.mensaje}}</p> </div>
-                        </div>
-                    </div>
-                </div>
-                <div v-else>
-                    <button @click="seleccionarMensaje(mensaje)" class="btn-responder-mensaje-profesional" type="button">Ver más</button>
-                </div>
-
-            </div>
-        </div>        
-    </div>  
-
-
- -->
   </form>
 </template>
 

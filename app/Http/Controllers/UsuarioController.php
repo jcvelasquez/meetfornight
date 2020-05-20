@@ -141,6 +141,7 @@ class UsuarioController extends Controller
         $usuario->apodo = $request->apodo;
         $usuario->fecha_nacimiento = Carbon::createFromFormat('d/m/Y', $request->fecha_nacimiento );
         $usuario->sexo = $request->sexo;
+        $usuario->celular = $request->celular;
         $usuario->idcountry = $request->idcountry;
         $usuario->idstate = $request->idstate;
         $usuario->idcity = $request->idcity;

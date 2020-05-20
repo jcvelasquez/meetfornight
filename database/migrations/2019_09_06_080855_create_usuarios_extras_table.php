@@ -14,24 +14,25 @@ class CreateUsuariosExtrasTable extends Migration
     public function up()
     {
         Schema::create('usuarios_extras', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->integer('idusuario')->unsigned();
-            $table->text('frase');
-            $table->text('descripcion');
+            $table->string('frase')->nullable();
+            $table->text('descripcion')->nullable();
             $table->string('web')->nullable();
             $table->string('pecho')->nullable();
             $table->string('pene')->nullable();
-            $table->string('color_ojos');
-            $table->string('color_cabello');
+            $table->string('color_ojos')->nullable();
+            $table->string('color_cabello')->nullable();
             $table->string('corte_intimo')->nullable();
-            $table->integer('estatura');
-            $table->integer('peso');
-            $table->enum('orientacion',['LESBIANA','HETEROSEXUAL','TRANSEXUAL','HOMOSEXUAL','BISEXUAL']);
+            $table->integer('estatura')->nullable();
+            $table->integer('peso')->nullable();
+            $table->enum('orientacion',['LESBIANA','HETEROSEXUAL','TRANSEXUAL','HOMOSEXUAL','BISEXUAL'])->nullable();
             $table->enum('tipo_contacto',['MENSAJE','CORREO','NA'])->nullable();
-            $table->enum('tipo_moneda',['PEN','USD','EUR']);
-            $table->integer('tatuaje');
-            $table->integer('piercing');
-            $table->integer('fumador');
-            $table->integer('seguridad');
+            $table->enum('tipo_moneda',['PEN','USD','EUR'])->nullable();
+            $table->integer('tatuaje')->nullable();
+            $table->integer('piercing')->nullable();
+            $table->integer('fumador')->nullable();
+            $table->integer('seguridad')->nullable();
             $table->integer('agenda')->nullable();
             
             $table->foreign('idusuario')->references('id')->on('usuarios')->onDelete('cascade');

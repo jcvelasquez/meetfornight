@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Notifications\ReenviarVerificacion;
 use App\Rol;
 use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
@@ -29,6 +30,11 @@ class Usuario extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify(new ReenviarVerificacion);
+    }
+
     public function extras(){
         return $this->hasOne('App\UsuarioExtras', 'idusuario', 'id');
     }
@@ -53,6 +59,10 @@ class Usuario extends Authenticatable implements MustVerifyEmail
         return $this->hasMany('App\CategoriasProfesional', 'idprofesional', 'id')->join('categorias', 'categorias_profesional.idcategoria','=', 'categorias.id');
     }
 
+    public function seguridad(){
+        return $this->hasMany('App\SeguridadUsuario', 'idusuario', 'id');
+    }
+
     public function disponibilidades()
     {
         return $this->hasMany('App\DisponibilidadProfesional', 'idusuario', 'id');
@@ -75,6 +85,8 @@ class Usuario extends Authenticatable implements MustVerifyEmail
     public function getFechaNacimientoAttribute( $value ) {
         return (new Carbon($value))->format('d/m/Y');
     }
+
+   
 
 
     //DEL USER ORIGINAL

@@ -15,7 +15,7 @@
 
     </div>
 
-    <div id="preview" style="display: none;">
+<!--     <div id="preview" style="display: none;">
  
         <div class="dz-preview dz-file-preview">
             <div class="dz-image"><img data-dz-thumbnail /></div>
@@ -32,7 +32,6 @@
             <div class="dz-success-mark">
  
                 <svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
-                    <!-- Generator: Sketch 3.2.1 (9971) - http://www.bohemiancoding.com/sketch -->
                     <title>Check</title>
                     <desc>Created with Sketch.</desc>
                     <defs></defs>
@@ -45,7 +44,6 @@
             <div class="dz-error-mark">
  
                 <svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
-                    <!-- Generator: Sketch 3.2.1 (9971) - http://www.bohemiancoding.com/sketch -->
                     <title>error</title>
                     <desc>Created with Sketch.</desc>
                     <defs></defs>
@@ -59,7 +57,7 @@
         </div>
     </div>
 
-
+ -->
     <draggable v-model="arFotos" @change="cambiarOrden()">
         <transition-group>
             <div class="img-cargada" v-for="(foto, index) in arFotos" :key="foto.id">

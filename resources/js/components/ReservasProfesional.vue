@@ -98,8 +98,7 @@
         
         <table class="table">
             <thead class="cabecera-fake">
-<!--               <tr><th scope="col" colspan="7" style="text-align: center; text-transform: uppercase; background: rgb(91, 55, 111);">LISTA DE RESERVAS</th></tr>
- -->              <tr>
+              <tr>
                 <th scope="col" width="40">#</th>
                 <th scope="col">Cliente</th>
                 <th scope="col">Fecha</th>
@@ -110,23 +109,29 @@
               </tr>
             </thead>
             <tbody class="resultado-fake">
- 
-              <tr v-for="reserva in arReservas" :key="reserva.id">
 
+            <template v-if="arReservas.length > 0">
+                <tr v-for="reserva in arReservas" :key="reserva.id">
                     <td v-text="reserva.id" scope="row"> </td>
                     <td v-text="reserva.usuario.nombre"></td>
                     <td v-text="reserva.fecha"></td>
                     <td v-text="reserva.desde"></td>
                     <td v-text="reserva.hasta"></td>
                     <td>
-
-                      <div v-if="reserva.es_aceptada === 1"><i class="fa fa-check"></i> Aceptada</div>
-                      <div v-else-if="reserva.es_aceptada == 0"><i class="fa fa-clock-o"></i> Pendiente</div>
-                      <div v-else><i class="fa fa-times"></i> Rechazada</div>
-
+                    <div v-if="reserva.es_aceptada === 1"><i class="fa fa-check"></i> Aceptada</div>
+                    <div v-else-if="reserva.es_aceptada == 0"><i class="fa fa-clock-o"></i> Pendiente</div>
+                    <div v-else><i class="fa fa-times"></i> Rechazada</div>
                     </td>
                     <td><button type="button" @click="seleccionarReserva(reserva)" class="btn btn-primary btn-sm"><i class="fa fa-search"></i></button></td>
-              </tr> 
+                </tr> 
+            </template>
+            <template v-else>
+                <tr>
+                    <td colspan="7" align="center">No tienes reservas registradas</td>
+                </tr>
+            </template>
+ 
+              
               
             </tbody>
           </table>

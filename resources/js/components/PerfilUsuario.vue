@@ -6,8 +6,11 @@
         <span class="obligatorio">(*) Campos Obligatorios</span>
       </div>
       <div class="form-row">
-        <div class="col-lg-12 col-sm-12">
-          <input type="text" class="form-control espacio-campos" name="nombre" id="nombre" placeholder="Nombre *" v-model="nombre" />
+        <div class="col-lg-6 col-sm-12">
+          <input type="text" class="form-control espacio-campos" name="nombre" placeholder="Nombre *" v-model="nombre" />
+        </div>
+        <div class="col-lg-6 col-sm-12">
+          <input type="text" class="form-control espacio-campos" name="celular" placeholder="Celular *" v-model="celular" />
         </div>
         <div class="col-lg-6 col-sm-12">
           <input type="text" class="form-control" v-model="apodo" id="apodo" name="apodo" placeholder="Apodo *" />
@@ -42,7 +45,7 @@
       </div>
       <div class="form-row">
             <div class="col-lg-6 col-sm-12">
-              <select type="text" class="form-control espacio-campos" name="idcountry" v-model="idcountry">
+              <select type="text" class="form-control espacio-campos" name="idcountry" @change="cambiarPais()" v-model="idcountry">
                 <option value="">Seleccione una nacionalidad</option>
                 <option value="205">España</option>
                 <option value="169">Panama</option> 
@@ -50,7 +53,7 @@
               </select>
             </div>
             <div class="col-lg-6 col-sm-12">
-              <select type="text" class="form-control espacio-campos" name="idstate" v-model="idstate">
+              <select type="text" class="form-control espacio-campos" name="idstate" @change="cambiarDepartamento()" v-model="idstate">
                 <option value="">Seleccione un departamento</option>
                 <option v-for="(option, index) in arStates" :key="index" :value="option.id" :selected="option.id === idstate ? 'selected' : ''">{{ option.name }}</option>
 
@@ -104,6 +107,7 @@ export default {
             apodo : '',
             email : '',
             password : '',
+            celular: '',
             confirmar_password : '',
             fecha_nacimiento : '',
             sexo : '',
@@ -149,6 +153,7 @@ export default {
                 me.email = usuario.email;
                 me.fecha_nacimiento = usuario.fecha_nacimiento;
                 me.sexo = usuario.sexo;
+                me.celular = usuario.celular;
                 me.idcountry = usuario.idcountry;
                 me.idstate = usuario.idstate;
                 me.idcity = usuario.idcity;
@@ -194,6 +199,7 @@ export default {
               'password' : me.password,
               'fecha_nacimiento' : me.fecha_nacimiento,
               'sexo' : me.sexo,
+              'celular' : me.celular,
               'nacionalidad' : me.nacionalidad,
               'idcountry' : me.idcountry,
               'idstate' : me.idstate,
@@ -205,6 +211,41 @@ export default {
             })
             .catch(function (error) {
                 // handle error
+                console.log(error);
+            });
+
+        },
+        cambiarPais(){
+                
+                let me = this;
+
+                axios.post('seleccionar-states', {
+                    'idcountry' : me.idcountry
+                })
+                .then(function (response) {
+
+                    me.arStates = response.data.states;   
+                    me.arCities = [];
+
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+                
+        },
+        cambiarDepartamento(){
+
+            let me = this;
+
+            axios.post('seleccionar-cities', {
+              'idstate' : me.idstate
+            })
+            .then(function (response) {
+
+                me.arCities = response.data.cities; 
+
+            })
+            .catch(function (error) {
                 console.log(error);
             });
 
