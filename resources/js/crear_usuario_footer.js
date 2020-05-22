@@ -62,7 +62,7 @@ $(document).ready(function () {
             required: true
           },
           celular: {
-            required: true
+            required: false
           },
         },
         errorPlacement: function (error, element) {

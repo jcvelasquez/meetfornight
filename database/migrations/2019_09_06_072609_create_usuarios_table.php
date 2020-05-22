@@ -28,7 +28,7 @@ class CreateUsuariosTable extends Migration
             $table->integer('idstate')->unsigned();
             $table->integer('idcity')->unsigned();
             $table->enum('idioma',['ES','EN']);
-            $table->string('celular');
+            $table->string('celular')->nullable();
             $table->enum('tipo_celular',['WHATSAPP','CELULAR']);
             $table->integer('estado');
             $table->dateTime('fecha_booster')->nullable();	

@@ -4,7 +4,7 @@
 
     <h5 class="formulario-titulos">CARGAR BANNERS:</h5>
 
-     <div class="cargar-imagenes" id="dropzone_fotos">
+     <div class="cargar-imagenes" id="dropzone_banners">
       <span class="titulo-cargar-imagenes">Sube tus imágenes</span>
       <span class="haz-click">Haz click</span>
       <button :disabled="arBanners.length >= 5" type="button" class="btn btn-primary"><i class="icon-cargar-archivo cargar"></i>SUBIR</button>
@@ -14,7 +14,7 @@
       </div>
 
     </div>
-
+<!-- 
     <div id="preview" style="display: none;">
  
         <div class="dz-preview dz-file-preview">
@@ -32,7 +32,6 @@
             <div class="dz-success-mark">
  
                 <svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
-                    <!-- Generator: Sketch 3.2.1 (9971) - http://www.bohemiancoding.com/sketch -->
                     <title>Check</title>
                     <desc>Created with Sketch.</desc>
                     <defs></defs>
@@ -45,7 +44,6 @@
             <div class="dz-error-mark">
  
                 <svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
-                    <!-- Generator: Sketch 3.2.1 (9971) - http://www.bohemiancoding.com/sketch -->
                     <title>error</title>
                     <desc>Created with Sketch.</desc>
                     <defs></defs>
@@ -57,7 +55,7 @@
                 </svg>
             </div>
         </div>
-    </div>
+    </div> -->
 
 
 
@@ -108,17 +106,17 @@ export default {
 
        let me = this;
 
-        var DropFotos = new Dropzone("#dropzone_fotos", { url: "banners-empresa/subir", 
+        var DropBanners = new Dropzone("#dropzone_banners", { url: "banners-empresa/subir", 
                         acceptedFiles: ".jpeg,.jpg,.png,.gif",
-                        clickable: "#dropzone_fotos button", 
-                        maxFiles: 5, 
+                        clickable: "#dropzone_banners button", 
+                        maxFiles: 1, 
                         addRemoveLinks:false,
                         headers: {
                           'X-CSRF-TOKEN': me.$csrf_token
                         },
                         data: {idusuario: me.$idprofesional },
                         error: function(file, response){
-                            return false;
+                            //return false;
                         },
                         success: function (file, done) {
 

@@ -19,7 +19,7 @@ class Usuario extends Authenticatable implements MustVerifyEmail
     public $table = "usuarios";
 
     protected $fillable =[
-        'idrol','apodo', 'nombre','email','password','fecha_nacimiento','sexo','nacionalidad','idioma','celular','estado'
+        'idrol','apodo', 'nombre','email','password','fecha_nacimiento','sexo','nacionalidad','idioma','estado'
     ];
 
     protected $hidden = [

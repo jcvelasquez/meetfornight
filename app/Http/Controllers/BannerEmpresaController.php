@@ -45,7 +45,7 @@ class BannerEmpresaController extends Controller
         if ( $image->move( $this->banners_empresas_path ,$save_name) ) {
 
             $banner = new BannerEmpresa();
-            $banner->idusuario = $idempresa;
+            $banner->idempresa = $idempresa;
             $banner->url_foto = $save_name;
             $banner->save();
             

@@ -38,7 +38,7 @@ class CrearCuentaController extends Controller
         $this->usuario_id = 0;
         
         $this->fotos_profesional_path = public_path('fotos_profesionales');
-        $this->fotos_usuario_path = public_path('fotos_usuario');
+        $this->fotos_usuario_path = public_path('fotos_usuarios');
         $this->banners_empresas_path = public_path('banners_empresas');
         
     }
