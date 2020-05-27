@@ -4,7 +4,8 @@
     @include('header')
 
   <body>
-
+    
+  @include('cookieConsent::index');
 
   <div id="widget">
 
@@ -18,11 +19,15 @@
 
         @include('footers.footer-free')
 
+        
+
   </div>
 
   
   <script src="{{ asset('js/app.js') }}"></script>
   <script src="{{ asset('js/meetfornight.js') }}"></script>
+
+  
 
   </body>
 </html>

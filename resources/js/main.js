@@ -1,6 +1,9 @@
 /******RANGE******/
 
+
+
 /*****GALERÍA IMAGENES PEQUEÑAS*****/
+/*
 function showImage(imgName) {
 
       var curImage = document.getElementById('currentImg');
@@ -18,8 +21,9 @@ function nombre(imgName2){
       curImage.href = theSource;
 
 }
-
+*/
 /*****FORMULARIO ANIMADO OCULTAR Y MOSTRAR******/
+/*
 function mostrarFormulario() {
 
       document.getElementById('form-consultor').style.display = 'block';
@@ -32,7 +36,7 @@ function ocultarFormulario() {
       document.getElementById('form-consultor').style.display = 'none';
       document.getElementById('consultor').style.display = 'block';
 
-}
+}*/
 
 
 $(document).ready(function(){
@@ -40,10 +44,11 @@ $(document).ready(function(){
       $('#perfilesRelacionados').owlCarousel({
             loop:true,
             margin:10,
-            nav:true,
+            nav:false,
+            dots:true,
             autoplay:true,
-            autoplayTimeout:1000,
-            autoplayHoverPause:false,
+            autoplayTimeout:2000,
+            autoplayHoverPause:true,
             responsive:{
                 0:{
                     items:1
@@ -69,5 +74,27 @@ $(document).ready(function(){
       if( $('ul.lista-otros').children().length < 1 ){ $('#nav-otros').hide(); }
 
       if( $('ul.lista-discapacitados').children().length < 1 ){ $('#nav-discapacitados').hide(); }
+
+
+      $(".btnAgregarFavoritos").click(function(e){
+
+            var apodo = $(this).data("apodo");
+
+
+            axios.post('/favoritos-usuario/agregar', { 'apodo' : apodo }).then(function (response) {
+
+                  Swal.fire('CONFIRMACION', response.data.mensaje ,'success');
+
+               }).catch(function (error) {  
+                   if (error.response.status === 401) {
+                        Swal.fire('ERROR', 'Debes iniciar sesión para poder agregar a favoritos','error');
+                   }
+               });
+      
+
+
+      });       
+
+      
 
 });

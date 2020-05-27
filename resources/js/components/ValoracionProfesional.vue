@@ -112,15 +112,15 @@
             },
             calcularEstrellas(total) {
 
-              let estrellas = "";
-              var restantes = 0;
+                  let estrellas = "";
+                  var restantes = 0;
 
-              for(var i=0; i< total; i++){ estrellas += '<i class="icon-star precio-morado"></i>'; }
-              for(var a=0; a < 5 - total; a++){ estrellas += '<i class="icon-star precio-plomo"></i>'; }
-              
-              return estrellas;
+                  for(var i=0; i< total; i++){ estrellas += '<i class="icon-star precio-morado"></i>'; }
+                  for(var a=0; a < 5 - total; a++){ estrellas += '<i class="icon-star precio-plomo"></i>'; }
+                  
+                  return estrellas;
 
-         }
+            }
 
          }
 

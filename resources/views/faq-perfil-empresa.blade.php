@@ -258,62 +258,7 @@
                   </div>
                 </div>
               </div>
-              <!--<div class="card">
-                <div class="card-header" id="headingThree">
-                  <h5 class="mb-0">
-                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThirteen" aria-expanded="false" aria-controls="collapseThirteen">
-                      No quiero recibir correos electrónicos a través del formulario de contacto 
-                    </button>
-                  </h5>
-                </div>
-                <div id="collapseThirteen" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                  <div class="card-body">
-                    ...
-                  </div>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-header" id="headingThree">
-                  <h5 class="mb-0">
-                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFourteen" aria-expanded="false" aria-controls="collapseFourteen">
-                      ¿Cómo puedo obtener el sello de “Perfil Verificado”? 
-                    </button>
-                  </h5>
-                </div>
-                <div id="collapseFourteen" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                  <div class="card-body">
-                    ...
-                  </div>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-header" id="headingThree">
-                  <h5 class="mb-0">
-                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFifteen" aria-expanded="false" aria-controls="collapseFifteen">
-                      ¿Por qué se ha ido el sello "Perfil Verificado”? 
-                    </button>
-                  </h5>
-                </div>
-                <div id="collapseFifteen" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                  <div class="card-body">
-                    ...
-                  </div>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-header" id="headingThree">
-                  <h5 class="mb-0">
-                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseSixteen" aria-expanded="false" aria-controls="collapseSixteen">
-                      ¿Qué opciones de anuncios tiene Meet For Night y para quién? 
-                    </button>
-                  </h5>
-                </div>
-                <div id="collapseSixteen" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                  <div class="card-body">
-                    ...
-                  </div>
-                </div>
-              </div>-->
+              
             </div>
           </div>
         </div>
@@ -325,6 +270,9 @@
   @include('footers.footer-free')
 
   @include('modal')
+
+<script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('js/meetfornight.js') }}"></script>
 
   </body>
 </html>

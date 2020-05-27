@@ -4,7 +4,9 @@
 //use App\Http\Middleware\Profesional;
 //use App\Http\Middleware\CheckRol;
 
+use App\Notifications\ReservaRealizada;
 use App\Notifications\VerificarEmail;
+use App\ReservasProfesional;
 use App\Usuario;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -14,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 Auth::routes(['verify' => true]);
 
 // Registration Routes...
+
+
+
 
 
 // Password Reset Routes...
@@ -29,15 +34,38 @@ Route::get('email/verify/{id}', 'Auth\VerificationController@verify')->name('ver
 Route::get('email/reenviar', 'Auth\VerificationController@reenviar')->name('verification.reenviar');
 Route::post('email/check', 'CrearCuentaController@checkEmail');  
 
-Route::get('/',  'HomeController@mostrar')->name('home');
+
+
+Route::group(['prefix' => '{country}', 'middleware' => 'country'], function () {
+
+        Route::get('/test', function ($country, Illuminate\Http\Request $request) {
+
+                return $request->session()->get('country');
+
+        });
+
+        Route::get('/',  'HomeController@mostrar')->name('home');
+
+        Route::get('anuncios', function () {  return view('anuncios'); });
+
+
+});
 
 
 //CATEGORIAS
-Route::get('anuncios', function () {  return view('anuncios'); });
 
 Route::get('anuncios/{categoria}', function (Request $request) {  
     return view('categoria')->withTitle($request->categoria);
 });
+
+/*
+Route::get('reserva/aceptada', function () {  
+        $reserva = ReservasProfesional::where('id', 9 )->with('usuario')->first();
+        return (new ReservaRealizada($reserva))->toMail($reserva['usuario']->email);
+        //return $reserva;
+});
+*/
+
 
 Route::post('usuarios', 'HomeController@listarProfesionales');
 Route::get('usuarios', 'HomeController@listarProfesionales');
@@ -47,9 +75,16 @@ Route::get('idiomas/listar', 'IdiomasController@listar');
 
 //VISTA DE PERFIL
 Route::get('perfil/{apodo}',  'PerfilController@mostrar');
+Route::get('perfil/listar/{apodo}',  'PerfilController@listar');
 Route::get('perfil/disponibilidad/{apodo}', 'DisponibilidadProfesionalController@listar' );
 Route::post('seleccionar-states', 'CrearCuentaController@seleccionarStates');
 Route::post('seleccionar-cities', 'CrearCuentaController@seleccionarCities');
+Route::get('faq-perfil-usuario', 'HomeController@mostrarFaqUsuario');   
+Route::get('faq-perfil-profesional', 'HomeController@mostrarFaqProfesional');   
+Route::get('faq-perfil-empresa', 'HomeController@mostrarFaqEmpresa');   
+Route::get('blog', 'BlogController@mostrar');   
+Route::get('blog/{id}', 'BlogController@leer');   
+
 
 Route::group(['middleware'=>['guest']],function(){
   
@@ -57,25 +92,14 @@ Route::group(['middleware'=>['guest']],function(){
         Route::get('crear-cuenta-profesional', 'CrearCuentaController@mostrarRegistroProfesional');   
         Route::get('crear-cuenta-usuario', 'CrearCuentaController@mostrarRegistroUsuario');      
         Route::get('crear-cuenta-empresa', 'CrearCuentaController@mostrarRegistroEmpresa');   
-
-        Route::get('faq-perfil-usuario', 'HomeController@mostrarFaqUsuario');   
-        Route::get('faq-perfil-profesional', 'HomeController@mostrarFaqProfesional');   
-        Route::get('faq-perfil-empresa', 'HomeController@mostrarFaqEmpresa');   
-
         Route::post('comprobar-credenciales', 'Auth\LoginController@login')->name('comprobar-credenciales');
-
         Route::get('iniciar-sesion', 'Auth\LoginController@showLoginForm')->name('iniciar-sesion');
-
         Route::post('registrar-usuario', 'CrearCuentaController@registrarUsuario')->name('registrar-usuario');
         Route::post('registrar-usuario-fotos', 'CrearCuentaController@subirFotoUsuarioRegistro');   
-
-        
         Route::post('registrar-profesional', 'CrearCuentaController@registrarProfesional')->name('registrar-profesional');
         Route::post('registrar-profesional-fotos', 'CrearCuentaController@subirFotoProfesionalRegistro');   
-
         Route::post('registrar-empresa', 'CrearCuentaController@registrarEmpresa')->name('registrar-empresa');
         Route::post('registrar-empresa-banner', 'CrearCuentaController@subirBannerEmpresaRegistro');   
-        
         Route::get('eliminar-profesional', 'AdministradorController@eliminarProfesional');      
 
 });
@@ -136,15 +160,12 @@ Route::group(['middleware'=>['auth','verified']],function(){
         Route::get('perfil-empresa', 'UsuarioController@mostrarPerfilEmpresaLogueado')->name('perfil-empresa');
         Route::get('perfil-empresa/editar', 'UsuarioController@editarDataEmpresa');
         Route::put('perfil-empresa/actualizar', 'UsuarioController@actualizarDataEmpresa');
-
         Route::get('banners-empresa', 'BannerEmpresaController@mostrar');
         Route::get('banners-empresa/listar', 'BannerEmpresaController@listar');
         Route::post('banners-empresa/eliminar', 'BannerEmpresaController@eliminar');
         Route::post('banners-empresa/subir', 'BannerEmpresaController@subir');
-        
         Route::get('planes-empresa', 'PlanesEmpresaController@mostrar');
         Route::get('planes-empresa/listar', 'PlanesEmpresaController@listar');
-
         Route::get('estadisticas-empresa', function () {  return view('forms-perfil-empresa.estadisticas-empresa');  });
 
     });

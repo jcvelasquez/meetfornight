@@ -342,7 +342,9 @@ ul.lista-opciones {
 
 #thumbnail_list { overflow: hidden;}
 #thumbnail_list li { list-style:none; }
+#thumbnail_list li:nth-child(n+1) img { border-radius: 12px; }
 #thumbnail_list li:nth-child(n+2) { float: left; width: 25%; margin-top: 5px; padding:5px; }
+#thumbnail_list li:nth-child(n+2) img { border-radius: 10px; min-height: 110px; }
 
 .vue__time-picker input.display-time {
     border: 2px solid #a86ba4 !important;
@@ -367,3 +369,48 @@ ul.lista-opciones {
     background:#a86ba414;
     border-radius: 10px;
 }
+
+#banner-internas h2 { color: #fff; text-align: center; padding:50px 0; }
+
+#lista_lateral li { list-style:none; }
+
+/* CSS BLOG */
+article.blog { border-bottom: 1px dotted #ccc; padding-bottom: 30px; }
+article.blog:nth-child(n+2) { padding-top: 30px; }
+article.blog:last-child { border-bottom: none; }
+
+ul.pagination { margin:30px 0 50px 0; }
+
+
+.page-item.active .page-link {
+    background-color: #a86ba4;
+    border-color: #a86ba4;
+}
+
+.page-link{
+    color: #5b376f;
+}
+
+article.blog_detalle p.content_blog { margin-top: 30px; }
+article.blog_detalle p.user_blog { margin-top: 10px; }
+
+article.blog_detalle .foto_blog { margin:15px 0; }
+
+.btn_volver_blog { float: right; display: block; border: 1px solid #5b376f; padding: 5px 30px; border-radius: 15px; color:#5b376f; text-decoration: none; width:fit-content; }
+.btn_volver_blog:hover { background:#a86ba4;  border: 1px solid #a86ba4; color:#fff; text-decoration: none; }
+
+.circulo_user { display:block; width: 100px; height: 100px; border-radius: 50px; background:#a86ba4; text-align: center; }
+.circulo_user img { max-width: 80%; vertical-align:middle; padding-top:45px;}
+.push_bottom_blog { margin-bottom: 100px; }
+
+.item-otras-chicas .triangulo { cursor: pointer; background: transparent; }
+.item-otras-chicas .triangulo i { position: absolute; top: -17px; color: #fff; }
+
+.owl-dots { text-align: center; margin: 0 auto 40px auto; }
+.owl-dot span { display: block; width:15px; height:15px; background:#a86ba4; border-radius:8px; margin:5px;   }
+.owl-dot.active span { background:#5b376f; }
+
+.js-cookie-consent { position: fixed; color: #fff; bottom:0; width: 100%; background:#a86ba4; text-align: center; padding: 10px; z-index: 99999;}
+
+.js-cookie-consent button { background:#5b376f; color: #fff; border: none; padding: 6px 15px; margin-left: 20px; border-radius: 10px; }
+

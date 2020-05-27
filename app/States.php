@@ -10,6 +10,6 @@ class States extends Model
 
     public $table = "states";
 
-    protected $fillable = ['name','country_id'];
+    protected $fillable = ['name_state','country_id'];
 
 }

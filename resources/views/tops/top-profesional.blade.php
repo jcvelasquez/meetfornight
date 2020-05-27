@@ -6,7 +6,9 @@
       <a href="" class="reactivar">RENOVAR</a>
   		<div class="usuario-creado">
   			<span><i class="icon-user-woman esp-icon-usuario-creado"></i> {{ Auth::user()->nombre }}</span>
-  			<span><i class="icon-locked-padlock esp-icon-usuario-creado"></i><a href="{{ route('cerrar-sesion') }}">Cerrar Sesión</a></span>
+        <span><i class="icon-locked-padlock esp-icon-usuario-creado"></i><a href="{{ route('cerrar-sesion') }}">Cerrar Sesión</a></span>
+        
+        <!-- BOTON ROJO -->
         <div class="dropdown show eliminar-usuario">
           <a class="btn x-circulo2 dropdown-toggle " href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="icon-trash"></i>
@@ -24,6 +26,8 @@
             <button type="submit" class="btn btn-primary">Confirmar</button>
           </form>
         </div>
+        <!-- FIN BOTON ROJO -->
+
   		</div>
   	</div>
   </header>

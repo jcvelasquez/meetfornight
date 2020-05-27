@@ -59,7 +59,7 @@
                   <div class="col-lg-6 col-sm-12">
                     <select type="text" class="form-control espacio-campos" v-model.trim="$v.idstate.$model" @change="cambiarDepartamento()" name="idstate" v-model="idstate">
                       <option value="">Seleccione un departamento</option>
-                      <option v-for="(option, index) in arStates" :key="index" :value="option.id" :selected="option.id === idstate ? 'selected' : ''">{{ option.name }}</option>
+                      <option v-for="(option, index) in arStates" :key="index" :value="option.id" :selected="option.id === idstate ? 'selected' : ''">{{ option.name_state }}</option>
                     </select>
                     <label class="error" v-if="!$v.idstate.required">El departamento es obligatorio</label>
                   </div>
@@ -68,7 +68,7 @@
                 <div class="col-lg-6 col-sm-12">
                     <select type="text" class="form-control espacio-campos" v-model.trim="$v.idcity.$model" name="idcity" v-model="idcity">
                       <option value="">Seleccione un distrito</option>
-                      <option v-for="(option, index) in arCities" :key="index" :value="option.id" :selected="option.id === idcity ? 'selected' : ''">{{ option.name }}</option>
+                      <option v-for="(option, index) in arCities" :key="index" :value="option.id" :selected="option.id === idcity ? 'selected' : ''">{{ option.name_city }}</option>
                     </select>
                     <label class="error" v-if="!$v.idcity.required">La ciudad es obligatoria</label>
                 </div>
@@ -96,9 +96,9 @@
                 <div class="col-lg-6 col-sm-12" v-if=" sexo === 'M' ">
                  <select type="text" class="form-control espacio-campos" name="pene" v-model="pene">
                     <option value="">Seleccione tamaño de pene</option>
-                    <option value="SMALL">Small</option>
-                    <option value="MEDIUM">Medium</option>
-                    <option value="LARGE">Large</option>
+                    <option value="SMALL">SMALL</option>
+                    <option value="MEDIUM">MEDIUM</option>
+                    <option value="LARGE">LARGE</option>
                   </select>
                 </div>
 
@@ -133,7 +133,7 @@
                   <option value="Natural">Natural</option>
                   <option value="Triangulo">Triangulo</option>
                   <option value="Afeitado">Afeitado</option>
-                  <option value="Otro">Otro</option>
+                  <option value="Otros">Otros</option>
                 </select>
               </div>
             </div>

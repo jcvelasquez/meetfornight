@@ -236,7 +236,7 @@
                             <i class="icon-star"></i>
                             <i class="icon-star"></i>
                             </span>
-                            <a :href="'perfil/' + profesional.apodo">VER PERFIL</a>
+                            <a :href="'perfil/' + profesional.apodo" target="_blank">VER PERFIL</a>
                             
                         </div>
                         <img :src="'fotos_profesionales/' + profesional.url_foto" class="img-responsive" />

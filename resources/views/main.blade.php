@@ -51,7 +51,7 @@
                 <div class="botones-cabecera-chicas">
                   <a href="intranet.php">PANEL DE CONTROL</a>
                   <span><i class="fa fa-angle-right" aria-hidden="true"></i></span>
-                  <a href="perfil-creado.php" class="cabecera-chicas-active">
+                  <a href="#" class="cabecera-chicas-active">
                   
                     @yield('title')
 

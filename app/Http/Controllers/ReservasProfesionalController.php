@@ -7,6 +7,11 @@ use Illuminate\Support\Facades\Auth;
 use App\ReservasProfesional;
 use App\Usuario;
 
+use App\Notifications\ReservaRealizada;
+use App\Notifications\ReservaRechazada;
+use App\Notifications\ReservaAceptada;
+
+
 class ReservasProfesionalController extends Controller
 {
 
@@ -30,6 +35,7 @@ class ReservasProfesionalController extends Controller
     {
 
         $idusuario = Auth::user()->id;
+        $usuariologged = Auth::user();
 
         $usuario = Usuario::where('apodo', '=', $request->apodo)->firstOrFail();
 
@@ -46,6 +52,8 @@ class ReservasProfesionalController extends Controller
         $reserva->es_aceptada = 0;
         $reserva->save();
 
+        $usuariologged->notify(new ReservaRealizada($usuariologged));
+
         return ['mensaje' => 'La reserva se ha registrado satisfactoriamente, sin embargo no podemos garantizar la confirmación de la misma. Una vez aceptada la reserva, se le notificará a su correo electrónico.'];
 
     }
@@ -53,9 +61,12 @@ class ReservasProfesionalController extends Controller
     public function aceptar(Request $request)
     {
 
-        $reserva = ReservasProfesional::find($request->idreserva);
+        $reserva = ReservasProfesional::where('id', $request->idreserva)->with('usuario')->first();
         $reserva->es_aceptada = 1;
         $reserva->save();
+
+        $usuario = $reserva['usuario'];
+        $usuario->notify(new ReservaAceptada($usuario));
 
         return ['mensaje' => 'Reserva aceptada correctamente'];
 
@@ -64,14 +75,12 @@ class ReservasProfesionalController extends Controller
     public function rechazar(Request $request)
     {
 
-        $reserva = ReservasProfesional::find($request->idreserva);
+        $reserva = ReservasProfesional::where('id', $request->idreserva)->with('usuario')->first();
         $reserva->es_aceptada = 2;
         $reserva->save();
 
-        /*$order = App\Order::find(1);
-
-        return (new App\Notifications\StatusUpdate($order))
-                ->toMail($order->user);*/
+        $usuario = $reserva['usuario'];
+        $usuario->notify(new ReservaRechazada($usuario));
 
         return ['mensaje' => 'Reserva rechazada satisfactoriamente, se le notificó al usuario.'];
 

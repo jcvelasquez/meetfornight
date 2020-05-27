@@ -14,7 +14,7 @@
               <li class="nav-item espaciado-btn-header-top active">
                 <a class="nav-link rojo" href="acceder-free.php"><span class="icon-header"><i class="color-header-top icon-locked-padlock rojo"></i></span>Acceder</a>
               </li>
-              -->
+              
               <li class="nav-item espaciado-btn-header-top dropdown">
                 <a class="nav-link dropdown-toggle rojo" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="icon-header"><i class="color-header-top icon-locked-padlock rojo"></i></span>Acceder</a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -22,23 +22,35 @@
                   <a class="dropdown-item" href="{{url('crear-cuenta')}}">Crear Cuenta</a>
                 </div>
               </li>
+              -->
+              @if(Auth::check())
+                <li class="nav-item espaciado-btn-header-top">
+                  <a class="nav-link" href="{{ url('/iniciar-sesion') }}"><span class="icon-header"><i class="color-header-top icon-user-woman"></i></span>Mi Cuenta</a>
+                </li>
+              @else
+                <li class="nav-item espaciado-btn-header-top">
+                  <a class="nav-link" href="{{ url('/iniciar-sesion') }}"><span class="icon-header"><i class="color-header-top icon-locked-padlock"></i></span>Iniciar Sesión</a>
+                </li>
+                <li class="nav-item espaciado-btn-header-top">
+                  <a class="nav-link" href="{{url('crear-cuenta')}}"><span class="icon-header"><i class="color-header-top icon-diary"></i></span>Crear Cuenta</a>
+                </li>
+              @endif
 
             <!--   <li class="nav-item espaciado-btn-header-top">
-
                 <a class="nav-link" href="#"><span class="icon-header"><i class="color-header-top icon-webcam"></i></span>Web Cam</a>
-
               </li> -->
               
               <li class="nav-item espaciado-btn-header-top">
                 <a class="nav-link" href="#"><span class="icon-header"><i class="color-header-top icon-email"></i></span>Contáctanos</a>
               </li>
+              
               <li class="nav-item espaciado-btn-header-top dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="/pe" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <span class="icon-header icon-peru"><i class="path1"></i><i class="path2"></i><i class="path3"></i></span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#"><span class="icon-header icon-panama"><i class="path1"></i><i class="path2"></i><i class="path3"></i><i class="path4"></i></span>Panamá</a>
-                  <a class="dropdown-item" href="#"><span class="icon-header icon-spain"><i class="path1"></i><i class="path2"></i><i class="path3"></i><i class="path4"></i></span>
+                  <a class="dropdown-item" href="/pa"><span class="icon-header icon-panama"><i class="path1"></i><i class="path2"></i><i class="path3"></i><i class="path4"></i></span>Panamá</a>
+                  <a class="dropdown-item" href="/es"><span class="icon-header icon-spain"><i class="path1"></i><i class="path2"></i><i class="path3"></i><i class="path4"></i></span>
                   España</a>
                 </div>
               </li>
@@ -79,7 +91,7 @@
                 </div>
               </li>
               <li class="nav-item espaciado-btn-header-bottom">
-                <a class="nav-link" href="#"><span class="color-header-bottom">BLOG</span></a>
+                <a class="nav-link" href="{{ url('/blog') }}"><span class="color-header-bottom">BLOG</span></a>
               </li>
             </ul>
           </div>

@@ -20,6 +20,9 @@
                 </div>
               </li>
               <li class="nav-item espaciado-btn-header-top">
+                <a class="nav-link" href="{{ url('/iniciar-sesion') }}"><span class="icon-header"><i class="color-header-top icon-email"></i></span>Iniciar Sesión</a>
+              </li>
+              <li class="nav-item espaciado-btn-header-top">
                 <a class="nav-link" href="#"><span class="icon-header"><i class="color-header-top icon-email"></i></span>Contáctanos</a>
               </li>
               <li class="nav-item espaciado-btn-header-top dropdown">

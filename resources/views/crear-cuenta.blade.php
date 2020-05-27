@@ -5,7 +5,7 @@
 
   <body>
 
-    @include('tops.top')
+    @include('tops.top-free')
 
   <!--BANNER-->
   <div id="banner-internas">
@@ -23,7 +23,7 @@
           <div class="botones-cabecera-chicas">
             <a href="index.php">Inicio</a>
             <span><i class="fa fa-angle-right"></i></span>
-            <a href="acceder.php" class="cabecera-chicas-active">Acceder</a>
+            <a href="#" class="cabecera-chicas-active">Acceder</a>
           </div>
         </div>
 
@@ -86,8 +86,10 @@
   </section>
 
   @include('footers.footer-free')
-
   @include('modal')
+
+  <script src="{{ asset('js/app.js') }}"></script>
+  <script src="{{ asset('js/meetfornight.js') }}"></script>
 
 
   </body>

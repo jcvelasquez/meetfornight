@@ -34,7 +34,8 @@ class CreateUsuariosExtrasTable extends Migration
             $table->integer('fumador')->nullable();
             $table->integer('seguridad')->nullable();
             $table->integer('agenda')->nullable();
-            
+            $table->integer('verificado')->nullable();
+            $table->integer('sanidad')->nullable();
             $table->foreign('idusuario')->references('id')->on('usuarios')->onDelete('cascade');
 
             

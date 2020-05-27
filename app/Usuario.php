@@ -78,6 +78,7 @@ class Usuario extends Authenticatable implements MustVerifyEmail
         return $this->belongsTo('App\Rol', 'idrol', 'id');
     }
 
+
     public function getFechaNacimiento(){
 
     }

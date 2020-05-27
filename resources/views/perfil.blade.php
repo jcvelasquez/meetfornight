@@ -13,11 +13,25 @@
   <div id="banner-reservas">
     <div class="container-fluid no-container-fluid-esp banner-reservas">
       <div class="centrar-banner-reservas">
-        <div class="tipo-de-perfil">PERFIL PLATINIUM</div>
-        <h2>{{ $perfil[0]->nombre }}</h2>
-        <h3>"{{ $perfil[0]->frase }}"</h3>
-        <a href="">FAVORITO<i class="icon-heart"></i></a>
-        <div class="sellos"><img src="{{ asset('img/perfil-averiguado.png') }}"><img src="{{ asset('img/control-sanitario.png') }}"></div>
+        <div class="tipo-de-perfil">PERFIL {{$perfil->nombre_plan}}</div>
+        <h2>{{ $perfil->nombre }}</h2>
+        <h3>"{{ $perfil->frase }}"</h3>
+
+          @if(Auth::check())
+            @if (Auth::user()->idrol == 3 )
+              <a href="">FAVORITO<i class="icon-heart"></i></a>
+            @endif
+          @endif
+
+        <div class="sellos">
+          @if($perfil->verificado)
+            <img src="{{ asset('img/perfil-averiguado.png') }}">
+          @endif
+          @if($perfil->sanidad)
+            <img src="{{ asset('img/control-sanitario.png') }}">
+          @endif
+        
+        </div>
       </div>
     </div>
   </div>
@@ -32,13 +46,9 @@
           <div class="botones-cabecera-chicas">
             <a href="{{url('/')}}">Inicio</a>
             <span><i class="fa fa-angle-right"></i></span>
-            <a href="privado.php">Privado</a>
-            <span><i class="fa fa-angle-right"></i></span>
-            <a href="mujeres.php">Mujeres</a>
-            <span><i class="fa fa-angle-right"></i></span>
-            <a href="#" class="cabecera-chicas-active">{{ $perfil[0]->nombre }}</a>
+            <a href="#" class="cabecera-chicas-active">{{ $perfil->nombre }}</a>
           </div>
-          <div class="reserva-fecha">Sábado 18 de Julio 2018, <i class="icon-podium esp-icono-bio fucsia"></i><time>13:30pm</time><a class="" data-toggle="modal" data-target="#denunciar"><i class="icon-danger espacio-busqueda red-denunciar"></i></a></div>
+          <div class="reserva-fecha">{{ date("l d, Y")}} | <!-- <i class="icon-podium esp-icono-bio fucsia"></i> --><time>{{ date("H:i")}}</time><a class="" data-toggle="modal" data-target="#denunciar"><i class="icon-danger espacio-busqueda red-denunciar"></i></a></div>
         </div>
       </div>
     </div>
@@ -49,31 +59,21 @@
       <div class="row" id="main-perfil">
         <div class="col-lg-4" id="sidebar">
             <div class="sidebar__inner">
-              <!-- Content goes here -->
-                  <div class="espacio-reservas">
-                    <div class="reservas-img-grande">
-                      <img src="{{ asset('fotos-profesionales').'/'.$fotos[0]->url_foto }}" class="img-responsive">
-												<a href="{{ asset('fotos-profesionales').'/'.$fotos[0]->url_foto }}" data-fancybox="gallery" data-caption="Sexy Woman">
-													<div class="img-grande-lupa">
-														<i class="icon-search"></i>
-													</div>
-												</a>
-                      <div class="img-grande-logo">
-                        <img src="{{ asset('img/logo-blanco.png') }}">
-                      </div>
-                    </div>
-                  </div>
 
-                  <div class="reservas-img-pequenas espacio-reservas">
-										@foreach($fotos as $foto)
-												@if($foto->orden > 0)
-													<div class="item-reservas-img-pequenas">
-														<img src="{{asset('img/galeria/galeria-1.png')}}" class="img-responsive" onclick="showImage('galeria-1.png'), nombre('galeria-1.png');" />
-														<a class="nunca-mostrar" data-fancybox="gallery" href="{{ asset('img/galeria/galeria-1.png') }}" data-caption="Sexy Woman"></a>
-													</div>
-												@endif
+              <!-- Content goes here -->
+
+              <div class="espacio-reservas">
+                <ul id="thumbnail_list">
+
+                     @foreach($fotos as $foto)
+													<li>
+														<img src="{{ asset('fotos_profesionales').'/'.$foto->url_foto }} " class="img-responsive" />
+														<a class="nunca-mostrar" data-fancybox="gallery" href="{{ asset('fotos_profesionales').'/'.$foto->url_foto }}" data-caption="Sexy Woman"></a>
+                          </li>
 										@endforeach
-                  </div>
+
+                </ul>
+              </div>
 
                   <div class="espacio-reservas">
                     <h2 class="subtitulo-reservas">PERFIL</h2>
@@ -81,67 +81,75 @@
                       <ul>
                         <li>
                           <div class="reserva-info-morado">Sexo</div>
-                          <div class="reserva-info-plomo">{{ $perfil[0]->sexo }}</div>
+                          <div class="reserva-info-plomo">{{ $perfil->sexo }}</div>
                         </li>
                         <li>
                           <div class="reserva-info-morado">Orientación</div>
-                          <div class="reserva-info-plomo">{{ $perfil[0]->orientacion }}</div>
+                          <div class="reserva-info-plomo">{{ $perfil->orientacion }}</div>
                         </li>
                         <li>
                           <div class="reserva-info-morado">Nacionalidad</div>
-                          <div class="reserva-info-plomo">{{ $perfil[0]->nacionalidad }}</div>
+                          <div class="reserva-info-plomo">{{ $perfil->name_country }}</div>
                         </li>
                         <li>
                           <div class="reserva-info-morado">Ciudad</div>
-                          <div class="reserva-info-plomo"></div>
+                          <div class="reserva-info-plomo">{{ $perfil->name_state }}</div>
                         </li>
                         <li>
                           <div class="reserva-info-morado">Distrito</div>
-                          <div class="reserva-info-plomo"></div>
+                          <div class="reserva-info-plomo">{{ $perfil->name_city }}</div>
                         </li>
                         <li>
                           <div class="reserva-info-morado">Idiomas</div>
-                          <div class="reserva-info-plomo">{{ $perfil[0]->idioma }}</div>
+                          <div class="reserva-info-plomo">{{ $perfil->idioma }}</div>
                         </li> 
                         <li>
                           <div class="reserva-info-morado">Edad</div>
-                          <div class="reserva-info-plomo">{{ $perfil[0]->edad }}</div>
+                          <div class="reserva-info-plomo">{{ $perfil->edad }}</div>
                         </li>
                         <li>
                           <div class="reserva-info-morado">Tamaño</div>
-                          <div class="reserva-info-plomo">{{ $perfil[0]->estatura }}</div>
+                          <div class="reserva-info-plomo">{{ $perfil->estatura }}</div>
                         </li>
                         <li>
                           <div class="reserva-info-morado">Peso</div>
-                          <div class="reserva-info-plomo">{{ $perfil[0]->peso }}Kg</div>
+                          <div class="reserva-info-plomo">{{ $perfil->peso }}Kg</div>
                         </li>
                         <li>
                           <div class="reserva-info-morado">Cabello</div>
-                          <div class="reserva-info-plomo">{{ $perfil[0]->color_cabello }}</div>
+                          <div class="reserva-info-plomo">{{ $perfil->color_cabello }}</div>
                         </li>
                         <li>
                           <div class="reserva-info-morado">Ojos</div>
-                          <div class="reserva-info-plomo">{{ $perfil[0]->color_ojos }}</div>
+                          <div class="reserva-info-plomo">{{ $perfil->color_ojos }}</div>
                         </li>
                         <li>
                           <div class="reserva-info-morado">Corte íntimo</div>
-                          <div class="reserva-info-plomo">{{ $perfil[0]->corte_intimo }}</div>
+                          <div class="reserva-info-plomo">{{ $perfil->corte_intimo }}</div>
                         </li>
+                        @if($perfil->pecho)
                         <li>
-                          <div class="reserva-info-morado">Copa</div>
-                          <div class="reserva-info-plomo">{{ $perfil[0]->pecho }}</div>
+                          <div class="reserva-info-morado">Pecho</div>
+                          <div class="reserva-info-plomo">{{ $perfil->pecho }}</div>
                         </li>
+                        @endif
+                        @if($perfil->pene)
+                        <li>
+                          <div class="reserva-info-morado">Pene</div>
+                          <div class="reserva-info-plomo">{{ $perfil->pene }}</div>
+                        </li>
+                        @endif
                         <li>
                           <div class="reserva-info-morado">Tatuajes</div>
-                          <div class="reserva-info-plomo">{{ $perfil[0]->tatuaje }}</div>
+                          <div class="reserva-info-plomo">{{ $perfil->tatuaje }}</div>
                         </li>
                         <li>
                           <div class="reserva-info-morado">Piercing</div>
-                          <div class="reserva-info-plomo">{{ $perfil[0]->piercing }}</div>
+                          <div class="reserva-info-plomo">{{ $perfil->piercing }}</div>
                         </li>
                         <li>
                           <div class="reserva-info-morado">Fumador(a)</div>
-                          <div class="reserva-info-plomo">{{ $perfil[0]->fumador }}</div>
+                          <div class="reserva-info-plomo">{{ $perfil->fumador }}</div>
                         </li>
                       </ul>
 
@@ -149,33 +157,24 @@
 
                   </div>
 
+                  @if(count($valoraciones) > 0)
                   <div class="espacio-reservas">
                     <h2 class="subtitulo-reservas">VALORACIÓN<br><div class="subsub-reserva"><p>Las calificaciones corresponden<br>a las experiencias</p></div></h2>
                     <div class="reserva-info">
                       <ul>
+                        @foreach($valoraciones as $valor)
                         <li>
-                          <div class="reserva-info-morado">Amabilidad</div>
-                          <div class="fucsia"><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></div>
+                          <div class="reserva-info-morado" style="text-transform: capitalize !important;">{{strtolower($valor->nombre_criterio)}}</div>
+                           <div class="fucsia"> {!! $valor->puntuacion_html !!} </div> 
                         </li>
-                        <li>
-                          <div class="reserva-info-morado">Sensualidad</div>
-                          <div class="fucsia"><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></div>
-                        </li>
-                        <li>
-                          <div class="reserva-info-morado">Conversación</div>
-                          <div class="fucsia"><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></div>
-                        </li>
-                        <li>
-                          <div class="reserva-info-morado">Diversión</div>
-                          <div class="fucsia"><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></div>
-                        </li>
-                        <li>
-                          <div class="reserva-info-morado">Corresponde a la foto</div>
-                          <div class="fucsia"><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></div>
-                        </li>
+                        @endforeach
+
                       </ul>
                     </div>
                   </div>
+                  @endif
+
+
             </div>
         </div>
 
@@ -187,20 +186,22 @@
                 <i class="icon-user-woman"></i>
                 <div class="biografia">
                   <h2>DESCRIPCIÓN</h2>
-                  <h3>ID: MFN001</h3>
+                  <h3 style="text-transform: uppercase;">ID: {{$perfil->apodo}}</h3>
                 </div>
               </div>
               <div class="ranking">
-                <div class="ranking-letra">Ranking</div><div class="fucsia horizontal"><div class="ranking-letra">5/5</div><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></div><div class="ranking-letra vistas">20 servicios</div>
+                <div class="ranking-letra">Ranking</div><div class="fucsia horizontal"><div class="ranking-letra"> {{ $ranking }} /5</div> {!! $ranking_html !!}</div><div class="ranking-letra vistas">{{ $reservas }} servicios</div>
               </div>
             </div>
-            <p class="texto-biografia tamano-delicado">{{ $perfil[0]->descripcion }}</p>
+            <p class="texto-biografia tamano-delicado">{{ $perfil->descripcion }}</p>
           </div>
           <div class="espacio-reservas">
             <h2 class="sub-tit"><i class="icon-diary esp-icono-bio"></i>CONTÁCTAME</h2>
             <div class="reserva-contactame">
-              <p class="texto-biografia"><i class="icon-whatsapp-green esp-icono-bio"></i>{{ $perfil[0]->celular }}</p>
-              <div class="web"><i class="icon-world esp-icono-bio"></i><a href="#" target="_blank">www.franchescarhodes.com</a></div>
+              <p class="texto-biografia"><i class="icon-whatsapp-green esp-icono-bio"></i>{{ $perfil->celular }}</p>
+              @if($perfil->web)
+              <div class="web"><i class="icon-world esp-icono-bio"></i><a href="#" target="_blank">{{ $perfil->web }}</a></div>
+              @endif
             </div>
           </div>
           <!-- <div class="espacio-reservas">
@@ -325,7 +326,7 @@
     
           <div id="widget">
         
-             <disponibilidad-profesional-front :apodo-data="{{json_encode($perfil[0]->apodo)}}"></disponibilidad-profesional-front>
+             <disponibilidad-profesional-front :apodo-data="{{json_encode($perfil->apodo)}}"></disponibilidad-profesional-front>
 
              @if(Auth::check())
                 @if (Auth::user()->idrol == 4)
@@ -340,7 +341,7 @@
                         </div>
                     </div> 
                 @elseif (Auth::user()->idrol == 3)
-                    <reservas-profesional-front :apodo-data="{{json_encode($perfil[0]->apodo)}}"></reservas-profesional-front>
+                    <reservas-profesional-front :apodo-data="{{json_encode($perfil->apodo)}}"></reservas-profesional-front>
                 @endif
 
              @else
@@ -398,12 +399,15 @@
             </div>
           </div>
 
+
+          @if($perfil->seguridad)
           <div class="espacio-reservas">
             <h2 class="sub-tit"><i class="icon-like esp-icono-bio"></i>SEGURIDAD</h2>
             <div class="texto-biografia">
               <p>Únicamente asisto a citas con usuarios de perfiles registrados con datos reales, DNI y fotos aprobadas por el administrador de la web.</p>
             </div>
           </div>
+          @endif
 
 
           @if(Auth::check())
@@ -423,7 +427,7 @@
 
                   </div> 
                 @elseif (Auth::user()->idrol == 3)
-                    <mensajes-profesional-front :apodo-data="{{json_encode($perfil[0]->apodo)}}"></mensajes-profesional-front> 
+                    <mensajes-profesional-front :apodo-data="{{json_encode($perfil->apodo)}}"></mensajes-profesional-front> 
                 @endif
 
           @else
@@ -483,32 +487,37 @@
           <!-- inicio de carrusel -->
           <div id="perfilesRelacionados" class="owl-carousel owl-theme">
 
+              @foreach($otraschicas as $chica)
               <div class="item">
 
-                    <div class="item-chica">
+                   
+                    <div class="item-chica item-otras-chicas">
+                      <button class="triangulo btnAgregarFavoritos" data-apodo="{{$chica->apodo}}"><i class="icon-heart"></i></button>
                       <img src="{{ asset('img/chicas/chica1.jpg') }}" class="img-responsive">
                       <div class="texto-chica">
-                        <h3>FRANCESCA</h3>
-                        <h4>Lima │ 21 años</h4>
-                        <h5>$ 150</h5>
-                        <span>
+                        <h3>{{$chica->nombre}}</h3>
+                       <!--  <h4>Lima │ 21 años</h4>
+                        <h5>$ 150</h5> -->
+                        <!-- <span>
                           <i class="icon-star"></i>
                           <i class="icon-star"></i>
                           <i class="icon-star"></i>
                           <i class="icon-star"></i>
                           <i class="icon-star"></i>
-                        </span>
-                        <a href="no-reserva.php">VER PERFIL</a>
-                        <div class="triangulo"><i class="icon-heart"></i></div>
+                        </span> -->
+                        <a href="/perfil/{{$chica->apodo}}" target="_blank">VER PERFIL</a>
+                        
                       </div>
                     </div>
+                   
 
               </div>
+              @endforeach
 
           </div>
           <!-- fin de carrusel -->
 
-         <!--  <a class="carousel-control-prev" href="#carouselExampleIndicators3" role="button" data-slide="prev">
+     <!--   <a class="carousel-control-prev" href="#carouselExampleIndicators3" role="button" data-slide="prev">
             <div class="carrusel-bot-circle"><span class="carousel-control-prev-icon" aria-hidden="true"></span></div>
             <span class="sr-only">Previous</span>
           </a>
@@ -516,7 +525,7 @@
           <a class="carousel-control-next" href="#carouselExampleIndicators3" role="button" data-slide="next">
             <div class="carrusel-bot-circle"><span class="carousel-control-next-icon" aria-hidden="true"></span></div>
             <span class="sr-only">Next</span>
-          </a> -->
+          </a>  -->
 
         </div>
       </div>
@@ -529,8 +538,5 @@
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('js/meetfornight.js') }}"></script>
 
-<script>
-      //var sidebar = new StickySidebar('#sidebar', {resizeSensor: false, maxWidth:350, topSpacing: 0, bottomSpacing: 50, containerSelector: '#main-perfil' });
-</script>
 </body>
 </html>

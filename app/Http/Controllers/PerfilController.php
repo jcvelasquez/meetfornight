@@ -27,69 +27,178 @@ class PerfilController extends Controller
         $usuario = Usuario::select('id')->where('apodo', '=', $request->apodo)->firstOrFail();    
 
         $perfil = DB::table('usuarios')->join('usuarios_extras', 'usuarios.id', '=', 'usuarios_extras.idusuario')
-        ->where('usuarios.id', '=', $usuario->id)
-        ->get();  
+                                        ->join('planes_profesional', 'usuarios.id', '=', 'planes_profesional.idprofesional')
+                                        ->join('planes', 'planes_profesional.idplan', '=', 'planes.id')
+                                        ->join('countries', 'usuarios.idcountry', '=', 'countries.id')
+                                        ->join('states', 'usuarios.idstate', '=', 'states.id')
+                                        ->join('cities', 'usuarios.idcity', '=', 'cities.id')
+                                        ->where('usuarios.id', '=', $usuario->id)->first();  
+
+        $servicios = ServiciosProfesional::where('estado_servicio', 1)->where('es_admin', 1)->get();
+        
+        $seleccionados = ServiciosXProfesional::where('idusuario', '=', $usuario->id)->where('idservicio', '!=', NULL)->get();
+   
+        data_set($perfil, 'edad', $this->calcularEdad($perfil->fecha_nacimiento));
+
+        if( $perfil->tatuaje = 1 ){
+            data_set($perfil, 'tatuaje', 'Sí');
+        }else{
+            data_set($perfil, 'tatuaje', 'No');
+        }
+
+        if( $perfil->piercing = 1 ){
+            data_set($perfil, 'piercing', 'Sí');
+        }else{
+            data_set($perfil, 'piercing', 'No');
+        }
+
+        if( $perfil->fumador = 1 ){
+            data_set($perfil, 'fumador', 'Sí');
+        }else{
+            data_set($perfil, 'fumador', 'No');
+        }
+
+        if( $perfil->sexo = "M" ){
+            data_set($perfil, 'sexo', 'Masculino');
+        }else{
+            data_set($perfil, 'sexo', 'Femenino');
+        }
+
+        if( $perfil->idioma = "ES" ){
+            data_set($perfil, 'idioma', 'Español');
+        }else{
+            data_set($perfil, 'idioma', 'Ingles');
+        }
+
+        if( $perfil->orientacion = "HETE" ){
+            data_set($perfil, 'orientacion', 'Heterosexual');
+        }else if( $perfil->orientacion = "LESB" ){
+            data_set($perfil, 'orientacion', 'Lesbiana');
+        }else if( $perfil->orientacion = "TRAN" ){
+            data_set($perfil, 'orientacion', 'Transexual');
+        }else if( $perfil->orientacion = "HOMO" ){
+            data_set($perfil, 'orientacion', 'Homosexual');
+        }else {
+            data_set($perfil, 'orientacion', 'Bisexual');
+        }
+
+
+        //SELECCIONADOS
+        foreach ($servicios as $serv) {
+
+            if( $this->checkSeleccionado($seleccionados, $serv->id) ){
+                data_set($serv, 'es_marcado', '1');
+            }else{
+                data_set($serv, 'es_marcado', '0');
+            }
+            
+        }
+
+
+        //PERSONALIZADOS
+        $personalizados = ServiciosXProfesional::where('idservicio', NULL)->where('idusuario', '=', $usuario->id)->get();
+
+        foreach ($personalizados as $serv_pers) {
+
+            data_set($serv_pers, 'es_marcado', '1');
+            
+        }
+
+        $fotos = FotoProfesional::where('idusuario', '=', $usuario->id )->orderBy('orden','asc')->get();
+
+
+        $valoraciones = DB::table('valoracion_profesional as valo')->join('criterios_valoracion as cri', 'valo.idcriterio', '=', 'cri.id')
+                                ->select('cri.nombre_criterio', DB::raw(' ROUND( AVG(valo.puntuacion), 1) as puntuacion, CAST(ROUND( AVG(valo.puntuacion), 0) AS UNSIGNED) as puntuacion_int ') )
+                                ->where('idprofesional', $usuario->id )
+                                ->groupBy('valo.idcriterio')->get();
+
+        $reservas = ReservasProfesional::where('idprofesional', $usuario->id )->count();
+
+        $registradas =  DB::table('valoracion_profesional')->where('idprofesional', $usuario->id )->select('idreserva')->groupBy('idreserva')->get();
+
+        $totalRanking = 0;
+
+        foreach($valoraciones as $valor){
+
+            $valor->puntuacion_html = $this->checkEstrellas($valor->puntuacion_int);
+
+            $totalRanking += $valor->puntuacion_int;
+                
+        }
+
+        $ranking = $totalRanking / count($valoraciones);
+        $ranking_html = $this->checkEstrellas($ranking);
+
+        $otraschicas = DB::table('usuarios')->join('foto_profesional', 'usuarios.id', '=', 'foto_profesional.idusuario')
+                                        ->where('foto_profesional.orden', '=', 0)
+                                        ->select('usuarios.id', 'nombre','apodo','url_foto')->inRandomOrder()->take(8)->get();
+        
+              
+        return view('perfil', compact('perfil', 'servicios', 'personalizados','fotos','valoraciones', 'reservas', 'registradas', 'ranking' , 'ranking_html', 'otraschicas' ));
+        
+
+    }
+
+    public function listar(Request $request)
+    {
+
+        $usuario = Usuario::select('id')->where('apodo', '=', $request->apodo)->firstOrFail();    
+
+        $perfil = DB::table('usuarios')->join('usuarios_extras', 'usuarios.id', '=', 'usuarios_extras.idusuario')
+                                        ->join('planes_profesional', 'usuarios.id', '=', 'planes_profesional.idprofesional')
+                                        ->join('planes', 'planes_profesional.idplan', '=', 'planes.id')
+                                        ->join('countries', 'usuarios.idcountry', '=', 'countries.id')
+                                        ->join('states', 'usuarios.idstate', '=', 'states.id')
+                                        ->join('cities', 'usuarios.idcity', '=', 'cities.id')
+                                        ->where('usuarios.id', '=', $usuario->id)->first();  
 
         $servicios = ServiciosProfesional::where('estado_servicio', 1)->where('es_admin', 1)->get();
         
         $seleccionados = ServiciosXProfesional::where('idusuario', '=', $usuario->id)->where('idservicio', '!=', NULL)->get();
 
-        //PERFIL
-        foreach ($perfil as $per) {
    
-            data_set($per, 'edad', $this->calcularEdad($per->fecha_nacimiento));
+        data_set($perfil, 'edad', $this->calcularEdad($perfil->fecha_nacimiento));
 
-            if( $per->tatuaje = 1 ){
-                data_set($per, 'tatuaje', 'Sí');
-            }else{
-                data_set($per, 'tatuaje', 'No');
-            }
+        if( $perfil->tatuaje = 1 ){
+            data_set($perfil, 'tatuaje', 'Sí');
+        }else{
+            data_set($perfil, 'tatuaje', 'No');
+        }
 
-            if( $per->piercing = 1 ){
-                data_set($per, 'piercing', 'Sí');
-            }else{
-                data_set($per, 'piercing', 'No');
-            }
+        if( $perfil->piercing = 1 ){
+            data_set($perfil, 'piercing', 'Sí');
+        }else{
+            data_set($perfil, 'piercing', 'No');
+        }
 
-            if( $per->fumador = 1 ){
-                data_set($per, 'fumador', 'Sí');
-            }else{
-                data_set($per, 'fumador', 'No');
-            }
+        if( $perfil->fumador = 1 ){
+            data_set($perfil, 'fumador', 'Sí');
+        }else{
+            data_set($perfil, 'fumador', 'No');
+        }
 
-            if( $per->sexo = "M" ){
-                data_set($per, 'sexo', 'Masculino');
-            }else{
-                data_set($per, 'sexo', 'Femenino');
-            }
+        if( $perfil->sexo = "M" ){
+            data_set($perfil, 'sexo', 'Masculino');
+        }else{
+            data_set($perfil, 'sexo', 'Femenino');
+        }
 
-            if( $per->idioma = "ES" ){
-                data_set($per, 'idioma', 'Español');
-            }else{
-                data_set($per, 'idioma', 'Ingles');
-            }
+        if( $perfil->idioma = "ES" ){
+            data_set($perfil, 'idioma', 'Español');
+        }else{
+            data_set($perfil, 'idioma', 'Ingles');
+        }
 
-            if( $per->orientacion = "HETE" ){
-                data_set($per, 'orientacion', 'Heterosexual');
-            }else if( $per->orientacion = "LESB" ){
-                data_set($per, 'orientacion', 'Lesbiana');
-            }else if( $per->orientacion = "TRAN" ){
-                data_set($per, 'orientacion', 'Transexual');
-            }else if( $per->orientacion = "HOMO" ){
-                data_set($per, 'orientacion', 'Homosexual');
-            }else {
-                data_set($per, 'orientacion', 'Bisexual');
-            }
-
-
-            if( $per->nacionalidad = "PE" ){
-                data_set($per, 'nacionalidad', 'Peruana');
-            }else if( $per->nacionalidad = "ES" ){
-                data_set($per, 'nacionalidad', 'Española');
-            }else{
-                data_set($per, 'nacionalidad', 'Panameña');
-            }
-            
+        if( $perfil->orientacion = "HETE" ){
+            data_set($perfil, 'orientacion', 'Heterosexual');
+        }else if( $perfil->orientacion = "LESB" ){
+            data_set($perfil, 'orientacion', 'Lesbiana');
+        }else if( $perfil->orientacion = "TRAN" ){
+            data_set($perfil, 'orientacion', 'Transexual');
+        }else if( $perfil->orientacion = "HOMO" ){
+            data_set($perfil, 'orientacion', 'Homosexual');
+        }else {
+            data_set($perfil, 'orientacion', 'Bisexual');
         }
 
         //SELECCIONADOS
@@ -113,9 +222,38 @@ class PerfilController extends Controller
             
         }
 
-        $fotos = FotoProfesional::where('idusuario', '=', $usuario->id)->orderBy('orden','asc')->get();
+        $fotos = FotoProfesional::where('idusuario', '=', $usuario->id )->orderBy('orden','asc')->get();
+
+
+        $valoraciones = DB::table('valoracion_profesional as valo')->join('criterios_valoracion as cri', 'valo.idcriterio', '=', 'cri.id')
+                                ->select('cri.nombre_criterio', DB::raw(' ROUND( AVG(valo.puntuacion), 1) as puntuacion, CAST(ROUND( AVG(valo.puntuacion), 0) AS UNSIGNED) as puntuacion_int ') )
+                                ->where('idprofesional', $usuario->id )
+                                ->groupBy('valo.idcriterio')->get();
+
+        $reservas = ReservasProfesional::where('idprofesional', $usuario->id )->count();
+
+        $registradas =  DB::table('valoracion_profesional')->where('idprofesional', $usuario->id )->select('idreserva')->groupBy('idreserva')->get();
+
+        $totalRanking = 0;
+
+        foreach($valoraciones as $valor){
+
+            $valor->puntuacion_html = $this->checkEstrellas($valor->puntuacion_int);
+
+            $totalRanking += $valor->puntuacion_int;
+                
+        }
+
+        $ranking = $totalRanking / count($valoraciones);
+        $ranking_html = $this->checkEstrellas($ranking);
+
+        $otraschicas = DB::table('usuarios')->join('foto_profesional', 'usuarios.id', '=', 'foto_profesional.idusuario')
+                                        ->where('foto_profesional.orden', '=', 0)
+                                        ->select('usuarios.id', 'nombre','apodo','url_foto')->inRandomOrder()->take(8)->get();
+        
        
-        return view('perfil', compact('perfil', 'servicios', 'personalizados','fotos'));
+        return compact('perfil', 'servicios', 'personalizados','fotos','valoraciones', 'reservas', 'registradas', 'ranking' , 'ranking_html', 'otraschicas' );
+        
 
     }
 
@@ -263,6 +401,20 @@ class PerfilController extends Controller
         }
 
         return false;
+
+    }
+
+    public function checkEstrellas($cantidad){
+
+        $html = "";
+
+        for ($x=0; $x < $cantidad; $x++) {
+            
+            $html .= "<i class='icon-star'></i>";
+            
+        }
+
+        return $html;
 
     }
 

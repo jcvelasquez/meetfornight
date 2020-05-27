@@ -253,6 +253,8 @@ class CrearCuentaController extends Controller
             $usuarioExtra->fumador = $request->fumador;
             $usuarioExtra->seguridad = $request->seguridad;
             $usuarioExtra->agenda = $request->agenda;
+            $usuarioExtra->verificado = 0;
+            $usuarioExtra->sanidad = 0;
             $usuarioExtra->save();
 
             //------------------------------

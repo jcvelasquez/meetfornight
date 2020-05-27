@@ -55,7 +55,7 @@
             <div class="col-lg-6 col-sm-12">
               <select type="text" class="form-control espacio-campos" name="idstate" @change="cambiarDepartamento()" v-model="idstate">
                 <option value="">Seleccione un departamento</option>
-                <option v-for="(option, index) in arStates" :key="index" :value="option.id" :selected="option.id === idstate ? 'selected' : ''">{{ option.name }}</option>
+                <option v-for="(option, index) in arStates" :key="index" :value="option.id" :selected="option.id === idstate ? 'selected' : ''">{{ option.name_state }}</option>
 
               </select>
             </div>
@@ -64,7 +64,7 @@
           <div class="col-lg-6 col-sm-12">
               <select type="text" class="form-control espacio-campos" name="idcity" v-model="idcity">
                 <option value="">Seleccione un distrito</option>
-                <option v-for="(option, index) in arCities" :key="index" :value="option.id" :selected="option.id === idcity ? 'selected' : ''">{{ option.name }}</option>
+                <option v-for="(option, index) in arCities" :key="index" :value="option.id" :selected="option.id === idcity ? 'selected' : ''">{{ option.name_city }}</option>
               </select>
           </div>
       </div>

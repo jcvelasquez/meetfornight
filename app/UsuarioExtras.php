@@ -12,8 +12,6 @@ class UsuarioExtras extends Model
 
     protected $primaryKey = 'idusuario';
 
-    //protected $fillable = ['nombre_rol','descripcion_rol'];
-
     public $timestamps = false;
 
     public function usuario(){

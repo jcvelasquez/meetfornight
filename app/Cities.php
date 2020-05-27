@@ -10,6 +10,6 @@ class Cities extends Model
 
     public $table = "cities";
 
-    protected $fillable = ['name','state_id'];
+    protected $fillable = ['name_city','state_id'];
 
 }
