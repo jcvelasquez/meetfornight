@@ -73,6 +73,7 @@ Vue.component('categorias-administrador', require('./components/CategoriasAdmini
 Vue.prototype.$csrf_token = document.querySelector("meta[name='csrf-token']").getAttribute('content');
 Vue.prototype.$idprofesional = document.querySelector("meta[name='profesional-id']").getAttribute('content');
 Vue.prototype.$idusuario = document.querySelector("meta[name='usuario-id']").getAttribute('content');
+Vue.prototype.$locale = document.querySelector("meta[name='locale']").getAttribute('content');
 
 const app = new Vue({
     el: '#widget'

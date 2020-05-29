@@ -1,12 +1,12 @@
   <!--TOP-->
   <header class="header-perfil">
   	<div class="container header-perfil-creado">
-  		<a href="{{ url('/') }}"><img src="img/logo-blanco-intranet.png"></a>
+  		<a href="{{ route('home', app()->getLocale()) }}"><img src="{{ asset('img/logo-blanco-intranet.png') }}"></a>
       <span class="quedan-tiempo">30 días | 24 hrs | 40 min</span>
       <a href="" class="reactivar">RENOVAR</a>
   		<div class="usuario-creado">
   			<span><i class="icon-user-woman esp-icon-usuario-creado"></i> {{ Auth::user()->nombre }}</span>
-        <span><i class="icon-locked-padlock esp-icon-usuario-creado"></i><a href="{{ route('cerrar-sesion') }}">Cerrar Sesión</a></span>
+        <span><i class="icon-locked-padlock esp-icon-usuario-creado"></i><a href="{{ route('cerrar-sesion', app()->getLocale()) }}">Cerrar Sesión</a></span>
         
         <!-- BOTON ROJO -->
         <div class="dropdown show eliminar-usuario">

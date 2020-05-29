@@ -31,6 +31,7 @@
         "@fullcalendar/timegrid": "^4.3.0",
         "@fullcalendar/vue": "^4.4.0",
         "echarts": "^4.7.0",
+        "geoip-country": "^4.0.20",
         "jquery-asRange": "^0.3.4",
         "pretty-checkbox": "^3.0.3",
         "pretty-checkbox-vue": "^1.1.9",

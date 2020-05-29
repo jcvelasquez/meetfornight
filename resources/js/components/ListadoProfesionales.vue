@@ -236,7 +236,7 @@
                             <i class="icon-star"></i>
                             <i class="icon-star"></i>
                             </span>
-                            <a :href="'perfil/' + profesional.apodo" target="_blank">VER PERFIL</a>
+                            <a :href=" $locale + '/perfil/' + profesional.apodo" target="_blank">VER PERFIL</a>
                             
                         </div>
                         <img :src="'fotos_profesionales/' + profesional.url_foto" class="img-responsive" />
@@ -389,7 +389,7 @@
 
                 let me = this;
                 
-                axios.post('favoritos-usuario/agregar', { 'apodo' : profesional.apodo }).then(function (response) {
+                axios.post( me.$locale + 'favoritos-usuario/agregar', { 'apodo' : profesional.apodo }).then(function (response) {
                    Swal.fire('CONFIRMACION', response.data.mensaje ,'success');
                 }).catch(function (error) {  
                     if (error.response.status === 401) {
@@ -414,7 +414,7 @@
 
                 let me = this;
 
-                axios.get('idiomas/listar').then(function (response) {
+                axios.get( me.$locale + '/idiomas/listar').then(function (response) {
 
                     var respuesta= response.data;
                     me.arIdiomas = respuesta.idiomas;
@@ -426,7 +426,7 @@
 
                 let me = this;
 
-                axios.get('categorias/listar').then(function (response) {
+                axios.get( me.$locale + '/categorias/listar').then(function (response) {
 
                     var respuesta= response.data;
                     me.arCategorias = respuesta.categorias;
@@ -475,7 +475,7 @@
                     return;
                 }
 
-                axios.post('usuarios', {
+                axios.post( me.$locale + '/usuarios', {
                     'page' : me.page,
                     'idrol' : 4,
                     'categoria' : me.categoriaData,

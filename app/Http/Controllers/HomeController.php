@@ -71,7 +71,7 @@ class HomeController extends Controller
         
        if(isset($request->categoria) && $request->categoria != 'all') { //CONSULTA PARA LAS CATEGORIAS
 
-            $categoria = Categorias::select('id')->where('nombre_categoria', '=', $request->categoria)->firstOrFail();       
+            /*$categoria = Categorias::select('id')->where('nombre_categoria', '=', $request->categoria)->firstOrFail();       
             
             //CONSULTA DE LOS REGISTRADOS
             $usuarios = CategoriasProfesional::join('usuarios','usuarios.id','=','categorias_profesional.idprofesional')
@@ -104,7 +104,7 @@ class HomeController extends Controller
 
             $ordenados = $todos->values()->sortByDesc('created_at');
 
-            $ordenados = $ordenados->values()->all(); 
+            $ordenados = $ordenados->values()->all(); */
 
 
        }else{ //CONSULTA PARA EL HOME PAGE
@@ -131,7 +131,7 @@ class HomeController extends Controller
             //$request->categorias
 
             //CONSULTA DE LOS BOOSTER
-            $boosters = BoosterCobrado::join('usuarios','usuarios.id','=','booster_cobrados_profesional.idprofesional')
+            /*$boosters = BoosterCobrado::join('usuarios','usuarios.id','=','booster_cobrados_profesional.idprofesional')
                                 ->join('foto_profesional','booster_cobrados_profesional.idprofesional','=','foto_profesional.idusuario')
                                 ->join('categorias','booster_cobrados_profesional.idcategoria','=','categorias.id')
                                 ->select('categorias.nombre_categoria','usuarios.apodo','usuarios.fecha_nacimiento','foto_profesional.url_foto','booster_cobrados_profesional.created_at')
@@ -155,7 +155,7 @@ class HomeController extends Controller
                                 )
                                 ->orderBy('booster_cobrados_profesional.created_at','desc');
 
-
+*/
             //CONSULTA DE LOS REGISTRADOS
             $usuarios = CategoriasProfesional::join('usuarios','usuarios.id','=','categorias_profesional.idprofesional')
                                 ->join('foto_profesional','categorias_profesional.idprofesional','=','foto_profesional.idusuario')
@@ -182,8 +182,8 @@ class HomeController extends Controller
                                     }
                                 )
                                 ->orderBy('usuarios.created_at','desc')
-                                ->union($boosters)
-                                ->paginate(32);                                          
+                                //->union($boosters)
+                                ->get(32);                                          
 
             $usuarios->makeHidden(['es_marcado']);
 

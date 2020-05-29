@@ -42,10 +42,10 @@ class Kernel extends HttpKernel
             'bindings',
         ],
 
-        'country' =>[
+        /*'country' =>[
             'web',
-             \App\Http\Middleware\PaisMiddleware::class
-         ],
+             \App\Http\Middleware\setPais::class
+         ],*/
 
     ];
 
@@ -69,7 +69,8 @@ class Kernel extends HttpKernel
         'usuario' => \App\Http\Middleware\Usuario::class,
         'profesional' => \App\Http\Middleware\Profesional::class,
         'empresa' => \App\Http\Middleware\Empresa::class,
-        'admin' => \App\Http\Middleware\Admin::class
+        'admin' => \App\Http\Middleware\Admin::class,
+        'setlocale' => \App\Http\Middleware\SetLocale::class
     ];
 
     /**

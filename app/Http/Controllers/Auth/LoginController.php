@@ -28,23 +28,23 @@ class LoginController extends Controller
       
             switch(Auth::user()->idrol){
                 
-                case 1: return redirect()->route('dashboard');
+                case 1: return redirect()->route('dashboard', app()->getLocale());
                         break;
 
-                case 2: return redirect()->route('perfil-empresa');
+                case 2: return redirect()->route('perfil-empresa', app()->getLocale());
                         break;
 
                 case 3: if(isset($request->toredirect)){
                             return redirect($request->toredirect);
                         }else{
-                            return redirect()->route('perfil-usuario');
+                            return redirect()->route('perfil-usuario', app()->getLocale());
                         }
                         break;
 
-                case 4: return redirect()->route('perfil-profesional');
+                case 4: return redirect()->route('perfil-profesional', app()->getLocale());
                         break;
 
-                default: return redirect()->route('iniciar-sesion');
+                default: return redirect()->route('iniciar-sesion', app()->getLocale());
 
             }
                 
@@ -53,6 +53,11 @@ class LoginController extends Controller
 
         return back()->withErrors(['email' => trans('auth.failed')])->withInput(request(['email']));
 
+    }
+
+    public function redirectTo()
+    {
+        return app()->getLocale() . '/home';
     }
 
     protected function validateLogin(Request $request){
@@ -66,7 +71,7 @@ class LoginController extends Controller
     public function logout(Request $request){
         Auth::logout();
         $request->session()->invalidate();
-        return redirect('/');
+        return redirect()->route('home', app()->getLocale());
     }
 
 

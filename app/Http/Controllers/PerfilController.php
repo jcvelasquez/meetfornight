@@ -138,7 +138,7 @@ class PerfilController extends Controller
         
 
     }
-
+/* 
     public function listar(Request $request)
     {
 
@@ -255,7 +255,7 @@ class PerfilController extends Controller
         return compact('perfil', 'servicios', 'personalizados','fotos','valoraciones', 'reservas', 'registradas', 'ranking' , 'ranking_html', 'otraschicas' );
         
 
-    }
+    } */
 
     public function tarifas(Request $request)
     {

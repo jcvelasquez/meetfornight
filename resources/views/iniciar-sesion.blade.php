@@ -8,9 +8,9 @@
       <div class="acceso-intranet">
         <div class="bg-img-acceso bg-persona"></div>
         <div class="espacio-acceso-intranet">
-          <div class="accesos-derecha"><a href="/"><img src="img/logo-blanco-intranet.png"></a></div>
+          <div class="accesos-derecha"><a href="{{ route('home', app()->getLocale()) }}"><img src="{{ asset('img/logo-blanco-intranet.png') }}"></a></div>
 
-          <form class="intranet-accesos" action="{{ route('comprobar-credenciales') }}" method="POST">
+          <form class="intranet-accesos" action="{{ route('comprobar-credenciales', app()->getLocale()) }}" method="POST">
             @csrf
 
             <h2>MI CUENTA</h2>
@@ -44,7 +44,7 @@
           <div class="accesos-derecha">
 
             @if (Route::has('password.request'))
-                <a class="btn btn-link" href="{{ route('password.request') }}">
+                <a class="btn btn-link" href="{{ route('password.request', app()->getLocale()) }}">
                     {{ __('Olvidaste tu contraseña') }}
                 </a>
             @endif

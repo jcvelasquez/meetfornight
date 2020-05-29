@@ -11,7 +11,7 @@
             <div class="col-md-4">
                 <div class="tipo-cuenta {{$plan->fondo_plan}}">
                     <div class="lateral-triangulo-paquetes">
-                        <img src="img/{{$plan->triangulo_plan}}">
+                        <img src="{{asset('img/'.$plan->triangulo_plan)}}">
                     </div>
                     <h2 class="titulo-tipo">{{$plan->nombre}} <span class="free-plus">{{$plan->small}}</span></h2>
                     <div class="precio-cuenta">

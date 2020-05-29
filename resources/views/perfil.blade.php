@@ -335,7 +335,7 @@
                     <h2 class="sub-tit"><i class="icon-calendar esp-icono-bio"></i>ACCEDISTE COMO PROFESIONAL</h2>
                         <div class="form-row" style="margin-top:20px;">
                             <div class="col-lg-12 col-sm-12">
-                              <p>Para ver las tarifas del profesional o realizar una reserva, debes iniciar sesión como un usuario. Si no tienes una cuenta de usuario, primero debes <a href="{{ route('cerrar-sesion') }}">cerrar la sesión</a>, y luego <a href="{{url('crear-cuenta')}}">registrarse desde aquí</a>.
+                              <p>Para ver las tarifas del profesional o realizar una reserva, debes iniciar sesión como un usuario. Si no tienes una cuenta de usuario, primero debes <a href="{{ route('cerrar-sesion', app()->getLocale() ) }}">cerrar la sesión</a>, y luego <a href="{{ route('crear-cuenta', app()->getLocale())}}">registrarse desde aquí</a>.
                               </p>
                             </div>
                         </div>
@@ -352,10 +352,10 @@
 
                   <div class="form-row" style="margin-top:20px;">
                       <div class="col-lg-12 col-sm-12">
-                        Para ver las tarifas del profesional o realizar una reserva, debes iniciar sesión. Si no tiene una cuenta con nosotros aún, <a href="{{url('crear-cuenta')}}">registrarse desde aquí</a>. Si no recuerdas su contraseña también puedes 
+                        Para ver las tarifas del profesional o realizar una reserva, debes iniciar sesión. Si no tiene una cuenta con nosotros aún, <a href="{{ route('crear-cuenta', app()->getLocale() )}}">registrarse desde aquí</a>. Si no recuerdas su contraseña también puedes 
                         
                         @if (Route::has('password.request'))
-                            <a href="{{ route('password.request') }}">
+                            <a href="{{ route('password.request', app()->getLocale() ) }}">
                                 {{ __('recuperarla desde aquí') }}
                             </a>
                         @endif
@@ -363,7 +363,7 @@
                       </div>
                   </div>
 
-                  <form action="{{ route('comprobar-credenciales') }}" method="POST">
+                  <form action="{{ route('comprobar-credenciales', app()->getLocale() ) }}" method="POST">
                     @csrf
                     <!-- SECCION INTERIOR DE DATOS -->
                     <div class="form-row" style="margin-top:20px;">
@@ -436,10 +436,10 @@
               <h2 class="sub-tit"><i class="icon-calendar esp-icono-bio"></i>INICIAR SESION</h2>
                   <div class="form-row" style="margin-top:20px;">
                       <div class="col-lg-12 col-sm-12">
-                        Para enviar un mensaje al profesional, debes iniciar sesión. Si no tiene una cuenta con nosotros aún, <a href="{{url('crear-cuenta')}}">registrarse desde aquí</a>. Si no recuerdas su contraseña también puedes 
+                        Para enviar un mensaje al profesional, debes iniciar sesión. Si no tiene una cuenta con nosotros aún, <a href="{{ route('crear-cuenta', app()->getLocale() )}}">registrarse desde aquí</a>. Si no recuerdas su contraseña también puedes 
                         
                         @if (Route::has('password.request'))
-                            <a href="{{ route('password.request') }}">
+                            <a href="{{ route('password.request', app()->getLocale() ) }}">
                                 {{ __('recuperarla desde aquí') }}
                             </a>
                         @endif
@@ -447,7 +447,7 @@
                       </div>
                   </div>
 
-                  <form action="{{ route('comprobar-credenciales') }}" method="POST">
+                  <form action="{{ route('comprobar-credenciales', app()->getLocale() ) }}" method="POST">
                     @csrf
                     <!-- SECCION INTERIOR DE DATOS -->
                     <div class="form-row" style="margin-top:20px;">
@@ -505,7 +505,7 @@
                           <i class="icon-star"></i>
                           <i class="icon-star"></i>
                         </span> -->
-                        <a href="/perfil/{{$chica->apodo}}" target="_blank">VER PERFIL</a>
+                        <a href="{{ route('perfil', ['locale' => app()->getLocale(), 'apodo' => $chica->apodo ]  ) }}" target="_blank">VER PERFIL</a>
                         
                       </div>
                     </div>

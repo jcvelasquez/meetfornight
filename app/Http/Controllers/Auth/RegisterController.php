@@ -62,7 +62,7 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
+    /*protected function create(array $data)
     {
         $usuario = Usuario::create([
             'nombre' => $data['nombre'],
@@ -73,7 +73,12 @@ class RegisterController extends Controller
         $usuario->roles()->attach(Rol::where('nombre_rol', 'usuario')->first());
 
         return $user;
+    }*/
 
-
+    public function redirectTo()
+    {
+        return app()->getLocale() . '/home';
     }
+
+
 }

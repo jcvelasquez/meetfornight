@@ -1,33 +1,28 @@
 <!doctype html>
 <html lang="es">
 
-    @include('header')
+  @include('header')
 
   <body>
     
-  @include('cookieConsent::index');
+  @include('cookieConsent::index')
 
   <div id="widget">
 
-        @include('tops.top-free')
+      @include('tops.top-free')
 
-        <banner-superior></banner-superior> 
-      
-        <listado-profesionales :categoria-data="{{json_encode('all')}}"></listado-profesionales> 
-            
-        <banner-inferior></banner-inferior>
+      <banner-superior></banner-superior> 
 
-        @include('footers.footer-free')
+      <listado-profesionales :categoria-data="{{ json_encode('all') }}"></listado-profesionales> 
+          
+      <banner-inferior></banner-inferior>
 
-        
+      @include('footers.footer-free')
 
   </div>
-
   
   <script src="{{ asset('js/app.js') }}"></script>
   <script src="{{ asset('js/meetfornight.js') }}"></script>
-
-  
 
   </body>
 </html>

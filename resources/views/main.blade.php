@@ -49,7 +49,7 @@
             <div class="col-lg-12 col-sm-12">
               <div class="navegacion-cabecera-chicas">
                 <div class="botones-cabecera-chicas">
-                  <a href="intranet.php">PANEL DE CONTROL</a>
+                  <a href="#">PANEL DE CONTROL</a>
                   <span><i class="fa fa-angle-right" aria-hidden="true"></i></span>
                   <a href="#" class="cabecera-chicas-active">
                   

@@ -10,7 +10,7 @@
   <!--BANNER-->
   <div id="banner-internas">
     <div class="container-fluid no-container-fluid-esp">
-      <img src="img/banner-internas/banner-internas-1.jpg" class="img-responsive">
+      <img src="{{asset('img/banner-internas/banner-internas-1.jpg')}}" class="img-responsive">
     </div>
   </div>
 

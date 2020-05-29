@@ -3,20 +3,20 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-4 footer-logo">
-          <a href="#">
+          <a href="{{ route('home', app()->getLocale() ) }}">
             <img src="{{ asset('img/logo-bottom.png') }}">
           </a>
         </div>
         <div class="col-lg-8">
           <ul>
             <li>
-              <a href="privado-free.php">ANUNCIOS</a>
+              <a href="{{ route('anuncios', ['locale' => app()->getLocale(), 'categoria' => 'mujeres' ]  ) }}">ANUNCIOS</a>
             </li>
             <li>
-              <a href="">F.A.Q.</a>
+              <a href="{{ route('faq-perfil-profesional', app()->getLocale() ) }}">F.A.Q.</a>
             </li>
             <li>
-              <a href="">BLOG</a>
+              <a href="{{ route('blog', app()->getLocale() ) }}">BLOG</a>
             </li>
           </ul>
         </div>

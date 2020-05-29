@@ -9,7 +9,7 @@
 
   <!--BANNER-->
   <div id="banner-internas">
-    <div class="container-fluid no-container-fluid-esp" style="background: url( {{asset('img/banner-internas/banner-internas-1.jpg')}} )">
+    <div class="container-fluid no-container-fluid-esp" style="background: url( {{ asset('img/banner-internas/banner-internas-1.jpg') }} )">
         <h2>BLOG</h2>
     </div>
   </div>
@@ -41,7 +41,7 @@
               <article class="blog">
                   <div class="row">
                     <div class="col-lg-3">
-                        <img src="fotos_profesionales/{{$post->imagen}}" class="img-responsive" />
+                        <img src='{{ asset("fotos_profesionales/$post->imagen")}}' class="img-responsive" />
                     </div>
                     <div class="col-lg-9">
                       <div class="titulo-cabecera-chicas">
@@ -51,7 +51,7 @@
                       <hr/>
                       <p>{{substr($post->contenido,0,400)."..." }}</p>
                       <div class="clr"></div>
-                      <a href="/blog/{{$post->id}}" class="btn-acceder">Leer más</a>
+                      <a href="{{ route('blog.leer',  ['locale' => app()->getLocale() ,'id' => $post->id] )}}" class="btn-acceder">Leer más</a>
                     </div>
                   </div>
 
@@ -69,7 +69,7 @@
                       <h4 align="left">{{$articulo->titulo}}</h4>
                       <h3 align="left">{{ date("d/m/Y", strtotime($articulo->created_at))}}</h3>
                     </div>
-                    <div class="foto_blog"><img src="/fotos_profesionales/{{$articulo->imagen}}" class="img-responsive" /></div>
+                    <div class="foto_blog"><img src='{{ asset("fotos_profesionales/$articulo->imagen")}}' class="img-responsive" /></div>
                     
                     <p class="content_blog">{{$articulo->contenido}}</p>
                     <div class="clr"></div>
@@ -83,7 +83,7 @@
                   <div class="col-lg-6">
                   </div>
                   <div class="col-lg-6 text-right">
-                      <a href="/blog" class="btn_volver_blog">REGRESAR AL BLOG</a>
+                      <a href="{{ route('blog', app()->getLocale() ) }}" class="btn_volver_blog">REGRESAR AL BLOG</a>
                   </div>
                 </div>
 
@@ -92,7 +92,7 @@
                 <div class="row espacio-campos push_bottom_blog">
                   <div class="col-lg-2">
                     <span class="circulo_user">
-                      <a href="{{ url('/') }}"><img src="{{ asset('img/logo-blanco-intranet.png') }}"></a>
+                      <a href="{{ route('home', app()->getLocale() ) }}"><img src="{{ asset('img/logo-blanco-intranet.png') }}"></a>
                     </span>
                   </div>
                   <div class="col-lg-10">
@@ -123,10 +123,10 @@
                             <i class="icon-star"></i>
                             <i class="icon-star"></i>
                           </span>
-                          <a href="/perfil/{{$perfil->apodo}}" target="_blank">VER PERFIL</a>
+                          <a href="{{ route('perfil', ['locale' => app()->getLocale(), 'apodo' => $perfil->apodo ]  ) }}" target="_blank">VER PERFIL</a>
                           
                       </div>
-                      <img src="/fotos_profesionales/{{$perfil->url_foto}}" class="img-responsive" />
+                      <img src='{{ asset("fotos_profesionales/$perfil->url_foto")}}' class="img-responsive" />
                   </div>
                 </li>
                 @endforeach

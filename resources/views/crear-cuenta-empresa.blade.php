@@ -41,7 +41,7 @@
       </div>
       @endif
 
-      <form method="post" action="{{ route('registrar-empresa') }}" id="form-cuenta-empresa">
+      <form method="post" action="{{ route('registrar-empresa', app()->getLocale()) }}" id="form-cuenta-empresa">
         @csrf
 
             <!-- SmartWizard html -->

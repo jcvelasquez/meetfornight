@@ -24,16 +24,17 @@ class BlogController extends Controller
         
     }
 
-    public function leer($id)
+    public function leer(Request $request)
     {
 
         $perfiles = DB::table('usuarios')->join('foto_profesional', 'usuarios.id', '=', 'foto_profesional.idusuario')
                                         ->where('foto_profesional.orden', '=', 0)
                                         ->select('usuarios.id', 'nombre','apodo','url_foto')->take(4)->get(); 
 
-        $articulo = Blog::find($id);
+        $articulo = Blog::find( $request->id);
 
-        return view('blog', compact('perfiles','articulo') );  
+        return view('blog', compact('perfiles','articulo') ); 
+
 
         
     }

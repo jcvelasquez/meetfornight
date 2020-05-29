@@ -149,7 +149,7 @@
         </div>
         @endif
 
-        <form method="post" action="{{ route('registrar-profesional') }}" id="form-cuenta-profesional" autocomplete="off">
+        <form method="post" action="{{ route('registrar-profesional', app()->getLocale()) }}" id="form-cuenta-profesional" autocomplete="off">
           @csrf
 
             <!-- SmartWizard html -->
