@@ -15,6 +15,10 @@ use Carbon\Carbon;
 class BoosterProfesionalController extends Controller
 {
    
+    public function mostrar(){
+        return view('forms-perfil-profesional.booster-profesional');
+    }
+    
     public function listar(Request $request)
     {
             $idprofesional = Auth::user()->id;

@@ -3,8 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Auth;
-//use Illuminate\Support\Facades\Auth; 
+//use Auth;
+use Illuminate\Support\Facades\Auth; 
 
 class Profesional
 {
@@ -14,19 +14,19 @@ class Profesional
     {
         
         if (!Auth::check()) {
-            return redirect()->route('iniciar-sesion');
+            return redirect()->route('iniciar-sesion', app()->getLocale());
         }
 
         if (Auth::user()->idrol == 1) {
-            return redirect()->route('admin/dashboard');
+            return redirect()->route('admin/dashboard', app()->getLocale());
         }
 
         if (Auth::user()->idrol == 2) {
-            return redirect()->route('perfil-empresa');
+            return redirect()->route('perfil-empresa', app()->getLocale());
         }
  
         if (Auth::user()->idrol == 3) {
-            return redirect()->route('perfil-usuario');
+            return redirect()->route('perfil-usuario', app()->getLocale());
         }
         
         if (Auth::user()->idrol == 4) {

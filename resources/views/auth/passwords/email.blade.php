@@ -8,9 +8,9 @@
       <div class="acceso-intranet">
         <div class="bg-img-acceso bg-persona"></div>
         <div class="espacio-acceso-intranet">
-          <div class="accesos-derecha"><a href="/"><img src="../img/logo-blanco-intranet.png"></a></div>
+          <div class="accesos-derecha"><a href="{{ route('home', app()->getLocale()) }}"><img src="{{asset('img/logo-blanco-intranet.png')}}"></a></div>
 
-          <form class="intranet-accesos" action="{{ route('password.email') }}" method="POST">
+          <form class="intranet-accesos" action="{{ route('password.email', app()->getLocale()) }}" method="POST">
             @csrf
 
             <h2><strong>{{ __('RESTABLECE TU CLAVE') }}</strong></h2>

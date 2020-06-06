@@ -132,7 +132,7 @@
 <script>
 
     export default {
-        props: ['apodoData'],
+        props: ['apodo','basepath'],
         mounted() {
             this.mostrarTarifas();  
             var currentDateWithFormat = new Date().toJSON().slice(0,10).replace(/-/g,'-');
@@ -197,8 +197,8 @@
                     
                       if (result.value) {
 
-                            axios.post('/perfil/reservas/' + me.apodoData, {
-                                'apodo': me.apodoData,
+                            axios.post( me.basepath + "/" + me.$locale + '/perfil/' + me.apodo + '/reservas' , {
+                                'apodo': me.apodo,
                                 'idusuario': me.$idusuario,
                                 'desde' : me.horarioSeleccionado.desde,
                                 'hasta' : me.horarioSeleccionado.hasta,
@@ -213,7 +213,9 @@
 
                                 me.limpiarReserva();
                                 
-                                Swal.fire('CONFIRMACION', respuesta.mensaje,'success').then(function() {  window.location = "/reservas-usuario";  });
+                                Swal.fire('CONFIRMACION', respuesta.mensaje,'success').then(function() {  
+                                    window.location = me.basepath + "/" + me.$locale + "/reservas-usuario"; 
+                                 });
                                 
 
                             }).catch(function (error) {  
@@ -233,7 +235,7 @@
 
                   let me = this;
 
-                  axios.get('/perfil/tarifas/' + me.apodoData ).then(function (response) {
+                  axios.get(  me.basepath + "/" + me.$locale + '/perfil/' + me.apodo + '/tarifas'  ).then(function (response) {
 
                       var respuesta= response.data;
                       me.arTarifas = respuesta.tarifas;
@@ -249,8 +251,8 @@
                 me.arHorariosGenerados = [];
                 me.horarioSeleccionado = [];
 
-                axios.post('/perfil/horarios/' + me.apodoData, {
-                    'apodo': me.apodoData,
+                axios.post(  me.basepath + "/" + me.$locale + '/perfil/' + me.apodo +'/horarios', {
+                    'apodo': me.apodo,
                     'tiempo': me.tiempo,
                     'fechaselec' : fecha
                 } ).then(function (response) {

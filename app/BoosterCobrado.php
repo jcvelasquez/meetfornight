@@ -10,6 +10,8 @@ class BoosterCobrado extends Model
 
     public $table = "booster_cobrados_profesional";
 
+    public static $withoutAppends = false;
+
     protected $appends = ['es_booster','uid','timestamp','fecha','hora'];
 
     public function getFechaAttribute()
@@ -22,9 +24,27 @@ class BoosterCobrado extends Model
         return (new Carbon($this->attributes['created_at']))->format('H:i');
     }
 
+    protected function getArrayableAppends()
+    {
+        if(self::$withoutAppends){
+            return [];
+        }
+        return parent::getArrayableAppends();
+    }
+
+    public static function disableDynamicAccessors()
+    {
+        self::$withoutAppends = true;
+    }
+
     public function getEsBoosterAttribute()
     {
         return 1;
+    }
+
+    public function categoriashome()
+    {
+        return $this->hasMany('App\CategoriasProfesional', 'idprofesional', 'id')->join('categorias', 'categorias_profesional.idcategoria','=', 'categorias.id');
     }
 
     public function getUidAttribute()
@@ -39,7 +59,7 @@ class BoosterCobrado extends Model
 
     public function setEsBoosterAttribute($value)
     {
-        $this->attributes['es_marcado'] = 1;
+        $this->attributes['es_booster'] = 1;
     }
 
     public function usuario()

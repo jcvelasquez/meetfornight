@@ -55,10 +55,10 @@ class LoginController extends Controller
 
     }
 
-    public function redirectTo()
+    /*public function redirectTo()
     {
-        return app()->getLocale() . '/home';
-    }
+        return app()->getLocale() . '/';
+    }*/
 
     protected function validateLogin(Request $request){
         $this->validate($request,[

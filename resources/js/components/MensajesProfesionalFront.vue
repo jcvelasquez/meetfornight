@@ -14,7 +14,7 @@
 <script>
 
     export default {
-        props: ['apodoData'],
+        props: ['apodo', 'basepath'],
         mounted() {
             this.usuarioLogueado();
         },
@@ -31,7 +31,7 @@
 
                 let me = this;
 
-                axios.get('usuario/sesion')
+                axios.get( me.basepath + "/" + me.$locale +"/perfil/" + me.apodo +  '/sesion')
                 .then(function (response) { 
 
                     me.nombre = response.data.nombre;
@@ -50,7 +50,7 @@
                 me.existeError = 0;
                 me.erroresMensaje = [];
 
-                if(!me.mensaje) me.erroresMensaje.push("Ingresa tu mensaje</br>");
+                if(!me.mensaje) me.erroresMensaje.push("Ingresa tu mensaje");
                                 
                 if(me.erroresMensaje.length) me.existeError = 1;
 
@@ -72,9 +72,9 @@
                     return;
                   }
 
-                  axios.post('../perfil/mensaje/' + me.apodoData, {
+                  axios.put( me.basepath + "/" + me.$locale + '/perfil/'+me.apodo+'/mensaje/', {
                     'mensaje' : me.mensaje,
-                    'apodo' : me.apodoData
+                    'apodo' : me.apodo
                   }).then(function (response) {
 
                       var respuesta = response.data;

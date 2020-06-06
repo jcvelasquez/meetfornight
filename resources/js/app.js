@@ -15,6 +15,11 @@ Vue.use(VCalendar, { componentPrefix: 'vc' });
 Vue.use(Vuelidate);
 Vue.use(PrettyCheckbox);
 Vue.use(PrettyRadio);
+/* 
+import VueSlider from 'vue-slider-component'
+import 'vue-slider-component/theme/default.css'
+
+Vue.component('VueSlider', VueSlider) */
 
 //PERFIL
 Vue.component('reservas-profesional-front', require('./components/ReservasProfesionalFront.vue').default);
@@ -34,7 +39,8 @@ Vue.component('estadisticas-profesional', require('./components/EstadisticasProf
 Vue.component('perfil-profesional', require('./components/PerfilProfesional.vue').default);
 Vue.component('alerta-profesional', require('./components/AlertaProfesional.vue').default);
 Vue.component('valoracion-profesional', require('./components/ValoracionProfesional.vue').default);
-Vue.component('listado-profesionales', require('./components/ListadoProfesionales.vue').default);
+Vue.component('listado-home', require('./components/ListadoHome.vue').default);
+Vue.component('listado-categoria', require('./components/ListadoCategoria.vue').default);
 Vue.component('reservas-profesional', require('./components/ReservasProfesional.vue').default);
 Vue.component('disponibilidad-profesional-front', require('./components/DisponibilidadProfesionalFront.vue').default);
 
@@ -71,8 +77,9 @@ Vue.component('categorias-administrador', require('./components/CategoriasAdmini
 
 
 Vue.prototype.$csrf_token = document.querySelector("meta[name='csrf-token']").getAttribute('content');
-Vue.prototype.$idprofesional = document.querySelector("meta[name='profesional-id']").getAttribute('content');
-Vue.prototype.$idusuario = document.querySelector("meta[name='usuario-id']").getAttribute('content');
+Vue.prototype.$idprofesional = document.querySelector("meta[name='pid']").getAttribute('content');
+Vue.prototype.$idusuario = document.querySelector("meta[name='uid']").getAttribute('content');
+Vue.prototype.$idrol = document.querySelector("meta[name='role']").getAttribute('content');
 Vue.prototype.$locale = document.querySelector("meta[name='locale']").getAttribute('content');
 
 const app = new Vue({

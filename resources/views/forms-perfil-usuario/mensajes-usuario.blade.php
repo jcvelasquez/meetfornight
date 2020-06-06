@@ -4,6 +4,6 @@
 
 @section('content')
 
-<mensajes-usuario></mensajes-usuario>
+<mensajes-usuario v-bind:basepath="{{ json_encode(url('/')) }}" ></mensajes-usuario>
 
 @endsection

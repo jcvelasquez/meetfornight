@@ -1030,6 +1030,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5c376f', end
 
     overflow: hidden;
 
+    cursor: pointer;
+
 }
 
 .item-chica img{
@@ -1073,15 +1075,20 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5c376f', end
 
 .item-chica:hover .triangulo{
 
-	border-right: 30px solid rgba(242, 15, 33, 0.8);
+	border-right: 30px solid #5b376f;
 
-    border-top: 30px solid rgba(242, 15, 33, 0.8);
+    border-top: 30px solid #5b376f;
 
     border-left: 30px solid transparent;
 
     border-bottom: 30px solid transparent;
 
 }
+
+.item-chica:hover .triangulo i {
+    color:#fff;
+}
+
 
 .item-chica .triangulo a i{
 

@@ -45,13 +45,14 @@
                 </ul>
                 <div>
                     <div id="planes" class="">
-                      @include('forms-crear-cuenta-usuario.tab-usuario-planes')
+                      
+                      @include('forms-crear-cuenta-usuario.tab-usuario-seguridad')
                     </div>
                     <div id="perfil" class="">
                       @include('forms-crear-cuenta-usuario.tab-usuario-perfil')
                     </div>
                     <div id="seguridad" class="">
-                      @include('forms-crear-cuenta-usuario.tab-usuario-seguridad')
+                    @include('forms-crear-cuenta-usuario.tab-usuario-planes')
                     </div>
                     <div id="activar" class="">
                       @include('forms-crear-cuenta-usuario.tab-usuario-activar')

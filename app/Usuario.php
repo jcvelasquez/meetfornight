@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Notifications\ReenviarVerificacion;
+use App\CategoriasProfesional;
 use App\Rol;
 use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
@@ -19,7 +20,7 @@ class Usuario extends Authenticatable implements MustVerifyEmail
     public $table = "usuarios";
 
     protected $fillable =[
-        'idrol','apodo', 'nombre','email','password','fecha_nacimiento','sexo','nacionalidad','idioma','estado'
+        'idusuario','idrol','apodo', 'nombre','email','password','fecha_nacimiento','sexo','nacionalidad','idioma','estado'
     ];
 
     protected $hidden = [
@@ -29,6 +30,9 @@ class Usuario extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    //protected $appends = ['es_booster','uid','timestamp','fecha','hora'];
+    protected $appends = ['es_booster'];
 
     public function sendEmailVerificationNotification()
     {
@@ -57,6 +61,14 @@ class Usuario extends Authenticatable implements MustVerifyEmail
 
     public function categorias(){
         return $this->hasMany('App\CategoriasProfesional', 'idprofesional', 'id')->join('categorias', 'categorias_profesional.idcategoria','=', 'categorias.id');
+        //return $this->hasMany('App\CategoriasProfesional', 'idprofesional', 'id');
+    }
+
+    public function categoriashome(){
+
+        CategoriasProfesional::$withoutAppends = true;
+        
+        return $this->hasMany('App\CategoriasProfesional', 'idprofesional', 'id')->join('categorias', 'categorias_profesional.idcategoria','=', 'categorias.id');
     }
 
     public function seguridad(){
@@ -78,9 +90,34 @@ class Usuario extends Authenticatable implements MustVerifyEmail
         return $this->belongsTo('App\Rol', 'idrol', 'id');
     }
 
+    public function getTimestampAttribute()
+    {
+        return Carbon::parse($this->attributes['created_at'])->getTimestamp();  
+    }
+
+    public function getEsBoosterAttribute()
+    {
+        return 0;
+    }
+
+    public function getFechaAttribute()
+    {
+        return (new Carbon($this->attributes['created_at']))->format('d/m/Y');
+    }
+
+    public function getHoraAttribute()
+    {
+        return (new Carbon($this->attributes['created_at']))->format('H:i');
+    }
+
 
     public function getFechaNacimiento(){
 
+    }
+
+    public function getUidAttribute()
+    {
+        return uniqid().Carbon::parse($this->attributes['created_at'])->getTimestamp();  
     }
 
     public function getFechaNacimientoAttribute( $value ) {

@@ -257,9 +257,9 @@
 
 <script>
 
-import VueSlider from 'vue-slider-component';
+/* import VueSlider from 'vue-slider-component';
 import 'vue-slider-component/theme/default.css';
-
+ */
 // Main JS (in UMD format)
 import VueTimepicker from 'vue2-timepicker'
 
@@ -268,7 +268,6 @@ import 'vue2-timepicker/dist/VueTimepicker.css'
 
     export default {
         components: {
-          VueSlider,
           VueTimepicker
         },
         mounted() {
@@ -323,6 +322,7 @@ import 'vue2-timepicker/dist/VueTimepicker.css'
                       me.tipo_celular = respuesta.contacto.tipo_celular;
 
                   }).catch(function (error) {  console.log(error);     });
+
 
 
             },

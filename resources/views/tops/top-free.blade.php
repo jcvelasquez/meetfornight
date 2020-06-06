@@ -28,7 +28,7 @@
               -->
               @if(Auth::check())
                 <li class="nav-item espaciado-btn-header-top">                
-                  <a class="nav-link" href="{{ route('iniciar-sesion', app()->getLocale()) }}"><span class="icon-header"><i class="color-header-top icon-user-woman"></i></span>Mi Cuenta</a>
+                  <a class="nav-link" href="{{ route('iniciar-sesion', app()->getLocale()) }}"> <span class="icon-header"><i class="color-header-top icon-user-woman"></i></span>Mi Cuenta</a>
                 </li>
               @else
                 <li class="nav-item espaciado-btn-header-top">

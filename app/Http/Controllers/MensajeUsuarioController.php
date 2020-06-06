@@ -23,8 +23,8 @@ class MensajeUsuarioController extends Controller
         $idusuario = Auth::user()->id;
       
         $mensajes = DB::table('mensaje_profesional')->join('usuarios', 'mensaje_profesional.idusuario', '=', 'usuarios.id')
-                                                    ->join('planes_profesional', 'planes_profesional.idprofesional', '=', 'usuarios.id')
-                                                    ->join('planes', 'planes.id', '=', 'planes_profesional.idplan')
+                                                    ->leftjoin('planes_profesional', 'planes_profesional.idprofesional', '=', 'usuarios.id')
+                                                    ->leftjoin('planes', 'planes.id', '=', 'planes_profesional.idplan')
                                                     ->where('mensaje_profesional.idusuario', $idusuario )
                                                     ->select('mensaje_profesional.id', 'mensaje_profesional.idprofesional', DB::raw("CONCAT(planes.tipo_usuario, ' ', planes.nombre_plan) as nombre_plan"), 'mensaje_profesional.idusuario','usuarios.nombre', 'usuarios.email','usuarios.celular','mensaje_profesional.mensaje', 'mensaje_profesional.es_leido', DB::raw("DATE_FORMAT( mensaje_profesional.created_at, '%d/%m/%Y a las %H:%i:%s') as enviado_el"), DB::raw(" '' as responder"), DB::raw(" 0 as esActivo") )
                                                     ->where('mensaje_profesional.parent_id','=', NULL)
@@ -32,7 +32,11 @@ class MensajeUsuarioController extends Controller
 
         foreach ($mensajes as $mensaje) {
 
-            $mensaje->respuestas = DB::table('usuarios')->select('mensaje_profesional.id','mensaje_profesional.idusuario','usuarios.nombre', 'usuarios.email','usuarios.celular','mensaje_profesional.mensaje', DB::raw("DATE_FORMAT(mensaje_profesional.created_at, '%d/%m/%Y - %H:%i:%s') as enviado_el"))->join('mensaje_profesional', 'usuarios.id', '=', 'mensaje_profesional.idusuario')->where('mensaje_profesional.parent_id','=',  $mensaje->id)->orderBy('mensaje_profesional.created_at','desc')->get();  
+            $mensaje->respuestas = DB::table('usuarios')->select('mensaje_profesional.id','mensaje_profesional.idusuario','usuarios.nombre', 'usuarios.email','usuarios.celular','mensaje_profesional.mensaje', DB::raw("DATE_FORMAT(mensaje_profesional.created_at, '%d/%m/%Y - %H:%i:%s') as enviado_el"))
+                                                        ->join('mensaje_profesional', 'usuarios.id', '=', 'mensaje_profesional.idusuario')
+                                                        ->where('mensaje_profesional.parent_id','=',  $mensaje->id)
+                                                        ->orderBy('mensaje_profesional.created_at','desc')
+                                                        ->get();  
 
         }
 

@@ -34,7 +34,7 @@
 
       <div class="img-cargada" v-for="(archivo, index) in filtrarPor(arArchivos, 'PERFIL')" :key="archivo.id">
           <div class="img-cargada-izq">
-            <img :src=" 'fotos_usuarios/' + archivo.url_foto" style="margin-left:15px;" />
+            <img :src="  basepath + '/fotos_usuarios/' + archivo.url_foto" style="margin-left:15px;" />
             <div class="img-cargada-datos">
               <span class="nom-img"><strong>FOTO DE PERFIL</strong></span>
             </div>
@@ -64,7 +64,7 @@
 
       <div class="img-cargada" v-for="(archivo, index) in filtrarPor(arArchivos, 'IDENTIDAD')" :key="archivo.id">
           <div class="img-cargada-izq">
-            <img :src=" 'fotos_usuarios/' + archivo.url_foto" style="margin-left:15px;" />
+            <img :src=" basepath +'/fotos_usuarios/' + archivo.url_foto" style="margin-left:15px;" />
             <div class="img-cargada-datos">
               <span class="nom-img"><strong>DOCUMENTO DE IDENTIDAD</strong></span>
             </div>
@@ -82,11 +82,11 @@
         </span>
       </div>
 
-<!-- 
+
       <h5 class="formulario-titulos" style="margin-top:40px;">Ingresa tu número de móvil:</h5>
       <div class="form-row espacio-campos">
         <div class="col-lg-12 col-sm-12">
-          <input type="text" class="form-control espacio-campos" name="celular" id="celular" placeholder="Celular *" required>
+          <input type="text" class="form-control espacio-campos" name="celular" v-model="celular" placeholder="Celular *" required>
         </div>
       </div>
 
@@ -96,7 +96,7 @@
           <button type="button" @click="actualizarSeguridadUsuario()" class="btn btn-primary btn-busqueda-detallada">ACTUALIZAR DATOS</button>
         </div>
       </div>
- -->
+ 
 
 
 
@@ -105,13 +105,15 @@
 
 <script>
     export default {
+        props: ['basepath'],
         data(){
             return {
                 existeError : 0,
                 erroresMensaje: [],
                 csrf_token : 0,
                 arArchivos: [],
-                seguridad:0
+                seguridad:0,
+                celular: 0
             }
         },
         mounted() {
@@ -119,16 +121,48 @@
             this.initDropZone();
         },
         methods:{
+              actualizarSeguridadUsuario(){
+
+               /* if(this.validarPerfilUsuario()){
+                  return;
+                }*/
+
+                let me = this;
+
+                // Make a request for a user with a given ID
+                axios.put('seguridad-usuario/actualizar', {
+                  'nombre' : me.nombre,
+                  'apodo' : me.apodo,
+                  'password' : me.password,
+                  'fecha_nacimiento' : me.fecha_nacimiento,
+                  'sexo' : me.sexo,
+                  'nacionalidad' : me.nacionalidad,
+                  'idcountry' : me.idcountry,
+                  'idstate' : me.idstate,
+                  'idcity' : me.idcity,
+                  'celular' : me.celular           
+                })
+                .then(function (response) {
+                    // handle success
+                    Swal.fire('CONFIRMACION!', response.data.mensaje, 'success');
+                })
+                .catch(function (error) {
+                    // handle error
+                    console.log(error);
+                });
+
+            },
             listarSeguridad(){
 
                   let me = this;
 
-                  axios.get('/seguridad-usuario/listar').then(function (response) {
+                  axios.get('seguridad-usuario/listar').then(function (response) {
 
                         var respuesta= response.data;
                     
                         me.arArchivos = respuesta.archivos;
                         me.seguridad= respuesta.seguridad;
+                        me.celular= respuesta.celular;
 
                   }).catch(function (error) {  console.log(error);     });
                 
@@ -142,7 +176,7 @@
 
               let me = this;
 
-              let DropPerfil = new Dropzone("#dzPerfil", { url: "/seguridad-usuario/subir", 
+              let DropPerfil = new Dropzone("#dzPerfil", { url: "seguridad-usuario/subir", 
                                                           acceptedFiles: ".jpeg,.jpg,.png,.gif",
                                                           clickable: "#dzPerfil button", 
                                                           maxFiles: 1, 
@@ -164,7 +198,7 @@
                                 
                                 });
 
-              let DropIdentidad = new Dropzone("#dzIdentidad", { url: "/seguridad-usuario/subir", 
+              let DropIdentidad = new Dropzone("#dzIdentidad", { url: "seguridad-usuario/subir", 
                                                           acceptedFiles: ".jpeg,.jpg,.png,.gif",
                                                           clickable: "#dzIdentidad button", 
                                                           maxFiles: 1, 
@@ -203,7 +237,7 @@
                           
                             if (result.value) {
 
-                                  axios.post('/seguridad-usuario/eliminar', {
+                                  axios.post('seguridad-usuario/eliminar', {
                                         'url' : item.url_foto,
                                         'idfoto' : item.id
                                     } ).then(function (response) {

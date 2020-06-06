@@ -4,6 +4,6 @@
 
 @section('content')
 
-      <seguridad-usuario></seguridad-usuario>
+      <seguridad-usuario v-bind:basepath="{{ json_encode(url('/')) }}"></seguridad-usuario>
   
 @endsection

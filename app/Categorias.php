@@ -14,9 +14,10 @@ class Categorias extends Model
     public $timestamps = false;
 
 
-    public function categoriasProfesionales()
+    public function categoriasprofesional()
     {
-        return $this->hasMany('App\CategoriasProfesional', 'idcategoria', 'id');
+        //return $this->hasMany('App\CategoriasProfesional','categorias_profesional','id','idcategoria');
+        return $this->hasMany('App\CategoriasProfesional','categorias_profesional','id','idcategoria');
     }
     
 

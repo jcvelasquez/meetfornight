@@ -21,7 +21,10 @@ class CategoriasProfesional extends Model
     {
         return $this->belongsTo('App\Usuario', 'idprofesional', 'id');
     }
-
+    
+    public function categorias(){
+        return $this->belongsToMany('App\Categorias','categorias_profesional','idcategoria','idcategoria');
+    }
     
     protected function getArrayableAppends()
     {
@@ -31,6 +34,10 @@ class CategoriasProfesional extends Model
         return parent::getArrayableAppends();
     }
 
+    public static function disableDynamicAccessors()
+    {
+        self::$withoutAppends = true;
+    }
 
     public function getEsMarcadoAttribute()
     {

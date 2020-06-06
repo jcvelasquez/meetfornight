@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Auth;
+use Illuminate\Support\Facades\Auth; 
 //use Illuminate\Support\Facades\Auth;
 
 class Usuario
@@ -13,15 +13,15 @@ class Usuario
     {
 
         if (!Auth::check()) {
-            return redirect()->route('iniciar-sesion');
+            return redirect()->route('iniciar-sesion', app()->getLocale());
         }
 
         if (Auth::user()->idrol == 1) {
-            return redirect()->route('admin/dashboard');
+            return redirect()->route('admin/dashboard', app()->getLocale());
         }
 
         if (Auth::user()->idrol == 2) {
-            return redirect()->route('perfil-empresa');
+            return redirect()->route('perfil-empresa', app()->getLocale());
         }
  
         if (Auth::user()->idrol == 3) {
@@ -29,7 +29,7 @@ class Usuario
         }
         
         if (Auth::user()->idrol == 4) {
-            return redirect()->route('perfil-profesional');
+            return redirect()->route('perfil-profesional', app()->getLocale());
         }
         
     }

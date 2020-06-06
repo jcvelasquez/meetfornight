@@ -430,7 +430,7 @@ export default {
             let me = this;
 
             // Make a request for a user with a given ID
-            axios.get('/perfil-profesional/editar')
+            axios.get( 'perfil-profesional/editar')
             .then(function (response) {
                 // handle success
 
@@ -568,7 +568,7 @@ export default {
             let me = this;
 
             // Make a request for a user with a given ID
-            axios.put('/perfil-profesional/actualizar', {
+            axios.put( 'perfil-profesional/actualizar', {
               'nombre' : this.nombre,
               'apodo' : this.apodo,
               'email' : this.email,

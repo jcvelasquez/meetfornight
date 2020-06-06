@@ -27,8 +27,8 @@ class PerfilController extends Controller
         $usuario = Usuario::select('id')->where('apodo', '=', $request->apodo)->firstOrFail();    
 
         $perfil = DB::table('usuarios')->join('usuarios_extras', 'usuarios.id', '=', 'usuarios_extras.idusuario')
-                                        ->join('planes_profesional', 'usuarios.id', '=', 'planes_profesional.idprofesional')
-                                        ->join('planes', 'planes_profesional.idplan', '=', 'planes.id')
+                                        ->leftJoin('planes_profesional', 'usuarios.id', '=', 'planes_profesional.idprofesional')
+                                        ->leftJoin('planes', 'planes_profesional.idplan', '=', 'planes.id')
                                         ->join('countries', 'usuarios.idcountry', '=', 'countries.id')
                                         ->join('states', 'usuarios.idstate', '=', 'states.id')
                                         ->join('cities', 'usuarios.idcity', '=', 'cities.id')
@@ -118,16 +118,26 @@ class PerfilController extends Controller
 
         $totalRanking = 0;
 
-        foreach($valoraciones as $valor){
+        $ranking = 0;
+        $ranking_html = "";
 
-            $valor->puntuacion_html = $this->checkEstrellas($valor->puntuacion_int);
+        if(count($registradas) > 0){
 
-            $totalRanking += $valor->puntuacion_int;
-                
+            foreach($valoraciones as $valor){
+
+                $valor->puntuacion_html = $this->checkEstrellas($valor->puntuacion_int);
+    
+                $totalRanking += $valor->puntuacion_int;
+                    
+            }
+    
+            $ranking = $totalRanking / count($valoraciones);
+            $ranking_html = $this->checkEstrellas($ranking);
+
         }
+        
 
-        $ranking = $totalRanking / count($valoraciones);
-        $ranking_html = $this->checkEstrellas($ranking);
+        
 
         $otraschicas = DB::table('usuarios')->join('foto_profesional', 'usuarios.id', '=', 'foto_profesional.idusuario')
                                         ->where('foto_profesional.orden', '=', 0)
@@ -138,124 +148,7 @@ class PerfilController extends Controller
         
 
     }
-/* 
-    public function listar(Request $request)
-    {
-
-        $usuario = Usuario::select('id')->where('apodo', '=', $request->apodo)->firstOrFail();    
-
-        $perfil = DB::table('usuarios')->join('usuarios_extras', 'usuarios.id', '=', 'usuarios_extras.idusuario')
-                                        ->join('planes_profesional', 'usuarios.id', '=', 'planes_profesional.idprofesional')
-                                        ->join('planes', 'planes_profesional.idplan', '=', 'planes.id')
-                                        ->join('countries', 'usuarios.idcountry', '=', 'countries.id')
-                                        ->join('states', 'usuarios.idstate', '=', 'states.id')
-                                        ->join('cities', 'usuarios.idcity', '=', 'cities.id')
-                                        ->where('usuarios.id', '=', $usuario->id)->first();  
-
-        $servicios = ServiciosProfesional::where('estado_servicio', 1)->where('es_admin', 1)->get();
-        
-        $seleccionados = ServiciosXProfesional::where('idusuario', '=', $usuario->id)->where('idservicio', '!=', NULL)->get();
-
-   
-        data_set($perfil, 'edad', $this->calcularEdad($perfil->fecha_nacimiento));
-
-        if( $perfil->tatuaje = 1 ){
-            data_set($perfil, 'tatuaje', 'Sí');
-        }else{
-            data_set($perfil, 'tatuaje', 'No');
-        }
-
-        if( $perfil->piercing = 1 ){
-            data_set($perfil, 'piercing', 'Sí');
-        }else{
-            data_set($perfil, 'piercing', 'No');
-        }
-
-        if( $perfil->fumador = 1 ){
-            data_set($perfil, 'fumador', 'Sí');
-        }else{
-            data_set($perfil, 'fumador', 'No');
-        }
-
-        if( $perfil->sexo = "M" ){
-            data_set($perfil, 'sexo', 'Masculino');
-        }else{
-            data_set($perfil, 'sexo', 'Femenino');
-        }
-
-        if( $perfil->idioma = "ES" ){
-            data_set($perfil, 'idioma', 'Español');
-        }else{
-            data_set($perfil, 'idioma', 'Ingles');
-        }
-
-        if( $perfil->orientacion = "HETE" ){
-            data_set($perfil, 'orientacion', 'Heterosexual');
-        }else if( $perfil->orientacion = "LESB" ){
-            data_set($perfil, 'orientacion', 'Lesbiana');
-        }else if( $perfil->orientacion = "TRAN" ){
-            data_set($perfil, 'orientacion', 'Transexual');
-        }else if( $perfil->orientacion = "HOMO" ){
-            data_set($perfil, 'orientacion', 'Homosexual');
-        }else {
-            data_set($perfil, 'orientacion', 'Bisexual');
-        }
-
-        //SELECCIONADOS
-        foreach ($servicios as $serv) {
-
-            if( $this->checkSeleccionado($seleccionados, $serv->id) ){
-                data_set($serv, 'es_marcado', '1');
-            }else{
-                data_set($serv, 'es_marcado', '0');
-            }
-            
-        }
-
-
-        //PERSONALIZADOS
-        $personalizados = ServiciosXProfesional::where('idservicio', NULL)->where('idusuario', '=', $usuario->id)->get();
-
-        foreach ($personalizados as $serv_pers) {
-
-            data_set($serv_pers, 'es_marcado', '1');
-            
-        }
-
-        $fotos = FotoProfesional::where('idusuario', '=', $usuario->id )->orderBy('orden','asc')->get();
-
-
-        $valoraciones = DB::table('valoracion_profesional as valo')->join('criterios_valoracion as cri', 'valo.idcriterio', '=', 'cri.id')
-                                ->select('cri.nombre_criterio', DB::raw(' ROUND( AVG(valo.puntuacion), 1) as puntuacion, CAST(ROUND( AVG(valo.puntuacion), 0) AS UNSIGNED) as puntuacion_int ') )
-                                ->where('idprofesional', $usuario->id )
-                                ->groupBy('valo.idcriterio')->get();
-
-        $reservas = ReservasProfesional::where('idprofesional', $usuario->id )->count();
-
-        $registradas =  DB::table('valoracion_profesional')->where('idprofesional', $usuario->id )->select('idreserva')->groupBy('idreserva')->get();
-
-        $totalRanking = 0;
-
-        foreach($valoraciones as $valor){
-
-            $valor->puntuacion_html = $this->checkEstrellas($valor->puntuacion_int);
-
-            $totalRanking += $valor->puntuacion_int;
-                
-        }
-
-        $ranking = $totalRanking / count($valoraciones);
-        $ranking_html = $this->checkEstrellas($ranking);
-
-        $otraschicas = DB::table('usuarios')->join('foto_profesional', 'usuarios.id', '=', 'foto_profesional.idusuario')
-                                        ->where('foto_profesional.orden', '=', 0)
-                                        ->select('usuarios.id', 'nombre','apodo','url_foto')->inRandomOrder()->take(8)->get();
-        
-       
-        return compact('perfil', 'servicios', 'personalizados','fotos','valoraciones', 'reservas', 'registradas', 'ranking' , 'ranking_html', 'otraschicas' );
-        
-
-    } */
+    
 
     public function tarifas(Request $request)
     {
@@ -267,6 +160,11 @@ class PerfilController extends Controller
 
     public function horarios(Request $request)
     {
+
+        //$idprofesional 
+
+        $reservas = [];
+        $available_slots = [];
 
         //FECHA SELECCIONADA DEL FRONT
         $fechaselec = $request->fechaselec;
@@ -305,55 +203,63 @@ class PerfilController extends Controller
                     break;
         }
 
+
+
         $disponibilidad = Usuario::where('apodo', '=', $request->apodo)->firstOrFail()->disponibilidades()->where('dia', '=', $day)->first();
 
-        //INICIO Y FIN DE SERVICIO
-        $desde = new DateTime($fechaselec." ".$disponibilidad->desde);
-        $hasta = new DateTime($fechaselec." ".$disponibilidad->hasta);
+        if($disponibilidad){
 
-        if($fechaEsHoy){
-            $timenow = new DateTime($fechaselec." ".date('H:i:s'));
-        }else{
-            $timenow = new DateTime($fechaselec." ".$disponibilidad->desde);
+                //INICIO Y FIN DE SERVICIO
+                $desde = new DateTime($fechaselec." ".$disponibilidad->desde);
+                $hasta = new DateTime($fechaselec." ".$disponibilidad->hasta);
+
+                if($fechaEsHoy){
+                    $timenow = new DateTime($fechaselec." ".date('H:i:s'));
+                }else{
+                    $timenow = new DateTime($fechaselec." ".$disponibilidad->desde);
+                }
+
+                //ANTICIPACION PARA PEDIR EL SERVICIO
+                //$timenow->add(new DateInterval('PT0M'));
+
+                //TIEMPO DEL SERVICIO
+                $interval = new DateInterval($duracion);
+
+                $time_slots = array();
+                //$time_slots = array( '17:30' => '18:30', '19:30' => '21:30' );
+
+                $available_slots = array();
+
+                $periodos = new DatePeriod($desde, $interval, $hasta);
+
+                //OBTENGO LOS HORARIOS RESERVADOS PARA ESE DIA
+                $reservas = ReservasProfesional::where('idprofesional', '=', 34)->where('es_aceptada', '=', 1)->get(['desde','hasta']);
+
+
+                foreach($periodos as $time) {
+
+                    $desde_slot = $fechaselec." ".$time->format('H:i');
+
+                    if ($timenow > $time) {
+                        continue;
+                    }                   
+
+                    
+                                
+                    $hasta_slot = $time->add($interval);
+
+                    /*if(array_key_exists($timeslot, $time_slots)) {
+                        $available_slots[] = array('desde' => $timeslot, 'hasta' => 'FULL'); 
+                        continue;
+                    }*/  
+
+                    $available_slots[] = array('id' => uniqid(), 'desde' => $desde_slot, 'hasta' => $fechaselec." ".$hasta_slot->format('H:i'));
+                    
+                }
+
         }
 
-        //ANTICIPACION PARA PEDIR EL SERVICIO
-        //$timenow->add(new DateInterval('PT0M'));
-
-        //TIEMPO DEL SERVICIO
-        $interval = new DateInterval($duracion);
-
-        $time_slots = array();
-        //$time_slots = array( '17:30' => '18:30', '19:30' => '21:30' );
-
-        $available_slots = array();
-
-        $periodos = new DatePeriod($desde, $interval, $hasta);
-
-        //OBTENGO LOS HORARIOS RESERVADOS PARA ESE DIA
-        $reservas = ReservasProfesional::where('idprofesional', '=', 34)->where('es_aceptada', '=', 1)->get(['desde','hasta']);
-
-
-        foreach($periodos as $time) {
-
-            $desde_slot = $fechaselec." ".$time->format('H:i');
-
-            if ($timenow > $time) {
-                continue;
-            }                   
-
-            
-                        
-            $hasta_slot = $time->add($interval);
-
-            /*if(array_key_exists($timeslot, $time_slots)) {
-                $available_slots[] = array('desde' => $timeslot, 'hasta' => 'FULL'); 
-                continue;
-            }*/  
-
-            $available_slots[] = array('id' => uniqid(), 'desde' => $desde_slot, 'hasta' => $fechaselec." ".$hasta_slot->format('H:i'));
-            
-        }
+        
 
         return ['horarios' => $available_slots, 'reservas' => $reservas];  
 

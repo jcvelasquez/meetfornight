@@ -13,7 +13,7 @@
 
       <banner-superior></banner-superior> 
 
-      <listado-profesionales :categoria-data="{{ json_encode('all') }}"></listado-profesionales> 
+      <listado-home></listado-home> 
           
       <banner-inferior></banner-inferior>
 

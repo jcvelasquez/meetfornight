@@ -6,18 +6,25 @@
 
         <div class="disponibilidad">
 
-            <div class="fecha" v-for="dispo in arDisponibilidad" :key=" 'm_' + dispo.id">      
-                 <div v-if="estaDisponible(dispo)">
-                    <span class="dias" v-text="dispo.dia.substr(0, 3)"></span>
-                    <p v-text="dispo.desde"></p>
-                    <p v-text="dispo.hasta"></p>
-                </div>
-                <div v-else>
-                    <span class="dias" style="background:#f20f21;" v-text="dispo.dia.substr(0, 3)"></span>
-                    <p>N/D</p>
-                </div> 
+            <template v-if="arDisponibilidad.length > 0">
 
-            </div>
+                <div class="fecha" v-for="dispo in arDisponibilidad" :key=" 'm_' + dispo.id">      
+                    <div v-if="estaDisponible(dispo)">
+                        <span class="dias" v-text="dispo.dia.substr(0, 3)"></span>
+                        <p v-text="dispo.desde"></p>
+                        <p v-text="dispo.hasta"></p>
+                    </div>
+                    <div v-else>
+                        <span class="dias" style="background:#f20f21;" v-text="dispo.dia.substr(0, 3)"></span>
+                        <p>N/D</p>
+                    </div> 
+                </div>
+
+            </template>
+
+            <template v-else>
+                <p>El profesional aún no registra horarios de disponibilidad</p>
+            </template>
 
 
         </div>
@@ -29,7 +36,7 @@
 <script>
 
     export default {
-        props: ['apodoData'],
+        props: ['apodo', 'basepath'],
         mounted() {
             this.mostrarDisponibilidad();
         },
@@ -69,7 +76,7 @@
 
                   let me = this;
 
-                  axios.get('/perfil/disponibilidad/' + me.apodoData ).then(function (response) {
+                  axios.get( me.basepath + '/' + me.$locale + '/perfil/' + me.apodo + '/disponibilidad'  ).then(function (response) {
 
                       var respuesta= response.data;
 

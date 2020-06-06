@@ -221,7 +221,7 @@
 
                 let me = this;
 
-                axios.get('/categorias-profesional/listar').then(function (response) {
+                axios.get('categorias-profesional/listar').then(function (response) {
 
                     var respuesta = response.data;
 
@@ -235,7 +235,7 @@
 
                 let me = this;
 
-                axios.get('/booster-cobrado/listar').then(function (response) {
+                axios.get('booster-cobrado/listar').then(function (response) {
 
                     var respuesta = response.data;
 
@@ -249,7 +249,7 @@
 
                   let me = this;
 
-                  axios.get('/booster-profesional/listar').then(function (response) {
+                  axios.get('booster-profesional/listar').then(function (response) {
 
                       var respuesta = response.data;
                       me.arConfiguracion = respuesta.configuracion;
@@ -269,7 +269,7 @@
 
                 let me = this;
 
-                axios.post('/booster-profesional/actualizar', {
+                axios.post('booster-profesional/actualizar', {
                     'id' : me.arConfiguracion.id,
                     'frecuencia' : me.frecuencia,
                     'intervalo' : me.intervalo,
@@ -288,7 +288,7 @@
 
                   let me = this;
 
-                  axios.post('/frecuencia-booster/agregar', {
+                  axios.post('frecuencia-booster/agregar', {
                       'fecha' : me.fechabooster,
                       'hora' : me.horabooster,
                       'idcategoria' : me.idcategoria
@@ -317,7 +317,7 @@
 
                   let me = this;
 
-                  axios.get('/frecuencia-booster/listar').then(function (response) {
+                  axios.get('frecuencia-booster/listar').then(function (response) {
 
                       var respuesta= response.data;
                       me.arFrecuencia = respuesta.frecuencia;
@@ -340,7 +340,7 @@
                     
                       if (result.value) {
 
-                            axios.post('/frecuencia-booster/eliminar', {
+                            axios.post('frecuencia-booster/eliminar', {
                                 'id' : frecuencia.id
                             }).then(function (response) {
 

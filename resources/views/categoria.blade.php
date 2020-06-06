@@ -51,7 +51,7 @@
               </div>
               <div class="row"> 
 
-                <listado-profesionales :categoria-data="{{json_encode($title)}}"></listado-profesionales>
+                <listado-categoria v-bind:categoria="{{json_encode($title)}}" v-bind:basepath="{{ json_encode(url('/')) }}" ></listado-categoria>
 
               </div>
 

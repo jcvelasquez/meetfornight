@@ -326,7 +326,7 @@
     
           <div id="widget">
         
-             <disponibilidad-profesional-front :apodo-data="{{json_encode($perfil->apodo)}}"></disponibilidad-profesional-front>
+             <disponibilidad-profesional-front v-bind:apodo="{{json_encode($perfil->apodo)}}" v-bind:basepath="{{ json_encode(url('/')) }}" ></disponibilidad-profesional-front>
 
              @if(Auth::check())
                 @if (Auth::user()->idrol == 4)
@@ -341,7 +341,7 @@
                         </div>
                     </div> 
                 @elseif (Auth::user()->idrol == 3)
-                    <reservas-profesional-front :apodo-data="{{json_encode($perfil->apodo)}}"></reservas-profesional-front>
+                    <reservas-profesional-front v-bind:apodo="{{json_encode($perfil->apodo)}}" v-bind:basepath="{{ json_encode(url('/')) }}" ></reservas-profesional-front>
                 @endif
 
              @else
@@ -390,7 +390,7 @@
             
             @endif
 
-
+<!-- 
           <div class="espacio-reservas">
             <h2 class="sub-tit"><i class="icon-medical-stethoscope esp-icono-bio"></i>SALUD</h2>
             <div class="reserva-salud">
@@ -398,7 +398,7 @@
               <p class="texto-salud-reserva">La gestión de la agenda es responsabilidad del administrador del perfil, por lo tanto no nos hacemos responsables de la reserva.</p>
             </div>
           </div>
-
+ -->
 
           @if($perfil->seguridad)
           <div class="espacio-reservas">
@@ -427,7 +427,7 @@
 
                   </div> 
                 @elseif (Auth::user()->idrol == 3)
-                    <mensajes-profesional-front :apodo-data="{{json_encode($perfil->apodo)}}"></mensajes-profesional-front> 
+                    <mensajes-profesional-front v-bind:apodo="{{json_encode($perfil->apodo)}}" v-bind:basepath="{{ json_encode(url('/')) }}" ></mensajes-profesional-front> 
                 @endif
 
           @else

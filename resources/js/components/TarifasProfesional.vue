@@ -229,7 +229,7 @@
 
                   let me = this;
 
-                  axios.get('/tarifas-profesional/listar').then(function (response) {
+                  axios.get('tarifas-profesional/listar').then(function (response) {
 
                       var respuesta= response.data;
                       me.arTarifas = respuesta.tarifas;
@@ -363,7 +363,7 @@
                     
                       if (result.value) {
 
-                        axios.delete('/tarifas-profesional/eliminar/' + data.id)
+                        axios.delete('tarifas-profesional/eliminar/' + data.id)
                           .then(function (response) {
 
                             me.$delete(me.arTarifas, index);

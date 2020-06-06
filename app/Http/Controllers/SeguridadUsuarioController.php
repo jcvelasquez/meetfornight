@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\SeguridadUsuario;
+use App\Usuario;
 use App\UsuarioExtras;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +16,9 @@ class SeguridadUsuarioController extends Controller
 
     public function __construct()
     {
-        $this->fotos_usuarios_path = public_path('fotos_usuarios');
+       $this->fotos_usuarios_path = public_path('fotos_usuarios');
+        //$this->fotos_usuarios_path = base_path('fotos_usuarios');
+        
 
         $this->middleware(['auth','verified']);
     }
@@ -32,9 +35,13 @@ class SeguridadUsuarioController extends Controller
         $idusuario = Auth::user()->id;
 
         $archivos = SeguridadUsuario::where("seguridad_usuario.idusuario","=",$idusuario)->get();
-        $extras = UsuarioExtras::where("usuarios_extras.idusuario","=",$idusuario)->first("seguridad","celular");
+        
+        $extras = UsuarioExtras::where("usuarios_extras.idusuario","=",$idusuario)
+                                ->join('usuarios', 'usuarios.id', '=', 'usuarios_extras.idusuario')
+                                ->select('usuarios.celular','usuarios_extras.seguridad')
+                                ->first();
 
-        return ["archivos" => $archivos, "seguridad" => $extras->seguridad];
+        return ["archivos" => $archivos, "seguridad" => $extras->seguridad , "celular" => $extras->celular, "ruta"  => $this->fotos_usuarios_path ];
 
 
     }
@@ -59,6 +66,27 @@ class SeguridadUsuarioController extends Controller
         $usuario->save();
  
         return ['mensaje' => 'Se elimino el archivo de su perfil de seguridad.'];
+
+
+    }
+
+    
+
+    //FUNCION PARA SUBIR LAS FOTOS DEL PROFESIONAL DESDE EL FORMULARIO DE CREAR CUENTA
+    public function actualizar(Request $request)
+    {
+
+        $idusuario = Auth::user()->id;
+
+        $extras = UsuarioExtras::where("idusuario", $idusuario)->first();
+        $extras->seguridad = 0;
+        $extras->save();
+
+        $usuario = Usuario::where("id", $idusuario)->first();
+        $usuario->celular = $request->celular;
+        $usuario->save();
+        
+        return [ 'status' =>  'success', 'mensaje' => 'Se actualizo correctamente'];
 
 
     }

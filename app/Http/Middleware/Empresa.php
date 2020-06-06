@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Auth;
+use Illuminate\Support\Facades\Auth; 
 
 
 class Empresa
@@ -18,11 +18,11 @@ class Empresa
     public function handle($request, Closure $next)
     {
         if (!Auth::check()) {
-            return redirect()->route('iniciar-sesion');
+            return redirect()->route('iniciar-sesion', app()->getLocale());
         }
 
         if (Auth::user()->idrol == 1) {
-            return redirect()->route('admin/dashboard');
+            return redirect()->route('admin/dashboard', app()->getLocale());
         }
 
         if (Auth::user()->idrol == 2) {
@@ -30,11 +30,11 @@ class Empresa
         }
  
         if (Auth::user()->idrol == 3) {
-            return redirect()->route('perfil-usuario');
+            return redirect()->route('perfil-usuario', app()->getLocale());
         }
         
         if (Auth::user()->idrol == 4) {
-            return redirect()->route('perfil-profesional');
+            return redirect()->route('perfil-profesional', app()->getLocale());
         }
 
     }

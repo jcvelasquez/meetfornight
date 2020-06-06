@@ -1037,6 +1037,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5c376f', end
 
     overflow: hidden;
 
+    cursor: pointer;
+
 }
 
 .item-chica img{
@@ -1080,15 +1082,20 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5c376f', end
 
 .item-chica:hover .triangulo{
 
-	border-right: 30px solid rgba(242, 15, 33, 0.8);
+	border-right: 30px solid #5b376f;
 
-    border-top: 30px solid rgba(242, 15, 33, 0.8);
+    border-top: 30px solid #5b376f;
 
     border-left: 30px solid transparent;
 
     border-bottom: 30px solid transparent;
 
 }
+
+.item-chica:hover .triangulo i {
+    color:#fff;
+}
+
 
 .item-chica .triangulo a i{
 
@@ -10312,7 +10319,7 @@ label.error { font-size: 12px; color:red; }
 
 .espacio-frecuencia { padding:20px 0; }
 
-.espacio-busqueda-edad { margin:20px 0; }
+.espacio-busqueda-edad { margin:20px 0 44px 0; }
 
 .modal-backdrop { z-index:1; }
 
@@ -10601,3 +10608,32 @@ article.blog_detalle .foto_blog { margin:15px 0; }
 
 .js-cookie-consent button { background:#5b376f; color: #fff; border: none; padding: 6px 15px; margin-left: 20px; border-radius: 10px; }
 
+.item-chica.es_booster {     
+    background: red;
+    border: 6px solid red; 
+}
+
+.item-chica .triangulo i {
+    position: absolute; 
+    top: -17px; 
+    right: -19px;
+    color:#5b376f;
+    -webkit-transition: all 2s;
+    -o-transition: all 2s;
+    transition: all 2s;
+}
+.item-chica .triangulo {
+    background: transparent;
+}
+.item-chica:hover .triangulo i { color:#fff; }
+
+.item-chica .triangulo:hover i { color:#fff; }
+
+.triangulo.es_favorito { 
+    border-right: 30px solid rgba(242, 15, 33, 0.8);
+    border-top: 30px solid rgba(242, 15, 33, 0.8); 
+}
+
+.triangulo.es_favorito i {  color:#fff;}
+
+.vue-slider-mark-label { color: #fff;}

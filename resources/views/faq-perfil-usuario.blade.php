@@ -4,6 +4,8 @@
     @include('header')
 
   <body>
+
+  <div id="widget"></div>
   
     @include('tops.top-free')
 

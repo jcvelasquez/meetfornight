@@ -31,7 +31,6 @@ class CreateUsuariosTable extends Migration
             $table->string('celular')->nullable();
             $table->enum('tipo_celular',['WHATSAPP','CELULAR']);
             $table->integer('estado');
-            $table->dateTime('fecha_booster')->nullable();	
             $table->timestamps();
 
             $table->foreign('idrol')->references('id')->on('roles');

@@ -327,7 +327,7 @@
             let me = this;
 
             axios
-              .get("/servicios-profesional/listar")
+              .get("servicios-profesional/listar")
               .then(function(response) {
                 var respuesta = response.data;
                 me.arServicios = respuesta.servicios;

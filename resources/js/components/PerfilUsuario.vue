@@ -9,9 +9,7 @@
         <div class="col-lg-6 col-sm-12">
           <input type="text" class="form-control espacio-campos" name="nombre" placeholder="Nombre *" v-model="nombre" />
         </div>
-        <div class="col-lg-6 col-sm-12">
-          <input type="text" class="form-control espacio-campos" name="celular" placeholder="Celular *" v-model="celular" />
-        </div>
+        
         <div class="col-lg-6 col-sm-12">
           <input type="text" class="form-control" v-model="apodo" id="apodo" name="apodo" placeholder="Apodo *" />
           <small id="emailHelp" class="form-text espacio-campos informativo" style="text-align:left;">El Apodo será el único dato personal que se visualizará en la web</small>
@@ -45,7 +43,7 @@
       </div>
       <div class="form-row">
             <div class="col-lg-6 col-sm-12">
-              <select type="text" class="form-control espacio-campos" name="idcountry" @change="cambiarPais()" v-model="idcountry">
+              <select type="text" class="form-control espacio-campos" name="idcountry" v-model="idcountry" disabled>
                 <option value="">Seleccione una nacionalidad</option>
                 <option value="205">España</option>
                 <option value="169">Panama</option> 
@@ -107,7 +105,6 @@ export default {
             apodo : '',
             email : '',
             password : '',
-            celular: '',
             confirmar_password : '',
             fecha_nacimiento : '',
             sexo : '',
@@ -142,7 +139,7 @@ export default {
             let me = this;
 
             // Make a request for a user with a given ID
-            axios.get('/perfil-usuario/editar')
+            axios.get('perfil-usuario/editar')
             .then(function (response) {
                 // handle success
 
@@ -153,7 +150,6 @@ export default {
                 me.email = usuario.email;
                 me.fecha_nacimiento = usuario.fecha_nacimiento;
                 me.sexo = usuario.sexo;
-                me.celular = usuario.celular;
                 me.idcountry = usuario.idcountry;
                 me.idstate = usuario.idstate;
                 me.idcity = usuario.idcity;
@@ -193,15 +189,13 @@ export default {
             let me = this;
 
             // Make a request for a user with a given ID
-            axios.put('/perfil-usuario/actualizar', {
+            axios.put('perfil-usuario/actualizar', {
               'nombre' : me.nombre,
               'apodo' : me.apodo,
               'password' : me.password,
               'fecha_nacimiento' : me.fecha_nacimiento,
               'sexo' : me.sexo,
-              'celular' : me.celular,
               'nacionalidad' : me.nacionalidad,
-              'idcountry' : me.idcountry,
               'idstate' : me.idstate,
               'idcity' : me.idcity              
             })

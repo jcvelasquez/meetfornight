@@ -8,9 +8,9 @@
       <div class="acceso-intranet">
         <div class="bg-img-acceso bg-persona"></div>
         <div class="espacio-acceso-intranet">
-          <div class="accesos-derecha"><a href="/"><img src="../../img/logo-blanco-intranet.png"></a></div>
+          <div class="accesos-derecha"><a href="{{ route('home', app()->getLocale()) }}"><img src="{{asset('img/logo-blanco-intranet.png')}}"></a></div>
 
-                <form class="intranet-accesos" method="POST" action="{{ route('password.update') }}">
+                <form class="intranet-accesos" method="POST" action="{{ route('password.update', app()->getLocale() ) }}">
                     @csrf
 
                     <input type="hidden" name="token" value="{{ $token }}">

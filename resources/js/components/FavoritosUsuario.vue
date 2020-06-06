@@ -21,22 +21,22 @@
                              <h3 v-text="profesional.apodo"></h3>
                             <h4 v-text="profesional.ubicacion_edad"></h4>
                             <h5 v-text="profesional.precio"></h5> 
-                            <span>
+                           <!--  <span>
                             <i class="icon-star"></i>
                             <i class="icon-star"></i>
                             <i class="icon-star"></i>
                             <i class="icon-star"></i>
                             <i class="icon-star"></i>
-                            </span>
+                            </span> -->
                             <a :href="'perfil/' + profesional.apodo" target="_blank">VER PERFIL</a>
                             
                         </div>
-                        <img :src="'fotos_profesionales/' + profesional.url_foto" class="img-responsive" />
+                        <img :src="'/fotos_profesionales/' + profesional.url_foto" class="img-responsive" />
                     </div>
                 </div>
             </div>
             
-            <nav>
+            <nav v-show=" arFavoritos.length > 31">
                 <ul class="pagination ir-derecha paginador-meet">
                     <li class="page-item" v-if="pagination.current_page > 1">
                         <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1)">Anterior</a>

@@ -184,7 +184,7 @@
 
                   let me = this;
 
-                  axios.get('/reservas-profesional/listar').then(function (response) {
+                  axios.get('reservas-profesional/listar').then(function (response) {
 
                       var respuesta= response.data;
                       me.arReservas = respuesta.reservas;

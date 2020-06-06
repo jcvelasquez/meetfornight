@@ -4,6 +4,8 @@
     @include('header')
 
   <body>
+
+  <div id="widget"></div>
   
     @include('tops.top-free')
 
@@ -144,6 +146,8 @@
   @include('footers.footer-free')
 
   @include('modal')
+
+
 
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('js/meetfornight.js') }}"></script>

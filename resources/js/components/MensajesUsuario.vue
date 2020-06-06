@@ -63,6 +63,19 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="form-row item-respuesta"> 
+                                    <div class="col-lg-12 col-sm-12  datos-mensaje">
+                                         <span class="fecha"  style="float:right;">{{mensaje.enviado_el}}</span>
+                                        <h6>{{mensaje.nombre}}</h6>
+                                       
+                                        <div class="clear"></div>
+                                        <div class="mensaje">
+                                            <p>{{mensaje.mensaje}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </td>
                         </tr>
                     </template>
@@ -88,6 +101,7 @@
 
 <script>
     export default {
+        props: ['basepath'],
         data(){
             return {
                 nombre: "",
@@ -112,7 +126,7 @@
 
                   let me = this;
 
-                  axios.get('/mensajes-usuario/listar').then(function (response) {
+                  axios.get( me.basepath + '/' + me.$locale + '/mensajes-usuario/listar').then(function (response) {
 
                       var respuesta= response.data;
                       me.arMensajes = respuesta.mensajes;
@@ -141,7 +155,7 @@
                     
                       if (result.value) {
 
-                            axios.post('/mensajes-profesional/responder', {
+                            axios.post( me.basepath + '/' + me.$locale + '/mensajes-profesional/responder', {
                                 'parent_id' : mensaje.id,
                                 'idprofesional' : mensaje.idprofesional,
                                 'idusuario' : mensaje.idprofesional,
@@ -180,7 +194,7 @@
                     
                       if (result.value) {
 
-                            axios.post('/mensajes-profesional/eliminar', {
+                            axios.post( me.basepath + '/' + me.$locale + '/mensajes-profesional/eliminar', {
                                 'id' : mensaje.id
                             }).then(function (response) {
 

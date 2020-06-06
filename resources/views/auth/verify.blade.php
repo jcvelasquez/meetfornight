@@ -9,7 +9,7 @@
       <div class="acceso-intranet">
         <div class="bg-img-acceso bg-persona"></div>
         <div class="espacio-acceso-intranet">
-          <div class="accesos-derecha"><a href="index-free.php"><img src="../img/logo-blanco-intranet.png"></a></div>
+          <div class="accesos-derecha"><a href="{{ route('home', app()->getLocale()) }}"><img src="{{asset('img/logo-blanco-intranet.png')}}"></a></div>
 
           <form class="intranet-accesos" action="#" method="POST">
             @csrf
@@ -26,7 +26,7 @@
                 @endif
 
                 {{ __('Antes de ingresar a tu perfil, debes confirmar tu correo electrónico con el enlace de verificación que se envió a tu bandeja.') }}
-                {{ __('Si no recibiste el email') }}, <a class="enlace_verificacion" href="{{ route('verification.reenviar') }}">{{ __('haz clic aquí para recibir un nuevo código') }}</a>.
+                {{ __('Si no recibiste el email') }}, <a class="enlace_verificacion" href="{{ route('verification.reenviar',  app()->getLocale()) }}">{{ __('haz clic aquí para recibir un nuevo código') }}</a>.
 
             </div>
           </form>

@@ -6,6 +6,7 @@ use App\Categorias;
 use App\CategoriasProfesional;
 use App\FotoProfesional;
 use App\BoosterCobrado;
+use App\FavoritoUsuario;
 use App\Usuario;
 use App\Rol;
 use App\Planes;
@@ -16,6 +17,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Collection;
 use Carbon\Carbon;
 use Hash;
+use Illuminate\Database\Eloquent\Model;
 
 class HomeController extends Controller
 {
@@ -33,16 +35,39 @@ class HomeController extends Controller
     private $pene;
     private $corte;
     //FILTROS DE BUSQUEDA ARRAY
-    private $categorias;
+    private $idcategoria;
     private $idiomas;
     private $edad;
     private $estatura;
     private $peso;
 
-    public function __construct() 
+    private $idcountry;
+    private $idstate;
+    private $idcity;
+    private $favoritos;
+
+
+    private $boosterstop;
+
+    /*public function __construct(string $locale = app()->getLocale(), $favoritos = array()) 
     {
         $this->fotos_profesional_path = public_path('fotos_profesionales');
-    }
+        $this->favoritos = $favoritos;
+
+        switch( $locale ){
+
+            case "es" : $this->idcountry = 205; break;
+            case "pe" : $this->idcountry = 172; break;
+            case "pa" : $this->idcountry = 169; break;
+            default : $this->idcountry = 172;
+
+        }
+
+        //parent::construct($this->favoritos);
+
+
+
+    }*/
 
     public function mostrar(Request $request)
     {
@@ -65,148 +90,162 @@ class HomeController extends Controller
     }
 
 
-    public function listarProfesionales(Request $request)
+    public function listarEnHome(Request $request)
     {
+
+        switch( app()->getLocale() ){
+
+            case "es" : $this->idcountry = 205; break;
+            case "pe" : $this->idcountry = 172; break;
+            case "pa" : $this->idcountry = 169; break;
+            default : $this->idcountry = 172;
+
+        }
+
+
+        $this->favoritos = [];
        
+        //FILTROS DE BUSQUEDA
+        $this->orientacion = $request->orientacion;
+        $this->seguridad = $request->seguridad;
+        $this->pecho = $request->pecho;
+        //$this->idstate = $request->idstate;
+        //$this->idcity = $request->idcity;
+        $this->pene = $request->pene;
+        $this->corte = $request->corte;
+
+        //FILTROS DE BUSQUEDA ARRAY
+        $this->idcategoria = $request->idcategoria;
+        $this->edad = $request->edad;
+
+        if(is_null($this->edad)){
+            $this->edad = [18,40];
+        }
+
+        if(is_null($this->idcategoria)){
+            $this->idcategoria = 1;
+        }
+
+        $this->boosterstop = 3;
+
         
-       if(isset($request->categoria) && $request->categoria != 'all') { //CONSULTA PARA LAS CATEGORIAS
+        $query = " (select TIMESTAMPDIFF( YEAR, usuarios.fecha_nacimiento, CURDATE()) as edad, usuarios.id, UNIX_TIMESTAMP(usuarios.created_at) as uid, 0 as es_favorito, 0 as 'es_booster', categorias.nombre_categoria, usuarios.apodo, usuarios.fecha_nacimiento, foto_profesional.url_foto, usuarios.created_at from usuarios INNER JOIN foto_profesional ON usuarios.id = foto_profesional.idusuario INNER JOIN categorias_profesional ON usuarios.id = categorias_profesional.idprofesional INNER JOIN categorias on categorias_profesional.idcategoria = categorias.id where usuarios.idrol = 4 and categorias.id = ".$this->idcategoria." and foto_profesional.orden = 0 and usuarios.idcountry = ".$this->idcountry. " and TIMESTAMPDIFF( YEAR, usuarios.fecha_nacimiento, CURDATE()) between ".$this->edad[0]." and ".$this->edad[1]; 
+        
+        $query .= " union all ";
+        
+        $query .= " select TIMESTAMPDIFF( YEAR, usuarios.fecha_nacimiento, CURDATE()) as edad, usuarios.id, UNIX_TIMESTAMP(booster_cobrados_profesional.created_at) as uid, 0 as es_favorito, 1 as 'es_booster', categorias.nombre_categoria, usuarios.apodo, usuarios.fecha_nacimiento, foto_profesional.url_foto, booster_cobrados_profesional.created_at from booster_cobrados_profesional INNER JOIN usuarios on usuarios.id = booster_cobrados_profesional.idprofesional INNER JOIN foto_profesional ON booster_cobrados_profesional.idprofesional = foto_profesional.idusuario INNER JOIN categorias ON booster_cobrados_profesional.idcategoria = categorias.id where usuarios.idrol = 4 and categorias.id = ".$this->idcategoria." and foto_profesional.orden = 0 and booster_cobrados_profesional.created_at >= '".Carbon::now()->subDays($this->boosterstop)->format("Y-m-d H:i:s")."' and usuarios.idcountry = ".$this->idcountry." and TIMESTAMPDIFF( YEAR, usuarios.fecha_nacimiento, CURDATE()) between ".$this->edad[0]." and ".$this->edad[1]." ) AS VIEW_RESULT ORDER BY created_at DESC";
 
-            /*$categoria = Categorias::select('id')->where('nombre_categoria', '=', $request->categoria)->firstOrFail();       
+        $resultados = DB::table( DB::raw($query) )->paginate(32);
+
+        
+        if(Auth::user()){
+
+            $idusuario = Auth::user()->id;
             
-            //CONSULTA DE LOS REGISTRADOS
-            $usuarios = CategoriasProfesional::join('usuarios','usuarios.id','=','categorias_profesional.idprofesional')
-                                ->join('foto_profesional','categorias_profesional.idprofesional','=','foto_profesional.idusuario')
-                                ->select('usuarios.apodo','usuarios.fecha_nacimiento','foto_profesional.url_foto','usuarios.created_at')
-                                ->where('categorias_profesional.idcategoria', '=', $categoria->id)
-                                ->where('usuarios.idrol', '=', 4 )
-                                ->where('foto_profesional.orden', '=', 0)
-                                ->orderBy('usuarios.created_at','desc')
-                                ->paginate(32);                                          
+            $this->favoritos = FavoritoUsuario::where('idusuario', '=',$idusuario)->pluck('idprofesional')->toArray();
 
-            $usuarios->makeHidden(['es_marcado']);
+            foreach($resultados as $result){
 
+                if($result->es_booster == 0 && in_array($result->id, $this->favoritos) ){
+                    $result->es_favorito = 1;
+                }
+            }
 
-            //CONSULTA DE LOS BOOSTER
-            $boosters = BoosterCobrado::join('usuarios','usuarios.id','=','booster_cobrados_profesional.idprofesional')
-                                ->join('foto_profesional','booster_cobrados_profesional.idprofesional','=','foto_profesional.idusuario')
-                                ->select('usuarios.apodo','usuarios.fecha_nacimiento','foto_profesional.url_foto','booster_cobrados_profesional.created_at')
-                                ->where('booster_cobrados_profesional.idcategoria', '=', $categoria->id)
-                                ->where('usuarios.idrol', '=', 4 )
-                                ->where('foto_profesional.orden', '=', 0)
-                                ->orderBy('booster_cobrados_profesional.created_at','desc')
-                                ->get();     
+        }
 
-            $boosters->makeHidden(['fecha','hora']);
-
-
-            //UNION DE CONSULTAS
-            $todos = $usuarios->concat($boosters);
-
-            $ordenados = $todos->values()->sortByDesc('created_at');
-
-            $ordenados = $ordenados->values()->all(); */
-
-
-       }else{ //CONSULTA PARA EL HOME PAGE
-
-            //FILTROS DE BUSQUEDA
-            $this->orientacion = $request->orientacion;
-            $this->nacionalidad = $request->nacionalidad;
-            $this->seguridad = $request->seguridad;
-            $this->nombre = $request->nombre;
-            $this->apodo = $request->apodo;
-            $this->ciudad = $request->ciudad;
-            $this->pecho = $request->pecho;
-            $this->distrito = $request->distrito;
-            $this->pene = $request->pene;
-            $this->corte = $request->corte;
-
-            //FILTROS DE BUSQUEDA ARRAY
-            $this->categorias = $request->categorias;
-            $this->idiomas = $request->idiomas;
-            $this->edad = $request->edad;
-            $this->estatura = $request->estatura;
-            $this->peso = $request->peso;
-
-            //$request->categorias
-
-            //CONSULTA DE LOS BOOSTER
-            /*$boosters = BoosterCobrado::join('usuarios','usuarios.id','=','booster_cobrados_profesional.idprofesional')
-                                ->join('foto_profesional','booster_cobrados_profesional.idprofesional','=','foto_profesional.idusuario')
-                                ->join('categorias','booster_cobrados_profesional.idcategoria','=','categorias.id')
-                                ->select('categorias.nombre_categoria','usuarios.apodo','usuarios.fecha_nacimiento','foto_profesional.url_foto','booster_cobrados_profesional.created_at')
-                                ->where('usuarios.idrol', '=', 4 )
-                                ->where('foto_profesional.orden', '=', 0)
-                                ->when((isset($this->categorias) && count($this->categorias) > 0),
-                                    function($q){
-                                        return $q->whereIn('booster_cobrados_profesional.idcategoria', $this->categorias);
-                                    }
-                                )
-                                ->when((isset($this->edad) && count($this->edad) > 0),
-                                    function($q){
-                                        
-                                        $desde = date('Y', strtotime('-'.$this->edad[1].'years'));
-                                        $hasta = date('Y', strtotime('-'.$this->edad[0].'years'));
-
-                                        return $q->whereYear('usuarios.fecha_nacimiento','>=',$desde)
-                                                  ->whereYear('usuarios.fecha_nacimiento','<=',$hasta);
-
-                                    }
-                                )
-                                ->orderBy('booster_cobrados_profesional.created_at','desc');
-
-*/
-            //CONSULTA DE LOS REGISTRADOS
-            $usuarios = CategoriasProfesional::join('usuarios','usuarios.id','=','categorias_profesional.idprofesional')
-                                ->join('foto_profesional','categorias_profesional.idprofesional','=','foto_profesional.idusuario')
-                                ->join('categorias','categorias.id','=','categorias_profesional.idcategoria')
-                                ->select('categorias.nombre_categoria','usuarios.apodo','usuarios.fecha_nacimiento','foto_profesional.url_foto','usuarios.created_at')
-                                ->where('usuarios.idrol', '=', 4 )
-                                ->where('foto_profesional.orden', '=', 0)
-                                ->when((isset($this->categorias) && count($this->categorias) > 0),
-                                    function($q){
-                                        return $q->whereIn('categorias_profesional.idcategoria', $this->categorias);
-                                    }
-                                )
-                                ->when((isset($this->edad) && count($this->edad) > 0),
-                                    function($q){
-
-
-                                        $desde = date('Y', strtotime('-'.$this->edad[1].'years'));
-                                        $hasta = date('Y', strtotime('-'.$this->edad[0].'years'));
-
-
-                                        return $q->whereYear('usuarios.fecha_nacimiento','>=',$desde)
-                                                  ->whereYear('usuarios.fecha_nacimiento','<=',$hasta);
-
-                                    }
-                                )
-                                ->orderBy('usuarios.created_at','desc')
-                                //->union($boosters)
-                                ->get(32);                                          
-
-            $usuarios->makeHidden(['es_marcado']);
-
-            $ordenados = $usuarios->values()->sortByDesc('created_at');
-
-            $ordenados = $ordenados->values()->all();
-
-       }       
+  
 
         return [
             'pagination' => [
-                'total'        => $usuarios->total(),
-                'current_page' => $usuarios->currentPage(),
-                'per_page'     => $usuarios->perPage(),
-                'last_page'    => $usuarios->lastPage(),
-                'from'         => $usuarios->firstItem(),
-                'to'           => $usuarios->lastItem(),
+                'total'        => $resultados->total(),
+                'current_page' => $resultados->currentPage(),
+                'per_page'     => $resultados->perPage(),
+                'last_page'    => $resultados->lastPage(),
+                'from'         => $resultados->firstItem(),
+                'to'           => $resultados->lastItem(),
             ],
-            'arUsuarios' => $ordenados,
-            'path' => $this->fotos_profesional_path
+            'arUsuarios' => $resultados->values()
         ];
 
     }
+
+    
+
+    public function listarEnCategoria(Request $request)
+    {
+
+        switch( app()->getLocale() ){
+
+            case "es" : $this->idcountry = 205; break;
+            case "pe" : $this->idcountry = 172; break;
+            case "pa" : $this->idcountry = 169; break;
+            default : $this->idcountry = 172;
+
+        }
+
+
+        $this->favoritos = [];
+            
+        if(isset($request->categoria) && $request->categoria != 'all') { //CONSULTA PARA LAS CATEGORIAS
+
+                $categoria = Categorias::select('id')->where('nombre_categoria', '=', $request->categoria)->firstOrFail();       
+
+                //FILTROS DE BUSQUEDA ARRAY
+                $this->idcategoria = $categoria->id;
+
+                if(is_null($this->edad)){
+                    $this->edad = [18,40];
+                }
+
+                if(is_null($this->idcategoria)){
+                    $this->idcategoria = 1;
+                }
+
+                $this->boosterstop = 3;
+
+                $query = " (select TIMESTAMPDIFF( YEAR, usuarios.fecha_nacimiento, CURDATE()) as edad, usuarios.id, UNIX_TIMESTAMP(usuarios.created_at) as uid, 0 as es_favorito, 0 as 'es_booster', categorias.nombre_categoria, usuarios.apodo, usuarios.fecha_nacimiento, foto_profesional.url_foto, usuarios.created_at from usuarios INNER JOIN foto_profesional ON usuarios.id = foto_profesional.idusuario INNER JOIN categorias_profesional ON usuarios.id = categorias_profesional.idprofesional INNER JOIN categorias on categorias_profesional.idcategoria = categorias.id where usuarios.idrol = 4 and categorias.id = ".$this->idcategoria." and foto_profesional.orden = 0 and usuarios.idcountry = ".$this->idcountry. " and TIMESTAMPDIFF( YEAR, usuarios.fecha_nacimiento, CURDATE()) between ".$this->edad[0]." and ".$this->edad[1]; 
+                
+                $query .= " union all ";
+                
+                $query .= " select TIMESTAMPDIFF( YEAR, usuarios.fecha_nacimiento, CURDATE()) as edad, usuarios.id, UNIX_TIMESTAMP(booster_cobrados_profesional.created_at) as uid, 0 as es_favorito, 1 as 'es_booster', categorias.nombre_categoria, usuarios.apodo, usuarios.fecha_nacimiento, foto_profesional.url_foto, booster_cobrados_profesional.created_at from booster_cobrados_profesional INNER JOIN usuarios on usuarios.id = booster_cobrados_profesional.idprofesional INNER JOIN foto_profesional ON booster_cobrados_profesional.idprofesional = foto_profesional.idusuario INNER JOIN categorias ON booster_cobrados_profesional.idcategoria = categorias.id where usuarios.idrol = 4 and categorias.id = ".$this->idcategoria." and foto_profesional.orden = 0 and booster_cobrados_profesional.created_at >= '".Carbon::now()->subDays($this->boosterstop)->format("Y-m-d H:i:s")."' and usuarios.idcountry = ".$this->idcountry." and TIMESTAMPDIFF( YEAR, usuarios.fecha_nacimiento, CURDATE()) between ".$this->edad[0]." and ".$this->edad[1]." ) AS VIEW_RESULT ORDER BY created_at DESC";
+
+                $resultados = DB::table( DB::raw($query) )->paginate(32);
+
+            
+                if(Auth::user()){
+
+                    $idusuario = Auth::user()->id;
+                    
+                    $this->favoritos = FavoritoUsuario::where('idusuario', '=',$idusuario)->pluck('idprofesional')->toArray();
+
+                    foreach($resultados as $result){
+
+                        if($result->es_booster == 0 && in_array($result->id, $this->favoritos) ){
+                            $result->es_favorito = 1;
+                        }
+                    }
+
+                }
+
+                
+
+            return [
+                'pagination' => [
+                    'total'        => $resultados->total(),
+                    'current_page' => $resultados->currentPage(),
+                    'per_page'     => $resultados->perPage(),
+                    'last_page'    => $resultados->lastPage(),
+                    'from'         => $resultados->firstItem(),
+                    'to'           => $resultados->lastItem(),
+                ],
+                'arUsuarios' => $resultados->values()
+            ];
+
+        }
+        //FIN DEL IF
+
+    }
+
 
 
 }

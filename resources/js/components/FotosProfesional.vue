@@ -65,7 +65,7 @@
 
                 <div class="img-cargada-izq">
                   <i class="fa fa-arrows-v" aria-hidden="true"></i>
-                  <img :src=" 'fotos_profesionales/' + foto.url_foto" style="margin-left:15px;" />
+                  <img :src=" '/fotos_profesionales/' + foto.url_foto" style="margin-left:15px;" />
                   <div class="img-cargada-datos">
                     <span class="nom-img" v-text="foto.url_foto"></span>
                     <span class="peso-img">234 KB</span>
@@ -113,7 +113,7 @@ export default {
             me.arFotos.find(foto => foto.id === item.id).orden = index;
         })
 
-        axios.post('/fotos-profesional/ordenar', {
+        axios.post('fotos-profesional/ordenar', {
             'idprofesional': me.$idprofesional,
             'fotos' : me.arFotos
         } ).then(function (response) {
@@ -127,7 +127,7 @@ export default {
 
        let me = this;
 
-        var DropFotos = new Dropzone("#dropzone_fotos", { url: "/fotos-profesional/subir", 
+        var DropFotos = new Dropzone("#dropzone_fotos", { url: "fotos-profesional/subir", 
                         acceptedFiles: ".jpeg,.jpg,.png,.gif",
                         clickable: "#dropzone_fotos button", 
                         maxFiles: 5, 
@@ -151,7 +151,7 @@ export default {
 
         let me = this;
 
-        axios.get('/fotos-profesional/listar').then(function (response) {
+        axios.get('fotos-profesional/listar').then(function (response) {
 
             var respuesta= response.data;
             me.arFotos = respuesta.fotos;
@@ -174,7 +174,7 @@ export default {
                     
                       if (result.value) {
 
-                             axios.post('/fotos-profesional/eliminar', {
+                             axios.post('fotos-profesional/eliminar', {
                                   'idprofesional': me.$idprofesional,
                                   'url' : item.url_foto,
                                   'idfoto' : item.id

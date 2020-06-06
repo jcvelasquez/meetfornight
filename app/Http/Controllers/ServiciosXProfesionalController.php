@@ -23,38 +23,4 @@ class ServiciosXProfesionalController extends Controller
     }
 
 
-    public function create()
-    {
-        //
-    }
-
-
-    public function store(Request $request)
-    {
-        //
-    }
-
-
-    public function show(ServiciosXProfesional $serviciosXProfesional)
-    {
-        //
-    }
-
- 
-    public function edit(ServiciosXProfesional $serviciosXProfesional)
-    {
-        //
-    }
-
-
-    public function update(Request $request, ServiciosXProfesional $serviciosXProfesional)
-    {
-        //
-    }
-
-
-    public function destroy(ServiciosXProfesional $serviciosXProfesional)
-    {
-        //
-    }
 }

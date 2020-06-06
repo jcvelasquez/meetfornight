@@ -35,7 +35,14 @@ class SetLocale
 
         */
 
-        app()->setLocale($request->segment(1));
+        if (!app()->getLocale()) {
+            return redirect('/es');
+        }else{
+            app()->setLocale($request->segment(1));
+        }
+
+        
+
         return $next($request);
 
    }
