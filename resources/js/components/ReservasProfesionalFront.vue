@@ -134,8 +134,11 @@
     export default {
         props: ['apodo','basepath'],
         mounted() {
-            this.mostrarTarifas();  
+
+            this.mostrarTarifas();
+            
             var currentDateWithFormat = new Date().toJSON().slice(0,10).replace(/-/g,'-');
+            
             this.mostrarHorarios(currentDateWithFormat)
 
         },
@@ -235,6 +238,8 @@
 
                   let me = this;
 
+                  
+
                   axios.get(  me.basepath + "/" + me.$locale + '/perfil/' + me.apodo + '/tarifas'  ).then(function (response) {
 
                       var respuesta= response.data;
@@ -251,7 +256,7 @@
                 me.arHorariosGenerados = [];
                 me.horarioSeleccionado = [];
 
-                axios.post(  me.basepath + "/" + me.$locale + '/perfil/' + me.apodo +'/horarios', {
+                axios.post( me.basepath + "/" + me.$locale + '/perfil/' + me.apodo +'/horarios', {
                     'apodo': me.apodo,
                     'tiempo': me.tiempo,
                     'fechaselec' : fecha

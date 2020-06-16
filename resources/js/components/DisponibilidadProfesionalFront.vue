@@ -67,6 +67,7 @@
             }
         },
         methods:{
+            
             estaDisponible(dispo) {
 
                 return dispo.idesde > 0 && dispo.ihasta > 0

@@ -42,7 +42,7 @@
               </div>
               <div class="form-row">
                 <div class="col-lg-6 col-sm-12">
-                  <select type="text" class="form-control espacio-campos" name="idcountry" v-model="idcountry">
+                  <select type="text" class="form-control espacio-campos" name="idcountry" v-model="idcountry" disabled>
                     <option value="">Seleccione una nacionalidad</option>
                     <option value="205">España</option>
                     <option value="169">Panama</option> 
@@ -51,8 +51,8 @@
                 </div>
                 <div class="col-lg-6 col-sm-12">
                   <select type="text" class="form-control espacio-campos" name="idstate" v-model="idstate">
-                    <option value="">Seleccione un departamento</option>
-                    <option v-for="(option, index) in arStates" :key="index" :value="option.id" :selected="option.id === idstate ? 'selected' : ''">{{ option.name }}</option>
+                    <option value="">{{labelState}}</option>
+                    <option v-for="(option, index) in arStates" :key="index" :value="option.id" :selected="option.id === idstate ? 'selected' : ''">{{ option.name_state }}</option>
 
                   </select>
                 </div>
@@ -60,8 +60,8 @@
             <div class="form-row"> 
               <div class="col-lg-6 col-sm-12">
                   <select type="text" class="form-control espacio-campos" name="idcity" v-model="idcity">
-                    <option value="">Seleccione un distrito</option>
-                    <option v-for="(option, index) in arCities" :key="index" :value="option.id" :selected="option.id === idcity ? 'selected' : ''">{{ option.name }}</option>
+                    <option value="">{{labelCity}}</option>
+                    <option v-for="(option, index) in arCities" :key="index" :value="option.id" :selected="option.id === idcity ? 'selected' : ''">{{ option.name_city }}</option>
                   </select>
               </div>
 
@@ -110,6 +110,8 @@ export default {
             idcountry : 0,
             idstate : 0,
             idcity : 0,
+            labelState: 'Selecciona un departamento',
+            labelCity: 'Selecciona un distrito',
             arCities: [],
             arStates : []
         }
@@ -157,6 +159,16 @@ export default {
 
                 me.arStates = usuario.states;
                 me.arCities = usuario.cities;
+
+                if(me.idcountry == 205) 
+                  me.labelState = 'Selecciona una provincia';
+                else
+                  me.labelState = 'Selecciona un departamento';
+
+                if(me.idcountry == 205) 
+                  me.labelCity = 'Selecciona una ciudad';
+                else
+                  me.labelCity = 'Selecciona una provincia';
                
 
             })

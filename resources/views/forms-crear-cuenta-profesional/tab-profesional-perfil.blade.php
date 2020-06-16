@@ -278,8 +278,8 @@
       <h5 class="formulario-titulos">DESCRIPCIÓN:</h5>
       <div class="form-row espacio-campos">
         <div class="col-lg-12 col-sm-12">
-          <textarea type="text" rows="5" class="form-control" name="descripcion"></textarea>
-          <small id="emailHelp" class="form-text text-muted espacio-campos informativo">1000 caracteres como máximo</small>
+          <textarea type="text" rows="5" class="form-control" name="descripcion" maxlength="1000" id="descripcion" data-length=1000></textarea>
+          <small id="descripcionHelp" class="form-text text-muted espacio-campos informativo">1000 caracteres como máximo</small>
         </div>
       </div>
     </div>

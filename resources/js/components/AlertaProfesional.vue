@@ -53,7 +53,7 @@
     </div>
 
     <div class="form-row espacio-campos-big">
-      <button type="button" @click="registrarAlerta()" class="btn btn-primary btn-busqueda-detallada">BUSCAR / AGREGAR</button>
+      <button type="button" @click="registrarAlerta()" class="btn btn-primary btn-busqueda-detallada">rEGISTRAR ALERTA</button>
     </div>
     
 

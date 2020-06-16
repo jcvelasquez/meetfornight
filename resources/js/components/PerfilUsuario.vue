@@ -52,7 +52,7 @@
             </div>
             <div class="col-lg-6 col-sm-12">
               <select type="text" class="form-control espacio-campos" name="idstate" @change="cambiarDepartamento()" v-model="idstate">
-                <option value="">Seleccione un departamento</option>
+                <option value=""> {{labelState}}</option>
                 <option v-for="(option, index) in arStates" :key="index" :value="option.id" :selected="option.id === idstate ? 'selected' : ''">{{ option.name_state }}</option>
 
               </select>
@@ -61,7 +61,7 @@
         <div class="form-row"> 
           <div class="col-lg-6 col-sm-12">
               <select type="text" class="form-control espacio-campos" name="idcity" v-model="idcity">
-                <option value="">Seleccione un distrito</option>
+                <option value=""> {{labelCity}}</option>
                 <option v-for="(option, index) in arCities" :key="index" :value="option.id" :selected="option.id === idcity ? 'selected' : ''">{{ option.name_city }}</option>
               </select>
           </div>
@@ -105,6 +105,8 @@ export default {
             apodo : '',
             email : '',
             password : '',
+            labelState: 'Selecciona un departamento',
+            labelCity: 'Selecciona un distrito',
             confirmar_password : '',
             fecha_nacimiento : '',
             sexo : '',
@@ -156,8 +158,17 @@ export default {
                 me.arStates = usuario.states;
                 me.arCities = usuario.cities;
 
-                console.log(response.data);
+                if(me.idcountry == 205) 
+                  me.labelState = 'Selecciona una provincia';
+                else
+                  me.labelState = 'Selecciona un departamento';
 
+                if(me.idcountry == 205) 
+                  me.labelCity = 'Selecciona una ciudad';
+                else
+                  me.labelCity = 'Selecciona una provincia';
+
+              
             })
             .catch(function (error) {
                 // handle error
@@ -196,6 +207,7 @@ export default {
               'fecha_nacimiento' : me.fecha_nacimiento,
               'sexo' : me.sexo,
               'nacionalidad' : me.nacionalidad,
+              'idcountry' : me.idcountry,
               'idstate' : me.idstate,
               'idcity' : me.idcity              
             })
@@ -212,6 +224,17 @@ export default {
         cambiarPais(){
                 
                 let me = this;
+
+                if(me.idcountry == 205) 
+                  me.labelState = 'Selecciona una provincia';
+                else
+                  me.labelState = 'Selecciona un departamento';
+
+                if(me.idcountry == 205) 
+                  me.labelCity = 'Selecciona una ciudad';
+                else
+                  me.labelCity = 'Selecciona una provincia';
+
 
                 axios.post('seleccionar-states', {
                     'idcountry' : me.idcountry

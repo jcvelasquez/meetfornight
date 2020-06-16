@@ -341,7 +341,7 @@
                         </div>
                     </div> 
                 @elseif (Auth::user()->idrol == 3)
-                    <reservas-profesional-front v-bind:apodo="{{json_encode($perfil->apodo)}}" v-bind:basepath="{{ json_encode(url('/')) }}" ></reservas-profesional-front>
+                    <reservas-profesional-front v-bind:apodo="{{ json_encode($perfil->apodo) }}" v-bind:basepath="{{  json_encode( url('/') ) }}" ></reservas-profesional-front>
                 @endif
 
              @else
@@ -420,7 +420,7 @@
 
                       <div class="form-row" style="margin-top:20px;">
                           <div class="col-lg-12 col-sm-12">
-                            <p>Para enviar un mensaje al profesional, debes iniciar sesión como un usuario. Si no tienes una cuenta de usuario, primero debes <a href="{{ route('cerrar-sesion') }}">cerrar la sesión</a>, y luego <a href="{{url('crear-cuenta')}}">registrarse desde aquí</a>.
+                            <p>Para enviar un mensaje al profesional, debes iniciar sesión como un usuario. Si no tienes una cuenta de usuario, primero debes <a href="{{ route('cerrar-sesion', app()->getLocale() ) }}">cerrar la sesión</a>, y luego <a href="{{ route('crear-cuenta', app()->getLocale() )}}">registrarse desde aquí</a>.
                             </p>
                           </div>
                       </div>

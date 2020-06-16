@@ -92,6 +92,7 @@ Route::group(['prefix' => '{locale}', 'where' => ['locale' => '(es|pe|pa)'], 'mi
         //PARA LAS BUSQUEDAS
         Route::get('categorias/listar', 'CategoriasController@listar');
         Route::get('idiomas/listar', 'IdiomasController@listar');
+        
 
 
         Route::group(['middleware'=>['auth','verified']],function(){
@@ -132,6 +133,8 @@ Route::group(['prefix' => '{locale}', 'where' => ['locale' => '(es|pe|pa)'], 'mi
                         Route::post('seguridad-usuario/eliminar', 'SeguridadUsuarioController@eliminar');
                         Route::put('seguridad-usuario/actualizar', 'SeguridadUsuarioController@actualizar');
                         Route::post('seguridad-usuario/subir', 'SeguridadUsuarioController@subir');
+
+                        
         
                 });
 
@@ -142,13 +145,18 @@ Route::group(['prefix' => '{locale}', 'where' => ['locale' => '(es|pe|pa)'], 'mi
                         Route::get('perfil-empresa', 'UsuarioController@mostrarPerfilEmpresaLogueado')->name('perfil-empresa');
                         Route::get('perfil-empresa/editar', 'UsuarioController@editarDataEmpresa');
                         Route::put('perfil-empresa/actualizar', 'UsuarioController@actualizarDataEmpresa');
-                        Route::get('banners-empresa', 'BannerEmpresaController@mostrar');
+
+                        //BANNERS
+                        Route::get('banners-empresa', 'BannerEmpresaController@mostrar')->name('banners-empresa');
                         Route::get('banners-empresa/listar', 'BannerEmpresaController@listar');
                         Route::post('banners-empresa/eliminar', 'BannerEmpresaController@eliminar');
                         Route::post('banners-empresa/subir', 'BannerEmpresaController@subir');
-                        Route::get('planes-empresa', 'PlanesEmpresaController@mostrar');
+
+                        Route::get('planes-empresa', 'PlanesEmpresaController@mostrar')->name('planes-empresa');
                         Route::get('planes-empresa/listar', 'PlanesEmpresaController@listar');
-                        Route::get('estadisticas-empresa', function () {  return view('forms-perfil-empresa.estadisticas-empresa');  });
+
+
+                        Route::get('estadisticas-empresa', function () {  return view('forms-perfil-empresa.estadisticas-empresa');  })->name('estadisticas-empresa');
 
                 });
 
@@ -157,23 +165,47 @@ Route::group(['prefix' => '{locale}', 'where' => ['locale' => '(es|pe|pa)'], 'mi
 
                         //ROUTES
                         Route::get('admin/dashboard', 'AdministradorController@mostrarDashboard')->name('admin/dashboard');
-                        Route::get('admin/usuarios', 'AdministradorController@mostrarUsuarios');
-                        Route::get('admin/alertas', 'AdministradorController@mostrarAlertas');
-                        Route::get('admin/idiomas', 'AdministradorController@mostrarIdiomas');
-                        Route::get('admin/categorias', 'AdministradorController@mostrarCategorias');
-                        Route::get('admin/planes', 'AdministradorController@mostrarPlanes');
                         
-                        //API REST
-                        Route::post('admin/usuarios/listar', 'AdministradorController@listarProfesionalesAdmin');
+                        Route::get('admin/alertas', 'AdministradorController@mostrarAlertas')->name('admin/alertas');
+                        Route::get('admin/planes', 'AdministradorController@mostrarPlanes')->name('admin/planes');
+                        
                         Route::post('admin/mensajes/listar', 'UsuarioController@listarProfesionalesAdmin');
                         Route::post('admin/alertas/listar', 'AlertaProfesionalController@listarAlertasAdmin');
-                        Route::get('admin/idiomas/listar', 'IdiomasController@listar');
+
+                        //USUARIOS
+                        Route::get('admin/usuarios', 'AdministradorController@mostrarUsuarios')->name('admin/usuarios');
+                        Route::post('admin/usuarios/listar', 'AdministradorController@listarUsuariosAdmin');
+
+                        //PROFESIONALES
+                        Route::get('admin/profesionales', 'AdministradorController@mostrarProfesionales')->name('admin/profesionales');
+                        Route::post('admin/profesionales/listar', 'AdministradorController@listarProfesionalesAdmin');
+
+                        //CATEGORIAS
+                        Route::get('admin/blog', 'AdministradorController@mostrarBlog')->name('admin/blog');
+                        Route::get('admin/blog/listar', 'BlogController@listar');
+
+                        
+   
+                        //CATEGORIAS
+                        Route::get('admin/categorias', 'AdministradorController@mostrarCategorias')->name('admin/categorias');
                         Route::get('admin/categorias/listar', 'CategoriasController@listar');
+                        Route::post('admin/categorias/grabar', 'CategoriasController@grabar');
+                        Route::post('admin/categorias/eliminar', 'CategoriasController@eliminar');
+
+                        //IDIOMAS
+                        Route::get('admin/idiomas', 'AdministradorController@mostrarIdiomas')->name('admin/idiomas');
+                        Route::get('admin/idiomas/listar', 'IdiomasController@listar');
+                        Route::post('admin/idiomas/grabar', 'IdiomasController@grabar');
+                        Route::post('admin/idiomas/eliminar', 'IdiomasController@eliminar');
 
                 });
 
 
                 Route::group(['middleware'=>['profesional']],function(){
+
+                        Route::get('chat', 'ChatsController@index');
+                        Route::get('messages', 'ChatsController@fetchMessages');
+                        Route::post('messages', 'ChatsController@sendMessage');
 
                         //URLS PARA EL PROFESIONAL
                         Route::get('perfil-profesional', 'UsuarioController@mostrarPerfilProfesionalLogueado')->name('perfil-profesional');

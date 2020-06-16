@@ -1,6 +1,49 @@
 //TEST
 
+
+
 $(document).ready(function(){
+
+
+    function checkTextAreaMaxLength(textBox, e) { 
+        
+          var maxLength = parseInt( $(textBox).data("length") );
+
+          var countChar = parseInt ( $(textBox).val().length );
+
+          var total = maxLength - countChar;
+          
+        
+          /*if (!checkSpecialKeys(e)) { 
+              if (textBox.value.length > maxLength - 1) textBox.value = textBox.value.substring(0, maxLength); 
+        } */
+
+        if(total>0){
+          $(".informativo").html( "Quedan " + total + " caracteres"); 
+          return true; 
+        }else{
+          return false; 
+        }
+        
+
+    } 
+
+    function checkSpecialKeys(e) { 
+
+        if (e.keyCode != 8 && e.keyCode != 46 && e.keyCode != 37 && e.keyCode != 38 && e.keyCode != 39 && e.keyCode != 40) 
+            return false; 
+        else 
+            return true; 
+
+    }
+
+  
+  $('#descripcion').on('keyup', function(event){
+
+    checkTextAreaMaxLength(this,event);
+
+
+  });
 
       dtTarifas = $('#tarifaxhoras').DataTable( {
           "paging":   false,

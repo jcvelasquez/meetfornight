@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Blog;
 use App\CategoriasProfesional;
 use App\DisponibilidadProfesional;
 use App\FotoProfesional;
@@ -23,38 +25,50 @@ class AdministradorController extends Controller
     public function __construct()
     {
         //$this->middleware(['auth','verified']);
-        $this->fotos_profesional_path = public_path('fotos-profesionales');
+        $this->fotos_profesional_path = public_path('fotos_profesionales');
     }
 
     //METODOS DEL ADMINISTRADOR
     public function mostrarUsuarios(Request $request)
     { 
-         return view('forms-administrador.usuarios');
+         return view('admin.usuarios');
+    }
+
+    //METODOS DEL ADMINISTRADOR
+    public function mostrarBlog(Request $request)
+    { 
+         return view('admin.blog');
+    }
+
+    //METODOS DEL ADMINISTRADOR
+    public function mostrarPRofesionales(Request $request)
+    { 
+         return view('admin.profesionales');
     }
 
     public function mostrarDashboard(Request $request)
     { 
-         return view('forms-administrador.dashboard');
+         return view('admin.main');
     }
 
     public function mostrarAlertas(Request $request)
     { 
-         return view('forms-administrador.alertas');
+         return view('admin.alertas');
     }
 
     public function mostrarIdiomas(Request $request)
     { 
-         return view('forms-administrador.idiomas');
+         return view('admin.idiomas');
     }
 
     public function mostrarCategorias(Request $request)
     { 
-         return view('forms-administrador.categorias');
+         return view('admin.categorias');
     }
 
     public function mostrarPlanes(Request $request)
     { 
-         return view('forms-administrador.planes');
+         return view('admin.planes');
     }
 
 
@@ -142,5 +156,38 @@ class AdministradorController extends Controller
         
 
     }
+
+    public function listarUsuariosAdmin(Request $request)
+    {
+        
+            //CONSULTA DE LOS REGISTRADOS
+
+            CategoriasProfesional::$withoutAppends = true;
+
+            $usuarios = Usuario::with('fotos')
+                                ->with('categorias')
+                                ->orderBy('usuarios.created_at','desc')
+                                ->paginate(20);    
+
+            $ordenados = $usuarios->values()->all();
+
+            return [
+                'pagination' => [
+                    'total'        => $usuarios->total(),
+                    'current_page' => $usuarios->currentPage(),
+                    'per_page'     => $usuarios->perPage(),
+                    'last_page'    => $usuarios->lastPage(),
+                    'from'         => $usuarios->firstItem(),
+                    'to'           => $usuarios->lastItem(),
+                ],
+                'arUsuarios' => $ordenados,
+                'path' => $this->fotos_profesional_path
+            ];
+        
+
+    }
+
+
+    
 
 }

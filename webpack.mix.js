@@ -37,6 +37,10 @@ mix.js(['resources/js/app.js'], 'public/js/app.js')
         'resources/css/jquery.timeselector.css',
         'resources/css/piwicho.css',
     ], 'public/css/meetfornight.css')
+    .styles([
+        'resources/css/material-dashboard.css',
+        'resources/css/administrador.css'
+    ], 'public/css/admin.css')
     .scripts([
         'resources/js/main.js',
         'resources/js/jquery.repeater.min.js',
@@ -53,4 +57,28 @@ mix.js(['resources/js/app.js'], 'public/js/app.js')
         'resources/js/jquery.timeselector.js',
         'resources/js/owl.carousel.min.js',
         'resources/js/bootstrap-datepicker.min.js'
-    ], 'public/js/meetfornight.js');
+    ], 'public/js/meetfornight.js')
+    .scripts([
+        'resources/js/core/jquery.min.js',
+        'resources/js/core/popper.min.js',
+        'resources/js/core/bootstrap-material-design.min.js',
+        'resources/js/plugins/perfect-scrollbar.jquery.min.js',
+        'resources/js/plugins/moment.min.js',
+        'resources/js/plugins/sweetalert2.js',
+        'resources/js/plugins/jquery.validate.min.js',
+        'resources/js/plugins/jquery.bootstrap-wizard.js',
+        'resources/js/plugins/bootstrap-selectpicker.js',
+        'resources/js/plugins/bootstrap-datetimepicker.min.js',
+        'resources/js/plugins/jquery.dataTables.min.js',
+        'resources/js/plugins/bootstrap-tagsinput.js',
+        'resources/js/plugins/jasny-bootstrap.min.js',
+        'resources/js/plugins/fullcalendar.min.js',
+        'resources/js/plugins/jquery-jvectormap.js',
+        'resources/js/plugins/nouislider.min.js',
+        'resources/js/plugins/arrive.min.js',
+        'resources/js/plugins/chartist.min.js',
+        'resources/js/plugins/bootstrap-notify.js',
+        'resources/js/material-dashboard.js',
+        'resources/js/demo.js'
+    ], 'public/js/admin.js');
+

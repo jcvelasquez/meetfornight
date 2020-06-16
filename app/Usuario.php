@@ -31,6 +31,8 @@ class Usuario extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
+    protected $primaryKey = 'id';
+
     //protected $appends = ['es_booster','uid','timestamp','fecha','hora'];
     protected $appends = ['es_booster'];
 
@@ -62,6 +64,11 @@ class Usuario extends Authenticatable implements MustVerifyEmail
     public function categorias(){
         return $this->hasMany('App\CategoriasProfesional', 'idprofesional', 'id')->join('categorias', 'categorias_profesional.idcategoria','=', 'categorias.id');
         //return $this->hasMany('App\CategoriasProfesional', 'idprofesional', 'id');
+    }
+
+    public function mensajes()
+    {
+        return $this->hasMany('App\Message' , 'idusuario', 'id');
     }
 
     public function categoriashome(){

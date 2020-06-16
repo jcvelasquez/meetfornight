@@ -5,5 +5,7 @@
     "/js/crear_profesional_footer.js": "/js/crear_profesional_footer.js",
     "/js/crear_usuario_footer.js": "/js/crear_usuario_footer.js",
     "/css/meetfornight.css": "/css/meetfornight.css",
-    "/js/meetfornight.js": "/js/meetfornight.js"
+    "/css/admin.css": "/css/admin.css",
+    "/js/meetfornight.js": "/js/meetfornight.js",
+    "/js/admin.js": "/js/admin.js"
 }

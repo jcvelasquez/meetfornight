@@ -15,9 +15,11 @@ class CreateBlogTable extends Migration
     {
         Schema::create('blog', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('idcountry')->unsigned();
             $table->string('titulo');
             $table->string('imagen');
             $table->text('contenido');
+            $table->foreign('idcountry')->references('id')->on('countries');
             $table->timestamps();
         });
     }

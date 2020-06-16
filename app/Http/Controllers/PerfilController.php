@@ -10,12 +10,14 @@ use App\ServiciosXProfesional;
 use App\TarifaProfesional;
 use App\ReservasProfesional;
 use App\FotoProfesional;
+use App\UsuarioExtras;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use DateTime;
 use DateInterval;
 use DatePeriod;
+use Illuminate\Support\Facades\Auth;
 
 class PerfilController extends Controller
 {
@@ -153,9 +155,14 @@ class PerfilController extends Controller
     public function tarifas(Request $request)
     {
 
+        $idusuario = Auth::user()->id;
+        
         $tarifas = Usuario::where('apodo', '=', $request->apodo)->firstOrFail()->tarifas()->get();
 
-        return ['tarifas' => $tarifas];  
+        $usuario = UsuarioExtras::where('idusuario', '=', $idusuario)->first('tipo_moneda');
+
+        return ['tarifas' => $tarifas, 'tipo_moneda' => $usuario->tipo_moneda ];  
+
     }
 
     public function horarios(Request $request)

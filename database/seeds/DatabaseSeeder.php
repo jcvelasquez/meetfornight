@@ -31,10 +31,8 @@ class DatabaseSeeder extends Seeder
         $this->call(PlanesSeeder::class);     
         $this->call(CriteriosValoracionSeeder::class);     
         $this->call(ValoracionProfesionalSeeder::class);     
-           
+        $this->call(BlogSeeder::class);         
 
-        
-     
-        
+
     }
 }

@@ -49,8 +49,8 @@
               <ul style="margin-bottom: 80px;">
                 <li><a href="#planes"> 1 <span>PLANES</span> </a></li>
                 <li><a href="#perfil"> 2 <span>PERFIL</span> </a></li>
-                <li><a href="#fotos"> 2 <span>FOTOS</span> </a></li>
-                <li><a href="#activar"> 7 <span>ACTIVAR</span></a></li>
+                <li><a href="#fotos"> 3 <span>FOTOS</span> </a></li>
+                <li><a href="#activar"> 4 <span>ACTIVAR</span></a></li>
               </ul>
               <div>
                 <div id="planes" class="">

@@ -28,7 +28,7 @@ class LoginController extends Controller
       
             switch(Auth::user()->idrol){
                 
-                case 1: return redirect()->route('dashboard', app()->getLocale());
+                case 1: return redirect()->route('admin/dashboard', app()->getLocale());
                         break;
 
                 case 2: return redirect()->route('perfil-empresa', app()->getLocale());

@@ -28,6 +28,7 @@ return [
     |
     */
 
+
     'connections' => [
 
         'pusher' => [

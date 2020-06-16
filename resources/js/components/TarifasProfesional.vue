@@ -2,7 +2,7 @@
 
     <div>
 
-          <div class="bloques-de-perfil">
+          <div class="bloques-de-perfil" v-show=" pais !== 'ES' ">
             <h5 class="formulario-titulos">TARIFAS:</h5>
             <p>Elige el tipo de moneda con el que deseas trabajar con tus clientes.</p>
             <div class="linea-morada">
@@ -61,8 +61,6 @@
                       <option value="1h30">1h30</option>
                       <option value="2 Horas">2 Horas</option>
                       <option value="2h30">2h30</option>
-                      <option value="Cena">Cena</option>
-                      <option value="Noche">Noche</option>
                     </select>
                   </div>
                   <div class="col-lg col-sm-12 espacio-campos">
@@ -119,7 +117,6 @@
                       <option value="Gastos de viaje +50km">Gastos de viaje +50km</option>
                       <option value="Gastos de viaje +75km">Gastos de viaje +75km</option>
                       <option value="Gastos de viaje +100km">Gastos de viaje +100km</option>
-                      <option value="Viaje de negocios">Viaje de negocios</option>
                     </select>
                   </div>
                   <div class="col-lg col-sm-12 espacio-campos">
@@ -220,7 +217,7 @@
                 extra_tarifa : '',
                 tipo_moneda : '',
                 simbolo_moneda : '',
-                pais : ''
+                pais : 'ES'
             }
         },
          methods:{
@@ -378,7 +375,7 @@
 
                       } 
                     
-                  })
+                  });
 
             }
 

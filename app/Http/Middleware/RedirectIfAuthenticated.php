@@ -20,7 +20,7 @@ class RedirectIfAuthenticated
         if (Auth::guard($guard)->check()) {
 
             if (Auth::user()->idrol == 1) {
-                return redirect()->route('dasboard', app()->getLocale() );
+                return redirect()->route('admin/dashboard', app()->getLocale() );
             }
     
             if (Auth::user()->idrol == 2) {

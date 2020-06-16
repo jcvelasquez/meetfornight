@@ -142,6 +142,7 @@ class UsuarioController extends Controller
         $usuario->fecha_nacimiento = Carbon::createFromFormat('d/m/Y', $request->fecha_nacimiento );
         $usuario->sexo = $request->sexo;
         $usuario->idstate = $request->idstate;
+        $usuario->idcountry = $request->idcountry;
         $usuario->idcity = $request->idcity;
         $usuario->save();
 
@@ -167,6 +168,8 @@ class UsuarioController extends Controller
         $usuario->idcity = $request->idcity;
         $usuario->save();
 
+        
+
         //------------------------------
         //ACTUALIZAR EXTRAS
         //------------------------------
@@ -183,6 +186,13 @@ class UsuarioController extends Controller
         $usuarioExtra->orientacion = $request->orientacion;
         $usuarioExtra->tatuaje = $request->tatuaje;
         $usuarioExtra->piercing = $request->piercing;
+
+        if((int) $request->idcountry == 205){
+            $usuarioExtra->tipo_moneda = "EUR";
+        }else{
+            $usuarioExtra->tipo_moneda = "USD";
+        }
+
         $usuarioExtra->fumador = $request->fumador;
         $usuarioExtra->seguridad = $request->seguridad;
         $usuarioExtra->save();
@@ -258,6 +268,10 @@ class UsuarioController extends Controller
     {
         return Usuario::where('id','=',Auth::user()->id)->first(['nombre']);
     }
+
+
+
+    
 
     
 

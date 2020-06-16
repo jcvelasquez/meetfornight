@@ -48,7 +48,7 @@
               </div>
               <div class="form-row">
                   <div class="col-lg-6 col-sm-12">
-                    <select type="text" class="form-control espacio-campos" v-model.trim="$v.idcountry.$model" @change="cambiarPais()" name="idcountry" v-model="idcountry">
+                    <select type="text" class="form-control espacio-campos" @change="cambiarPais()" name="idcountry" disabled v-model="idcountry">
                       <option value="">Seleccione una nacionalidad</option>
                       <option value="205">España</option>
                       <option value="169">Panama</option> 
@@ -57,20 +57,20 @@
                     <label class="error" v-if="!$v.idcountry.required">El país es obligatorio</label>
                   </div>
                   <div class="col-lg-6 col-sm-12">
-                    <select type="text" class="form-control espacio-campos" v-model.trim="$v.idstate.$model" @change="cambiarDepartamento()" name="idstate" v-model="idstate">
-                      <option value="">Seleccione un departamento</option>
+                    <select type="text" class="form-control espacio-campos" @change="cambiarDepartamento()" name="idstate" v-model="idstate">
+                      <option value="">{{labelState}}</option>
                       <option v-for="(option, index) in arStates" :key="index" :value="option.id" :selected="option.id === idstate ? 'selected' : ''">{{ option.name_state }}</option>
                     </select>
-                    <label class="error" v-if="!$v.idstate.required">El departamento es obligatorio</label>
+                    <label v-if="!$v.idstate.required">El departamento es obligatorio</label>
                   </div>
               </div>
               <div class="form-row"> 
                 <div class="col-lg-6 col-sm-12">
-                    <select type="text" class="form-control espacio-campos" v-model.trim="$v.idcity.$model" name="idcity" v-model="idcity">
-                      <option value="">Seleccione un distrito</option>
+                    <select type="text" class="form-control espacio-campos" name="idcity" v-model="idcity">
+                      <option value="">{{labelCity}}</option>
                       <option v-for="(option, index) in arCities" :key="index" :value="option.id" :selected="option.id === idcity ? 'selected' : ''">{{ option.name_city }}</option>
                     </select>
-                    <label class="error" v-if="!$v.idcity.required">La ciudad es obligatoria</label>
+                    <label v-if="!$v.idcity.required">La ciudad es obligatoria</label>
                 </div>
               </div>
 
@@ -380,6 +380,8 @@ export default {
             fumador : 0,
             seguridad : 0,
             estado : '',
+            labelState: 'Selecciona un departamento',
+            labelCity: 'Selecciona un distrito',
             id_perfil : 0,
             usuario: [],
             extras: [],
@@ -466,6 +468,17 @@ export default {
                 me.arStates = usuario.states;
                 me.arCities = usuario.cities;
 
+                if(me.idcountry == 205) 
+                  me.labelState = 'Selecciona una provincia';
+                else
+                  me.labelState = 'Selecciona un departamento';
+
+                if(me.idcountry == 205) 
+                  me.labelCity = 'Selecciona una ciudad';
+                else
+                  me.labelCity = 'Selecciona una provincia';
+                
+
             })
             .catch(function (error) {
                 // handle error
@@ -486,6 +499,16 @@ export default {
         cambiarPais(){
                 
                 let me = this;
+
+                if(me.idcountry == 205) 
+                  me.labelState = 'Selecciona una provincia';
+                else
+                  me.labelState = 'Selecciona un departamento';
+
+                if(me.idcountry == 205) 
+                  me.labelCity = 'Selecciona una ciudad';
+                else
+                  me.labelCity = 'Selecciona una provincia';
 
                 axios.post('seleccionar-states', {
                     'idcountry' : me.idcountry

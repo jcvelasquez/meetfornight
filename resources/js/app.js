@@ -15,15 +15,12 @@ Vue.use(VCalendar, { componentPrefix: 'vc' });
 Vue.use(Vuelidate);
 Vue.use(PrettyCheckbox);
 Vue.use(PrettyRadio);
-/* 
-import VueSlider from 'vue-slider-component'
-import 'vue-slider-component/theme/default.css'
-
-Vue.component('VueSlider', VueSlider) */
 
 //PERFIL
 Vue.component('reservas-profesional-front', require('./components/ReservasProfesionalFront.vue').default);
 Vue.component('mensajes-profesional-front', require('./components/MensajesProfesionalFront.vue').default);
+Vue.component('disponibilidad-profesional-front', require('./components/DisponibilidadProfesionalFront.vue').default);
+
 
 //PROFESIONALES
 Vue.component('planes-profesional', require('./components/PlanesProfesional.vue').default);
@@ -42,7 +39,6 @@ Vue.component('valoracion-profesional', require('./components/ValoracionProfesio
 Vue.component('listado-home', require('./components/ListadoHome.vue').default);
 Vue.component('listado-categoria', require('./components/ListadoCategoria.vue').default);
 Vue.component('reservas-profesional', require('./components/ReservasProfesional.vue').default);
-Vue.component('disponibilidad-profesional-front', require('./components/DisponibilidadProfesionalFront.vue').default);
 
 
 //EMPRESA
@@ -60,21 +56,22 @@ Vue.component('reservas-usuario', require('./components/ReservasUsuario.vue').de
 Vue.component('seguridad-usuario', require('./components/SeguridadUsuario.vue').default);
 
 
-
 //COMPONENTES HOME
 //Vue.component('busqueda-detallada', require('./components/BusquedaDetallada.vue').default);
 Vue.component('banner-superior', require('./components/BannerSuperior.vue').default);
 Vue.component('banner-inferior', require('./components/BannerInferior.vue').default);
-//Vue.component('modal-busqueda', require('./components/ModalBusqueda.vue').default);
 Vue.component('modal-denuncia', require('./components/ModalDenuncia.vue').default);
 
 //COMPONENTES DASHBOARD
 Vue.component('usuarios-administrador', require('./components/UsuariosAdministrador.vue').default);
+Vue.component('profesionales-administrador', require('./components/UsuariosAdministrador.vue').default);
 Vue.component('mensajes-administrador', require('./components/MensajesAdministrador.vue').default);
 Vue.component('alertas-administrador', require('./components/AlertasAdministrador.vue').default);
 Vue.component('idiomas-administrador', require('./components/IdiomasAdministrador.vue').default);
 Vue.component('categorias-administrador', require('./components/CategoriasAdministrador.vue').default);
-
+Vue.component('blog-administrador', require('./components/BlogAdministrador.vue').default);
+Vue.component('chat-messages', require('./components/ChatMessages.vue').default);
+Vue.component('chat-form', require('./components/ChatForm.vue').default);
 
 Vue.prototype.$csrf_token = document.querySelector("meta[name='csrf-token']").getAttribute('content');
 Vue.prototype.$idprofesional = document.querySelector("meta[name='pid']").getAttribute('content');
@@ -82,6 +79,36 @@ Vue.prototype.$idusuario = document.querySelector("meta[name='uid']").getAttribu
 Vue.prototype.$idrol = document.querySelector("meta[name='role']").getAttribute('content');
 Vue.prototype.$locale = document.querySelector("meta[name='locale']").getAttribute('content');
 
+
 const app = new Vue({
-    el: '#widget'
+    el: '#widget',
+    data: {
+        messages: []
+    },
+    created() {
+         
+        //this.fetchMessages();
+
+        Echo.private('chat').listen('MessageSent', (e) => {
+            this.messages.push({ message: e.message.message, nombre: e.nombre, id: e.id });
+        });
+
+    },
+    methods: {
+
+        fetchMessages() {
+            axios.get('messages').then(response => {
+                this.messages = response.data;
+            });
+        },
+
+        addMessage(message) {
+            this.messages.push(message);
+
+            axios.post('messages', message).then(response => {
+              console.log(response.data);
+            });
+        }
+
+    }
 });

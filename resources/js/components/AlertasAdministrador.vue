@@ -1,49 +1,79 @@
 <template>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="card item-usuario">
-                <div class="card-header">ALERTAS</div>
-                <div class="card-body">
-                    <ul>
-                        <li class="repeater-usuario" v-for="alerta in arAlertas" :key="alerta.id">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <small>Enviado por: </small> {{alerta.nombre_usuario}}
-                                    <button>Leer más</button>
-                                    <hr>
-                                    <div class="datos">
-                                        <p>{{alerta.razon}}</p>
-                                        <small class="categorias"><i class="fa fa-calendar"></i> 24/10/2019</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
 
-                    <nav>
-                        <ul class="pagination ir-izquierda paginador-meet">
-                            <li class="page-item" v-if="pagination.current_page > 1">
-                                <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1)">Anterior</a>
-                            </li>
-                            <li class="page-item" v-for="page in pagesNumber" :key="page" :class="[page == isActived ? 'active' : '']">
-                                <a class="page-link" href="#" @click.prevent="cambiarPagina(page)" v-text="page"></a>
-                            </li>
-                            <li class="page-item" v-if="pagination.current_page < pagination.last_page">
-                                <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page + 1)">Siguiente</a>
-                            </li>
-                        </ul>
-                    </nav>
-                    
+
+<div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header card-header-primary">
+                <div class="text-left">
+                    <h4 class="card-title">Categorias de MeetForNight</h4>
+                    <p class="card-category">Listado de categorias registradas en el portal</p>
                 </div>
             </div>
-        
-            
-        
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead class="text-primary">
+                    <th>ID</th>
+                    <th width="300">Enviado por:</th>
+                    <th>Razon por:</th>
+                    <th class="text-right" width="200">
+                       Acciones
+                    </th>
+                  </thead>
+                  <tbody>
+
+                    <tr v-for="alerta in arAlertas" :key="alerta.id">
+                      <td>{{alerta.id}}</td>
+                      <td><h5>{{alerta.nombre_usuario}}</h5></td>
+
+                      <td>{{alerta.razon}}</td>
+
+                      <td class="td-actions text-right">
+                          
+                           <button type="button" rel="tooltip" class="btn btn-info">
+                                <i class="material-icons">person</i>
+                            </button>
+                            <button type="button" rel="tooltip" class="btn btn-success">
+                                <i class="material-icons">edit</i>
+                            </button>
+                            <button type="button" rel="tooltip" class="btn btn-danger">
+                                <i class="material-icons">close</i>
+                            </button>
+                            
+                      </td>
+                    </tr>
+                  
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="card-footer">
+
+                 <nav>
+                    <ul class="pagination ir-izquierda paginador-meet">
+                        <li class="page-item" v-if="pagination.current_page > 1">
+                            <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1)">Anterior</a>
+                        </li>
+                        <li class="page-item" v-for="page in pagesNumber" :key="page" :class="[page == isActived ? 'active' : '']">
+                            <a class="page-link" href="#" @click.prevent="cambiarPagina(page)" v-text="page"></a>
+                        </li>
+                        <li class="page-item" v-if="pagination.current_page < pagination.last_page">
+                            <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page + 1)">Siguiente</a>
+                        </li>
+                    </ul>
+                </nav>
+
+            </div>
+
+          </div>
         </div>
 
-        
-
+    
+      </div>
     </div>
+
 </template>
 
 

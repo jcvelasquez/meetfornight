@@ -39,5 +39,29 @@ class BlogController extends Controller
         
     }
 
+    public function listar(Request $request)
+    {
+        
+            //CONSULTA DE LOS REGISTRADOS
+
+            $articulos = Blog::paginate(32);
+
+            return [
+                'pagination' => [
+                    'total'        => $articulos->total(),
+                    'current_page' => $articulos->currentPage(),
+                    'per_page'     => $articulos->perPage(),
+                    'last_page'    => $articulos->lastPage(),
+                    'from'         => $articulos->firstItem(),
+                    'to'           => $articulos->lastItem(),
+                ],
+                'arArticulos' => $articulos->values()->all()
+            ];
+        
+
+    }
+
+
+
 
 }
