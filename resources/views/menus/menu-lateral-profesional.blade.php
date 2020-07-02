@@ -18,8 +18,8 @@
 
     <li><a href="{{ route('fotos-profesional', app()->getLocale()) }}" class="{{ request()->is( app()->getLocale().'/fotos-profesional') ? 'menu-lateral-usuario-active' : '' }}"><span><i class="icon-video esp-icono-bio"></i>FOTOS</span><span><i class="fa fa-angle-right" aria-hidden="true"></i></span></a></li>
 
-<!--     <li><a href="{{ route('creditos-profesional', app()->getLocale()) }}" class="{{ request()->is( app()->getLocale().'/creditos-profesional') ? 'menu-lateral-usuario-active' : '' }}"><span class="resaltar"><i class="icon-moneda-nuevo-sol esp-icono-bio"></i>CRÉDITOS</span><span><i class="fa fa-angle-right" aria-hidden="true"></i></span></a></li>
- -->
+    <li><a href="{{ route('creditos-profesional', app()->getLocale()) }}" class="{{ request()->is( app()->getLocale().'/creditos-profesional') ? 'menu-lateral-usuario-active' : '' }}"><span class="resaltar"><i class="icon-moneda-nuevo-sol esp-icono-bio"></i>CRÉDITOS</span><span><i class="fa fa-angle-right" aria-hidden="true"></i></span></a></li>
+ 
     <li><a href="{{ route('booster-profesional', app()->getLocale()) }}" class="{{ request()->is( app()->getLocale().'/booster-profesional') ? 'menu-lateral-usuario-active' : '' }}"><span class="resaltar"><i class="icon-podium esp-icono-bio"></i>BOOSTER</span><span><i class="fa fa-angle-right" aria-hidden="true"></i></span></a></li>
 
     <li><a href="{{ route('estadisticas-profesional', app()->getLocale()) }}" class="{{ request()->is( app()->getLocale().'/estadisticas-profesional') ? 'menu-lateral-usuario-active' : '' }}"><span><i class="icon-estadisticas esp-icono-bio"></i>ESTADÍSTICAS</span><span><i class="fa fa-angle-right" aria-hidden="true"></i></span></a></li>

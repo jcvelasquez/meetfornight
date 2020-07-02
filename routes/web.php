@@ -99,6 +99,11 @@ Route::group(['prefix' => '{locale}', 'where' => ['locale' => '(es|pe|pa)'], 'mi
 
                 Route::get('cerrar-sesion', 'Auth\LoginController@logout')->name('cerrar-sesion');
 
+                Route::get('chat', 'ChatsController@index')->name('chat');
+                Route::get('chat-room', 'ChatsController@mostrarRoom')->name('chat-room');
+                Route::get('messages', 'ChatsController@fetchMessages');
+                Route::post('messages', 'ChatsController@sendMessage');
+
                 Route::group(['middleware'=>['usuario']],function(){
 
                         //URLS PARA EL USUARIO
@@ -183,6 +188,8 @@ Route::group(['prefix' => '{locale}', 'where' => ['locale' => '(es|pe|pa)'], 'mi
                         //CATEGORIAS
                         Route::get('admin/blog', 'AdministradorController@mostrarBlog')->name('admin/blog');
                         Route::get('admin/blog/listar', 'BlogController@listar');
+                        Route::post('admin/blog/grabar', 'BlogController@grabar');
+                        Route::post('admin/blog/eliminar', 'BlogController@eliminar');
 
                         
    
@@ -203,10 +210,7 @@ Route::group(['prefix' => '{locale}', 'where' => ['locale' => '(es|pe|pa)'], 'mi
 
                 Route::group(['middleware'=>['profesional']],function(){
 
-                        Route::get('chat', 'ChatsController@index');
-                        Route::get('messages', 'ChatsController@fetchMessages');
-                        Route::post('messages', 'ChatsController@sendMessage');
-
+                        
                         //URLS PARA EL PROFESIONAL
                         Route::get('perfil-profesional', 'UsuarioController@mostrarPerfilProfesionalLogueado')->name('perfil-profesional');
                         Route::get('perfil-profesional/editar', 'UsuarioController@editarDataPerfilProfesional');

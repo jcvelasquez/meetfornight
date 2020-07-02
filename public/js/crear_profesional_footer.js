@@ -95,7 +95,6 @@
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//TEST
 $(document).ready(function () {
   function checkTextAreaMaxLength(textBox, e) {
     var maxLength = parseInt($(textBox).data("length"));
@@ -119,6 +118,76 @@ $(document).ready(function () {
 
   $('#descripcion').on('keyup', function (event) {
     checkTextAreaMaxLength(this, event);
+  }); //CHECK NO DISPONIBLE LUNES
+
+  $('#disponibilidad_lunes_0').click(function () {
+    if ($(this).prop("checked") == true) {
+      $('input[name="desde_lunes"]').val("00:00");
+      $('input[name="hasta_lunes"]').val("00:00");
+    } else {
+      $('input[name="desde_lunes"]').val("");
+      $('input[name="hasta_lunes"]').val("");
+    }
+  }); //CHECK NO DISPONIBLE MARTES
+
+  $('#disponibilidad_martes_0').click(function () {
+    if ($(this).prop("checked") == true) {
+      $('input[name="desde_martes"]').val("00:00");
+      $('input[name="hasta_martes"]').val("00:00");
+    } else {
+      $('input[name="desde_martes"]').val("");
+      $('input[name="hasta_martes"]').val("");
+    }
+  }); //CHECK NO DISPONIBLE MIERCOLES
+
+  $('#disponibilidad_miercoles_0').click(function () {
+    if ($(this).prop("checked") == true) {
+      $('input[name="desde_miercoles"]').val("00:00");
+      $('input[name="hasta_miercoles"]').val("00:00");
+    } else {
+      $('input[name="desde_miercoles"]').val("");
+      $('input[name="hasta_miercoles"]').val("");
+    }
+  }); //CHECK NO DISPONIBLE JUEVES
+
+  $('#disponibilidad_jueves_0').click(function () {
+    if ($(this).prop("checked") == true) {
+      $('input[name="desde_jueves"]').val("00:00");
+      $('input[name="hasta_jueves"]').val("00:00");
+    } else {
+      $('input[name="desde_jueves"]').val("");
+      $('input[name="hasta_jueves"]').val("");
+    }
+  }); //CHECK NO DISPONIBLE VIERNES
+
+  $('#disponibilidad_viernes_0').click(function () {
+    if ($(this).prop("checked") == true) {
+      $('input[name="desde_viernes"]').val("00:00");
+      $('input[name="hasta_viernes"]').val("00:00");
+    } else {
+      $('input[name="desde_viernes"]').val("");
+      $('input[name="hasta_viernes"]').val("");
+    }
+  }); //CHECK NO DISPONIBLE SABADO
+
+  $('#disponibilidad_sabado_0').click(function () {
+    if ($(this).prop("checked") == true) {
+      $('input[name="desde_sabado"]').val("00:00");
+      $('input[name="hasta_sabado"]').val("00:00");
+    } else {
+      $('input[name="desde_sabado"]').val("");
+      $('input[name="hasta_sabado"]').val("");
+    }
+  }); //CHECK NO DISPONIBLE DOMINGO
+
+  $('#disponibilidad_domingo_0').click(function () {
+    if ($(this).prop("checked") == true) {
+      $('input[name="desde_domingo"]').val("00:00");
+      $('input[name="hasta_domingo"]').val("00:00");
+    } else {
+      $('input[name="desde_domingo"]').val("");
+      $('input[name="hasta_domingo"]').val("");
+    }
   });
   dtTarifas = $('#tarifaxhoras').DataTable({
     "paging": false,
@@ -381,46 +450,102 @@ $(document).ready(function () {
         required: true
       },
       desde_lunes: {
-        required: true
+        required: {
+          depends: function depends(elem) {
+            return !$('#disponibilidad_lunes_0').prop("checked");
+          }
+        }
       },
       hasta_lunes: {
-        required: true
+        required: {
+          depends: function depends(elem) {
+            return !$('#disponibilidad_lunes_0').prop("checked");
+          }
+        }
       },
       desde_martes: {
-        required: true
+        required: {
+          depends: function depends(elem) {
+            return !$('#disponibilidad_martes_0').prop("checked");
+          }
+        }
       },
       hasta_martes: {
-        required: true
+        required: {
+          depends: function depends(elem) {
+            return !$('#disponibilidad_martes_0').prop("checked");
+          }
+        }
       },
       desde_miercoles: {
-        required: true
+        required: {
+          depends: function depends(elem) {
+            return !$('#disponibilidad_miercoles_0').prop("checked");
+          }
+        }
       },
       hasta_miercoles: {
-        required: true
+        required: {
+          depends: function depends(elem) {
+            return !$('#disponibilidad_miercoles_0').prop("checked");
+          }
+        }
       },
       desde_jueves: {
-        required: true
+        required: {
+          depends: function depends(elem) {
+            return !$('#disponibilidad_jueves_0').prop("checked");
+          }
+        }
       },
       hasta_jueves: {
-        required: true
+        required: {
+          depends: function depends(elem) {
+            return !$('#disponibilidad_jueves_0').prop("checked");
+          }
+        }
       },
       desde_viernes: {
-        required: true
+        required: {
+          depends: function depends(elem) {
+            return !$('#disponibilidad_viernes_0').prop("checked");
+          }
+        }
       },
       hasta_viernes: {
-        required: true
+        required: {
+          depends: function depends(elem) {
+            return !$('#disponibilidad_viernes_0').prop("checked");
+          }
+        }
       },
       desde_sabado: {
-        required: true
+        required: {
+          depends: function depends(elem) {
+            return !$('#disponibilidad_sabado_0').prop("checked");
+          }
+        }
       },
       hasta_sabado: {
-        required: true
+        required: {
+          depends: function depends(elem) {
+            return !$('#disponibilidad_sabado_0').prop("checked");
+          }
+        }
       },
       desde_domingo: {
-        required: true
+        required: {
+          depends: function depends(elem) {
+            return !$('#disponibilidad_domingo_0').prop("checked");
+          }
+        }
       },
       hasta_domingo: {
-        required: true
+        required: {
+          depends: function depends(elem) {
+            return !$('#disponibilidad_domingo_0').prop("checked");
+          }
+        }
       },
       //PESTAÑA TARIFAS
       tipo_moneda: {

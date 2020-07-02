@@ -443,3 +443,22 @@ article.blog_detalle .foto_blog { margin:15px 0; }
 .triangulo.es_favorito i {  color:#fff;}
 
 .vue-slider-mark-label { color: #fff;}
+
+.padding-chat { padding: 100px 0; }
+.padding-chat h2 ,
+.padding-chat p { color: #fff; padding: 5px 0;}
+.padding-chat .lista_chat { width: 80%; margin: 20px 0 20px 20px; }
+.padding-chat .lista_chat li { float: left; width:50%; color: #fff; }
+.padding-chat .text-left { border-left: 2px solid #fff;}
+.padding-chat .text-left h3 { color:#fff; margin-bottom: 20px; }
+.padding-chat .text-left input[type="text"] { background: none; border:2px solid #fff; border-radius: 7px; color: #fff; padding: 20px 15px; }
+.padding-chat .text-left input[type="text"]::placeholder { color: #fff;}
+.padding-chat .text-left button { width: 100%; }
+.padding-chat .text-left a { color: #fff; text-decoration:underline; }
+.padding-chat .text-left a:hover { text-decoration:none; }
+.padding-chat .text-left span { color: #fff; }
+
+form.logueado strong { color: #fff; margin-bottom:35px; display: inline-block; }
+
+
+#listado-profesionales { width: 100%;}

@@ -120,6 +120,9 @@
               <li class="nav-item espaciado-btn-header-bottom">
                 <a class="nav-link" href="{{ route('blog', app()->getLocale()) }}"><span class="color-header-bottom">BLOG</span></a>
               </li>
+              <li class="nav-item espaciado-btn-header-bottom">
+                <a class="nav-link" href="{{ route('chat', app()->getLocale()) }}"><span class="color-header-bottom">CHAT</span></a>
+              </li>
             </ul>
           </div>
         </nav>

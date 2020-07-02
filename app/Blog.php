@@ -10,6 +10,6 @@ class Blog extends Model
 
     public $table = "blog";
     
-    protected $fillable = ['titulo','contenido'];
+    protected $fillable = ['idcountry','titulo','subtitulo','slug', 'imagen_alt','descripcion_seo','keywords_seo','contenido'];
 
 }

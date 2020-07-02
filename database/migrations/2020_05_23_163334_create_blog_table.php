@@ -17,7 +17,12 @@ class CreateBlogTable extends Migration
             $table->bigIncrements('id');
             $table->integer('idcountry')->unsigned();
             $table->string('titulo');
+            $table->string('subtitulo');
+            $table->string('slug');
             $table->string('imagen');
+            $table->string('imagen_alt');
+            $table->string('descripcion_seo');
+            $table->string('keywords_seo');
             $table->text('contenido');
             $table->foreign('idcountry')->references('id')->on('countries');
             $table->timestamps();

@@ -207,13 +207,13 @@
                 <div class="card-header" id="headingThree">
                   <h5 class="mb-0">
                     <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTen" aria-expanded="false" aria-controls="collapseTen">
-                      ¿Qué hacer si olvido mi contraseña? 
+                    ¿Qué hacer si olvidé mi contraseña?
                     </button>
                   </h5>
                 </div>
                 <div id="collapseTen" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
                   <div class="card-body">
-                    <p class="texto-biografia tamano-delicado espaciado">Muy fácil, tendrás que ir a “Acceder” ingresar el perfil en el que tienes tu cuenta con nosotros y ahí cliqueas en “olvidaste tu contraseña” y te la volveremos a mandar a tu correo.</p>
+                    <p class="texto-biografia tamano-delicado espaciado">Muy fácil, tendrás que ir a “Iniciar sesión” ir a “olvidaste tu contraseña” ingresar tu correo y ahí cliqueas en “olvidaste tu contraseña” y te la volveremos a mandar a tu correo.</p>
                   </div>
                 </div>
               </div>
@@ -260,6 +260,46 @@
                   </div>
                 </div>
               </div>
+
+
+              <div class="card">
+                <div class="card-header" id="headingThree">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThirteen" aria-expanded="false" aria-controls="collapseThirteen">
+                      ¿Cómo poner un banner publicitario y donde aparecen?
+                    </button>
+                  </h5>
+                </div>
+                <div id="collapseThirteen" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                  <div class="card-body">
+                    <p class="texto-biografia tamano-delicado espaciado">Los banners publicitarios aparecen en la pagina principal de Meet For Night y se encuentran en la parte superior. </p>
+
+                    <p class="texto-biografia tamano-delicado espaciado">Para publicar un banner publicitario necesitarás crearte una cuenta EMPRESA. A la hora de crear la cuenta en el paso 3, tendrás que subir la imagen publicitaria deseada con la información de tu establecimiento o la que desees comunicar dentro de la misma imagen. </p>
+
+                    <p class="texto-biografia tamano-delicado espaciado">Además, se dará la posibilidad de vincular la imagen a tu pagina web y así re-direccionar directamente todo el trafico a tu web. </p>  
+                  </div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-header" id="headingFourteen">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#headingFourteen" aria-expanded="false" aria-controls="headingFourteen">
+                    ¿Con qué frecuencia se verá mi banner en la home page?
+                    </button>
+                  </h5>
+                </div>
+                <div id="headingFourteen" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                  <div class="card-body">
+                    <p class="texto-biografia tamano-delicado espaciado">Este espacio publicitario está compuesto y limitado a un rulo de 20 banners divididos en bloques de 4 banners que siempre permanecen visibles. </p>
+
+                    <p class="texto-biografia tamano-delicado espaciado">A cada visita de Meet For Night por un usuario diferente se le muestran los banners por bloque de 4 y de forma aleatoria.  </p>
+
+                    <p class="texto-biografia tamano-delicado espaciado">Si quieren promocionar de la mejor manera posible y con una alta visibilidad por el trafico generado por Meet For Night, este banner publicitario es el más adecuado para captar nuevos clientes.  </p>  
+                  </div>
+                </div>
+              </div>
+
               
             </div>
           </div>

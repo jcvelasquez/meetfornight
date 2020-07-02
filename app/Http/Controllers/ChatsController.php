@@ -22,6 +22,14 @@ class ChatsController extends Controller
         return view('chat');
     }
 
+    public function mostrarRoom()
+    {
+        return view('chat');
+    }
+
+
+
+    
 
     public function fetchMessages()
     {

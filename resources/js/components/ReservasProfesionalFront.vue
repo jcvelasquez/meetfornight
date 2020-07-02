@@ -9,7 +9,7 @@
                   <div class="tarifario-horizontal" v-for="servicio in filtrarPor(arTarifas, 'SERVICIO')" :key=" 'm_' + servicio.id">
                     <div class="tarifario-morado" v-text="servicio.opcion_tarifa"></div>
                     <div class="tarifario-rojo">
-                      <button type="button" class="btn btn-primary btn-busqueda-detallada" @click="agregarTarifa(servicio)">${{servicio.costo_tarifa}}</button>
+                      <button type="button" class="btn btn-primary btn-busqueda-detallada" @click="agregarTarifa(servicio)">{{simbolo_moneda}} {{servicio.costo_tarifa}}</button>
                     </div>
                   </div>
             </div>
@@ -23,7 +23,7 @@
               
                  <div class="tarifario-horizontal" v-for="escort in filtrarPor(arTarifas, 'ESCORT')" :key=" 'm_' + escort.id">
                     <div class="tarifario-morado" v-text="escort.opcion_tarifa"></div>
-                    <div class="tarifario-rojo" v-text="'$' +escort.costo_tarifa"></div>
+                    <div class="tarifario-rojo" v-text="simbolo_moneda + escort.costo_tarifa"></div>
                   </div>
 
             </div>
@@ -36,7 +36,7 @@
               <div class="tarifario-horizontal" v-for="extra in filtrarPor(arTarifas, 'EXTRAS')" :key=" 'm_' + extra.id">
                   <div class="tarifario-morado" v-text="extra.opcion_tarifa"></div>
                   <div class="tarifario-rojo">
-                    <button type="button" @click="agregarTarifa(extra)" class="btn btn-primary btn-busqueda-detallada">$ {{extra.costo_tarifa}}</button>
+                    <button type="button" @click="agregarTarifa(extra)" class="btn btn-primary btn-busqueda-detallada">{{simbolo_moneda}} {{extra.costo_tarifa}}</button>
                   </div>
                 </div>
 
@@ -54,7 +54,7 @@
                 {{seleccionado.opcion_tarifa}}
             </div>
             <div class="col-lg-2 col-sm-12 text-right">
-                $ {{seleccionado.costo_tarifa}}
+                {{simbolo_moneda}} {{seleccionado.costo_tarifa}}
             </div>  
         </div>
 
@@ -63,7 +63,7 @@
                 <strong>TOTAL SERVICIO:</strong>
             </div>
             <div class="col-lg-2 col-sm-12 text-right">
-                <strong>${{calcularServicios}}</strong>
+                <strong>{{simbolo_moneda}} {{calcularServicios}}</strong>
             </div>  
         </div>
 
@@ -166,7 +166,9 @@
                 direccion : "",
                 email : "",
                 extras: "",
-                totalTarifa : 0
+                totalTarifa : 0,
+                tipo_moneda : "",
+                simbolo_moneda : ""
             }
         },
         computed:{
@@ -244,6 +246,8 @@
 
                       var respuesta= response.data;
                       me.arTarifas = respuesta.tarifas;
+                      me.tipo_moneda = respuesta.tipo_moneda;
+                      me.simbolo_moneda = respuesta.simbolo_moneda;
 
                   }).catch(function (error) {  console.log(error);     });
 

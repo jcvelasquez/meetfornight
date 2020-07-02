@@ -1,5 +1,8 @@
 <template>
   <div>
+
+    <template v-if="!isEditing">
+
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
@@ -110,6 +113,10 @@
         </div>
       </div>
     </div>
+
+  </template>
+
+  <template v-else>
 
     <!-- BEGIN EDIT -->
     <div class="content" v-show="isEditing">
@@ -231,7 +238,11 @@
       </div>
     </div>
     <!-- END EDIT -->
+
+     </template>
+
   </div>
+
 </template>
 
 <script>

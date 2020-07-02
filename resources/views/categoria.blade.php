@@ -29,8 +29,7 @@
                 <span><i class="fa fa-angle-right"></i></span>
                 <a href="mujeres-free.php" class="cabecera-chicas-active">Mujeres</a>
               </div>
-              <a class="cabecera-chicas-busqueda-detallada" data-toggle="modal" data-target="#exampleModal">BÚSQUEDA DETALLADA <i class="icon-search espacio-busqueda"></i></a>
-            </div>
+           </div>
           </div>
         </div>
 

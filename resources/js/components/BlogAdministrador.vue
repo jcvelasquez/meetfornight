@@ -37,29 +37,26 @@
                 <table class="table">
                   <thead class="text-primary">
                     <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Icono</th>
-                    <th>Estado</th>
+                    <th>Imagen</th>
+                    <th>Titulo</th>
+                    <th>Fecha</th>
                     <th class=" text-right">
                        Acciones
                     </th>
                   </thead>
                   <tbody>
 
-                    <tr v-for="(categoria, index) in arCategorias" :key="categoria.id">
-                      <td>{{categoria.id}}</td>
-                      <td><h5>{{categoria.nombre_categoria}}</h5></td>
-                      <td><i class=""></i>{{categoria.icono_categoria}}</td>
-                      <td> 
-                          <span class="badge badge-success" v-if="categoria.estado_categoria == 1">ACTIVO</span>
-                          <span class="badge badge-danger" v-else>INACTIVO</span>
-                      </td>
+                    <tr v-for="(art, index) in arArticulos" :key="art.id">
+                      <td>{{art.id}}</td>
+                      <td><img width="80" :src=" basepath + '/fotos_profesionales/' + art.imagen " /> </td>
+                      <td>{{art.titulo}}</td>
+                      <td>{{art.created_at}}</td>
                       <td class="td-actions text-right">
                           
-                          <button type="button" rel="tooltip" class="btn btn-success" @click="editar(categoria)">
+                          <button type="button" rel="tooltip" class="btn btn-success" @click="editar(art)">
                               <i class="material-icons">edit</i>
                           </button>
-                          <button type="button" rel="tooltip" class="btn btn-danger" @click="eliminar(categoria, index)">
+                          <button type="button" rel="tooltip" class="btn btn-danger" @click="eliminar(art, index)">
                               <i class="material-icons">close</i>
                           </button>
                             
@@ -82,47 +79,100 @@
 
     <template v-else>
         <!-- BEGIN EDIT -->
-        <div class="content" v-show="isEditing">
+        <div class="content animated fadeIn" v-show="isEditing">
         <div class="container-fluid">
             <div class="row">
             <div class="col-md-12">
                 <div class="card">
                 <div class="card-header card-header-primary">
-                    <h4 class="card-title">Editar Categoria</h4>
+                    <h4 class="card-title">Editar Blog</h4>
                     <p class="card-category">Completa todos los campos</p>
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-12">
                           <div class="form-group">
-                              <label class="bmd-label-floating">Nombre categoria</label>
-                              <input type="text" class="form-control" v-model="categoriaSelected.nombre_categoria" />
-                          </div>
-                        </div>
-                        <div class="col-md-4">
-                          <div class="form-group">
-                              <label class="bmd-label-floating">Icono</label>
-                              <select class="form-control" v-model="categoriaSelected.icono_categoria">
-                                  <option value="icon-c-mujer"> MUJER </option>
-                                  <option value="icon-c-gigolo"> GIGOLO </option>
-                                  <option value="icon-c-homo"> HOMO </option>
-                                  <option value="icon-c-trans"> TRANS </option>
-                                  <option value="icon-c-fetiche"> FETICHE</option>
-                                  <option value="icon-c-masaje">MASAJE</option>
-                                  <option value="icon-c-parejas">PAREJAS</option>
-                              </select>
-                          </div>
-                        </div>
-                        <div class="col-md-4">
-                          <div class="form-group">
-                              <label class="bmd-label-floating">Estado</label>
-                              <select class="form-control" v-model="categoriaSelected.estado_categoria">
-                                  <option value="1"> ACTIVO </option>
-                                  <option value="0"> INACTIVO </option>
+                              <label class="bmd-label-floating">Texto Alternativo (Imagen)</label>
+                              <select class="form-control" v-model="blogSelected.idcountry">
+                                <option value="">Selecciona</option>
+                                <option value="205">España</option>
+                                <option value="169">Panama</option>
+                                <option value="172">Peru</option>
                               </select>
                           </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                          <div class="form-group">
+                              <label class="bmd-label-floating">Titulo del artículo</label>
+                              <input class="form-control" maxlength="190" type="text" v-model="blogSelected.titulo" />
+                          </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="bmd-label-floating">Slug del artículo</label>
+                            <input class="form-control" type="text" :value="slug" readonly />
+                            <input class="form-control" type="hidden" v-model="blogSelected.slug" readonly />
+                        </div>
+                      </div>
+                    </div>
+                   
+                    <div class="row">
+                        <div class="col-md-12">
+                          <div class="form-group">
+                              <label class="bmd-label-floating">Subtitulo del artículo</label>
+                              <input class="form-control" maxlength="190" type="text" v-model="blogSelected.subtitulo" />
+                          </div>
+                        </div>
+                    </div>
+
+                     <div class="row">
+                        <div class="col-md-12" style="margin-bottom:20px;">
+                              <label class="bmd-label-floating">Imagen</label>
+                              <input type="file" id="myfile" name="myfile" class="form-control">
+                        </div>
+                    </div>
+
+                     <div class="row">
+                        <div class="col-md-12">
+                          <div class="form-group">
+                              <label class="bmd-label-floating">Texto Alternativo (Imagen)</label>
+                              <input type="text" class="form-control" maxlength="190" v-model="blogSelected.imagen_alt"/>
+                          </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                          <div class="form-group">
+                              <label class="bmd-label-floating">Contenido del artículo</label>
+                              <vue-editor v-model="blogSelected.contenido"></vue-editor>
+<!--                               <wysiwyg v-model="blogSelected.contenido"  />
+ -->                          </div>
+                        </div>
+                    </div>   
+
+                    <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                              <label class="bmd-label-floating">Meta Keywords SEO</label>
+                              <textarea class="form-control" rows="3" v-model="blogSelected.keywords_seo"></textarea>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                              <label class="bmd-label-floating">Meta Descripcion SEO</label>
+                              <textarea class="form-control" rows="3" v-model="blogSelected.descripcion_seo"></textarea>
+                          </div>
+                        </div>
+                        
+                    </div>
+
+                    
 
                     <input type="hidden" v-model="id"/>
                     <button type="button" class="btn btn-success" @click="grabar()">Actualizar</button>
@@ -146,7 +196,16 @@
 </template>
 
 <script>
+
+  //import "vue-wysiwyg/dist/vueWysiwyg.css";
+
+  import { VueEditor } from "vue2-editor";
+
+
     export default {
+        components: {
+          VueEditor
+        },
         props: ['basepath'],
         mounted() {
 
@@ -155,22 +214,44 @@
         },
         data(){
             return {
-                arCategorias: [],
+                arArticulos: [],
                 id: 0,
                 isEditing: false,
-                categoriaSelected : []
+                blogSelected : []
             }
         },
+        computed: {
+          slug: function () {
+            let slug = this.slugify(this.blogSelected.titulo);
+            this.blogSelected.slug = slug;
+            return slug;
+          }
+        },
         methods:{
-           
+
+            slugify(text, ampersand = 'and') {
+              const a = 'àáäâèéëêìíïîòóöôùúüûñçßÿỳýœæŕśńṕẃǵǹḿǘẍźḧ'
+              const b = 'aaaaeeeeiiiioooouuuuncsyyyoarsnpwgnmuxzh'
+              const p = new RegExp(a.split('').join('|'), 'g')
+
+              return text.toString().toLowerCase()
+                .replace(/[\s_]+/g, '-')
+                .replace(p, c =>
+                  b.charAt(a.indexOf(c)))
+                .replace(/&/g, `-${ampersand}-`)
+                .replace(/[^\w-]+/g, '')
+                .replace(/--+/g, '-')
+                .replace(/^-+|-+$/g, '')
+
+            },  
             listar(){
 
                   let me = this;
 
-                  axios.get(  me.basepath + "/" +  me.$locale +  "/categorias/listar").then(function (response) {
+                  axios.get(  me.basepath + "/" +  me.$locale +  "/admin/blog/listar").then(function (response) {
 
                       var respuesta= response.data;
-                      me.arCategorias = respuesta.categorias;
+                      me.arArticulos = respuesta.arArticulos;
 
                   }).catch(function (error) {  console.log(error);     });
                 
@@ -190,12 +271,12 @@
               
                   if (result.value) {
 
-                      axios.post( me.basepath + "/" +  me.$locale +  "/admin/categorias/eliminar", {
+                      axios.post( me.basepath + "/" +  me.$locale +  "/admin/blog/eliminar", {
                           'id' : categoria.id,
 
                       }).then(function (response) {
 
-                          if(response.data.code == 0) me.$delete(me.arCategorias, index);
+                          if(response.data.code == 0) me.$delete(me.arArticulos, index);
 
                           Swal.fire('CONFIRMACIÓN', response.data.mensaje , response.data.status );
 
@@ -211,18 +292,23 @@
               let me = this;
 
               me.isEditing = true;
-              me.categoriaSelected = [];
+              me.blogSelected = [];
 
           },
           grabar() {
 
               let me = this;
               
-              axios.post( me.basepath + '/' +  me.$locale + '/admin/categorias/grabar', {
-                'id' : me.categoriaSelected.id,
-                'nombre_categoria' : me.categoriaSelected.nombre_categoria,
-                'icono_categoria' : me.categoriaSelected.icono_categoria,
-                'estado_categoria' : me.categoriaSelected.estado_categoria
+              axios.post( me.basepath + '/' +  me.$locale + '/admin/blog/grabar', {
+                'id' : me.blogSelected.id,
+                'titulo' : me.blogSelected.titulo,
+                'subtitulo' : me.blogSelected.subtitulo,
+                'slug' : me.blogSelected.slug,
+                'imagen' : me.blogSelected.imagen,
+                'imagen_alt' : me.blogSelected.imagen_alt,
+                'descripcion_seo' : me.blogSelected.descripcion_seo,
+                'keywords_seo' : me.blogSelected.keywords_seo,
+                'contenido' : me.blogSelected.contenido
               })
               .then(function (response) {
 
@@ -243,14 +329,14 @@
             let me = this;
 
             me.isEditing = true;
-            me.categoriaSelected = categoria;
+            me.blogSelected = categoria;
 
           },
           limpiar(){
 
               let me = this;
               me.isEditing = false;
-              me.categoriaSelected = [];
+              me.blogSelected = [];
 
           }
 
@@ -270,4 +356,5 @@
     font-weight:bold;
   }
 </style>
+
 

@@ -158,20 +158,20 @@
                   </div>
 
                   @if(count($valoraciones) > 0)
-                  <div class="espacio-reservas">
-                    <h2 class="subtitulo-reservas">VALORACIÓN<br><div class="subsub-reserva"><p>Las calificaciones corresponden<br>a las experiencias</p></div></h2>
-                    <div class="reserva-info">
-                      <ul>
-                        @foreach($valoraciones as $valor)
-                        <li>
-                          <div class="reserva-info-morado" style="text-transform: capitalize !important;">{{strtolower($valor->nombre_criterio)}}</div>
-                           <div class="fucsia"> {!! $valor->puntuacion_html !!} </div> 
-                        </li>
-                        @endforeach
+                    <div class="espacio-reservas">
+                      <h2 class="subtitulo-reservas">VALORACIÓN<br><div class="subsub-reserva"><p>Las calificaciones corresponden<br>a las experiencias</p></div></h2>
+                      <div class="reserva-info">
+                        <ul>
+                          @foreach($valoraciones as $valor)
+                          <li>
+                            <div class="reserva-info-morado" style="text-transform: capitalize !important;">{{strtolower($valor->nombre_criterio)}}</div>
+                            <div class="fucsia"> {!! $valor->puntuacion_html !!} </div> 
+                          </li>
+                          @endforeach
 
-                      </ul>
+                        </ul>
+                      </div>
                     </div>
-                  </div>
                   @endif
 
 

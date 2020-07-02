@@ -2,7 +2,7 @@
 require('sticky-sidebar');
 require('./bootstrap');
 
-window.Dropzone = require('./dropzone');
+//window.Dropzone = require('./dropzone');
 window.Swal = require('sweetalert2');
 window.Vue = require('vue');
 
@@ -10,17 +10,24 @@ import PrettyCheckbox from 'pretty-checkbox-vue';
 import PrettyRadio from 'pretty-checkbox-vue/radio';
 import VCalendar from 'v-calendar';
 import Vuelidate from 'vuelidate';
+import wysiwyg from "vue-wysiwyg";
 
 Vue.use(VCalendar, { componentPrefix: 'vc' }); 
 Vue.use(Vuelidate);
 Vue.use(PrettyCheckbox);
 Vue.use(PrettyRadio);
 
+
+Vue.use(wysiwyg, {
+    maxHeight: "500px",
+    forcePlainTextOnPaste: false,
+    locale: 'es'
+  }); // config is optional. more below
+
 //PERFIL
 Vue.component('reservas-profesional-front', require('./components/ReservasProfesionalFront.vue').default);
 Vue.component('mensajes-profesional-front', require('./components/MensajesProfesionalFront.vue').default);
 Vue.component('disponibilidad-profesional-front', require('./components/DisponibilidadProfesionalFront.vue').default);
-
 
 //PROFESIONALES
 Vue.component('planes-profesional', require('./components/PlanesProfesional.vue').default);
@@ -40,13 +47,11 @@ Vue.component('listado-home', require('./components/ListadoHome.vue').default);
 Vue.component('listado-categoria', require('./components/ListadoCategoria.vue').default);
 Vue.component('reservas-profesional', require('./components/ReservasProfesional.vue').default);
 
-
 //EMPRESA
 Vue.component('planes-empresa', require('./components/PlanesEmpresa.vue').default);
 Vue.component('banners-empresa', require('./components/BannersEmpresa.vue').default);
 Vue.component('estadisticas-empresa', require('./components/EstadisticasEmpresa.vue').default);
 Vue.component('perfil-empresa', require('./components/PerfilEmpresa.vue').default);
-
 
 //USUARIO
 Vue.component('perfil-usuario', require('./components/PerfilUsuario.vue').default);
@@ -54,7 +59,6 @@ Vue.component('mensajes-usuario', require('./components/MensajesUsuario.vue').de
 Vue.component('favoritos-usuario', require('./components/FavoritosUsuario.vue').default);
 Vue.component('reservas-usuario', require('./components/ReservasUsuario.vue').default);
 Vue.component('seguridad-usuario', require('./components/SeguridadUsuario.vue').default);
-
 
 //COMPONENTES HOME
 //Vue.component('busqueda-detallada', require('./components/BusquedaDetallada.vue').default);
@@ -64,7 +68,7 @@ Vue.component('modal-denuncia', require('./components/ModalDenuncia.vue').defaul
 
 //COMPONENTES DASHBOARD
 Vue.component('usuarios-administrador', require('./components/UsuariosAdministrador.vue').default);
-Vue.component('profesionales-administrador', require('./components/UsuariosAdministrador.vue').default);
+Vue.component('profesionales-administrador', require('./components/ProfesionalesAdministrador.vue').default);
 Vue.component('mensajes-administrador', require('./components/MensajesAdministrador.vue').default);
 Vue.component('alertas-administrador', require('./components/AlertasAdministrador.vue').default);
 Vue.component('idiomas-administrador', require('./components/IdiomasAdministrador.vue').default);

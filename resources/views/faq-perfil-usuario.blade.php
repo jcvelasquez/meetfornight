@@ -193,11 +193,11 @@
                   <div class="card-body">
                     <p class="texto-biografia tamano-delicado espaciado">¡Pues claro!</p>
 
-                    <p class="texto-biografia tamano-delicado espaciado">Puedes guardar tus perfiles favoritos y tus anuncios favoritos para poder visualizarlos más adelante.</p>
+                    <p class="texto-biografia tamano-delicado espaciado">Puedes guardar tus anuncios favoritos para poder visualizarlos más adelante.</p>
 
-                    <p class="texto-biografia tamano-delicado espaciado">Lo único que tienes que hacer es registrarte en Meet For Night como perfil USUARIO. Una vez que se haya completado tu registro, puedes guardar tus favoritos a través de la página principal de la categoría elegida (por ej. mujeres, gigoló, homosexual, …) y sino a través de la pagina de un perfil detallado.</p>
+                    <p class="texto-biografia tamano-delicado espaciado">Lo único que tienes que hacer es créate una cuenta en 2 minutos como perfil USUARIO. Una vez que se haya completado tu registro, puedes guardar tus favoritos a través de la página principal de la categoría elegida (por ej. mujeres, gigoló, gays, …) y también a través de la pagina de un perfil detallado.</p>
 
-                    <p class="texto-biografia tamano-delicado espaciado">Con un simple clic en la icono del corazón situado en la parte superior de la plataforma si te encuentras en “perfil detallado” o en el icono del corazón situado en las fotos miniaturas de la pagina principal de la categoría elegida. </p>
+                    <p class="texto-biografia tamano-delicado espaciado">Con un simple clic en el icono del corazón situado en la parte superior de la plataforma si te encuentras en “perfil detallado” o en el icono del corazón situado en las fotos miniaturas de la pagina principal de la categoría elegida. </p>
 
                     <p class="texto-biografia tamano-delicado espaciado">A través de la sección "favoritos" en tu panel de control, puedes ver y administrar tu lista personal de favoritos.</p>
                   </div>
@@ -207,13 +207,13 @@
                 <div class="card-header" id="headingThree">
                   <h5 class="mb-0">
                     <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTen" aria-expanded="false" aria-controls="collapseTen">
-                      ¿Qué hacer si olvido mi contraseña? 
+                    ¿Qué hacer si olvidé mi contraseña?
                     </button>
                   </h5>
                 </div>
                 <div id="collapseTen" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
                   <div class="card-body">
-                    <p class="texto-biografia tamano-delicado espaciado">Muy fácil, tendrás que ir a “Acceder” ingresar el perfil en el que tienes tu cuenta con nosotros y ahí cliqueas en “olvidaste tu contraseña” y te la volveremos a mandar a tu correo.</p>
+                    <p class="texto-biografia tamano-delicado espaciado">Muy fácil, tendrás que ir a “Iniciar sesión” ir a “olvidaste tu contraseña” ingresar tu correo y ahí cliqueas en “olvidaste tu contraseña” y te la volveremos a mandar a tu correo.</p>
                   </div>
                 </div>
               </div>
@@ -260,34 +260,45 @@
                   </div>
                 </div>
               </div>
-              <!--<div class="card">
+              <div class="card">
                 <div class="card-header" id="headingThree">
                   <h5 class="mb-0">
                     <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThirteen" aria-expanded="false" aria-controls="collapseThirteen">
-                      No quiero recibir correos electrónicos a través del formulario de contacto 
+                    ¿Cómo puedo contactar o reservar un servicio con una profesional que tenga sus datos de contacto ocultos?
                     </button>
                   </h5>
                 </div>
                 <div id="collapseThirteen" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
                   <div class="card-body">
-                    ...
+                      <p class="texto-biografia tamano-delicado espaciado">Esa profesional ha decido ocultar sus datos por motivos de seguridad.</p>
+
+                      <p class="texto-biografia tamano-delicado espaciado">Para tener acceso a la profesional debes registrarte en nuestra plataforma y rellenar el paso 3 en el cual se te solicitará que rellenes tu numeró de móvil y una foto de tu DNI.</p>
+
+                      <p class="texto-biografia tamano-delicado espaciado">Estos datos solo serán visible por Meet For Night en caso de haber un problema y cuyo problema sea reportado legalmente. De lo contrario tus datos serán totalmente anónimos y nadie tendrá acceso a ellos.</p>
+
                   </div>
                 </div>
               </div>
+
+              
+
               <div class="card">
                 <div class="card-header" id="headingThree">
                   <h5 class="mb-0">
                     <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFourteen" aria-expanded="false" aria-controls="collapseFourteen">
-                      ¿Cómo puedo obtener el sello de “Perfil Verificado”? 
+                    ¿Qué debo hacer para acceder al chat y poder conversar con las profesionales?
                     </button>
                   </h5>
                 </div>
                 <div id="collapseFourteen" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
                   <div class="card-body">
-                    ...
+                    <p class="texto-biografia tamano-delicado espaciado">Para poder usar el chat tendrás que crearte una cuenta como usuario y solo te tomará 3 minutos. ¡Así de sencillo! </p>
                   </div>
                 </div>
               </div>
+
+              <!--
+
               <div class="card">
                 <div class="card-header" id="headingThree">
                   <h5 class="mb-0">

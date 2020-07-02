@@ -159,9 +159,17 @@ class PerfilController extends Controller
         
         $tarifas = Usuario::where('apodo', '=', $request->apodo)->firstOrFail()->tarifas()->get();
 
-        $usuario = UsuarioExtras::where('idusuario', '=', $idusuario)->first('tipo_moneda');
+        $usuario = UsuarioExtras::join('usuarios', "usuarios_extras.idusuario", "=", "usuarios.id")->where('usuarios.apodo', '=', $request->apodo)->first('tipo_moneda');
 
-        return ['tarifas' => $tarifas, 'tipo_moneda' => $usuario->tipo_moneda ];  
+        if($usuario->tipo_moneda == "PEN"){
+            $simbolo_moneda = "S/";
+        }else if($usuario->tipo_moneda == "USD"){
+            $simbolo_moneda = "$";
+        }else{
+            $simbolo_moneda = "€";
+        }
+
+        return ['tarifas' => $tarifas, 'tipo_moneda' => $usuario->tipo_moneda, 'simbolo_moneda' => $simbolo_moneda ];  
 
     }
 
