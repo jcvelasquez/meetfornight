@@ -92,7 +92,7 @@
                     <div class="row">
                         <div class="col-md-12">
                           <div class="form-group">
-                              <label class="bmd-label-floating">Texto Alternativo (Imagen)</label>
+                              <label class="bmd-label-floating">Pais del articulo</label>
                               <select class="form-control" v-model="blogSelected.idcountry">
                                 <option value="">Selecciona</option>
                                 <option value="205">España</option>

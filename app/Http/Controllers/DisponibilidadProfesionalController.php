@@ -11,10 +11,10 @@ use Illuminate\Support\Facades\Auth;
 
 class DisponibilidadProfesionalController extends Controller
 {
-   
+
     public function listar(Request $request)
     {
-        
+
         //
         if($request->apodo){
 
@@ -33,15 +33,12 @@ class DisponibilidadProfesionalController extends Controller
             $viernes = DisponibilidadProfesional::where('idusuario', $idprofesional)->where('dia', 'VIERNES')->first();
             $sabado = DisponibilidadProfesional::where('idusuario', $idprofesional)->where('dia', 'SABADO')->first();
             $domingo = DisponibilidadProfesional::where('idusuario', $idprofesional)->where('dia', 'DOMINGO')->first();
-    
-            
-            return ['lunes' => $lunes, 'martes' => $martes, 'miercoles' => $miercoles, 'jueves' => $jueves, 'viernes' => $viernes, 'sabado' => $sabado, 'domingo' => $domingo];  
 
-            
+
+            return ['lunes' => $lunes, 'martes' => $martes, 'miercoles' => $miercoles, 'jueves' => $jueves, 'viernes' => $viernes, 'sabado' => $sabado, 'domingo' => $domingo];
+
         }
-        
-        
-       
+
     }
 
 
@@ -49,7 +46,7 @@ class DisponibilidadProfesionalController extends Controller
     public function actualizar(Request $request)
     {
 
-    
+
     }
 
     public function store(Request $request)
