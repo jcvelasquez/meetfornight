@@ -17,7 +17,7 @@ Auth::routes();
 
 Route::get('/', function() {
         return redirect()->route('home', app()->getLocale());
-       // return redirect(app()->getLocale());     
+       // return redirect(app()->getLocale());
 });
 
 
@@ -32,36 +32,31 @@ Route::get('email/verify/{id}', 'Auth\VerificationController@verify')->name('ver
 
 Route::group(['prefix' => '{locale}', 'where' => ['locale' => '(es|pe|pa)'], 'middleware' => 'setlocale'], function ($country) {
 
-
         Route::get('email/reenviar', 'Auth\VerificationController@reenviar')->name('verification.reenviar');
-
         Route::post('email/check', 'CrearCuentaController@checkEmail');
-
         Route::get('iniciar-sesion', 'Auth\LoginController@showLoginForm')->name('iniciar-sesion');
-
         Route::get('/',  'HomeController@mostrar')->name('home');
-
         Route::get('anuncios', function () {  return view('anuncios'); });
 
         Route::group(['middleware' => ['guest']],function(){
-  
-                Route::get('crear-cuenta', 'CrearCuentaController@mostrarOpcionesRegistro')->name('crear-cuenta');   
-                Route::get('crear-cuenta-profesional', 'CrearCuentaController@mostrarRegistroProfesional')->name('crear-cuenta-profesional');   
-                Route::get('crear-cuenta-usuario', 'CrearCuentaController@mostrarRegistroUsuario')->name('crear-cuenta-usuario');         
-                Route::get('crear-cuenta-empresa', 'CrearCuentaController@mostrarRegistroEmpresa')->name('crear-cuenta-empresa');      
+
+                Route::get('crear-cuenta', 'CrearCuentaController@mostrarOpcionesRegistro')->name('crear-cuenta');
+                Route::get('crear-cuenta-profesional', 'CrearCuentaController@mostrarRegistroProfesional')->name('crear-cuenta-profesional');
+                Route::get('crear-cuenta-usuario', 'CrearCuentaController@mostrarRegistroUsuario')->name('crear-cuenta-usuario');
+                Route::get('crear-cuenta-empresa', 'CrearCuentaController@mostrarRegistroEmpresa')->name('crear-cuenta-empresa');
 
                 Route::post('comprobar-credenciales', 'Auth\LoginController@login')->name('comprobar-credenciales');
 
                 Route::get('iniciar-sesion', 'Auth\LoginController@showLoginForm')->name('iniciar-sesion');
 
                 Route::post('registrar-usuario', 'CrearCuentaController@registrarUsuario')->name('registrar-usuario');
-                Route::post('registrar-usuario-fotos', 'CrearCuentaController@subirFotoUsuarioRegistro');   
+                Route::post('registrar-usuario-fotos', 'CrearCuentaController@subirFotoUsuarioRegistro');
                 Route::post('registrar-profesional', 'CrearCuentaController@registrarProfesional')->name('registrar-profesional');
-                Route::post('registrar-profesional-fotos', 'CrearCuentaController@subirFotoProfesionalRegistro');   
+                Route::post('registrar-profesional-fotos', 'CrearCuentaController@subirFotoProfesionalRegistro');
                 Route::post('registrar-empresa', 'CrearCuentaController@registrarEmpresa')->name('registrar-empresa');
-                Route::post('registrar-empresa-banner', 'CrearCuentaController@subirBannerEmpresaRegistro');   
+                Route::post('registrar-empresa-banner', 'CrearCuentaController@subirBannerEmpresaRegistro');
                 Route::get('eliminar-profesional', 'AdministradorController@eliminarProfesional');
-        
+
         });
 
 
@@ -73,12 +68,12 @@ Route::group(['prefix' => '{locale}', 'where' => ['locale' => '(es|pe|pa)'], 'mi
         Route::post('seleccionar-states', 'CrearCuentaController@seleccionarStates');
         Route::post('seleccionar-cities', 'CrearCuentaController@seleccionarCities');
 
-        Route::get('faq-perfil-usuario', 'HomeController@mostrarFaqUsuario')->name('faq-perfil-usuario');    
-        Route::get('faq-perfil-profesional', 'HomeController@mostrarFaqProfesional')->name('faq-perfil-profesional');   
-        Route::get('faq-perfil-empresa', 'HomeController@mostrarFaqEmpresa')->name('faq-perfil-empresa');  
-        
-        Route::get('blog', 'BlogController@mostrar')->name('blog');   
-        Route::get('blog/{id}', 'BlogController@leer')->name('blog.leer');   
+        Route::get('faq-perfil-usuario', 'HomeController@mostrarFaqUsuario')->name('faq-perfil-usuario');
+        Route::get('faq-perfil-profesional', 'HomeController@mostrarFaqProfesional')->name('faq-perfil-profesional');
+        Route::get('faq-perfil-empresa', 'HomeController@mostrarFaqEmpresa')->name('faq-perfil-empresa');
+
+        Route::get('blog', 'BlogController@mostrar')->name('blog');
+        Route::get('blog/{id}', 'BlogController@leer')->name('blog.leer');
 
 
         //CATEGORIAS
@@ -88,11 +83,11 @@ Route::group(['prefix' => '{locale}', 'where' => ['locale' => '(es|pe|pa)'], 'mi
         //OBTENER LISTADO EN HOME
         Route::post('usuarios-home/buscar', 'HomeController@listarEnHome');
 
-        
+
         //PARA LAS BUSQUEDAS
         Route::get('categorias/listar', 'CategoriasController@listar');
         Route::get('idiomas/listar', 'IdiomasController@listar');
-        
+
 
 
         Route::group(['middleware'=>['auth','verified']],function(){
@@ -110,42 +105,42 @@ Route::group(['prefix' => '{locale}', 'where' => ['locale' => '(es|pe|pa)'], 'mi
                         Route::get('perfil-usuario', 'UsuarioController@mostrarPerfilUsuarioLogueado')->name('perfil-usuario');
                         Route::get('perfil-usuario/editar', 'UsuarioController@editarDataUsuario');
                         Route::put('perfil-usuario/actualizar', 'UsuarioController@actualizarDataUsuario');
-                
+
                         //MENSAJES
                         Route::get('mensajes-usuario', 'MensajeUsuarioController@mostrar')->name('mensajes-usuario');
                         Route::get('mensajes-usuario/listar', 'MensajeUsuarioController@listar');
                         Route::post('mensajes-usuario/responder', 'MensajeUsuarioController@responder');
                         Route::post('mensajes-usuario/eliminar', 'MensajeUsuarioController@eliminar');
-                
+
                         //RESERVAS
                         Route::get('reservas-usuario', 'ReservasUsuarioController@mostrar' )->name('reservas-usuario');
                         Route::get('reservas-usuario/listar', 'ReservasUsuarioController@listar' );
-                        Route::post('reservas-usuario/aceptar', 'ReservasUsuarioController@cancelar'); 
-                
+                        Route::post('reservas-usuario/aceptar', 'ReservasUsuarioController@cancelar');
+
                         //FAVORITOS
                         Route::get('favoritos-usuario', 'FavoritoUsuarioController@mostrar')->name('favoritos-usuario');
                         Route::get('favoritos-usuario/listar', 'FavoritoUsuarioController@listar');
-                        Route::post('favoritos-usuario/agregar', 'FavoritoUsuarioController@agregar' );    
-                
+                        Route::post('favoritos-usuario/agregar', 'FavoritoUsuarioController@agregar' );
+
                         Route::get('perfil/{apodo}/sesion', 'UsuarioController@obtenerUsuarioLogueado');
                         Route::get('perfil/{apodo}/tarifas', 'PerfilController@tarifas' );
-                        Route::post('perfil/{apodo}/horarios', 'PerfilController@horarios' );     
+                        Route::post('perfil/{apodo}/horarios', 'PerfilController@horarios' );
                         Route::post('perfil/{apodo}/reservas', 'ReservasProfesionalController@registrar' );
                         Route::put('perfil/{apodo}/mensaje', 'MensajeProfesionalController@enviarMensaje' );
-                
+
                         Route::get('seguridad-usuario', 'SeguridadUsuarioController@mostrar')->name('seguridad-usuario');
                         Route::get('seguridad-usuario/listar', 'SeguridadUsuarioController@listar');
                         Route::post('seguridad-usuario/eliminar', 'SeguridadUsuarioController@eliminar');
                         Route::put('seguridad-usuario/actualizar', 'SeguridadUsuarioController@actualizar');
                         Route::post('seguridad-usuario/subir', 'SeguridadUsuarioController@subir');
 
-                        
-        
+
+
                 });
 
 
                 Route::group(['middleware'=>['empresa']],function(){
-                        
+
                         //URLS PARA EL USUARIO
                         Route::get('perfil-empresa', 'UsuarioController@mostrarPerfilEmpresaLogueado')->name('perfil-empresa');
                         Route::get('perfil-empresa/editar', 'UsuarioController@editarDataEmpresa');
@@ -170,10 +165,10 @@ Route::group(['prefix' => '{locale}', 'where' => ['locale' => '(es|pe|pa)'], 'mi
 
                         //ROUTES
                         Route::get('admin/dashboard', 'AdministradorController@mostrarDashboard')->name('admin/dashboard');
-                        
+
                         Route::get('admin/alertas', 'AdministradorController@mostrarAlertas')->name('admin/alertas');
                         Route::get('admin/planes', 'AdministradorController@mostrarPlanes')->name('admin/planes');
-                        
+
                         Route::post('admin/mensajes/listar', 'UsuarioController@listarProfesionalesAdmin');
                         Route::post('admin/alertas/listar', 'AlertaProfesionalController@listarAlertasAdmin');
 
@@ -191,8 +186,8 @@ Route::group(['prefix' => '{locale}', 'where' => ['locale' => '(es|pe|pa)'], 'mi
                         Route::post('admin/blog/grabar', 'BlogController@grabar');
                         Route::post('admin/blog/eliminar', 'BlogController@eliminar');
 
-                        
-   
+
+
                         //CATEGORIAS
                         Route::get('admin/categorias', 'AdministradorController@mostrarCategorias')->name('admin/categorias');
                         Route::get('admin/categorias/listar', 'CategoriasController@listar');
@@ -210,7 +205,7 @@ Route::group(['prefix' => '{locale}', 'where' => ['locale' => '(es|pe|pa)'], 'mi
 
                 Route::group(['middleware'=>['profesional']],function(){
 
-                        
+
                         //URLS PARA EL PROFESIONAL
                         Route::get('perfil-profesional', 'UsuarioController@mostrarPerfilProfesionalLogueado')->name('perfil-profesional');
                         Route::get('perfil-profesional/editar', 'UsuarioController@editarDataPerfilProfesional');
@@ -229,15 +224,15 @@ Route::group(['prefix' => '{locale}', 'where' => ['locale' => '(es|pe|pa)'], 'mi
                         Route::post('contacto-profesional/actualizar', 'ContactoProfesionalController@actualizar' );
 
                         //DISPONIBILIDAD
-                        Route::get('disponibilidad-profesional/listar', 'DisponibilidadProfesionalController@listar');  
-                        Route::post('disponibilidad-profesional/registrar', 'DisponibilidadProfesionalController@store');  
+                        Route::get('disponibilidad-profesional/listar', 'DisponibilidadProfesionalController@listar');
+                        Route::post('disponibilidad-profesional/registrar', 'DisponibilidadProfesionalController@store');
                         Route::post('disponibilidad-profesional/actualizar', 'DisponibilidadProfesionalController@actualizar' );
 
-                        //RESERVAS            
+                        //RESERVAS
                         Route::get('reservas-profesional', 'ReservasProfesionalController@mostrar' )->name('reservas-profesional');
                         Route::get('reservas-profesional/listar', 'ReservasProfesionalController@listar' );
-                        Route::post('reservas-profesional/aceptar', 'ReservasProfesionalController@aceptar'); 
-                        Route::post('reservas-profesional/rechazar', 'ReservasProfesionalController@rechazar'); 
+                        Route::post('reservas-profesional/aceptar', 'ReservasProfesionalController@aceptar');
+                        Route::post('reservas-profesional/rechazar', 'ReservasProfesionalController@rechazar');
 
                         //URLS PARA EL PROFESIONAL
                         Route::get('planes-profesional', 'PlanesProfesionalController@mostrar')->name('planes-profesional');
@@ -258,12 +253,12 @@ Route::group(['prefix' => '{locale}', 'where' => ['locale' => '(es|pe|pa)'], 'mi
                         //ALERTA
                         Route::get('alerta-profesional', 'AlertaProfesionalController@mostrar')->name('alerta-profesional');
                         Route::get('alerta-profesional/listar', 'AlertaProfesionalController@listar' );
-                        Route::post('alerta-profesional/registrar', 'AlertaProfesionalController@registrar');  
-                        
+                        Route::post('alerta-profesional/registrar', 'AlertaProfesionalController@registrar');
+
                         //AGENDA
                         Route::get('agenda-profesional', 'AgendaProfesionalController@mostrar')->name('agenda-profesional');
                         Route::get('agenda-profesional/listar', 'AgendaProfesionalController@listar');
-                        
+
                         //TARIFAS
                         Route::get('tarifas-profesional', 'TarifaProfesionalController@mostrar')->name('tarifas-profesional');
                         Route::get('tarifas-profesional/listar', 'TarifaProfesionalController@list' );
@@ -271,7 +266,7 @@ Route::group(['prefix' => '{locale}', 'where' => ['locale' => '(es|pe|pa)'], 'mi
                         Route::post('tarifas-profesional/registrar', 'TarifaProfesionalController@store');
 
                         Route::post('tipo-moneda/actualizar', 'TarifaProfesionalController@actualizarTipoMoneda');
-                        
+
                         //CREDITOS
                         Route::get('creditos-profesional', 'CreditoProfesionalController@mostrar' )->name('creditos-profesional');
                         Route::get('creditos-profesional/listar', 'CreditoProfesionalController@listar' );
@@ -291,13 +286,13 @@ Route::group(['prefix' => '{locale}', 'where' => ['locale' => '(es|pe|pa)'], 'mi
                         Route::get('categorias-profesional/listar', 'CategoriasProfesionalController@listar' );
 
                         Route::get('estadisticas-profesional', 'EstadisticaProfesionalController@mostrar')->name('estadisticas-profesional');
-                        
+
                         Route::get('valoracion-profesional', 'ValoracionProfesionalController@mostrar' )->name('valoracion-profesional');
                         Route::get('valoracion-profesional/listar', 'ValoracionProfesionalController@listar' );
 
                 });
-        
-        
+
+
         });
 
 
