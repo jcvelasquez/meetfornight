@@ -19,6 +19,6 @@ class Categorias extends Model
         //return $this->hasMany('App\CategoriasProfesional','categorias_profesional','id','idcategoria');
         return $this->hasMany('App\CategoriasProfesional','categorias_profesional','id','idcategoria');
     }
-    
+
 
 }
