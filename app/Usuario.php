@@ -16,7 +16,7 @@ class Usuario extends Authenticatable implements MustVerifyEmail
 {
     //
     use Notifiable;
-    
+
     public $table = "usuarios";
 
     protected $fillable =[
@@ -74,7 +74,7 @@ class Usuario extends Authenticatable implements MustVerifyEmail
     public function categoriashome(){
 
         CategoriasProfesional::$withoutAppends = true;
-        
+
         return $this->hasMany('App\CategoriasProfesional', 'idprofesional', 'id')->join('categorias', 'categorias_profesional.idcategoria','=', 'categorias.id');
     }
 
@@ -99,7 +99,7 @@ class Usuario extends Authenticatable implements MustVerifyEmail
 
     public function getTimestampAttribute()
     {
-        return Carbon::parse($this->attributes['created_at'])->getTimestamp();  
+        return Carbon::parse($this->attributes['created_at'])->getTimestamp();
     }
 
     public function getEsBoosterAttribute()
@@ -124,14 +124,14 @@ class Usuario extends Authenticatable implements MustVerifyEmail
 
     public function getUidAttribute()
     {
-        return uniqid().Carbon::parse($this->attributes['created_at'])->getTimestamp();  
+        return uniqid().Carbon::parse($this->attributes['created_at'])->getTimestamp();
     }
 
     public function getFechaNacimientoAttribute( $value ) {
         return (new Carbon($value))->format('d/m/Y');
     }
 
-   
+
 
 
     //DEL USER ORIGINAL
@@ -174,6 +174,6 @@ class Usuario extends Authenticatable implements MustVerifyEmail
     }
 
 
-    
+
 
 }

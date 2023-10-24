@@ -16,8 +16,8 @@ use Hash;
 
 class UsuarioController extends Controller
 {
-   
-    
+
+
     public function __construct()
     {
         $this->middleware(['auth','verified']);
@@ -47,9 +47,9 @@ class UsuarioController extends Controller
         $idusuario = Auth::user()->id;
 
         $usuario = Usuario::where('id', '=', $idusuario)->with('states')->with('cities')->first();
-        
-        return ['usuario' => $usuario];     
-        
+
+        return ['usuario' => $usuario];
+
     }
 
 
@@ -60,13 +60,13 @@ class UsuarioController extends Controller
 
         $usuario = Usuario::where('id', '=', $idempresa)->with('states')->with('cities')->first();
 
-        return ['usuario' => $usuario];     
+        return ['usuario' => $usuario];
 
     }
 
 
 
-    
+
     public function editarDataPerfilProfesional(Request $request){
 
         $idprofesional = Auth::user()->id;
@@ -77,7 +77,7 @@ class UsuarioController extends Controller
         //$States = States::where()
 
         $cat_seleccionados = CategoriasProfesional::where('idprofesional', '=', $idprofesional)->get();
-        $idi_seleccionados = IdiomasProfesional::where('idprofesional', '=', $idprofesional)->get();      
+        $idi_seleccionados = IdiomasProfesional::where('idprofesional', '=', $idprofesional)->get();
 
         //CATEGORIAS SELECCIONADAS
         foreach ($categorias as $cat) {
@@ -87,7 +87,7 @@ class UsuarioController extends Controller
             }else{
                 data_set($cat, 'es_marcado', 0);
             }
-            
+
         }
 
         //IDIOMAS SELECCIONADAS
@@ -98,17 +98,17 @@ class UsuarioController extends Controller
             }else{
                 data_set($idi, 'es_marcado', 0);
             }
-            
+
         }
 
         $usuario->categorias = $categorias;
         $usuario->idiomas = $idiomas;
 
-        return ['usuario' => $usuario];     
+        return ['usuario' => $usuario];
 
     }
 
-    
+
     public function actualizarDataEmpresa(Request $request)
     {
         $idempresa = Auth::user()->id;
@@ -125,7 +125,7 @@ class UsuarioController extends Controller
         $usuario->idcity = $request->idcity;
         $usuario->save();
 
-        return ['mensaje' => 'Los datos fueron actualizados correctamente'];     
+        return ['mensaje' => 'Los datos fueron actualizados correctamente'];
 
     }
 
@@ -146,7 +146,7 @@ class UsuarioController extends Controller
         $usuario->idcity = $request->idcity;
         $usuario->save();
 
-        return ['mensaje' => 'Los datos fueron actualizados correctamente'];     
+        return ['mensaje' => 'Los datos fueron actualizados correctamente'];
 
     }
 
@@ -168,7 +168,7 @@ class UsuarioController extends Controller
         $usuario->idcity = $request->idcity;
         $usuario->save();
 
-        
+
 
         //------------------------------
         //ACTUALIZAR EXTRAS
@@ -216,7 +216,7 @@ class UsuarioController extends Controller
                 }
             }
         }
-        
+
 
         //------------------------------
         //IDIOMAS
@@ -237,10 +237,10 @@ class UsuarioController extends Controller
             }
         }
 
-        
 
-        return ['mensaje' => "Se actualizo satisfactoriamente el perfil ", 'status' => 'success' ];     
-        
+
+        return ['mensaje' => "Se actualizo satisfactoriamente el perfil ", 'status' => 'success' ];
+
     }
 
     public function checkCategoriaSeleccionada($cat_seleccionados, $id){
@@ -248,7 +248,7 @@ class UsuarioController extends Controller
             if($selec->idcategoria == $id){
                 return true;
                 break;
-            } 
+            }
         }
         return false;
     }
@@ -258,7 +258,7 @@ class UsuarioController extends Controller
             if($selec->ididioma == $id){
                 return true;
                 break;
-            }        
+            }
         }
         return false;
     }
@@ -271,11 +271,11 @@ class UsuarioController extends Controller
 
 
 
-    
-
-    
 
 
-    
+
+
+
+
 
 }
